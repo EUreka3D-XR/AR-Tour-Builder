@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { FETCH_STATE } from "constants/fetchState";
+
+export const FETCH_STATE = {
+  IDLE: "idle",
+  LOADING: "pending",
+  SUCCESS: "success",
+  ERROR: "error",
+};
 
 export const useFetchState = (initialState) => {
   const [state, setState] = useState(initialState ?? FETCH_STATE.IDLE);

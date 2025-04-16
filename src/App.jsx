@@ -1,7 +1,9 @@
 import { BrowserRouter } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import MyThemeProvider from "@/providers/theme/MyThemeProvider";
-import "@/config/translations/i18next-config.js";
+
+import MyThemeProvider from "@/src/providers/theme/MyThemeProvider";
+
+import "@/src/config/translations/i18next-config.js";
 
 const queryClient = new QueryClient({
   defaultOptions: {

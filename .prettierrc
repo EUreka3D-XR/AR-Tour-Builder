@@ -1,0 +1,19 @@
+{
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "^(react/(.*)$)|^(react$)",
+    "^(react-router/(.*)$)|^(react-router$)",
+    "^(react-i18next/(.*)$)|^(react-i18next$)",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@/src/providers/(.*)$",
+    "^@/src/layouts/(.*)$",
+    "^@/src/components/(.*)$",
+    "^@/src/hooks/(.*)$",
+    "^@/src/utils/(.*)$",
+    "^@/src/config/(.*)$",
+    "^@/src/assets/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSortSpecifiers": true
+}

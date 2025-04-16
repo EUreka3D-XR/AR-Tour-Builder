@@ -1,9 +1,9 @@
 import { BrowserRouter } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import MyThemeProvider from "@/src/providers/theme/MyThemeProvider";
+import MyThemeProvider from "@/providers/theme/MyThemeProvider";
 
-import "@/src/config/translations/i18next-config.js";
+import "@/config/translations/i18next-config.js";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,9 +18,7 @@ export default function App() {
   return (
     <MyThemeProvider>
       <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          <></>
-        </QueryClientProvider>
+        <QueryClientProvider client={queryClient}></QueryClientProvider>
       </BrowserRouter>
     </MyThemeProvider>
   );

@@ -5,6 +5,9 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 function MyThemeProvider({ children }) {
   const theme = useMemo(() => {
     return createTheme({
+      custom: {
+        headerHeight: "3.5rem",
+      },
       typography: {
         fontFamily: "Poppins, Noto Sans, serif",
       },

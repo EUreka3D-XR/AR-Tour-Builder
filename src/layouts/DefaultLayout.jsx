@@ -3,6 +3,7 @@ import { styled } from "@mui/material";
 import { GeneralProvider } from "@/providers/general/GeneralProvider";
 import Header from "@/components/header/Header";
 import Navbar from "@/components/navbar/Navbar";
+import RoutesLayout from "./RoutesLayout";
 
 const PageContainerStyled = styled("div")(({ theme }) => ({
   width: "100vw",
@@ -23,7 +24,9 @@ function DefaultLayout() {
       <Header />
       <PageContainerStyled>
         <Navbar />
-        <div className="page-content"></div>
+        <div className="page-content">
+          <RoutesLayout />
+        </div>
       </PageContainerStyled>
     </GeneralProvider>
   );

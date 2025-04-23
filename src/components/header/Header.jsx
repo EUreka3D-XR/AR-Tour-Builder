@@ -1,4 +1,3 @@
-import React from "react";
 import { Menu, Person } from "@mui/icons-material";
 import { IconButton, styled } from "@mui/material";
 

@@ -9,6 +9,7 @@ import { MenuList, styled } from "@mui/material";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import { navPaths } from "@/utils/paths";
 import NavbarItem from "./NavbarItem";
+import NavbarProjects from "./NavbarProjects";
 
 const MenuListStyled = styled(MenuList)({
   "&.nav-open": {
@@ -34,6 +35,7 @@ function Navbar() {
         "nav-close": !isNavMenuOpen,
       })}
     >
+      <NavbarProjects />
       <NavbarItem to={navPaths.home.to} name={navPaths.home.label}>
         <HomeOutlined />
       </NavbarItem>

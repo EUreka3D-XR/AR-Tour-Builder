@@ -26,6 +26,13 @@ h1 {
   line-height: 1.1;
 }
 
+/* Truncate text */
+.text-truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

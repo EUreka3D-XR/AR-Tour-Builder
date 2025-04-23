@@ -13,6 +13,10 @@ function MyThemeProvider({ children }) {
       },
       components: {
         MuiButton: {
+          defaultProps: {
+            variant: "outlined",
+            loadingPosition: "end",
+          },
           styleOverrides: {
             root: {
               textTransform: "none",

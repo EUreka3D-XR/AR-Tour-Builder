@@ -1,6 +1,6 @@
 import { styled } from "@mui/material";
 
-import { GeneralProvider } from "@/providers/general/GeneralProvider";
+import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import Header from "@/components/header/Header";
 import Navbar from "@/components/navbar/Navbar";
 import RoutesLayout from "./RoutesLayout";
@@ -19,16 +19,18 @@ const PageContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function DefaultLayout() {
+  const { isInsideAProject } = useGeneralProvider();
+
   return (
-    <GeneralProvider>
+    <>
       <Header />
       <PageContainerStyled>
-        <Navbar />
+        {isInsideAProject && <Navbar />}
         <div className="page-content">
           <RoutesLayout />
         </div>
       </PageContainerStyled>
-    </GeneralProvider>
+    </>
   );
 }
 

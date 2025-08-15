@@ -4,11 +4,16 @@ const constructPaths = (base) => {
   return {
     index: base,
     new: `${base}/new`,
+    edit: `${base}/edit`,
     id: {
       static: `${base}/:id`,
       dynamic: (id) => `${base}/${id}`,
     },
   };
+};
+
+const checkIfInsideAProject = (pathname) => {
+  return pathname.startsWith("/projects/") && !pathname.includes("/new");
 };
 
 export const paths = {
@@ -17,6 +22,7 @@ export const paths = {
   tours: constructPaths("/tours"),
   poi: constructPaths("/poi"),
   library: constructPaths("/library"),
+  isLocationInsideAProject: checkIfInsideAProject,
 };
 
 export const dynamicPath = (path, id) => `${path}/${id}`;

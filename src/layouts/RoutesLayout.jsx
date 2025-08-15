@@ -1,4 +1,5 @@
-import { Outlet, Route, Routes } from "react-router-dom";
+import { lazy } from "react";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 
 // Placeholder layout components for grouping
 const AuthLayout = () => <Outlet />;
@@ -6,6 +7,8 @@ const ProjectLayout = () => <Outlet />;
 const TourLayout = () => <Outlet />;
 const POILayout = () => <Outlet />;
 const LibraryLayout = () => <Outlet />;
+
+const ProjectsPage = lazy(() => import("@/pages/projects/page"));
 
 function RoutesLayout() {
   return (
@@ -17,10 +20,11 @@ function RoutesLayout() {
         <Route path="forgot-password" element={<></>} />
         <Route path="reset-password" element={<></>} />
       </Route>
-
+      {/* Default Home */}
+      <Route path="/" element={<Navigate to="/projects" replace />} />
       {/* 📁 Projects */}
       <Route path="/projects" element={<ProjectLayout />}>
-        <Route index element={<></>} />
+        <Route index element={<ProjectsPage />} />
         <Route path="new" element={<></>} />
         <Route path=":projectId" element={<></>} />
         <Route path=":projectId/edit" element={<></>} />

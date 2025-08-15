@@ -6,6 +6,7 @@ import MyThemeProvider from "@/providers/theme/MyThemeProvider";
 import "@/config/translations/i18next-config.js";
 
 import DefaultLayout from "./layouts/DefaultLayout";
+import { GeneralProvider } from "./providers/general/GeneralProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,7 +22,9 @@ export default function App() {
     <MyThemeProvider>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <DefaultLayout />
+          <GeneralProvider>
+            <DefaultLayout />
+          </GeneralProvider>
         </QueryClientProvider>
       </BrowserRouter>
     </MyThemeProvider>

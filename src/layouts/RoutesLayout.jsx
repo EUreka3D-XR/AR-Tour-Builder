@@ -3,7 +3,7 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 
 // Placeholder layout components for grouping
 const AuthLayout = () => <Outlet />;
-const ProjectLayout = () => <Outlet />;
+const ProjectsLayout = () => <Outlet />;
 const TourLayout = () => <Outlet />;
 const POILayout = () => <Outlet />;
 const LibraryLayout = () => <Outlet />;
@@ -23,7 +23,7 @@ function RoutesLayout() {
       {/* Default Home */}
       <Route path="/" element={<Navigate to="/projects" replace />} />
       {/* 📁 Projects */}
-      <Route path="/projects" element={<ProjectLayout />}>
+      <Route path="/projects" element={<ProjectsLayout />}>
         <Route index element={<ProjectsPage />} />
         <Route path="new" element={<></>} />
         <Route path=":projectId" element={<></>} />

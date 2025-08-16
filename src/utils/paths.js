@@ -2,19 +2,16 @@ import { t } from "i18next";
 
 const constructPaths = (base) => {
   return {
+    all: `${base}/*`,
     index: base,
     new: `${base}/new`,
     edit: `${base}/edit`,
-    id: {
-      static: `${base}/:id`,
-      dynamic: (id) => `${base}/${id}`,
-    },
+    one: (id) => `${base}/${id}`,
   };
 };
 
-const checkIfInsideAProject = (pathname) => {
-  return pathname.startsWith("/projects/") && !pathname.includes("/new");
-};
+const checkIfInsideAProject = (pathname) =>
+  pathname.startsWith("/projects/") && !pathname.includes("/new");
 
 export const paths = {
   home: "/",
@@ -22,6 +19,12 @@ export const paths = {
   tours: constructPaths("/tours"),
   poi: constructPaths("/poi"),
   library: constructPaths("/library"),
+  settings: "/settings",
+  auth: "/auth",
+  login: "/login",
+  signup: "/signup",
+  forgotPassword: "/forgot-password",
+  resetPassword: "/reset-password",
   isLocationInsideAProject: checkIfInsideAProject,
 };
 

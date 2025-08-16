@@ -27,7 +27,8 @@ const ProjectsGrid = styled(Box)({
 });
 
 function ProjectsPage() {
-  const { data: projects } = useProjects();
+  const { data: projects } = useProjects("en");
+
   return (
     <ContainerStyled>
       <Typography variant="h2" component="h2" gutterBottom>

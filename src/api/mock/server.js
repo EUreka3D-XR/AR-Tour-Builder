@@ -2,8 +2,8 @@ import {
   belongsTo,
   createServer,
   hasMany,
-  JSONAPISerializer,
   Model,
+  RestSerializer,
 } from "miragejs";
 
 import { getRandomItems, getRandomPoiAssets } from "./helpers/randomizers";
@@ -13,10 +13,60 @@ import { mockProjects } from "./mock-data/projectsMocks";
 import { mockTours } from "./mock-data/toursMocks";
 import { mockUsers } from "./mock-data/usersMocks";
 
-const AppSerializer = JSONAPISerializer.extend({
+const AppSerializer = RestSerializer.extend({
   serialize() {
-    let json = JSONAPISerializer.prototype.serialize.apply(this, arguments);
-    return Object.values(json)[0];
+    let json = RestSerializer.prototype.serialize.apply(this, arguments);
+    let res = Object.values(json)[0];
+
+    // Get the locale parameter from the request
+    const request = arguments[1];
+    const localesParam = request?.queryParams?.locale;
+
+    if (localesParam && res.data) {
+      // Transform the data to use localized values
+      res.data = this.transformLocalizedFields(res.data, localesParam);
+    }
+
+    return res;
+  },
+  transformLocalizedFields(data, locale) {
+    // Handle arrays of data
+    if (Array.isArray(data)) {
+      return data.map((item) => this.transformLocalizedFields(item, locale));
+    }
+
+    // Handle single objects
+    if (data && typeof data === "object") {
+      const transformed = { ...data };
+
+      // Check each property for LocalesField pattern
+      Object.keys(transformed).forEach((key) => {
+        const value = transformed[key];
+
+        // Check if this is a LocalesField (has locales.en, locales.fr, etc.)
+        if (this.isLocalesField(value)) {
+          // Transform to the requested locale or fallback to 'en'
+          transformed[key] = value.locales[locale] || value.locales.en || "";
+        }
+        // Recursively handle nested objects and arrays
+        else if (value && typeof value === "object") {
+          transformed[key] = this.transformLocalizedFields(value, locale);
+        }
+      });
+
+      return transformed;
+    }
+
+    return data;
+  },
+  isLocalesField(value) {
+    return (
+      value &&
+      typeof value === "object" &&
+      value.locales &&
+      typeof value.locales === "object" &&
+      (value.locales.en || value.locales.fr)
+    ); // Check for expected locale keys
   },
 });
 

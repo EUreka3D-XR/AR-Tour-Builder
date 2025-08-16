@@ -1,10 +1,15 @@
 import axiosInstance from "../client-instance/axiosInstance";
 import { baseUrls } from "../endpoints-base-urls/baseUrls";
 
-const getAllProjects = async () => {
+const getAllProjects = async ({ locale } = {}) => {
   try {
     const url = baseUrls.projects;
-    const response = await axiosInstance.get(url);
+
+    const params = {};
+    if (locale) {
+      params.locale = locale;
+    }
+    const response = await axiosInstance.get(url, { params });
     return response.data;
   } catch (error) {
     console.error("Error fetching projects:", error);
@@ -12,10 +17,15 @@ const getAllProjects = async () => {
   }
 };
 
-const getProject = async (projectId) => {
+const getProject = async (projectId, { locale } = {}) => {
   try {
     const url = baseUrls.projects(projectId);
-    const response = await axiosInstance.get(url);
+
+    const params = {};
+    if (locale) {
+      params.locale = locale;
+    }
+    const response = await axiosInstance.get(url, { params });
     return response.data;
   } catch (error) {
     console.error("Error fetching project:", error);

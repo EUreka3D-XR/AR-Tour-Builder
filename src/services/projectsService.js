@@ -2,16 +2,16 @@ import { api } from "@/api";
 
 import { useDataFetcher } from "./helpers/serviceHooks";
 
-export const useProjects = () => {
+export const useProjects = (locale) => {
   return useDataFetcher({
-    fetcher: () => api.projects.fetchAll(),
-    queryKey: ["projects"],
+    fetcher: () => api.projects.fetchAll({ locale }),
+    queryKey: ["projects", locale],
   });
 };
 
-export const useProject = (projectId) => {
+export const useProject = (projectId, locale) => {
   return useDataFetcher({
-    fetcher: () => api.projects.fetchOne(projectId),
-    queryKey: ["project", projectId],
+    fetcher: () => api.projects.fetchOne(projectId, { locale }),
+    queryKey: ["project", projectId, locale],
   });
 };

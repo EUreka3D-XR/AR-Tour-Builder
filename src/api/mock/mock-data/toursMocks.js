@@ -2,7 +2,7 @@
  * @typedef {import('@/types/jsdoc-types').Tour} Tour
  */
 
-import { getMockPois } from "./poisMocks.js";
+// import { getMockPois } from "./poisMocks.js";
 
 /**
  * Array of 10 mock tours
@@ -10,7 +10,7 @@ import { getMockPois } from "./poisMocks.js";
  */
 export const mockTours = [
   {
-    id: "tour-001",
+    // id: "tour-001",
     title: {
       locales: {
         en: "Complete Acropolis Experience",
@@ -25,7 +25,7 @@ export const mockTours = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1555993539-1732b0258235?w=600&h=400&fit=crop",
-    pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
+    // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 180, // 3 hours
     distance: 1200, // 1.2 km
@@ -41,7 +41,7 @@ export const mockTours = [
     updatedAt: "2024-01-20T09:00:00Z",
   },
   {
-    id: "tour-002",
+    // id: "tour-002",
     title: {
       locales: {
         en: "Ancient Theatres of Athens",
@@ -56,7 +56,7 @@ export const mockTours = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=600&h=400&fit=crop",
-    pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
+    // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 120, // 2 hours
     distance: 800, // 800m
@@ -72,7 +72,7 @@ export const mockTours = [
     updatedAt: "2024-01-19T10:30:00Z",
   },
   {
-    id: "tour-003",
+    // id: "tour-003",
     title: {
       locales: {
         en: "Sacred Architecture Journey",
@@ -87,7 +87,7 @@ export const mockTours = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop",
-    pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
+    // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 150, // 2.5 hours
     distance: 950, // 950m
@@ -103,7 +103,7 @@ export const mockTours = [
     updatedAt: "2024-01-18T14:15:00Z",
   },
   {
-    id: "tour-004",
+    // id: "tour-004",
     title: {
       locales: {
         en: "Democracy and Politics in Ancient Athens",
@@ -118,7 +118,7 @@ export const mockTours = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=600&h=400&fit=crop",
-    pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
+    // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 135, // 2.25 hours
     distance: 1100, // 1.1 km
@@ -134,7 +134,7 @@ export const mockTours = [
     updatedAt: "2024-01-17T11:45:00Z",
   },
   {
-    id: "tour-005",
+    // id: "tour-005",
     title: {
       locales: {
         en: "Mythology and Legends Tour",
@@ -149,7 +149,7 @@ export const mockTours = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1594736797933-d0f06ba07c45?w=600&h=400&fit=crop",
-    pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
+    // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 165, // 2.75 hours
     distance: 1350, // 1.35 km
@@ -165,7 +165,7 @@ export const mockTours = [
     updatedAt: "2024-01-16T13:20:00Z",
   },
   {
-    id: "tour-006",
+    // id: "tour-006",
     title: {
       locales: {
         en: "Sunrise at the Acropolis",
@@ -180,7 +180,7 @@ export const mockTours = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop",
-    pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
+    // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 90, // 1.5 hours
     distance: 600, // 600m
@@ -196,7 +196,7 @@ export const mockTours = [
     updatedAt: "2024-01-15T16:30:00Z",
   },
   {
-    id: "tour-007",
+    // id: "tour-007",
     title: {
       locales: {
         en: "Archaeological Discoveries Walk",
@@ -211,7 +211,7 @@ export const mockTours = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1539650116574-75c0c6d73c6e?w=600&h=400&fit=crop",
-    pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
+    // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "draft",
     duration: 195, // 3.25 hours
     distance: 1500, // 1.5 km
@@ -227,7 +227,7 @@ export const mockTours = [
     updatedAt: "2024-01-20T14:30:00Z",
   },
   {
-    id: "tour-008",
+    // id: "tour-008",
     title: {
       locales: {
         en: "Family-Friendly Ancient Adventure",
@@ -242,7 +242,7 @@ export const mockTours = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1571045034717-14cf9ffe1b69?w=600&h=400&fit=crop",
-    pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
+    // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 105, // 1.75 hours
     distance: 750, // 750m
@@ -258,7 +258,7 @@ export const mockTours = [
     updatedAt: "2024-01-13T12:00:00Z",
   },
   {
-    id: "tour-009",
+    // id: "tour-009",
     title: {
       locales: {
         en: "Art and Sculpture Masterpieces",
@@ -273,7 +273,7 @@ export const mockTours = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=600&h=400&fit=crop",
-    pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
+    // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 170, // 2.83 hours
     distance: 900, // 900m
@@ -289,7 +289,7 @@ export const mockTours = [
     updatedAt: "2024-01-12T15:15:00Z",
   },
   {
-    id: "tour-010",
+    // id: "tour-010",
     title: {
       locales: {
         en: "Evening Photography Tour",
@@ -304,7 +304,7 @@ export const mockTours = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
-    pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
+    // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 125, // 2.08 hours
     distance: 1000, // 1 km

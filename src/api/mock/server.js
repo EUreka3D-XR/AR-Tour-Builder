@@ -1,59 +1,71 @@
-import { belongsTo, hasMany, Model, RestSerializer } from "miragejs";
-import { createServer } from "miragejs/server";
+import {
+  belongsTo,
+  createServer,
+  hasMany,
+  JSONAPISerializer,
+  Model,
+} from "miragejs";
 
-import { getMockAssets } from "../mocks/assetsMocks";
-import { mockPOIs } from "../mocks/poisMocks";
-import { mockProjects } from "../mocks/projectsMocks";
-import { mockTours } from "../mocks/toursMocks";
-import { mockUsers } from "../mocks/usersMocks";
 import { getRandomItems, getRandomPoiAssets } from "./helpers/randomizers";
+import { getMockAssets } from "./mock-data/assetsMocks";
+import { mockPOIs } from "./mock-data/poisMocks";
+import { mockProjects } from "./mock-data/projectsMocks";
+import { mockTours } from "./mock-data/toursMocks";
+import { mockUsers } from "./mock-data/usersMocks";
+
+const AppSerializer = JSONAPISerializer.extend({
+  serialize() {
+    let json = JSONAPISerializer.prototype.serialize.apply(this, arguments);
+    return Object.values(json)[0];
+  },
+});
 
 export const makeServer = ({ environment = "development" } = {}) => {
   return createServer({
     environment,
     models: {
-      users: Model,
+      user: Model,
       project: Model.extend({
-        members: hasMany("users"),
-        tours: hasMany(),
+        members: hasMany("user"),
+        tours: hasMany("tour"),
       }),
       library: Model.extend({
-        project: belongsTo(),
-        assets: hasMany(),
+        project: belongsTo("project"),
+        assets: hasMany("asset"),
       }),
       tour: Model.extend({
-        project: belongsTo(),
-        pois: hasMany(),
+        project: belongsTo("project"),
+        pois: hasMany("poi"),
       }),
       poi: Model.extend({
-        tour: belongsTo(),
-        poiAssets: hasMany(),
+        tour: belongsTo("tour"),
+        poiAssets: hasMany("poiAsset"),
       }),
       asset: Model.extend({
-        library: hasMany(),
-        poiAsset: hasMany(),
+        libraries: hasMany("library"),
+        poiAssets: hasMany("poiAsset"),
       }),
       poiAsset: Model.extend({
-        poi: belongsTo(),
-        asset: belongsTo(),
+        poi: belongsTo("poi"),
+        asset: belongsTo("asset"),
       }),
     },
     serializers: {
-      application: RestSerializer,
-      project: RestSerializer.extend({
-        include: ["tours", "assets"],
-        embed: true, // embed tours + assets instead of IDs
+      application: AppSerializer,
+      project: AppSerializer.extend({
+        include: ["tours"],
+        embed: true, // embed tours + pois instead of IDs
       }),
-      tour: RestSerializer.extend({
+      tour: AppSerializer.extend({
         include: ["pois"],
         embed: true,
       }),
-      poi: RestSerializer.extend({
+      poi: AppSerializer.extend({
         include: ["poiAssets"],
         embed: true,
 
         // serialize(resource, request) {
-        //   let json = RestSerializer.prototype.serialize.apply(this, arguments);
+        //   let json = AppSerializer.prototype.serialize.apply(this, arguments);
 
         //   // Transform poiAssets into array with asset data + viewInAr
         //   if (json.poi && json.poi.poiAssets) {
@@ -68,8 +80,12 @@ export const makeServer = ({ environment = "development" } = {}) => {
         //   return json;
         // },
       }),
-      poiAsset: RestSerializer.extend({
-        include: ["asset"],
+      poiAsset: AppSerializer.extend({
+        include: ["assets"],
+        embed: true,
+      }),
+      library: AppSerializer.extend({
+        include: ["assets"],
         embed: true,
       }),
     },
@@ -77,7 +93,7 @@ export const makeServer = ({ environment = "development" } = {}) => {
     seeds(server) {
       // 1. Create users first (no dependencies)
       mockUsers.forEach((user) => {
-        server.create("users", user);
+        server.create("user", user);
       });
 
       // 2. Create assets (no dependencies)
@@ -120,7 +136,7 @@ export const makeServer = ({ environment = "development" } = {}) => {
         });
 
         // Assign the poiAsset ids to the assets array of the poi
-        server.db.pois.update(poi.id, { assets: poiAssetIds });
+        server.db.pois.update(poi.id, { assetIds: poiAssetIds });
       });
 
       // Assign random pois to each tour
@@ -128,7 +144,7 @@ export const makeServer = ({ environment = "development" } = {}) => {
         const pois = server.db.pois;
         const selectedPois = getRandomItems(pois, 5, 10);
         const poiIds = selectedPois.map((poi) => poi.id);
-        server.db.tours.update(tour.id, { pois: poiIds });
+        server.db.tours.update(tour.id, { poiIds: poiIds });
       });
 
       // Assign tours to projects
@@ -136,17 +152,20 @@ export const makeServer = ({ environment = "development" } = {}) => {
         const tours = server.db.tours;
         const selectedTours = getRandomItems(tours, 2, 5);
         const tourIds = selectedTours.map((tour) => tour.id);
-        server.db.projects.update(project.id, { tours: tourIds });
+        server.db.projects.update(project.id, { tourIds: tourIds });
       });
 
       // Create and assign a library for each project, which will contain all assets for more easy handling
+      const assetIds = server.db.assets.map((asset) => asset.id);
       server.db.projects.forEach((project) => {
         server.create("library", {
           projectId: project.id,
-          assets: server.db.assets.map((asset) => asset.id),
+          assetIds: assetIds,
         });
       });
     },
+    // "Mirage: You're trying to create a library model and you passed in \"asset-004,video-003,audio-004,model-001,audio-001,model-003,asset-001,audio-002,model-005,asset-005,video-005,video-004,model-004,asset-002,audio-005,video-001,audio-003,asset-003,video-002,model-002\" under the assets key, but that key is a HasMany relationship. You must pass in a Collection, PolymorphicCollection, array of Models, or null."
+
     routes() {
       this.namespace = "api";
 

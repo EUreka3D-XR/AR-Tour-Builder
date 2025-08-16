@@ -50,9 +50,6 @@
  * @property {string} coverPhoto - The URL of the project's cover photo
  * @property {Tour[]} tours - Array of tours associated with this project
  * @property {User[]} members - Members of the project
- * @property {number} totalTours - Number of tours in the project
- * @property {number} totalPois - Number of POIs in the project
- * @property {number} totalAssets - Number of media assets in the project
  * @property {Status} [status] - Project status (draft, published, archived)
  * @property {string} lastUpdated - Last updated date in ISO format
  */

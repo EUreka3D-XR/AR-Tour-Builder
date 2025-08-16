@@ -2,7 +2,7 @@
  * @typedef {import('@/types/jsdoc-types').Project} Project
  */
 
-import { getMockTours } from "./toursMocks.js";
+// import { getMockTours } from "./toursMocks.js";
 
 /**
  * Array of mock projects
@@ -27,7 +27,7 @@ export const mockProjects = [
       "https://images.unsplash.com/photo-1555993539-1732b0258235?w=400&h=250&fit=crop",
     coverPhoto:
       "https://images.unsplash.com/photo-1555993539-1732b0258235?w=1200&h=600&fit=crop",
-    tours: getMockTours(Math.floor(Math.random() * 3) + 1), // Random 1-3
+    // tours: getMockTours(Math.floor(Math.random() * 3) + 1), // Random 1-3
     totalTours: 5,
     totalPois: 12,
     totalAssets: 34,
@@ -52,7 +52,7 @@ export const mockProjects = [
       "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=250&fit=crop",
     coverPhoto:
       "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&h=600&fit=crop",
-    tours: getMockTours(Math.floor(Math.random() * 3) + 1), // Random 1-3
+    // tours: getMockTours(Math.floor(Math.random() * 3) + 1), // Random 1-3
     totalTours: 3,
     totalPois: 8,
     totalAssets: 22,
@@ -77,7 +77,7 @@ export const mockProjects = [
       "https://images.unsplash.com/photo-1539650116574-75c0c6d73c6e?w=400&h=250&fit=crop",
     coverPhoto:
       "https://images.unsplash.com/photo-1539650116574-75c0c6d73c6e?w=1200&h=600&fit=crop",
-    tours: getMockTours(Math.floor(Math.random() * 3) + 1), // Random 1-3
+    // tours: getMockTours(Math.floor(Math.random() * 3) + 1), // Random 1-3
     totalTours: 4,
     totalPois: 6,
     totalAssets: 18,

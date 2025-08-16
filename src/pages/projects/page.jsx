@@ -1,4 +1,4 @@
-import { mockProjects } from "@/api/mocks/projectsMocks";
+import { useProjects } from "@/services/projectsService";
 import { Box, styled, Typography } from "@mui/material";
 
 import ProjectCard from "./_components/ProjectCard";
@@ -27,13 +27,14 @@ const ProjectsGrid = styled(Box)({
 });
 
 function ProjectsPage() {
+  const { data: projects } = useProjects();
   return (
     <ContainerStyled>
       <Typography variant="h2" component="h2" gutterBottom>
         My Projects
       </Typography>
       <ProjectsGrid>
-        {mockProjects.map((project) => (
+        {projects?.map((project) => (
           <div key={project.id} className="grid-item">
             <ProjectCard project={project} />
           </div>

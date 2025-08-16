@@ -2,7 +2,7 @@
  * @typedef {import('@/types/jsdoc-types').POI} POI
  */
 
-import { getMockAssets } from "./assetsMocks.js";
+// import { getMockAssets } from "./assetsMocks.js";
 
 /**
  * Array of 10 mock POIs
@@ -29,7 +29,7 @@ export const mockPOIs = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1555993539-1732b0258235?w=400&h=300&fit=crop",
-    assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
+    // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
         title: "UNESCO World Heritage",
@@ -65,7 +65,7 @@ export const mockPOIs = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-    assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
+    // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
         title: "Ancient History Encyclopedia",
@@ -101,7 +101,7 @@ export const mockPOIs = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1594736797933-d0f06ba07c45?w=400&h=300&fit=crop",
-    assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
+    // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
         title: "Greek Ministry of Culture",
@@ -137,7 +137,7 @@ export const mockPOIs = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
-    assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
+    // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
         title: "Acropolis Museum",
@@ -173,7 +173,7 @@ export const mockPOIs = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=400&h=300&fit=crop",
-    assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
+    // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
         title: "Ancient Theatre Archive",
@@ -209,7 +209,7 @@ export const mockPOIs = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1571045034717-14cf9ffe1b69?w=400&h=300&fit=crop",
-    assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
+    // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
         title: "Athens Festival",
@@ -245,7 +245,7 @@ export const mockPOIs = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1539650116574-75c0c6d73c6e?w=400&h=300&fit=crop",
-    assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
+    // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
         title: "Ancient Agora Museum",
@@ -281,7 +281,7 @@ export const mockPOIs = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=400&h=300&fit=crop",
-    assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
+    // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
         title: "American School of Classical Studies",
@@ -317,7 +317,7 @@ export const mockPOIs = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-    assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
+    // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
         title: "Hellenic Ministry of Culture",
@@ -353,7 +353,7 @@ export const mockPOIs = [
     },
     thumbnail:
       "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop",
-    assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
+    // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
         title: "Agora Museum",

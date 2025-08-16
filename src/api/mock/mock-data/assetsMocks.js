@@ -1,10 +1,12 @@
 /**
+ * @typedef {import('@/types/jsdoc-types').Asset} Asset
  * @typedef {import('@/types/jsdoc-types').PoiAsset} PoiAsset
+ * @typedef {import('@/types/jsdoc-types').AssetType} AssetType
  */
 
 /**
  * Array of 5 mock image assets
- * @type {PoiAsset[]}
+ * @type {Asset[]}
  */
 export const mockImageAssets = [
   {
@@ -28,7 +30,6 @@ export const mockImageAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Parthenon_east_facade.jpg",
     url: "https://images.unsplash.com/photo-1555993539-1732b0258235?w=1200&h=800&fit=crop",
     type: "image",
-    priority: "normal",
     metadata: {
       width: 1200,
       height: 800,
@@ -60,7 +61,6 @@ export const mockImageAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Ionic_capital_detail.jpg",
     url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop",
     type: "image",
-    priority: "normal",
     metadata: {
       width: 1200,
       height: 800,
@@ -92,7 +92,6 @@ export const mockImageAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Red_figure_pottery.jpg",
     url: "https://images.unsplash.com/photo-1594736797933-d0f06ba07c45?w=1200&h=800&fit=crop",
     type: "image",
-    priority: "normal",
     metadata: {
       width: 1200,
       height: 800,
@@ -124,7 +123,6 @@ export const mockImageAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Acropolis_panorama.jpg",
     url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=600&fit=crop",
     type: "image",
-    priority: "normal",
     metadata: {
       width: 1200,
       height: 600,
@@ -157,7 +155,6 @@ export const mockImageAssets = [
       "https://commons.wikimedia.org/wiki/File:Parthenon_frieze_detail.jpg",
     url: "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=1200&h=800&fit=crop",
     type: "image",
-    priority: "normal",
     metadata: {
       width: 1200,
       height: 800,
@@ -172,7 +169,7 @@ export const mockImageAssets = [
 
 /**
  * Array of 5 mock video assets
- * @type {PoiAsset[]}
+ * @type {Asset[]}
  */
 export const mockVideoAssets = [
   {
@@ -197,7 +194,6 @@ export const mockVideoAssets = [
       "https://commons.wikimedia.org/wiki/File:Parthenon_reconstruction.mp4",
     url: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
     type: "video",
-    priority: "normal",
     metadata: {
       width: 1920,
       height: 1080,
@@ -230,7 +226,6 @@ export const mockVideoAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Acropolis_excavation.mp4",
     url: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
     type: "video",
-    priority: "normal",
     metadata: {
       width: 1280,
       height: 720,
@@ -264,7 +259,6 @@ export const mockVideoAssets = [
       "https://commons.wikimedia.org/wiki/File:Greek_architecture_orders.mp4",
     url: "https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4",
     type: "video",
-    priority: "normal",
     metadata: {
       width: 1920,
       height: 1080,
@@ -297,7 +291,6 @@ export const mockVideoAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Acropolis_sunrise.mp4",
     url: "https://sample-videos.com/zip/10/mp4/SampleVideo_1920x1080_1mb.mp4",
     type: "video",
-    priority: "normal",
     metadata: {
       width: 1920,
       height: 1080,
@@ -330,7 +323,6 @@ export const mockVideoAssets = [
     source: "https://commons.wikimedia.org/wiki/File:3D_laser_scanning.mp4",
     url: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4",
     type: "video",
-    priority: "normal",
     metadata: {
       width: 1280,
       height: 720,
@@ -346,7 +338,7 @@ export const mockVideoAssets = [
 
 /**
  * Array of 5 mock audio assets
- * @type {PoiAsset[]}
+ * @type {Asset[]}
  */
 export const mockAudioAssets = [
   {
@@ -369,7 +361,6 @@ export const mockAudioAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Parthenon_audio_guide.mp3",
     url: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
     type: "audio",
-    priority: "normal",
     metadata: {
       duration: 480,
       format: "MP3",
@@ -399,7 +390,6 @@ export const mockAudioAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Ancient_greek_music.mp3",
     url: "https://www.soundjay.com/misc/sounds/wind-chimes-1.wav",
     type: "audio",
-    priority: "normal",
     metadata: {
       duration: 360,
       format: "MP3",
@@ -430,7 +420,6 @@ export const mockAudioAssets = [
       "https://commons.wikimedia.org/wiki/File:Archaeologist_interview.mp3",
     url: "https://www.soundjay.com/misc/sounds/page-flip-01a.wav",
     type: "audio",
-    priority: "normal",
     metadata: {
       duration: 1200,
       format: "MP3",
@@ -460,7 +449,6 @@ export const mockAudioAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Acropolis_dawn_sounds.mp3",
     url: "https://www.soundjay.com/nature/sounds/wind.wav",
     type: "audio",
-    priority: "normal",
     metadata: {
       duration: 600,
       format: "MP3",
@@ -490,7 +478,6 @@ export const mockAudioAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Greek_poetry_reading.mp3",
     url: "https://www.soundjay.com/misc/sounds/paper-flip-1.wav",
     type: "audio",
-    priority: "normal",
     metadata: {
       duration: 900,
       format: "MP3",
@@ -504,7 +491,7 @@ export const mockAudioAssets = [
 
 /**
  * Array of 5 mock 3D model assets
- * @type {PoiAsset[]}
+ * @type {Asset[]}
  */
 export const mockModelAssets = [
   {
@@ -527,21 +514,6 @@ export const mockModelAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Parthenon_3D_model.glb",
     url: "https://example.com/models/parthenon_complete.glb",
     type: "3d",
-    priority: "high",
-    modelAssetAttributes: {
-      viewInAr: true,
-      linkedAsset: {
-        id: "audio-001",
-        title: {
-          locales: {
-            en: "Audio Guide: Parthenon History",
-            fr: "Guide Audio : Histoire du Parthénon",
-          },
-        },
-        type: "audio",
-        url: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
-      },
-    },
     metadata: {
       format: "GLB",
       photographer: "Digital Heritage Lab",
@@ -570,21 +542,6 @@ export const mockModelAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Ionic_capital_3D.glb",
     url: "https://example.com/models/ionic_capital.glb",
     type: "3d",
-    priority: "normal",
-    modelAssetAttributes: {
-      viewInAr: true,
-      linkedAsset: {
-        id: "audio-002",
-        title: {
-          locales: {
-            en: "Ancient Greek Music Reconstruction",
-            fr: "Reconstruction de Musique Grecque Antique",
-          },
-        },
-        type: "audio",
-        url: "https://www.soundjay.com/misc/sounds/wind-chimes-1.wav",
-      },
-    },
     metadata: {
       format: "GLB",
       photographer: "Archaeological 3D Scanning Unit",
@@ -613,21 +570,6 @@ export const mockModelAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Greek_amphora_3D.glb",
     url: "https://example.com/models/greek_amphora.glb",
     type: "3d",
-    priority: "normal",
-    modelAssetAttributes: {
-      viewInAr: true,
-      linkedAsset: {
-        id: "audio-003",
-        title: {
-          locales: {
-            en: "Archaeologist Interview: Latest Discoveries",
-            fr: "Entretien d'Archéologue : Dernières Découvertes",
-          },
-        },
-        type: "audio",
-        url: "https://www.soundjay.com/misc/sounds/page-flip-01a.wav",
-      },
-    },
     metadata: {
       format: "GLB",
       photographer: "Museum Digital Archive Team",
@@ -656,21 +598,6 @@ export const mockModelAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Caryatid_3D_model.glb",
     url: "https://example.com/models/caryatid_statue.glb",
     type: "3d",
-    priority: "normal",
-    modelAssetAttributes: {
-      viewInAr: true,
-      linkedAsset: {
-        id: "audio-004",
-        title: {
-          locales: {
-            en: "Ambient Sounds: Acropolis at Dawn",
-            fr: "Sons Ambiants : Acropole à l'Aube",
-          },
-        },
-        type: "audio",
-        url: "https://www.soundjay.com/nature/sounds/wind.wav",
-      },
-    },
     metadata: {
       format: "GLB",
       photographer: "Hellenic Ministry of Culture 3D Lab",
@@ -699,21 +626,6 @@ export const mockModelAssets = [
     source: "https://commons.wikimedia.org/wiki/File:Parthenon_frieze_3D.glb",
     url: "https://example.com/models/parthenon_frieze.glb",
     type: "3d",
-    priority: "normal",
-    modelAssetAttributes: {
-      viewInAr: true,
-      linkedAsset: {
-        id: "audio-005",
-        title: {
-          locales: {
-            en: "Poetry Reading: Ancient Greek Verses",
-            fr: "Lecture de Poésie : Vers Grecs Anciens",
-          },
-        },
-        type: "audio",
-        url: "https://www.soundjay.com/misc/sounds/paper-flip-1.wav",
-      },
-    },
     metadata: {
       format: "GLB",
       photographer: "International Heritage Preservation Society",
@@ -727,9 +639,9 @@ export const mockModelAssets = [
 /**
  * Returns a random combination of mock assets (images, videos, audios, models).
  * @param {number} count
- * @returns {PoiAsset[]}
+ * @returns {Asset[]}
  */
-export function getMockAssets(count) {
+export function getMockAssets(count = 100) {
   const allAssets = [
     ...mockImageAssets,
     ...mockVideoAssets,
@@ -740,5 +652,32 @@ export function getMockAssets(count) {
     .map((asset) => ({ asset, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ asset }) => asset);
-  return shuffled.slice(0, count);
+  return shuffled.slice(0, Math.min(count, shuffled.length));
+}
+
+/**
+ * Returns a random combination of mock poi assets (images, videos, audios, models).
+ * @param {number} count
+ * @returns {PoiAsset[]}
+ */
+export function getMockPoiAssets(assets, count = 100) {
+  let isModel3dIncluded = false;
+  const poiAssets = getMockAssets(count).map((asset) => {
+    const poiAsset = {
+      ...asset,
+      assetId: asset.id,
+      priority: "normal",
+      modelAssetAttributes: {},
+    };
+    if (asset.type === "3d") {
+      poiAsset.modelAssetAttributes = { viewInAr: true };
+      if (!isModel3dIncluded) {
+        poiAsset.priority = "high";
+        isModel3dIncluded = true;
+      }
+    }
+    return poiAsset;
+  });
+
+  return poiAssets;
 }

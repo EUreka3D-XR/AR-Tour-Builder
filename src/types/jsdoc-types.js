@@ -49,6 +49,7 @@
  * @property {string} thumbnail - The URL of the project's thumbnail image
  * @property {string} coverPhoto - The URL of the project's cover photo
  * @property {Tour[]} tours - Array of tours associated with this project
+ * @property {User[]} members - Members of the project
  * @property {number} totalTours - Number of tours in the project
  * @property {number} totalPois - Number of POIs in the project
  * @property {number} totalAssets - Number of media assets in the project
@@ -125,7 +126,7 @@
 
 /**
  * POI-specific asset schema extending the base Asset type
- * @typedef {Asset & {age: number, seniority: number}} PoiAsset
+ * @typedef {Asset & {priority: AssetPriority, modelAssetAttributes: ModelAssetAttributes}} PoiAsset
  */
 
 /**

@@ -1,4 +1,4 @@
-import { mockProjects } from "@/mocks/projectsMocks";
+import { mockProjects } from "@/api/mocks/projectsMocks";
 import { Box, styled, Typography } from "@mui/material";
 
 import ProjectCard from "./_components/ProjectCard";

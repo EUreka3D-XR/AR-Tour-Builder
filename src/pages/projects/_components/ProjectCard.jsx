@@ -52,7 +52,7 @@ function ProjectCard({ project }) {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(paths.projects.id.dynamic(project.id));
+    navigate(paths.projects.one(project.id));
   };
 
   return (

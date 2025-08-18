@@ -56,16 +56,16 @@ function ProjectCard({ project }) {
   };
 
   return (
-    <ProjectCardStyled key={project.id} onClick={handleCardClick}>
+    <ProjectCardStyled onClick={handleCardClick}>
       <CardMedia
         component="img"
         height="200"
         image={project.thumbnail}
-        alt={project.title.locales.en}
+        alt={project.title}
       />
       <CardContent>
         <Typography variant="h6" component="h3" gutterBottom>
-          {project.title.locales.en}
+          {project.title}
         </Typography>
         <Typography
           variant="body2"
@@ -78,7 +78,7 @@ function ProjectCard({ project }) {
             marginBottom: "1rem",
           }}
         >
-          {project.description.locales.en}
+          {project.description}
         </Typography>
         <StatsContainer>
           <StatChip

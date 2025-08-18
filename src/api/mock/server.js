@@ -16,18 +16,18 @@ import { mockUsers } from "./mock-data/usersMocks";
 const AppSerializer = RestSerializer.extend({
   serialize() {
     let json = RestSerializer.prototype.serialize.apply(this, arguments);
-    let res = Object.values(json)[0];
+    let data = Object.values(json)[0];
 
     // Get the locale parameter from the request
     const request = arguments[1];
     const localesParam = request?.queryParams?.locale;
 
-    if (localesParam && res.data) {
+    if (localesParam && data) {
       // Transform the data to use localized values
-      res.data = this.transformLocalizedFields(res.data, localesParam);
+      data = this.transformLocalizedFields(data, localesParam);
     }
 
-    return res;
+    return data;
   },
   transformLocalizedFields(data, locale) {
     // Handle arrays of data

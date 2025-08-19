@@ -19,7 +19,7 @@ const getAllProjects = async ({ locale } = {}) => {
 
 const getProject = async (projectId, { locale } = {}) => {
   try {
-    const url = baseUrls.projects(projectId);
+    const url = baseUrls.project(projectId);
 
     const params = {};
     if (locale) {

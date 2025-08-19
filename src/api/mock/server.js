@@ -218,13 +218,47 @@ export const makeServer = ({ environment = "development" } = {}) => {
 
     routes() {
       this.namespace = "api";
+      this.timing = 1000;
 
       this.get("/projects");
-      this.get("/projects/:projectId");
-      this.get("/projects/:projectId/tours");
-      this.get("/projects/:projectId/tours/:tourId");
-      this.get("/projects/:projectId/tours/:tourId/pois");
-      this.get("/projects/:projectId/tours/:tourId/pois/:poiId");
+      this.get("/projects/:projectId", (schema, request) => {
+        const projectId = request.params.projectId;
+        const project = schema.projects.find(projectId);
+
+        if (!project) {
+          return new Response(404, {}, { error: "Project not found" });
+        }
+
+        return project;
+      });
+      this.get("/projects/:projectId/tours", (schema, request) => {
+        const projectId = request.params.projectId;
+        const project = schema.projects.find(projectId);
+        return project ? project.tours : [];
+      });
+      this.get("/projects/:projectId/tours/:tourId", (schema, request) => {
+        const { projectId, tourId } = request.params;
+        const tour = schema.tours.find(tourId);
+
+        // Optionally verify tour belongs to project
+        if (tour && tour.projectId === projectId) {
+          return tour;
+        }
+        return new Response(404, {}, { error: "Tour not found" });
+      });
+      this.get("/projects/:projectId/tours/:tourId/pois", (schema, request) => {
+        const { tourId } = request.params;
+        const tour = schema.tours.find(tourId);
+        return tour ? tour.pois : [];
+      });
+      this.get(
+        "/projects/:projectId/tours/:tourId/pois/:poiId",
+        (schema, request) => {
+          const { poiId } = request.params;
+          const poi = schema.pois.find(poiId);
+          return poi || new Response(404, {}, { error: "POI not found" });
+        },
+      );
     },
   });
 };

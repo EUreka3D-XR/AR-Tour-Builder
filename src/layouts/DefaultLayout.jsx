@@ -10,7 +10,6 @@ const PageContainerStyled = styled("div")(({ theme }) => ({
   height: `calc(100vh - ${theme.custom.headerHeight})`,
   display: "flex",
   overflow: "hidden",
-  padding: "1rem 0 0",
   "& .page-content": {
     flex: 1,
     overflowY: "auto",

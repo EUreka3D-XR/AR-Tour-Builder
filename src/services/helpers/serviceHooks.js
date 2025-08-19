@@ -3,19 +3,18 @@ import { useQuery } from "@tanstack/react-query";
 import { useFetchStateHelper } from "@/hooks/useFetchState";
 
 /**
- * @typedef {Object} FetchStateType
- * @property {any} error
- * @property {boolean} isLoading
- * @property {boolean} isError
- * @property {boolean} isSuccess
+ * @typedef {import("@/types/jsdoc-types").FetchStateType} FetchStateType
+ * @template T
+ * @typedef {import("@/types/jsdoc-types").FetchResultType<T>} FetchResultType
  */
 
 /**
  * Custom hook for fetching data using react-query.
+ * @template T
  * @param {Object} params
- * @param {Function} params.fetcher - The function to fetch data (queryFn for useQuery).
+ * @param {() => Promise<T>} params.fetcher - The function to fetch data that returns Promise<T>
  * @param {String[]} params.queryKey - The key for the query (queryKey for useQuery).
- * @returns {{ data: unknown, fetchState: FetchStateType }} - Object containing fetched data and fetch state.
+ * @returns {FetchResultType<T>} - Object containing fetched data and fetch state.
  */
 export const useDataFetcher = ({ fetcher, queryKey }) => {
   const { data, ...queryResponse } = useQuery({

@@ -37,6 +37,25 @@
  */
 
 // =============================================================================
+// API TYPES
+// =============================================================================
+
+/**
+ * @typedef {Object} FetchStateType
+ * @property {any} error
+ * @property {boolean} isLoading
+ * @property {boolean} isError
+ * @property {boolean} isSuccess
+ */
+
+/**
+ * @template T
+ * @typedef {Object} FetchResultType
+ * @property {T} data - The fetched data
+ * @property {FetchStateType} fetchState - The fetch state
+ */
+
+// =============================================================================
 // PROJECT TYPES
 // =============================================================================
 

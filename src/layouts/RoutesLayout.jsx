@@ -9,6 +9,7 @@ const POILayout = () => <Outlet />;
 const LibraryLayout = () => <Outlet />;
 
 const ProjectsPage = lazy(() => import("@/pages/projects/page"));
+const ProjectPage = lazy(() => import("@/pages/dashboard/page"));
 
 function RoutesLayout() {
   return (
@@ -26,7 +27,7 @@ function RoutesLayout() {
       <Route path="/projects" element={<ProjectsLayout />}>
         <Route index element={<ProjectsPage />} />
         <Route path="new" element={<></>} />
-        <Route path=":projectId" element={<></>} />
+        <Route path=":projectId" element={<ProjectPage />} />
         <Route path=":projectId/edit" element={<></>} />
         {/* 🗺️ Tours */}
         <Route path=":projectId/tours" element={<TourLayout />}>

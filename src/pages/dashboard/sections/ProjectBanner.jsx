@@ -1,6 +1,35 @@
-import { Avatar, styled, Typography } from "@mui/material";
+import { Avatar, Badge, styled, Typography } from "@mui/material";
 
 import Banner from "@/components/banner/Banner";
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    backgroundColor: "#44b700",
+    color: "#44b700",
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    "&::after": {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      animation: "ripple 1.2s infinite ease-in-out",
+      border: "1px solid currentColor",
+      content: '""',
+    },
+  },
+  "@keyframes ripple": {
+    "0%": {
+      transform: "scale(.8)",
+      opacity: 1,
+    },
+    "100%": {
+      transform: "scale(2.4)",
+      opacity: 0,
+    },
+  },
+}));
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   "& .info-wrapper": {
@@ -22,18 +51,32 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 /**
  * ProjectBanner component
  * @param {Object} props
- * @param {string} props.logo - The logo image URL
- * @param {string} props.cover - The cover image URL
- * @param {string} props.title - The title text
- * @param {string} props.description - The description text
+ * @param {import("@/types/jsdoc-types").Project} props.project - The project object
  * @returns {JSX.Element}
  */
-function ProjectBanner({ logo, cover, title, description }) {
+function ProjectBanner({ project = {} }) {
+  const { thumbnail, coverPhoto, title, description, status } = project;
+
+  const isPublished = status === "published";
+
   return (
-    <Banner src={cover}>
+    <Banner src={coverPhoto}>
       <ContainerStyled>
         <div className="info-wrapper">
-          <Avatar src={logo} alt={logo} className="project-logo" />
+          {isPublished ? (
+            <StyledBadge
+              badgeContent=" "
+              overlap="circular"
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <Avatar src={thumbnail} alt={title} className="project-logo" />
+            </StyledBadge>
+          ) : (
+            <Avatar src={thumbnail} alt={title} className="project-logo" />
+          )}
           <div className="project-info">
             <Typography variant="h2">{title}</Typography>
             <Typography>{description}</Typography>

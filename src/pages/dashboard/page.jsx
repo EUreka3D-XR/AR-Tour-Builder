@@ -8,14 +8,7 @@ function DashboardPage() {
 
   const { data: project } = useProject(projectId, "en");
 
-  return (
-    <ProjectBanner
-      logo={project?.thumbnail}
-      cover={project?.coverPhoto}
-      title={project?.title}
-      description={project?.description}
-    />
-  );
+  return <ProjectBanner project={project} />;
 }
 
 export default DashboardPage;

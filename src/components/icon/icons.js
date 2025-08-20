@@ -7,6 +7,7 @@ export const icons = {
   settings: "settings",
   tour: "tour",
   user: "person",
+  users: "group",
 };
 
 /**

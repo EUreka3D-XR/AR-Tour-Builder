@@ -1,6 +1,7 @@
 import { Avatar, Badge, styled, Typography } from "@mui/material";
 
 import Banner from "@/components/banner/Banner";
+import EurekaIcon from "@/components/icon/Icon";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -33,17 +34,32 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   "& .info-wrapper": {
-    padding: theme.spacing(4, 4),
+    padding: theme.spacing(2, 4),
     display: "flex",
     alignItems: "flex-end",
     gap: theme.spacing(4),
     "& .project-logo": {
       height: theme.spacing(16),
       width: theme.spacing(16),
+      marginBottom: theme.spacing(2),
     },
     "& .project-info": {
       color: "white",
       textShadow: "2px 2px 4px rgba(0,0,0,0.7)",
+    },
+    "& .stats-info": {
+      marginTop: theme.spacing(2),
+      display: "flex",
+      gap: theme.spacing(2),
+      "& .stat": {
+        display: "flex",
+        alignItems: "center",
+        color: theme.palette.grey[300],
+        gap: theme.spacing(0.5),
+        "& *": {
+          fontSize: "1em",
+        },
+      },
     },
   },
 }));
@@ -55,7 +71,17 @@ const ContainerStyled = styled("div")(({ theme }) => ({
  * @returns {JSX.Element}
  */
 function ProjectBanner({ project = {} }) {
-  const { thumbnail, coverPhoto, title, description, status } = project;
+  const {
+    thumbnail,
+    coverPhoto,
+    title,
+    description,
+    status,
+    tours,
+    members,
+    totalPois,
+    totalAssets,
+  } = project;
 
   const isPublished = status === "published";
 
@@ -80,6 +106,24 @@ function ProjectBanner({ project = {} }) {
           <div className="project-info">
             <Typography variant="h2">{title}</Typography>
             <Typography>{description}</Typography>
+            <div className="stats-info">
+              <div className="stat">
+                <EurekaIcon name="tour" />
+                <span>{tours?.length} Tours</span>
+              </div>
+              <div className="stat">
+                <EurekaIcon name="poi" />
+                <span>{totalPois} POIs</span>
+              </div>
+              <div className="stat">
+                <EurekaIcon name="media" />
+                <span>{totalAssets} Assets</span>
+              </div>
+              <div className="stat">
+                <EurekaIcon name="users" />
+                <span>{members?.length} Members</span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="actions-wrapper"></div>

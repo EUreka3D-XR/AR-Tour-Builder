@@ -1,5 +1,7 @@
 import { Icon as MuiIcon, styled } from "@mui/material";
 
+import { icons } from "./icons";
+
 const VARIANTS = {
   filled: "material-icons",
   outlined: "material-icons-outlined",
@@ -22,7 +24,7 @@ function IconUnstyled({ variant, className, color, fontSize, name }) {
       baseClassName={VARIANTS[variant]}
       className={className}
     >
-      {name}
+      {icons[name]}
     </MuiIcon>
   );
 }

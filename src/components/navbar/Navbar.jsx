@@ -36,7 +36,7 @@ function Navbar() {
         <EurekaIcon name="home" />
       </NavbarItem>
       <NavbarItem to={navPaths.tours.to} name={navPaths.tours.label}>
-        <EurekaIcon name="tours" />
+        <EurekaIcon name="tour" />
       </NavbarItem>
       <NavbarItem to={navPaths.library.to} name={navPaths.library.label}>
         <EurekaIcon name="media" />

@@ -47,6 +47,11 @@ function MyThemeProvider({ children }) {
             size: "small",
           },
         },
+        MuiIcon: {
+          defaultProps: {
+            baseClassName: "material-icons-outlined",
+          },
+        },
       },
     });
   }, []);

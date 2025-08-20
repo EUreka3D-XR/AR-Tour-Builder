@@ -1,8 +1,8 @@
-import { Menu, Person } from "@mui/icons-material";
 import { IconButton, styled } from "@mui/material";
 
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import logo from "@/assets/images/dummy-logo.webp";
+import EurekaIcon from "../icon/Icon";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   width: "100vw",
@@ -30,14 +30,14 @@ function Header() {
       <div className="side-header left-header">
         {isInsideAProject && (
           <IconButton size="small" onClick={toggleNavMenu}>
-            <Menu />
+            <EurekaIcon name="menu" />
           </IconButton>
         )}
         <img src={logo} alt="logo" className="logo" />
       </div>
       <div className="side-header right-header">
         <IconButton size="small">
-          <Person />
+          <EurekaIcon name="user" variant="filled" />
         </IconButton>
       </div>
     </ContainerStyled>

@@ -1,13 +1,9 @@
 import clsx from "clsx";
-import {
-  HomeOutlined,
-  PermMediaOutlined,
-  TourOutlined,
-} from "@mui/icons-material";
 import { MenuList, styled } from "@mui/material";
 
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import { navPaths } from "@/utils/paths";
+import EurekaIcon from "../icon/Icon";
 import NavbarItem from "./NavbarItem";
 import NavbarProjects from "./NavbarProjects";
 
@@ -37,13 +33,13 @@ function Navbar() {
     >
       <NavbarProjects />
       <NavbarItem to={navPaths.home.to} name={navPaths.home.label}>
-        <HomeOutlined />
+        <EurekaIcon name="home" />
       </NavbarItem>
       <NavbarItem to={navPaths.tours.to} name={navPaths.tours.label}>
-        <TourOutlined />
+        <EurekaIcon name="tours" />
       </NavbarItem>
       <NavbarItem to={navPaths.library.to} name={navPaths.library.label}>
-        <PermMediaOutlined />
+        <EurekaIcon name="media" />
       </NavbarItem>
     </MenuListStyled>
   );

@@ -186,7 +186,12 @@
  * @property {string} firstName - User's first name
  * @property {string} lastName - User's last name
  * @property {string} [avatar] - Avatar image URL
- * @property {string} [role] - User role (admin, editor, viewer)
+ * @property {UserRole} [role] - User role (admin, editor, viewer)
+ */
+
+/**
+ * User Role
+ * @typedef {'admin'|'editor'|'viewer'} UserRole
  */
 
 // =============================================================================

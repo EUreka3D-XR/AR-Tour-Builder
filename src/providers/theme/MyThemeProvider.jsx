@@ -9,7 +9,7 @@ function MyThemeProvider({ children }) {
         headerHeight: "3.5rem",
       },
       typography: {
-        fontFamily: "Poppins, Noto Sans, serif",
+        // fontFamily: "Poppins, Noto Sans, serif",
         h1: {
           fontSize: "3.5rem",
         },

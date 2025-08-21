@@ -141,12 +141,10 @@ export const makeServer = ({ environment = "development" } = {}) => {
     },
 
     seeds(server) {
-      // 1. Create users first (no dependencies)
       mockUsers.forEach((user) => {
         server.create("user", user);
       });
 
-      // 2. Create assets (no dependencies)
       getMockAssets().forEach((asset) => {
         server.create("asset", asset);
       });
@@ -202,7 +200,7 @@ export const makeServer = ({ environment = "development" } = {}) => {
         const tours = server.db.tours;
         const selectedTours = getRandomItems(tours, 2, 5);
         const tourIds = selectedTours.map((tour) => tour.id);
-        server.db.projects.update(project.id, { tourIds: tourIds });
+        server.db.projects.update(project.id, { tourIds });
       });
 
       // Create and assign a library for each project, which will contain all assets for more easy handling
@@ -213,13 +211,21 @@ export const makeServer = ({ environment = "development" } = {}) => {
           assetIds: assetIds,
         });
       });
+
+      // Add 3-7 random users from db to each project
+      server.db.projects.forEach((project) => {
+        const users = server.db.users;
+        const selectedUsers = getRandomItems(users, 3, 7);
+        const memberIds = selectedUsers.map((user) => user.id);
+        server.db.projects.update(project.id, { memberIds });
+      });
     },
-    // "Mirage: You're trying to create a library model and you passed in \"asset-004,video-003,audio-004,model-001,audio-001,model-003,asset-001,audio-002,model-005,asset-005,video-005,video-004,model-004,asset-002,audio-005,video-001,audio-003,asset-003,video-002,model-002\" under the assets key, but that key is a HasMany relationship. You must pass in a Collection, PolymorphicCollection, array of Models, or null."
 
     routes() {
       this.namespace = "api";
       this.timing = 1000;
 
+      // Project
       this.get("/projects");
       this.get("/projects/:projectId", (schema, request) => {
         const projectId = request.params.projectId;
@@ -231,6 +237,8 @@ export const makeServer = ({ environment = "development" } = {}) => {
 
         return project;
       });
+
+      // Tours
       this.get("/projects/:projectId/tours", (schema, request) => {
         const projectId = request.params.projectId;
         const project = schema.projects.find(projectId);
@@ -246,6 +254,8 @@ export const makeServer = ({ environment = "development" } = {}) => {
         }
         return new Response(404, {}, { error: "Tour not found" });
       });
+
+      // Pois
       this.get("/projects/:projectId/tours/:tourId/pois", (schema, request) => {
         const { tourId } = request.params;
         const tour = schema.tours.find(tourId);
@@ -259,6 +269,13 @@ export const makeServer = ({ environment = "development" } = {}) => {
           return poi || new Response(404, {}, { error: "POI not found" });
         },
       );
+
+      // Project Members
+      this.get("/projects/:projectId/members", (schema, request) => {
+        const projectId = request.params.projectId;
+        const project = schema.projects.find(projectId);
+        return project ? project.members : [];
+      });
     },
   });
 };

@@ -13,7 +13,7 @@ export const mockUsers = [
     username: "johndoe",
     firstName: "John",
     lastName: "Doe",
-    avatar: "https://example.com/avatars/johndoe.png",
+    role: "admin",
   },
   {
     id: "2",
@@ -21,7 +21,7 @@ export const mockUsers = [
     username: "janesmith",
     firstName: "Jane",
     lastName: "Smith",
-    avatar: "https://example.com/avatars/janesmith.png",
+    role: "admin",
   },
   {
     id: "3",
@@ -29,7 +29,9 @@ export const mockUsers = [
     username: "alicejohnson",
     firstName: "Alice",
     lastName: "Johnson",
-    avatar: "https://example.com/avatars/alicejohnson.png",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    role: "admin",
   },
   {
     id: "4",

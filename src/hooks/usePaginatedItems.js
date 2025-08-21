@@ -8,13 +8,14 @@ import { useMemo } from "react";
  * @param {number} params.page
  * @returns {{ data: T[], meta: { page: number, pageSize: number, totalItems: number, totalPages: number, needsPagination: boolean } }}
  */
-const usePaginatedItems = ({ items, size, page }) => {
+const usePaginatedItems = ({ items = [], size, page }) => {
   const meta = useMemo(() => {
-    const totalPages = Math.ceil(items.length / size);
+    const totalItems = items.length || 0;
+    const totalPages = Math.ceil(totalItems / size);
     return {
       page,
       pageSize: size,
-      totalItems: items.length,
+      totalItems,
       totalPages,
       needsPagination: totalPages > 1,
     };

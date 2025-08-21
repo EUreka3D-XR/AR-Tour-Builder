@@ -27,7 +27,7 @@ const ProjectsGrid = styled(Box)({
 });
 
 function ProjectsPage() {
-  const { data: projects } = useProjects("en");
+  const { data: projects } = useProjects.localized();
 
   return (
     <ContainerStyled>

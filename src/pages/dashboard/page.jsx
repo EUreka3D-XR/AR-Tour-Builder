@@ -27,7 +27,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 function DashboardPage() {
   const { projectId } = useParams();
 
-  const { data: project } = useProject(projectId, "en");
+  const { data: project } = useProject.localized(projectId);
 
   return (
     <ContainerStyled>

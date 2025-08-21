@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { api } from "@/api";
 
 import { useDataFetcher } from "./helpers/serviceHooks";
@@ -9,24 +10,50 @@ import { useDataFetcher } from "./helpers/serviceHooks";
  */
 
 /**
- * @param {string} locale
  * @returns {ProjectsResult}
  */
-export const useProjects = (locale) => {
+export const useProjects = () => {
   return useDataFetcher({
-    fetcher: () => api.projects.fetchAll({ locale }),
+    fetcher: () => api.projects.fetchAll(),
+    queryKey: ["projects"],
+  });
+};
+
+/**
+ * @returns {ProjectsResult}
+ */
+const useProjectsLocalized = () => {
+  const { i18n } = useTranslation();
+  const locale = i18n.language;
+  return useDataFetcher({
+    fetcher: () => api.projects.fetchAll.localized(locale),
     queryKey: ["projects", locale],
   });
 };
 
 /**
  * @param {string} projectId
- * @param {string} locale
  * @returns {ProjectResult}
  */
-export const useProject = (projectId, locale) => {
+export const useProject = (projectId) => {
   return useDataFetcher({
-    fetcher: () => api.projects.fetchOne(projectId, { locale }),
+    fetcher: () => api.projects.fetchOne(projectId),
+    queryKey: ["project", projectId],
+  });
+};
+
+/**
+ * @param {string} projectId
+ * @returns {ProjectResult}
+ */
+const useProjectLocalized = (projectId) => {
+  const { i18n } = useTranslation();
+  const locale = i18n.language;
+  return useDataFetcher({
+    fetcher: () => api.projects.fetchOne.localized(projectId, locale),
     queryKey: ["project", projectId, locale],
   });
 };
+
+useProjects.localized = useProjectsLocalized;
+useProject.localized = useProjectLocalized;

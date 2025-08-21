@@ -5,6 +5,7 @@ export const baseUrls = {
   members: (projectId) => `/api/projects/${projectId}/members`,
   users: "/api/users",
   tours: (projectId) => `/api/projects/${projectId}/tours`,
+  tour: (projectId, tourId) => `/api/projects/${projectId}/tours/${tourId}`,
   pois: (projectId, tourId) =>
     `/api/projects/${projectId}/tours/${tourId}/pois`,
 };

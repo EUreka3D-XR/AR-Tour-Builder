@@ -1,37 +1,29 @@
-import axiosInstance from "../client-instance/axiosInstance";
 import { baseUrls } from "../endpoints-base-urls/baseUrls";
+import fetcher from "../fetcher/api-fetcher";
 
-const getAllProjects = async ({ locale } = {}) => {
-  try {
-    const url = baseUrls.projects;
-
-    const params = {};
-    if (locale) {
-      params.locale = locale;
-    }
-    const response = await axiosInstance.get(url, { params });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching projects:", error);
-    throw error;
-  }
+const getAllProjects = () => {
+  const url = baseUrls.projects;
+  return fetcher.get(url);
 };
 
-const getProject = async (projectId, { locale } = {}) => {
-  try {
-    const url = baseUrls.project(projectId);
-
-    const params = {};
-    if (locale) {
-      params.locale = locale;
-    }
-    const response = await axiosInstance.get(url, { params });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching project:", error);
-    throw error;
-  }
+const getAllProjectsLocalized = (locale) => {
+  const url = baseUrls.projects;
+  return fetcher.get.localized(url, { locale });
 };
+
+getAllProjects.localized = getAllProjectsLocalized;
+
+const getProject = async (projectId) => {
+  const url = baseUrls.project(projectId);
+  return fetcher.get(url);
+};
+
+const getProjectLocalized = (projectId, locale) => {
+  const url = baseUrls.project(projectId);
+  return fetcher.get.localized(url, { locale });
+};
+
+getProject.localized = getProjectLocalized;
 
 export const projectsApi = {
   fetchAll: getAllProjects,

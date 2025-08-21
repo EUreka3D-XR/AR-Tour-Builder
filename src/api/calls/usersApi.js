@@ -1,28 +1,14 @@
-import axiosInstance from "../client-instance/axiosInstance";
 import { baseUrls } from "../endpoints-base-urls/baseUrls";
+import fetcher from "../fetcher/api-fetcher";
 
 const getUser = async (userId) => {
-  try {
-    const url = `${baseUrls.users}/${userId}`;
-
-    const response = await axiosInstance.get(url);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching user with id " + userId + ":", error);
-    throw error;
-  }
+  const url = `${baseUrls.users}/${userId}`;
+  return fetcher.get(url);
 };
 
 const getProjectUsers = async (projectId) => {
-  try {
-    const url = baseUrls.members(projectId);
-
-    const response = await axiosInstance.get(url);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    throw error;
-  }
+  const url = baseUrls.members(projectId);
+  return fetcher.get(url);
 };
 
 export const usersApi = {

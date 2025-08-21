@@ -13,6 +13,7 @@ const PageContainerStyled = styled("div")(({ theme }) => ({
   "& .page-content": {
     flex: 1,
     overflowY: "auto",
+    paddingBottom: theme.spacing(2),
   },
 }));
 

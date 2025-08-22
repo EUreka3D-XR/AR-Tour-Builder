@@ -23,26 +23,7 @@ import axiosInstance from "./axiosInstance";
  * @param {FetcherOptions} options - Request options
  * @returns {Promise<any>} The response data
  */
-const get = async (url, { params, fromDTO, signal } = {}) => {
-  try {
-    const response = await axiosInstance.get(url, {
-      params,
-      signal,
-    });
-    return fromDTO ? fromDTO(response.data) : response.data;
-  } catch (error) {
-    handleApiError(error, "GET", url);
-    throw error;
-  }
-};
-
-/**
- * Localized GET request handler
- * @param {string} url - The endpoint URL
- * @param {FetcherOptions} options - Request options including locale
- * @returns {Promise<any>} The response data
- */
-const getLocalized = async (url, { params, locale, fromDTO, signal } = {}) => {
+const get = async (url, { params, locale, fromDTO, signal } = {}) => {
   try {
     const response = await axiosInstance.get(url, {
       params: { ...params, locale },
@@ -50,7 +31,7 @@ const getLocalized = async (url, { params, locale, fromDTO, signal } = {}) => {
     });
     return fromDTO ? fromDTO(response.data) : response.data;
   } catch (error) {
-    handleApiError(error, "GET (localized)", url);
+    handleApiError(error, "GET", url);
     throw error;
   }
 };
@@ -102,45 +83,6 @@ const put = async (url, { data, locale, fromDTO, toDTO, signal } = {}) => {
     throw error;
   }
 };
-
-/**
- * Localized POST request handler
- * @param {string} url - The endpoint URL
- * @param {FetcherPostOptions} options - Request options including locale
- * @returns {Promise<any>} The localized response data
- */
-const postLocalized = async (
-  url,
-  { data, locale, fromDTO, toDTO, signal } = {},
-) => {
-  if (!locale) {
-    throw new Error("Locale is required for localized POST requests");
-  }
-
-  return post(url, { data, locale, fromDTO, toDTO, signal });
-};
-
-/**
- * Localized PUT request handler
- * @param {string} url - The endpoint URL
- * @param {FetcherPostOptions} options - Request options including locale
- * @returns {Promise<any>} The localized response data
- */
-const putLocalized = async (
-  url,
-  { data, locale, fromDTO, toDTO, signal } = {},
-) => {
-  if (!locale) {
-    throw new Error("Locale is required for localized PUT requests");
-  }
-
-  return put(url, { data, locale, fromDTO, toDTO, signal });
-};
-
-// Attach localized methods to their base functions
-post.localized = postLocalized;
-put.localized = putLocalized;
-get.localized = getLocalized;
 
 /**
  * DELETE request handler

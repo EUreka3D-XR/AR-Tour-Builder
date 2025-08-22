@@ -1,29 +1,15 @@
 import { baseUrls } from "../endpoints-base-urls/baseUrls";
 import fetcher from "../fetcher/api-fetcher";
 
-const getAllProjects = () => {
+const getAllProjects = (locale) => {
   const url = baseUrls.projects;
-  return fetcher.get(url);
+  return fetcher.get(url, { locale });
 };
 
-const getAllProjectsLocalized = (locale) => {
-  const url = baseUrls.projects;
-  return fetcher.get.localized(url, { locale });
-};
-
-getAllProjects.localized = getAllProjectsLocalized;
-
-const getProject = async (projectId) => {
+const getProject = async (projectId, locale) => {
   const url = baseUrls.project(projectId);
-  return fetcher.get(url);
+  return fetcher.get(url, { locale });
 };
-
-const getProjectLocalized = (projectId, locale) => {
-  const url = baseUrls.project(projectId);
-  return fetcher.get.localized(url, { locale });
-};
-
-getProject.localized = getProjectLocalized;
 
 export const projectsApi = {
   fetchAll: getAllProjects,

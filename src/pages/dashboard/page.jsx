@@ -1,26 +1,28 @@
 import { useParams } from "react-router";
-import OverviewStats from "@/pages/dashboard/sections/OverviewStats";
+import OverviewStats from "@/pages/dashboard/_sections/OverviewStats";
 import { useProject } from "@/services/projectsService";
 import { styled } from "@mui/material";
 
-import Members from "./sections/Members";
-import ProjectBanner from "./sections/ProjectBanner";
-import Tours from "./sections/Tours";
-import ToursStats from "./sections/ToursStats";
+import Members from "./_sections/Members";
+import ProjectBanner from "./_sections/ProjectBanner";
+import RecentTours from "./_sections/RecentTours";
+import ToursStats from "./_sections/ToursStats";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   paddingBottom: theme.spacing(8),
-  "& .stats-sections": {
+  "& .dash-section": {
     marginTop: theme.spacing(4),
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
-    display: "grid",
-    gap: theme.spacing(4),
-    "&.equal": {
-      gridTemplateColumns: "1fr 1fr",
-    },
-    "&.one-two-thirds": {
-      gridTemplateColumns: "1fr 2fr",
+    "&.dash-grid": {
+      display: "grid",
+      gap: theme.spacing(4),
+      "&.equal": {
+        gridTemplateColumns: "1fr 1fr",
+      },
+      "&.one-two-thirds": {
+        gridTemplateColumns: "1fr 2fr",
+      },
     },
   },
 }));
@@ -32,8 +34,10 @@ function DashboardPage() {
 
   return (
     <ContainerStyled>
-      <ProjectBanner project={project} />
-      <div className="stats-sections one-two-thirds">
+      <div className="dash-section">
+        <ProjectBanner project={project} />
+      </div>
+      <div className="dash-section dash-grid one-two-thirds">
         <OverviewStats
           totalViews={2812}
           viewsThisMonth={512}
@@ -42,9 +46,9 @@ function DashboardPage() {
         />
         <ToursStats />
       </div>
-      <div className="stats-sections equal">
+      <div className="dash-section dash-grid equal">
         <Members projectId={projectId} />
-        <Tours projectId={projectId} />
+        <RecentTours projectId={projectId} />
       </div>
     </ContainerStyled>
   );

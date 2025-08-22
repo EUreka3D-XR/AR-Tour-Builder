@@ -2,7 +2,7 @@ import { IconButton, styled } from "@mui/material";
 
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import logo from "@/assets/images/dummy-logo.webp";
-import EurekaIcon from "../icon/Icon";
+import EurekaIcon from "../icon/EurekaIcon";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   width: "100vw",

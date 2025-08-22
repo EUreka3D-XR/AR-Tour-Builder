@@ -1,20 +1,15 @@
 import { useProjectMembers } from "@/services/usersService";
 import {
   Avatar,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Divider,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Pagination,
   Skeleton,
 } from "@mui/material";
 
 import usePaginatedItems from "@/hooks/usePaginatedItems";
+import DashboardCard from "../_common/DashboardCard";
 
 function Members({ projectId }) {
   const { data: members, fetchState } = useProjectMembers(projectId);
@@ -25,26 +20,14 @@ function Members({ projectId }) {
   });
 
   return (
-    <Card>
-      <CardHeader title="Members" />
-      <Divider />
-      <CardContent>
+    <DashboardCard title="Members" pagination={meta}>
+      <>
         {fetchState.isLoading && <MembersSkeleton />}
         {fetchState.isSuccess && membersPaginated && (
           <MembersList members={membersPaginated} />
         )}
-      </CardContent>
-      {meta.needsPagination && (
-        <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Pagination
-            page={meta.page}
-            count={meta.totalPages}
-            shape="rounded"
-            onChange={(_, value) => meta.setPage(value)}
-          />
-        </CardActions>
-      )}
-    </Card>
+      </>
+    </DashboardCard>
   );
 }
 

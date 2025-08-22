@@ -1,14 +1,7 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  Divider,
-  styled,
-  Typography,
-} from "@mui/material";
+import { styled, Typography } from "@mui/material";
 
-import EurekaIcon from "@/components/icon/Icon";
+import EurekaIcon from "@/components/icon/EurekaIcon";
+import DashboardCard from "../_common/DashboardCard";
 
 /**
  * @typedef {import("@/components/icon/icons").IconName} IconName
@@ -22,11 +15,11 @@ import EurekaIcon from "@/components/icon/Icon";
  * @property {number} completionRate - Completion rate percentage
  */
 
-const CardStyled = styled(Card)({
+const DashboardCardStyled = styled(DashboardCard)({
   display: "flex",
   flexDirection: "column",
   height: "100%",
-  "& .centered-content": {
+  "& .dash-card-content": {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -34,7 +27,7 @@ const CardStyled = styled(Card)({
   },
 });
 
-const StatsGrid = styled(Box)(({ theme }) => ({
+const StatsGrid = styled("div")(({ theme }) => ({
   height: "100%",
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
@@ -42,7 +35,7 @@ const StatsGrid = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(2),
 }));
 
-const StatItem = styled(Box)(({ theme }) => ({
+const StatItem = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -143,34 +136,30 @@ export default function OverviewStats({
   ];
 
   return (
-    <CardStyled>
-      <CardHeader title="Overview" />
-      <Divider />
-      <CardContent className="centered-content">
-        <StatsGrid>
-          {predefinedStats.map((stat, index) => (
-            <StatItem key={index}>
-              <StatValue className={stat.class}>
-                <EurekaIcon name={stat.icon} className="stat-icon" />
-                <Typography variant="h4" className="stat-value">
-                  {typeof stat.value === "number"
-                    ? stat.value.toLocaleString()
-                    : stat.value}
-                </Typography>
-              </StatValue>
-
-              <Typography
-                variant="body1"
-                color="text.secondary"
-                noWrap
-                title={stat.title}
-              >
-                {stat.title}
+    <DashboardCardStyled title="Overview">
+      <StatsGrid>
+        {predefinedStats.map((stat, index) => (
+          <StatItem key={index}>
+            <StatValue className={stat.class}>
+              <EurekaIcon name={stat.icon} className="stat-icon" />
+              <Typography variant="h4" className="stat-value">
+                {typeof stat.value === "number"
+                  ? stat.value.toLocaleString()
+                  : stat.value}
               </Typography>
-            </StatItem>
-          ))}
-        </StatsGrid>
-      </CardContent>
-    </CardStyled>
+            </StatValue>
+
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              noWrap
+              title={stat.title}
+            >
+              {stat.title}
+            </Typography>
+          </StatItem>
+        ))}
+      </StatsGrid>
+    </DashboardCardStyled>
   );
 }

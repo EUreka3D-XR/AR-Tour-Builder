@@ -3,7 +3,7 @@ import { MenuList, styled } from "@mui/material";
 
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import { navPaths } from "@/utils/paths";
-import EurekaIcon from "../icon/Icon";
+import EurekaIcon from "../icon/EurekaIcon";
 import NavbarItem from "./NavbarItem";
 import NavbarProjects from "./NavbarProjects";
 

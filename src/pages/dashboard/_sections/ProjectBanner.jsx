@@ -1,7 +1,8 @@
 import { Avatar, Badge, styled, Typography } from "@mui/material";
 
 import Banner from "@/components/banner/Banner";
-import EurekaIcon from "@/components/icon/Icon";
+import EurekaIcon from "@/components/icon/EurekaIcon";
+import DashboardCard from "../_common/DashboardCard";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -86,49 +87,51 @@ function ProjectBanner({ project = {} }) {
   const isPublished = status === "published";
 
   return (
-    <Banner src={coverPhoto}>
-      <ContainerStyled>
-        <div className="info-wrapper">
-          {isPublished ? (
-            <StyledBadge
-              badgeContent=" "
-              overlap="circular"
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-            >
+    <DashboardCard noPadding>
+      <Banner src={coverPhoto}>
+        <ContainerStyled>
+          <div className="info-wrapper">
+            {isPublished ? (
+              <StyledBadge
+                badgeContent=" "
+                overlap="circular"
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+              >
+                <Avatar src={thumbnail} alt={title} className="project-logo" />
+              </StyledBadge>
+            ) : (
               <Avatar src={thumbnail} alt={title} className="project-logo" />
-            </StyledBadge>
-          ) : (
-            <Avatar src={thumbnail} alt={title} className="project-logo" />
-          )}
-          <div className="project-info">
-            <Typography variant="h2">{title}</Typography>
-            <Typography>{description}</Typography>
-            <div className="stats-info">
-              <div className="stat">
-                <EurekaIcon name="tour" />
-                <span>{tours?.length} Tours</span>
-              </div>
-              <div className="stat">
-                <EurekaIcon name="poi" />
-                <span>{totalPois} POIs</span>
-              </div>
-              <div className="stat">
-                <EurekaIcon name="media" />
-                <span>{totalAssets} Assets</span>
-              </div>
-              <div className="stat">
-                <EurekaIcon name="users" />
-                <span>{members?.length} Members</span>
+            )}
+            <div className="project-info">
+              <Typography variant="h2">{title}</Typography>
+              <Typography>{description}</Typography>
+              <div className="stats-info">
+                <div className="stat">
+                  <EurekaIcon name="tour" />
+                  <span>{tours?.length} Tours</span>
+                </div>
+                <div className="stat">
+                  <EurekaIcon name="poi" />
+                  <span>{totalPois} POIs</span>
+                </div>
+                <div className="stat">
+                  <EurekaIcon name="media" />
+                  <span>{totalAssets} Assets</span>
+                </div>
+                <div className="stat">
+                  <EurekaIcon name="users" />
+                  <span>{members?.length} Members</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="actions-wrapper"></div>
-      </ContainerStyled>
-    </Banner>
+          <div className="actions-wrapper"></div>
+        </ContainerStyled>
+      </Banner>
+    </DashboardCard>
   );
 }
 

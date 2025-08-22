@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 /**
  * @template T
@@ -6,9 +6,10 @@ import { useMemo } from "react";
  * @param {T[]} params.items
  * @param {number} params.size
  * @param {number} params.page
- * @returns {{ data: T[], meta: { page: number, pageSize: number, totalItems: number, totalPages: number, needsPagination: boolean } }}
+ * @returns {{ data: T[], meta: { page: number, pageSize: number, totalItems: number, totalPages: number, needsPagination: boolean, setPage: (page: number) => void } }}
  */
-const usePaginatedItems = ({ items = [], size, page }) => {
+const usePaginatedItems = ({ items = [], size, initialPage = 1 }) => {
+  const [page, setPage] = useState(initialPage);
   const meta = useMemo(() => {
     const totalItems = items.length || 0;
     const totalPages = Math.ceil(totalItems / size);
@@ -18,6 +19,7 @@ const usePaginatedItems = ({ items = [], size, page }) => {
       totalItems,
       totalPages,
       needsPagination: totalPages > 1,
+      setPage,
     };
   }, [items, size, page]);
 

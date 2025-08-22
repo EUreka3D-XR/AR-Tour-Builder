@@ -5,6 +5,7 @@ import { styled } from "@mui/material";
 
 import Members from "./sections/Members";
 import ProjectBanner from "./sections/ProjectBanner";
+import Tours from "./sections/Tours";
 import ToursStats from "./sections/ToursStats";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
@@ -43,6 +44,7 @@ function DashboardPage() {
       </div>
       <div className="stats-sections equal">
         <Members projectId={projectId} />
+        <Tours projectId={projectId} />
       </div>
     </ContainerStyled>
   );

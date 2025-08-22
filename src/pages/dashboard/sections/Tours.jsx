@@ -1,6 +1,5 @@
-import { useProjectMembers } from "@/services/usersService";
+import { useProjectTours } from "@/services/toursService";
 import {
-  Avatar,
   Card,
   CardActions,
   CardContent,
@@ -8,7 +7,6 @@ import {
   Divider,
   List,
   ListItem,
-  ListItemAvatar,
   ListItemText,
   Pagination,
   Skeleton,
@@ -16,23 +14,20 @@ import {
 
 import usePaginatedItems from "@/hooks/usePaginatedItems";
 
-function Members({ projectId }) {
-  const { data: members, fetchState } = useProjectMembers(projectId);
-
-  const { data: membersPaginated, meta } = usePaginatedItems({
-    items: members,
+function Tours({ projectId }) {
+  const { data, fetchState } = useProjectTours(projectId);
+  const { data: tours, meta } = usePaginatedItems({
+    items: data,
     size: 5,
   });
 
   return (
     <Card>
-      <CardHeader title="Members" />
+      <CardHeader title="Recente Tours" />
       <Divider />
       <CardContent>
-        {fetchState.isLoading && <MembersSkeleton />}
-        {fetchState.isSuccess && membersPaginated && (
-          <MembersList members={membersPaginated} />
-        )}
+        {fetchState.isLoading && <ToursSkeleton />}
+        {fetchState.isSuccess && tours && <ToursList tours={tours} />}
       </CardContent>
       {meta.needsPagination && (
         <CardActions sx={{ justifyContent: "flex-end" }}>
@@ -50,42 +45,33 @@ function Members({ projectId }) {
 
 /**
  * @param {Object} props
- * @param {Array<import("@/types/jsdoc-types").User>} props.members - Array of member objects
+ * @param {Array<import("@/types/jsdoc-types").Tour>} props.tours - Array of tour objects
  * @returns
  */
-function MembersList({ members }) {
+function ToursList({ tours }) {
   return (
-    <List dense>
-      {members?.map((member) => (
+    <List>
+      {tours?.map((tour) => (
         <ListItem
-          key={member.id}
+          key={tour.id}
           // secondaryAction={
           //   <IconButton edge="end" aria-label="delete">
           //     <DeleteIcon />
           //   </IconButton>
           // }
         >
-          <ListItemAvatar>
-            <Avatar src={member.avatar} />
-          </ListItemAvatar>
-          <ListItemText
-            primary={member.firstName + " " + member.lastName}
-            secondary={member.role}
-          />
+          <ListItemText primary={tour.title} />
         </ListItem>
       ))}
     </List>
   );
 }
 
-function MembersSkeleton() {
+function ToursSkeleton() {
   return (
     <List>
       {Array.from(Array(5)).map((_, index) => (
         <ListItem key={index}>
-          <ListItemAvatar>
-            <Avatar />
-          </ListItemAvatar>
           <ListItemText primary={<Skeleton />} secondary={<Skeleton />} />
         </ListItem>
       ))}
@@ -93,4 +79,4 @@ function MembersSkeleton() {
   );
 }
 
-export default Members;
+export default Tours;

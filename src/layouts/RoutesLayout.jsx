@@ -10,6 +10,7 @@ const LibraryLayout = () => <Outlet />;
 
 const ProjectsPage = lazy(() => import("@/pages/projects/page"));
 const ProjectPage = lazy(() => import("@/pages/dashboard/page"));
+const LibraryPage = lazy(() => import("@/pages/library/page"));
 
 function RoutesLayout() {
   return (
@@ -45,7 +46,7 @@ function RoutesLayout() {
         </Route>
         {/* 📚 Library */}
         <Route path=":projectId/library" element={<LibraryLayout />}>
-          <Route index element={<></>} />
+          <Route index element={<LibraryPage />} />
           <Route path="new" element={<></>} />
           <Route path=":assetId" element={<></>} />
           <Route path=":assetId/edit" element={<></>} />

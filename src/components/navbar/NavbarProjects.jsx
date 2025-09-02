@@ -3,8 +3,8 @@ import { Add } from "@mui/icons-material";
 import { Divider, styled } from "@mui/material";
 
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
+import useNavPaths from "@/hooks/useNavPaths";
 import { useToggle } from "@/hooks/useToggle";
-import { paths } from "@/utils/paths";
 import projectImg from "@/assets/images/ntua-logo.jpeg";
 import Link from "../link/Link";
 
@@ -74,6 +74,7 @@ const dummyProjects = [
 
 function NavbarProjects() {
   const { isNavMenuOpen } = useGeneralProvider();
+  const { routes } = useNavPaths();
   const {
     isOpen: isProjectMenuOpen,
     open: openProjectMenu,
@@ -128,7 +129,7 @@ function NavbarProjects() {
               </span>
             </ProjectItem>
           ))}
-          <Link to={paths.projects.new} className="add-new-btn">
+          <Link to={routes.projects.new} className="add-new-btn">
             <Add />
             <span className={clsx({ hidden: !isNavMenuOpen })}>
               Add new project

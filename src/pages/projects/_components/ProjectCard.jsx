@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { paths } from "@/utils/paths";
+import useNavPaths from "@/hooks/useNavPaths";
 
 /**
  * @typedef {import('@/types/jsdoc-types').Project} Project
@@ -50,9 +50,10 @@ const LastUpdated = styled(Typography)({
  */
 function ProjectCard({ project }) {
   const navigate = useNavigate();
+  const { routes } = useNavPaths();
 
   const handleCardClick = () => {
-    navigate(paths.projects.one(project.id));
+    navigate(routes.projects.one(project.id));
   };
 
   return (

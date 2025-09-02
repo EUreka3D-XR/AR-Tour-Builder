@@ -1,9 +1,9 @@
 import { styled } from "@mui/material";
 
+import EurekaRoutes from "@/routes/EurekaRoutes";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import Header from "@/components/header/Header";
 import Navbar from "@/components/navbar/Navbar";
-import RoutesLayout from "./RoutesLayout";
 
 const PageContainerStyled = styled("div")(({ theme }) => ({
   width: "100vw",
@@ -26,7 +26,7 @@ function DefaultLayout() {
       <PageContainerStyled>
         {isInsideAProject && <Navbar />}
         <div className="page-content">
-          <RoutesLayout />
+          <EurekaRoutes />
         </div>
       </PageContainerStyled>
     </>

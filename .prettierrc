@@ -8,6 +8,7 @@
     "<THIRD_PARTY_MODULES>",
     "^@mui/(.*)$",
     "",
+    "^@/routes/(.*)$",
     "^@/providers/(.*)$",
     "^@/layouts/(.*)$",
     "^@/components/(.*)$",

@@ -5,8 +5,8 @@ import MyThemeProvider from "@/providers/theme/MyThemeProvider";
 
 import "@/config/translations/i18next-config.js";
 
-import DefaultLayout from "./layouts/DefaultLayout";
 import { GeneralProvider } from "./providers/general/GeneralProvider";
+import EurekaRoutes from "./routes/EurekaRoutes";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,7 +23,7 @@ export default function App() {
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
           <GeneralProvider>
-            <DefaultLayout />
+            <EurekaRoutes />
           </GeneralProvider>
         </QueryClientProvider>
       </BrowserRouter>

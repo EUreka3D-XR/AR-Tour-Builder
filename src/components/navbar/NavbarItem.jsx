@@ -1,3 +1,4 @@
+import { useLocation } from "react-router";
 import clsx from "clsx";
 import { MenuItem, styled } from "@mui/material";
 
@@ -25,9 +26,16 @@ const MenuItemStyled = styled(MenuItem)({
 
 function NavbarItem({ to, children, name, className }) {
   const { isNavMenuOpen } = useGeneralProvider();
+  const location = useLocation();
+
+  // Check if current path starts with the 'to' prop value
+  const isSelected = location.pathname.startsWith(to);
 
   return (
-    <MenuItemStyled className={clsx("navbar-item", className)}>
+    <MenuItemStyled
+      selected={isSelected}
+      className={clsx("navbar-item", className)}
+    >
       <Link
         to={to}
         className={clsx("nav-item-content", {

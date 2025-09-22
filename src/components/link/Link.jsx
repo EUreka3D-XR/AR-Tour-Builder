@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router";
+import { NavLink as RouterLink } from "react-router";
 import { Link as MuiLink, styled } from "@mui/material";
 
 const RouterLinkStyled = styled(RouterLink)({

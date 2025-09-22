@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { Outlet, Route, Routes } from "react-router";
+import { Navigate, Outlet, Route, Routes } from "react-router";
 
 import ProjectLayout from "@/layouts/ProjectLayout";
 
@@ -17,7 +17,9 @@ function ProjectRoutes() {
     <Routes>
       {/* 🏠 Project Dashboard */}
       <Route path="/" element={<ProjectLayout />}>
-        <Route index element={<ProjectPage />} />
+        {/* Redirect from /projects/{id} to /projects/{id}/dashboard */}
+        <Route index element={<Navigate to="dashboard" replace />} />
+        <Route path="dashboard" element={<ProjectPage />} />
         <Route path="edit" element={<></>} />
 
         {/* 🗺️ Tours */}

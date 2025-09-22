@@ -38,6 +38,7 @@ const useNavPaths = () => {
     return {
       home: "/",
       projects: projectsBase,
+      dashboard: constructPaths(internalProjectRoute("/dashboard")),
       tours: constructPaths(internalProjectRoute("/tours")),
       poi: constructPaths(internalProjectRoute("/poi")),
       library: constructPaths(internalProjectRoute("/library")),
@@ -55,13 +56,13 @@ const useNavPaths = () => {
       home: { label: t("nav_menu.home"), to: routes.home },
       dashboard: {
         label: t("nav_menu.dashboard"),
-        to: routes.projects.one(projectId),
+        to: routes.dashboard.index,
       },
       projects: { label: t("nav_menu.projects"), to: routes.projects.index },
       tours: { label: t("nav_menu.tours"), to: routes.tours.index },
       library: { label: t("nav_menu.library"), to: routes.library.index },
     }),
-    [routes, projectId, t],
+    [routes, t],
   );
 
   return {

@@ -33,7 +33,7 @@ function Navbar() {
       })}
     >
       <NavbarProjects />
-      <NavbarItem to={navLinks.home.to} name={navLinks.home.label}>
+      <NavbarItem to={navLinks.dashboard.to} name={navLinks.dashboard.label}>
         <EurekaIcon name="home" />
       </NavbarItem>
       <NavbarItem to={navLinks.tours.to} name={navLinks.tours.label}>

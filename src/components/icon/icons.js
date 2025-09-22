@@ -1,5 +1,6 @@
 /** @const */
 export const icons = {
+  add: "add",
   chart: "bar_chart_4_bars",
   decline: "trending_down",
   growth: "trending_up",
@@ -7,6 +8,7 @@ export const icons = {
   media: "perm_media",
   menu: "menu",
   poi: "location_on",
+  search: "search",
   settings: "settings",
   time: "schedule",
   tour: "tour",

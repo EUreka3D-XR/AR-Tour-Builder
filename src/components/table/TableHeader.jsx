@@ -40,6 +40,7 @@ function TableHeader({ columns = [], order, orderBy, onRequestSort }) {
                   ? order
                   : false
             }
+            sx={{ fontWeight: 600, minWidth: headCell.width }}
           >
             {!headCell.disableSorting ? (
               <TableSortLabel

@@ -1,7 +1,7 @@
 import Table from "@/components/table/Table";
 
 const columns = [
-  { label: "Title", value: "title" },
+  { label: "Title", value: "title", width: 250 },
   { label: "Type", value: "type", disableSorting: true },
   { label: "Url", value: "url", disableSorting: true },
   {

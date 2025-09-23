@@ -15,10 +15,10 @@ import TableHeader from "./TableHeader";
  * @typedef {Object} TableColumn
  * @property {string} value - Unique value for the column
  * @property {string} label - Display label for the column header
+ * @property {number|string} [width] - Width of the column (e.g., '100px' or 100)
  * @property {boolean} [numeric] - Whether the column contains numeric data
  * @property {boolean} [disableSorting] - Whether sorting is disabled for the column
  * @property {string} [align] - Text alignment for the column ('left'|'center'|'right')
- * @property {number} [minWidth] - Minimum width for the column
  */
 
 /**
@@ -51,7 +51,7 @@ export default function Table({
   onRequestSort,
   onChangePage,
   onChangeRowsPerPage,
-  rowsPerPage,
+  rowsPerPage = 10,
   page,
   order,
   orderBy,
@@ -61,7 +61,7 @@ export default function Table({
   return (
     <div>
       <MuiTableContainer>
-        <MuiTable sx={{ minWidth: 750 }}>
+        <MuiTable>
           <TableHeader
             columns={columns}
             order={order}

@@ -6,7 +6,7 @@ import { TableBody as MuiTableBody, TableCell, TableRow } from "@mui/material";
  * @typedef {Object} TableBodyProps
  * @property {import('./Table').TableColumn[]} columns - Array of table column definitions
  * @property {import('./Table').TableRow[]} rows - Array of table row data
- * @property {number} rowsPerPage - Number of rows to display per page
+ * @property {number} pageSize - Number of rows to display per page
  */
 
 /**
@@ -14,10 +14,10 @@ import { TableBody as MuiTableBody, TableCell, TableRow } from "@mui/material";
  * @param {TableBodyProps} props - TableBody props
  * @returns {React.ReactElement} Rendered table body component
  */
-function TableBody({ columns, rows, rowsPerPage }) {
+function TableBody({ columns, rows, pageSize }) {
   const emptyRows = useMemo(
-    () => rowsPerPage - Math.min(rowsPerPage, rows.length),
-    [rowsPerPage, rows.length],
+    () => pageSize - Math.min(pageSize, rows.length),
+    [pageSize, rows.length],
   );
 
   return (

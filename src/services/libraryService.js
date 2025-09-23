@@ -13,10 +13,10 @@ import { useDataFetcher } from "./helpers/serviceHooks";
  * @param {string} projectId
  * @returns {AssetsResult}
  */
-export const useLibraryAssets = (projectId) => {
+export const useLibraryAssets = (projectId, params) => {
   const locale = useLocale();
   return useDataFetcher({
-    fetcher: () => api.library.fetchAll(projectId, locale),
-    queryKey: ["library-assets", locale],
+    fetcher: () => api.library.fetchAll(projectId, params, locale),
+    queryKey: ["library-assets", locale, params],
   });
 };

@@ -1,4 +1,5 @@
 import Table from "@/components/table/Table";
+import useDashboardParams from "../_utils/useDashboardParams";
 
 const columns = [
   { label: "Title", value: "title", width: 250 },
@@ -13,7 +14,18 @@ const columns = [
 ];
 
 function LibraryTableSection({ assets = [], fetchState }) {
-  return <Table rows={assets} columns={columns} fetchState={fetchState} />;
+  const { filterParams, updateParams } = useDashboardParams();
+  return (
+    <Table
+      rows={assets}
+      columns={columns}
+      page={filterParams.page || 0}
+      pageSize={filterParams.pageSize || 10}
+      fetchState={fetchState}
+      onChangePage={(page) => updateParams({ page })}
+      onChangePageSize={(pageSize) => updateParams({ pageSize, page: 0 })}
+    />
+  );
 }
 
 export default LibraryTableSection;

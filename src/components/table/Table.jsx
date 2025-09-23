@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import MuiTable from "@mui/material/Table";
 import MuiTableContainer from "@mui/material/TableContainer";
 import MuiTablePagination from "@mui/material/TablePagination";
@@ -29,11 +30,11 @@ import TableHeader from "./TableHeader";
 /**
  * Props for Table component
  * @typedef {Object} TableProps
- * @property {number[]} [rowsPerPageOptions=[10, 25, 50]] - Options for rows per page dropdown
+ * @property {number[]} [pageSizeOptions=[10, 25, 50]] - Options for rows per page dropdown
  * @property {Function} onRequestSort - Handler for sort requests (column, order)
  * @property {Function} onChangePage - Handler for page changes
  * @property {Function} onChangeRowsPerPage - Handler for rows per page changes
- * @property {number} rowsPerPage - Current number of rows per page
+ * @property {number} pageSize - Current number of rows per page
  * @property {number} page - Current page number (0-indexed)
  * @property {SortOrder} order - Current sort order
  * @property {string} orderBy - Current sort column id
@@ -47,17 +48,31 @@ import TableHeader from "./TableHeader";
  * @returns {React.ReactElement} Rendered table component
  */
 export default function Table({
-  rowsPerPageOptions = [10, 25, 50],
+  pageSizeOptions = [10, 25, 50],
   onRequestSort,
   onChangePage,
-  onChangeRowsPerPage,
-  rowsPerPage = 10,
+  onChangePageSize,
+  pageSize = 10,
   page,
   order,
   orderBy,
   rows,
   columns,
 }) {
+  const handleChangePage = useCallback(
+    (_, newPage) => {
+      onChangePage(newPage);
+    },
+    [onChangePage],
+  );
+
+  const handleChangePageSize = useCallback(
+    (event) => {
+      onChangePageSize(event?.target?.value || pageSize);
+    },
+    [onChangePageSize, pageSize],
+  );
+
   return (
     <div>
       <MuiTableContainer>
@@ -68,17 +83,17 @@ export default function Table({
             orderBy={orderBy}
             onRequestSort={onRequestSort}
           />
-          <TableBody columns={columns} rows={rows} rowsPerPage={rowsPerPage} />
+          <TableBody columns={columns} rows={rows} pageSize={pageSize} />
         </MuiTable>
       </MuiTableContainer>
       <MuiTablePagination
-        rowsPerPageOptions={rowsPerPageOptions}
+        rowsPerPageOptions={pageSizeOptions}
         component="div"
         count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={onChangePage}
-        onRowsPerPageChange={onChangeRowsPerPage}
+        rowsPerPage={pageSize}
+        page={page >= 0 ? page : 0}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangePageSize}
       />
     </div>
   );

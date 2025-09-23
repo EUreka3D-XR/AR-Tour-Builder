@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Chip,
   FormControl,
@@ -11,6 +10,7 @@ import {
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import SearchInput from "@/components/search-input/SearchInput";
+import useDashboardParams from "../_utils/useDashboardParams";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(2),
@@ -49,30 +49,36 @@ const typeOptions = [
 ];
 
 function LibraryFiltersSection() {
-  const [typeFilter, setTypeFilter] = useState("all");
+  const { filterParams, updateParams } = useDashboardParams();
 
-  const handleTypeChange = (event) => {
-    setTypeFilter(event.target.value);
+  const handleParamsChange = (key) => (event) => {
+    if (event.target?.value) {
+      updateParams({ [key]: event.target.value });
+      return;
+    }
+    updateParams({ [key]: event });
   };
 
-  const handleDelete = (value) => {
-    if (value === "all") {
-      setTypeFilter("all");
-    }
+  const handleDelete = (key) => () => {
+    updateParams({ [key]: null });
   };
 
   return (
     <ContainerStyled className="filters-section">
       <div className="filter-row">
-        <SearchInput label="Search assets" />
+        <SearchInput
+          label="Search assets"
+          value={filterParams.searchTerm || ""}
+          onChange={handleParamsChange("searchTerm")}
+        />
         <FormControl size="small" className="type-input item-no-shrink">
           <InputLabel id="type-filter-label">Type</InputLabel>
           <Select
             labelId="type-filter-label"
             id="type-filter"
-            value={typeFilter}
+            value={filterParams.type || "all"}
             label="Type"
-            onChange={handleTypeChange}
+            onChange={handleParamsChange("type")}
           >
             {typeOptions.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -90,13 +96,23 @@ function LibraryFiltersSection() {
         </Button>
       </div>
       <div className="filter-pills">
-        {typeOptions.map((option) => (
+        {filterParams.type && (
           <Chip
-            key={option.value}
-            label={option.label}
-            onDelete={() => handleDelete(option.value)}
+            key={filterParams.type}
+            label={
+              typeOptions.find((option) => option.value === filterParams.type)
+                ?.label
+            }
+            onDelete={handleDelete("type")}
           />
-        ))}
+        )}
+        {filterParams.searchTerm && (
+          <Chip
+            key={filterParams.searchTerm}
+            label={filterParams.searchTerm}
+            onDelete={handleDelete("searchTerm")}
+          />
+        )}
       </div>
     </ContainerStyled>
   );

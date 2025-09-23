@@ -10,7 +10,7 @@ import {
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import SearchInput from "@/components/search-input/SearchInput";
-import useDashboardParams from "../_utils/useDashboardParams";
+import useLibraryParams from "../_utils/useLibraryParams";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(2),
@@ -49,7 +49,7 @@ const typeOptions = [
 ];
 
 function LibraryFiltersSection() {
-  const { filterParams, updateParams } = useDashboardParams();
+  const { filterParams, updateParams } = useLibraryParams();
 
   const handleParamsChange = (key) => (event) => {
     if (event.target?.value) {

@@ -5,7 +5,7 @@ import { useLibraryAssets } from "@/services/libraryService";
 import FiltersSection from "./_sections/LibraryFiltersSection";
 import HeaderSection from "./_sections/LibraryHeaderSection";
 import TableSection from "./_sections/LibraryTableSection";
-import useDashboardParams from "./_utils/useDashboardParams";
+import useLibraryParams from "./_utils/useLibraryParams";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(4),
@@ -13,7 +13,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 
 function LibraryPage() {
   const { projectId } = useParams();
-  const { filterParams } = useDashboardParams();
+  const { filterParams } = useLibraryParams();
   const { data, fetchState } = useLibraryAssets(projectId, filterParams);
 
   return (

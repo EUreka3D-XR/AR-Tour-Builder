@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 
-const useDashboardParams = () => {
+const useLibraryParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filterParams = {};
@@ -30,4 +30,4 @@ const useDashboardParams = () => {
   return { filterParams, updateParams };
 };
 
-export default useDashboardParams;
+export default useLibraryParams;

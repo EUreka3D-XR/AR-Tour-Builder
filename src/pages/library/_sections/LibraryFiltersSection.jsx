@@ -26,6 +26,9 @@ const ContainerStyled = styled("div")(({ theme }) => ({
     "& .sort-input": {
       minWidth: "150px",
     },
+    "& .item-no-shrink": {
+      flexShrink: 0,
+    },
   },
   "& .filter-pills": {
     marginTop: theme.spacing(2),
@@ -62,7 +65,7 @@ function LibraryFiltersSection() {
     <ContainerStyled className="filters-section">
       <div className="filter-row">
         <SearchInput label="Search assets" />
-        <FormControl size="small" className="type-input">
+        <FormControl size="small" className="type-input item-no-shrink">
           <InputLabel id="type-filter-label">Type</InputLabel>
           <Select
             labelId="type-filter-label"
@@ -78,7 +81,11 @@ function LibraryFiltersSection() {
             ))}
           </Select>
         </FormControl>
-        <Button startIcon={<EurekaIcon name="add" />} variant="filled">
+        <Button
+          startIcon={<EurekaIcon name="add" />}
+          variant="filled"
+          className="item-no-shrink"
+        >
           Add New Asset
         </Button>
       </div>

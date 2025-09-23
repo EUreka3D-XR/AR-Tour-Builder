@@ -16,7 +16,7 @@ import TableHeader from "./TableHeader";
  * @property {string} value - Unique value for the column
  * @property {string} label - Display label for the column header
  * @property {boolean} [numeric] - Whether the column contains numeric data
- * @property {boolean} [sortable] - Whether the column is sortable
+ * @property {boolean} [disableSorting] - Whether sorting is disabled for the column
  * @property {string} [align] - Text alignment for the column ('left'|'center'|'right')
  * @property {number} [minWidth] - Minimum width for the column
  */

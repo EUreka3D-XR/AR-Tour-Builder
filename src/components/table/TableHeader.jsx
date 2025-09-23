@@ -33,20 +33,32 @@ function TableHeader({ columns = [], order, orderBy, onRequestSort }) {
           <TableCell
             key={headCell.value}
             align={headCell.numeric ? "right" : "left"}
-            sortDirection={orderBy === headCell.value ? order : false}
+            sortDirection={
+              headCell.disableSorting
+                ? false
+                : orderBy === headCell.value
+                  ? order
+                  : false
+            }
           >
-            <TableSortLabel
-              active={orderBy === headCell.value}
-              direction={orderBy === headCell.value ? order : "asc"}
-              onClick={createSortHandler(headCell.label)}
-            >
-              {headCell.label}
-              {orderBy === headCell.value ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </Box>
-              ) : null}
-            </TableSortLabel>
+            {!headCell.disableSorting ? (
+              <TableSortLabel
+                active={orderBy === headCell.value}
+                direction={orderBy === headCell.value ? order : "asc"}
+                onClick={createSortHandler(headCell.label)}
+              >
+                {headCell.label}
+                {orderBy === headCell.value ? (
+                  <Box component="span" sx={visuallyHidden}>
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
+                  </Box>
+                ) : null}
+              </TableSortLabel>
+            ) : (
+              headCell.label
+            )}
           </TableCell>
         ))}
       </TableRow>

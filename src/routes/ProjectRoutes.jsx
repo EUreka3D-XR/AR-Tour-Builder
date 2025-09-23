@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router";
+import ToursPage from "@/pages/tours/page";
 
 import ProjectLayout from "@/layouts/ProjectLayout";
 
@@ -24,7 +25,7 @@ function ProjectRoutes() {
 
         {/* 🗺️ Tours */}
         <Route path="tours" element={<TourLayout />}>
-          <Route index element={<></>} />
+          <Route index element={<ToursPage />} />
           <Route path="new" element={<></>} />
           <Route path=":tourId" element={<></>} />
           <Route path=":tourId/edit" element={<></>} />

@@ -1,9 +1,9 @@
 import { baseUrls } from "../endpoints-base-urls/baseUrls";
 import fetcher from "../fetcher/api-fetcher";
 
-const getProjectTours = async (projectId, locale) => {
+const getProjectTours = async (projectId, { params, locale }) => {
   const url = baseUrls.tours(projectId);
-  return fetcher.get(url, { locale });
+  return fetcher.get(url, { locale, params });
 };
 
 const getTour = async (projectId, tourId, locale) => {

@@ -8,6 +8,7 @@ import Link from "../link/Link";
 const MenuItemStyled = styled(MenuItem)({
   borderRadius: "0.5rem",
   "& .nav-item-content": {
+    width: "100%",
     display: "flex",
     alignItems: "center",
     "&.nav-item-expand": {

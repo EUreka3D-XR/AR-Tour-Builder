@@ -274,7 +274,7 @@ export const makeServer = ({ environment = "development" } = {}) => {
       this.get("/projects/:projectId/library", (schema, request) => {
         const projectId = request.params.projectId;
         const library = schema.libraries.where({ projectId }).models[0];
-        console.log(library);
+
         if (!library) {
           return new Response(
             404,

@@ -49,7 +49,13 @@ const SearchInputUnstyled = ({
       className={className}
       slotProps={{
         input: {
-          startAdornment: <EurekaIcon name="search" />,
+          startAdornment: (
+            <EurekaIcon
+              name="search"
+              color="text.secondary"
+              sx={{ marginRight: 1 }}
+            />
+          ),
         },
       }}
     />

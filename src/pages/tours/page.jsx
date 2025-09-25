@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { styled } from "@mui/material";
 
 import { useProjectTours } from "@/services/toursService";
+import useDashboardParams from "@/hooks/useDashboardParams";
 import ToursFiltersSection from "./_sections/ToursFiltersSection";
 import HeroSection from "./_sections/ToursHeroSection";
 import ListSection from "./_sections/ToursListSection";
@@ -12,6 +13,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 
 function ToursPage() {
   const { projectId } = useParams();
+  const { filterParams } = useDashboardParams();
   const { data, fetchState } = useProjectTours(projectId);
   console.log(data);
   return (

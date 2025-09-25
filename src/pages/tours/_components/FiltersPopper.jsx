@@ -99,7 +99,7 @@ function FiltersPopper({
                       },
                     },
                   }}
-                  onChange={(e) => onChange("tourType", e.target.value)}
+                  onChange={(e) => onChange("tourType")(e.target.value)}
                 >
                   <MenuItem value="all" className="inside-menu">
                     All Types
@@ -107,14 +107,8 @@ function FiltersPopper({
                   <MenuItem value="guided" className="inside-menu">
                     Guided
                   </MenuItem>
-                  <MenuItem value="self-guided" className="inside-menu">
-                    Self-Guided
-                  </MenuItem>
-                  <MenuItem value="audio" className="inside-menu">
-                    Audio Tour
-                  </MenuItem>
-                  <MenuItem value="walking" className="inside-menu">
-                    Walking Tour
+                  <MenuItem value="free-roam" className="inside-menu">
+                    Free Roam
                   </MenuItem>
                 </Select>
               </FormControl>
@@ -139,7 +133,7 @@ function FiltersPopper({
                       },
                     },
                   }}
-                  onChange={(e) => onChange("status", e.target.value)}
+                  onChange={(e) => onChange("status")(e.target.value)}
                 >
                   <MenuItem value="all" className="inside-menu">
                     All Status

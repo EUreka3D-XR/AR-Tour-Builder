@@ -1,12 +1,11 @@
-import { useState } from "react";
-import clsx from "clsx";
-import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
+import { useMemo } from "react";
 import { FormControl, MenuItem, Select, styled } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import SearchInput from "@/components/search-input/SearchInput";
-import FiltersPopper from "../_components/FiltersPopper";
+import useDashboardParams from "@/hooks/useDashboardParams";
+import FiltersButton from "../_components/FiltersButton";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -19,27 +18,15 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   "& .dropdown-item": {
     display: "flex",
     alignItems: "center",
+    gap: theme.spacing(1),
   },
   "& .filter-icon": {
     color: theme.palette.text.secondary,
   },
 }));
 
-const FilterButtonStyled = styled(Button)(({ theme }) => ({
-  border: `1px solid ${theme.palette.action.disabled}`,
-  color: theme.palette.text.primary,
-  borderRadius: theme.spacing(0.5),
-  "&:hover": {
-    backgroundColor: "white",
-    borderColor: theme.palette.text.primary,
-  },
-  "&.active": {
-    borderColor: theme.palette.text.primary,
-  },
-}));
-
 const sortOptions = [
-  { value: "newest", label: "Date (Newest)" },
+  { value: "latest", label: "Date (Newest)" },
   { value: "oldest", label: "Date (Oldest)" },
   { value: "title-asc", label: "Title (A-Z)" },
   { value: "title-desc", label: "Title (Z-A)" },
@@ -65,54 +52,37 @@ const sortOptionsMap = sortOptions.reduce((acc, option) => {
  * @param {ToursFiltersSectionProps} props - ToursFiltersSection props
  * @returns {React.ReactElement} Rendered tours filters section
  */
-function ToursFiltersSection({ onFilterChange, onSortChange, onSearchChange }) {
-  const [filterAnchorEl, setFilterAnchorEl] = useState(null);
-  const [filters, setFilters] = useState({
-    tourType: "all",
-    status: "all",
-  });
-  const [sortBy, setSortBy] = useState("newest");
+function ToursFiltersSection() {
+  const { filterParams, updateParams, resetParams } = useDashboardParams();
 
-  const isFilterOpen = Boolean(filterAnchorEl);
+  const filters = useMemo(
+    () => ({
+      tourType: filterParams.tourType || "all",
+      status: filterParams.status || "all",
+    }),
+    [filterParams],
+  );
 
-  const handleFilterClick = (event) => {
-    setFilterAnchorEl(filterAnchorEl ? null : event.currentTarget);
-  };
-
-  const handleFilterClose = () => {
-    setFilterAnchorEl(null);
-  };
-
-  const handleFilterChange = (filterKey, value) => {
-    const newFilters = { ...filters, [filterKey]: value };
-    setFilters(newFilters);
-    onFilterChange?.(newFilters);
-  };
-
-  const handleSortChange = (event) => {
-    const newSort = event.target.value;
-    setSortBy(newSort);
-    onSortChange?.(newSort);
+  const handleFilterChange = (key) => (event) => {
+    if (event.target?.value) {
+      updateParams({ [key]: event.target.value });
+      return;
+    }
+    updateParams({ [key]: event });
   };
 
   const handleResetFilters = () => {
-    const resetFilters = {
-      tourType: "all",
-      status: "all",
-    };
-    setFilters(resetFilters);
-    onFilterChange?.(resetFilters);
+    resetParams();
   };
-
-  const hasActiveFilters = Object.values(filters).some(
-    (value, index) => value !== ["all", "all"][index],
-  );
 
   return (
     <ContainerStyled>
-      <SearchInput placeholder="Search tours..." onChange={onSearchChange} />
+      <SearchInput
+        placeholder="Search tours..."
+        value={filterParams.searchTerm || ""}
+        onChange={handleFilterChange("searchTerm")}
+      />
 
-      {/* Sort Dropdown */}
       <FormControl size="small" className="no-shrink">
         <Select
           size="small"
@@ -122,13 +92,12 @@ function ToursFiltersSection({ onFilterChange, onSortChange, onSearchChange }) {
                 name="sort"
                 fontSize="small"
                 className="filter-icon"
-                sx={{ mr: 1 }}
               />
               {sortOptionsMap[se]}
             </div>
           )}
-          value={sortBy}
-          onChange={handleSortChange}
+          value={filterParams.sortBy || sortOptions[0].value}
+          onChange={handleFilterChange("sortBy")}
         >
           {sortOptions.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -137,16 +106,11 @@ function ToursFiltersSection({ onFilterChange, onSortChange, onSearchChange }) {
           ))}
         </Select>
       </FormControl>
-
-      {/* Filter Button */}
-      <FilterButtonStyled
-        onClick={handleFilterClick}
-        className={clsx("no-shrink", { active: hasActiveFilters })}
-        startIcon={<EurekaIcon name="filter" className="filter-icon" />}
-        endIcon={<KeyboardArrowDown />}
-      >
-        Filter
-      </FilterButtonStyled>
+      <FiltersButton
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        onResetFilter={handleResetFilters}
+      />
       <Button
         className="no-shrink"
         variant="text"
@@ -154,16 +118,6 @@ function ToursFiltersSection({ onFilterChange, onSortChange, onSearchChange }) {
       >
         Show on Map
       </Button>
-
-      {/* Filter Dropdown */}
-      <FiltersPopper
-        filters={filters}
-        isOpen={isFilterOpen}
-        anchorEl={filterAnchorEl}
-        onClose={handleFilterClose}
-        onChange={handleFilterChange}
-        onReset={handleResetFilters}
-      />
     </ContainerStyled>
   );
 }

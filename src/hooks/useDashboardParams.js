@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 
-const useLibraryParams = () => {
+const useDashboardParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filterParams = {};
@@ -17,7 +17,6 @@ const useLibraryParams = () => {
         return;
       }
       if (key === "page" && Number(value || 0) < 0) {
-        console.log(key, value);
         newParams.set(key, "0");
         return;
       }
@@ -27,7 +26,21 @@ const useLibraryParams = () => {
     setSearchParams(newParams);
   };
 
-  return { filterParams, updateParams };
+  const resetParams = () => {
+    const currentParams = new URLSearchParams(searchParams);
+    const newParams = new URLSearchParams(searchParams);
+
+    currentParams.forEach((_, key) => {
+      if (key !== "page" && key !== "pageSize") {
+        newParams.delete(key);
+      }
+    });
+
+    console.log(newParams.toString());
+    setSearchParams(newParams);
+  };
+
+  return { filterParams, updateParams, resetParams };
 };
 
-export default useLibraryParams;
+export default useDashboardParams;

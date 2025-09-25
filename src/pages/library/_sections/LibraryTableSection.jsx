@@ -1,5 +1,5 @@
 import Table from "@/components/table/Table";
-import useLibraryParams from "../_utils/useLibraryParams";
+import useDashboardParams from "../../../hooks/useDashboardParams";
 
 const columns = [
   { label: "Title", value: "title", width: 250 },
@@ -14,7 +14,7 @@ const columns = [
 ];
 
 function LibraryTableSection({ assets = [], fetchState }) {
-  const { filterParams, updateParams } = useLibraryParams();
+  const { filterParams, updateParams } = useDashboardParams();
   return (
     <Table
       rows={assets}

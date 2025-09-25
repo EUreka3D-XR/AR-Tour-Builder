@@ -5,6 +5,7 @@ export const icons = {
   chart: "bar_chart_4_bars",
   check: "check",
   checkCircle: "check_circle",
+  close: "close",
   decline: "trending_down",
   filter: "filter_list",
   growth: "trending_up",

@@ -71,6 +71,14 @@ function ToursFiltersSection() {
     updateParams({ [key]: event });
   };
 
+  const handleToggleMapView = () => {
+    if (filterParams.viewMode === "map") {
+      updateParams({ viewMode: "list" });
+      return;
+    }
+    updateParams({ viewMode: "map" });
+  };
+
   const handleResetFilters = () => {
     resetParams();
   };
@@ -114,9 +122,14 @@ function ToursFiltersSection() {
       <Button
         className="no-shrink"
         variant="text"
-        startIcon={<EurekaIcon name="map" />}
+        startIcon={
+          <EurekaIcon
+            name={filterParams.viewMode === "map" ? "close" : "map"}
+          />
+        }
+        onClick={handleToggleMapView}
       >
-        Show on Map
+        {filterParams.viewMode === "map" ? "Close Map" : "Show on Map"}
       </Button>
     </ContainerStyled>
   );

@@ -31,7 +31,7 @@ const useDashboardParams = () => {
     const newParams = new URLSearchParams(searchParams);
 
     currentParams.forEach((_, key) => {
-      if (key !== "page" && key !== "pageSize") {
+      if (key !== "page" && key !== "pageSize" && key !== "viewMode") {
         newParams.delete(key);
       }
     });

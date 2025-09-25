@@ -41,6 +41,20 @@ function MyThemeProvider({ children }) {
             },
           },
         },
+        MuiOutlinedInput: {
+          styleOverrides: {
+            input: {
+              fontSize: "0.875rem",
+            },
+            notchedOutline: ({ theme }) => ({
+              borderColor: theme.palette.grey[400], // your custom default
+              transition: theme.transitions.create(
+                ["border-color", "background-color"],
+                { duration: theme.transitions.duration.short },
+              ),
+            }),
+          },
+        },
         MuiTextField: {
           defaultProps: {
             fullWidth: true,

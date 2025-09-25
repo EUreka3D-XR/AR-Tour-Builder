@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { FormControl, MenuItem, Select, styled } from "@mui/material";
+import { Divider, FormControl, MenuItem, Select, styled } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -119,6 +119,7 @@ function ToursFiltersSection() {
         onFilterChange={handleFilterChange}
         onResetFilter={handleResetFilters}
       />
+      <Divider orientation="vertical" flexItem className="no-shrink" />
       <Button
         className="no-shrink"
         variant="text"

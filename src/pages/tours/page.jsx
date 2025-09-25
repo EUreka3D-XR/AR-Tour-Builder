@@ -20,7 +20,7 @@ function ToursPage() {
     <ContainerStyled>
       <HeroSection />
       <ToursFiltersSection />
-      <ListSection tours={data} />
+      <ListSection tours={data} viewMode={filterParams.viewMode} />
     </ContainerStyled>
   );
 }

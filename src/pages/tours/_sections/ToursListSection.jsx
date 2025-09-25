@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Box, styled, Typography } from "@mui/material";
 
 import TourCard from "../_components/TourCard";
@@ -7,13 +8,16 @@ const ContainerStyled = styled(Box)(({ theme }) => ({
   height: `calc(100vh - ${theme.custom.headerHeight})`, // Adjust based on your header height
   gap: theme.spacing(3),
   paddingTop: theme.spacing(3),
+  position: "relative",
+  overflow: "hidden",
 }));
 
-const ToursListContainer = styled(Box)(() => ({
-  width: "400px",
+const ToursListContainer = styled(Box)(({ viewMode }) => ({
+  width: viewMode === "list" ? "100%" : "400px",
   flexShrink: 0,
   display: "flex",
   flexDirection: "column",
+  transition: "width 0.3s ease-in-out",
 }));
 
 const ToursScrollableArea = styled(Box)(({ theme }) => ({
@@ -46,6 +50,17 @@ const MapContainer = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   position: "relative",
   overflow: "hidden",
+  transition: theme.transitions.create(["transform"], {
+    duration: theme.transitions.duration.short,
+  }),
+  transform: "translateX(100%)",
+  opacity: 0,
+  visibility: "hidden",
+  "&.show": {
+    transform: "translateX(0)",
+    opacity: 1,
+    visibility: "visible",
+  },
 }));
 
 const TourItem = styled(Box)(({ theme }) => ({
@@ -59,13 +74,16 @@ const TourItem = styled(Box)(({ theme }) => ({
  * ToursListSection component for displaying a list of tour cards with map
  * @param {Object} props - ToursListSection props
  * @param {Array} [tours=[]] - Array of tour objects to display
+ * @param {'map'|'list'} [viewMode] - Current view mode (e.g., "map" or "list")
  * @returns {React.ReactElement} Rendered tours list section with map
  */
-function ToursListSection({ tours = [] }) {
+function ToursListSection({ tours = [], viewMode = "list" }) {
+  const isFullWidth = viewMode === "list";
+
   return (
     <ContainerStyled>
       {/* Tours List - Left Side */}
-      <ToursListContainer>
+      <ToursListContainer viewMode={viewMode}>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
           Tours ({tours.length})
         </Typography>
@@ -74,7 +92,7 @@ function ToursListSection({ tours = [] }) {
           {tours.length > 0 ? (
             tours.map((tour) => (
               <TourItem key={tour.id}>
-                <TourCard tour={tour} />
+                <TourCard tour={tour} isFullWidth={isFullWidth} />
               </TourItem>
             ))
           ) : (
@@ -94,7 +112,7 @@ function ToursListSection({ tours = [] }) {
       </ToursListContainer>
 
       {/* Map - Right Side */}
-      <MapContainer>
+      <MapContainer className={clsx({ show: viewMode === "map" })}>
         <Box sx={{ textAlign: "center" }}>
           <Typography variant="h6" color="text.secondary" sx={{ mb: 1 }}>
             Map View

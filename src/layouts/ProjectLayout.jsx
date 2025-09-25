@@ -10,7 +10,6 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   "& .project-content": {
     flex: 1,
     overflowY: "auto",
-    paddingBottom: theme.spacing(2),
   },
 }));
 

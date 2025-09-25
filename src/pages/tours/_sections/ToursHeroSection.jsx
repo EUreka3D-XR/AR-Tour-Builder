@@ -5,14 +5,14 @@ import { useProject } from "@/services/projectsService";
 import RouterBreadcrumbs from "@/components/breadcrumbs/RouterBreadcrumbs";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
-  padding: theme.spacing(3, 4),
+  padding: theme.spacing(1, 3, 3),
   "& .title": {
     marginTop: theme.spacing(2),
     fontWeight: 600,
   },
   "& .subtitle": {
     marginTop: theme.spacing(2),
-    maxWidth: "600px",
+    maxWidth: "700px",
   },
 }));
 

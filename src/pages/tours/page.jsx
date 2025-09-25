@@ -2,9 +2,13 @@ import { useParams } from "react-router";
 import { styled } from "@mui/material";
 
 import { useProjectTours } from "@/services/toursService";
+import ToursFiltersSection from "./_sections/ToursFiltersSection";
 import HeroSection from "./_sections/ToursHeroSection";
+import ListSection from "./_sections/ToursListSection";
 
-const ContainerStyled = styled("div")(({ theme }) => ({}));
+const ContainerStyled = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 0, 0, 2),
+}));
 
 function ToursPage() {
   const { projectId } = useParams();
@@ -13,7 +17,8 @@ function ToursPage() {
   return (
     <ContainerStyled>
       <HeroSection />
-      <div>Tours Page</div>
+      <ToursFiltersSection />
+      <ListSection tours={data} />
     </ContainerStyled>
   );
 }

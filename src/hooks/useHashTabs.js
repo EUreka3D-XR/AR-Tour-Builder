@@ -5,9 +5,9 @@ const useHashTabs = (tabs, initialTab) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const activeTab = location.hash.replace("#", "") || initialTab;
+  const activeHash = location.hash.replace("#", "") || initialTab;
 
-  const setActiveTab = (event, value) => {
+  const setActiveHash = (event, value) => {
     let navToUrl = `${location.pathname}${location.search}#${value}`;
     if (value == null) {
       navToUrl = `${location.pathname}${location.search}#${event}`;
@@ -24,7 +24,7 @@ const useHashTabs = (tabs, initialTab) => {
     }
   }, [location.hash, location.pathname, location.search, navigate]);
 
-  return { tabs, activeTab, setActiveTab };
+  return { tabs, activeHash, setActiveHash };
 };
 
 export default useHashTabs;

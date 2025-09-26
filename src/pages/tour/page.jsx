@@ -1,9 +1,11 @@
 import { Divider, styled } from "@mui/material";
 
+import useHashTabs from "@/hooks/useHashTabs";
 import TourHeaderSection from "./_sections/TourHeaderSection";
 import TourInfoSection from "./_sections/TourInfoSection";
 import TourMapSection from "./_sections/TourMapSection";
 import TourNavigationSection from "./_sections/TourNavigationSection";
+import TourPoisSection from "./_sections/TourPoisSection";
 
 const ContainerStyled = styled("div")(() => ({
   height: "100%",
@@ -13,6 +15,11 @@ const ContainerStyled = styled("div")(() => ({
     flex: 1,
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
+    overflow: "hidden",
+    "& .left-section": {
+      height: "100%",
+      overflow: "hidden",
+    },
   },
 }));
 
@@ -23,6 +30,7 @@ const ContainerStyled = styled("div")(() => ({
  * @returns {React.ReactElement}
  */
 function TourPage({ initialTour, onSave, onPublish, onArchive }) {
+  const { activeHash } = useHashTabs();
   return (
     <ContainerStyled>
       <TourHeaderSection
@@ -37,7 +45,10 @@ function TourPage({ initialTour, onSave, onPublish, onArchive }) {
       <Divider />
       <div className="main-content">
         <div className="left-section">
-          <TourInfoSection />
+          {activeHash === "info" && <TourInfoSection />}
+          {activeHash === "pois" && (
+            <TourPoisSection pois={initialTour?.pois} />
+          )}
         </div>
         <TourMapSection />
       </div>

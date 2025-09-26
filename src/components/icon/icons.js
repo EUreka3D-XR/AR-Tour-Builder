@@ -1,6 +1,8 @@
 /** @const */
 export const icons = {
   add: "add",
+  arrowUp: "keyboard_arrow_up",
+  arrowDown: "keyboard_arrow_down",
   archive: "archive",
   back: "arrow_back",
   breadcrumb: "keyboard_arrow_right",
@@ -10,13 +12,17 @@ export const icons = {
   close: "close",
   decline: "trending_down",
   delete: "delete",
+  document: "article",
+  edit: "edit",
   filter: "filter_list",
   growth: "trending_up",
   home: "home",
+  image: "image",
   info: "info",
   map: "map",
   media: "perm_media",
   menu: "menu",
+  model: "view_in_ar",
   poi: "location_on",
   publish: "publish",
   reset: "replay",
@@ -29,6 +35,7 @@ export const icons = {
   tour: "tour",
   user: "person",
   users: "group",
+  video: "videocam",
   visibility: "visibility",
 };
 

@@ -52,14 +52,14 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function TourNavigationSection() {
-  const { tabs, activeTab, setActiveTab } = useHashTabs([
+  const { tabs, activeHash, setActiveHash } = useHashTabs([
     { icon: "info", label: "Tour Information", value: "info" },
     { icon: "poi", label: "Points of Interest", value: "pois" },
   ]);
 
   return (
     <ContainerStyled>
-      <Tabs value={activeTab} onChange={setActiveTab}>
+      <Tabs value={activeHash} onChange={setActiveHash}>
         {tabs.map((tab, index) => {
           const id = `tour-nav-tab-${index}`;
           const aria = `tour-nav-tabpanel-${index}`;

@@ -34,3 +34,17 @@ export const useProjectTour = (projectId, tourId) => {
     shouldStoreValue: true,
   });
 };
+
+/**
+ * @param {string} projectId
+ * @param {string} tourId
+ * @returns {TourResult}
+ */
+export const useProjectTourMultilingual = (projectId, tourId) => {
+  return useDataFetcher({
+    fetcher: () => api.tours.fetchOne(projectId, tourId),
+    queryKey: ["project-tour", projectId, tourId, "multilingual"],
+    shouldStoreValue: true,
+    enabled: !!tourId,
+  });
+};

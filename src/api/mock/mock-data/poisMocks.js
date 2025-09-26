@@ -1,12 +1,12 @@
 /**
- * @typedef {import('@/types/jsdoc-types').POI} POI
+ * @typedef {import('@/types/jsdoc-types').Poi} Poi
  */
 
 // import { getMockAssets } from "./assetsMocks.js";
 
 /**
  * Array of 10 mock POIs
- * @type {POI[]}
+ * @type {Poi[]}
  */
 export const mockPOIs = [
   {
@@ -374,7 +374,7 @@ export const mockPOIs = [
 /**
  * Returns a random combination of mock points of interest (POIs).
  * @param {number} count
- * @returns {POI[]}
+ * @returns {Poi[]}
  */
 export function getMockPois(count) {
   const allPois = [...mockPOIs];

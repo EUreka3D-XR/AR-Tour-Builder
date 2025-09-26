@@ -84,7 +84,7 @@
  * @property {LocalesField} title - Tour title
  * @property {LocalesField} description - Tour description
  * @property {string} thumbnail - Tour thumbnail image URL
- * @property {POI[]} pois - Array of Points of Interest in this tour
+ * @property {Poi[]} pois - Array of Points of Interest in this tour
  * @property {Status} status - Tour status (draft, published, archived)
  * @property {number} duration - Estimated duration in minutes
  * @property {number} distance - Estimated distance in meters
@@ -100,7 +100,7 @@
 
 /**
  * Point of Interest schema
- * @typedef {Object} POI
+ * @typedef {Object} Poi
  * @property {string} id - Unique identifier for the POI
  * @property {LocalesField} title - POI title
  * @property {LocalesField} description - POI description
@@ -134,7 +134,7 @@
  * @property {string} filename - The filename of the asset
  * @property {string} landingPage - The URL of the asset's landing page
  * @property {string} source - The source URL of the asset
- * @property {AssetType} type - Media type (image, video, audio, 3d_model)
+ * @property {AssetType} type - Media type (image, video, audio, 3d_model, text)
  * @property {MediaMetadata} [metadata] - Additional metadata
  * @property {string} createdAt - Creation timestamp
  * @property {string} updatedAt - Last update timestamp

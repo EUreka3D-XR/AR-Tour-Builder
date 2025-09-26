@@ -27,6 +27,28 @@ const AppSerializer = RestSerializer.extend({
       data = this.transformLocalizedFields(data, localesParam);
     }
 
+    // Handle POI assets transformation
+    data = this.transformPoiAssets(data);
+
+    return data;
+  },
+  transformPoiAssets(data) {
+    // Handle single POI
+    if (data && data.poiAssets) {
+      data.assets = data.poiAssets;
+      delete data.poiAssets;
+    }
+
+    // Handle array of POIs (like when getting tour with POIs)
+    if (Array.isArray(data)) {
+      return data.map((item) => this.transformPoiAssets(item));
+    }
+
+    // Handle nested POIs in tours
+    if (data && data.pois && Array.isArray(data.pois)) {
+      data.pois = data.pois.map((poi) => this.transformPoiAssets(poi));
+    }
+
     return data;
   },
   transformLocalizedFields(data, locale) {
@@ -114,7 +136,7 @@ export const makeServer = ({ environment = "development" } = {}) => {
         include: ["poiAssets"],
         embed: true,
 
-        // serialize(resource, request) {
+        // serialize() {
         //   let json = AppSerializer.prototype.serialize.apply(this, arguments);
 
         //   // Transform poiAssets into array with asset data + viewInAr

@@ -7,10 +7,12 @@ import EurekaIcon from "../icon/EurekaIcon";
 import NavbarItem from "./NavbarItem";
 import NavbarProjects from "./NavbarProjects";
 
-const MenuListStyled = styled(MenuList)({
+const MenuListStyled = styled(MenuList)(({ theme }) => ({
+  boxShadow: "2px 0 8px rgba(0,0,0,0.08)", // right shadow
+  transition: theme.transitions.create("width"),
   "&.nav-open": {
     padding: "0 1rem",
-    width: "240px",
+    width: "300px",
   },
   "&.nav-close": {
     padding: 0,
@@ -19,7 +21,7 @@ const MenuListStyled = styled(MenuList)({
   "& .navbar-item": {
     marginBottom: "0.5rem",
   },
-});
+}));
 
 function Navbar() {
   const { isNavMenuOpen } = useGeneralProvider();

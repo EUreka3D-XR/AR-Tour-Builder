@@ -43,9 +43,6 @@ function MyThemeProvider({ children }) {
         },
         MuiOutlinedInput: {
           styleOverrides: {
-            input: {
-              fontSize: "0.875rem",
-            },
             notchedOutline: ({ theme }) => ({
               borderColor: theme.palette.grey[400], // your custom default
               transition: theme.transitions.create(
@@ -64,6 +61,14 @@ function MyThemeProvider({ children }) {
         MuiIcon: {
           defaultProps: {
             baseClassName: "material-icons-outlined",
+          },
+        },
+        MuiTab: {
+          styleOverrides: {
+            root: {
+              textTransform: "none",
+              minHeight: "3rem",
+            },
           },
         },
       },

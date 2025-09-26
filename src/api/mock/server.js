@@ -200,7 +200,14 @@ export const makeServer = ({ environment = "development" } = {}) => {
         const tours = server.db.tours;
         const selectedTours = getRandomItems(tours, 2, 5);
         const tourIds = selectedTours.map((tour) => tour.id);
+
+        // Update project with tour IDs
         server.db.projects.update(project.id, { tourIds });
+
+        // Update each tour with the project ID
+        selectedTours.forEach((tour) => {
+          server.db.tours.update(tour.id, { projectId: project.id });
+        });
       });
 
       // Create and assign a library for each project, which will contain all assets for more easy handling
@@ -245,14 +252,14 @@ export const makeServer = ({ environment = "development" } = {}) => {
         return project ? project.tours : [];
       });
       this.get("/projects/:projectId/tours/:tourId", (schema, request) => {
-        const { projectId, tourId } = request.params;
+        const { tourId } = request.params;
         const tour = schema.tours.find(tourId);
 
         // Optionally verify tour belongs to project
-        if (tour && tour.projectId === projectId) {
-          return tour;
+        if (!tour) {
+          return new Response(404, {}, { error: "Tour not found" });
         }
-        return new Response(404, {}, { error: "Tour not found" });
+        return tour;
       });
 
       // Pois

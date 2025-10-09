@@ -22,6 +22,7 @@ const checkIfInsideAProject = (pathname) =>
 const useNavPaths = () => {
   const { t } = useTranslation();
   const { projectId } = useParams();
+  const { tourId } = useParams();
 
   const routes = useMemo(() => {
     // Base paths
@@ -32,6 +33,9 @@ const useNavPaths = () => {
     const internalProjectRoute = (route) =>
       projectId ? `${projectsBase.one(projectId)}${route}` : route;
 
+    const internalTourRoute = (route) =>
+      tourId ? `${projectsBase.one(projectId)}/tours/${tourId}${route}` : route;
+
     // Helper function for auth routes
     const internalAuthRoute = (route) => `${authBase}${route}`;
 
@@ -40,7 +44,9 @@ const useNavPaths = () => {
       projects: projectsBase,
       dashboard: constructPaths(internalProjectRoute("/dashboard")),
       tours: constructPaths(internalProjectRoute("/tours")),
-      poi: constructPaths(internalProjectRoute("/poi")),
+      tour: internalTourRoute(""),
+      tourInfo: internalTourRoute("/info"),
+      pois: constructPaths(internalTourRoute("/pois")),
       library: constructPaths(internalProjectRoute("/library")),
       settings: "/settings",
       auth: authBase,
@@ -49,7 +55,7 @@ const useNavPaths = () => {
       forgotPassword: internalAuthRoute("/forgot-password"),
       resetPassword: internalAuthRoute("/reset-password"),
     };
-  }, [projectId]);
+  }, [projectId, tourId]);
 
   const navLinks = useMemo(
     () => ({

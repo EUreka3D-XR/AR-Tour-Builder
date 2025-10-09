@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import useNavPaths from "@/hooks/useNavPaths";
 import useUrlTabs from "@/hooks/useUrlTabs";
 
 const LANGUAGE_OPTIONS = [
@@ -52,9 +53,11 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function TourNavigationTabsSection() {
+  const { routes } = useNavPaths();
+
   const { tabs, activeTab, setActiveTab } = useUrlTabs([
-    { icon: "info", label: "Tour Information", value: "info" },
-    { icon: "poi", label: "Points of Interest", value: "pois" },
+    { icon: "info", label: "Tour Information", value: routes.tourInfo },
+    { icon: "poi", label: "Points of Interest", value: routes.pois.index },
   ]);
 
   return (

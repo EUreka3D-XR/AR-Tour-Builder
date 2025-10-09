@@ -1,38 +1,38 @@
 import { useLocation, useNavigate } from "react-router";
 
 /**
- * Hook for managing tabs using URL paths instead of hash fragments.
- * Changes the URL to include the tab name as a path segment (e.g., /info, /pois).
+ * Hook for managing tabs using full URL paths.
+ * Each tab's value property contains the complete URL path for that tab.
  *
- * @param {Array<{ value: string }>} tabs - Array of tab objects with value properties.
- * @param {string} [initialTab="info"] - Default tab to use when no tab is specified in URL.
+ * @param {Array<{ value: string, label: string }>} tabs - Array of tab objects where value is the full URL path
+ * @param {string} [defaultTabPath] - Default tab path to redirect to if current path doesn't match any tab
  * @returns {{
- *   tabs: Array<{ value: string }>,
+ *   tabs: Array<{ value: string, label: string }>,
  *   activeTab: string,
  *   setActiveTab: (event: React.SyntheticEvent | string, value?: string) => void
  * }} Object containing tabs, activeTab, and setActiveTab function.
  */
-const useUrlTabs = (tabs, initialTab = "info") => {
+const useUrlTabs = (tabs, defaultTabPath) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const pathSegments = location.pathname.split("/").filter(Boolean);
-  const currentTab = pathSegments[pathSegments.length - 1];
+  // Find the current active tab by matching the current pathname with tab values
+  const activeTab =
+    tabs.find((tab) => location.pathname.startsWith(tab.value))?.value ||
+    defaultTabPath ||
+    tabs[0]?.value;
 
-  // Check if the current path segment is a valid tab
-  const activeTab = currentTab ?? initialTab;
-
+  /**
+   * Navigate to a new tab using its full URL path
+   * @param {Event|string} event - Event object or tab value string
+   * @param {string} value - Tab value (full URL path) when called from MUI Tabs component
+   */
   const setActiveTab = (event, value) => {
     // Handle both direct calls and MUI Tabs onChange format
-    const tabValue = value != null ? value : event;
+    const tabPath = value != null ? value : event;
 
-    // Build the new URL by replacing the last path segment with the new tab
-    const pathWithoutTab = pathSegments.slice(0, -1);
-    const newPath = `/${pathWithoutTab.join("/")}/${tabValue}`;
-    const newUrl = `${newPath}${location.search}`;
-
-    console.log(newUrl);
-
+    // Navigate to the full URL path, preserving any search parameters
+    const newUrl = `${tabPath}${location.search}`;
     navigate(newUrl);
   };
 

@@ -1,11 +1,9 @@
+import { Outlet } from "react-router";
 import { Divider, styled } from "@mui/material";
 
-import useHashTabs from "@/hooks/useHashTabs";
 import TourHeaderSection from "./_sections/TourHeaderSection";
-import TourInfoSection from "./_sections/TourInfoSection";
 import TourMapSection from "./_sections/TourMapSection";
 import TourNavigationTabsSection from "./_sections/TourNavigationTabsSection";
-import TourPoisSection from "./_sections/TourPoisSection";
 
 const ContainerStyled = styled("div")(() => ({
   height: "100%",
@@ -30,7 +28,7 @@ const ContainerStyled = styled("div")(() => ({
  * @returns {React.ReactElement}
  */
 function TourPage({ initialTour, onSave, onPublish, onArchive }) {
-  const { activeHash } = useHashTabs();
+  // const { activeTab } = useUrlTabs();
   return (
     <ContainerStyled>
       <TourHeaderSection
@@ -45,10 +43,9 @@ function TourPage({ initialTour, onSave, onPublish, onArchive }) {
       <Divider />
       <div className="main-content">
         <div className="left-section">
-          {activeHash === "info" && <TourInfoSection />}
-          {activeHash === "pois" && (
-            <TourPoisSection pois={initialTour?.pois} />
-          )}
+          <Outlet context={{ pois: initialTour?.pois }} />
+          {/* {activeTab === "info" && <TourInfoSection />}
+          {activeTab === "pois" && <TourPoisSection pois={initialTour?.pois} />} */}
         </div>
         <TourMapSection />
       </div>

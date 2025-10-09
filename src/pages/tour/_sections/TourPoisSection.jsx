@@ -1,3 +1,4 @@
+import { useOutletContext } from "react-router";
 import { Divider, FormControlLabel, styled, Switch } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -32,7 +33,9 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-function TourPoisSection({ pois = [] }) {
+function TourPoisSection() {
+  const { pois } = useOutletContext();
+
   return (
     <ContainerStyled className="pois-section">
       <div className="pois-header">

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
-import useHashTabs from "@/hooks/useHashTabs";
+import useUrlTabs from "@/hooks/useUrlTabs";
 
 const LANGUAGE_OPTIONS = [
   {
@@ -52,14 +52,14 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function TourNavigationTabsSection() {
-  const { tabs, activeHash, setActiveHash } = useHashTabs([
+  const { tabs, activeTab, setActiveTab } = useUrlTabs([
     { icon: "info", label: "Tour Information", value: "info" },
     { icon: "poi", label: "Points of Interest", value: "pois" },
   ]);
 
   return (
     <ContainerStyled>
-      <Tabs value={activeHash} onChange={setActiveHash}>
+      <Tabs value={activeTab} onChange={setActiveTab}>
         {tabs.map((tab, index) => {
           const id = `tour-nav-tab-${index}`;
           const aria = `tour-nav-tabpanel-${index}`;

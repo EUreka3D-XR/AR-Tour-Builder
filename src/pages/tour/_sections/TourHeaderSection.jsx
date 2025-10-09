@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { IconButton, styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -32,7 +31,6 @@ function TourHeaderSection({
   onArchive,
 }) {
   const navigate = useNavigate();
-  const location = useLocation();
   const { routes } = useNavPaths();
 
   const isEditing = lastModified ? "edit" : "create";
@@ -40,15 +38,6 @@ function TourHeaderSection({
   const handleBackClick = () => {
     navigate(routes.tours.index);
   };
-
-  useEffect(() => {
-    // If there's no hash in the URL, add #info
-    if (!location.hash) {
-      navigate(`${location.pathname}${location.search}#info`, {
-        replace: true,
-      });
-    }
-  }, [location.hash, location.pathname, location.search, navigate]);
 
   return (
     <ContainerStyled>

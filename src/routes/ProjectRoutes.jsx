@@ -1,5 +1,7 @@
 import { lazy } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router";
+import TourInfoSection from "@/pages/tour/_sections/TourInfoSection";
+import TourPoisSection from "@/pages/tour/_sections/TourPoisSection";
 import TourPageContainer from "@/pages/tour/container";
 import ToursPage from "@/pages/tours/page";
 
@@ -23,22 +25,24 @@ function ProjectRoutes() {
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<ProjectPage />} />
         <Route path="edit" element={<></>} />
-
         {/* 🗺️ Tours */}
         <Route path="tours" element={<TourLayout />}>
           <Route index element={<ToursPage />} />
           <Route path="new" element={<TourPageContainer />} />
-          <Route path=":tourId" element={<TourPageContainer />} />
-          <Route path=":tourId/poi/:poiId" element={<></>} />
-          <Route path=":tourId/poi/:poiId/edit" element={<></>} />
+          <Route path=":tourId" element={<TourPageContainer />}>
+            {/* Redirect /tours/:tourId to /tours/:tourId/info by default */}
+            <Route index element={<Navigate to="info" replace />} />
+            <Route path="info" element={<TourInfoSection />} />
+            <Route path="pois" element={<TourPoisSection />} />
+          </Route>
+          {/* <Route path=":tourId/pois/:poiId" element={<></>} />
+          <Route path=":tourId/pois/:poiId/edit" element={<></>} /> */}
         </Route>
-
         {/* 📍 POIs */}
         <Route path="pois" element={<POILayout />}>
           <Route index element={<></>} />
           <Route path=":poiId" element={<></>} />
         </Route>
-
         {/* 📚 Library */}
         <Route path="library" element={<LibraryLayout />}>
           <Route index element={<LibraryPage />} />

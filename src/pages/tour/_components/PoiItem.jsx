@@ -113,6 +113,7 @@ function PoiItem({
   onMoveDown,
   onEdit,
   onDelete,
+  onCopy,
 }) {
   // Get asset type counts for display
   const getAssetTypeIcon = (type) => {
@@ -192,10 +193,13 @@ function PoiItem({
 
         {/* Action buttons on the right */}
         <ActionButtons>
-          <IconButton size="small" onClick={onEdit}>
+          <IconButton size="small" onClick={() => onCopy(poi.id)}>
+            <EurekaIcon name="copy" fontSize="small" />
+          </IconButton>
+          <IconButton size="small" onClick={() => onEdit(poi.id)}>
             <EurekaIcon name="edit" fontSize="small" />
           </IconButton>
-          <IconButton size="small" onClick={onDelete}>
+          <IconButton size="small" onClick={() => onDelete(poi.id)}>
             <EurekaIcon name="delete" fontSize="small" />
           </IconButton>
         </ActionButtons>

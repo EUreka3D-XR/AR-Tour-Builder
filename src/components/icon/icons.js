@@ -10,6 +10,7 @@ export const icons = {
   check: "check",
   checkCircle: "check_circle",
   close: "close",
+  copy: "content_copy",
   decline: "trending_down",
   delete: "delete",
   document: "article",

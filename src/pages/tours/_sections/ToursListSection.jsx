@@ -25,6 +25,7 @@ const ToursScrollableArea = styled(Box)(({ theme }) => ({
   overflowY: "auto",
   paddingRight: theme.spacing(1),
   paddingBottom: theme.spacing(6),
+  paddingTop: theme.spacing(2),
   "&::-webkit-scrollbar": {
     width: "6px",
   },
@@ -64,6 +65,7 @@ const MapContainer = styled(Box)(({ theme }) => ({
 }));
 
 const TourItem = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(0, 2),
   marginBottom: theme.spacing(2),
   "&:last-child": {
     marginBottom: 0,
@@ -84,7 +86,7 @@ function ToursListSection({ tours = [], viewMode = "list" }) {
     <ContainerStyled>
       {/* Tours List - Left Side */}
       <ToursListContainer viewMode={viewMode}>
-        <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+        <Typography variant="h6" sx={{ mb: 0, fontWeight: 600 }}>
           Tours ({tours.length})
         </Typography>
 

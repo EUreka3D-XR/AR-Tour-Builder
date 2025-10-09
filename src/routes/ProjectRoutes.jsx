@@ -29,11 +29,11 @@ function ProjectRoutes() {
         <Route path="tours" element={<TourLayout />}>
           <Route index element={<ToursPage />} />
           <Route path="new" element={<TourPageContainer />} />
-          <Route path=":tourId" element={<TourPageContainer />}>
+          <Route path=":tourId/*" element={<TourPageContainer />}>
             {/* Redirect /tours/:tourId to /tours/:tourId/info by default */}
             <Route index element={<Navigate to="info" replace />} />
             <Route path="info" element={<TourInfoSection />} />
-            <Route path="pois" element={<TourPoisSection />} />
+            <Route path="pois/*" element={<TourPoisSection />} />
           </Route>
           {/* <Route path=":tourId/pois/:poiId" element={<></>} />
           <Route path=":tourId/pois/:poiId/edit" element={<></>} /> */}

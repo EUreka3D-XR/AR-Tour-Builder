@@ -1,8 +1,9 @@
-import { useOutletContext } from "react-router";
+import { useLocation, useNavigate, useOutletContext } from "react-router";
 import { Divider, FormControlLabel, styled, Switch } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import useNavPaths from "@/hooks/useNavPaths";
 import PoiItem from "../_components/PoiItem";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
@@ -36,6 +37,17 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 function TourPoisSection() {
   const { pois } = useOutletContext();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { routes } = useNavPaths();
+
+  const handleEdit = (poiId) => {
+    console.log(routes.pois.one(poiId));
+    navigate(routes.pois.one(poiId), {
+      state: { backgroundLocation: location },
+    });
+  };
+
   return (
     <ContainerStyled className="pois-section">
       <div className="pois-header">
@@ -49,7 +61,7 @@ function TourPoisSection() {
         <div className="pois-list-scrollable">
           {pois.map((poi) => (
             <div key={poi.id} className="poi-item-flex-item">
-              <PoiItem poi={poi} />
+              <PoiItem poi={poi} onEdit={handleEdit} />
             </div>
           ))}
         </div>

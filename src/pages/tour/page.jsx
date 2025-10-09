@@ -1,6 +1,8 @@
-import { Outlet } from "react-router";
+import { Outlet, Route, Routes, useLocation } from "react-router";
 import { Divider, styled } from "@mui/material";
 
+import useNavPaths from "@/hooks/useNavPaths";
+import BasePoiSidebar from "../poi-sidebar/_common/sidebar";
 import TourHeaderSection from "./_sections/TourHeaderSection";
 import TourMapSection from "./_sections/TourMapSection";
 import TourNavigationTabsSection from "./_sections/TourNavigationTabsSection";
@@ -28,28 +30,37 @@ const ContainerStyled = styled("div")(() => ({
  * @returns {React.ReactElement}
  */
 function TourPage({ initialTour, onSave, onPublish, onArchive }) {
-  // const { activeTab } = useUrlTabs();
+  const { routes } = useNavPaths();
+  const location = useLocation();
+  const backgroundLocation = location.state?.backgroundLocation;
+
   return (
-    <ContainerStyled>
-      <TourHeaderSection
-        tourTitle={initialTour?.title.locales.en}
-        tourStatus={initialTour?.status}
-        lastModified={initialTour?.lastModified}
-        onSave={onSave}
-        onPublish={onPublish}
-        onArchive={onArchive}
-      />
-      <TourNavigationTabsSection />
-      <Divider />
-      <div className="main-content">
-        <div className="left-section">
-          <Outlet context={{ pois: initialTour?.pois }} />
-          {/* {activeTab === "info" && <TourInfoSection />}
-          {activeTab === "pois" && <TourPoisSection pois={initialTour?.pois} />} */}
+    <>
+      <ContainerStyled>
+        <TourHeaderSection
+          tourTitle={initialTour?.title.locales.en}
+          tourStatus={initialTour?.status}
+          lastModified={initialTour?.lastModified}
+          onSave={onSave}
+          onPublish={onPublish}
+          onArchive={onArchive}
+        />
+        <TourNavigationTabsSection />
+        <Divider />
+        <div className="main-content">
+          <div className="left-section">
+            <Outlet context={{ pois: initialTour?.pois }} />
+          </div>
+          <TourMapSection />
         </div>
-        <TourMapSection />
-      </div>
-    </ContainerStyled>
+      </ContainerStyled>
+      {backgroundLocation && (
+        <Routes location={backgroundLocation}>
+          <Route path={"/:poiId"} element={<BasePoiSidebar />} />
+          <Route path={routes.pois.new} element={<BasePoiSidebar />} />
+        </Routes>
+      )}
+    </>
   );
 }
 

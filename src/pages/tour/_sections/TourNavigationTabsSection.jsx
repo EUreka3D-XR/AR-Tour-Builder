@@ -51,7 +51,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-function TourNavigationSection() {
+function TourNavigationTabsSection() {
   const { tabs, activeHash, setActiveHash } = useHashTabs([
     { icon: "info", label: "Tour Information", value: "info" },
     { icon: "poi", label: "Points of Interest", value: "pois" },
@@ -97,4 +97,4 @@ function TourNavigationSection() {
   );
 }
 
-export default TourNavigationSection;
+export default TourNavigationTabsSection;

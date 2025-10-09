@@ -4,7 +4,7 @@ import useHashTabs from "@/hooks/useHashTabs";
 import TourHeaderSection from "./_sections/TourHeaderSection";
 import TourInfoSection from "./_sections/TourInfoSection";
 import TourMapSection from "./_sections/TourMapSection";
-import TourNavigationSection from "./_sections/TourNavigationSection";
+import TourNavigationTabsSection from "./_sections/TourNavigationTabsSection";
 import TourPoisSection from "./_sections/TourPoisSection";
 
 const ContainerStyled = styled("div")(() => ({
@@ -41,7 +41,7 @@ function TourPage({ initialTour, onSave, onPublish, onArchive }) {
         onPublish={onPublish}
         onArchive={onArchive}
       />
-      <TourNavigationSection />
+      <TourNavigationTabsSection />
       <Divider />
       <div className="main-content">
         <div className="left-section">

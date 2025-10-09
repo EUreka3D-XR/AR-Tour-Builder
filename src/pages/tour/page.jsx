@@ -1,8 +1,6 @@
-import { Outlet, Route, Routes, useLocation } from "react-router";
+import { Outlet } from "react-router";
 import { Divider, styled } from "@mui/material";
 
-import useNavPaths from "@/hooks/useNavPaths";
-import BasePoiSidebar from "../poi-sidebar/_common/sidebar";
 import TourHeaderSection from "./_sections/TourHeaderSection";
 import TourMapSection from "./_sections/TourMapSection";
 import TourNavigationTabsSection from "./_sections/TourNavigationTabsSection";
@@ -30,10 +28,6 @@ const ContainerStyled = styled("div")(() => ({
  * @returns {React.ReactElement}
  */
 function TourPage({ initialTour, onSave, onPublish, onArchive }) {
-  const { routes } = useNavPaths();
-  const location = useLocation();
-  const backgroundLocation = location.state?.backgroundLocation;
-
   return (
     <>
       <ContainerStyled>
@@ -54,12 +48,6 @@ function TourPage({ initialTour, onSave, onPublish, onArchive }) {
           <TourMapSection />
         </div>
       </ContainerStyled>
-      {backgroundLocation && (
-        <Routes location={backgroundLocation}>
-          <Route path={"/:poiId"} element={<BasePoiSidebar />} />
-          <Route path={routes.pois.new} element={<BasePoiSidebar />} />
-        </Routes>
-      )}
     </>
   );
 }

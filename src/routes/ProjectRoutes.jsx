@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router";
+import EditPoiSidebar from "@/pages/poi-sidebar/edit/EditPoiSidebar";
 import TourInfoSection from "@/pages/tour/_sections/TourInfoSection";
 import TourPoisSection from "@/pages/tour/_sections/TourPoisSection";
 import TourPageContainer from "@/pages/tour/container";
@@ -33,7 +34,10 @@ function ProjectRoutes() {
             {/* Redirect /tours/:tourId to /tours/:tourId/info by default */}
             <Route index element={<Navigate to="info" replace />} />
             <Route path="info" element={<TourInfoSection />} />
-            <Route path="pois/*" element={<TourPoisSection />} />
+            <Route path="pois/*" element={<TourPoisSection />}>
+              <Route index element={<></>} />
+              <Route path=":poiId" element={<EditPoiSidebar />} />
+            </Route>
           </Route>
           {/* <Route path=":tourId/pois/:poiId" element={<></>} />
           <Route path=":tourId/pois/:poiId/edit" element={<></>} /> */}

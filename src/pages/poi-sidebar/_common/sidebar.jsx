@@ -1,18 +1,14 @@
-import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { Drawer, styled } from "@mui/material";
 
 const DrawerStyled = styled(Drawer)(({ theme }) => ({
   "& .drawer-paper": {
-    width: "1000px",
+    width: "800px",
   },
 }));
 
-function BasePoiSidebar() {
-  const navigate = useNavigate();
-
+function PoiSidebar({ children, onClose }) {
   return (
-    // <AnimatePresence>
     <DrawerStyled
       anchor="right"
       open
@@ -26,14 +22,11 @@ function BasePoiSidebar() {
           transition: { type: "tween", duration: 0.3 },
         },
       }}
-      onClose={() => {
-        navigate(-1);
-      }}
+      onClose={onClose}
     >
-      <div>BasePoiSidebar</div>
+      <div>{children}</div>
     </DrawerStyled>
-    // </AnimatePresence>
   );
 }
 
-export default BasePoiSidebar;
+export default PoiSidebar;

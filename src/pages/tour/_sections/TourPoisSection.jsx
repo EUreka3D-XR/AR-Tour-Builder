@@ -1,4 +1,9 @@
-import { useLocation, useNavigate, useOutletContext } from "react-router";
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useOutletContext,
+} from "react-router";
 import { Divider, FormControlLabel, styled, Switch } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -42,31 +47,33 @@ function TourPoisSection() {
   const { routes } = useNavPaths();
 
   const handleEdit = (poiId) => {
-    console.log(routes.pois.one(poiId));
     navigate(routes.pois.one(poiId), {
       state: { backgroundLocation: location },
     });
   };
 
   return (
-    <ContainerStyled className="pois-section">
-      <div className="pois-header">
-        <FormControlLabel control={<Switch />} label="Guided Tour" />
-        <Button variant="filled" startIcon={<EurekaIcon name="add" />}>
-          Add POI
-        </Button>
-      </div>
-      <Divider />
-      <div className="pois-list">
-        <div className="pois-list-scrollable">
-          {pois.map((poi) => (
-            <div key={poi.id} className="poi-item-flex-item">
-              <PoiItem poi={poi} onEdit={handleEdit} />
-            </div>
-          ))}
+    <>
+      <ContainerStyled className="pois-section">
+        <div className="pois-header">
+          <FormControlLabel control={<Switch />} label="Guided Tour" />
+          <Button variant="filled" startIcon={<EurekaIcon name="add" />}>
+            Add POI
+          </Button>
         </div>
-      </div>
-    </ContainerStyled>
+        <Divider />
+        <div className="pois-list">
+          <div className="pois-list-scrollable">
+            {pois.map((poi) => (
+              <div key={poi.id} className="poi-item-flex-item">
+                <PoiItem poi={poi} onEdit={handleEdit} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </ContainerStyled>
+      <Outlet />
+    </>
   );
 }
 

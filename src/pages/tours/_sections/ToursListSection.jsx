@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { Box, styled, Typography } from "@mui/material";
 
+import Map from "@/components/map/Map";
 import TourCard from "../_components/TourCard";
 
 const ContainerStyled = styled(Box)(({ theme }) => ({
@@ -43,14 +44,6 @@ const ToursScrollableArea = styled(Box)(({ theme }) => ({
 
 const MapContainer = styled(Box)(({ theme }) => ({
   flex: 1,
-  backgroundColor: "#f5f5f5",
-  borderRadius: theme.spacing(1),
-  border: `1px solid ${theme.palette.divider}`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  position: "relative",
-  overflow: "hidden",
   transition: theme.transitions.create(["transform"], {
     duration: theme.transitions.duration.short,
   }),
@@ -115,14 +108,7 @@ function ToursListSection({ tours = [], viewMode = "list" }) {
 
       {/* Map - Right Side */}
       <MapContainer className={clsx({ show: viewMode === "map" })}>
-        <Box sx={{ textAlign: "center" }}>
-          <Typography variant="h6" color="text.secondary" sx={{ mb: 1 }}>
-            Map View
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Interactive map will be displayed here
-          </Typography>
-        </Box>
+        <Map />
       </MapContainer>
     </ContainerStyled>
   );

@@ -160,6 +160,7 @@
  * @typedef {Object} ModelAssetAttributes
  * @property {boolean} viewInAr - Indicates if the asset can be viewed in AR
  * @property {Asset} linkedAsset - Linked asset information
+ * @property {Coordinates} georeference - Geographical reference for the asset
  */
 
 /**

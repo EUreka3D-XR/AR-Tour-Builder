@@ -47,7 +47,7 @@ function MyThemeProvider({ children }) {
         MuiOutlinedInput: {
           styleOverrides: {
             notchedOutline: ({ theme }) => ({
-              borderColor: theme.palette.grey[400], // your custom default
+              borderColor: theme.palette.grey[500], // your custom default
               transition: theme.transitions.create(
                 ["border-color", "background-color"],
                 { duration: theme.transitions.duration.short },
@@ -64,6 +64,16 @@ function MyThemeProvider({ children }) {
           defaultProps: {
             fullWidth: true,
             size: "small",
+          },
+        },
+        MuiCheckbox: {
+          defaultProps: {
+            size: "small",
+          },
+          styleOverrides: {
+            root: ({ theme }) => ({
+              color: theme.palette.grey[500],
+            }),
           },
         },
         MuiIcon: {

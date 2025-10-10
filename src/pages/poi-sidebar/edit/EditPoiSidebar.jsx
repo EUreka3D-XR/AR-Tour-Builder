@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import { Divider, styled } from "@mui/material";
 
 import useNavPaths from "@/hooks/useNavPaths";
+import PoiAssetDetailsSection from "../_common/_sections/PoiAssetDetailsSection";
 import PoiAssetHeaderSection from "../_common/_sections/PoiAssetHeaderSection";
 import PoiFooterSection from "../_common/_sections/PoiFooterSection";
 import PoiMainSection from "../_common/_sections/PoiMainSection";
@@ -26,12 +27,12 @@ const ScrollableArea = styled("div")({
 
 function EditPoiSidebar() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { routes } = useNavPaths();
 
   const isInsideAssetForm = useMemo(
-    () => searchParams.get("assetForm"),
+    () => searchParams.get("mediaForm"),
     [searchParams],
   );
 
@@ -40,8 +41,11 @@ function EditPoiSidebar() {
   }, [navigate, routes]);
 
   const handleCloseAsset = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
+    setSearchParams((prev) => {
+      prev.delete("mediaForm");
+      return prev;
+    });
+  }, [setSearchParams]);
 
   return (
     <PoiSidebar onClose={handleClosePoi}>
@@ -49,18 +53,21 @@ function EditPoiSidebar() {
         <div className="no-shrink">
           <PoiSidebarHeader
             title="Edit Point of Interest"
-            onBack={isInsideAssetForm ? handleCloseAsset : undefined}
             onClose={handleClosePoi}
           />
           <Divider />
           {!isInsideAssetForm && <PoiNavigationTabsSection />}
           {isInsideAssetForm && (
-            <PoiAssetHeaderSection onBack={handleCloseAsset} />
+            <PoiAssetHeaderSection
+              title="Create Asset"
+              onBack={handleCloseAsset}
+            />
           )}
           <Divider />
         </div>
         <ScrollableArea className="scrollable-area">
           {!isInsideAssetForm && <PoiMainSection />}
+          {isInsideAssetForm && <PoiAssetDetailsSection />}
         </ScrollableArea>
         <div className="no-shrink">
           <PoiFooterSection saveIcon="save" />

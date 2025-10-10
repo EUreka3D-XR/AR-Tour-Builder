@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 import { getMockPoiAssets } from "@/api/mock/mock-data/assetsMocks";
 import { Menu, MenuItem, styled, Typography } from "@mui/material";
 
@@ -57,6 +58,7 @@ function PoiMediaTab() {
 export default PoiMediaTab;
 
 function AddMediaButton() {
+  const [, setSearchParams] = useSearchParams();
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -69,7 +71,10 @@ function AddMediaButton() {
   };
 
   const handleCreateNew = () => {
-    console.log("Create New clicked");
+    setSearchParams((prev) => {
+      prev.set("mediaForm", "new");
+      return prev;
+    });
     handleMenuClose();
   };
 

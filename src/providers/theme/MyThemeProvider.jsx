@@ -28,6 +28,9 @@ function MyThemeProvider({ children }) {
         h6: {
           fontSize: "1rem",
         },
+        body1: {
+          fontSize: "0.875rem",
+        },
       },
       components: {
         MuiButton: {

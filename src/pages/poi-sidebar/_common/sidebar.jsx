@@ -4,7 +4,9 @@ import { Drawer, styled } from "@mui/material";
 const DrawerStyled = styled(Drawer)(({ theme }) => ({
   "& .drawer-paper": {
     width: "800px",
+    height: "100vh",
   },
+  "& .drawer-content": {},
 }));
 
 function PoiSidebar({ children, onClose }) {
@@ -24,7 +26,7 @@ function PoiSidebar({ children, onClose }) {
       }}
       onClose={onClose}
     >
-      <div>{children}</div>
+      {children}
     </DrawerStyled>
   );
 }

@@ -8,6 +8,7 @@ import { Button as MuiButton, styled } from "@mui/material";
  * @property {'filled'|'outlined'|'text'|'unstyled'} variant - Button style variant
  * @property {'primary'|'secondary'|'error'|'success'|'warning'|'info'|'inherit'} [color] - Button color theme
  * @property {'round'|'square'} [corners='square'] - Button corner style
+ * @property {boolean} [disableGutters] - Button gutter style
  * @property {boolean} [isLoading] - Loading state
  * @property {boolean} [isDisabled] - Disabled state
  * @property {boolean} [isFullwidth] - Full width button
@@ -19,9 +20,11 @@ import { Button as MuiButton, styled } from "@mui/material";
  * @property {string} [className] - Additional CSS classes
  */
 
-const ButtonStyled = styled(MuiButton)({
+const ButtonStyled = styled(MuiButton)(({ theme }) => ({
   borderRadius: "3rem",
   whiteSpace: "nowrap",
+  paddingLeft: theme.spacing(4),
+  paddingRight: theme.spacing(4),
   "&.square": {
     borderRadius: "0.25rem",
   },
@@ -38,7 +41,11 @@ const ButtonStyled = styled(MuiButton)({
       opacity: 0.5,
     },
   },
-});
+  "&.disable-gutters": {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+  },
+}));
 
 const VARIANTS_DICT = {
   filled: "contained",
@@ -59,6 +66,7 @@ function ButtonNewUnstyled({
   isLoading,
   isDisabled,
   isFullwidth,
+  disableGutters,
   type,
   startIcon,
   endIcon,
@@ -79,6 +87,7 @@ function ButtonNewUnstyled({
       endIcon={endIcon}
       className={clsx(className, variant, corners, {
         "btn-unstyled": variant === "unstyled",
+        "disable-gutters": disableGutters,
       })}
       onClick={onClick}
     >

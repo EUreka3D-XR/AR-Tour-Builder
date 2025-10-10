@@ -41,6 +41,9 @@ const ButtonStyled = styled(MuiButton)(({ theme }) => ({
       opacity: 0.5,
     },
   },
+  "&.outlined": {
+    backgroundColor: theme.palette.background.default,
+  },
   "&.disable-gutters": {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
@@ -60,7 +63,7 @@ const VARIANTS_DICT = {
  */
 function ButtonNewUnstyled({
   children,
-  variant,
+  variant = "outlined",
   color,
   corners = "square",
   isLoading,

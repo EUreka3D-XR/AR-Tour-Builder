@@ -1,6 +1,10 @@
 import { InputLabel, styled } from "@mui/material";
 
-const ContainerStyled = styled("div")({});
+const ContainerStyled = styled("div")(({ theme }) => ({
+  "& label": {
+    marginBottom: theme.spacing(1),
+  },
+}));
 
 function LabeledInput({ label, children }) {
   return (

@@ -3,12 +3,12 @@ import { useNavigate, useSearchParams } from "react-router";
 import { Divider, styled } from "@mui/material";
 
 import useNavPaths from "@/hooks/useNavPaths";
+import PoiAssetHeaderSection from "../_common/_sections/PoiAssetHeaderSection";
+import PoiFooterSection from "../_common/_sections/PoiFooterSection";
+import PoiMainSection from "../_common/_sections/PoiMainSection";
+import PoiNavigationTabsSection from "../_common/_sections/PoiNavigationTabsSection";
 import PoiSidebarHeader from "../_common/PoiSidebarHeader";
 import PoiSidebar from "../_common/sidebar";
-import PoiAssetHeaderSection from "./_sections/PoiAssetHeaderSection";
-import PoiFooterSection from "./_sections/PoiFooterSection";
-import PoiMainSection from "./_sections/PoiMainSection";
-import PoiNavigationTabsSection from "./_sections/PoiNavigationTabsSection";
 
 const ContentStyled = styled("div")({
   display: "flex",

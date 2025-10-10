@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import Image from "@/components/image/Image";
 import useNavPaths from "@/hooks/useNavPaths";
 
 const CardStyled = styled(Card)(({ theme }) => ({
@@ -83,6 +84,11 @@ const CardStyled = styled(Card)(({ theme }) => ({
     "& .card-media": {
       height: "100%",
       width: "240px",
+      "& img": {
+        height: "100%",
+        width: "100%",
+        objectFit: "cover",
+      },
     },
     "& .stats-row": {
       gap: theme.spacing(3),
@@ -115,12 +121,9 @@ function TourCard({ tour, isFullWidth }) {
       className={clsx("card-tour", { "full-width": isFullWidth })}
       onClick={handleCardClick}
     >
-      <CardMedia
-        component="img"
-        image={tour.thumbnail}
-        alt={tour.title}
-        className="card-media"
-      />
+      <CardMedia className="card-media">
+        <Image src={tour.thumbnail} alt={tour.title} />
+      </CardMedia>
 
       <CardContent className="card-content">
         <div className="tour-title-section">

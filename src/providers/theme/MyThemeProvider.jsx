@@ -55,6 +55,11 @@ function MyThemeProvider({ children }) {
             }),
           },
         },
+        MuiSelect: {
+          defaultProps: {
+            size: "small",
+          },
+        },
         MuiTextField: {
           defaultProps: {
             fullWidth: true,

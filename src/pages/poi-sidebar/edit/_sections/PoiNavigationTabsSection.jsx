@@ -12,7 +12,6 @@ const poiTabs = [
 const NavigationAreaStyled = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  borderBottom: `1px solid ${theme.palette.divider}`,
   "& .tabs-row": {
     padding: theme.spacing(1, 3, 0),
     "& .tab-item": {

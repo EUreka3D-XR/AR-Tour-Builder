@@ -93,7 +93,6 @@ function ToursFiltersSection() {
 
       <FormControl size="small" className="no-shrink">
         <Select
-          size="small"
           renderValue={(se) => (
             <div className="dropdown-item">
               <EurekaIcon

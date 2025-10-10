@@ -7,24 +7,21 @@ const HeaderStyled = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  borderBottom: `1px solid ${theme.palette.divider}`,
   "& .left-section": {
     display: "flex",
     alignItems: "center",
     gap: theme.spacing(2),
     "& .header-title": {
       ...theme.typography.h4,
+      marginLeft: theme.spacing(4),
     },
   },
 }));
 
-function PoiSidebarHeader({ title, onBack, onClose }) {
+function PoiSidebarHeader({ title, onClose }) {
   return (
     <HeaderStyled>
       <div className="left-section">
-        <IconButton onClick={onBack}>
-          <EurekaIcon name="back" />
-        </IconButton>
         <span className="header-title">{title}</span>
       </div>
       <div className="right-section">

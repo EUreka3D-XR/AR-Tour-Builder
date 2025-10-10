@@ -1,10 +1,11 @@
-import { useCallback } from "react";
-import { useNavigate } from "react-router";
-import { styled } from "@mui/material";
+import { useCallback, useMemo } from "react";
+import { useNavigate, useSearchParams } from "react-router";
+import { Divider, styled } from "@mui/material";
 
 import useNavPaths from "@/hooks/useNavPaths";
 import PoiSidebarHeader from "../_common/PoiSidebarHeader";
 import PoiSidebar from "../_common/sidebar";
+import PoiAssetHeaderSection from "./_sections/PoiAssetHeaderSection";
 import PoiFooterSection from "./_sections/PoiFooterSection";
 import PoiMainSection from "./_sections/PoiMainSection";
 import PoiNavigationTabsSection from "./_sections/PoiNavigationTabsSection";
@@ -25,25 +26,41 @@ const ScrollableArea = styled("div")({
 
 function EditPoiSidebar() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
   const { routes } = useNavPaths();
 
-  const handleClose = useCallback(() => {
+  const isInsideAssetForm = useMemo(
+    () => searchParams.get("assetForm"),
+    [searchParams],
+  );
+
+  const handleClosePoi = useCallback(() => {
     navigate(routes.pois.index);
   }, [navigate, routes]);
 
+  const handleCloseAsset = useCallback(() => {
+    navigate(-1);
+  }, [navigate]);
+
   return (
-    <PoiSidebar onClose={handleClose}>
+    <PoiSidebar onClose={handleClosePoi}>
       <ContentStyled className="sidebar-inner">
         <div className="no-shrink">
           <PoiSidebarHeader
             title="Edit Point of Interest"
-            onBack={() => {}}
-            onClose={handleClose}
+            onBack={isInsideAssetForm ? handleCloseAsset : undefined}
+            onClose={handleClosePoi}
           />
-          <PoiNavigationTabsSection />
+          <Divider />
+          {!isInsideAssetForm && <PoiNavigationTabsSection />}
+          {isInsideAssetForm && (
+            <PoiAssetHeaderSection onBack={handleCloseAsset} />
+          )}
+          <Divider />
         </div>
         <ScrollableArea className="scrollable-area">
-          <PoiMainSection />
+          {!isInsideAssetForm && <PoiMainSection />}
         </ScrollableArea>
         <div className="no-shrink">
           <PoiFooterSection saveIcon="save" />

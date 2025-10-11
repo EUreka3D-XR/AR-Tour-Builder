@@ -13,11 +13,15 @@ import SearchInput from "@/components/search-input/SearchInput";
 import { useToggle } from "@/hooks/useToggle";
 import AssetsPresentation from "../_presentation/AssetsPresentation";
 
-const ModalContent = styled("div")(({ theme }) => ({
+const BrowsingContent = styled("div")(({ theme }) => ({
   padding: theme.spacing(2, 2, 2, 4),
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(2),
+  overflow: "hidden",
+  "& .presentation-wrapper": {
+    overflow: "auto",
+  },
 }));
 
 const FilterRow = styled("div")(({ theme }) => ({
@@ -50,7 +54,7 @@ const sortOptionsMap = sortOptions.reduce((acc, option) => {
   return acc;
 }, {});
 
-function AssetsModalContent({ allowMultiple, selected, setSelected }) {
+function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
   const { isOpen: isListView, toggle: toggleListView } = useToggle(true);
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -58,7 +62,7 @@ function AssetsModalContent({ allowMultiple, selected, setSelected }) {
   const [sortBy, setSortBy] = useState(sortOptions[0].value);
 
   return (
-    <ModalContent>
+    <BrowsingContent className="browsing-form">
       <FilterRow>
         <SearchInput
           value={searchTerm}
@@ -107,14 +111,16 @@ function AssetsModalContent({ allowMultiple, selected, setSelected }) {
           )}
         </IconButton>
       </FilterRow>
-      <AssetsPresentation
-        isListView={isListView}
-        allowMultiple={allowMultiple}
-        selected={selected}
-        setSelected={setSelected}
-      />
-    </ModalContent>
+      <div className="presentation-wrapper">
+        <AssetsPresentation
+          isListView={isListView}
+          allowMultiple={allowMultiple}
+          selected={selected}
+          setSelected={setSelected}
+        />
+      </div>
+    </BrowsingContent>
   );
 }
 
-export default AssetsModalContent;
+export default AssetsModalBrowser;

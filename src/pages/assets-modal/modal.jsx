@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Divider, Modal, styled } from "@mui/material";
 
-import AssetsModalContent from "./_sections/AssetsModalContent";
+import AssetsModalBrowser from "./_sections/AssetsModalBrowser";
 import AssetsModalHeader from "./_sections/AssetsModalHeader";
 import AssetsModalSourcesRow from "./_sections/AssetsModalSourcesRow";
 
@@ -44,7 +44,7 @@ function AssetsModal({ onClose, allowMultiple, allowedSources = ["library"] }) {
         <AssetsModalHeader onClose={onClose} />
         <AssetsModalSourcesRow allowedSources={allowedSources} />
         <Divider />
-        <AssetsModalContent
+        <AssetsModalBrowser
           allowMultiple={allowMultiple}
           selected={selectedAssets}
           setSelected={setSelectedAssets}

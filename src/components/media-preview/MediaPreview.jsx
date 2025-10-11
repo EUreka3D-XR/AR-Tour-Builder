@@ -7,8 +7,6 @@ const MediaPreviewStyled = styled("div")(({ theme }) => ({
   width: "100%",
   height: "100%",
   borderRadius: theme.spacing(0.5),
-  overflow: "hidden",
-  flexShrink: 0,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

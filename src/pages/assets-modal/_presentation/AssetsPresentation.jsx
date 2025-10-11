@@ -20,6 +20,7 @@ const PresentationStyled = styled("div")(({ theme }) => ({
 }));
 
 const GridAssetItem = styled("div")(({ theme }) => ({
+  height: "180px",
   border: `1px solid ${theme.palette.divider}`,
   borderRadius: theme.shape.borderRadius,
   overflow: "hidden",
@@ -30,8 +31,8 @@ const GridAssetItem = styled("div")(({ theme }) => ({
     duration: theme.transitions.duration.shortest,
     easing: theme.transitions.easing.sharp,
   }),
-  "&:hover:not(.selected)": {
-    backgroundColor: theme.palette.action.selected,
+  "&:hover": {
+    boxShadow: theme.shadows[1],
   },
   "&.selected": {
     backgroundColor: lighten(theme.palette.primary.light, 0.8),
@@ -40,8 +41,14 @@ const GridAssetItem = styled("div")(({ theme }) => ({
   "& .preview": {
     flex: 1,
     width: "100%",
+    overflow: "hidden",
+    "& .media-preview-transparent": {
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0,
+      backgroundColor: theme.palette.background.default,
+    },
   },
-  "& .title": {
+  "& .title-area": {
     flexShrink: 0,
     padding: theme.spacing(1),
   },
@@ -149,9 +156,12 @@ function AssetsPresentation({
                   type={asset.type}
                   url={asset.url}
                   title={asset.title}
+                  className="media-preview-transparent"
                 />
               </div>
-              <Typography nowrap>{asset.title}</Typography>
+              <div className="title-area">
+                <Typography noWrap>{asset.title}</Typography>
+              </div>
             </GridAssetItem>
           );
         })}

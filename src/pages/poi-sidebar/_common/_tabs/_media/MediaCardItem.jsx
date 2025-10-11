@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import {
   Box,
   Card,
@@ -11,7 +10,7 @@ import {
 } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
-import Image from "@/components/image/Image";
+import MediaPreview from "@/components/media-preview/MediaPreview";
 
 const CardStyled = styled(Card)(({ theme }) => ({
   borderRadius: theme.spacing(1),
@@ -32,34 +31,10 @@ const CardContentStyled = styled(CardContent)(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 
-const MediaPreview = styled("div")(({ theme }) => ({
+const MediaPreviewStyled = styled(MediaPreview)({
   width: 80,
   height: 80,
-  borderRadius: theme.spacing(0.5),
-  overflow: "hidden",
-  flexShrink: 0,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: theme.palette.grey[200],
-  "& img": {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
-  "& .media-icon": {
-    fontSize: theme.spacing(5),
-    "&.icon-video": {
-      color: theme.palette.secondary.light,
-    },
-    "&.icon-document": {
-      color: theme.palette.success.light,
-    },
-    "&.icon-3d": {
-      color: theme.palette.warning.light,
-    },
-  },
-}));
+});
 
 const PillStyled = styled(Chip)(({ theme }) => ({
   fontSize: "0.75rem",
@@ -121,13 +96,6 @@ const MediaDescription = styled(Typography)(() => ({
   textOverflow: "ellipsis",
 }));
 
-const MediaTypeIcon = {
-  image: "image",
-  video: "video",
-  "3d": "model",
-  text: "document",
-};
-
 /**
  * Media Card Item component for displaying POI assets
  * @param {Object} props - Component props
@@ -150,19 +118,11 @@ function MediaCardItem({ asset, onEdit, onDelete, onClick }) {
     <CardStyled onClick={onClick}>
       <CardContentStyled>
         {/* Media Preview */}
-        <MediaPreview>
-          {asset?.type === "image" ? (
-            <Image
-              src={asset.contentUrl}
-              alt={asset.title?.locales?.en || "Media"}
-            />
-          ) : (
-            <EurekaIcon
-              name={MediaTypeIcon[asset?.type]}
-              className={clsx("media-icon", `icon-${asset.type}`)}
-            />
-          )}
-        </MediaPreview>
+        <MediaPreviewStyled
+          type={asset?.type}
+          url={asset?.contentUrl}
+          title={asset?.title?.locales?.en}
+        />
 
         {/* Content Section */}
         <ContentSection>

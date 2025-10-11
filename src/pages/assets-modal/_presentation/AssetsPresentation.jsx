@@ -28,7 +28,7 @@ const GridAssetItem = styled("div")(({ theme }) => ({
   flexDirection: "column",
   cursor: "pointer",
   transition: theme.transitions.create(["background-color", "box-shadow"], {
-    duration: theme.transitions.duration.shortest,
+    duration: "0.1s",
     easing: theme.transitions.easing.sharp,
   }),
   "&:hover": {
@@ -62,7 +62,7 @@ const ListAssetItem = styled("div")(({ theme }) => ({
   gap: theme.spacing(2),
   cursor: "pointer",
   transition: theme.transitions.create(["background-color", "box-shadow"], {
-    duration: theme.transitions.duration.shortest,
+    duration: "0.1s",
     easing: theme.transitions.easing.sharp,
   }),
   "&:hover:not(.selected)": {

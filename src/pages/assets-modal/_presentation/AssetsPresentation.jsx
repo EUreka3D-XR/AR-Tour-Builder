@@ -1,6 +1,8 @@
+import { useParams } from "react-router";
 import clsx from "clsx";
-import { styled, Typography } from "@mui/material";
+import { lighten, styled, Typography } from "@mui/material";
 
+import { useLibraryAssets } from "@/services/libraryService";
 import MediaIcon from "@/components/icon/MediaIcon";
 import MediaPreview from "@/components/media-preview/MediaPreview";
 
@@ -13,7 +15,7 @@ const PresentationStyled = styled("div")(({ theme }) => ({
   "&.list-view": {
     display: "flex",
     flexDirection: "column",
-    gap: theme.spacing(1),
+    gap: theme.spacing(0.5),
   },
 }));
 
@@ -24,8 +26,15 @@ const GridAssetItem = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   cursor: "pointer",
+  transition: theme.transitions.create(["background-color", "box-shadow"], {
+    duration: theme.transitions.duration.shortest,
+    easing: theme.transitions.easing.sharp,
+  }),
+  "&:hover:not(.selected)": {
+    backgroundColor: theme.palette.action.selected,
+  },
   "&.selected": {
-    borderColor: theme.palette.primary.main,
+    backgroundColor: lighten(theme.palette.primary.light, 0.8),
     boxShadow: theme.shadows[4],
   },
   "& .preview": {
@@ -39,16 +48,23 @@ const GridAssetItem = styled("div")(({ theme }) => ({
 }));
 
 const ListAssetItem = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0.5, 1.5),
+  borderRadius: theme.shape.borderRadius,
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(2),
   cursor: "pointer",
-  "&.selected": {
+  transition: theme.transitions.create(["background-color", "box-shadow"], {
+    duration: theme.transitions.duration.shortest,
+    easing: theme.transitions.easing.sharp,
+  }),
+  "&:hover:not(.selected)": {
     backgroundColor: theme.palette.action.selected,
   },
+  "&.selected": {
+    backgroundColor: lighten(theme.palette.primary.light, 0.8),
+  },
 }));
-
-const assets = [];
 
 /**
  *
@@ -67,6 +83,21 @@ function AssetsPresentation({
   selected = [],
   allowMultiple,
 }) {
+  const { projectId } = useParams();
+  const { data: assets, fetchState } = useLibraryAssets(projectId);
+
+  if (fetchState === "loading") {
+    return <div>Loading assets...</div>;
+  }
+
+  if (fetchState === "error") {
+    return <div>Error loading assets.</div>;
+  }
+
+  if (!assets || assets.length === 0) {
+    return <div>No assets available.</div>;
+  }
+
   const handleSelectAsset = (asset) => {
     if (allowMultiple) {
       setSelected((prevSelected) => {

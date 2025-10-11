@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import { getMockPoiAssets } from "@/api/mock/mock-data/assetsMocks";
+import AssetsModal from "@/pages/assets-modal/modal";
 import { Menu, MenuItem, styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import { useToggle } from "@/hooks/useToggle";
 import MediaCardItem from "./MediaCardItem";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
@@ -59,6 +61,7 @@ export default PoiMediaTab;
 
 function AddMediaButton() {
   const [, setSearchParams] = useSearchParams();
+  const { isOpen, open, close } = useToggle();
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -79,8 +82,8 @@ function AddMediaButton() {
   };
 
   const handleBrowseLibrary = () => {
-    console.log("Browse Library clicked");
     handleMenuClose();
+    open();
   };
   return (
     <>
@@ -122,6 +125,7 @@ function AddMediaButton() {
           Browse Library
         </MenuItemStyled>
       </Menu>
+      {isOpen && <AssetsModal allowMultiple onClose={close} />}
     </>
   );
 }

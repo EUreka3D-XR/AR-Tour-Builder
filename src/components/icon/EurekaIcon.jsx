@@ -8,12 +8,17 @@ const VARIANTS = {
 };
 
 /**
- * @param {Object} props
- * @param {'outlined'|'filled'} props.variant
- * @param {string} props.className
- * @param {'inherit'|'action'|'disabled'|'primary'|'secondary'|'error'|'info'|'success'|'warning'} props.color
- * @param {'inherit'|'large'|'medium'|'small'} props.fontSize
- * @param {import("@/components/icon/icons").IconName} props.name
+ * EurekaIcon component props
+ * @typedef {Object} EurekaIconProps
+ * @property {'outlined'|'filled'} [variant] - Icon variant style
+ * @property {string} [className] - CSS class name
+ * @property {'inherit'|'action'|'disabled'|'primary'|'secondary'|'error'|'info'|'success'|'warning'} [color] - Icon color
+ * @property {'inherit'|'large'|'medium'|'small'} [fontSize] - Icon font size
+ * @property {import("@/components/icon/icons").IconName} name - Icon name from icons collection
+ */
+
+/**
+ * @param {EurekaIconProps} props
  * @returns {JSX.Element}
  */
 function IconUnstyled({ variant, className, color, fontSize, name }) {

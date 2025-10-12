@@ -14,13 +14,14 @@ import { useToggle } from "@/hooks/useToggle";
 import AssetsPresentation from "../_presentation/AssetsPresentation";
 
 const BrowsingContent = styled("div")(({ theme }) => ({
-  padding: theme.spacing(2, 2, 2, 4),
+  padding: theme.spacing(2, 2, 0, 4),
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(2),
   overflow: "hidden",
   "& .presentation-wrapper": {
     overflow: "auto",
+    paddingBottom: theme.spacing(10),
   },
 }));
 

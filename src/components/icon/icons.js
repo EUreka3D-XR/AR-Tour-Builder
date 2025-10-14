@@ -41,6 +41,7 @@ export const icons = {
   sort: "swap_vert",
   time: "schedule",
   tour: "tour",
+  uploadImage: "add_photo_alternate",
   user: "person",
   users: "group",
   video: "videocam",

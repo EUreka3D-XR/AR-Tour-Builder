@@ -14,6 +14,16 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
+/**
+ *
+ * @param {Object} props
+ * @param {React.ReactNode} props.children - The input element to be labeled.
+ * @param {string} props.id - The id for the input element.
+ * @param {string} props.label - The text for the label.
+ * @param {string} [props.className] - Additional class names for the container.
+ * @param {'top'|'left'} props.labelPlacement - Placement of the label relative to the input.
+ * @returns
+ */
 function LabeledInputUnstyled({
   children,
   id,

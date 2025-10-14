@@ -16,8 +16,7 @@ const SourcesRow = styled("div")(({ theme }) => ({
 
 const sourcesTabs = [
   { value: "library", label: "Library" },
-  { value: "eureka", label: "Eureka" },
-  { value: "europeana", label: "Europeana" },
+  { value: "external", label: "External" },
   { value: "upload", label: "Upload" },
 ];
 

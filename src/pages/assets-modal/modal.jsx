@@ -45,10 +45,14 @@ const ModalPaper = styled("div")(({ theme }) => ({
  * @param {Object} props
  * @param {boolean} props.allowMultiple - Allow multiple asset selection
  * @param {Function} props.onClose - Callback function when modal is closed
- * @param {Array<'library'|'eureka'|'europeana'|'upload'> | 'all'} props.allowedSources - List of allowed asset sources ('library', 'eureka', 'europeana', 'upload')
+ * @param {Array<'library'|'external'|'upload'> | 'all'} props.allowedSources - List of allowed asset sources ('library', 'external', 'upload')
  * @returns
  */
-function AssetsModal({ onClose, allowMultiple, allowedSources = ["library"] }) {
+function AssetsModal({
+  onClose,
+  allowMultiple,
+  allowedSources = ["library", "external"],
+}) {
   const [selectedAssets, setSelectedAssets] = useState([]);
 
   const handleImport = () => {
@@ -68,6 +72,7 @@ function AssetsModal({ onClose, allowMultiple, allowedSources = ["library"] }) {
         <AssetsModalHeader onClose={onClose} />
         <AssetsModalSourcesRow allowedSources={allowedSources} />
         <Divider />
+        {/* <AssetsModalExternalBrowser /> */}
         <AssetsModalBrowser
           allowMultiple={allowMultiple}
           selected={selectedAssets}

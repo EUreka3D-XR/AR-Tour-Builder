@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 
+import Image from "@/components/image/Image";
 import useNavPaths from "@/hooks/useNavPaths";
 
 /**
@@ -58,12 +59,15 @@ function ProjectCard({ project }) {
 
   return (
     <ProjectCardStyled onClick={handleCardClick}>
-      <CardMedia
-        component="img"
-        height="200"
-        image={project.thumbnail}
-        alt={project.title}
-      />
+      <CardMedia>
+        <Image
+          src={project.thumbnail}
+          alt={project.title}
+          width="100%"
+          height="200px"
+          objectFit="cover"
+        />
+      </CardMedia>
       <CardContent>
         <Typography variant="h6" component="h3" gutterBottom>
           {project.title}

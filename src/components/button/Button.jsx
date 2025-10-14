@@ -84,12 +84,12 @@ function ButtonNewUnstyled({
 }) {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     if (href) {
       navigate(href);
       return;
     }
-    onClick?.();
+    onClick?.(e);
   };
 
   return (

@@ -1,6 +1,7 @@
 import { styled, TextField, Typography } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import ImageInput from "@/components/image-input/ImageInput";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -30,7 +31,11 @@ const FieldSection = styled("div")(({ theme }) => ({
       marginBottom: theme.spacing(0.5),
     },
   },
-  "& .field-input": {},
+  "& .field-input": {
+    "& .logo-dropzone": {
+      width: 200,
+    },
+  },
 }));
 
 function ProjectForm() {
@@ -90,7 +95,11 @@ function ProjectForm() {
           </Typography>
         </div>
         <div className="field-input">
-          <TextField fullWidth placeholder="Enter project title" />
+          <ImageInput
+            placeholderText="Click to upload Logo"
+            maxFileSize={2}
+            className="logo-dropzone"
+          />
         </div>
       </FieldSection>
       <FieldSection className="field-section">
@@ -104,7 +113,7 @@ function ProjectForm() {
           </Typography>
         </div>
         <div className="field-input">
-          <TextField fullWidth placeholder="Enter project title" />
+          <ImageInput placeholderText="Click to upload a cover photo" />
         </div>
       </FieldSection>
     </ContainerStyled>

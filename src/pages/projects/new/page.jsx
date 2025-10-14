@@ -1,6 +1,7 @@
 import { styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
+import useNavPaths from "@/hooks/useNavPaths";
 import ProjectForm from "../_components/ProjectForm";
 
 const ContainerStyled = styled("div")({
@@ -25,6 +26,7 @@ const ContainerStyled = styled("div")({
 });
 
 function NewProjectPage() {
+  const { routes } = useNavPaths();
   return (
     <ContainerStyled>
       <div className="header">
@@ -32,7 +34,7 @@ function NewProjectPage() {
           Create New Project
         </Typography>
         <div className="actions">
-          <Button>Cancel</Button>
+          <Button href={routes.projects.index}>Cancel</Button>
           <Button variant="filled">Create Project</Button>
         </div>
       </div>

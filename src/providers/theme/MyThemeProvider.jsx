@@ -9,24 +9,33 @@ function MyThemeProvider({ children }) {
         headerHeight: "3.5rem",
       },
       typography: {
-        // fontFamily: "Poppins, Noto Sans, serif",
+        fontFamily: "Work Sans",
         h1: {
           fontSize: "3.5rem",
+          fontWeight: 500,
+          letterSpacing: "-0.04em",
         },
         h2: {
           fontSize: "2.75rem",
+          fontWeight: 500,
+          letterSpacing: "-0.04em",
         },
         h3: {
           fontSize: "2rem",
+          fontWeight: 500,
+          letterSpacing: "-0.04em",
         },
         h4: {
           fontSize: "1.5rem",
+          letterSpacing: "-0.04em",
         },
         h5: {
           fontSize: "1.25rem",
+          letterSpacing: "-0.04em",
         },
         h6: {
           fontSize: "1rem",
+          letterSpacing: "-0.04em",
         },
         body1: {
           fontSize: "0.875rem",

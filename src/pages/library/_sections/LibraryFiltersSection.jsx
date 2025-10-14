@@ -1,11 +1,4 @@
-import {
-  Chip,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  styled,
-} from "@mui/material";
+import { Chip, FormControl, MenuItem, Select, styled } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -40,12 +33,12 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 const typeOptions = [
-  { value: "all", label: "All" },
+  { value: "all", label: "All Types" },
   { value: "image", label: "Image" },
   { value: "video", label: "Video" },
   { value: "audio", label: "Audio" },
   { value: "3d", label: "3D Model" },
-  { value: "text", label: "Text" },
+  { value: "text", label: "Document" },
 ];
 
 function LibraryFiltersSection() {
@@ -72,12 +65,9 @@ function LibraryFiltersSection() {
           onChange={handleParamsChange("searchTerm")}
         />
         <FormControl size="small" className="type-input item-no-shrink">
-          <InputLabel id="type-filter-label">Type</InputLabel>
           <Select
-            labelId="type-filter-label"
             id="type-filter"
             value={filterParams.type || "all"}
-            label="Type"
             onChange={handleParamsChange("type")}
           >
             {typeOptions.map((option) => (

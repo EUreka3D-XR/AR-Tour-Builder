@@ -3,18 +3,27 @@ import clsx from "clsx";
 import { MenuItem, styled } from "@mui/material";
 
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
+import EurekaIcon from "../icon/EurekaIcon";
 import Link from "../link/Link";
 
-const MenuItemStyled = styled(MenuItem)({
-  borderRadius: "0.5rem",
+const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
+  transition: theme.transitions.create(["background-color"], {
+    duration: theme.transitions.duration.shortest,
+  }),
   "& .nav-item-content": {
     width: "100%",
     display: "flex",
     alignItems: "center",
-    "&.nav-item-expand": {
+  },
+  "&.expanded": {
+    borderRadius: "0.5rem",
+    "& .nav-item-content": {
       gap: "1rem",
     },
-    "&.nav-item-shrink": {
+    "& .nav-item-shrink": {},
+  },
+  "&:not(.expanded)": {
+    "& .nav-item-content": {
       flexDirection: "column",
       justifyContent: "center",
       width: "100%",
@@ -23,9 +32,9 @@ const MenuItemStyled = styled(MenuItem)({
       },
     },
   },
-});
+}));
 
-function NavbarItem({ to, children, name, className }) {
+function NavbarItem({ to, name, className, icon }) {
   const { isNavMenuOpen } = useGeneralProvider();
   const location = useLocation();
 
@@ -35,7 +44,7 @@ function NavbarItem({ to, children, name, className }) {
   return (
     <MenuItemStyled
       selected={isSelected}
-      className={clsx("navbar-item", className)}
+      className={clsx("navbar-item", { expanded: isNavMenuOpen }, className)}
     >
       <Link
         to={to}
@@ -44,7 +53,7 @@ function NavbarItem({ to, children, name, className }) {
           "nav-item-shrink": !isNavMenuOpen,
         })}
       >
-        {children}
+        <EurekaIcon name={icon} variant={isSelected ? "filled" : "outlined"} />
         <span className="nav-item-name">{name}</span>
       </Link>
     </MenuItemStyled>

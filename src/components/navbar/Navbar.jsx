@@ -3,7 +3,6 @@ import { MenuList, styled } from "@mui/material";
 
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import useNavPaths from "@/hooks/useNavPaths";
-import EurekaIcon from "../icon/EurekaIcon";
 import NavbarItem from "./NavbarItem";
 import NavbarProjects from "./NavbarProjects";
 
@@ -35,15 +34,21 @@ function Navbar() {
       })}
     >
       <NavbarProjects />
-      <NavbarItem to={navLinks.dashboard.to} name={navLinks.dashboard.label}>
-        <EurekaIcon name="home" />
-      </NavbarItem>
-      <NavbarItem to={navLinks.tours.to} name={navLinks.tours.label}>
-        <EurekaIcon name="tour" />
-      </NavbarItem>
-      <NavbarItem to={navLinks.library.to} name={navLinks.library.label}>
-        <EurekaIcon name="media" />
-      </NavbarItem>
+      <NavbarItem
+        to={navLinks.dashboard.to}
+        name={navLinks.dashboard.label}
+        icon="home"
+      />
+      <NavbarItem
+        to={navLinks.tours.to}
+        name={navLinks.tours.label}
+        icon="tour"
+      />
+      <NavbarItem
+        to={navLinks.library.to}
+        name={navLinks.library.label}
+        icon="media"
+      />
     </MenuListStyled>
   );
 }

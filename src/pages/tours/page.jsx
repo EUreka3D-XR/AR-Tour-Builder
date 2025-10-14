@@ -9,6 +9,9 @@ import ListSection from "./_sections/ToursListSection";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 0, 0, 2),
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
 }));
 
 function ToursPage() {
@@ -17,7 +20,7 @@ function ToursPage() {
   const { data, fetchState } = useProjectTours(projectId);
   console.log(data);
   return (
-    <ContainerStyled>
+    <ContainerStyled className="tours-page">
       <HeroSection />
       <ToursFiltersSection />
       <ListSection tours={data} viewMode={filterParams.viewMode} />

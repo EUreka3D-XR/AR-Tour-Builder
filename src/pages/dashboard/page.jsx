@@ -1,8 +1,8 @@
 import { useParams } from "react-router";
 import OverviewStats from "@/pages/dashboard/_sections/OverviewStats";
-import { useProject } from "@/services/projectsService";
 import { styled } from "@mui/material";
 
+import { useProject } from "@/services/projectsService";
 import Members from "./_sections/Members";
 import ProjectBanner from "./_sections/ProjectBanner";
 import RecentTours from "./_sections/RecentTours";
@@ -33,7 +33,7 @@ function DashboardPage() {
   const { data: project } = useProject(projectId);
 
   return (
-    <ContainerStyled>
+    <ContainerStyled className="dashboard-main">
       <div className="dash-section">
         <ProjectBanner project={project} />
       </div>

@@ -30,16 +30,21 @@ const CardStyled = styled(Card)(({ theme }) => ({
     height: "100px",
     flexShrink: 0,
     borderRadius: theme.spacing(1, 0, 0, 1),
+    "& img": {
+      height: "100%",
+      width: "100%",
+      objectFit: "cover",
+    },
   },
   "& .card-content": {
     flex: 1,
-    p: theme.spacing(3),
+    padding: theme.spacing(1, 2),
     display: "flex",
     flexDirection: "column",
   },
   "& .tour-title-section": {
     display: "flex",
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
   "& .tour-title": {
     flex: 1,
@@ -52,8 +57,8 @@ const CardStyled = styled(Card)(({ theme }) => ({
   },
   "& .stats-row": {
     display: "flex",
-    gap: theme.spacing(2), //
-    marginBottom: theme.spacing(2),
+    gap: theme.spacing(2),
+    marginBottom: theme.spacing(1),
     "& .stat-item": {
       display: "flex",
       alignItems: "center",
@@ -90,7 +95,14 @@ const CardStyled = styled(Card)(({ theme }) => ({
         objectFit: "cover",
       },
     },
+    "& .card-content": {
+      padding: theme.spacing(3),
+    },
+    "& .tour-title-section": {
+      marginBottom: theme.spacing(2),
+    },
     "& .stats-row": {
+      marginBottom: theme.spacing(2),
       gap: theme.spacing(3),
     },
   },
@@ -158,7 +170,9 @@ function TourCard({ tour, isFullWidth }) {
           {tour.status === "published" && (
             <div className="stat-item success">
               <EurekaIcon name="checkCircle" className="stat-icon" />
-              <Typography variant="body2">Published</Typography>
+              {isFullWidth && (
+                <Typography variant="body2">Published</Typography>
+              )}
             </div>
           )}
         </div>

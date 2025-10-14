@@ -1,19 +1,26 @@
+import { styled, Typography } from "@mui/material";
+
 import { useProjects } from "@/services/projectsService";
-import { Box, styled, Typography } from "@mui/material";
-
+import Button from "@/components/button/Button";
+import EurekaIcon from "@/components/icon/EurekaIcon";
+import useNavPaths from "@/hooks/useNavPaths";
 import ProjectCard from "./_components/ProjectCard";
-
-/**
- * @typedef {import('@/types/jsdoc-types').Project} Project
- */
 
 const ContainerStyled = styled("div")({
   margin: "auto",
   maxWidth: "1200px",
   padding: "2rem",
+  "& .header": {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  "& .subtitle": {
+    maxWidth: "600px",
+  },
 });
 
-const ProjectsGrid = styled(Box)({
+const ProjectsGrid = styled("div")({
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
@@ -28,11 +35,25 @@ const ProjectsGrid = styled(Box)({
 
 function ProjectsPage() {
   const { data: projects } = useProjects();
+  const { routes } = useNavPaths();
 
   return (
     <ContainerStyled>
-      <Typography variant="h2" component="h2" gutterBottom>
-        My Projects
+      <div className="header">
+        <Typography variant="h2" component="h2" gutterBottom>
+          My Projects
+        </Typography>
+        <Button
+          variant="filled"
+          startIcon={<EurekaIcon name="add" />}
+          href={routes.projects.new}
+        >
+          New Project
+        </Button>
+      </div>
+      <Typography color="textSecondary" className="subtitle">
+        Browse and manage your projects. Here you can view details, create new
+        projects, and keep track of your progress.
       </Typography>
       <ProjectsGrid>
         {projects?.map((project) => (

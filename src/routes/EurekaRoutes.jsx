@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import NewProjectPage from "@/pages/projects/new/page";
 
 import OuterLayout from "@/layouts/OuterLayout";
 
@@ -24,7 +25,7 @@ function EurekaRoutes() {
       {/* 📁 Projects */}
       <Route path="/projects" element={<OuterLayout />}>
         <Route index element={<ProjectsPage />} />
-        <Route path="new" element={<></>} />
+        <Route path="new" element={<NewProjectPage />} />
         {/* All project-specific routes delegated to ProjectRoutes */}
         <Route path=":projectId/*" element={<ProjectRoutes />} />
       </Route>

@@ -26,6 +26,15 @@ function PoiDetailsTab() {
           rows={4}
         />
       </LabeledInput>
+      <LabeledInput label="Quiz Links">
+        <TextField placeholder="ex. https://quizlink.com/quiz/1" fullWidth />
+      </LabeledInput>
+      <LabeledInput label="External Sources and Links">
+        <TextField
+          placeholder="ex. https://archaeo-blogs.com/blog/1"
+          fullWidth
+        />
+      </LabeledInput>
     </ContainerStyled>
   );
 }

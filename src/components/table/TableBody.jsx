@@ -24,10 +24,30 @@ function TableBody({ columns, rows, pageSize }) {
     <MuiTableBody>
       {rows.map((row) => {
         return (
-          <TableRow hover tabIndex={-1} key={row.id}>
-            {columns.map((column) => (
-              <TableCell key={column.value}>{row[column.value]}</TableCell>
-            ))}
+          <TableRow tabIndex={-1} key={row.id}>
+            {columns.map((column) => {
+              const width = column.width ?? 250;
+              const colStyle = {
+                maxWidth: width,
+                ...(column.wrap
+                  ? {}
+                  : {
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }),
+              };
+
+              return column.renderCell ? (
+                <TableCell key={column.value} width={width} sx={colStyle}>
+                  {column.renderCell(row)}
+                </TableCell>
+              ) : (
+                <TableCell key={column.value} width={width} sx={colStyle}>
+                  {row[column.value]}
+                </TableCell>
+              );
+            })}
           </TableRow>
         );
       })}
@@ -37,7 +57,7 @@ function TableBody({ columns, rows, pageSize }) {
             height: 53 * emptyRows,
           }}
         >
-          <TableCell colSpan={6} />
+          <TableCell colSpan={columns.length} />
         </TableRow>
       )}
     </MuiTableBody>

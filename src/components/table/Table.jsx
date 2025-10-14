@@ -20,6 +20,8 @@ import TableHeader from "./TableHeader";
  * @property {boolean} [numeric] - Whether the column contains numeric data
  * @property {boolean} [disableSorting] - Whether sorting is disabled for the column
  * @property {string} [align] - Text alignment for the column ('left'|'center'|'right')
+ * @property {Function} [renderCell] - Custom cell rendering function (row) => ReactNode
+ * @property {boolean} [wrap] - Whether to wrap text in the column
  */
 
 /**

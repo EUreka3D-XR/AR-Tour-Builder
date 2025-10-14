@@ -19,6 +19,7 @@ function Link({
   rel,
   children,
   openInNewTab = false,
+  noWrap,
   className,
 }) {
   if (isExterior) {
@@ -28,6 +29,7 @@ function Link({
         target={openInNewTab ? "_blank" : "_self"}
         rel={rel}
         className={className}
+        noWrap={noWrap}
       >
         {children}
       </MuiLinkStyled>

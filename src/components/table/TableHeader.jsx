@@ -32,6 +32,7 @@ function TableHeader({ columns = [], order, orderBy, onRequestSort }) {
         {columns.map((headCell) => (
           <TableCell
             key={headCell.value}
+            width={headCell.width ?? 250}
             align={headCell.numeric ? "right" : "left"}
             sortDirection={
               headCell.disableSorting
@@ -40,7 +41,11 @@ function TableHeader({ columns = [], order, orderBy, onRequestSort }) {
                   ? order
                   : false
             }
-            sx={{ fontWeight: 600, minWidth: headCell.width }}
+            sx={{
+              fontWeight: 600,
+              minWidth: headCell.width ?? 250,
+              maxWidth: headCell.width ?? 250,
+            }}
           >
             {!headCell.disableSorting ? (
               <TableSortLabel

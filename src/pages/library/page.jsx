@@ -3,9 +3,9 @@ import { styled } from "@mui/material";
 
 import { useLibraryAssets } from "@/services/libraryService";
 import useDashboardParams from "../../hooks/useDashboardParams";
+import TableSection from "./_sections/_table-section/LibraryTableSection";
 import FiltersSection from "./_sections/LibraryFiltersSection";
 import HeaderSection from "./_sections/LibraryHeaderSection";
-import TableSection from "./_sections/LibraryTableSection";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(4),

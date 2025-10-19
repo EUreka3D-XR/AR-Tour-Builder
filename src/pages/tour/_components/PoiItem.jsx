@@ -10,9 +10,11 @@ import EurekaIcon from "@/components/icon/EurekaIcon";
 import MediaCounter from "@/components/media-counter/MediaCounter";
 
 const CardStyled = styled(Card)(({ theme }) => ({
-  boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+  transition: "box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out",
   "&:hover": {
-    boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+    transform: "translateY(-2px)",
   },
   "& .card-content": {
     padding: theme.spacing(2, 1.5, 0),

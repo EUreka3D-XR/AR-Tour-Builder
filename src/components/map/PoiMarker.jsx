@@ -27,25 +27,72 @@ const TooltipStyled = styled(Tooltip)(({ theme }) => ({
  * @param {string} props.title
  * @returns
  */
-function PoiMarker({ coordinates, thumbnail, title }) {
+function PoiMarker({ id, coordinates, thumbnail, title, containerRef }) {
   const position = convertToLeafletLatLng(coordinates);
+  const icon = useMemo(() => {
+    // create DOM nodes to avoid injection and allow reliable event handlers
+    const wrapper = document.createElement("div");
+    wrapper.className = "custom-poi-marker";
+    wrapper.dataset.id = String(id);
+    wrapper.style.width = `${ICON_SIZE}px`;
+    wrapper.style.height = `${ICON_SIZE}px`;
+    wrapper.style.borderColor = BORDER_COLOR;
 
-  const icon = useMemo(
-    () =>
-      divIcon({
-        html: `
-      <div class="custom-poi-marker" style="width: ${ICON_SIZE}px; height: ${ICON_SIZE}px; border-color: ${BORDER_COLOR}" >
-        <img src="${thumbnail}" alt="poi-marker" onerror="this.onerror=null;this.src='${placeholderImage}'"/>
-      </div>
-    `,
-        className: "",
-        iconSize: [ICON_SIZE, ICON_SIZE],
-      }),
-    [thumbnail],
-  );
+    const img = document.createElement("img");
+    img.alt = "poi-marker";
+    img.src = thumbnail || placeholderImage;
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "cover";
+    img.style.objectPosition = "center center";
+    img.onerror = () => {
+      img.onerror = null;
+      img.src = placeholderImage;
+    };
+
+    wrapper.appendChild(img);
+
+    return divIcon({
+      html: wrapper,
+      className: "",
+      iconSize: [ICON_SIZE, ICON_SIZE],
+    });
+  }, [thumbnail, id]);
 
   return (
-    <Marker position={position} icon={icon}>
+    <Marker
+      position={position}
+      icon={icon}
+      eventHandlers={{
+        mouseover(e) {
+          const el = e.target.getElement();
+          if (el) {
+            el.dataset.id = id;
+            el.classList.add("is-hovered");
+            if (containerRef?.current) {
+              containerRef.current.dataset.hovered = id;
+              const listItem = containerRef.current.querySelector(
+                `.poi-item-flex-item[data-id="${id}"]`,
+              );
+              if (listItem) listItem.classList.add("is-hovered");
+            }
+          }
+        },
+        mouseout(e) {
+          const el = e.target.getElement();
+          if (el) {
+            el.classList.remove("is-hovered");
+            if (containerRef?.current) {
+              delete containerRef.current.dataset.hovered;
+              const listItem = containerRef.current.querySelector(
+                `.poi-item-flex-item[data-id="${id}"]`,
+              );
+              if (listItem) listItem.classList.remove("is-hovered");
+            }
+          }
+        },
+      }}
+    >
       {/* <Popup>Popup for Marker</Popup> */}
       <TooltipStyled offset={[ICON_SIZE / 2 + 4, 0]}>
         <strong>{title}</strong>

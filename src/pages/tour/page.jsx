@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Outlet } from "react-router";
 import { Divider, styled } from "@mui/material";
 
@@ -31,6 +32,8 @@ const ContainerStyled = styled("div")(() => ({
  * @returns {React.ReactElement}
  */
 function TourPage({ initialTour, onSave, onPublish, onArchive }) {
+  const containerRef = useRef(null);
+
   return (
     <>
       <ContainerStyled>
@@ -44,14 +47,15 @@ function TourPage({ initialTour, onSave, onPublish, onArchive }) {
         />
         <TourNavigationTabsSection />
         <Divider />
-        <div className="main-content">
+        <div className="main-content" ref={containerRef}>
           <div className="left-section">
-            <Outlet context={{ pois: initialTour?.pois }} />
+            <Outlet context={{ pois: initialTour?.pois, containerRef }} />
           </div>
           <div className="right-section">
             <TourPoisMapSection
               tourBoundBox={initialTour?.boundBox}
               pois={initialTour?.pois}
+              containerRef={containerRef}
             />
           </div>
         </div>

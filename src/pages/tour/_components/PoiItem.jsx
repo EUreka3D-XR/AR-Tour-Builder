@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import MediaCounter from "@/components/media-counter/MediaCounter";
 
 const CardStyled = styled(Card)(({ theme }) => ({
   boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
@@ -64,19 +65,7 @@ const PoiDescription = styled(Typography)(({ theme }) => ({
 }));
 
 const AssetsRow = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: theme.spacing(1),
   marginTop: theme.spacing(1),
-  "& .asset-item": {
-    display: "flex",
-    alignItems: "center",
-    gap: theme.spacing(0.5),
-    color: theme.palette.text.secondary,
-    "& .asset-icon": {
-      fontSize: "1rem",
-    },
-  },
 }));
 
 const CardFooter = styled("div")(({ theme }) => ({
@@ -115,22 +104,6 @@ function PoiItem({
   onDelete,
   onCopy,
 }) {
-  // Get asset type counts for display
-  const getAssetTypeIcon = (type) => {
-    switch (type) {
-      case "image":
-        return "image";
-      case "video":
-        return "video";
-      case "3d":
-        return "model";
-      case "audio":
-        return "file";
-      default:
-        return "file";
-    }
-  };
-
   // Group assets by type and count them
   const assetCounts =
     poi?.assets?.reduce((acc, asset) => {
@@ -155,20 +128,16 @@ function PoiItem({
               {poi?.description.locales.en || "No description available"}
             </PoiDescription>
 
-            {/* Assets indicators */}
-            {Object.keys(assetCounts).length > 0 && (
-              <AssetsRow className="assets-row">
-                {Object.entries(assetCounts).map(([type, count]) => (
-                  <div key={type} className="asset-item">
-                    <EurekaIcon
-                      name={getAssetTypeIcon(type)}
-                      className="asset-icon"
-                    />
-                    <Typography variant="caption">{count}</Typography>
-                  </div>
-                ))}
-              </AssetsRow>
-            )}
+            <AssetsRow className="assets-row">
+              <MediaCounter
+                images={assetCounts.image}
+                videos={assetCounts.video}
+                documents={assetCounts.text}
+                audios={assetCounts.audio}
+                models={assetCounts["3d"]}
+                noColor
+              />
+            </AssetsRow>
           </ContentSection>
         </ContentContainer>
       </CardContent>

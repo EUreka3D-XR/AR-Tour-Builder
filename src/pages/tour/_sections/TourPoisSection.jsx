@@ -23,7 +23,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
     flexShrink: 0,
   },
   "& .pois-list": {
-    padding: theme.spacing(2, 3, 0, 3),
+    paddingTop: theme.spacing(2),
     flex: 1,
     display: "flex",
     flexDirection: "column",
@@ -35,6 +35,9 @@ const ContainerStyled = styled("div")(({ theme }) => ({
       gap: theme.spacing(2),
       overflowY: "auto",
       paddingBottom: theme.spacing(3),
+    },
+    "& .poi-item-flex-item": {
+      margin: theme.spacing(0, 3),
     },
   },
 }));

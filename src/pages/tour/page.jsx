@@ -31,7 +31,6 @@ const ContainerStyled = styled("div")(() => ({
  * @returns {React.ReactElement}
  */
 function TourPage({ initialTour, onSave, onPublish, onArchive }) {
-  console.log(initialTour);
   return (
     <>
       <ContainerStyled>

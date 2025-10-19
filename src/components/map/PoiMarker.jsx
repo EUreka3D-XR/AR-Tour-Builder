@@ -3,6 +3,8 @@ import { divIcon } from "leaflet";
 import { Marker, Tooltip } from "react-leaflet";
 import { styled } from "@mui/material";
 
+import placeholderImage from "@/assets/images/image-placeholder.webp";
+
 import "./poi-marker.css";
 
 import { convertToLeafletLatLng } from "./mapConverters";
@@ -20,31 +22,33 @@ const TooltipStyled = styled(Tooltip)(({ theme }) => ({
 /**
  *
  * @param {Object} props
- * @param {import("@/types/jsdoc-types").Poi} props.poi
+ * @param {import("@/types/jsdoc-types").Coordinates} props.coordinates
+ * @param {string} props.thumbnail
+ * @param {string} props.title
  * @returns
  */
-function PoiMarker({ poi }) {
-  const position = convertToLeafletLatLng(poi.coordinates);
+function PoiMarker({ coordinates, thumbnail, title }) {
+  const position = convertToLeafletLatLng(coordinates);
 
   const icon = useMemo(
     () =>
       divIcon({
         html: `
-      <div class="custom-poi-marker" style="width: ${ICON_SIZE}px; height: ${ICON_SIZE}px; border-color: ${BORDER_COLOR}">
-        <img src="${poi.thumbnail}" alt="poi-marker"/>
+      <div class="custom-poi-marker" style="width: ${ICON_SIZE}px; height: ${ICON_SIZE}px; border-color: ${BORDER_COLOR}" >
+        <img src="${thumbnail}" alt="poi-marker" onerror="this.onerror=null;this.src='${placeholderImage}'"/>
       </div>
     `,
         className: "",
         iconSize: [ICON_SIZE, ICON_SIZE],
       }),
-    [poi.thumbnail],
+    [thumbnail],
   );
 
   return (
     <Marker position={position} icon={icon}>
       {/* <Popup>Popup for Marker</Popup> */}
       <TooltipStyled offset={[ICON_SIZE / 2 + 4, 0]}>
-        <strong>{poi.title}</strong>
+        <strong>{title}</strong>
       </TooltipStyled>
     </Marker>
   );

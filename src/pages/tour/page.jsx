@@ -2,8 +2,8 @@ import { Outlet } from "react-router";
 import { Divider, styled } from "@mui/material";
 
 import TourHeaderSection from "./_sections/TourHeaderSection";
-import TourMapSection from "./_sections/TourMapSection";
 import TourNavigationTabsSection from "./_sections/TourNavigationTabsSection";
+import TourPoisMapSection from "./_sections/TourPoisMapSection";
 
 const ContainerStyled = styled("div")(() => ({
   height: "100%",
@@ -18,6 +18,9 @@ const ContainerStyled = styled("div")(() => ({
       height: "100%",
       overflow: "hidden",
     },
+    "& .right-section": {
+      flex: 1,
+    },
   },
 }));
 
@@ -28,6 +31,7 @@ const ContainerStyled = styled("div")(() => ({
  * @returns {React.ReactElement}
  */
 function TourPage({ initialTour, onSave, onPublish, onArchive }) {
+  console.log(initialTour);
   return (
     <>
       <ContainerStyled>
@@ -45,7 +49,12 @@ function TourPage({ initialTour, onSave, onPublish, onArchive }) {
           <div className="left-section">
             <Outlet context={{ pois: initialTour?.pois }} />
           </div>
-          <TourMapSection />
+          <div className="right-section">
+            <TourPoisMapSection
+              tourBoundBox={initialTour?.boundBox}
+              pois={initialTour?.pois}
+            />
+          </div>
         </div>
       </ContainerStyled>
     </>

@@ -8,7 +8,9 @@
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   will-change: transform;
 }
 

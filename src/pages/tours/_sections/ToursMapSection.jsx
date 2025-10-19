@@ -43,7 +43,12 @@ function ToursMapSection({ tour, onOpenTour }) {
   return (
     <Map bounds={bounds}>
       {tour?.pois.map((poi) => (
-        <PoiMarker key={poi.id} poi={poi} />
+        <PoiMarker
+          key={poi.id}
+          title={poi.title}
+          coordinates={poi.coordinates}
+          thumbnail={poi.thumbnail}
+        />
       ))}
       <MapUIAreaStyled>
         <Stack

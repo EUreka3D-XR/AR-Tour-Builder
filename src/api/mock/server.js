@@ -209,12 +209,27 @@ export const makeServer = ({ environment = "development" } = {}) => {
         server.db.pois.update(poi.id, { assetIds: poiAssetIds });
       });
 
-      // Assign random pois to each tour
+      // Assign random pois to each tour and compute boundBox from selected pois
       server.db.tours.forEach((tour) => {
         const pois = server.db.pois;
         const selectedPois = getRandomItems(pois, 5, 10);
         const poiIds = selectedPois.map((poi) => poi.id);
-        server.db.tours.update(tour.id, { poiIds: poiIds });
+        const boundBox = computeBoundBoxFromPois(selectedPois);
+
+        // Optionally set the tour coordinates to the center of the bound box
+        let center = null;
+        if (boundBox) {
+          center = {
+            lat: (boundBox[0].lat + boundBox[1].lat) / 2,
+            long: (boundBox[0].long + boundBox[1].long) / 2,
+          };
+        }
+
+        server.db.tours.update(tour.id, {
+          poiIds: poiIds,
+          boundBox: boundBox,
+          coordinates: center || tour.coordinates,
+        });
       });
 
       // Assign tours to projects
@@ -323,3 +338,26 @@ export const makeServer = ({ environment = "development" } = {}) => {
     },
   });
 };
+
+// Helper: compute bounding box from an array of poi objects
+function computeBoundBoxFromPois(pois) {
+  if (!pois || pois.length === 0) return null;
+  let minLat = Infinity;
+  let minLong = Infinity;
+  let maxLat = -Infinity;
+  let maxLong = -Infinity;
+
+  pois.forEach((p) => {
+    const lat = p.coordinates?.lat ?? p.lat ?? 0;
+    const long = p.coordinates?.long ?? p.long ?? 0;
+    if (lat < minLat) minLat = lat;
+    if (lat > maxLat) maxLat = lat;
+    if (long < minLong) minLong = long;
+    if (long > maxLong) maxLong = long;
+  });
+
+  return [
+    { lat: minLat, long: minLong }, // southwest
+    { lat: maxLat, long: maxLong }, // northeast
+  ];
+}

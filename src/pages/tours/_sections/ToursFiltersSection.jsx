@@ -122,6 +122,7 @@ function ToursFiltersSection() {
       <Button
         className="no-shrink"
         variant="text"
+        disableGutters
         startIcon={
           <EurekaIcon
             name={filterParams.viewMode === "map" ? "close" : "map"}

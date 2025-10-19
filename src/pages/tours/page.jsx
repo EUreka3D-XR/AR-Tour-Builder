@@ -18,7 +18,7 @@ function ToursPage() {
   const { projectId } = useParams();
   const { filterParams } = useDashboardParams();
   const { data, fetchState } = useProjectTours(projectId);
-  console.log(data);
+  // console.log(data);
   return (
     <ContainerStyled className="tours-page">
       <HeroSection />

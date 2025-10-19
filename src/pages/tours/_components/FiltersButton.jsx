@@ -40,8 +40,6 @@ function FiltersButton({ onFilterChange, onResetFilter, filters }) {
   return (
     <>
       <FilterButtonStyled
-        onClick={handleFilterClick}
-        className={clsx("no-shrink", { active: hasActiveFilters })}
         startIcon={
           <Badge badgeContent={activeFiltersCount} color="primary">
             <EurekaIcon
@@ -52,6 +50,9 @@ function FiltersButton({ onFilterChange, onResetFilter, filters }) {
           </Badge>
         }
         endIcon={<KeyboardArrowDown />}
+        disableGutters
+        className={clsx("no-shrink", { active: hasActiveFilters })}
+        onClick={handleFilterClick}
       >
         Filter
       </FilterButtonStyled>

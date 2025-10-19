@@ -1,8 +1,12 @@
+import { useMemo } from "react";
+import { useNavigate } from "react-router";
 import clsx from "clsx";
 import { Box, styled, Typography } from "@mui/material";
 
-import Map from "@/components/map/Map";
+import useDashboardParams from "@/hooks/useDashboardParams";
+import useNavPaths from "@/hooks/useNavPaths";
 import TourCard from "../_components/TourCard";
+import ToursMapSection from "./ToursMapSection";
 
 const ContainerStyled = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -42,7 +46,7 @@ const ToursScrollableArea = styled(Box)(({ theme }) => ({
   },
 }));
 
-const MapContainer = styled(Box)(({ theme }) => ({
+const MapArea = styled(Box)(({ theme }) => ({
   flex: 1,
   transition: theme.transitions.create(["transform"], {
     duration: theme.transitions.duration.short,
@@ -73,13 +77,36 @@ const TourItem = styled(Box)(({ theme }) => ({
  * @returns {React.ReactElement} Rendered tours list section with map
  */
 function ToursListSection({ tours = [], viewMode = "list" }) {
+  const navigate = useNavigate();
+  const { searchParams, updateParams } = useDashboardParams();
+
+  const { routes } = useNavPaths();
+
   const isFullWidth = viewMode === "list";
+
+  const openTour = (tourId) => {
+    navigate(routes.tours.one(tourId));
+  };
+
+  const handleTourClicked = (tourId) => {
+    if (isFullWidth) {
+      navigate(routes.tours.one(tourId));
+      return;
+    }
+
+    updateParams({ tourId });
+  };
+
+  const selectedTour = useMemo(() => {
+    const tourId = searchParams.get("tourId");
+    return tours.find((tour) => tour.id === tourId);
+  }, [searchParams, tours]);
 
   return (
     <ContainerStyled>
       {/* Tours List - Left Side */}
       <ToursListContainer viewMode={viewMode}>
-        <Typography variant="h6" sx={{ mb: 0, fontWeight: 600 }}>
+        <Typography variant="h6" sx={{ mb: 0, ml: 2, fontWeight: 600 }}>
           Tours ({tours.length})
         </Typography>
 
@@ -87,7 +114,12 @@ function ToursListSection({ tours = [], viewMode = "list" }) {
           {tours.length > 0 ? (
             tours.map((tour) => (
               <TourItem key={tour.id}>
-                <TourCard tour={tour} isFullWidth={isFullWidth} />
+                <TourCard
+                  tour={tour}
+                  isHighlighted={selectedTour?.id === tour.id}
+                  isFullWidth={isFullWidth}
+                  onTourClick={handleTourClicked}
+                />
               </TourItem>
             ))
           ) : (
@@ -107,9 +139,9 @@ function ToursListSection({ tours = [], viewMode = "list" }) {
       </ToursListContainer>
 
       {/* Map - Right Side */}
-      <MapContainer className={clsx({ show: viewMode === "map" })}>
-        <Map />
-      </MapContainer>
+      <MapArea className={clsx({ show: viewMode === "map" })}>
+        <ToursMapSection tour={selectedTour} onOpenTour={openTour} />
+      </MapArea>
     </ContainerStyled>
   );
 }

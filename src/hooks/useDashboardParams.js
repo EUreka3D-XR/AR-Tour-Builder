@@ -36,11 +36,10 @@ const useDashboardParams = () => {
       }
     });
 
-    console.log(newParams.toString());
     setSearchParams(newParams);
   };
 
-  return { filterParams, updateParams, resetParams };
+  return { filterParams, searchParams, updateParams, resetParams };
 };
 
 export default useDashboardParams;

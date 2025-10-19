@@ -30,6 +30,7 @@ export const icons = {
   media: "perm_media",
   menu: "menu",
   model: "view_in_ar",
+  openInNew: "open_in_new",
   palette: "palette",
   poi: "location_on",
   publish: "publish",

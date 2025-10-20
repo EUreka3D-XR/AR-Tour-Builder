@@ -33,8 +33,16 @@ const ProjectsGrid = styled("div")({
   },
 });
 
+const ErrorSection = styled("div")({
+  width: "100%",
+  height: "400px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+});
+
 function ProjectsPage() {
-  const { data: projects } = useProjects();
+  const { data: projects, fetchState } = useProjects();
   const { routes } = useNavPaths();
 
   return (
@@ -55,12 +63,37 @@ function ProjectsPage() {
         Browse and manage your projects. Here you can view details, create new
         projects, and keep track of your progress.
       </Typography>
+
+      {fetchState.isError && (
+        <ErrorSection>
+          <Typography variant="subtitle1" sx={{ textAlign: "center" }}>
+            Oops! Something went wrong while fetching your projects. Please try
+            again later.
+          </Typography>
+        </ErrorSection>
+      )}
+      {fetchState.isSuccess && !projects?.length && (
+        <ErrorSection>
+          <Typography variant="subtitle1" sx={{ textAlign: "center" }}>
+            You have no projects yet. <br /> Click New Project to create your
+            first one.
+          </Typography>
+        </ErrorSection>
+      )}
       <ProjectsGrid>
-        {projects?.map((project) => (
-          <div key={project.id} className="grid-item">
-            <ProjectCard project={project} />
-          </div>
-        ))}
+        {fetchState.isLoading &&
+          Array.from({ length: 2 }).map((_, i) => (
+            <div key={i} className="grid-item">
+              <ProjectCard.Skeleton />
+            </div>
+          ))}
+        {fetchState.isSuccess &&
+          Boolean(projects?.length) &&
+          projects?.map((project) => (
+            <div key={project.id} className="grid-item">
+              <ProjectCard project={project} />
+            </div>
+          ))}
       </ProjectsGrid>
     </ContainerStyled>
   );

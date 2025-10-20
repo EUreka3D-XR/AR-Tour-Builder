@@ -21,7 +21,7 @@ const FieldSection = styled("div")(({ theme }) => ({
   },
 }));
 
-function ProjectFieldWrapper({ label, description, children }) {
+function HorizontalFieldWrapper({ label, description, children }) {
   return (
     <FieldSection className="field-section">
       <div className="field-label">
@@ -35,4 +35,4 @@ function ProjectFieldWrapper({ label, description, children }) {
   );
 }
 
-export default ProjectFieldWrapper;
+export default HorizontalFieldWrapper;

@@ -1,8 +1,8 @@
 import { styled, TextField, Typography } from "@mui/material";
 
+import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/HorizontalFieldWrapper";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import ImageInput from "@/components/image-input/ImageInput";
-import ProjectFieldWrapper from "./field-wrapper/ProjectFieldWrapper";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -26,7 +26,7 @@ function ProjectForm() {
           Languages
         </Typography>
       </div>
-      <ProjectFieldWrapper
+      <HorizontalFieldWrapper
         label="Supported Languages"
         description="Specify the languages your project supports."
       >
@@ -41,19 +41,19 @@ function ProjectForm() {
             />
           )}
         />
-      </ProjectFieldWrapper> */}
+      </HorizontalFieldWrapper> */}
       <div className="group-title-section">
         <Typography variant="h4" component="h4" fontWeight={400}>
           Basic Information
         </Typography>
       </div>
-      <ProjectFieldWrapper
+      <HorizontalFieldWrapper
         label="Project Title"
         description="This is the title the project will appear with to the visitors too"
       >
         <TextField fullWidth placeholder="Enter project title" />
-      </ProjectFieldWrapper>
-      <ProjectFieldWrapper
+      </HorizontalFieldWrapper>
+      <HorizontalFieldWrapper
         label="Description"
         description="A brief overview of your project that helps users understand its
             purpose"
@@ -64,14 +64,14 @@ function ProjectForm() {
           multiline
           rows={4}
         />
-      </ProjectFieldWrapper>
+      </HorizontalFieldWrapper>
       <div className="group-title-section">
         <EurekaIcon name="palette" />
         <Typography variant="h4" component="h4" fontWeight={400}>
           Branding
         </Typography>
       </div>
-      <ProjectFieldWrapper
+      <HorizontalFieldWrapper
         label="Project Logo"
         description="Upload your project logo. This will be displayed on the project homepage and tour listings."
       >
@@ -80,14 +80,14 @@ function ProjectForm() {
           maxFileSize={2}
           className="logo-dropzone"
         />
-      </ProjectFieldWrapper>
-      <ProjectFieldWrapper
+      </HorizontalFieldWrapper>
+      <HorizontalFieldWrapper
         label="Cover Photo"
         description="A hero image for your project. This appears at the top of your
             project page and inside the tour cards."
       >
         <ImageInput placeholderText="Click to upload a cover photo" />
-      </ProjectFieldWrapper>
+      </HorizontalFieldWrapper>
     </ContainerStyled>
   );
 }

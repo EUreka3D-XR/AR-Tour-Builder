@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import clsx from "clsx";
 import { Button as MuiButton, styled } from "@mui/material";
 
@@ -82,16 +81,6 @@ function ButtonNewUnstyled({
   onClick,
   className,
 }) {
-  const navigate = useNavigate();
-
-  const handleClick = (e) => {
-    if (href) {
-      navigate(href);
-      return;
-    }
-    onClick?.(e);
-  };
-
   return (
     <ButtonStyled
       variant={VARIANTS_DICT[variant]}
@@ -102,12 +91,13 @@ function ButtonNewUnstyled({
       type={type}
       startIcon={startIcon}
       size={size}
+      href={href}
       endIcon={endIcon}
       className={clsx(className, variant, corners, {
         "btn-unstyled": variant === "unstyled",
         "disable-gutters": disableGutters,
       })}
-      onClick={handleClick}
+      onClick={onClick}
     >
       {children}
     </ButtonStyled>

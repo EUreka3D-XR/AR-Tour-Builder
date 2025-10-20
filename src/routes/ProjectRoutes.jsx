@@ -14,7 +14,7 @@ const POILayout = () => <Outlet />;
 const LibraryLayout = () => <Outlet />;
 
 // Lazy-loaded page components
-const ProjectPage = lazy(() => import("@/pages/dashboard/page"));
+const ProjectPage = lazy(() => import("@/pages/dashboard/container"));
 const LibraryPage = lazy(() => import("@/pages/library/page"));
 
 function ProjectRoutes() {

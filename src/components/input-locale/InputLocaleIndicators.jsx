@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import PropTypes from "prop-types";
 import { useFormContext, useWatch } from "react-hook-form";
 import { styled } from "@mui/material";
 
@@ -12,6 +11,14 @@ const ContainerStyled = styled("div")({
   marginTop: "1rem",
 });
 
+/**
+ *
+ * @param {Object} props
+ * @param {string} [props.className]
+ * @param {string} props.name - Name of the input field to watch
+ * @param {('small'|'normal'|'large')} [props.size='normal'] - Size of the language icons
+ * @returns
+ */
 function InputLocaleIndicators({ className, name, size }) {
   const { control } = useFormContext();
 
@@ -19,7 +26,7 @@ function InputLocaleIndicators({ className, name, size }) {
   const localizedValue = useWatch({ control, name });
 
   const existingLocales = useMemo(() => {
-    const locales = localizedValue || {};
+    const locales = localizedValue?.locales || {};
 
     return Object.entries(locales)
       .filter(
@@ -45,9 +52,3 @@ function InputLocaleIndicators({ className, name, size }) {
 }
 
 export default InputLocaleIndicators;
-
-InputLocaleIndicators.propTypes = {
-  className: PropTypes.string,
-  inputName: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(["small", "normal", "large"]),
-};

@@ -1,8 +1,10 @@
+import { Controller } from "react-hook-form";
 import { styled, TextField, Typography } from "@mui/material";
 
 import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/HorizontalFieldWrapper";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import ImageInput from "@/components/image-input/ImageInput";
+import InputLocale from "@/components/input-locale/InputLocale";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -18,7 +20,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-function ProjectForm() {
+function ProjectFormFields({ formControl }) {
   return (
     <ContainerStyled className="project-form">
       {/* <div className="group-title-section">
@@ -51,19 +53,48 @@ function ProjectForm() {
         label="Project Title"
         description="This is the title the project will appear with to the visitors too"
       >
-        <TextField fullWidth placeholder="Enter project title" />
+        <InputLocale name="title" locale="en">
+          {({ name }) => {
+            return (
+              <Controller
+                name={name}
+                control={formControl}
+                render={({ field }) => (
+                  <TextField
+                    fullWidth
+                    placeholder="Enter project title"
+                    {...field}
+                  />
+                )}
+              />
+            );
+          }}
+        </InputLocale>
       </HorizontalFieldWrapper>
       <HorizontalFieldWrapper
         label="Description"
         description="A brief overview of your project that helps users understand its
             purpose"
       >
-        <TextField
-          fullWidth
-          placeholder="Enter project description"
-          multiline
-          rows={4}
-        />
+        <InputLocale name="description" locale="en">
+          {({ name }) => {
+            return (
+              <Controller
+                name={name}
+                control={formControl}
+                render={({ field }) => (
+                  <TextField
+                    fullWidth
+                    placeholder="Enter project description"
+                    multiline
+                    rows={4}
+                    {...field}
+                  />
+                )}
+              />
+            );
+          }}
+        </InputLocale>
       </HorizontalFieldWrapper>
       <div className="group-title-section">
         <EurekaIcon name="palette" />
@@ -92,4 +123,4 @@ function ProjectForm() {
   );
 }
 
-export default ProjectForm;
+export default ProjectFormFields;

@@ -37,11 +37,7 @@ function InputLocale({
           ? children({ name: inputName, locale })
           : children}
         {hasLocaleIndicators && (
-          <InputLocaleIndicators
-            name={name}
-            size="small"
-            className="indicator"
-          />
+          <InputLocaleIndicators name={name} className="indicator" />
         )}
       </div>
     </ContainerStyled>

@@ -13,6 +13,7 @@ import { Button as MuiButton, styled } from "@mui/material";
  * @property {boolean} [isDisabled] - Disabled state
  * @property {boolean} [isFullwidth] - Full width button
  * @property {'button'|'submit'|'reset'} [type] - HTML button type attribute
+ * @property {string} [form] - HTML form attribute
  * @property {string} [href] - URL for link button
  * @property {string} [target] - Link target attribute
  * @property {string} [rel] - Link rel attribute
@@ -78,6 +79,7 @@ function ButtonNewUnstyled({
   startIcon,
   endIcon,
   size,
+  form,
   onClick,
   className,
 }) {
@@ -92,6 +94,7 @@ function ButtonNewUnstyled({
       startIcon={startIcon}
       size={size}
       href={href}
+      form={form}
       endIcon={endIcon}
       className={clsx(className, variant, corners, {
         "btn-unstyled": variant === "unstyled",

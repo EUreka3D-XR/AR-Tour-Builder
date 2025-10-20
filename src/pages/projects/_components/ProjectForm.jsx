@@ -2,6 +2,7 @@ import { styled, TextField, Typography } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import ImageInput from "@/components/image-input/ImageInput";
+import ProjectFieldWrapper from "./field-wrapper/ProjectFieldWrapper";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -17,105 +18,76 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-const FieldSection = styled("div")(({ theme }) => ({
-  padding: theme.spacing(2, 0),
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  alignItems: "start",
-  gap: theme.spacing(2),
-  "& .field-label": {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    "& label": {
-      marginBottom: theme.spacing(0.5),
-    },
-  },
-  "& .field-input": {
-    "& .logo-dropzone": {
-      width: 200,
-    },
-  },
-}));
-
 function ProjectForm() {
   return (
     <ContainerStyled className="project-form">
+      {/* <div className="group-title-section">
+        <Typography variant="h4" component="h4" fontWeight={400}>
+          Languages
+        </Typography>
+      </div>
+      <ProjectFieldWrapper
+        label="Supported Languages"
+        description="Specify the languages your project supports."
+      >
+        <Autocomplete
+          fullWidth
+          multiple
+          options={["English", "French", "German"]}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              placeholder="e.g., English, Spanish, French"
+            />
+          )}
+        />
+      </ProjectFieldWrapper> */}
       <div className="group-title-section">
         <Typography variant="h4" component="h4" fontWeight={400}>
           Basic Information
         </Typography>
       </div>
-      <FieldSection className="field-section">
-        <div className="field-label">
-          <Typography variant="h5" component="label">
-            Project Title
-          </Typography>
-          <Typography color="textSecondary">
-            This is the title the project will appear with to the visitors too
-          </Typography>
-        </div>
-        <div className="field-input">
-          <TextField fullWidth placeholder="Enter project title" />
-        </div>
-      </FieldSection>
-      <FieldSection className="field-section">
-        <div className="field-label">
-          <Typography variant="h5" component="label">
-            Description
-          </Typography>
-          <Typography color="textSecondary">
-            A brief overview of your project that helps users understand its
-            purpose
-          </Typography>
-        </div>
-        <div className="field-input">
-          <TextField
-            fullWidth
-            placeholder="Enter project description"
-            multiline
-            rows={4}
-          />
-        </div>
-      </FieldSection>
+      <ProjectFieldWrapper
+        label="Project Title"
+        description="This is the title the project will appear with to the visitors too"
+      >
+        <TextField fullWidth placeholder="Enter project title" />
+      </ProjectFieldWrapper>
+      <ProjectFieldWrapper
+        label="Description"
+        description="A brief overview of your project that helps users understand its
+            purpose"
+      >
+        <TextField
+          fullWidth
+          placeholder="Enter project description"
+          multiline
+          rows={4}
+        />
+      </ProjectFieldWrapper>
       <div className="group-title-section">
         <EurekaIcon name="palette" />
         <Typography variant="h4" component="h4" fontWeight={400}>
           Branding
         </Typography>
       </div>
-      <FieldSection className="field-section">
-        <div className="field-label">
-          <Typography variant="h5" component="label">
-            Project Logo
-          </Typography>
-          <Typography color="textSecondary">
-            Upload your project logo. This will be displayed on the project
-            homepage and tour listings.
-          </Typography>
-        </div>
-        <div className="field-input">
-          <ImageInput
-            placeholderText="Click to upload Logo"
-            maxFileSize={2}
-            className="logo-dropzone"
-          />
-        </div>
-      </FieldSection>
-      <FieldSection className="field-section">
-        <div className="field-label">
-          <Typography variant="h5" component="label">
-            Cover Photo
-          </Typography>
-          <Typography color="textSecondary">
-            A hero image for your project. This appears at the top of your
-            project page and inside the tour cards.
-          </Typography>
-        </div>
-        <div className="field-input">
-          <ImageInput placeholderText="Click to upload a cover photo" />
-        </div>
-      </FieldSection>
+      <ProjectFieldWrapper
+        label="Project Logo"
+        description="Upload your project logo. This will be displayed on the project homepage and tour listings."
+      >
+        <ImageInput
+          placeholderText="Click to upload Logo"
+          maxFileSize={2}
+          className="logo-dropzone"
+        />
+      </ProjectFieldWrapper>
+      <ProjectFieldWrapper
+        label="Cover Photo"
+        description="A hero image for your project. This appears at the top of your
+            project page and inside the tour cards."
+      >
+        <ImageInput placeholderText="Click to upload a cover photo" />
+      </ProjectFieldWrapper>
     </ContainerStyled>
   );
 }

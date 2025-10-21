@@ -79,13 +79,12 @@ const TourItem = styled(Box)(({ theme }) => ({
  * ToursListSection component for displaying a list of tour cards with map
  * @param {Object} props - ToursListSection props
  * @param {Array} [tours=[]] - Array of tour objects to display
- * @param {'map'|'list'} [viewMode] - Current view mode (e.g., "map" or "list")
  * @returns {React.ReactElement} Rendered tours list section with map
  */
 function ToursListSection({ tours = [], fetchState }) {
   const navigate = useNavigate();
-  const { searchParams, updateParams, filterParams } = useDashboardParams();
-  const viewMode = filterParams.viewMode;
+  const { searchParams, updateParams } = useDashboardParams();
+  const viewMode = searchParams.get("viewMode") ?? "list";
 
   const { routes } = useNavPaths();
 

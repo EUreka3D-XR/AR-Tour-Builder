@@ -4,6 +4,8 @@ import FormInput from "@/components/form/FormInput";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
+import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
+import LanguageRow from "@/components/language-dropdown/LanguageRow";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(3),
@@ -31,6 +33,9 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 function TourInfoSection() {
   return (
     <ContainerStyled>
+      <LanguageRow>
+        <LanguageDropdown />
+      </LanguageRow>
       <FormInputMultilingual
         name="title"
         locale="en"

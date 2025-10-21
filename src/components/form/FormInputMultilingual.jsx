@@ -13,10 +13,10 @@ import InputLocale from "../input-locale/InputLocale";
  * @param {string} props.locale
  * @returns {JSX.Element}
  */
-function FormInputMultilingual({ name, locale, render }) {
+function FormInputMultilingual({ name, render }) {
   const { control } = useFormContext();
   return (
-    <InputLocale name={name} locale={locale}>
+    <InputLocale name={name}>
       {({ name: localizedName }) => (
         <Controller name={localizedName} control={control} render={render} />
       )}

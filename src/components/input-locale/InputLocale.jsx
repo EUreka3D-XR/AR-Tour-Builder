@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import clsx from "clsx";
 import { styled } from "@mui/material";
 
+import useFormLocale from "@/stores/useFormLocale";
 import { inputLocaleName } from "@/utils/inputLocale";
 import InputLocaleIndicators from "./InputLocaleIndicators";
 
@@ -17,13 +18,10 @@ const ContainerStyled = styled("div")({
     alignSelf: "flex-end",
   },
 });
-function InputLocale({
-  className,
-  children,
-  name,
-  hasNoLocaleIndicators,
-  locale,
-}) {
+
+function InputLocale({ className, children, name, hasNoLocaleIndicators }) {
+  const { locale } = useFormLocale();
+
   const hasLocaleIndicators = !hasNoLocaleIndicators;
 
   const inputName = useMemo(() => {

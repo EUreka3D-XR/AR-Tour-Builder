@@ -50,9 +50,10 @@ const sortOptionsMap = sortOptions.reduce((acc, option) => {
 /**
  * ToursFiltersSection component for filtering and searching tours
  * @param {ToursFiltersSectionProps} props - ToursFiltersSection props
+ * @param {string} props.firstTourId - ID of the first tour in the list
  * @returns {React.ReactElement} Rendered tours filters section
  */
-function ToursFiltersSection() {
+function ToursFiltersSection({ defaultTourId }) {
   const { filterParams, updateParams, resetParams } = useDashboardParams();
 
   const filters = useMemo(
@@ -73,10 +74,10 @@ function ToursFiltersSection() {
 
   const handleToggleMapView = () => {
     if (filterParams.viewMode === "map") {
-      updateParams({ viewMode: "list" });
+      updateParams({ viewMode: "list", tourId: null });
       return;
     }
-    updateParams({ viewMode: "map" });
+    updateParams({ viewMode: "map", tourId: defaultTourId });
   };
 
   const handleResetFilters = () => {

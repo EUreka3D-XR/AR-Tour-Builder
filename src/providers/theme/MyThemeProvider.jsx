@@ -98,6 +98,11 @@ function MyThemeProvider({ children }) {
             },
           },
         },
+        MuiSkeleton: {
+          defaultProps: {
+            variant: "rounded",
+          },
+        },
       },
     });
   }, []);

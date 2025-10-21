@@ -36,10 +36,6 @@ const MapUIAreaStyled = styled(MapUIArea)(({ theme }) => ({
 function ToursMapSection({ tour, onOpenTour }) {
   const bounds = useMemo(() => convertToLeafletBounds(tour?.boundBox), [tour]);
 
-  if (!bounds) {
-    return null;
-  }
-
   return (
     <Map bounds={bounds}>
       {tour?.pois.map((poi) => (

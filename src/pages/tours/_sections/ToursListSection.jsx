@@ -1,12 +1,13 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { useNavigate } from "react-router";
 import clsx from "clsx";
-import { Box, styled, Typography } from "@mui/material";
+import { Box, Skeleton, styled, Typography } from "@mui/material";
 
 import useDashboardParams from "@/hooks/useDashboardParams";
 import useNavPaths from "@/hooks/useNavPaths";
 import TourCard from "../_components/TourCard";
 import ToursMapSection from "./ToursMapSection";
+import useMapResizeObserver from "./useMapResizeObserver";
 
 const ContainerStyled = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -17,12 +18,15 @@ const ContainerStyled = styled(Box)(({ theme }) => ({
   overflow: "hidden",
 }));
 
-const ToursListContainer = styled(Box)(({ viewMode }) => ({
-  width: viewMode === "list" ? "100%" : "400px",
+const ToursListContainer = styled(Box)(() => ({
+  width: "400px",
   flexShrink: 0,
   display: "flex",
   flexDirection: "column",
   transition: "width 0.3s ease-in-out",
+  "&.full-width": {
+    width: "100%",
+  },
 }));
 
 const ToursScrollableArea = styled(Box)(({ theme }) => ({
@@ -102,10 +106,13 @@ function ToursListSection({ tours = [], viewMode = "list" }) {
     return tours.find((tour) => tour.id === tourId);
   }, [searchParams, tours]);
 
+  const mapAreaRef = useRef(null);
+  const { mapReady } = useMapResizeObserver(mapAreaRef, viewMode);
+
   return (
     <ContainerStyled>
       {/* Tours List - Left Side */}
-      <ToursListContainer viewMode={viewMode}>
+      <ToursListContainer className={clsx({ "full-width": isFullWidth })}>
         <Typography variant="h6" sx={{ mb: 0, ml: 2, fontWeight: 600 }}>
           Tours ({tours.length})
         </Typography>
@@ -139,8 +146,15 @@ function ToursListSection({ tours = [], viewMode = "list" }) {
       </ToursListContainer>
 
       {/* Map - Right Side */}
-      <MapArea className={clsx({ show: viewMode === "map" })}>
-        <ToursMapSection tour={selectedTour} onOpenTour={openTour} />
+      <MapArea ref={mapAreaRef} className={clsx({ show: !isFullWidth })}>
+        {/* {selectedTour && ( */}
+        {selectedTour && mapReady ? (
+          <ToursMapSection tour={selectedTour} onOpenTour={openTour} />
+        ) : (
+          <Skeleton height="100%" />
+        )}
+
+        {/* )} */}
       </MapArea>
     </ContainerStyled>
   );

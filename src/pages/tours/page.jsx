@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useParams } from "react-router";
 import { styled } from "@mui/material";
 
@@ -18,11 +19,17 @@ function ToursPage() {
   const { projectId } = useParams();
   const { filterParams } = useDashboardParams();
   const { data, fetchState } = useProjectTours(projectId);
-  // console.log(data);
+
+  const defaultTourId = useMemo(() => {
+    if (Array.isArray(data) && data.length > 0) {
+      return data[0].id;
+    }
+  }, [data]);
+
   return (
     <ContainerStyled className="tours-page">
       <HeroSection />
-      <ToursFiltersSection />
+      <ToursFiltersSection defaultTourId={defaultTourId} />
       <ListSection tours={data} viewMode={filterParams.viewMode} />
     </ContainerStyled>
   );

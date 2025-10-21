@@ -1,15 +1,11 @@
 import { styled } from "@mui/material";
 
+import CenteredArea from "../centered/Centered";
 import MediaIcon from "../icon/MediaIcon";
 import Image from "../image/Image";
 
-const MediaPreviewStyled = styled("div")(({ theme }) => ({
-  width: "100%",
-  height: "100%",
+const MediaPreviewStyled = styled(CenteredArea)(({ theme }) => ({
   borderRadius: theme.spacing(0.5),
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
   backgroundColor: theme.palette.grey[200],
   "& img": {
     width: "100%",

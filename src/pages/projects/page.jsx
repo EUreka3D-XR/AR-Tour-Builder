@@ -2,6 +2,7 @@ import { styled, Typography } from "@mui/material";
 
 import { useProjects } from "@/services/projectsService";
 import Button from "@/components/button/Button";
+import CenteredArea from "@/components/centered/Centered";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";
 import ProjectCard from "./_components/ProjectCard";
@@ -33,12 +34,8 @@ const ProjectsGrid = styled("div")({
   },
 });
 
-const ErrorSection = styled("div")({
-  width: "100%",
+const ErrorSection = styled(CenteredArea)({
   height: "400px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
 });
 
 function ProjectsPage() {

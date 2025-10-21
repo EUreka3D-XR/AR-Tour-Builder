@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { useDropzone } from "react-dropzone";
 import { styled, Typography } from "@mui/material";
 
+import CenteredArea from "../centered/Centered.jsx";
 import EurekaIcon from "../icon/EurekaIcon.jsx";
 import Image from "../image/Image.jsx";
 
@@ -18,13 +19,8 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-const PlaceholderStyled = styled("div")(({ theme }) => ({
-  height: "100%",
-  width: "100%",
-  display: "flex",
+const PlaceholderStyled = styled(CenteredArea)(({ theme }) => ({
   flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
   gap: theme.spacing(1),
 }));
 

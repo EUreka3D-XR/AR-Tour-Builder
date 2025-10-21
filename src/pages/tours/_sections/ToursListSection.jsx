@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import clsx from "clsx";
 import { Box, Skeleton, styled, Typography } from "@mui/material";
 
+import CenteredArea from "@/components/centered/Centered";
+import ErrorArea from "@/components/error/ErrorArea";
 import useDashboardParams from "@/hooks/useDashboardParams";
 import useNavPaths from "@/hooks/useNavPaths";
 import TourCard from "../_components/TourCard";
@@ -80,9 +82,10 @@ const TourItem = styled(Box)(({ theme }) => ({
  * @param {'map'|'list'} [viewMode] - Current view mode (e.g., "map" or "list")
  * @returns {React.ReactElement} Rendered tours list section with map
  */
-function ToursListSection({ tours = [], viewMode = "list" }) {
+function ToursListSection({ tours = [], fetchState }) {
   const navigate = useNavigate();
-  const { searchParams, updateParams } = useDashboardParams();
+  const { searchParams, updateParams, filterParams } = useDashboardParams();
+  const viewMode = filterParams.viewMode;
 
   const { routes } = useNavPaths();
 
@@ -109,8 +112,30 @@ function ToursListSection({ tours = [], viewMode = "list" }) {
   const mapAreaRef = useRef(null);
   const { mapReady } = useMapResizeObserver(mapAreaRef, viewMode);
 
+  if (fetchState.isError) {
+    return (
+      <ContainerStyled className="tours-main-area">
+        <CenteredArea sx={{ mt: -8 }}>
+          <ErrorArea hideGoBack />
+        </CenteredArea>
+      </ContainerStyled>
+    );
+  }
+
+  if (fetchState.isSuccess && tours.length === 0) {
+    return (
+      <ContainerStyled className="tours-main-area">
+        <CenteredArea sx={{ mt: -8 }}>
+          <Typography variant="h6" sx={{ textAlign: "center" }}>
+            No tours found. Please create a new tour to get started.
+          </Typography>
+        </CenteredArea>
+      </ContainerStyled>
+    );
+  }
+
   return (
-    <ContainerStyled>
+    <ContainerStyled className="tours-main-area">
       {/* Tours List - Left Side */}
       <ToursListContainer className={clsx({ "full-width": isFullWidth })}>
         <Typography variant="h6" sx={{ mb: 0, ml: 2, fontWeight: 600 }}>
@@ -118,8 +143,15 @@ function ToursListSection({ tours = [], viewMode = "list" }) {
         </Typography>
 
         <ToursScrollableArea>
-          {tours.length > 0 ? (
-            tours.map((tour) => (
+          {fetchState.isLoading &&
+            Array.from({ length: 2 }).map((_, i) => (
+              <TourItem key={i}>
+                <TourCard.Skeleton isFullWidth={isFullWidth} />
+              </TourItem>
+            ))}
+
+          {fetchState.isSuccess &&
+            tours?.map((tour) => (
               <TourItem key={tour.id}>
                 <TourCard
                   tour={tour}
@@ -128,33 +160,17 @@ function ToursListSection({ tours = [], viewMode = "list" }) {
                   onTourClick={handleTourClicked}
                 />
               </TourItem>
-            ))
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "200px",
-                color: "text.secondary",
-              }}
-            >
-              <Typography variant="body2">No tours found</Typography>
-            </Box>
-          )}
+            ))}
         </ToursScrollableArea>
       </ToursListContainer>
 
       {/* Map - Right Side */}
       <MapArea ref={mapAreaRef} className={clsx({ show: !isFullWidth })}>
-        {/* {selectedTour && ( */}
         {selectedTour && mapReady ? (
           <ToursMapSection tour={selectedTour} onOpenTour={openTour} />
         ) : (
           <Skeleton height="100%" />
         )}
-
-        {/* )} */}
       </MapArea>
     </ContainerStyled>
   );

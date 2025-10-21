@@ -1,33 +1,11 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  styled,
-  Tab,
-  Tabs,
-} from "@mui/material";
+import { styled, Tab, Tabs } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";
 import useUrlTabs from "@/hooks/useUrlTabs";
 
-const LANGUAGE_OPTIONS = [
-  {
-    value: "en",
-    label: "English",
-  },
-  {
-    value: "fr",
-    label: "French",
-  },
-];
-
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(1.5, 2, 0, 0),
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
   "& .tabs-section": {},
   "& .language-input": {
     display: "flex",
@@ -69,7 +47,7 @@ function TourNavigationTabsSection() {
   ]);
 
   return (
-    <ContainerStyled>
+    <ContainerStyled className="tour-navigation-tabs-section">
       <Tabs value={activeTab} onChange={setActiveTab}>
         {tabs.map((tab, index) => {
           const id = `tour-nav-tab-${index}`;
@@ -87,23 +65,6 @@ function TourNavigationTabsSection() {
           );
         })}
       </Tabs>
-      <FormControl size="small" className="language-input item-no-shrink">
-        <InputLabel id="language-switcher-label">Input Language:</InputLabel>
-        <Select
-          labelId="language-switcher-label"
-          id="language-switcher"
-          value={"en"}
-          variant="standard"
-          className="language-select"
-          onChange={() => {}}
-        >
-          {LANGUAGE_OPTIONS.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
     </ContainerStyled>
   );
 }

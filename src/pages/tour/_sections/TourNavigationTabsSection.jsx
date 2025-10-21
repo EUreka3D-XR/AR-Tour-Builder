@@ -56,8 +56,16 @@ function TourNavigationTabsSection() {
   const { routes } = useNavPaths();
 
   const { tabs, activeTab, setActiveTab } = useUrlTabs([
-    { icon: "info", label: "Tour Information", value: routes.tourInfo },
-    { icon: "poi", label: "Points of Interest", value: routes.pois.index },
+    {
+      icon: "info",
+      label: "Tour Information",
+      value: routes.tourInfo,
+    },
+    {
+      icon: "poi",
+      label: "Points of Interest",
+      value: routes.pois.index,
+    },
   ]);
 
   return (

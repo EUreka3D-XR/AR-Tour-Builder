@@ -4,6 +4,7 @@ import {
   useNavigate,
   useOutletContext,
 } from "react-router";
+import { useWatch } from "react-hook-form";
 import { Divider, FormControlLabel, styled, Switch } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -49,11 +50,12 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function TourPoisSection() {
-  const { pois, containerRef } = useOutletContext();
-
+  const { containerRef } = useOutletContext();
   const location = useLocation();
   const navigate = useNavigate();
   const { routes } = useNavPaths();
+
+  const pois = useWatch({ name: "pois", defaultValue: [] });
 
   const handleEdit = (poiId) => {
     navigate(routes.pois.one(poiId), {
@@ -66,7 +68,11 @@ function TourPoisSection() {
       <ContainerStyled className="pois-section">
         <div className="pois-header">
           <FormControlLabel control={<Switch />} label="Guided Tour" />
-          <Button variant="filled" startIcon={<EurekaIcon name="add" />}>
+          <Button
+            variant="filled"
+            href={routes.pois.new}
+            startIcon={<EurekaIcon name="add" />}
+          >
             Add POI
           </Button>
         </div>
@@ -84,7 +90,6 @@ function TourPoisSection() {
                     const markerEl = containerRef.current.querySelector(
                       `.custom-poi-marker[data-id="${poi.id}"]`,
                     );
-                    console.log(poi.id, markerEl);
                     if (markerEl) markerEl.classList.add("is-hovered");
                   }
                 }}

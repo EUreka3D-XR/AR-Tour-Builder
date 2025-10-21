@@ -1,18 +1,19 @@
 import { useMemo } from "react";
+import { useWatch } from "react-hook-form";
 
 import Map from "@/components/map/Map";
 import { convertToLeafletBounds } from "@/components/map/mapConverters";
 import PoiMarker from "@/components/map/PoiMarker";
 
-function TourPoisMapSection({ tourBoundBox, pois, containerRef }) {
+function TourPoisMapSection({ containerRef }) {
+  const tourBoundBox = useWatch({ name: "boundBox" });
+  const pois = useWatch({ name: "pois" }) || [];
+
   const bounds = useMemo(
     () => convertToLeafletBounds(tourBoundBox),
     [tourBoundBox],
   );
 
-  if (!bounds) {
-    return null;
-  }
   return (
     <Map bounds={bounds}>
       {pois.map((poi) => (

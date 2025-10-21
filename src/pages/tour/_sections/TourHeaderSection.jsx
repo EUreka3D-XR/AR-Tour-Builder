@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { useWatch } from "react-hook-form";
 import { IconButton, styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -10,10 +11,13 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  gap: theme.spacing(4),
+  overflow: "hidden",
   "& .left-section": {
     display: "flex",
     alignItems: "center",
     gap: theme.spacing(2),
+    overflow: "hidden",
   },
   "& .right-section": {
     display: "flex",
@@ -22,18 +26,19 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-function TourHeaderSection({
-  tourTitle = "Downtown Heritage Walking Tour",
-  tourStatus,
-  lastModified,
-  onSave,
-  onPublish,
-  onArchive,
-}) {
+function TourHeaderSection({ onSave, onPublish, onArchive }) {
   const navigate = useNavigate();
   const { routes } = useNavPaths();
 
-  const isEditing = lastModified ? "edit" : "create";
+  const tourTitle = useWatch({
+    name: "title",
+    compute: (title) => title?.locales?.en || "Untitled Tour",
+  });
+  const tourStatus = useWatch({ name: "status", defaultValue: "draft" });
+  const createdAt = useWatch({ name: "createdAt" });
+  const updatedAt = useWatch({ name: "updatedAt" });
+  const lastModifiedAt = updatedAt ?? createdAt;
+  const isEditing = Boolean(lastModifiedAt);
 
   const handleBackClick = () => {
     navigate(routes.tours.index);
@@ -45,14 +50,14 @@ function TourHeaderSection({
         <IconButton size="small" onClick={handleBackClick}>
           <EurekaIcon name="back" fontSize="small" />
         </IconButton>
-        <Typography variant="h4" component="h2">
+        <Typography variant="h4" component="h2" noWrap>
           {tourTitle}
         </Typography>
       </div>
       <div className="right-section">
         {isEditing ? (
           <>
-            {lastModified}
+            {lastModifiedAt}
             <Button startIcon={<EurekaIcon name="save" />} onClick={onSave}>
               Save Changes
             </Button>

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useParams } from "react-router";
-import { styled } from "@mui/material";
+import { Divider, styled } from "@mui/material";
 
 import { useProjectTours } from "@/services/toursService";
 import ToursFiltersSection from "./_sections/ToursFiltersSection";
@@ -27,6 +27,7 @@ function ToursPage() {
   return (
     <ContainerStyled className="tours-page">
       <HeroSection />
+      <Divider sx={{ mb: 2 }} />
       <ToursFiltersSection defaultTourId={defaultTourId} />
       <ListSection tours={data} fetchState={fetchState} />
     </ContainerStyled>

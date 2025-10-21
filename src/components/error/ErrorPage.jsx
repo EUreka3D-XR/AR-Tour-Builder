@@ -12,7 +12,7 @@ const Container = styled("div")(({ theme }) => ({
 
 function ErrorPage({ hideReload, hideGoBack }) {
   return (
-    <Container>
+    <Container className="error-page">
       <ErrorArea hideReload={hideReload} hideGoBack={hideGoBack} />
     </Container>
   );

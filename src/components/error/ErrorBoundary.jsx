@@ -1,6 +1,11 @@
 import React from "react";
+import { styled } from "@mui/material";
 
 import ErrorPage from "./ErrorPage";
+
+const ContainerStyled = styled("div")(() => ({
+  width: "100vw",
+}));
 
 // ErrorBoundary must be a class component per React API
 export default class ErrorBoundary extends React.Component {
@@ -23,7 +28,11 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       // Render the existing ErrorPage as a fallback UI
-      return <ErrorPage />;
+      return (
+        <ContainerStyled className="error-boundary">
+          <ErrorPage />
+        </ContainerStyled>
+      );
     }
 
     return this.props.children;

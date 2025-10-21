@@ -5,6 +5,7 @@ import MyThemeProvider from "@/providers/theme/MyThemeProvider";
 
 import "@/config/translations/i18next-config.js";
 
+import ErrorBoundary from "./components/error/ErrorBoundary";
 import { GeneralProvider } from "./providers/general/GeneralProvider";
 import EurekaRoutes from "./routes/EurekaRoutes";
 
@@ -21,11 +22,13 @@ export default function App() {
   return (
     <MyThemeProvider>
       <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          <GeneralProvider>
-            <EurekaRoutes />
-          </GeneralProvider>
-        </QueryClientProvider>
+        <ErrorBoundary>
+          <QueryClientProvider client={queryClient}>
+            <GeneralProvider>
+              <EurekaRoutes />
+            </GeneralProvider>
+          </QueryClientProvider>
+        </ErrorBoundary>
       </BrowserRouter>
     </MyThemeProvider>
   );

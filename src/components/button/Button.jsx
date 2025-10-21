@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import clsx from "clsx";
 import { Button as MuiButton, styled } from "@mui/material";
 
@@ -93,13 +94,13 @@ function ButtonNewUnstyled({
       type={type}
       startIcon={startIcon}
       size={size}
-      href={href}
       form={form}
       endIcon={endIcon}
       className={clsx(className, variant, corners, {
         "btn-unstyled": variant === "unstyled",
         "disable-gutters": disableGutters,
       })}
+      {...(href ? { component: NavLink, to: href } : {})}
       onClick={onClick}
     >
       {children}

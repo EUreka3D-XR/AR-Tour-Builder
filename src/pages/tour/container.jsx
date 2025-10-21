@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 
 import { useProjectTourMultilingual } from "@/services/toursService";
 import ErrorPage from "@/components/error/ErrorPage";
+import TourPageLoading from "./loading";
 import TourPage from "./page";
 
 function TourPageContainer() {
@@ -13,7 +14,7 @@ function TourPageContainer() {
     return <ErrorPage />;
   }
   if (fetchState.isLoading) {
-    return <div>Loading...</div>;
+    return <TourPageLoading />;
   }
 
   return <TourPage initialTour={data} />;

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 const useMapResizeObserver = (mapAreaRef, viewMode) => {
   // --- NEW: map readiness handling ---
-  const [mapReady, setMapReady] = useState(false);
+  const [mapReady, setMapReady] = useState(true);
   const stableTimerRef = useRef(null);
   const lastSizeRef = useRef({ w: 0, h: 0 });
 

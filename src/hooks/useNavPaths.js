@@ -34,7 +34,9 @@ const useNavPaths = () => {
       projectId ? `${projectsBase.one(projectId)}${route}` : route;
 
     const internalTourRoute = (route) =>
-      tourId ? `${projectsBase.one(projectId)}/tours/${tourId}${route}` : route;
+      tourId
+        ? `${projectsBase.one(projectId)}/tours/${tourId}${route}`
+        : `${projectsBase.one(projectId)}/tours/new${route}`;
 
     // Helper function for auth routes
     const internalAuthRoute = (route) => `${authBase}${route}`;

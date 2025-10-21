@@ -21,7 +21,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 
 function AssetURLCell({ url }) {
   return (
-    <LinkStyled to={url} isExterior openInNewTab noWrap>
+    <LinkStyled to={url} openInNewTab noWrap>
       {url}
     </LinkStyled>
   );

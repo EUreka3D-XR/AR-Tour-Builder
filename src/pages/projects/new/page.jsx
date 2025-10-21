@@ -2,7 +2,7 @@ import { styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import useNavPaths from "@/hooks/useNavPaths";
-import NewProjectForm from "../_forms/NewProjectForm";
+import CreateProjectForm from "../_forms/CreateProjectFormContainer";
 
 const ContainerStyled = styled("div")({
   margin: "auto",
@@ -45,7 +45,7 @@ function NewProjectPage() {
         the form to set up your project and begin collaborating.
       </Typography>
       <div className="project-form-section">
-        <NewProjectForm />
+        <CreateProjectForm />
       </div>
     </ContainerStyled>
   );

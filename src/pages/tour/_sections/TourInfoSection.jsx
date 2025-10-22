@@ -38,18 +38,16 @@ function TourInfoSection() {
       </LanguageRow>
       <FormInputMultilingual
         name="title"
-        locale="en"
         render={({ field }) => (
-          <LabeledInput label="Tour Title">
+          <LabeledInput label="Tour Title" isMultilingual>
             <TextField fullWidth {...field} />
           </LabeledInput>
         )}
       />
       <FormInputMultilingual
         name="description"
-        locale="en"
         render={({ field }) => (
-          <LabeledInput label="Description">
+          <LabeledInput label="Description" isMultilingual>
             <TextField fullWidth multiline minRows={4} maxRows={8} {...field} />
           </LabeledInput>
         )}

@@ -6,7 +6,6 @@ import useFormLocale from "@/stores/useFormLocale";
 import useProjectLanguages from "@/stores/useProjectLanguages";
 import useTourLanguages from "@/stores/useTourLanguages";
 import { LanguageAllOptions } from "@/utils/languages";
-import EurekaIcon from "../icon/EurekaIcon";
 import LanguageIcon from "../icon/LanguageIcon";
 import LabeledInput from "../labeled-input/LabeledInput";
 
@@ -66,9 +65,7 @@ function LanguageDropdownComponent({
       id="language-switcher-label"
       label="Input Language"
       labelPlacement="left"
-      labelIcon={
-        <EurekaIcon name="language" fontSize="small" className="filter-icon" />
-      }
+      labelIcon="language"
       className={className}
     >
       <SelectStyled

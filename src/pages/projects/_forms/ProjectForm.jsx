@@ -55,7 +55,6 @@ function ProjectForm({ onSubmit }) {
         >
           <FormInputMultilingual
             name="title"
-            locales="en"
             render={({ field }) => (
               <TextField
                 fullWidth
@@ -72,7 +71,6 @@ function ProjectForm({ onSubmit }) {
         >
           <FormInputMultilingual
             name="description"
-            locales="en"
             render={({ field }) => (
               <TextField
                 fullWidth

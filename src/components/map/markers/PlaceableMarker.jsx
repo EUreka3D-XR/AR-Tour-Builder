@@ -13,9 +13,19 @@ import { Box } from "@mui/material";
  * - initialPosition?: LatLngLiteral | null
  * - onChange?: (latlng) => void
  */
-export default function PlaceableMarker({ initialPosition = null, onChange }) {
+export default function PlaceableMarker({
+  position: propPosition = null,
+  onChange,
+}) {
   const map = useMap();
-  const [position, setPosition] = useState(initialPosition);
+  // local state, initialize from prop if provided
+
+  const [position, setPosition] = useState(propPosition);
+
+  // update local state if controlled prop changes
+  useEffect(() => {
+    setPosition(propPosition);
+  }, [propPosition]);
 
   // tooltip container appended to the leaflet container
   const tooltipContainerRef = useRef(null);
@@ -111,7 +121,6 @@ export default function PlaceableMarker({ initialPosition = null, onChange }) {
 
       // treat as click -> place marker
       const latlng = e.latlng;
-      setPosition(latlng);
       if (typeof onChange === "function") onChange(latlng);
     },
   });
@@ -119,7 +128,6 @@ export default function PlaceableMarker({ initialPosition = null, onChange }) {
   // drag end handler
   const handleDragEnd = (e) => {
     const latlng = e.target.getLatLng();
-    setPosition(latlng);
     if (typeof onChange === "function") onChange(latlng);
   };
 

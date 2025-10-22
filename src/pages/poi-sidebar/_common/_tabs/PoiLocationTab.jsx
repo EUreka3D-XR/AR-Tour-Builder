@@ -1,9 +1,11 @@
 import { styled, TextField, Typography } from "@mui/material";
 
+import FormInput from "@/components/form/FormInput";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
+import MarkerInput from "@/components/map-marker-input/MarkerInput";
+import MarkerInputFollower from "@/components/map-marker-input/MarkerInputFollower";
 import Map from "@/components/map/Map";
-import PlaceableMarker from "@/components/map/markers/PlaceableMarker";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -36,16 +38,37 @@ function PoiLocationTab() {
       </div>
       <div className="map-container">
         <Map>
-          <PlaceableMarker />
+          <MarkerInput name="coordinates" />
+          <MarkerInputFollower name="coordinates" />
         </Map>
       </div>
       <div className="coordinates-inputs">
-        <LabeledInput label="Latitude">
-          <TextField placeholder="3.123456" />
-        </LabeledInput>
-        <LabeledInput label="Longitude">
-          <TextField placeholder="101.123456" />
-        </LabeledInput>
+        <FormInput
+          name="coordinates.lat"
+          render={({ field }) => (
+            <LabeledInput label="Latitude">
+              <TextField
+                {...field}
+                placeholder="ex. 3.123456"
+                type="number"
+                onChange={(e) => field.onChange(e.target.valueAsNumber)}
+              />
+            </LabeledInput>
+          )}
+        />
+        <FormInput
+          name="coordinates.long"
+          render={({ field }) => (
+            <LabeledInput label="Longitude">
+              <TextField
+                {...field}
+                placeholder="ex. 101.123456"
+                type="number"
+                onChange={(e) => field.onChange(e.target.valueAsNumber)}
+              />
+            </LabeledInput>
+          )}
+        />
       </div>
     </ContainerStyled>
   );

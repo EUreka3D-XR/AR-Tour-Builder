@@ -28,8 +28,8 @@ function NewPoiSidebar() {
         },
       },
       coordinates: {
-        lat: "",
-        long: "",
+        lat: 0,
+        long: 0,
       },
       thumbnai: "",
       externalLinks: [],
@@ -47,6 +47,8 @@ function NewPoiSidebar() {
     });
   };
 
+  const values = methods.watch();
+  console.log(values);
   return (
     <PoiSidebar onClose={handleClosePoi}>
       <FormProvider {...methods}>

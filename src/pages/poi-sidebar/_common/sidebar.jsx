@@ -1,12 +1,14 @@
 import { motion } from "motion/react";
 import { Drawer, styled } from "@mui/material";
 
-const DrawerStyled = styled(Drawer)(({ theme }) => ({
+const DrawerStyled = styled(Drawer)(() => ({
   "& .drawer-paper": {
     width: "800px",
     height: "100vh",
   },
-  "& .drawer-content": {},
+  "& form": {
+    height: "100%",
+  },
 }));
 
 function PoiSidebar({ children, onClose }) {

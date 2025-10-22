@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import { FormProvider, useForm } from "react-hook-form";
 
 import useNavPaths from "@/hooks/useNavPaths";
@@ -12,8 +11,7 @@ import TourForm from "./TourForm";
  * @returns
  */
 function EditTourForm({ initialTour }) {
-  const { routes } = useNavPaths();
-  const navigate = useNavigate();
+  const { routes, navigate } = useNavPaths();
 
   const methods = useForm({
     defaultValues: {

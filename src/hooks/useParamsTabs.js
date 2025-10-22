@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router";
  * @param {Array} tabs - Array of tab objects with value properties
  * @param {string} initialTab - Default tab to use when no tab parameter is specified in URL
  * @param {string} paramName - URL parameter name to use for the tab (default: 'tab')
- * @returns {Object} Object containing tabs, activeTab, and setActiveTab function
+ * @returns {{tabs: Array, activeTab: string, setActiveTab: function}} Object containing tabs, activeTab, and setActiveTab function
  */
 const useParamsTabs = (paramName = "tab", tabs, initialTab) => {
   const [searchParams, setSearchParams] = useSearchParams();

@@ -3,13 +3,6 @@ import { styled, Tab, Tabs } from "@mui/material";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useParamsTabs from "@/hooks/useParamsTabs";
 
-const poiTabs = [
-  { icon: "poi", value: "location", label: "Location" },
-  { icon: "info", value: "details", label: "Details" },
-  { icon: "link", value: "external-links", label: "External Links" },
-  { icon: "media", value: "media", label: "Media" },
-];
-
 const NavigationAreaStyled = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -21,7 +14,7 @@ const NavigationAreaStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-function PoiNavigationTabsSection() {
+function PoiNavigationTabsSection({ tabs: poiTabs = [] }) {
   const { activeTab, setActiveTab, tabs } = useParamsTabs(
     "poiTab",
     poiTabs,

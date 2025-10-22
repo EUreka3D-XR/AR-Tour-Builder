@@ -1,21 +1,23 @@
-import { useCallback } from "react";
-import { useNavigate } from "react-router";
-
-import useNavPaths from "@/hooks/useNavPaths";
+import ToggleVisibility from "../_common/_components/ToggleVisibility";
+import PoiAssetDetailsSection from "../_common/_sections/PoiAssetDetailsSection";
 import PoiSidebar from "../_common/sidebar";
-import SidebarInner from "../_common/SidebarInner";
+import NewPoiForm from "../_forms/poi/NewPoiForm";
 
 function EditPoiSidebar() {
-  const navigate = useNavigate();
-  const { routes } = useNavPaths();
-
-  const handleClosePoi = useCallback(() => {
-    navigate(routes.pois.index);
-  }, [navigate, routes]);
-
   return (
-    <PoiSidebar onClose={handleClosePoi}>
-      <SidebarInner onClose={handleClosePoi} />
+    <PoiSidebar>
+      {({ showAssetForm }) => {
+        return (
+          <>
+            <ToggleVisibility show={!showAssetForm}>
+              <NewPoiForm />
+            </ToggleVisibility>
+            <ToggleVisibility show={showAssetForm}>
+              <PoiAssetDetailsSection />
+            </ToggleVisibility>
+          </>
+        );
+      }}
     </PoiSidebar>
   );
 }

@@ -160,8 +160,9 @@ function FormArrayURLInput({
         />
         <Spacer size={2}></Spacer>
         <TextField
-          placeholder={urlPlaceholder}
           inputRef={urlRef}
+          placeholder={urlPlaceholder}
+          type="url"
           fullWidth
           helperText={errors.url}
           error={!!errors.url}

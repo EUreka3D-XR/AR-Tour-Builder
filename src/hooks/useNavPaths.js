@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
 /**
@@ -20,6 +20,7 @@ const checkIfInsideAProject = (pathname) =>
   pathname.startsWith("/projects/") && !pathname.includes("/new");
 
 const useNavPaths = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { projectId } = useParams();
   const { tourId } = useParams();
@@ -74,6 +75,7 @@ const useNavPaths = () => {
   );
 
   return {
+    navigate,
     routes,
     navLinks,
     isLocationInsideAProject: checkIfInsideAProject,

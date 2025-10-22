@@ -7,7 +7,7 @@ import placeholderImage from "@/assets/images/image-placeholder.webp";
 
 import "./poi-marker.css";
 
-import { convertToLeafletLatLng } from "./mapConverters";
+import { convertToLeafletLatLng } from "../utils/mapConverters";
 
 const ICON_SIZE = 40;
 const BORDER_COLOR = "white";

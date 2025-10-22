@@ -4,7 +4,7 @@ import { alpha, keyframes, Stack, styled, Typography } from "@mui/material";
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import Map from "@/components/map/Map";
-import PoiMarker from "@/components/map/PoiMarker";
+import PoiMarker from "@/components/map/markers/PoiMarker";
 import MapUIArea from "@/components/map/ui/MapUIArea";
 import { convertToLeafletBounds } from "@/components/map/utils/mapConverters";
 

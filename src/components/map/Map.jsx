@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Box, styled } from "@mui/material";
 
-import FitBounds from "./FitBounds";
+import FitBounds from "./utils/FitBounds";
 
 const ContainerStyled = styled(Box)(({ theme }) => ({
   height: "100%",

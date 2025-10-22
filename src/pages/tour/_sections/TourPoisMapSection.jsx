@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useWatch } from "react-hook-form";
 
 import Map from "@/components/map/Map";
-import PoiMarker from "@/components/map/PoiMarker";
+import PoiMarker from "@/components/map/markers/PoiMarker";
 import { convertToLeafletBounds } from "@/components/map/utils/mapConverters";
 
 function TourPoisMapSection({ containerRef }) {

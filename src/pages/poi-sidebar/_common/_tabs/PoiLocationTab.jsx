@@ -3,6 +3,7 @@ import { styled, TextField, Typography } from "@mui/material";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import Map from "@/components/map/Map";
+import PlaceableMarker from "@/components/map/markers/PlaceableMarker";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -34,7 +35,9 @@ function PoiLocationTab() {
         </Typography>
       </div>
       <div className="map-container">
-        <Map />
+        <Map>
+          <PlaceableMarker />
+        </Map>
       </div>
       <div className="coordinates-inputs">
         <LabeledInput label="Latitude">

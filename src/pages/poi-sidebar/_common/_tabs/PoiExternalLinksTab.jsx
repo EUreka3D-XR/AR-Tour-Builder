@@ -1,6 +1,6 @@
-import { styled, TextField } from "@mui/material";
+import { styled } from "@mui/material";
 
-import LabeledInput from "@/components/labeled-input/LabeledInput";
+import FormArray from "@/components/form/FormArray";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -14,15 +14,29 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 function PoiExternalLinksTab() {
   return (
     <ContainerStyled>
-      <LabeledInput label="Quiz Links">
-        <TextField placeholder="ex. https://quizlink.com/quiz/1" fullWidth />
-      </LabeledInput>
-      <LabeledInput label="External Sources and Links">
-        <TextField
-          placeholder="ex. https://archaeo-blogs.com/blog/1"
-          fullWidth
+      <FormArray>
+        <FormArray.URLInput
+          name="quizLinks"
+          label="Quiz Links"
+          labelPlaceholder="Quiz Name"
+          isLabelRequired
+          urlPlaceholder="URL: ex. https://quiz-platform.com/quiz/123"
         />
-      </LabeledInput>
+        <FormArray.Display name="quizLinks" displayMode="chips" variant="url" />
+      </FormArray>
+      <FormArray>
+        <FormArray.URLInput
+          name="externalLinks"
+          label="External Links"
+          labelPlaceholder="Name"
+          urlPlaceholder="URL: ex. https://some-blog.com/page"
+        />
+        <FormArray.Display
+          name="externalLinks"
+          displayMode="chips"
+          variant="url"
+        />
+      </FormArray>
     </ContainerStyled>
   );
 }

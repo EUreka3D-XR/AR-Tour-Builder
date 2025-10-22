@@ -4,9 +4,9 @@ import { alpha, keyframes, Stack, styled, Typography } from "@mui/material";
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import Map from "@/components/map/Map";
-import { convertToLeafletBounds } from "@/components/map/mapConverters";
-import MapUIArea from "@/components/map/MapUIArea";
 import PoiMarker from "@/components/map/PoiMarker";
+import MapUIArea from "@/components/map/ui/MapUIArea";
+import { convertToLeafletBounds } from "@/components/map/utils/mapConverters";
 
 const MapUIAreaStyled = styled(MapUIArea)(({ theme }) => ({
   bottom: theme.spacing(0),

@@ -2,8 +2,8 @@ import { useMemo } from "react";
 import { useWatch } from "react-hook-form";
 
 import Map from "@/components/map/Map";
-import { convertToLeafletBounds } from "@/components/map/mapConverters";
 import PoiMarker from "@/components/map/PoiMarker";
+import { convertToLeafletBounds } from "@/components/map/utils/mapConverters";
 
 function TourPoisMapSection({ containerRef }) {
   const tourBoundBox = useWatch({ name: "boundBox" });

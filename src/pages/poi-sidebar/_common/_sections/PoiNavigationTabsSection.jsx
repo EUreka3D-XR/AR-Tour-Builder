@@ -6,6 +6,7 @@ import useParamsTabs from "@/hooks/useParamsTabs";
 const poiTabs = [
   { icon: "poi", value: "location", label: "Location" },
   { icon: "info", value: "details", label: "Details" },
+  { icon: "link", value: "external-links", label: "External Links" },
   { icon: "media", value: "media", label: "Media" },
 ];
 

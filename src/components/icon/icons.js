@@ -26,6 +26,7 @@ export const icons = {
   image: "image",
   info: "info",
   language: "language",
+  link: "link",
   list: "list",
   map: "map",
   media: "perm_media",

@@ -43,7 +43,7 @@ function PoiFooterSection({ onCancel, steps = [] }) {
 
   const [searchParams] = useSearchParams();
   const formIdToSubmit = searchParams.get("mediaForm")
-    ? "media-form"
+    ? "poi-asset-form"
     : "poi-form";
 
   console.log(currentStep, steps, activeTab);

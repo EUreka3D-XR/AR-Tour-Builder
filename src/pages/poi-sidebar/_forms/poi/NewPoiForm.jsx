@@ -1,7 +1,7 @@
 import { FormProvider, useForm } from "react-hook-form";
 
 import wait from "@/utils/wait";
-import PoiForm from "../PoiForm";
+import PoiForm from "./PoiForm";
 
 function NewPoiForm() {
   const methods = useForm({
@@ -40,9 +40,7 @@ function NewPoiForm() {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <PoiForm />
-      </form>
+      <PoiForm onSubmit={handleSubmit(onSubmit)} />
     </FormProvider>
   );
 }

@@ -28,7 +28,6 @@ function InputLocale({ className, children, name, hasNoLocaleIndicators }) {
 
   const hasLocaleIndicators = !hasNoLocaleIndicators;
 
-  console.log(locale, available);
   return (
     <ContainerStyled className={clsx("input-localized-wrapper", className)}>
       {available.map((loc) => (

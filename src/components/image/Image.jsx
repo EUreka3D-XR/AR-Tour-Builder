@@ -12,7 +12,7 @@ const ImageUnstyled = ({
 }) => {
   return (
     <img
-      src={src}
+      src={src || placeholderImage}
       alt={alt}
       className={className}
       width={width}

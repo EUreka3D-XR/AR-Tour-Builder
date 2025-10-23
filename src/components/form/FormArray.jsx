@@ -57,7 +57,6 @@ function FormArrayTextInput({ name, label, placeholder }) {
   const handleInsert = () => {
     if (inputRef.current) {
       const value = inputRef.current.value;
-      console.log("value", value);
       if (value.trim() !== "") {
         insert(0, value);
         inputRef.current.value = "";

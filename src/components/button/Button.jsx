@@ -91,7 +91,7 @@ function ButtonNewUnstyled({
       color={color}
       fullWidth={isFullwidth}
       loading={isLoading}
-      disabled={isDisabled}
+      disabled={isDisabled || isLoading}
       type={type}
       startIcon={startIcon}
       size={size}

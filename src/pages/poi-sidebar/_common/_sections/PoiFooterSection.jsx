@@ -46,8 +46,6 @@ function PoiFooterSection({ onCancel, steps = [] }) {
     ? "poi-asset-form"
     : "poi-form";
 
-  console.log(currentStep, steps, activeTab);
-
   return (
     <FooterStyled className="poi-sidebar-footer">
       <Stack direction="row" alignItems="center" justifyContent="space-between">

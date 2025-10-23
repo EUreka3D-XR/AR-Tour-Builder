@@ -33,12 +33,16 @@ const DEFAULT_VALUES = {
     },
   },
 };
-function NewPoiAssetForm() {
+function NewPoiAssetForm({ onClose }) {
   const onSubmit = (data) => {
     console.log(data);
   };
   return (
-    <PoiAssetFormContainer defaultValues={DEFAULT_VALUES} onSubmit={onSubmit} />
+    <PoiAssetFormContainer
+      defaultValues={DEFAULT_VALUES}
+      onSubmit={onSubmit}
+      onClose={onClose}
+    />
   );
 }
 

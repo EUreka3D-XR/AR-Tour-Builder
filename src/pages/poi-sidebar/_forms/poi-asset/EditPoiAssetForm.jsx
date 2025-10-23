@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from "react-router";
 import { usePoiAssetMultilingual } from "@/services/assetsService";
 import PoiAssetForm from "./PoiAssetForm";
 
-function EditPoiAssetForm() {
+function EditPoiAssetForm({ onClose }) {
   const { projectId, tourId, poiId } = useParams();
   const [searchParams] = useSearchParams();
   const mediaId = searchParams.get("mediaId");
@@ -22,7 +22,17 @@ function EditPoiAssetForm() {
     console.log("Submitted data:", data);
   };
 
-  return <PoiAssetForm defaultValues={data} onSubmit={onSubmit} />;
+  const handleClose = () => {
+    onClose();
+  };
+
+  return (
+    <PoiAssetForm
+      defaultValues={data}
+      onSubmit={onSubmit}
+      onClose={handleClose}
+    />
+  );
 }
 
 export default EditPoiAssetForm;

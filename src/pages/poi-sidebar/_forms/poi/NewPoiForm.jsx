@@ -3,7 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import wait from "@/utils/wait";
 import PoiForm from "./PoiForm";
 
-function NewPoiForm() {
+function NewPoiForm({ onClose }) {
   const methods = useForm({
     defaultValues: {
       title: {
@@ -40,7 +40,7 @@ function NewPoiForm() {
 
   return (
     <FormProvider {...methods}>
-      <PoiForm onSubmit={handleSubmit(onSubmit)} />
+      <PoiForm onSubmit={handleSubmit(onSubmit)} onClose={onClose} />
     </FormProvider>
   );
 }

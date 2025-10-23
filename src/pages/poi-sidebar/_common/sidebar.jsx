@@ -4,9 +4,6 @@ import { motion } from "motion/react";
 import { Divider, Drawer, styled } from "@mui/material";
 
 import useNavPaths from "@/hooks/useNavPaths";
-import PoiAssetHeaderSection from "./_sections/PoiAssetHeaderSection";
-import PoiFooterSection from "./_sections/PoiFooterSection";
-import PoiNavigationTabsSection from "./_sections/PoiNavigationTabsSection";
 import PoiSidebarHeader from "./_sections/PoiSidebarHeader";
 
 function PoiSidebar({ children }) {
@@ -50,22 +47,13 @@ function PoiSidebar({ children }) {
             onClose={handleCloseSidebar}
           />
           <Divider />
-          {!isInsideAssetForm && <PoiNavigationTabsSection tabs={poiTabs} />}
-          {isInsideAssetForm && (
-            <PoiAssetHeaderSection
-              title="Create Asset"
-              onBack={handleCloseAsset}
-            />
-          )}
-          <Divider />
         </div>
-        <ScrollableArea className="scrollable-area">
-          {typeof children === "function" &&
-            children({ showAssetForm: isInsideAssetForm })}
-        </ScrollableArea>
-        <div className="no-shrink">
-          <PoiFooterSection steps={steps} onCancel={handleCloseSidebar} />
-        </div>
+        {typeof children === "function" &&
+          children({
+            showAssetForm: isInsideAssetForm,
+            onCloseAsset: handleCloseAsset,
+            onClosePoi: handleCloseSidebar,
+          })}
       </ContentStyled>
     </DrawerStyled>
   );
@@ -91,17 +79,3 @@ const ContentStyled = styled("div")({
     flexShrink: 0,
   },
 });
-
-const ScrollableArea = styled("div")({
-  flex: 1,
-  overflowY: "auto",
-});
-
-const poiTabs = [
-  { icon: "poi", value: "location", label: "Location" },
-  { icon: "info", value: "details", label: "Details" },
-  { icon: "link", value: "external-links", label: "External Links" },
-  { icon: "media", value: "media", label: "Media" },
-];
-
-const steps = poiTabs.map((tab) => tab.value);

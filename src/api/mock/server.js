@@ -6,6 +6,7 @@ import {
   RestSerializer,
 } from "miragejs";
 
+import normalizeRelationships from "./helpers/normalizeRelationships";
 import { getRandomItems, getRandomPoiAssets } from "./helpers/randomizers";
 import { getMockAssets } from "./mock-data/assetsMocks";
 import { mockPOIs } from "./mock-data/poisMocks";
@@ -87,7 +88,7 @@ const AppSerializer = RestSerializer.extend({
       typeof value === "object" &&
       value.locales &&
       typeof value.locales === "object" &&
-      (value.locales.en || value.locales.fr)
+      Object.keys(value.locales).length > 0
     ); // Check for expected locale keys
   },
 });
@@ -298,6 +299,59 @@ export const makeServer = ({ environment = "development" } = {}) => {
         }
         return tour;
       });
+      // Create a new tour under a project
+      this.post("/projects/:projectId/tours", (schema, request) => {
+        const projectId = request.params.projectId;
+        const attrs = JSON.parse(request.requestBody);
+        attrs.projectId = projectId;
+        const tour = schema.tours.create(attrs);
+        // const project = schema.projects.find(projectId);
+        // if (project) {
+        //   project.tourIds = [...(project.tourIds || []), tour.id];
+        //   project.save();
+        // }
+        return tour;
+      });
+      // Update an existing tour
+      this.put("/projects/:projectId/tours/:tourId", (schema, request) => {
+        const { tourId } = request.params;
+        const attrs = JSON.parse(request.requestBody);
+        const normalizedAttrs = normalizeRelationships(attrs, ["pois"]);
+
+        let tour = schema.tours.find(tourId);
+        if (!tour) {
+          return new Response(404, {}, { error: "Tour not found" });
+        }
+        // Optionally ensure the tour belongs to the project
+        // ...
+
+        tour.update(normalizedAttrs);
+        return tour;
+      });
+      // Delete a tour
+      this.delete("/projects/:projectId/tours/:tourId", (schema, request) => {
+        const { projectId, tourId } = request.params;
+        const tour = schema.tours.find(tourId);
+        if (!tour) {
+          return new Response(404, {}, { error: "Tour not found" });
+        }
+        // Optionally ensure the tour belongs to the project
+        if (tour.projectId !== projectId) {
+          return new Response(
+            400,
+            {},
+            { error: "Tour does not belong to project" },
+          );
+        }
+        // Remove tour from project's tourIds
+        const project = schema.projects.find(projectId);
+        if (project && Array.isArray(project.tourIds)) {
+          project.tourIds = project.tourIds.filter((id) => id !== tourId);
+          project.save();
+        }
+        tour.destroy();
+        return new Response(204);
+      });
 
       // Pois
       this.get("/projects/:projectId/tours/:tourId/pois", (schema, request) => {
@@ -311,6 +365,73 @@ export const makeServer = ({ environment = "development" } = {}) => {
           const { poiId } = request.params;
           const poi = schema.pois.find(poiId);
           return poi || new Response(404, {}, { error: "POI not found" });
+        },
+      );
+      // Create a new POI under a tour
+      this.post(
+        "/projects/:projectId/tours/:tourId/pois",
+        (schema, request) => {
+          const { tourId } = request.params;
+          const attrs = JSON.parse(request.requestBody);
+          attrs.tourId = tourId;
+          const poi = schema.pois.create(attrs);
+          // Add POI to tour
+          const tour = schema.tours.find(tourId);
+          if (tour) {
+            tour.poiIds = [...(tour.poiIds || []), poi.id];
+            tour.save();
+          }
+          return poi;
+        },
+      );
+      // Update an existing POI
+      this.put(
+        "/projects/:projectId/tours/:tourId/pois/:poiId",
+        (schema, request) => {
+          const { tourId, poiId } = request.params;
+          const attrs = JSON.parse(request.requestBody);
+          // const normalizedAttrs = normalizeRelationships(attrs, ["pois"]);
+          let poi = schema.pois.find(poiId);
+          if (!poi) {
+            return new Response(404, {}, { error: "POI not found" });
+          }
+          // Optionally ensure the POI belongs to the tour
+          if (poi.tourId !== tourId) {
+            return new Response(
+              400,
+              {},
+              { error: "POI does not belong to tour" },
+            );
+          }
+          poi.update(attrs);
+          return poi;
+        },
+      );
+      // Delete a POI
+      this.delete(
+        "/projects/:projectId/tours/:tourId/pois/:poiId",
+        (schema, request) => {
+          const { tourId, poiId } = request.params;
+          const poi = schema.pois.find(poiId);
+          if (!poi) {
+            return new Response(404, {}, { error: "POI not found" });
+          }
+          // Optionally ensure the POI belongs to the tour
+          if (poi.tourId !== tourId) {
+            return new Response(
+              400,
+              {},
+              { error: "POI does not belong to tour" },
+            );
+          }
+          // Remove POI from tour's poiIds
+          const tour = schema.tours.find(tourId);
+          if (tour && Array.isArray(tour.poiIds)) {
+            tour.poiIds = tour.poiIds.filter((id) => id !== poiId);
+            tour.save();
+          }
+          poi.destroy();
+          return new Response(204);
         },
       );
 

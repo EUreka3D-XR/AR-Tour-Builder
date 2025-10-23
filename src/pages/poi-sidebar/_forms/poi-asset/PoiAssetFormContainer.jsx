@@ -4,6 +4,7 @@ import PoiAssetForm from "./PoiAssetForm";
 
 function PoiAssetFormContainer({ defaultValues, onSubmit }) {
   const methods = useForm({
+    shouldUnregister: false,
     defaultValues,
   });
 

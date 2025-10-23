@@ -10,6 +10,7 @@ function CreateProjectForm() {
   const navigate = useNavigate();
 
   const methods = useForm({
+    shouldUnregister: false,
     defaultValues: {
       title: {
         locales: {

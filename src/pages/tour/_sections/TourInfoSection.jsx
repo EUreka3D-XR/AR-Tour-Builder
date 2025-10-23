@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useFormContext } from "react-hook-form";
 import { styled, TextField } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -50,6 +51,10 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 function TourInfoSection() {
   const { tourId } = useParams();
   const isNew = !tourId;
+
+  const {
+    formState: { isSubmitting },
+  } = useFormContext();
 
   return (
     <ContainerStyled>
@@ -143,7 +148,7 @@ function TourInfoSection() {
       </div>
       {isNew && (
         <div className="bottom-actions">
-          <Button variant="filled" type="submit">
+          <Button variant="filled" type="submit" isLoading={isSubmitting}>
             Create tour and start editing
           </Button>
         </div>

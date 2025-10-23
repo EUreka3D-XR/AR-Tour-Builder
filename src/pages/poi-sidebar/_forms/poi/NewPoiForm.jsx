@@ -5,6 +5,7 @@ import PoiForm from "./PoiForm";
 
 function NewPoiForm({ onClose }) {
   const methods = useForm({
+    shouldUnregister: false,
     defaultValues: {
       title: {
         locales: {

@@ -31,7 +31,7 @@ function CreateTourForm() {
 
   return (
     <FormProvider {...methods}>
-      <TourForm onSubmit={handleSubmit(onSubmit)} />;
+      <TourForm onSubmit={handleSubmit(onSubmit)} />
     </FormProvider>
   );
 }

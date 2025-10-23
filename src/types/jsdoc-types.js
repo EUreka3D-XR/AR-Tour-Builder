@@ -55,6 +55,14 @@
  * @property {FetchStateType} fetchState - The fetch state
  */
 
+/**
+ * @template T
+ * @typedef {Object} MutationResultType
+ * @property {T} data - The mutated data
+ * @property {FetchStateType} fetchState - The fetch state
+ * @property {import('@tanstack/react-query').UseMutateAsyncFunction<T>} mutate - The mutate async function
+ */
+
 // =============================================================================
 // PROJECT TYPES
 // =============================================================================

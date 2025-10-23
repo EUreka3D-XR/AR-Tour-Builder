@@ -5,6 +5,7 @@ import { IconButton, styled, Typography } from "@mui/material";
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";
+import { dateFormatters } from "@/utils/datetimeFormatters";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(1.5, 2),
@@ -36,11 +37,6 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
     formState: { isSubmitting },
   } = useFormContext();
 
-  const tourTitle = useWatch({
-    name: "title",
-    compute: (title) =>
-      isExisting ? title?.locales?.en || "Untitled Tour" : "Create New Tour",
-  });
   const tourStatus = useWatch({ name: "status", defaultValue: "draft" });
   const createdAt = useWatch({ name: "createdAt" });
   const updatedAt = useWatch({ name: "updatedAt" });
@@ -57,12 +53,13 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
           <EurekaIcon name="back" fontSize="small" />
         </IconButton>
         <Typography variant="h4" component="h2" noWrap>
-          {tourTitle}
+          Editting Tour
         </Typography>
       </div>
       {isExisting && (
         <div className="right-section">
-          {lastModifiedAt}
+          {"Last modified: "}
+          {dateFormatters.lastUpdatedLike(lastModifiedAt)}
           <Button
             startIcon={<EurekaIcon name="save" />}
             type="submit"

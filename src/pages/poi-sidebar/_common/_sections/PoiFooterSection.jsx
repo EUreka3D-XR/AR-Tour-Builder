@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useParams } from "react-router";
+import { useFormContext } from "react-hook-form";
 import { Stack, styled } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -12,11 +13,15 @@ const FooterStyled = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.grey[50],
 }));
 
-function PoiFooterSection({ onCancel, steps = [] }) {
+function PoiFooterSection({ onCancel, steps = [], fieldsPerStep = [] }) {
   const { activeTab, setActiveTab } = useParamsTabs("poiTab");
-
   const { poiId } = useParams();
   const isNew = !poiId;
+
+  const {
+    trigger,
+    formState: { errors },
+  } = useFormContext();
 
   const currentStep = useMemo(() => {
     if (!steps) return 0;
@@ -24,11 +29,13 @@ function PoiFooterSection({ onCancel, steps = [] }) {
   }, [activeTab, steps]);
 
   const renderPreviousButton = isNew && currentStep > 0;
-  const renderNextButton = isNew && currentStep < steps.length - 1;
-  const renderSaveButton = isNew && currentStep === steps.length - 1;
+  const renderNextButton = isNew && currentStep < steps.length - 2;
+  const renderCreateButton = isNew && currentStep === steps.length - 2;
   const renderUpdateButton = !isNew;
 
-  const handleNextStep = () => {
+  const handleNextStep = async () => {
+    await validateStep(currentStep);
+
     const nextStep = steps[currentStep + 1];
     if (nextStep) {
       setActiveTab(nextStep);
@@ -40,6 +47,17 @@ function PoiFooterSection({ onCancel, steps = [] }) {
       setActiveTab(prevStep);
     }
   };
+
+  const validateStep = async (step) => {
+    const currentStepFields = fieldsPerStep[step] || [];
+    const isValid = await trigger(currentStepFields);
+    return isValid;
+  };
+
+  const isNextDisabled = useMemo(() => {
+    const currentStepFields = fieldsPerStep[currentStep] || [];
+    return currentStepFields.some((field) => errors[field]);
+  }, [errors, currentStep, fieldsPerStep]);
 
   return (
     <FooterStyled className="poi-sidebar-footer">
@@ -57,24 +75,24 @@ function PoiFooterSection({ onCancel, steps = [] }) {
             </Button>
           )}
           {renderNextButton && (
-            <Button variant="filled" onClick={handleNextStep}>
+            <Button
+              variant="filled"
+              isDisabled={isNextDisabled}
+              onClick={handleNextStep}
+            >
               Next Step
             </Button>
           )}
-          {renderSaveButton && (
-            <Button
-              type="submit"
-              variant="filled"
-              startIcon={<EurekaIcon name="save" />}
-            >
-              Save
+          {renderCreateButton && (
+            <Button type="submit" variant="filled">
+              Create and add media
             </Button>
           )}
           {renderUpdateButton && (
             <Button
               type="submit"
               variant="filled"
-              startIcon={<EurekaIcon name={"save"} />}
+              startIcon={<EurekaIcon name="save" />}
             >
               Save Changes
             </Button>

@@ -1,3 +1,4 @@
+import { useParams } from "react-router";
 import { styled, Tab, Tabs } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -31,6 +32,9 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function TourNavigationTabsSection() {
+  const { tourId } = useParams();
+  const tourStatus = tourId ? "existing" : "new";
+
   const { routes } = useNavPaths();
 
   const { tabs, activeTab, setActiveTab } = useUrlTabs([
@@ -43,6 +47,7 @@ function TourNavigationTabsSection() {
       icon: "poi",
       label: "Points of Interest",
       value: routes.pois.index,
+      disableForStatus: "new",
     },
   ]);
 
@@ -61,6 +66,7 @@ function TourNavigationTabsSection() {
               label={tab.label}
               icon={<EurekaIcon name={tab.icon} />}
               iconPosition="start"
+              disabled={tab.disableForStatus === tourStatus}
             />
           );
         })}

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useParams } from "react-router";
 import { useWatch } from "react-hook-form";
 import { IconButton, styled, Typography } from "@mui/material";
 
@@ -27,12 +27,15 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function TourHeaderSection({ onSave, onPublish, onArchive }) {
-  const navigate = useNavigate();
-  const { routes } = useNavPaths();
+  const { tourId } = useParams();
+  const isExisting = !!tourId;
+
+  const { routes, navigate } = useNavPaths();
 
   const tourTitle = useWatch({
     name: "title",
-    compute: (title) => title?.locales?.en || "Untitled Tour",
+    compute: (title) =>
+      isExisting ? title?.locales?.en || "Untitled Tour" : "Create New Tour",
   });
   const tourStatus = useWatch({ name: "status", defaultValue: "draft" });
   const createdAt = useWatch({ name: "createdAt" });
@@ -54,43 +57,45 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
           {tourTitle}
         </Typography>
       </div>
-      <div className="right-section">
-        {isEditing ? (
-          <>
-            {lastModifiedAt}
-            <Button startIcon={<EurekaIcon name="save" />} onClick={onSave}>
-              Save Changes
-            </Button>
-            <Button
-              startIcon={<EurekaIcon name="delete" />}
-              color="error"
-              onClick={onSave}
-            >
-              Delete Tour
-            </Button>
-            {tourStatus === "draft" && (
-              <Button
-                startIcon={<EurekaIcon name="publish" />}
-                onClick={onPublish}
-              >
-                Publish
+      {isExisting && (
+        <div className="right-section">
+          {isEditing ? (
+            <>
+              {lastModifiedAt}
+              <Button startIcon={<EurekaIcon name="save" />} onClick={onSave}>
+                Save Changes
               </Button>
-            )}
-            {tourStatus === "published" && (
               <Button
-                startIcon={<EurekaIcon name="archive" />}
-                onClick={onArchive}
+                startIcon={<EurekaIcon name="delete" />}
+                color="error"
+                onClick={onSave}
               >
-                Archive
+                Delete Tour
               </Button>
-            )}
-          </>
-        ) : (
-          <Button variant="filled" onClick={onSave}>
-            Create Tour
-          </Button>
-        )}
-      </div>
+              {tourStatus === "draft" && (
+                <Button
+                  startIcon={<EurekaIcon name="publish" />}
+                  onClick={onPublish}
+                >
+                  Publish
+                </Button>
+              )}
+              {tourStatus === "published" && (
+                <Button
+                  startIcon={<EurekaIcon name="archive" />}
+                  onClick={onArchive}
+                >
+                  Archive
+                </Button>
+              )}
+            </>
+          ) : (
+            <Button variant="filled" onClick={onSave}>
+              Create Tour
+            </Button>
+          )}
+        </div>
+      )}
     </ContainerStyled>
   );
 }

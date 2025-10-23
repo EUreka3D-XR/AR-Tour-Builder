@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useParams, useSearchParams } from "react-router";
+import { useParams } from "react-router";
 import { Stack, styled } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -41,11 +41,6 @@ function PoiFooterSection({ onCancel, steps = [] }) {
     }
   };
 
-  const [searchParams] = useSearchParams();
-  const formIdToSubmit = searchParams.get("mediaForm")
-    ? "poi-asset-form"
-    : "poi-form";
-
   return (
     <FooterStyled className="poi-sidebar-footer">
       <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -78,7 +73,6 @@ function PoiFooterSection({ onCancel, steps = [] }) {
           {renderUpdateButton && (
             <Button
               type="submit"
-              form={formIdToSubmit}
               variant="filled"
               startIcon={<EurekaIcon name={"save"} />}
             >

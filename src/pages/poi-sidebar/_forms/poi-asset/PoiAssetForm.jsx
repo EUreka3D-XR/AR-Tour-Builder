@@ -17,6 +17,7 @@ import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 import { fileTypes, getExtensionsHelperForType } from "@/utils/fileExtensions";
+import PoiAssetFooterSection from "../../_common/_sections/PoiAssetFooterSection";
 import PoiAssetHeaderSection from "../../_common/_sections/PoiAssetHeaderSection";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
@@ -251,6 +252,9 @@ function PoiAssetForm({ onSubmit, onClose }) {
           </div>
         </form>
       </ContainerStyled>
+      <NoShrink>
+        <PoiAssetFooterSection onCancel={onClose} />
+      </NoShrink>
     </>
   );
 }

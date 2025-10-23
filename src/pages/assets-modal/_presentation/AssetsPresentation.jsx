@@ -29,7 +29,7 @@ const GridAssetItem = styled("div")(({ theme }) => ({
   cursor: "pointer",
   transition: theme.transitions.create(["background-color", "box-shadow"], {
     duration: "0.1s",
-    easing: theme.transitions.easing.sharp,
+    easing: theme.transitions.easing.easeOut,
   }),
   "&:hover": {
     boxShadow: theme.shadows[1],
@@ -63,7 +63,7 @@ const ListAssetItem = styled("div")(({ theme }) => ({
   cursor: "pointer",
   transition: theme.transitions.create(["background-color", "box-shadow"], {
     duration: "0.1s",
-    easing: theme.transitions.easing.sharp,
+    easing: theme.transitions.easing.easeOut,
   }),
   "&:hover:not(.selected)": {
     backgroundColor: theme.palette.action.selected,

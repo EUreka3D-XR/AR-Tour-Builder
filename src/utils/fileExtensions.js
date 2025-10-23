@@ -1,3 +1,16 @@
+/**
+ * @typedef {Object} FileExtensionEntry
+ * @property {string} value - The file extension including the leading dot (e.g. ".jpg").
+ * @property {string} label - Human-friendly label or description for the extension.
+ */
+
+/**
+ * Mapping of asset types to their allowed file extensions.
+ * Keys are of type AssetType.
+ * Each value is an array of FileExtensionEntry objects.
+ *
+ * @type {Record<AssetType, FileExtensionEntry[]>}
+ */
 export const allowedFileExtensions = {
   image: [
     { value: ".jpg", label: "JPEG" },
@@ -41,6 +54,64 @@ export const allowedFileExtensions = {
   ],
 };
 
+/**
+ * Determine the asset type for a given URL or filename by inspecting its extension.
+ *
+ * - The function extracts the substring after the last '.' in the provided url.
+ * - It strips any URL fragment (#...) or query string (?...) from the extracted part.
+ * - Comparison is performed case-insensitively against allowedFileExtensions entries
+ *   (entries store extensions with a leading dot; the comparison strips that dot).
+ *
+ * @param {string} url - The URL or filename to inspect (may include query/hash).
+ * @returns {import("@/types/jsdoc-types").AssetType|null} The matching asset type if found; otherwise null.
+ */
+export const findTypeFromFileExtension = (url) => {
+  const extension = url.split(".").pop().split(/#|\?/)[0].toLowerCase();
+  for (const [type, extensions] of Object.entries(allowedFileExtensions)) {
+    if (extensions.some((ext) => ext.value.slice(1) === extension)) {
+      return type;
+    }
+  }
+  return null;
+};
+
+/**
+ * Flattened list of all allowed file extension values (each including the leading dot).
+ *
+ * @type {string[]}
+ */
 export const allAllowedFileExtensions = Object.values(allowedFileExtensions)
   .flat()
   .map((ext) => ext.value);
+
+/**
+ * List of all supported asset types.
+ * @type {Array<{value: import("@/types/jsdoc-types").AssetType, label: string}>}
+ */
+export const fileTypes = [
+  {
+    value: "image",
+    label: "Image",
+  },
+  {
+    value: "video",
+    label: "Video",
+  },
+  {
+    value: "audio",
+    label: "Audio",
+  },
+  {
+    value: "3d",
+    label: "3D Model",
+  },
+  {
+    value: "text",
+    label: "Document",
+  },
+];
+
+export const getExtensionsHelperForType = (type) => {
+  const allowed = allowedFileExtensions[type] || [];
+  return allowed.map((ext) => String(ext.value).toUpperCase()).join(", ");
+};

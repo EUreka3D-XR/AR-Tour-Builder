@@ -32,11 +32,20 @@ const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
 }));
 
 function PoiMediaTab() {
+  const [, setSearchParams] = useSearchParams();
   const [mockAssets, setMockAssets] = useState();
 
   useEffect(() => {
     setMockAssets(getMockPoiAssets(10));
   }, []);
+
+  const handleEditPoiAsset = (asset) => {
+    setSearchParams((prev) => {
+      prev.set("mediaForm", "edit");
+      prev.set("mediaId", asset.id);
+      return prev;
+    });
+  };
 
   return (
     <ContainerStyled>
@@ -51,7 +60,13 @@ function PoiMediaTab() {
         {mockAssets &&
           mockAssets
             .filter((asset) => asset.type !== "audio")
-            .map((asset) => <MediaCardItem key={asset.id} asset={asset} />)}
+            .map((asset) => (
+              <MediaCardItem
+                key={asset.id}
+                asset={asset}
+                onEdit={handleEditPoiAsset}
+              />
+            ))}
       </div>
     </ContainerStyled>
   );

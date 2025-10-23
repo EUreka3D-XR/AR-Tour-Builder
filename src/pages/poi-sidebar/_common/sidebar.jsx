@@ -22,6 +22,7 @@ function PoiSidebar({ children }) {
   const handleCloseAsset = useCallback(() => {
     setSearchParams((prev) => {
       prev.delete("mediaForm");
+      prev.delete("mediaId");
       return prev;
     });
   }, [setSearchParams]);

@@ -41,7 +41,6 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
   const createdAt = useWatch({ name: "createdAt" });
   const updatedAt = useWatch({ name: "updatedAt" });
   const lastModifiedAt = updatedAt ?? createdAt;
-  const isEditing = Boolean(lastModifiedAt);
 
   const handleBackClick = () => {
     navigate(routes.tours.index);
@@ -59,39 +58,31 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
       </div>
       {isExisting && (
         <div className="right-section">
-          {isEditing ? (
-            <>
-              {lastModifiedAt}
-              <Button startIcon={<EurekaIcon name="save" />} onClick={onSave}>
-                Save Changes
-              </Button>
-              <Button
-                startIcon={<EurekaIcon name="delete" />}
-                color="error"
-                onClick={onSave}
-              >
-                Delete Tour
-              </Button>
-              {tourStatus === "draft" && (
-                <Button
-                  startIcon={<EurekaIcon name="publish" />}
-                  onClick={onPublish}
-                >
-                  Publish
-                </Button>
-              )}
-              {tourStatus === "published" && (
-                <Button
-                  startIcon={<EurekaIcon name="archive" />}
-                  onClick={onArchive}
-                >
-                  Archive
-                </Button>
-              )}
-            </>
-          ) : (
-            <Button variant="filled" onClick={onSave}>
-              Create Tour
+          {lastModifiedAt}
+          <Button startIcon={<EurekaIcon name="save" />} onClick={onSave}>
+            Save Changes
+          </Button>
+          <Button
+            startIcon={<EurekaIcon name="delete" />}
+            color="error"
+            onClick={onSave}
+          >
+            Delete Tour
+          </Button>
+          {tourStatus === "draft" && (
+            <Button
+              startIcon={<EurekaIcon name="publish" />}
+              onClick={onPublish}
+            >
+              Publish
+            </Button>
+          )}
+          {tourStatus === "published" && (
+            <Button
+              startIcon={<EurekaIcon name="archive" />}
+              onClick={onArchive}
+            >
+              Archive
             </Button>
           )}
         </div>

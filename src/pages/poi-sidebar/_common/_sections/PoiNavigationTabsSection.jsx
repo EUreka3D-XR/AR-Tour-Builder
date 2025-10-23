@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useParams } from "react-router";
 import { useFormContext } from "react-hook-form";
 import { styled, Tab, Tabs } from "@mui/material";
 
@@ -17,7 +18,11 @@ const NavigationAreaStyled = styled("div")(({ theme }) => ({
 }));
 
 function PoiNavigationTabsSection({ tabs: poiTabs = [], fieldsPerStep }) {
+  const { poiId } = useParams();
+  const isNew = !poiId;
+
   const {
+    trigger,
     formState: { errors },
   } = useFormContext();
 
@@ -43,9 +48,26 @@ function PoiNavigationTabsSection({ tabs: poiTabs = [], fieldsPerStep }) {
     return validity;
   }, [errors, fieldsPerStep, poiTabs]);
 
+  const validateStep = async (step) => {
+    const currentStepFields = fieldsPerStep[step] || [];
+    const isValid = await trigger(currentStepFields);
+    return isValid;
+  };
+
+  const changeTab = (e, val) => {
+    const tabIndex = poiTabs.findIndex((tab) => tab.value === val);
+    if (!isNew && validityPerSteps[val] === false) {
+      const isValid = validateStep(tabIndex);
+      if (!isValid) {
+        return;
+      }
+    }
+    setActiveTab(e, val);
+  };
+
   return (
     <NavigationAreaStyled>
-      <Tabs value={activeTab} className="tabs-row" onChange={setActiveTab}>
+      <Tabs value={activeTab} className="tabs-row" onChange={changeTab}>
         {tabs.map((tab, index) => {
           const id = `poi-nav-tab-${index}`;
           const aria = `poi-nav-tabpanel-${index}`;
@@ -56,7 +78,7 @@ function PoiNavigationTabsSection({ tabs: poiTabs = [], fieldsPerStep }) {
               aria-controls={aria}
               value={tab.value}
               label={tab.label}
-              disabled={validityPerSteps[tab.value] === false}
+              disabled={isNew && validityPerSteps[tab.value] === false}
               icon={<EurekaIcon name={tab.icon} fontSize="small" />}
               iconPosition="start"
               className="tab-item"

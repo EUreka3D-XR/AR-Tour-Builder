@@ -9,7 +9,7 @@ function CreateTourForm() {
   const { routes, navigate } = useNavPaths();
   const { projectId } = useParams();
 
-  const { mutate: createTour, fetchState } = useCreateTour(projectId);
+  const { mutate: createTour } = useCreateTour(projectId);
 
   const methods = useForm({
     shouldUnregister: false,

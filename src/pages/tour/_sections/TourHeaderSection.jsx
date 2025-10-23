@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useWatch } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { IconButton, styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -32,6 +32,10 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
 
   const { routes, navigate } = useNavPaths();
 
+  const {
+    formState: { isSubmitting },
+  } = useFormContext();
+
   const tourTitle = useWatch({
     name: "title",
     compute: (title) =>
@@ -59,7 +63,11 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
       {isExisting && (
         <div className="right-section">
           {lastModifiedAt}
-          <Button startIcon={<EurekaIcon name="save" />} onClick={onSave}>
+          <Button
+            startIcon={<EurekaIcon name="save" />}
+            type="submit"
+            isLoading={isSubmitting}
+          >
             Save Changes
           </Button>
           <Button

@@ -16,7 +16,7 @@ function EditTourForm({ initialTour }) {
 
   const { projectId, tourId } = useParams();
 
-  const { mutate: updateTour, fetchState } = useUpdateTour(projectId, tourId);
+  const { mutate: updateTour } = useUpdateTour(projectId, tourId);
 
   const methods = useForm({
     shouldUnregister: false,

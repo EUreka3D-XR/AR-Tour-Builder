@@ -41,9 +41,9 @@ const ContainerStyled = styled("div")(({ theme }) => ({
     flexShrink: 0,
     display: "flex",
     justifyContent: "flex-end",
-    backgroundColor: theme.palette.background.paper,
     borderTop: `1px solid ${theme.palette.divider}`,
     padding: theme.spacing(2),
+    backgroundColor: theme.palette.grey[50],
   },
 }));
 

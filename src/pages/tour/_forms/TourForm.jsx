@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useParams } from "react-router";
 import { Divider, styled } from "@mui/material";
 
 import TourHeaderSection from "../_sections/TourHeaderSection";
@@ -38,6 +38,9 @@ const ContainerStyled = styled("div")(() => ({
  * @returns {React.ReactElement}
  */
 function TourForm({ onSubmit }) {
+  const { tourId } = useParams();
+  const isExisting = !!tourId;
+
   const containerRef = useRef(null);
 
   return (
@@ -52,7 +55,7 @@ function TourForm({ onSubmit }) {
               <Outlet context={{ containerRef }} />
             </div>
             <div className="right-section">
-              <TourPoisMapSection containerRef={containerRef} />
+              {isExisting && <TourPoisMapSection containerRef={containerRef} />}
             </div>
           </div>
         </div>

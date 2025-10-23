@@ -144,7 +144,7 @@ function TourInfoSection() {
       {isNew && (
         <div className="bottom-actions">
           <Button variant="filled" type="submit">
-            Create Tour
+            Create tour and start editing
           </Button>
         </div>
       )}

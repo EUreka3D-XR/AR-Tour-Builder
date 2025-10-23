@@ -1,6 +1,6 @@
 import ToggleVisibility from "../_common/_components/ToggleVisibility";
-import PoiAssetDetailsSection from "../_common/_sections/PoiAssetDetailsSection";
 import PoiSidebar from "../_common/sidebar";
+import EditPoiAssetForm from "../_forms/poi-asset/EditPoiAssetForm";
 import NewPoiForm from "../_forms/poi/NewPoiForm";
 
 function EditPoiSidebar() {
@@ -13,7 +13,7 @@ function EditPoiSidebar() {
               <NewPoiForm />
             </ToggleVisibility>
             <ToggleVisibility show={showAssetForm}>
-              <PoiAssetDetailsSection />
+              <EditPoiAssetForm />
             </ToggleVisibility>
           </>
         );

@@ -1,52 +1,44 @@
-import { FormProvider, useForm } from "react-hook-form";
+import PoiAssetFormContainer from "./PoiAssetFormContainer";
 
-import PoiAssetForm from "./PoiAssetForm";
-
-function NewPoiAssetForm() {
-  const methods = useForm({
-    defaultValues: {
+const DEFAULT_VALUES = {
+  title: {
+    locales: {
+      en: "",
+      fr: "",
+    },
+  },
+  description: {
+    locales: {
+      en: "",
+      fr: "",
+    },
+  },
+  contentUrl: "",
+  assetType: "",
+  georeference: {
+    lat: "",
+    long: "",
+  },
+  isGeoreferenced: false,
+  modelAssetAttributes: {
+    viewInAr: false,
+    linkedAsset: {
+      contentUrl: "",
       title: {
         locales: {
           en: "",
           fr: "",
         },
       },
-      description: {
-        locales: {
-          en: "",
-          fr: "",
-        },
-      },
-      contentUrl: "",
-      assetType: "",
-      georeference: {
-        lat: "",
-        long: "",
-      },
-      isGeoreferenced: false,
-      modelAssetAttributes: {
-        viewInAr: false,
-        linkedAsset: {
-          contentUrl: "",
-          title: {
-            locales: {
-              en: "",
-              fr: "",
-            },
-          },
-        },
-      },
     },
-  });
-
-  const { handleSubmit } = methods;
+  },
+};
+function NewPoiAssetForm() {
   const onSubmit = (data) => {
     console.log(data);
   };
   return (
-    <FormProvider {...methods}>
-      <PoiAssetForm onSubmit={handleSubmit(onSubmit)} />
-    </FormProvider>
+    <PoiAssetFormContainer defaultValues={DEFAULT_VALUES} onSubmit={onSubmit} />
   );
 }
 

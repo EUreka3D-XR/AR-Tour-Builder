@@ -9,6 +9,7 @@ import {
 
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
+import UrlHelperText from "@/components/url-helper-text/UrlHelperText";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(5),
@@ -60,6 +61,7 @@ function PoiAssetDetailsSection() {
         <TextField
           placeholder="https://example.com/media-url.png"
           fullWidth
+          helperText={<UrlHelperText />}
           type="url"
         />
       </LabeledInput>

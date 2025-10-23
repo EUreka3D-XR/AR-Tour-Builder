@@ -25,7 +25,7 @@ function CreateTourForm() {
   const onSubmit = (data) => {
     console.log(data);
     wait(1000).then(() => {
-      navigate(`${routes.tours.one("new-tour-id")}`);
+      navigate(`${routes.tours.one("tour-001")}`);
     });
   };
 

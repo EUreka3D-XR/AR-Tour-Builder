@@ -7,7 +7,10 @@ export const inputLocaleValue = (values, name, locale) => {
   return values[name].locales[locale];
 };
 export const localeValue = (value, locale = i18n.language) => {
-  return value?.locales?.[locale];
+  if (isLocalesValue(value)) {
+    return value?.locales?.[locale];
+  }
+  return value;
 };
 
 export const getLocaleValues = (values, name, index) => {

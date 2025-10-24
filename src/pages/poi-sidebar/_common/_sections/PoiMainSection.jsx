@@ -1,7 +1,7 @@
 import { styled } from "@mui/material";
 
 import useParamsTabs from "@/hooks/useParamsTabs";
-import PoiMediaTab from "../_tabs/_media/PoiMediaTab";
+import PoiMediaTabContainer from "../_tabs/_media/PoiMediaTabContainer";
 import PoiDetailsTab from "../_tabs/PoiDetailsTab";
 import PoiExternalLinksTab from "../_tabs/PoiExternalLinksTab";
 import PoiLocationTab from "../_tabs/PoiLocationTab";
@@ -18,7 +18,7 @@ function PoiMainSection() {
       {activeTab === "location" && <PoiLocationTab />}
       {activeTab === "details" && <PoiDetailsTab />}
       {activeTab === "external-links" && <PoiExternalLinksTab />}
-      {activeTab === "media" && <PoiMediaTab />}
+      {activeTab === "media" && <PoiMediaTabContainer />}
     </MainAreaStyled>
   );
 }

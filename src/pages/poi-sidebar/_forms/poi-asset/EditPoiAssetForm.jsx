@@ -1,7 +1,8 @@
 import { useParams, useSearchParams } from "react-router";
 
 import { usePoiAssetMultilingual } from "@/services/assetsService";
-import PoiAssetForm from "./PoiAssetForm";
+import SidebarSkeleton from "../../_common/_utils/SidebarSkeleton";
+import PoiAssetFormContainer from "./PoiAssetFormContainer";
 
 function EditPoiAssetForm({ onClose }) {
   const { projectId, tourId, poiId } = useParams();
@@ -15,7 +16,7 @@ function EditPoiAssetForm({ onClose }) {
     mediaId,
   );
 
-  if (fetchState.isLoading) return <div>Loading...</div>;
+  if (fetchState.isLoading) return <SidebarSkeleton />;
   if (fetchState.isError) return <div>Error loading asset.</div>;
 
   const onSubmit = (data) => {
@@ -27,7 +28,7 @@ function EditPoiAssetForm({ onClose }) {
   };
 
   return (
-    <PoiAssetForm
+    <PoiAssetFormContainer
       defaultValues={data}
       onSubmit={onSubmit}
       onClose={handleClose}

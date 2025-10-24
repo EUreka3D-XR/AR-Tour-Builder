@@ -2,7 +2,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import PoiAssetForm from "./PoiAssetForm";
 
-function PoiAssetFormContainer({ defaultValues, onSubmit }) {
+function PoiAssetFormContainer({ defaultValues, onSubmit, onClose }) {
   const methods = useForm({
     shouldUnregister: false,
     defaultValues,
@@ -12,7 +12,7 @@ function PoiAssetFormContainer({ defaultValues, onSubmit }) {
 
   return (
     <FormProvider {...methods}>
-      <PoiAssetForm onSubmit={handleSubmit(onSubmit)} />
+      <PoiAssetForm onSubmit={handleSubmit(onSubmit)} onClose={onClose} />
     </FormProvider>
   );
 }

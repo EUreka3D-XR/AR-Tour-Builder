@@ -8,6 +8,8 @@ export const baseUrls = {
   tour: (projectId, tourId) => `/api/projects/${projectId}/tours/${tourId}`,
   tourPois: (projectId, tourId) =>
     `/api/projects/${projectId}/tours/${tourId}/pois`,
+  tourPoi: (projectId, tourId, poiId) =>
+    `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}`,
   pois: (projectId) => `/api/projects/${projectId}/pois`,
   poiAssets: (projectId, tourId, poiId) =>
     `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}/assets`,

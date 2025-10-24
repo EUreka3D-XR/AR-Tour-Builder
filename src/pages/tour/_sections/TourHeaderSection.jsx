@@ -27,6 +27,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
     gap: theme.spacing(0.5),
     "& .timestamps": {
       fontStyle: "italic",
+      color: theme.palette.text.secondary,
     },
   },
 }));

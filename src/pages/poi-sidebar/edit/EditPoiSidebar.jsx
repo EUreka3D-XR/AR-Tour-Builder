@@ -2,7 +2,7 @@ import SidebarFormArea from "../_common/_utils/SidebarFormArea";
 import ToggleVisibility from "../_common/_utils/ToggleVisibility";
 import PoiSidebar from "../_common/sidebar";
 import EditPoiAssetForm from "../_forms/poi-asset/EditPoiAssetForm";
-import NewPoiForm from "../_forms/poi/NewPoiForm";
+import EditPoiForm from "../_forms/poi/EditPoiForm";
 
 function EditPoiSidebar() {
   return (
@@ -12,7 +12,7 @@ function EditPoiSidebar() {
           <SidebarFormArea className="sidebar-form-area">
             <ToggleVisibility show={!showAssetForm}>
               <div className="main-area">
-                <NewPoiForm onClose={onClosePoi} />
+                <EditPoiForm onClose={onClosePoi} />
               </div>
             </ToggleVisibility>
             <ToggleVisibility show={showAssetForm}>

@@ -13,7 +13,7 @@ export const convertToLeafletLatLng = (coordinates) => {
 };
 
 export const convertToLeafletLatLngClass = (coordinates) => {
-  if (!coordinates || coordinates.lat === 0 || coordinates.long === 0) {
+  if (!coordinates || !coordinates.lat || !coordinates.long) {
     return null;
   }
   return new LatLng(coordinates.lat, coordinates.long);

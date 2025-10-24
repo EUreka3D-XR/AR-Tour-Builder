@@ -7,7 +7,7 @@ const getTourPois = async (projectId, tourId, { params, locale }) => {
 };
 
 const getPoi = async (projectId, tourId, poiId, locale) => {
-  const url = baseUrls.pois(projectId, tourId, poiId);
+  const url = baseUrls.tourPoi(projectId, tourId, poiId);
   return fetcher.get(url, { locale });
 };
 

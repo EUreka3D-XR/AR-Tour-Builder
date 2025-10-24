@@ -78,11 +78,11 @@ export const useCreatePoiAsset = (projectId, tourId, poiId) => {
  * @param {string} poiId
  * @returns {PoiAssetMutateResult}
  */
-export const useUpdateTourPoi = (projectId, tourId, poiId, assetId) => {
+export const useUpdatePoiAsset = (projectId, tourId, poiId, assetId) => {
   return useDataMutator({
     mutator: ({ data }) =>
       api.assets.update(projectId, tourId, poiId, assetId, data),
-    mutationKey: ["update-tour-poi", projectId, tourId, poiId, assetId],
+    mutationKey: ["update-poi-asset", projectId, tourId, poiId, assetId],
     invalidateKey: ["poi-asset", projectId, tourId, poiId, assetId],
   });
 };

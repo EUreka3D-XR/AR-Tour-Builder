@@ -33,7 +33,7 @@ function FormInputCommonMultilingual({ name, render }) {
     });
   };
   return (
-    <InputLocale name={name}>
+    <InputLocale name={name} hideLocaleIndicators>
       {({ name: localizedName }) => (
         <Controller
           name={localizedName}

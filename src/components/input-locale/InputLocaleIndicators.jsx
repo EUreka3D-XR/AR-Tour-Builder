@@ -32,7 +32,6 @@ const ContainerStyled = styled("div")({
 function InputLocaleIndicators({ className, value, size, alignment = "end" }) {
   // subscribe to just the locales object for this input
 
-  console.log(value);
   const existingLocales = useMemo(() => {
     const locales = value?.locales || {};
 

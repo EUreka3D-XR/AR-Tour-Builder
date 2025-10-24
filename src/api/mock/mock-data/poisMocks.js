@@ -32,13 +32,23 @@ export const mockPOIs = [
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
-        title: "UNESCO World Heritage",
+        title: {
+          locales: {
+            en: "UNESCO World Heritage",
+            fr: "Patrimoine mondial de l'UNESCO",
+          },
+        },
         url: "https://whc.unesco.org/en/list/404",
       },
     ],
     quizLinks: [
       {
-        title: "Parthenon Architecture Quiz",
+        title: {
+          locales: {
+            en: "Parthenon Architecture Quiz",
+            fr: "Quiz sur l'architecture du Parthénon",
+          },
+        },
         url: "https://example.com/quiz/parthenon",
       },
     ],
@@ -68,13 +78,23 @@ export const mockPOIs = [
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
-        title: "Ancient History Encyclopedia",
+        title: {
+          locales: {
+            en: "Ancient History Encyclopedia",
+            fr: "Encyclopédie d'Histoire Ancienne",
+          },
+        },
         url: "https://www.worldhistory.org/Erechtheion/",
       },
     ],
     quizLinks: [
       {
-        title: "Caryatids Knowledge Test",
+        title: {
+          locales: {
+            en: "Caryatids Knowledge Test",
+            fr: "Test de Connaissance sur les Cariatides",
+          },
+        },
         url: "https://example.com/quiz/caryatids",
       },
     ],
@@ -104,13 +124,23 @@ export const mockPOIs = [
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
-        title: "Greek Ministry of Culture",
+        title: {
+          locales: {
+            en: "Greek Ministry of Culture",
+            fr: "Ministère grec de la Culture",
+          },
+        },
         url: "https://www.culture.gr/en/monument/SitePages/view.aspx?nID=1348",
       },
     ],
     quizLinks: [
       {
-        title: "Victory Goddess Quiz",
+        title: {
+          locales: {
+            en: "Victory Goddess Quiz",
+            fr: "Quiz sur la Déesse de la Victoire",
+          },
+        },
         url: "https://example.com/quiz/athena-nike",
       },
     ],
@@ -140,13 +170,20 @@ export const mockPOIs = [
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
-        title: "Acropolis Museum",
+        title: {
+          locales: { en: "Acropolis Museum", fr: "Musée de l'Acropole" },
+        },
         url: "https://www.theacropolismuseum.gr/en/propylaia",
       },
     ],
     quizLinks: [
       {
-        title: "Ancient Gateways Quiz",
+        title: {
+          locales: {
+            en: "Ancient Gateways Quiz",
+            fr: "Quiz sur les Portails Anciens",
+          },
+        },
         url: "https://example.com/quiz/propylaea",
       },
     ],
@@ -176,13 +213,20 @@ export const mockPOIs = [
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
-        title: "Ancient Theatre Archive",
+        title: {
+          locales: {
+            en: "Ancient Theatre Archive",
+            fr: "Archives du Théâtre Ancien",
+          },
+        },
         url: "https://www.ancient-theatre.com/greece/athens-theatre-dionysus",
       },
     ],
     quizLinks: [
       {
-        title: "Greek Drama Quiz",
+        title: {
+          locales: { en: "Greek Drama Quiz", fr: "Quiz sur le Drame Grec" },
+        },
         url: "https://example.com/quiz/dionysus-theatre",
       },
     ],
@@ -212,13 +256,18 @@ export const mockPOIs = [
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
-        title: "Athens Festival",
+        title: { locales: { en: "Athens Festival", fr: "Festival d'Athènes" } },
         url: "https://www.greekfestival.gr/en/venues/odeon-herodes-atticus",
       },
     ],
     quizLinks: [
       {
-        title: "Roman Architecture Quiz",
+        title: {
+          locales: {
+            en: "Roman Architecture Quiz",
+            fr: "Quiz sur l'Architecture Romaine",
+          },
+        },
         url: "https://example.com/quiz/odeon",
       },
     ],
@@ -248,13 +297,23 @@ export const mockPOIs = [
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
-        title: "Ancient Agora Museum",
+        title: {
+          locales: {
+            en: "Ancient Agora Museum",
+            fr: "Musée de l'Agora Antique",
+          },
+        },
         url: "https://www.agathe.gr/areopagus.html",
       },
     ],
     quizLinks: [
       {
-        title: "Ancient Democracy Quiz",
+        title: {
+          locales: {
+            en: "Ancient Democracy Quiz",
+            fr: "Quiz sur la Démocratie Ancienne",
+          },
+        },
         url: "https://example.com/quiz/areopagus",
       },
     ],
@@ -284,13 +343,23 @@ export const mockPOIs = [
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
-        title: "American School of Classical Studies",
+        title: {
+          locales: {
+            en: "American School of Classical Studies",
+            fr: "École Américaine d'Études Classiques",
+          },
+        },
         url: "https://www.agathe.gr/",
       },
     ],
     quizLinks: [
       {
-        title: "Ancient Marketplace Quiz",
+        title: {
+          locales: {
+            en: "Ancient Marketplace Quiz",
+            fr: "Quiz sur le Marché Ancien",
+          },
+        },
         url: "https://example.com/quiz/agora",
       },
     ],
@@ -320,13 +389,23 @@ export const mockPOIs = [
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
-        title: "Hellenic Ministry of Culture",
+        title: {
+          locales: {
+            en: "Hellenic Ministry of Culture",
+            fr: "Ministère Hellénique de la Culture",
+          },
+        },
         url: "https://www.culture.gr/en/monument/SitePages/view.aspx?nID=1347",
       },
     ],
     quizLinks: [
       {
-        title: "Greek Gods Quiz",
+        title: {
+          locales: {
+            en: "Greek Gods Quiz",
+            fr: "Quiz sur les Dieux Grecs",
+          },
+        },
         url: "https://example.com/quiz/hephaestus",
       },
     ],
@@ -356,13 +435,23 @@ export const mockPOIs = [
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: [
       {
-        title: "Agora Museum",
+        title: {
+          locales: {
+            en: "Agora Museum",
+            fr: "Musée de l'Agora",
+          },
+        },
         url: "https://www.agathe.gr/museum.html",
       },
     ],
     quizLinks: [
       {
-        title: "Ancient Architecture Quiz",
+        title: {
+          locales: {
+            en: "Ancient Architecture Quiz",
+            fr: "Quiz sur l'Architecture Ancienne",
+          },
+        },
         url: "https://example.com/quiz/stoa",
       },
     ],

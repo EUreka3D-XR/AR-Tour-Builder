@@ -6,6 +6,7 @@ import {
   useUpdateTourPoi,
 } from "@/services/poiService";
 import useNavPaths from "@/hooks/useNavPaths";
+import SidebarSkeleton from "../../_common/_utils/SidebarSkeleton";
 import PoiFormContainer from "./PoiFormContainer";
 
 function EditPoiForm({ onClose }) {
@@ -41,7 +42,7 @@ function EditPoiForm({ onClose }) {
   };
 
   if (fetchState.isLoading) {
-    return <PoiFormContainer.Skeleton />;
+    return <SidebarSkeleton />;
   }
 
   return (

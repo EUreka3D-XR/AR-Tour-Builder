@@ -16,11 +16,16 @@ const SelectStyled = styled(Select)(({ theme }) => ({
   },
 }));
 
-function LanguageDropdown({ className }) {
+function LanguageDropdown({ className, label, hideLabels }) {
   const { available } = useAvailableLocales();
 
   return (
-    <LanguageDropdownComponent className={className} options={available} />
+    <LanguageDropdownComponent
+      className={className}
+      label={label}
+      hideLabels={hideLabels}
+      options={available}
+    />
   );
 }
 
@@ -40,7 +45,12 @@ function LanguageDropdown({ className }) {
 //   );
 // }
 
-function LanguageDropdownComponent({ className, options = [] }) {
+function LanguageDropdownComponent({
+  className,
+  label = "Input Language",
+  hideLabels,
+  options = [],
+}) {
   const initialLocale = options[0]?.value || "en";
 
   const { locale, setCurrentLocale } = useFormLocale(initialLocale);
@@ -48,7 +58,7 @@ function LanguageDropdownComponent({ className, options = [] }) {
   return (
     <LabeledInput
       id="language-switcher-label"
-      label="Input Language"
+      label={label}
       labelPlacement="left"
       labelIcon="language"
       className={className}
@@ -61,7 +71,8 @@ function LanguageDropdownComponent({ className, options = [] }) {
         renderValue={(currentValue) => (
           <div className="dropdown-item">
             <LanguageIcon code={currentValue} />
-            {options.find((option) => option.value === currentValue)?.label}
+            {!hideLabels &&
+              options.find((option) => option.value === currentValue)?.label}
           </div>
         )}
         onChange={(e) => setCurrentLocale(e.target.value)}

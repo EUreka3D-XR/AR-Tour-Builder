@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
+import clsx from "clsx";
 import { styled } from "@mui/material";
 
 import LanguageIcon from "../icon/LanguageIcon";
@@ -8,25 +8,33 @@ const ContainerStyled = styled("div")({
   display: "flex",
   alignItems: "center",
   gap: "0.5rem",
-  marginTop: "1rem",
+  marginTop: "0.25rem",
+  "&.left, &.start, &.flex-start": {
+    justifyContent: "flex-start",
+  },
+  "&.center": {
+    justifyContent: "center",
+  },
+  "&.right, &.end, &.flex-end": {
+    justifyContent: "flex-end",
+  },
 });
 
 /**
  *
  * @param {Object} props
  * @param {string} [props.className]
- * @param {string} props.name - Name of the input field to watch
+ * @param {import("@/types/jsdoc-types").LocalesField} props.value - Name of the input field to watch
+ * @param {('flex-start'|'center'|'flex-end'|'start'|'end'|'left'|'right')} [props.alignment='flex-start'] - Alignment of the icons container
  * @param {('small'|'normal'|'large')} [props.size='normal'] - Size of the language icons
  * @returns
  */
-function InputLocaleIndicators({ className, name, size }) {
-  const { control } = useFormContext();
-
+function InputLocaleIndicators({ className, value, size, alignment = "end" }) {
   // subscribe to just the locales object for this input
-  const localizedValue = useWatch({ control, name });
 
+  console.log(value);
   const existingLocales = useMemo(() => {
-    const locales = localizedValue?.locales || {};
+    const locales = value?.locales || {};
 
     return Object.entries(locales)
       .filter(
@@ -34,10 +42,10 @@ function InputLocaleIndicators({ className, name, size }) {
       )
       .map(([key]) => key)
       .sort();
-  }, [localizedValue]);
+  }, [value]);
 
   return (
-    <ContainerStyled className={className}>
+    <ContainerStyled className={clsx(alignment, className)}>
       {existingLocales.map((locale) => (
         <LanguageIcon
           key={locale}

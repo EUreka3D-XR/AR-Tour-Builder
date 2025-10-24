@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useWatch } from "react-hook-form";
 import { styled } from "@mui/material";
 
 import useFormLocale from "@/stores/useFormLocale";
@@ -17,7 +18,6 @@ const ContainerStyled = styled("div")({
   },
   "& .indicator": {
     minHeight: "1rem",
-    marginTop: "0.25rem",
     alignSelf: "flex-end",
   },
 });
@@ -27,6 +27,8 @@ function InputLocale({ className, children, name, hasNoLocaleIndicators }) {
   const { available } = useAvailableLocales();
 
   const hasLocaleIndicators = !hasNoLocaleIndicators;
+
+  const localizedValue = useWatch({ name });
 
   return (
     <ContainerStyled className={clsx("input-localized-wrapper", className)}>
@@ -39,7 +41,10 @@ function InputLocale({ className, children, name, hasNoLocaleIndicators }) {
             ? children({ name: inputLocaleName(name, loc.value), locale })
             : children}
           {hasLocaleIndicators && (
-            <InputLocaleIndicators name={name} className="indicator" />
+            <InputLocaleIndicators
+              value={localizedValue}
+              className="indicator"
+            />
           )}
         </div>
       ))}

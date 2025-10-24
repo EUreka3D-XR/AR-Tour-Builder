@@ -17,14 +17,13 @@ function FormInputCommonMultilingual({ name, render }) {
 
   const updateAllLocalesWithSingleValue = (input) => {
     const value = input?.target ? input.target.value : input;
-    const allLocalesValues = getValues(name);
-    const updatedValues = Object.keys(allLocalesValues).reduce(
-      (acc, locale) => {
+    const allLocalesValues = getValues(name)?.locales ?? {};
+    const updatedValues = {
+      locales: Object.keys(allLocalesValues).reduce((acc, locale) => {
         acc[locale] = value;
         return acc;
-      },
-      {},
-    );
+      }, {}),
+    };
 
     setValue(name, updatedValues, {
       shouldDirty: true,

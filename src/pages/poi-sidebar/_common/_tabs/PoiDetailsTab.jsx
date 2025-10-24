@@ -12,6 +12,10 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   "& .language-selector": {
     alignSelf: "flex-end",
   },
+  "& .poi-thumbnail-dropzone": {
+    width: 250,
+    height: 250,
+  },
 }));
 function PoiDetailsTab() {
   return (
@@ -46,7 +50,7 @@ function PoiDetailsTab() {
         <ImageInput
           placeholderText="Click to upload photo"
           maxFileSize={5}
-          // className="logo-dropzone"
+          className="poi-thumbnail-dropzone"
         />
       </LabeledInput>
       {/* )}

@@ -1,17 +1,8 @@
 import { useRef, useState } from "react";
 import { useFieldArray, useWatch } from "react-hook-form";
-import {
-  Chip,
-  IconButton,
-  Stack,
-  styled,
-  TextField,
-  Tooltip,
-} from "@mui/material";
+import { Chip, IconButton, styled, TextField, Tooltip } from "@mui/material";
 
-import useFormLocale from "@/stores/useFormLocale";
 import EurekaIcon from "../icon/EurekaIcon";
-import InputLocaleIndicators from "../input-locale/InputLocaleIndicators";
 import LabeledInput from "../labeled-input/LabeledInput";
 import Link from "../link/Link";
 import Spacer from "../spacer/Spacer";
@@ -89,13 +80,10 @@ function FormArrayURLInput({
   urlPlaceholder,
   isLabelRequired,
 }) {
-  const [labelLocalesValues, setLabelLocalesValues] = useState({});
   const [errors, setErrors] = useState({});
   const [submits, setSubmits] = useState(0);
 
-  const { locale } = useFormLocale();
-
-  // const labelRef = useRef(null);
+  const labelRef = useRef(null);
   const urlRef = useRef(null);
   const { insert } = useFieldArray({
     name,
@@ -110,8 +98,15 @@ function FormArrayURLInput({
 
     const newErrors = {};
 
-    if (!urlRef.current) {
+    if (!labelRef.current || !urlRef.current) {
       return;
+    }
+
+    const labelValue = labelRef.current?.value ?? "";
+    if (isLabelRequired) {
+      if (!labelValue || labelValue.trim() === "") {
+        newErrors.label = "Label is required";
+      }
     }
 
     const urlValue = urlRef.current.value;
@@ -124,31 +119,24 @@ function FormArrayURLInput({
       return;
     }
 
-    const value = { label: { locales: labelLocalesValues }, url: urlValue };
+    const value = { label: labelValue, url: urlValue };
 
     insert(0, value);
-    setLabelLocalesValues({});
+    labelRef.current.value = "";
     urlRef.current.value = "";
   };
 
-  // const validateLabel = (e) => {
-  //   if (submits === 0) return;
+  const validateLabel = (e) => {
+    if (submits === 0) return;
 
-  //   const value = e.target.value;
-  //   if (isLabelRequired && (!value || value.trim() === "")) {
-  //     setErrors((prev) => ({ ...prev, label: "Label is required" }));
-  //   } else {
-  //     setErrors((prev) => ({ ...prev, label: null }));
-  //   }
-  // };
-
-  const handleChangeLabel = (e) => {
     const value = e.target.value;
-    setLabelLocalesValues((prev) => ({
-      ...prev,
-      [locale]: value,
-    }));
+    if (isLabelRequired && (!value || value.trim() === "")) {
+      setErrors((prev) => ({ ...prev, label: "Label is required" }));
+    } else {
+      setErrors((prev) => ({ ...prev, label: null }));
+    }
   };
+
   const validateURL = (e) => {
     if (submits === 0) return;
 
@@ -161,23 +149,17 @@ function FormArrayURLInput({
   };
 
   return (
-    <LabeledInput label={label} isMultilingual>
+    <LabeledInput label={label}>
       <FormArrayInputWrapper onAdd={handleInsert}>
-        <Stack>
-          <TextField
-            value={labelLocalesValues[locale] || ""}
-            placeholder={labelPlaceholderText}
-            fullWidth
-            helperText={errors.label}
-            error={!!errors.label}
-            required={isLabelRequired}
-            onChange={handleChangeLabel}
-          />
-          <InputLocaleIndicators
-            value={{ locales: labelLocalesValues }}
-            alignment="end"
-          />
-        </Stack>
+        <TextField
+          inputRef={labelRef}
+          placeholder={labelPlaceholderText}
+          fullWidth
+          helperText={errors.label}
+          error={!!errors.label}
+          required={isLabelRequired}
+          onChange={validateLabel}
+        />
         <Spacer size={2}></Spacer>
         <TextField
           inputRef={urlRef}
@@ -212,7 +194,6 @@ function FormArrayDisplay({
   name,
   renderItems,
   displayMode = "list",
-  locale,
   variant = "text",
 }) {
   const items = useWatch({ name });
@@ -229,26 +210,21 @@ function FormArrayDisplay({
   return (
     <div className="items-display">
       {displayMode === "list" && (
-        <FormArray.List items={items} locale={locale} onDelete={remove} />
+        <FormArray.List items={items} onDelete={remove} />
       )}
       {displayMode === "chips" && (
-        <FormArray.Chips
-          items={items}
-          locale={locale}
-          variant={variant}
-          onDelete={remove}
-        />
+        <FormArray.Chips items={items} onDelete={remove} variant={variant} />
       )}
     </div>
   );
 }
 
-function FormArrayList({ items, locale, onDelete }) {
+function FormArrayList({ items, onDelete }) {
   return (
     <div className="items-list">
       {items.map((item, index) => (
         <div key={item} className="item-row">
-          <div className="item-value">{renderItemText(item, locale)}</div>
+          <div className="item-value">{item}</div>
           <div className="actions">
             <IconButton onClick={() => onDelete(index)}></IconButton>
           </div>
@@ -258,17 +234,18 @@ function FormArrayList({ items, locale, onDelete }) {
   );
 }
 
-function FormArrayChips({ items, variant, locale, onDelete }) {
+function FormArrayChips({ items, variant, onDelete }) {
   const isUrlVariant = variant === "url";
 
   return (
     <div className="items-chips">
       {items.map((item, index) => {
+        console.log(item);
         if (isUrlVariant) {
           return (
             <Tooltip key={item.url} title={item.url}>
               <Chip
-                label={renderItemText(item.label, locale)}
+                label={item.title}
                 variant="outlined"
                 icon={
                   <EurekaIcon
@@ -297,19 +274,6 @@ function FormArrayChips({ items, variant, locale, onDelete }) {
     </div>
   );
 }
-
-const renderItemText = (item, locale) => {
-  if (!item) {
-    return "";
-  }
-  if (typeof item === "string" || !locale) {
-    return item || "";
-  }
-  if (item?.locales) {
-    return item.locales[locale] || "";
-  }
-  return "";
-};
 
 FormArray.TextInput = FormArrayTextInput;
 FormArray.URLInput = FormArrayURLInput;

@@ -22,11 +22,11 @@ const ContainerStyled = styled("div")({
   },
 });
 
-function InputLocale({ className, children, name, hasNoLocaleIndicators }) {
+function InputLocale({ className, children, name, hideLocaleIndicators }) {
   const { locale } = useFormLocale();
   const { available } = useAvailableLocales();
 
-  const hasLocaleIndicators = !hasNoLocaleIndicators;
+  const hasLocaleIndicators = !hideLocaleIndicators;
 
   const localizedValue = useWatch({ name });
 

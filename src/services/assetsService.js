@@ -1,12 +1,13 @@
 import { api } from "@/api";
 
 import { useLocale } from "@/hooks/useLocale";
-import { useDataFetcher } from "./helpers/serviceHooks";
+import { useDataFetcher, useDataMutator } from "./helpers/serviceHooks";
 
 /**
  * @typedef {import('@/types/jsdoc-types').PoiAsset} PoiAsset
  * @typedef {import('@/types/jsdoc-types').FetchResultType<PoiAsset[]>} PoiAssetsResult
  * @typedef {import('@/types/jsdoc-types').FetchResultType<PoiAsset>} PoiAssetResult
+ * @typedef {import('@/types/jsdoc-types').MutationResultType<PoiAsset>} PoiAssetMutateResult
  */
 
 /**
@@ -54,5 +55,34 @@ export const usePoiAssetMultilingual = (projectId, tourId, poiId, assetId) => {
     queryKey: ["poi-asset", projectId, tourId, poiId, assetId, "multilingual"],
     shouldStoreValue: true,
     enabled: !!assetId,
+  });
+};
+
+/**
+ * @param {string} projectId
+ * @param {string} tourId
+ * @param {string} poiId
+ * @returns {PoiAssetMutateResult}
+ */
+export const useCreatePoiAsset = (projectId, tourId, poiId) => {
+  return useDataMutator({
+    mutator: ({ data }) => api.assets.create(projectId, tourId, poiId, data),
+    mutationKey: ["create-poi-asset", projectId, tourId, poiId],
+    invalidateKey: ["poi-assets", projectId, tourId, poiId],
+  });
+};
+
+/**
+ * @param {string} projectId
+ * @param {string} tourId
+ * @param {string} poiId
+ * @returns {PoiAssetMutateResult}
+ */
+export const useUpdateTourPoi = (projectId, tourId, poiId, assetId) => {
+  return useDataMutator({
+    mutator: ({ data }) =>
+      api.assets.update(projectId, tourId, poiId, assetId, data),
+    mutationKey: ["update-tour-poi", projectId, tourId, poiId, assetId],
+    invalidateKey: ["poi-asset", projectId, tourId, poiId, assetId],
   });
 };

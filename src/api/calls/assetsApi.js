@@ -11,7 +11,32 @@ const getPoiAsset = async (projectId, tourId, poiId, assetId, locale) => {
   return fetcher.get(url, { locale });
 };
 
+const createPoiAsset = async (projectId, tourId, poiId, data, locale) => {
+  const url = baseUrls.poiAssets(projectId, tourId, poiId);
+  return fetcher.post(url, { data, locale });
+};
+
+const updatePoiAsset = async (
+  projectId,
+  tourId,
+  poiId,
+  assetId,
+  data,
+  locale,
+) => {
+  const url = baseUrls.poiAsset(projectId, tourId, poiId, assetId);
+  return fetcher.put(url, { data, locale });
+};
+
+const deletePoiAsset = async (projectId, tourId, poiId, assetId) => {
+  const url = baseUrls.poiAsset(projectId, tourId, poiId, assetId);
+  return fetcher.delete(url);
+};
+
 export const assetsApi = {
   fetchAll: getPoiAssets,
   fetchOne: getPoiAsset,
+  create: createPoiAsset,
+  update: updatePoiAsset,
+  delete: deletePoiAsset,
 };

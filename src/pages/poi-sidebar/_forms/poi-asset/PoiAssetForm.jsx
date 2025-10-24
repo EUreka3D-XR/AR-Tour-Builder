@@ -73,7 +73,7 @@ function PoiAssetForm({ onSubmit, onClose }) {
     <>
       <NoShrink>
         <PoiAssetHeaderSection
-          title={isNewAsset ? "Create Asset" : "Edit Asset"}
+          title={isNewAsset ? "Create Asset" : "Editting Asset"}
           onBack={onClose}
         />
         <Divider />

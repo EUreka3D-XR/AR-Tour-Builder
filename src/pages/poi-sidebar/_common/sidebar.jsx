@@ -43,7 +43,7 @@ function PoiSidebar({ children }) {
       <ContentStyled className="sidebar-inner">
         <div className="no-shrink">
           <PoiSidebarHeader
-            title="Edit Point of Interest"
+            title="Editting Point of Interest"
             onClose={handleCloseSidebar}
           />
           <Divider />

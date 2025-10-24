@@ -11,8 +11,8 @@ const constructPaths = (base) => {
     all: `${base}/*`,
     index: `${base}`,
     new: `${base}/new`,
-    edit: `${base}/edit`,
     one: (id) => `${base}/${id}`,
+    edit: (id) => `${base}/${id}/edit`,
   };
 };
 

@@ -66,7 +66,7 @@ function TourPoisSection() {
   const pois = useWatch({ name: "pois" });
 
   const handleEdit = (poiId) => {
-    navigate(routes.pois.one(poiId), {
+    navigate(routes.pois.edit(poiId), {
       state: { backgroundLocation: location },
     });
   };

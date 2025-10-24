@@ -5,9 +5,17 @@ import {
   useOutletContext,
 } from "react-router";
 import { useWatch } from "react-hook-form";
-import { Divider, FormControlLabel, styled, Switch } from "@mui/material";
+import {
+  Divider,
+  FormControlLabel,
+  Stack,
+  styled,
+  Switch,
+  Typography,
+} from "@mui/material";
 
 import Button from "@/components/button/Button";
+import CenteredArea from "@/components/centered/Centered";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";
 import PoiItem from "../_components/PoiItem";
@@ -55,13 +63,34 @@ function TourPoisSection() {
   const navigate = useNavigate();
   const { routes } = useNavPaths();
 
-  const pois = useWatch({ name: "pois", defaultValue: [] });
+  const pois = useWatch({ name: "pois" });
 
   const handleEdit = (poiId) => {
     navigate(routes.pois.one(poiId), {
       state: { backgroundLocation: location },
     });
   };
+
+  if (!pois?.length) {
+    return (
+      <CenteredArea className="empty-pois-section">
+        <Stack alignItems="center" justifyContent="center">
+          <Typography>
+            There are no points of interest associated to the tour yet.
+          </Typography>
+          <Typography>Click below to start adding points</Typography>
+          <br />
+          <Button
+            variant="filled"
+            href={routes.pois.new}
+            startIcon={<EurekaIcon name="add" />}
+          >
+            Add POI
+          </Button>
+        </Stack>
+      </CenteredArea>
+    );
+  }
 
   return (
     <>

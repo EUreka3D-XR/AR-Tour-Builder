@@ -1,3 +1,6 @@
+import { useParams } from "react-router";
+
+import { useCreatePoiAsset } from "@/services/assetsService";
 import PoiAssetFormContainer from "./PoiAssetFormContainer";
 
 const DEFAULT_VALUES = {
@@ -44,8 +47,12 @@ const DEFAULT_VALUES = {
   },
 };
 function NewPoiAssetForm({ onClose }) {
-  const onSubmit = (data) => {
-    console.log(data);
+  const { projectId, tourId, poiId } = useParams();
+  const { mutate: createAsset } = useCreatePoiAsset(projectId, tourId, poiId);
+
+  const onSubmit = async (data) => {
+    await createAsset({ data });
+    onClose();
   };
   return (
     <PoiAssetFormContainer

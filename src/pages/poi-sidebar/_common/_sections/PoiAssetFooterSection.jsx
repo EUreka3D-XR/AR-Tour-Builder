@@ -24,20 +24,19 @@ function PoiAssetFooterSection({ onCancel }) {
           justifyContent="space-between"
           spacing={1}
         >
-          {!isNew && (
+          {isNew ? (
             <Button
               type="submit"
               variant="filled"
               startIcon={<EurekaIcon name="save" />}
             >
-              Save
+              Create Media Asset
             </Button>
-          )}
-          {isNew && (
+          ) : (
             <Button
               type="submit"
               variant="filled"
-              startIcon={<EurekaIcon name={"save"} />}
+              startIcon={<EurekaIcon name="save" />}
             >
               Save Changes
             </Button>

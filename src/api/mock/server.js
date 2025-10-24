@@ -450,7 +450,7 @@ export const makeServer = ({ environment = "development" } = {}) => {
         },
       );
 
-      // Create a new asset for a POI
+      // Create a new POI Asset for a POI
       this.post(
         "/projects/:projectId/tours/:tourId/pois/:poiId/assets",
         (schema, request) => {
@@ -458,12 +458,6 @@ export const makeServer = ({ environment = "development" } = {}) => {
           const attrs = JSON.parse(request.requestBody);
           attrs.poiId = poiId;
           const poiAsset = schema.poiAssets.create(attrs);
-          // Add POI Asset to POI
-          const poi = schema.pois.find(poiId);
-          if (poi) {
-            poi.poiAssetIds = [...(poi.poiAssetIds || []), poiAsset.id];
-            poi.save();
-          }
           return poiAsset;
         },
       );
@@ -472,19 +466,11 @@ export const makeServer = ({ environment = "development" } = {}) => {
       this.put(
         "/projects/:projectId/tours/:tourId/pois/:poiId/assets/:assetId",
         (schema, request) => {
-          const { assetId, poiId } = request.params;
+          const { assetId } = request.params;
           const attrs = JSON.parse(request.requestBody);
           let poiAsset = schema.poiAssets.find(assetId);
           if (!poiAsset) {
             return new Response(404, {}, { error: "POI Asset not found" });
-          }
-          // Optionally ensure the POI Asset belongs to the POI
-          if (poiAsset.poiId !== poiId) {
-            return new Response(
-              400,
-              {},
-              { error: "POI Asset does not belong to POI" },
-            );
           }
           poiAsset.update(attrs);
           return poiAsset;

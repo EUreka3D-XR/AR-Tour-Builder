@@ -1,16 +1,16 @@
 import { useLocale } from "@/hooks/useLocale";
 import { isLocalesValue, localeValue } from "@/utils/inputLocale";
 
-function InjectedLocaleString({ string }) {
+function InjectedLocaleValue({ value }) {
   const locale = useLocale();
 
-  if (!string) return null;
+  if (!value) return null;
 
-  if (isLocalesValue(string)) {
-    const localeString = localeValue(string, locale);
+  if (isLocalesValue(value)) {
+    const localeString = localeValue(value, locale);
     return localeString;
   }
-  return string;
+  return value;
 }
 
-export default InjectedLocaleString;
+export default InjectedLocaleValue;

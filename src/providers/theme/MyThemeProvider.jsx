@@ -1,6 +1,11 @@
 import { useMemo } from "react";
 import PropTypes from "prop-types";
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import {
+  createTheme,
+  CssBaseline,
+  lighten,
+  ThemeProvider,
+} from "@mui/material";
 
 function MyThemeProvider({ children }) {
   const theme = useMemo(() => {
@@ -92,10 +97,16 @@ function MyThemeProvider({ children }) {
         },
         MuiTab: {
           styleOverrides: {
-            root: {
+            root: ({ theme }) => ({
               textTransform: "none",
               minHeight: "3rem",
-            },
+              borderTopLeftRadius: 16,
+              borderTopRightRadius: 16,
+              "&.Mui-selected": {
+                backgroundColor: lighten(theme.palette.primary.main, 0.9), // same as contained button
+                // color: theme.palette.primary.contrastText,
+              },
+            }),
           },
         },
         MuiSkeleton: {

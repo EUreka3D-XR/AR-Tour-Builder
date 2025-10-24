@@ -6,6 +6,7 @@ import {
   RestSerializer,
 } from "miragejs";
 
+import { isLocalesValue } from "@/utils/inputLocale";
 import normalizeRelationships from "./helpers/normalizeRelationships";
 import { getRandomItems, getRandomPoiAssets } from "./helpers/randomizers";
 import { getMockAssets } from "./mock-data/assetsMocks";
@@ -67,7 +68,7 @@ const AppSerializer = RestSerializer.extend({
         const value = transformed[key];
 
         // Check if this is a LocalesField (has locales.en, locales.fr, etc.)
-        if (this.isLocalesField(value)) {
+        if (isLocalesValue(value)) {
           // Transform to the requested locale or fallback to 'en'
           transformed[key] = value.locales[locale] || value.locales.en || "";
         }
@@ -81,15 +82,6 @@ const AppSerializer = RestSerializer.extend({
     }
 
     return data;
-  },
-  isLocalesField(value) {
-    return (
-      value &&
-      typeof value === "object" &&
-      value.locales &&
-      typeof value.locales === "object" &&
-      Object.keys(value.locales).length > 0
-    ); // Check for expected locale keys
   },
 });
 

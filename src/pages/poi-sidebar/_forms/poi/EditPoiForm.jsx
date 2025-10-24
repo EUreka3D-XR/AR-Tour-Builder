@@ -19,8 +19,6 @@ function EditPoiForm({ onClose }) {
   );
   const { mutate: updatePoi } = useUpdateTourPoi(projectId, tourId, poiId);
 
-  console.log(initialPoi);
-
   const defaultValues = useMemo(
     () => ({
       title: initialPoi?.title,

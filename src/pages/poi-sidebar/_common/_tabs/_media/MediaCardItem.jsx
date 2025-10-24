@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import InjectLocaleValue from "@/components/inject-locale-value/InjectLocaleValue";
+import InjectedLocaleString from "@/components/inject-locale-value/InjectLocaleValue";
 import MediaPreview from "@/components/media-preview/MediaPreview";
 
 const CardStyled = styled(Card)(({ theme }) => ({
@@ -121,7 +123,7 @@ function MediaCardItem({ asset, onEdit, onDelete, onClick }) {
         <MediaPreviewStyled
           type={asset?.type}
           url={asset?.contentUrl}
-          title={asset?.title?.locales?.en}
+          title={<InjectLocaleValue string={asset?.title} />}
         />
 
         {/* Content Section */}
@@ -129,13 +131,13 @@ function MediaCardItem({ asset, onEdit, onDelete, onClick }) {
           <HeaderRow>
             <TitleSection>
               <MediaTitle variant="subtitle2" component="h4">
-                {asset?.title?.locales?.en || "Untitled Asset"}
+                <InjectedLocaleString
+                  string={asset?.title || "Untitled Media"}
+                />
               </MediaTitle>
-              {asset?.description?.locales?.en && (
-                <MediaDescription variant="body2" color="text.secondary">
-                  {asset.description.locales.en}
-                </MediaDescription>
-              )}
+              <MediaDescription variant="body2" color="text.secondary">
+                <InjectedLocaleString string={asset?.description} />
+              </MediaDescription>
             </TitleSection>
 
             <ActionButtons>

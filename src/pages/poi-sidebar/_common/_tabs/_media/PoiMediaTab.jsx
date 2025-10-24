@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router";
-import { getMockPoiAssets } from "@/api/mock/mock-data/assetsMocks";
 import AssetsModal from "@/pages/assets-modal/modal";
+import { useWatch } from "react-hook-form";
 import { Menu, MenuItem, styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -33,11 +33,8 @@ const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
 
 function PoiMediaTab() {
   const [, setSearchParams] = useSearchParams();
-  const [mockAssets, setMockAssets] = useState();
 
-  useEffect(() => {
-    setMockAssets(getMockPoiAssets(10));
-  }, []);
+  const mediaAssets = useWatch({ name: "assets" });
 
   const handleEditPoiAsset = (asset) => {
     setSearchParams((prev) => {
@@ -57,8 +54,8 @@ function PoiMediaTab() {
       </div>
       <div className="media-list">
         {/* Render media card items here */}
-        {mockAssets &&
-          mockAssets
+        {mediaAssets &&
+          mediaAssets
             .filter((asset) => asset.type !== "audio")
             .map((asset) => (
               <MediaCardItem

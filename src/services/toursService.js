@@ -27,11 +27,13 @@ export const useProjectTours = (projectId, params) => {
  * @param {string} tourId
  * @returns {TourFetchResult}
  */
-export const useProjectTour = (projectId, tourId) => {
+export const useProjectTour = (projectId, tourId, propLocale) => {
   const locale = useLocale();
+  const effectiveLocale = propLocale || locale;
+
   return useDataFetcher({
-    fetcher: () => api.tours.fetchOne(projectId, tourId, locale),
-    queryKey: ["project-tour", projectId, tourId, locale],
+    fetcher: () => api.tours.fetchOne(projectId, tourId, effectiveLocale),
+    queryKey: ["project-tour", projectId, tourId, effectiveLocale],
     shouldStoreValue: true,
   });
 };

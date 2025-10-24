@@ -30,11 +30,13 @@ export const useTourPois = (projectId, tourId, params) => {
  * @param {string} poiId
  * @returns {PoiResult}
  */
-export const useTourPoi = (projectId, tourId, poiId) => {
+export const useTourPoi = (projectId, tourId, poiId, propLocale) => {
   const locale = useLocale();
+  const effectiveLocale = propLocale || locale;
+
   return useDataFetcher({
-    fetcher: () => api.pois.fetchOne(projectId, tourId, poiId, locale),
-    queryKey: ["project-tour-poi", projectId, tourId, poiId, locale],
+    fetcher: () => api.pois.fetchOne(projectId, tourId, poiId, effectiveLocale),
+    queryKey: ["project-tour-poi", projectId, tourId, poiId, effectiveLocale],
     shouldStoreValue: true,
   });
 };

@@ -32,12 +32,14 @@ export const usePoiAssets = (projectId, tourId, poiId, params) => {
  * @param {string} assetId
  * @returns {PoiAssetResult}
  */
-export const usePoiAsset = (projectId, tourId, poiId, assetId) => {
+export const usePoiAsset = (projectId, tourId, poiId, assetId, propLocale) => {
   const locale = useLocale();
+  const effectiveLocale = propLocale || locale;
+
   return useDataFetcher({
     fetcher: () =>
-      api.assets.fetchOne(projectId, tourId, poiId, assetId, locale),
-    queryKey: ["poi-asset", projectId, tourId, poiId, assetId, locale],
+      api.assets.fetchOne(projectId, tourId, poiId, assetId, effectiveLocale),
+    queryKey: ["poi-asset", projectId, tourId, poiId, assetId, effectiveLocale],
     shouldStoreValue: true,
   });
 };

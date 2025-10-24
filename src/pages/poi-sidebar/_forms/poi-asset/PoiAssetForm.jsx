@@ -22,6 +22,8 @@ import PoiAssetHeaderSection from "../../_common/_sections/PoiAssetHeaderSection
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(5),
+  flex: 1,
+  overflow: "auto",
   "& .poi-asset-form-inner": {
     display: "flex",
     flexDirection: "column",
@@ -62,7 +64,7 @@ function PoiAssetForm({ onSubmit, onClose }) {
   }, [assetType]);
 
   const [searchParams] = useSearchParams();
-  const isNewAsset = !!searchParams.get("mediaId");
+  const isNewAsset = !searchParams.get("mediaId");
 
   return (
     <>
@@ -73,7 +75,7 @@ function PoiAssetForm({ onSubmit, onClose }) {
         />
         <Divider />
       </NoShrink>
-      <ContainerStyled>
+      <ContainerStyled className="poi-asset-form-wrapper">
         <form id="poi-asset-form" onSubmit={onSubmit}>
           <div className="poi-asset-form-inner">
             <LanguageDropdown className="language-selector" />
@@ -134,9 +136,9 @@ function PoiAssetForm({ onSubmit, onClose }) {
                 </LabeledInput>
               )}
             />
-            <Divider />
             {assetType === "3d" && (
               <>
+                <Divider />
                 <Typography variant="h5">3D Model Attributes</Typography>
                 <div className="models-details">
                   <FormInput

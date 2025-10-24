@@ -240,7 +240,6 @@ function FormArrayChips({ items, variant, onDelete }) {
   return (
     <div className="items-chips">
       {items.map((item, index) => {
-        console.log(item);
         if (isUrlVariant) {
           return (
             <Tooltip key={item.url} title={item.url}>

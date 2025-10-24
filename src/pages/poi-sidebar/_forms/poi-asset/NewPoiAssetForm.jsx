@@ -19,7 +19,7 @@ const DEFAULT_VALUES = {
       fr: "",
     },
   },
-  assetType: "",
+  type: "",
   georeference: {
     lat: "",
     long: "",

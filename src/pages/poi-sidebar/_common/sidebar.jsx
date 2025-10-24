@@ -10,7 +10,11 @@ function PoiSidebar({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const { routes, navigate } = useNavPaths();
 
-  const isInsideAssetForm = Boolean(searchParams.get("mediaForm"));
+  const isInsideCreateAssetForm =
+    Boolean(searchParams.get("mediaForm")) && !searchParams.get("mediaId");
+  const isInsideEditAssetForm =
+    Boolean(searchParams.get("mediaForm")) &&
+    Boolean(searchParams.get("mediaId"));
 
   const handleCloseSidebar = useCallback(() => {
     navigate(routes.pois.index);
@@ -50,7 +54,9 @@ function PoiSidebar({ children }) {
         </div>
         {typeof children === "function" &&
           children({
-            showAssetForm: isInsideAssetForm,
+            showCreateAssetForm: isInsideCreateAssetForm,
+            showEditAssetForm: isInsideEditAssetForm,
+            showPoiForm: !isInsideCreateAssetForm && !isInsideEditAssetForm,
             onCloseAsset: handleCloseAsset,
             onClosePoi: handleCloseSidebar,
           })}

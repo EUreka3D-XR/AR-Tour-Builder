@@ -71,6 +71,12 @@ function TourPoisSection() {
     });
   };
 
+  const handleClick = (poiId) => {
+    navigate(routes.pois.one(poiId), {
+      state: { backgroundLocation: location },
+    });
+  };
+
   if (!pois?.length) {
     return (
       <CenteredArea className="empty-pois-section">
@@ -132,7 +138,12 @@ function TourPoisSection() {
                   }
                 }}
               >
-                <PoiItem poi={poi} onEdit={handleEdit} dataId={poi.id} />
+                <PoiItem
+                  poi={poi}
+                  dataId={poi.id}
+                  onEdit={handleEdit}
+                  onClick={handleClick}
+                />
               </div>
             ))}
           </div>

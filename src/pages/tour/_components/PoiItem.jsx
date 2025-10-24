@@ -94,6 +94,7 @@ const ActionButtons = styled("div")(() => ({
  * @param {Function} [props.onMoveDown] - Callback for moving POI down
  * @param {Function} [props.onEdit] - Callback for editing POI
  * @param {Function} [props.onDelete] - Callback for deleting POI
+ * @param {Function} [props.onClick] - Callback for clicking on POI
  * @returns {React.ReactElement} Rendered POI item card
  */
 function PoiItem({
@@ -105,6 +106,7 @@ function PoiItem({
   onEdit,
   onDelete,
   onCopy,
+  onClick,
 }) {
   // Group assets by type and count them
   const assetCounts =
@@ -115,7 +117,7 @@ function PoiItem({
     }, {}) || {};
 
   return (
-    <CardStyled className="poi-card">
+    <CardStyled className="poi-card" onClick={() => onClick(poi.id)}>
       <CardContent className="card-content">
         <ContentContainer>
           {/* First flex item: POI Number */}

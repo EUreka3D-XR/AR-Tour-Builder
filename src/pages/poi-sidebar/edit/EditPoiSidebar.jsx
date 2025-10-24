@@ -1,5 +1,3 @@
-import { Divider } from "@mui/material";
-
 import PoiSidebarHeader from "../_common/_sections/PoiSidebarHeader";
 import SidebarFormArea from "../_common/_utils/SidebarFormArea";
 import ToggleVisibility from "../_common/_utils/ToggleVisibility";
@@ -25,7 +23,6 @@ function EditPoiSidebar() {
                 title="Editting Point of Interest"
                 onClose={onClosePoi}
               />
-              <Divider />
             </div>
             <SidebarFormArea className="sidebar-form-area">
               <ToggleVisibility show={showPoiForm}>

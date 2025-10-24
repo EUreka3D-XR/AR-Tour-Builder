@@ -22,10 +22,10 @@ import PoiAssetFooterSection from "../../_common/_sections/PoiAssetFooterSection
 import PoiAssetHeaderSection from "../../_common/_sections/PoiAssetHeaderSection";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
-  padding: theme.spacing(5),
   flex: 1,
   overflow: "auto",
   "& .poi-asset-form-inner": {
+    padding: theme.spacing(5),
     display: "flex",
     flexDirection: "column",
     gap: theme.spacing(4),

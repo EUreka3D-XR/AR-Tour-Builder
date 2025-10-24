@@ -7,7 +7,7 @@ const getPoiAssets = async (projectId, tourId, poiId, { params, locale }) => {
 };
 
 const getPoiAsset = async (projectId, tourId, poiId, assetId, locale) => {
-  const url = baseUrls.poiAssets(projectId, tourId, poiId, assetId);
+  const url = baseUrls.poiAsset(projectId, tourId, poiId, assetId);
   return fetcher.get(url, { locale });
 };
 

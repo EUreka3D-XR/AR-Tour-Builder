@@ -427,6 +427,98 @@ export const makeServer = ({ environment = "development" } = {}) => {
         },
       );
 
+      // POI Assets CRUD
+      // Get all assets for a POI
+      this.get(
+        "/projects/:projectId/tours/:tourId/pois/:poiId/assets",
+        (schema, request) => {
+          const { poiId } = request.params;
+          const poi = schema.pois.find(poiId);
+          return poi ? poi.poiAssets : [];
+        },
+      );
+
+      // Get one asset for a POI
+      this.get(
+        "/projects/:projectId/tours/:tourId/pois/:poiId/assets/:assetId",
+        (schema, request) => {
+          const { assetId } = request.params;
+          const poiAsset = schema.poiAssets.find(assetId);
+          return (
+            poiAsset || new Response(404, {}, { error: "POI Asset not found" })
+          );
+        },
+      );
+
+      // Create a new asset for a POI
+      this.post(
+        "/projects/:projectId/tours/:tourId/pois/:poiId/assets",
+        (schema, request) => {
+          const { poiId } = request.params;
+          const attrs = JSON.parse(request.requestBody);
+          attrs.poiId = poiId;
+          const poiAsset = schema.poiAssets.create(attrs);
+          // Add POI Asset to POI
+          const poi = schema.pois.find(poiId);
+          if (poi) {
+            poi.poiAssetIds = [...(poi.poiAssetIds || []), poiAsset.id];
+            poi.save();
+          }
+          return poiAsset;
+        },
+      );
+
+      // Update an existing POI Asset
+      this.put(
+        "/projects/:projectId/tours/:tourId/pois/:poiId/assets/:assetId",
+        (schema, request) => {
+          const { assetId, poiId } = request.params;
+          const attrs = JSON.parse(request.requestBody);
+          let poiAsset = schema.poiAssets.find(assetId);
+          if (!poiAsset) {
+            return new Response(404, {}, { error: "POI Asset not found" });
+          }
+          // Optionally ensure the POI Asset belongs to the POI
+          if (poiAsset.poiId !== poiId) {
+            return new Response(
+              400,
+              {},
+              { error: "POI Asset does not belong to POI" },
+            );
+          }
+          poiAsset.update(attrs);
+          return poiAsset;
+        },
+      );
+
+      // Delete a POI Asset
+      this.delete(
+        "/projects/:projectId/tours/:tourId/pois/:poiId/assets/:assetId",
+        (schema, request) => {
+          const { assetId, poiId } = request.params;
+          const poiAsset = schema.poiAssets.find(assetId);
+          if (!poiAsset) {
+            return new Response(404, {}, { error: "POI Asset not found" });
+          }
+          // Optionally ensure the POI Asset belongs to the POI
+          if (poiAsset.poiId !== poiId) {
+            return new Response(
+              400,
+              {},
+              { error: "POI Asset does not belong to POI" },
+            );
+          }
+          // Remove POI Asset from POI's poiAssetIds
+          const poi = schema.pois.find(poiId);
+          if (poi && Array.isArray(poi.poiAssetIds)) {
+            poi.poiAssetIds = poi.poiAssetIds.filter((id) => id !== assetId);
+            poi.save();
+          }
+          poiAsset.destroy();
+          return new Response(204);
+        },
+      );
+
       // Library
       this.get("/projects/:projectId/library", (schema, request) => {
         const projectId = request.params.projectId;

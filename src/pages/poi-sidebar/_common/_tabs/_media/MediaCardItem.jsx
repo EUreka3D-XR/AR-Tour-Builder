@@ -12,6 +12,8 @@ import {
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import InjectedLocaleValue from "@/components/inject-locale-value/InjectLocaleValue";
 import MediaPreview from "@/components/media-preview/MediaPreview";
+import { useLocale } from "@/hooks/useLocale";
+import { localeValue } from "@/utils/inputLocale";
 
 const CardStyled = styled(Card)(({ theme }) => ({
   borderRadius: theme.spacing(1),
@@ -107,6 +109,8 @@ const MediaDescription = styled(Typography)(() => ({
  * @returns {React.ReactElement} Rendered media card item
  */
 function MediaCardItem({ asset, onEdit, onDelete, onClick }) {
+  const locale = useLocale();
+
   // Check if asset should show AR pill
   const showArPill =
     asset?.type === "3d" && asset?.modelAssetAttributes?.viewInAr;
@@ -121,7 +125,7 @@ function MediaCardItem({ asset, onEdit, onDelete, onClick }) {
         {/* Media Preview */}
         <MediaPreviewStyled
           type={asset?.type}
-          url={asset?.contentUrl}
+          url={localeValue(asset?.contentUrl, locale)}
           title={<InjectedLocaleValue value={asset?.title} />}
         />
 

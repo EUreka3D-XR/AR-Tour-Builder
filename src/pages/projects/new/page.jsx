@@ -26,7 +26,7 @@ const ContainerStyled = styled("div")({
 });
 
 function NewProjectPage() {
-  const { routes } = useNavPaths();
+  const { navigate } = useNavPaths();
   return (
     <ContainerStyled>
       <div className="header">
@@ -34,7 +34,7 @@ function NewProjectPage() {
           Create New Project
         </Typography>
         <div className="actions">
-          <Button href={routes.projects.index}>Cancel</Button>
+          <Button onClick={() => navigate(-1)}>Cancel</Button>
           <Button variant="filled" type="submit" form="create-project-form">
             Create Project
           </Button>

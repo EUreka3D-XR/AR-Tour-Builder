@@ -13,7 +13,12 @@ const DEFAULT_VALUES = {
       fr: "",
     },
   },
-  contentUrl: "",
+  contentUrl: {
+    locales: {
+      en: "",
+      fr: "",
+    },
+  },
   assetType: "",
   georeference: {
     lat: "",
@@ -23,7 +28,12 @@ const DEFAULT_VALUES = {
   modelAssetAttributes: {
     viewInAr: false,
     linkedAsset: {
-      contentUrl: "",
+      contentUrl: {
+        locales: {
+          en: "",
+          fr: "",
+        },
+      },
       title: {
         locales: {
           en: "",

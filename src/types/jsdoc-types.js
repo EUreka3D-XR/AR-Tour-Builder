@@ -141,7 +141,7 @@
  * @property {string} id - Unique identifier for the media asset
  * @property {LocalesField} title - Media title
  * @property {LocalesField} [description] - Media description (optional)
- * @property {string} contentUrl - The URL of the asset's main content (e.g., image, video, etc.)
+ * @property {LocalesField} contentUrl - The URL of the asset's main content (e.g., image, video, etc.)
  * @property {string} filename - The filename of the asset
  * @property {string} landingPage - The URL of the asset's landing page
  * @property {string} source - The source URL of the asset

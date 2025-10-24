@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 import { useWatch } from "react-hook-form";
 import {
@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 
 import FormInput from "@/components/form/FormInput";
+import FormInputCommonMultilingual from "@/components/form/FormInputCommonMultilingual";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
@@ -58,13 +59,15 @@ const CoordinatesRow = styled("div")(({ theme }) => ({
 }));
 
 function PoiAssetForm({ onSubmit, onClose }) {
+  const [isMultilingual, setIsMultilingual] = useState(false);
+
+  const [searchParams] = useSearchParams();
+  const isNewAsset = !searchParams.get("mediaId");
+
   const assetType = useWatch({ name: "type" });
   const helperTextForUrl = useMemo(() => {
     return getExtensionsHelperForType(assetType);
   }, [assetType]);
-
-  const [searchParams] = useSearchParams();
-  const isNewAsset = !searchParams.get("mediaId");
 
   return (
     <>
@@ -122,20 +125,55 @@ function PoiAssetForm({ onSubmit, onClose }) {
                 </LabeledInput>
               )}
             />
-            <FormInput
-              name="contentUrl"
-              render={({ field }) => (
-                <LabeledInput label="Media URL">
-                  <TextField
-                    {...field}
-                    placeholder="https://example.com/media-url.png"
-                    fullWidth
-                    helperText={helperTextForUrl}
-                    type="url"
-                  />
-                </LabeledInput>
-              )}
+            <FormControlLabelStyled
+              control={
+                <Checkbox
+                  checked={isMultilingual}
+                  onChange={(e) => setIsMultilingual(e.target.checked)}
+                />
+              }
+              label={
+                <div className="checkbox-label">
+                  <Typography variant="body2">Multilingual Media</Typography>
+                  <Typography variant="caption">
+                    Enable this option to provide media content in multiple
+                    languages. This is helpful for media containing text or
+                    audio that needs to be accessible to a diverse audience.
+                  </Typography>
+                </div>
+              }
             />
+            {isMultilingual ? (
+              <FormInputMultilingual
+                name="contentUrl"
+                render={({ field }) => (
+                  <LabeledInput label="Media URL" isMultilingual>
+                    <TextField
+                      {...field}
+                      placeholder="https://example.com/media-url.png"
+                      fullWidth
+                      helperText={helperTextForUrl}
+                      type="url"
+                    />
+                  </LabeledInput>
+                )}
+              />
+            ) : (
+              <FormInputCommonMultilingual
+                name="contentUrl"
+                render={({ field }) => (
+                  <LabeledInput label="Media URL">
+                    <TextField
+                      {...field}
+                      placeholder="https://example.com/media-url.png"
+                      fullWidth
+                      helperText={helperTextForUrl}
+                      type="url"
+                    />
+                  </LabeledInput>
+                )}
+              />
+            )}
             {assetType === "3d" && (
               <>
                 <Divider />

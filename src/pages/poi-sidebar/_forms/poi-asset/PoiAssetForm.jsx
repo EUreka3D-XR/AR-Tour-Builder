@@ -274,10 +274,10 @@ function PoiAssetForm({ onSubmit, onClose }) {
                     </LabeledInput>
                   )}
                 />
-                <FormInput
+                <FormInputMultilingual
                   name="modelAssetAttributes.linkedAsset.contentUrl"
                   render={({ field }) => (
-                    <LabeledInput label="Audio URL">
+                    <LabeledInput label="Audio URL" isMultilingual>
                       <TextField
                         {...field}
                         placeholder="https://example.com/audio-url.mp3"

@@ -1,3 +1,6 @@
+import { Divider } from "@mui/material";
+
+import PoiSidebarHeader from "../_common/_sections/PoiSidebarHeader";
 import SidebarFormArea from "../_common/_utils/SidebarFormArea";
 import ToggleVisibility from "../_common/_utils/ToggleVisibility";
 import PoiSidebar from "../_common/sidebar";
@@ -16,19 +19,30 @@ function EditPoiSidebar() {
         onClosePoi,
       }) => {
         return (
-          <SidebarFormArea className="sidebar-form-area">
-            <ToggleVisibility show={showPoiForm}>
-              <div className="main-area">
-                <EditPoiForm onClose={onClosePoi} />
-              </div>
-            </ToggleVisibility>
-            <div className="main-area">
-              {showCreateAssetForm && (
-                <NewPoiAssetForm onClose={onCloseAsset} />
-              )}
-              {showEditAssetForm && <EditPoiAssetForm onClose={onCloseAsset} />}
+          <>
+            <div className="no-shrink">
+              <PoiSidebarHeader
+                title="Editting Point of Interest"
+                onClose={onClosePoi}
+              />
+              <Divider />
             </div>
-          </SidebarFormArea>
+            <SidebarFormArea className="sidebar-form-area">
+              <ToggleVisibility show={showPoiForm}>
+                <div className="main-area">
+                  <EditPoiForm onClose={onClosePoi} />
+                </div>
+              </ToggleVisibility>
+              <div className="main-area">
+                {showCreateAssetForm && (
+                  <NewPoiAssetForm onClose={onCloseAsset} />
+                )}
+                {showEditAssetForm && (
+                  <EditPoiAssetForm onClose={onCloseAsset} />
+                )}
+              </div>
+            </SidebarFormArea>
+          </>
         );
       }}
     </PoiSidebar>

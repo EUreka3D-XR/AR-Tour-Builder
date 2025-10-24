@@ -1,10 +1,9 @@
 import { useCallback } from "react";
 import { useSearchParams } from "react-router";
 import { motion } from "motion/react";
-import { Divider, Drawer, styled } from "@mui/material";
+import { Drawer, styled } from "@mui/material";
 
 import useNavPaths from "@/hooks/useNavPaths";
-import PoiSidebarHeader from "./_sections/PoiSidebarHeader";
 
 function PoiSidebar({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -45,13 +44,6 @@ function PoiSidebar({ children }) {
       onClose={handleCloseSidebar}
     >
       <ContentStyled className="sidebar-inner">
-        <div className="no-shrink">
-          <PoiSidebarHeader
-            title="Editting Point of Interest"
-            onClose={handleCloseSidebar}
-          />
-          <Divider />
-        </div>
         {typeof children === "function" &&
           children({
             showCreateAssetForm: isInsideCreateAssetForm,

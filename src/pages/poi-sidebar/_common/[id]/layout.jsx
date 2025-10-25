@@ -1,6 +1,9 @@
 import { styled } from "@mui/material";
 
 const ViewPoiSidebarLayout = styled("div")(({ theme }) => ({
+  label: "view-poi-sidebar-layout",
+  overflow: "auto",
+  paddingBottom: theme.spacing(8),
   "& .poi-sidebar-content": {
     padding: theme.spacing(1, 2),
   },

@@ -6,11 +6,19 @@ import ViewPoiInfo from "./_sections/ViewPoiInfo";
 import ViewPoiLinks from "./_sections/ViewPoiLinks";
 import ViewPoiMedia from "./_sections/ViewPoiMedia";
 
-const ContainerStyled = styled("div")(({ theme }) => ({}));
+const ContainerStyled = styled("div")(() => ({
+  label: "view-poi-sidebar-content",
+}));
 
+/**
+ *
+ * @param {Object} props
+ * @param {import('@/types/jsdoc-types').Poi} props.poi
+ * @returns
+ */
 function ViewPoiSidebarContent({ poi }) {
   return (
-    <ContainerStyled className="poi-sidebar-content">
+    <ContainerStyled>
       {poi.thumbnail ? (
         <ViewPoiBanner photoUrl={poi.thumbnail} />
       ) : (

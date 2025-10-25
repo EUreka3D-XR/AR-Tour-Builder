@@ -3,7 +3,7 @@ import { Stack, Typography } from "@mui/material";
 
 import Button from "../button/Button";
 
-const ExpandableText = ({ children, lines = 1 }) => {
+const ExpandableText = ({ children, lines = 1, props }) => {
   const [expanded, setExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const textRef = useRef(null);
@@ -25,7 +25,6 @@ const ExpandableText = ({ children, lines = 1 }) => {
     >
       <Typography
         ref={textRef}
-        variant="body2"
         sx={{
           whiteSpace: expanded ? "wrap" : "nowrap",
           overflow: "hidden",
@@ -36,6 +35,7 @@ const ExpandableText = ({ children, lines = 1 }) => {
           WebkitLineClamp: expanded ? "unset" : lines,
           transition: "all 0.2s ease",
         }}
+        {...props}
       >
         {children}
       </Typography>

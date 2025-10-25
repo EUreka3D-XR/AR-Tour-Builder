@@ -1,7 +1,66 @@
-import CloseIcon from "@mui/icons-material/Close";
-import { Box, IconButton, Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 import ExpandableText from "@/components/expandable-text/ExpandableText";
+import EurekaIcon from "@/components/icon/EurekaIcon";
+
+const MAX_WIDTH = "1000px";
+
+const Root = styled("div")({
+  width: "100%",
+  height: "100%",
+  backgroundColor: "black",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  overflow: "hidden",
+});
+
+const ContentContainer = styled("div")({
+  position: "relative",
+  paddingLeft: 16,
+  paddingRight: 16,
+  width: "100%",
+  height: "100%",
+  maxWidth: MAX_WIDTH,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  overflow: "hidden",
+});
+
+const TopBar = styled("div")(({ theme }) => ({
+  height: 64,
+  width: "100%",
+  maxWidth: MAX_WIDTH,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  zIndex: 2,
+  color: theme.palette.common.white,
+}));
+
+const DisplayArea = styled("div")({
+  flex: 1,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  paddingBottom: 64,
+  width: "100%",
+  height: "100%",
+  maxWidth: MAX_WIDTH,
+});
+
+const InfoArea = styled("div")(({ theme }) => ({
+  position: "absolute",
+  left: 0,
+  right: 0,
+  bottom: 0,
+  padding: theme.spacing(2),
+  zIndex: 3,
+  color: theme.palette.common.white,
+  maxWidth: MAX_WIDTH,
+}));
 
 export default function DisplayStructure({
   title,
@@ -10,76 +69,25 @@ export default function DisplayStructure({
   children,
 }) {
   return (
-    <Box
-      sx={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        bgcolor: "black",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
-      }}
-    >
-      {/* Top bar */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 64,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          px: 3,
-          zIndex: 2,
-        }}
-      >
-        <Typography variant="h6" noWrap>
-          {title}
-        </Typography>
-        {onClose && (
-          <IconButton onClick={onClose} size="large">
-            <CloseIcon />
-          </IconButton>
-        )}
-      </Box>
-
-      {/* Display area */}
-      <Box
-        sx={{
-          flex: 1,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          pt: 8,
-          pb: 80, // leave space for info area
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        {children}
-      </Box>
-
-      {/* Info area (bottom) */}
-      <Box
-        sx={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          bottom: 0,
-          bgcolor: "background.default",
-          px: 3,
-          py: 2,
-          boxShadow: 3,
-          zIndex: 3,
-        }}
-      >
-        <ExpandableText text={description}>
-          {description + description + description + description}
-        </ExpandableText>
-      </Box>
-    </Box>
+    <Root>
+      <ContentContainer>
+        <TopBar>
+          <Typography variant="h5" noWrap>
+            {title}
+          </Typography>
+          {onClose && (
+            <IconButton size="large" onClick={onClose} color="inherit">
+              <EurekaIcon name="close" color="inherit" />
+            </IconButton>
+          )}
+        </TopBar>
+        <DisplayArea>{children}</DisplayArea>
+        <InfoArea>
+          <ExpandableText text={description}>
+            {description + description + description + description}
+          </ExpandableText>
+        </InfoArea>
+      </ContentContainer>
+    </Root>
   );
 }

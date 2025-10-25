@@ -9,6 +9,7 @@ import MediaModalDisplay from "./MediaModalDisplay";
 
 function PoiMediaModalContainer() {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const assetId = searchParams.get("displayMedia");
 
   const { projectId, tourId, poiId } = useParams();

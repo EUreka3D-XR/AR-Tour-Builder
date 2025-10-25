@@ -122,7 +122,22 @@ function MediaCardItem({ asset, onEdit, onDelete }) {
     asset?.type === "3d" && asset?.modelAssetAttributes?.georeference;
 
   const handleClick = () => {
-    setSearchParams((prev) => ({ ...prev, displayMedia: asset.id }));
+    setSearchParams((prev) => {
+      prev.set("displayMedia", asset.id);
+      return prev;
+    });
+  };
+
+  const handleEdit = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onEdit?.(asset);
+  };
+
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onDelete?.(asset);
   };
 
   return (
@@ -148,10 +163,10 @@ function MediaCardItem({ asset, onEdit, onDelete }) {
             </TitleSection>
 
             <ActionButtons>
-              <IconButton size="small" onClick={() => onEdit?.(asset)}>
+              <IconButton size="small" onClick={handleEdit}>
                 <EurekaIcon name="edit" fontSize="small" />
               </IconButton>
-              <IconButton size="small" onClick={() => onDelete?.(asset)}>
+              <IconButton size="small" onClick={handleDelete}>
                 <EurekaIcon name="delete" fontSize="small" />
               </IconButton>
             </ActionButtons>

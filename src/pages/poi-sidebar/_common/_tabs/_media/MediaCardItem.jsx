@@ -104,7 +104,6 @@ const MediaDescription = styled(Typography)(() => ({
  * Media Card Item component for displaying POI assets
  * @param {Object} props - Component props
  * @param {import('@/types/jsdoc-types').PoiAsset} props.asset - POI asset data
- * @param {Function} [props.onClick] - Card click handler
  * @param {Function} [props.onEdit] - Edit button click handler
  * @param {Function} [props.onDelete] - Delete button click handler
  * @returns {React.ReactElement} Rendered media card item

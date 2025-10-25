@@ -1,6 +1,7 @@
-import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box, Button, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
+
+import ExpandableText from "@/components/expandable-text/ExpandableText";
 
 export default function DisplayStructure({
   title,
@@ -8,8 +9,6 @@ export default function DisplayStructure({
   onClose,
   children,
 }) {
-  const [expanded, setExpanded] = useState(false);
-
   return (
     <Box
       sx={{
@@ -77,30 +76,9 @@ export default function DisplayStructure({
           zIndex: 3,
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography
-            variant="body2"
-            sx={{
-              flex: 1,
-              whiteSpace: expanded ? "normal" : "nowrap",
-              overflow: "hidden",
-              textOverflow: expanded ? "clip" : "ellipsis",
-              maxHeight: expanded ? "none" : 24,
-              transition: "max-height 0.2s",
-            }}
-          >
-            {description}
-          </Typography>
-          {description && (
-            <Button
-              size="small"
-              onClick={() => setExpanded((v) => !v)}
-              sx={{ ml: 2, minWidth: 80 }}
-            >
-              {expanded ? "Show less" : "Show more"}
-            </Button>
-          )}
-        </Box>
+        <ExpandableText text={description}>
+          {description + description + description + description}
+        </ExpandableText>
       </Box>
     </Box>
   );

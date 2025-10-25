@@ -22,12 +22,22 @@ const TooltipStyled = styled(Tooltip)(({ theme }) => ({
 /**
  *
  * @param {Object} props
+ * @param {string|number} props.id
  * @param {import("@/types/jsdoc-types").Coordinates} props.coordinates
  * @param {string} props.thumbnail
  * @param {string} props.title
+ * @param {any} [props.containerRef]
+ * @param {Function} [props.onClick]
  * @returns
  */
-function PoiMarker({ id, coordinates, thumbnail, title, containerRef }) {
+function PoiMarker({
+  id,
+  coordinates,
+  thumbnail,
+  title,
+  containerRef,
+  onClick,
+}) {
   const position = convertToLeafletLatLng(coordinates);
   const icon = useMemo(() => {
     // create DOM nodes to avoid injection and allow reliable event handlers
@@ -90,6 +100,9 @@ function PoiMarker({ id, coordinates, thumbnail, title, containerRef }) {
               if (listItem) listItem.classList.remove("is-hovered");
             }
           }
+        },
+        click() {
+          onClick?.(id);
         },
       }}
     >

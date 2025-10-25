@@ -40,6 +40,7 @@ export const usePoiAsset = (projectId, tourId, poiId, assetId, propLocale) => {
     fetcher: () =>
       api.assets.fetchOne(projectId, tourId, poiId, assetId, effectiveLocale),
     queryKey: ["poi-asset", projectId, tourId, poiId, assetId, effectiveLocale],
+    enabled: !!assetId,
     shouldStoreValue: true,
   });
 };

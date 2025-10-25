@@ -1,14 +1,8 @@
-import { styled } from "@mui/material";
-
 import Spacer from "@/components/spacer/Spacer";
 import ViewPoiBanner from "./_sections/ViewPoiBanner";
 import ViewPoiInfo from "./_sections/ViewPoiInfo";
 import ViewPoiLinks from "./_sections/ViewPoiLinks";
 import ViewPoiMedia from "./_sections/ViewPoiMedia";
-
-const ContainerStyled = styled("div")(() => ({
-  label: "view-poi-sidebar-content",
-}));
 
 /**
  *
@@ -18,7 +12,7 @@ const ContainerStyled = styled("div")(() => ({
  */
 function ViewPoiSidebarContent({ poi }) {
   return (
-    <ContainerStyled>
+    <div className="poi-sidebar-content">
       {poi.thumbnail ? (
         <ViewPoiBanner photoUrl={poi.thumbnail} />
       ) : (
@@ -30,7 +24,7 @@ function ViewPoiSidebarContent({ poi }) {
         quizLinks={poi.quizLinks}
       />
       <ViewPoiMedia mediaItems={poi.assets} />
-    </ContainerStyled>
+    </div>
   );
 }
 

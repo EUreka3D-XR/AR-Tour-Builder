@@ -10,6 +10,7 @@ import EurekaIcon from "@/components/icon/EurekaIcon";
 import MediaCounter from "@/components/media-counter/MediaCounter";
 
 const CardStyled = styled(Card)(({ theme }) => ({
+  cursor: "pointer",
   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
   transition: "box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out",
   "&:hover": {
@@ -150,31 +151,35 @@ function PoiItem({
         <ActionButtons>
           {isOrderable && (
             <>
-              <IconButton size="small" disabled={!onMoveUp} onClick={onMoveUp}>
+              <IconButtonCustom
+                size="small"
+                disabled={!onMoveUp}
+                onClick={onMoveUp}
+              >
                 <EurekaIcon name="arrowUp" fontSize="small" />
-              </IconButton>
-              <IconButton
+              </IconButtonCustom>
+              <IconButtonCustom
                 size="small"
                 disabled={!onMoveDown}
                 onClick={onMoveDown}
               >
                 <EurekaIcon name="arrowDown" fontSize="small" />
-              </IconButton>
+              </IconButtonCustom>
             </>
           )}
         </ActionButtons>
 
         {/* Action buttons on the right */}
         <ActionButtons>
-          <IconButton size="small" onClick={() => onCopy(poi.id)}>
+          <IconButtonCustom size="small" onClick={() => onCopy(poi.id)}>
             <EurekaIcon name="copy" fontSize="small" />
-          </IconButton>
-          <IconButton size="small" onClick={() => onEdit(poi.id)}>
+          </IconButtonCustom>
+          <IconButtonCustom size="small" onClick={() => onEdit(poi.id)}>
             <EurekaIcon name="edit" fontSize="small" />
-          </IconButton>
-          <IconButton size="small" onClick={() => onDelete(poi.id)}>
+          </IconButtonCustom>
+          <IconButtonCustom size="small" onClick={() => onDelete(poi.id)}>
             <EurekaIcon name="delete" fontSize="small" />
-          </IconButton>
+          </IconButtonCustom>
         </ActionButtons>
       </CardFooter>
     </CardStyled>
@@ -182,3 +187,15 @@ function PoiItem({
 }
 
 export default PoiItem;
+
+const IconButtonCustom = (props) => (
+  <IconButton
+    size="small"
+    {...props}
+    onClick={(e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      props.onClick();
+    }}
+  />
+);

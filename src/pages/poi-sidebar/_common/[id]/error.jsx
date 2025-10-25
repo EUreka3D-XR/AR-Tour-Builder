@@ -1,5 +1,7 @@
+import ErrorArea from "@/components/error/ErrorArea";
+
 function ViewPoiSidebarError() {
-  return <div>ViewPoiSidebarError</div>;
+  return <ErrorArea />;
 }
 
 export default ViewPoiSidebarError;

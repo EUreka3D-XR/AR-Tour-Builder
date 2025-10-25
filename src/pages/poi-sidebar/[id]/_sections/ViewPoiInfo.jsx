@@ -2,6 +2,7 @@ import { IconButton, Stack, styled, Typography } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
+import Spacer from "@/components/spacer/Spacer";
 import useNavPaths from "@/hooks/useNavPaths";
 import { formatCoordinates } from "@/utils/locationFormatters";
 import SectionTitle from "../_common/SectionTitle";
@@ -25,7 +26,7 @@ function ViewPoiInfo({ poi }) {
 
   return (
     <div className="poi-info-section">
-      <Stack spacing={4}>
+      <Stack spacing={2}>
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="h4" fontWeight="600">
             {poi.title}
@@ -51,6 +52,7 @@ function ViewPoiInfo({ poi }) {
             </Typography>
           </div>
         </Stack>
+        <Spacer size={2} />
         <div className="poi-description">
           <SectionTitle>Description</SectionTitle>
           <Typography>{poi.description}</Typography>

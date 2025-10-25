@@ -2,10 +2,9 @@ import { Stack } from "@mui/material";
 
 import NotFoundText from "../_common/NotFoundText";
 import SectionTitle from "../_common/SectionTitle";
-import MediaCardItem from "../../_tabs/_media/MediaCardItem";
+import MediaCardItem from "../../_common/_tabs/_media/MediaCardItem";
 
 function ViewPoiMedia({ mediaItems = [] }) {
-  console.log(mediaItems);
   return (
     <div className="poi-media-section">
       <SectionTitle>{`Asset Media (${mediaItems.length})`} </SectionTitle>

@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import ViewPoiSidebar from "@/pages/poi-sidebar/_common/[id]/ViewPoiSidebar";
+import ViewPoiSidebar from "@/pages/poi-sidebar/[id]/ViewPoiSidebar";
 import EditPoiSidebar from "@/pages/poi-sidebar/edit/EditPoiSidebar";
 import NewPoiSidebar from "@/pages/poi-sidebar/new/NewPoiSidebar";
 import TourPoisSection from "@/pages/tour/_sections/TourPoisSection";

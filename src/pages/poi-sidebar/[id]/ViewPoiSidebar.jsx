@@ -1,6 +1,6 @@
-import PoiSidebarHeader from "../_sections/PoiSidebarHeader";
-import SidebarFormArea from "../_utils/SidebarFormArea";
-import PoiSidebar from "../sidebar";
+import PoiSidebarHeader from "../_common/_sections/PoiSidebarHeader";
+import SidebarFormArea from "../_common/_utils/SidebarFormArea";
+import PoiSidebar from "../_common/sidebar";
 import ViewPoiSidebarContainer from "./container";
 
 function ViewPoiSidebar() {

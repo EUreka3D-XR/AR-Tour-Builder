@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router";
 import {
   Box,
   Card,
@@ -108,7 +109,9 @@ const MediaDescription = styled(Typography)(() => ({
  * @param {Function} [props.onDelete] - Delete button click handler
  * @returns {React.ReactElement} Rendered media card item
  */
-function MediaCardItem({ asset, onEdit, onDelete, onClick }) {
+function MediaCardItem({ asset, onEdit, onDelete }) {
+  const [, setSearchParams] = useSearchParams();
+
   const locale = useLocale();
 
   // Check if asset should show AR pill
@@ -119,8 +122,12 @@ function MediaCardItem({ asset, onEdit, onDelete, onClick }) {
   const showGeoferencedPill =
     asset?.type === "3d" && asset?.modelAssetAttributes?.georeference;
 
+  const handleClick = () => {
+    setSearchParams((prev) => ({ ...prev, displayMedia: asset.id }));
+  };
+
   return (
-    <CardStyled onClick={onClick}>
+    <CardStyled onClick={handleClick}>
       <CardContentStyled>
         {/* Media Preview */}
         <MediaPreviewStyled

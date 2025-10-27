@@ -6,6 +6,8 @@ import {
   RestSerializer,
 } from "miragejs";
 
+import { isLocalesValue } from "@/utils/inputLocale";
+import normalizeRelationships from "./helpers/normalizeRelationships";
 import { getRandomItems, getRandomPoiAssets } from "./helpers/randomizers";
 import { getMockAssets } from "./mock-data/assetsMocks";
 import { mockPOIs } from "./mock-data/poisMocks";
@@ -66,7 +68,7 @@ const AppSerializer = RestSerializer.extend({
         const value = transformed[key];
 
         // Check if this is a LocalesField (has locales.en, locales.fr, etc.)
-        if (this.isLocalesField(value)) {
+        if (isLocalesValue(value)) {
           // Transform to the requested locale or fallback to 'en'
           transformed[key] = value.locales[locale] || value.locales.en || "";
         }
@@ -80,15 +82,6 @@ const AppSerializer = RestSerializer.extend({
     }
 
     return data;
-  },
-  isLocalesField(value) {
-    return (
-      value &&
-      typeof value === "object" &&
-      value.locales &&
-      typeof value.locales === "object" &&
-      (value.locales.en || value.locales.fr)
-    ); // Check for expected locale keys
   },
 });
 
@@ -209,12 +202,27 @@ export const makeServer = ({ environment = "development" } = {}) => {
         server.db.pois.update(poi.id, { assetIds: poiAssetIds });
       });
 
-      // Assign random pois to each tour
+      // Assign random pois to each tour and compute boundBox from selected pois
       server.db.tours.forEach((tour) => {
         const pois = server.db.pois;
         const selectedPois = getRandomItems(pois, 5, 10);
         const poiIds = selectedPois.map((poi) => poi.id);
-        server.db.tours.update(tour.id, { poiIds: poiIds });
+        const boundBox = computeBoundBoxFromPois(selectedPois);
+
+        // Optionally set the tour coordinates to the center of the bound box
+        let center = null;
+        if (boundBox) {
+          center = {
+            lat: (boundBox[0].lat + boundBox[1].lat) / 2,
+            long: (boundBox[0].long + boundBox[1].long) / 2,
+          };
+        }
+
+        server.db.tours.update(tour.id, {
+          poiIds: poiIds,
+          boundBox: boundBox,
+          coordinates: center || tour.coordinates,
+        });
       });
 
       // Assign tours to projects
@@ -283,6 +291,59 @@ export const makeServer = ({ environment = "development" } = {}) => {
         }
         return tour;
       });
+      // Create a new tour under a project
+      this.post("/projects/:projectId/tours", (schema, request) => {
+        const projectId = request.params.projectId;
+        const attrs = JSON.parse(request.requestBody);
+        attrs.projectId = projectId;
+        const tour = schema.tours.create(attrs);
+        // const project = schema.projects.find(projectId);
+        // if (project) {
+        //   project.tourIds = [...(project.tourIds || []), tour.id];
+        //   project.save();
+        // }
+        return tour;
+      });
+      // Update an existing tour
+      this.put("/projects/:projectId/tours/:tourId", (schema, request) => {
+        const { tourId } = request.params;
+        const attrs = JSON.parse(request.requestBody);
+        const normalizedAttrs = normalizeRelationships(attrs, ["pois"]);
+
+        let tour = schema.tours.find(tourId);
+        if (!tour) {
+          return new Response(404, {}, { error: "Tour not found" });
+        }
+        // Optionally ensure the tour belongs to the project
+        // ...
+
+        tour.update(normalizedAttrs);
+        return tour;
+      });
+      // Delete a tour
+      this.delete("/projects/:projectId/tours/:tourId", (schema, request) => {
+        const { projectId, tourId } = request.params;
+        const tour = schema.tours.find(tourId);
+        if (!tour) {
+          return new Response(404, {}, { error: "Tour not found" });
+        }
+        // Optionally ensure the tour belongs to the project
+        if (tour.projectId !== projectId) {
+          return new Response(
+            400,
+            {},
+            { error: "Tour does not belong to project" },
+          );
+        }
+        // Remove tour from project's tourIds
+        const project = schema.projects.find(projectId);
+        if (project && Array.isArray(project.tourIds)) {
+          project.tourIds = project.tourIds.filter((id) => id !== tourId);
+          project.save();
+        }
+        tour.destroy();
+        return new Response(204);
+      });
 
       // Pois
       this.get("/projects/:projectId/tours/:tourId/pois", (schema, request) => {
@@ -296,6 +357,151 @@ export const makeServer = ({ environment = "development" } = {}) => {
           const { poiId } = request.params;
           const poi = schema.pois.find(poiId);
           return poi || new Response(404, {}, { error: "POI not found" });
+        },
+      );
+      // Create a new POI under a tour
+      this.post(
+        "/projects/:projectId/tours/:tourId/pois",
+        (schema, request) => {
+          const { tourId } = request.params;
+          const attrs = JSON.parse(request.requestBody);
+          attrs.tourId = tourId;
+          const poi = schema.pois.create(attrs);
+          // Add POI to tour
+          const tour = schema.tours.find(tourId);
+          if (tour) {
+            tour.poiIds = [...(tour.poiIds || []), poi.id];
+            tour.save();
+          }
+          return poi;
+        },
+      );
+      // Update an existing POI
+      this.put(
+        "/projects/:projectId/tours/:tourId/pois/:poiId",
+        (schema, request) => {
+          const { tourId, poiId } = request.params;
+          const attrs = JSON.parse(request.requestBody);
+          // const normalizedAttrs = normalizeRelationships(attrs, ["pois"]);
+          let poi = schema.pois.find(poiId);
+          if (!poi) {
+            return new Response(404, {}, { error: "POI not found" });
+          }
+          // Optionally ensure the POI belongs to the tour
+          if (poi.tourId !== tourId) {
+            return new Response(
+              400,
+              {},
+              { error: "POI does not belong to tour" },
+            );
+          }
+          poi.update(attrs);
+          return poi;
+        },
+      );
+      // Delete a POI
+      this.delete(
+        "/projects/:projectId/tours/:tourId/pois/:poiId",
+        (schema, request) => {
+          const { tourId, poiId } = request.params;
+          const poi = schema.pois.find(poiId);
+          if (!poi) {
+            return new Response(404, {}, { error: "POI not found" });
+          }
+          // Optionally ensure the POI belongs to the tour
+          if (poi.tourId !== tourId) {
+            return new Response(
+              400,
+              {},
+              { error: "POI does not belong to tour" },
+            );
+          }
+          // Remove POI from tour's poiIds
+          const tour = schema.tours.find(tourId);
+          if (tour && Array.isArray(tour.poiIds)) {
+            tour.poiIds = tour.poiIds.filter((id) => id !== poiId);
+            tour.save();
+          }
+          poi.destroy();
+          return new Response(204);
+        },
+      );
+
+      // POI Assets CRUD
+      // Get all assets for a POI
+      this.get(
+        "/projects/:projectId/tours/:tourId/pois/:poiId/assets",
+        (schema, request) => {
+          const { poiId } = request.params;
+          const poi = schema.pois.find(poiId);
+          return poi ? poi.poiAssets : [];
+        },
+      );
+
+      // Get one asset for a POI
+      this.get(
+        "/projects/:projectId/tours/:tourId/pois/:poiId/assets/:assetId",
+        (schema, request) => {
+          const { assetId } = request.params;
+          const poiAsset = schema.poiAssets.find(assetId);
+          return (
+            poiAsset || new Response(404, {}, { error: "POI Asset not found" })
+          );
+        },
+      );
+
+      // Create a new POI Asset for a POI
+      this.post(
+        "/projects/:projectId/tours/:tourId/pois/:poiId/assets",
+        (schema, request) => {
+          const { poiId } = request.params;
+          const attrs = JSON.parse(request.requestBody);
+          attrs.poiId = poiId;
+          const poiAsset = schema.poiAssets.create(attrs);
+          return poiAsset;
+        },
+      );
+
+      // Update an existing POI Asset
+      this.put(
+        "/projects/:projectId/tours/:tourId/pois/:poiId/assets/:assetId",
+        (schema, request) => {
+          const { assetId } = request.params;
+          const attrs = JSON.parse(request.requestBody);
+          let poiAsset = schema.poiAssets.find(assetId);
+          if (!poiAsset) {
+            return new Response(404, {}, { error: "POI Asset not found" });
+          }
+          poiAsset.update(attrs);
+          return poiAsset;
+        },
+      );
+
+      // Delete a POI Asset
+      this.delete(
+        "/projects/:projectId/tours/:tourId/pois/:poiId/assets/:assetId",
+        (schema, request) => {
+          const { assetId, poiId } = request.params;
+          const poiAsset = schema.poiAssets.find(assetId);
+          if (!poiAsset) {
+            return new Response(404, {}, { error: "POI Asset not found" });
+          }
+          // Optionally ensure the POI Asset belongs to the POI
+          if (poiAsset.poiId !== poiId) {
+            return new Response(
+              400,
+              {},
+              { error: "POI Asset does not belong to POI" },
+            );
+          }
+          // Remove POI Asset from POI's poiAssetIds
+          const poi = schema.pois.find(poiId);
+          if (poi && Array.isArray(poi.poiAssetIds)) {
+            poi.poiAssetIds = poi.poiAssetIds.filter((id) => id !== assetId);
+            poi.save();
+          }
+          poiAsset.destroy();
+          return new Response(204);
         },
       );
 
@@ -323,3 +529,26 @@ export const makeServer = ({ environment = "development" } = {}) => {
     },
   });
 };
+
+// Helper: compute bounding box from an array of poi objects
+function computeBoundBoxFromPois(pois) {
+  if (!pois || pois.length === 0) return null;
+  let minLat = Infinity;
+  let minLong = Infinity;
+  let maxLat = -Infinity;
+  let maxLong = -Infinity;
+
+  pois.forEach((p) => {
+    const lat = p.coordinates?.lat ?? p.lat ?? 0;
+    const long = p.coordinates?.long ?? p.long ?? 0;
+    if (lat < minLat) minLat = lat;
+    if (lat > maxLat) maxLat = lat;
+    if (long < minLong) minLong = long;
+    if (long > maxLong) maxLong = long;
+  });
+
+  return [
+    { lat: minLat, long: minLong }, // southwest
+    { lat: maxLat, long: maxLong }, // northeast
+  ];
+}

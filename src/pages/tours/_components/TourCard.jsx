@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import clsx from "clsx";
 import {
   Card,
@@ -12,7 +11,6 @@ import {
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import Image from "@/components/image/Image";
-import useNavPaths from "@/hooks/useNavPaths";
 
 const CardStyled = styled(Card)(({ theme }) => ({
   display: "flex",
@@ -21,10 +19,25 @@ const CardStyled = styled(Card)(({ theme }) => ({
   borderRadius: theme.spacing(2),
   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
   cursor: "pointer",
-  transition: "all 0.2s ease-in-out",
-  "&:hover": {
-    boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+  transition: "box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out",
+  "&.highlighted:not(.full-width)": {
+    border: `1px solid ${theme.palette.primary.main}`,
+    boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
     transform: "translateY(-2px)",
+    "& .tour-title-section": {
+      "& .open-tour-icon": {
+        opacity: 1,
+      },
+    },
+  },
+  "&:hover:not(.highlighted)": {
+    boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+    transform: "translateY(-2px)",
+    "& .tour-title-section": {
+      "& .open-tour-icon": {
+        opacity: 1,
+      },
+    },
   },
   "& .card-media": {
     height: "100px",
@@ -44,7 +57,14 @@ const CardStyled = styled(Card)(({ theme }) => ({
   },
   "& .tour-title-section": {
     display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: theme.spacing(1),
+    "& .open-tour-icon": {
+      color: theme.palette.text.secondary,
+      opacity: 0,
+      transition: "opacity 0.2s ease-in-out",
+    },
   },
   "& .tour-title": {
     flex: 1,
@@ -86,6 +106,15 @@ const CardStyled = styled(Card)(({ theme }) => ({
     flexDirection: "row",
     height: "180px",
     maxWidth: "1000px",
+    "&:hover": {
+      boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+      transform: "translateY(-2px)",
+      "& .tour-title-section": {
+        "& .open-tour-icon": {
+          opacity: 1,
+        },
+      },
+    },
     "& .card-media": {
       height: "100%",
       width: "240px",
@@ -113,6 +142,7 @@ const CardStyled = styled(Card)(({ theme }) => ({
  * @typedef {Object} TourCardProps
  * @property {import("@/types/jsdoc-types").Tour} tour - Tour data object
  * @property {boolean} [isFullWidth] - Whether the card should be full width
+ * @property {(tourId: string) => void} [onTourClick] - Callback when the tour card is clicked; receives a string param named "tourId"
  */
 
 /**
@@ -120,17 +150,18 @@ const CardStyled = styled(Card)(({ theme }) => ({
  * @param {TourCardProps} props - TourCard props
  * @returns {React.ReactElement} Rendered tour card component
  */
-function TourCard({ tour, isFullWidth }) {
-  const navigate = useNavigate();
-  const { routes } = useNavPaths();
-
+function TourCard({ tour, isFullWidth, isHighlighted, onTourClick }) {
   const handleCardClick = () => {
-    navigate(routes.tours.one(tour.id));
+    onTourClick?.(tour.id);
+    // navigate(routes.tours.one(tour.id));
   };
 
   return (
     <CardStyled
-      className={clsx("card-tour", { "full-width": isFullWidth })}
+      className={clsx("card-tour", {
+        highlighted: isHighlighted,
+        "full-width": isFullWidth,
+      })}
       onClick={handleCardClick}
     >
       <CardMedia className="card-media">
@@ -142,6 +173,9 @@ function TourCard({ tour, isFullWidth }) {
           <Typography variant="h5" component="h3" className="card-title">
             {tour.title}
           </Typography>
+          {isFullWidth && (
+            <EurekaIcon name="openInNew" className="open-tour-icon" />
+          )}
         </div>
 
         {/* Tour Stats */}

@@ -1,5 +1,7 @@
 import { styled, TextField } from "@mui/material";
 
+import FormInputMultilingual from "@/components/form/FormInputMultilingual";
+import ImageInput from "@/components/image-input/ImageInput";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 
@@ -10,31 +12,49 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   "& .language-selector": {
     alignSelf: "flex-end",
   },
+  "& .poi-thumbnail-dropzone": {
+    width: 250,
+    height: 250,
+  },
 }));
 function PoiDetailsTab() {
   return (
     <ContainerStyled>
       <LanguageDropdown className="language-selector" />
-      <LabeledInput label="Title">
-        <TextField placeholder="Enter title" fullWidth />
-      </LabeledInput>
-      <LabeledInput label="Description">
-        <TextField
-          placeholder="Enter description"
-          fullWidth
-          multiline
-          rows={4}
+      <FormInputMultilingual
+        name="title"
+        render={({ field }) => (
+          <LabeledInput label="Title" isMultilingual>
+            <TextField {...field} placeholder="Enter title" fullWidth />
+          </LabeledInput>
+        )}
+      />
+      <FormInputMultilingual
+        name="description"
+        render={({ field }) => (
+          <LabeledInput label="Description" isMultilingual>
+            <TextField
+              {...field}
+              placeholder="Enter description"
+              fullWidth
+              multiline
+              rows={4}
+            />
+          </LabeledInput>
+        )}
+      />
+      {/* <FormInput
+        name="thumbnail"
+        render={({ field }) => ( */}
+      <LabeledInput label="Thumbnail Image">
+        <ImageInput
+          placeholderText="Click to upload photo"
+          maxFileSize={5}
+          className="poi-thumbnail-dropzone"
         />
       </LabeledInput>
-      <LabeledInput label="Quiz Links">
-        <TextField placeholder="ex. https://quizlink.com/quiz/1" fullWidth />
-      </LabeledInput>
-      <LabeledInput label="External Sources and Links">
-        <TextField
-          placeholder="ex. https://archaeo-blogs.com/blog/1"
-          fullWidth
-        />
-      </LabeledInput>
+      {/* )}
+      /> */}
     </ContainerStyled>
   );
 }

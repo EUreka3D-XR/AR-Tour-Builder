@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router";
 import clsx from "clsx";
 import { Button as MuiButton, styled } from "@mui/material";
+
+import Link from "../link/Link";
 
 /**
  * Props for ButtonNewUnstyled component
@@ -14,6 +15,7 @@ import { Button as MuiButton, styled } from "@mui/material";
  * @property {boolean} [isDisabled] - Disabled state
  * @property {boolean} [isFullwidth] - Full width button
  * @property {'button'|'submit'|'reset'} [type] - HTML button type attribute
+ * @property {string} [form] - HTML form attribute
  * @property {string} [href] - URL for link button
  * @property {string} [target] - Link target attribute
  * @property {string} [rel] - Link rel attribute
@@ -79,35 +81,28 @@ function ButtonNewUnstyled({
   startIcon,
   endIcon,
   size,
+  form,
   onClick,
   className,
 }) {
-  const navigate = useNavigate();
-
-  const handleClick = (e) => {
-    if (href) {
-      navigate(href);
-      return;
-    }
-    onClick?.(e);
-  };
-
   return (
     <ButtonStyled
       variant={VARIANTS_DICT[variant]}
       color={color}
       fullWidth={isFullwidth}
       loading={isLoading}
-      disabled={isDisabled}
+      disabled={isDisabled || isLoading}
       type={type}
       startIcon={startIcon}
       size={size}
+      form={form}
       endIcon={endIcon}
       className={clsx(className, variant, corners, {
         "btn-unstyled": variant === "unstyled",
         "disable-gutters": disableGutters,
       })}
-      onClick={handleClick}
+      {...(href ? { component: Link, to: href } : {})}
+      onClick={onClick}
     >
       {children}
     </ButtonStyled>

@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router";
 import {
   Box,
   Card,
@@ -10,7 +11,10 @@ import {
 } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import InjectedLocaleValue from "@/components/inject-locale-value/InjectLocaleValue";
 import MediaPreview from "@/components/media-preview/MediaPreview";
+import { useLocale } from "@/hooks/useLocale";
+import { localeValue } from "@/utils/inputLocale";
 
 const CardStyled = styled(Card)(({ theme }) => ({
   borderRadius: theme.spacing(1),
@@ -100,12 +104,15 @@ const MediaDescription = styled(Typography)(() => ({
  * Media Card Item component for displaying POI assets
  * @param {Object} props - Component props
  * @param {import('@/types/jsdoc-types').PoiAsset} props.asset - POI asset data
- * @param {Function} [props.onClick] - Card click handler
  * @param {Function} [props.onEdit] - Edit button click handler
  * @param {Function} [props.onDelete] - Delete button click handler
  * @returns {React.ReactElement} Rendered media card item
  */
-function MediaCardItem({ asset, onEdit, onDelete, onClick }) {
+function MediaCardItem({ asset, onEdit, onDelete }) {
+  const [, setSearchParams] = useSearchParams();
+
+  const locale = useLocale();
+
   // Check if asset should show AR pill
   const showArPill =
     asset?.type === "3d" && asset?.modelAssetAttributes?.viewInAr;
@@ -114,14 +121,33 @@ function MediaCardItem({ asset, onEdit, onDelete, onClick }) {
   const showGeoferencedPill =
     asset?.type === "3d" && asset?.modelAssetAttributes?.georeference;
 
+  const handleClick = () => {
+    setSearchParams((prev) => {
+      prev.set("displayMedia", asset.id);
+      return prev;
+    });
+  };
+
+  const handleEdit = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onEdit?.(asset);
+  };
+
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onDelete?.(asset);
+  };
+
   return (
-    <CardStyled onClick={onClick}>
+    <CardStyled onClick={handleClick}>
       <CardContentStyled>
         {/* Media Preview */}
         <MediaPreviewStyled
           type={asset?.type}
-          url={asset?.contentUrl}
-          title={asset?.title?.locales?.en}
+          url={localeValue(asset?.contentUrl, locale)}
+          title={<InjectedLocaleValue value={asset?.title} />}
         />
 
         {/* Content Section */}
@@ -129,20 +155,18 @@ function MediaCardItem({ asset, onEdit, onDelete, onClick }) {
           <HeaderRow>
             <TitleSection>
               <MediaTitle variant="subtitle2" component="h4">
-                {asset?.title?.locales?.en || "Untitled Asset"}
+                <InjectedLocaleValue value={asset?.title || "Untitled Media"} />
               </MediaTitle>
-              {asset?.description?.locales?.en && (
-                <MediaDescription variant="body2" color="text.secondary">
-                  {asset.description.locales.en}
-                </MediaDescription>
-              )}
+              <MediaDescription variant="body2" color="text.secondary">
+                <InjectedLocaleValue value={asset?.description} />
+              </MediaDescription>
             </TitleSection>
 
             <ActionButtons>
-              <IconButton size="small" onClick={() => onEdit?.(asset)}>
+              <IconButton size="small" onClick={handleEdit}>
                 <EurekaIcon name="edit" fontSize="small" />
               </IconButton>
-              <IconButton size="small" onClick={() => onDelete?.(asset)}>
+              <IconButton size="small" onClick={handleDelete}>
                 <EurekaIcon name="delete" fontSize="small" />
               </IconButton>
             </ActionButtons>

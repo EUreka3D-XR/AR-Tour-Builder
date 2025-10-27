@@ -23,8 +23,12 @@ export const mockImageAssets = [
         fr: "Photographie haute résolution de la façade orientale du Parthénon présentant les colonnes doriques emblématiques et les sculptures du fronton.",
       },
     },
-    contentUrl:
-      "https://images.unsplash.com/photo-1555993539-1732b0258235?w=1200&h=800&fit=crop",
+    contentUrl: {
+      locales: {
+        en: "https://images.unsplash.com/photo-1555993539-1732b0258235?w=1200&h=800&fit=crop",
+        fr: "https://images.unsplash.com/photo-1555993539-1732b0258235?w=1200&h=800&fit=crop",
+      },
+    },
     filename: "parthenon_east_facade_4k.jpg",
     landingPage: "https://acropolis-museum.gr/parthenon-east-facade",
     source: "https://commons.wikimedia.org/wiki/File:Parthenon_east_facade.jpg",
@@ -54,8 +58,12 @@ export const mockImageAssets = [
         fr: "Détail rapproché d'un chapiteau ionique antique montrant les volutes caractéristiques et la sculpture ornementale.",
       },
     },
-    contentUrl:
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop",
+    contentUrl: {
+      locales: {
+        en: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop",
+        fr: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop",
+      },
+    },
     filename: "ionic_capital_detail.jpg",
     landingPage: "https://acropolis-museum.gr/ionic-architecture",
     source: "https://commons.wikimedia.org/wiki/File:Ionic_capital_detail.jpg",
@@ -85,8 +93,12 @@ export const mockImageAssets = [
         fr: "Fragment de poterie à figures rouges représentant des scènes mythologiques, datant du Ve siècle avant J.-C.",
       },
     },
-    contentUrl:
-      "https://images.unsplash.com/photo-1594736797933-d0f06ba07c45?w=1200&h=800&fit=crop",
+    contentUrl: {
+      locales: {
+        en: "https://images.unsplash.com/photo-1594736797933-d0f06ba07c45?w=1200&h=800&fit=crop",
+        fr: "https://images.unsplash.com/photo-1594736797933-d0f06ba07c45?w=1200&h=800&fit=crop",
+      },
+    },
     filename: "pottery_fragment_red_figure.jpg",
     landingPage: "https://acropolis-museum.gr/pottery-collection",
     source: "https://commons.wikimedia.org/wiki/File:Red_figure_pottery.jpg",
@@ -116,8 +128,12 @@ export const mockImageAssets = [
         fr: "Vue panoramique époustouflante de la colline de l'Acropole montrant le Parthénon, les Propylées et les structures antiques environnantes.",
       },
     },
-    contentUrl:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=600&fit=crop",
+    contentUrl: {
+      locales: {
+        en: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=600&fit=crop",
+        fr: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=600&fit=crop",
+      },
+    },
     filename: "acropolis_panorama_sunset.jpg",
     landingPage: "https://acropolis-museum.gr/acropolis-overview",
     source: "https://commons.wikimedia.org/wiki/File:Acropolis_panorama.jpg",
@@ -147,8 +163,12 @@ export const mockImageAssets = [
         fr: "Détail complexe de sculpture en marbre de la frise du Parthénon montrant l'artisanat grec classique et la maîtrise artistique.",
       },
     },
-    contentUrl:
-      "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=1200&h=800&fit=crop",
+    contentUrl: {
+      locales: {
+        en: "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=1200&h=800&fit=crop",
+        fr: "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=1200&h=800&fit=crop",
+      },
+    },
     filename: "marble_sculpture_frieze_detail.jpg",
     landingPage: "https://acropolis-museum.gr/parthenon-frieze",
     source:
@@ -186,8 +206,12 @@ export const mockVideoAssets = [
         fr: "Une vidéo time-lapse 4K époustouflante montrant la reconstruction virtuelle du Parthénon tel qu'il apparaissait dans l'Antiquité, avec les couleurs et décorations d'origine.",
       },
     },
-    contentUrl:
-      "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
+    contentUrl: {
+      locales: {
+        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
+        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
+      },
+    },
     filename: "parthenon_reconstruction_4k.mp4",
     landingPage: "https://acropolis-museum.gr/virtual-reconstruction",
     source:
@@ -219,8 +243,12 @@ export const mockVideoAssets = [
         fr: "Images documentaires des coulisses des fouilles archéologiques en cours autour de l'Acropole, montrant les techniques archéologiques modernes et les découvertes.",
       },
     },
-    contentUrl:
-      "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
+    contentUrl: {
+      locales: {
+        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
+        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
+      },
+    },
     filename: "archaeological_excavation_doc.mp4",
     landingPage: "https://acropolis-museum.gr/excavation-documentary",
     source: "https://commons.wikimedia.org/wiki/File:Acropolis_excavation.mp4",
@@ -251,8 +279,12 @@ export const mockVideoAssets = [
         fr: "Vidéo éducative expliquant les trois ordres classiques de l'architecture grecque antique : dorique, ionique et corinthien, avec des exemples détaillés de l'Acropole.",
       },
     },
-    contentUrl:
-      "https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4",
+    contentUrl: {
+      locales: {
+        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4",
+        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4",
+      },
+    },
     filename: "greek_architecture_explained.mp4",
     landingPage: "https://acropolis-museum.gr/architecture-guide",
     source:
@@ -284,8 +316,12 @@ export const mockVideoAssets = [
         fr: "Vidéo time-lapse à couper le souffle capturant le lever du soleil sur l'Acropole, mettant en valeur l'éclairage de l'heure dorée sur les structures de marbre antiques.",
       },
     },
-    contentUrl:
-      "https://sample-videos.com/zip/10/mp4/SampleVideo_1920x1080_1mb.mp4",
+    contentUrl: {
+      locales: {
+        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1920x1080_1mb.mp4",
+        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1920x1080_1mb.mp4",
+      },
+    },
     filename: "acropolis_sunrise_timelapse.mp4",
     landingPage: "https://acropolis-museum.gr/sunrise-gallery",
     source: "https://commons.wikimedia.org/wiki/File:Acropolis_sunrise.mp4",
@@ -316,8 +352,12 @@ export const mockVideoAssets = [
         fr: "Vidéo de documentation technique montrant le processus avancé de numérisation laser 3D utilisé pour créer des archives de préservation numérique des sculptures du Parthénon.",
       },
     },
-    contentUrl:
-      "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4",
+    contentUrl: {
+      locales: {
+        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4",
+        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4",
+      },
+    },
     filename: "3d_laser_scanning_process.mp4",
     landingPage: "https://acropolis-museum.gr/digital-preservation",
     source: "https://commons.wikimedia.org/wiki/File:3D_laser_scanning.mp4",
@@ -355,7 +395,12 @@ export const mockAudioAssets = [
         fr: "Guide audio professionnel narrant l'histoire complète du Parthénon, de sa construction en 447 avant J.-C. à son état actuel, y compris sa transformation à travers différentes périodes.",
       },
     },
-    contentUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+    contentUrl: {
+      locales: {
+        en: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+        fr: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+      },
+    },
     filename: "parthenon_history_guide.mp3",
     landingPage: "https://acropolis-museum.gr/audio-guides",
     source: "https://commons.wikimedia.org/wiki/File:Parthenon_audio_guide.mp3",
@@ -384,7 +429,12 @@ export const mockAudioAssets = [
         fr: "Reconstruction authentique de musique grecque antique utilisant des instruments d'époque et des notations musicales trouvées sur des tablettes anciennes, interprétée par des érudits en musique classique.",
       },
     },
-    contentUrl: "https://www.soundjay.com/misc/sounds/wind-chimes-1.wav",
+    contentUrl: {
+      locales: {
+        en: "https://www.soundjay.com/misc/sounds/wind-chimes-1.wav",
+        fr: "https://www.soundjay.com/misc/sounds/wind-chimes-1.wav",
+      },
+    },
     filename: "ancient_greek_music_reconstruction.mp3",
     landingPage: "https://acropolis-museum.gr/ancient-music",
     source: "https://commons.wikimedia.org/wiki/File:Ancient_greek_music.mp3",
@@ -413,7 +463,12 @@ export const mockAudioAssets = [
         fr: "Entretien exclusif avec l'archéologue en chef Dr. Maria Stavros discutant des découvertes récentes autour de l'Acropole et de leur importance pour notre compréhension de l'Athènes antique.",
       },
     },
-    contentUrl: "https://www.soundjay.com/misc/sounds/page-flip-01a.wav",
+    contentUrl: {
+      locales: {
+        en: "https://www.soundjay.com/misc/sounds/page-flip-01a.wav",
+        fr: "https://www.soundjay.com/misc/sounds/page-flip-01a.wav",
+      },
+    },
     filename: "archaeologist_interview_discoveries.mp3",
     landingPage: "https://acropolis-museum.gr/expert-interviews",
     source:
@@ -443,7 +498,12 @@ export const mockAudioAssets = [
         fr: "Enregistrement audio ambiant immersif capturant les sons naturels de l'Acropole à l'aube - vent à travers les colonnes antiques, ville lointaine qui s'éveille et chants d'oiseaux.",
       },
     },
-    contentUrl: "https://www.soundjay.com/nature/sounds/wind.wav",
+    contentUrl: {
+      locales: {
+        en: "https://www.soundjay.com/nature/sounds/wind.wav",
+        fr: "https://www.soundjay.com/nature/sounds/wind.wav",
+      },
+    },
     filename: "acropolis_dawn_ambient.mp3",
     landingPage: "https://acropolis-museum.gr/ambient-experiences",
     source: "https://commons.wikimedia.org/wiki/File:Acropolis_dawn_sounds.mp3",
@@ -472,7 +532,12 @@ export const mockAudioAssets = [
         fr: "Lecture dramatique de poésie grecque antique par un professeur de littérature classique renommé, présentant des œuvres d'Homère, Sappho et Pindare en grec ancien original avec traduction anglaise.",
       },
     },
-    contentUrl: "https://www.soundjay.com/misc/sounds/paper-flip-1.wav",
+    contentUrl: {
+      locales: {
+        en: "https://www.soundjay.com/misc/sounds/paper-flip-1.wav",
+        fr: "https://www.soundjay.com/misc/sounds/paper-flip-1.wav",
+      },
+    },
     filename: "ancient_greek_poetry_reading.mp3",
     landingPage: "https://acropolis-museum.gr/literary-heritage",
     source: "https://commons.wikimedia.org/wiki/File:Greek_poetry_reading.mp3",
@@ -508,7 +573,12 @@ export const mockModelAssets = [
         fr: "Modèle 3D haute définition de la structure complète du Parthénon tel qu'il apparaissait en 447 avant J.-C., avec des détails architecturaux précis, les couleurs d'origine et les éléments décoratifs.",
       },
     },
-    contentUrl: "https://example.com/models/parthenon_complete.glb",
+    contentUrl: {
+      locales: {
+        en: "https://example.com/models/parthenon_complete.glb",
+        fr: "https://example.com/models/parthenon_complete.glb",
+      },
+    },
     filename: "parthenon_complete_model.glb",
     landingPage: "https://acropolis-museum.gr/3d-models/parthenon",
     source: "https://commons.wikimedia.org/wiki/File:Parthenon_3D_model.glb",
@@ -536,7 +606,12 @@ export const mockModelAssets = [
         fr: "Scan 3D détaillé d'un chapiteau de colonne ionique authentique de l'Érechthéion, mettant en valeur les volutes complexes et les décorations de feuilles d'acanthe avec une précision de qualité muséale.",
       },
     },
-    contentUrl: "https://example.com/models/ionic_capital.glb",
+    contentUrl: {
+      locales: {
+        en: "https://example.com/models/ionic_capital.glb",
+        fr: "https://example.com/models/ionic_capital.glb",
+      },
+    },
     filename: "ionic_capital_detailed.glb",
     landingPage: "https://acropolis-museum.gr/3d-models/ionic-capital",
     source: "https://commons.wikimedia.org/wiki/File:Ionic_capital_3D.glb",
@@ -564,7 +639,12 @@ export const mockModelAssets = [
         fr: "Modèle 3D méticuleusement reconstruit d'une amphore à figures rouges du Ve siècle avant J.-C. représentant des scènes de la mythologie grecque, avec des détails de peinture authentiques et des textures de surface.",
       },
     },
-    contentUrl: "https://example.com/models/greek_amphora.glb",
+    contentUrl: {
+      locales: {
+        en: "https://example.com/models/greek_amphora.glb",
+        fr: "https://example.com/models/greek_amphora.glb",
+      },
+    },
     filename: "ancient_amphora_red_figure.glb",
     landingPage: "https://acropolis-museum.gr/3d-models/amphora",
     source: "https://commons.wikimedia.org/wiki/File:Greek_amphora_3D.glb",
@@ -592,7 +672,12 @@ export const mockModelAssets = [
         fr: "Reproduction 3D haute fidélité de l'une des célèbres statues de Cariatides de l'Érechthéion, capturant chaque détail des vêtements drapés et des traits du visage de ces chefs-d'œuvre architecturaux.",
       },
     },
-    contentUrl: "https://example.com/models/caryatid_statue.glb",
+    contentUrl: {
+      locales: {
+        en: "https://example.com/models/caryatid_statue.glb",
+        fr: "https://example.com/models/caryatid_statue.glb",
+      },
+    },
     filename: "caryatid_erechtheion_statue.glb",
     landingPage: "https://acropolis-museum.gr/3d-models/caryatid",
     source: "https://commons.wikimedia.org/wiki/File:Caryatid_3D_model.glb",
@@ -620,7 +705,12 @@ export const mockModelAssets = [
         fr: "Modèle 3D détaillé d'une section de la frise du Parthénon représentant la procession panathénaïque, mettant en valeur les techniques magistrales de sculpture en relief des sculpteurs grecs anciens.",
       },
     },
-    contentUrl: "https://example.com/models/parthenon_frieze.glb",
+    contentUrl: {
+      locales: {
+        en: "https://example.com/models/parthenon_frieze.glb",
+        fr: "https://example.com/models/parthenon_frieze.glb",
+      },
+    },
     filename: "parthenon_frieze_procession.glb",
     landingPage: "https://acropolis-museum.gr/3d-models/frieze",
     source: "https://commons.wikimedia.org/wiki/File:Parthenon_frieze_3D.glb",

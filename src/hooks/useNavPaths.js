@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
 /**
@@ -11,8 +11,8 @@ const constructPaths = (base) => {
     all: `${base}/*`,
     index: `${base}`,
     new: `${base}/new`,
-    edit: `${base}/edit`,
     one: (id) => `${base}/${id}`,
+    edit: (id) => `${base}/${id}/edit`,
   };
 };
 
@@ -20,6 +20,7 @@ const checkIfInsideAProject = (pathname) =>
   pathname.startsWith("/projects/") && !pathname.includes("/new");
 
 const useNavPaths = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { projectId } = useParams();
   const { tourId } = useParams();
@@ -34,7 +35,9 @@ const useNavPaths = () => {
       projectId ? `${projectsBase.one(projectId)}${route}` : route;
 
     const internalTourRoute = (route) =>
-      tourId ? `${projectsBase.one(projectId)}/tours/${tourId}${route}` : route;
+      tourId
+        ? `${projectsBase.one(projectId)}/tours/${tourId}${route}`
+        : `${projectsBase.one(projectId)}/tours/new${route}`;
 
     // Helper function for auth routes
     const internalAuthRoute = (route) => `${authBase}${route}`;
@@ -72,6 +75,7 @@ const useNavPaths = () => {
   );
 
   return {
+    navigate,
     routes,
     navLinks,
     isLocationInsideAProject: checkIfInsideAProject,

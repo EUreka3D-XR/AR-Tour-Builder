@@ -1,34 +1,104 @@
-import { styled } from "@mui/material";
+import { useMemo } from "react";
+import { useParams } from "react-router";
+import { useFormContext } from "react-hook-form";
+import { Stack, styled } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import useParamsTabs from "@/hooks/useParamsTabs";
 
 const FooterStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(2, 4),
   borderTop: `1px solid ${theme.palette.divider}`,
   backgroundColor: theme.palette.grey[50],
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
 }));
 
-function PoiFooterSection({
-  onCancel,
-  onSave,
-  cancelText = "Cancel",
-  saveText = "Save",
-  saveIcon,
-}) {
+function PoiFooterSection({ onCancel, steps = [], fieldsPerStep = [] }) {
+  const { activeTab, setActiveTab } = useParamsTabs("poiTab");
+  const { poiId } = useParams();
+  const isNew = !poiId;
+
+  const {
+    trigger,
+    formState: { errors },
+  } = useFormContext();
+
+  const currentStep = useMemo(() => {
+    if (!steps) return 0;
+    return steps.findIndex((step) => step === activeTab);
+  }, [activeTab, steps]);
+
+  const renderPreviousButton = isNew && currentStep > 0;
+  const renderNextButton = isNew && currentStep < steps.length - 2;
+  const renderCreateButton = isNew && currentStep === steps.length - 2;
+  const renderUpdateButton = !isNew;
+
+  const handleNextStep = async () => {
+    await validateStep(currentStep);
+
+    const nextStep = steps[currentStep + 1];
+    if (nextStep) {
+      setActiveTab(nextStep);
+    }
+  };
+  const handlePreviousStep = () => {
+    const prevStep = steps[currentStep - 1];
+    if (prevStep) {
+      setActiveTab(prevStep);
+    }
+  };
+
+  const validateStep = async (step) => {
+    const currentStepFields = fieldsPerStep[step] || [];
+    const isValid = await trigger(currentStepFields);
+    return isValid;
+  };
+
+  const isNextDisabled = useMemo(() => {
+    const currentStepFields = fieldsPerStep[currentStep] || [];
+    return currentStepFields.some((field) => errors[field]);
+  }, [errors, currentStep, fieldsPerStep]);
+
   return (
     <FooterStyled className="poi-sidebar-footer">
-      <Button onClick={onCancel}>{cancelText}</Button>
-      <Button
-        variant="filled"
-        startIcon={Boolean(saveIcon) && <EurekaIcon name={saveIcon} />}
-        onClick={onSave}
-      >
-        {saveText}
-      </Button>
+      <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Button onClick={onCancel}>Cancel</Button>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          spacing={1}
+        >
+          {renderPreviousButton && (
+            <Button variant="outlined" onClick={handlePreviousStep}>
+              Previous
+            </Button>
+          )}
+          {renderNextButton && (
+            <Button
+              variant="filled"
+              isDisabled={isNextDisabled}
+              onClick={handleNextStep}
+            >
+              Next Step
+            </Button>
+          )}
+          {renderCreateButton && (
+            <Button type="submit" variant="filled">
+              Create and add media
+            </Button>
+          )}
+          {renderUpdateButton && (
+            <Button
+              type="submit"
+              variant="filled"
+              startIcon={<EurekaIcon name="save" />}
+            >
+              Save Changes
+            </Button>
+          )}
+        </Stack>
+      </Stack>
     </FooterStyled>
   );
 }

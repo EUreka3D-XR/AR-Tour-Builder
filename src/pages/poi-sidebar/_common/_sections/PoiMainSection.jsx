@@ -1,8 +1,9 @@
 import { styled } from "@mui/material";
 
 import useParamsTabs from "@/hooks/useParamsTabs";
-import PoiMediaTab from "../_tabs/_media/PoiMediaTab";
+import PoiMediaTabContainer from "../_tabs/_media/PoiMediaTabContainer";
 import PoiDetailsTab from "../_tabs/PoiDetailsTab";
+import PoiExternalLinksTab from "../_tabs/PoiExternalLinksTab";
 import PoiLocationTab from "../_tabs/PoiLocationTab";
 
 const MainAreaStyled = styled("div")(({ theme }) => ({
@@ -16,7 +17,8 @@ function PoiMainSection() {
     <MainAreaStyled>
       {activeTab === "location" && <PoiLocationTab />}
       {activeTab === "details" && <PoiDetailsTab />}
-      {activeTab === "media" && <PoiMediaTab />}
+      {activeTab === "external-links" && <PoiExternalLinksTab />}
+      {activeTab === "media" && <PoiMediaTabContainer />}
     </MainAreaStyled>
   );
 }

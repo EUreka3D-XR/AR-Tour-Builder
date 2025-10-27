@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { useFetchStateHelper } from "@/hooks/useFetchState";
 
@@ -35,4 +35,36 @@ export const useDataFetcher = ({
   const { fetchState } = useFetchStateHelper(queryResponse);
 
   return { data, fetchState };
+};
+
+/**
+ * @template T
+ * @typedef {import("@/types/jsdoc-types").MutateResultType<T>} MutateResultType
+ */
+
+/**
+ * Custom hook for mutating data using react-query
+ * @template TData The type of the data passed to the mutator
+ * @template TResult The type of the result returned by the mutator's Promise
+ * @param {Object} params
+ * @param {(data: TData) => Promise<TResult>} params.mutator - The function to mutate data that returns Promise<TResult>
+ * @param {String[]} params.mutationKey - The key for the mutation (mutationKey for useMutation).
+ * @param {String[]} [params.invalidateKey] - The key for the query to invalidate upon successful mutation.
+ * @returns {MutateResultType<TResult>}
+ */
+export const useDataMutator = ({ mutator, mutationKey, invalidateKey }) => {
+  const queryClient = useQueryClient();
+
+  const { data, ...mutation } = useMutation({
+    mutationKey,
+    mutationFn: mutator,
+    onSuccess: () => {
+      if (invalidateKey) {
+        queryClient.invalidateQueries({ queryKey: invalidateKey });
+      }
+    },
+  });
+  const { fetchState } = useFetchStateHelper(mutation);
+
+  return { data, mutate: mutation.mutateAsync, fetchState };
 };

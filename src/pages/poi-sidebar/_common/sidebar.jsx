@@ -1,34 +1,83 @@
+import { useCallback } from "react";
+import { useSearchParams } from "react-router";
 import { motion } from "motion/react";
 import { Drawer, styled } from "@mui/material";
 
-const DrawerStyled = styled(Drawer)(({ theme }) => ({
-  "& .drawer-paper": {
-    width: "800px",
-    height: "100vh",
-  },
-  "& .drawer-content": {},
-}));
+import PoiMediaModalContainer from "@/components/poi-media-modal/container";
+import useNavPaths from "@/hooks/useNavPaths";
 
-function PoiSidebar({ children, onClose }) {
+function PoiSidebar({ children }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { routes, navigate } = useNavPaths();
+
+  const isInsideCreateAssetForm =
+    Boolean(searchParams.get("mediaForm")) && !searchParams.get("mediaId");
+  const isInsideEditAssetForm =
+    Boolean(searchParams.get("mediaForm")) &&
+    Boolean(searchParams.get("mediaId"));
+
+  const handleCloseSidebar = useCallback(() => {
+    navigate(routes.pois.index);
+  }, [navigate, routes]);
+
+  const handleCloseAsset = useCallback(() => {
+    setSearchParams((prev) => {
+      prev.delete("mediaForm");
+      prev.delete("mediaId");
+      return prev;
+    });
+  }, [setSearchParams]);
+
   return (
-    <DrawerStyled
-      anchor="right"
-      open
-      slotProps={{
-        paper: {
-          className: "drawer-paper",
-          component: motion.div,
-          initial: { x: "100%" },
-          animate: { x: 0 },
-          exit: { x: "100%" },
-          transition: { type: "tween", duration: 0.3 },
-        },
-      }}
-      onClose={onClose}
-    >
-      {children}
-    </DrawerStyled>
+    <>
+      <DrawerStyled
+        anchor="right"
+        open
+        slotProps={{
+          paper: {
+            className: "drawer-paper",
+            component: motion.div,
+            initial: { x: "100%" },
+            animate: { x: 0 },
+            exit: { x: "100%" },
+            transition: { type: "tween", duration: 0.3 },
+          },
+        }}
+        onClose={handleCloseSidebar}
+      >
+        <ContentStyled className="sidebar-inner">
+          {typeof children === "function" &&
+            children({
+              showCreateAssetForm: isInsideCreateAssetForm,
+              showEditAssetForm: isInsideEditAssetForm,
+              showPoiForm: !isInsideCreateAssetForm && !isInsideEditAssetForm,
+              onCloseAsset: handleCloseAsset,
+              onClosePoi: handleCloseSidebar,
+            })}
+        </ContentStyled>
+      </DrawerStyled>
+      <PoiMediaModalContainer />
+    </>
   );
 }
 
 export default PoiSidebar;
+
+const DrawerStyled = styled(Drawer)(() => ({
+  "& .drawer-paper": {
+    width: "800px",
+    height: "100vh",
+  },
+  "& form": {
+    height: "100%",
+  },
+}));
+
+const ContentStyled = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  height: "100%",
+  "& .no-shrink": {
+    flexShrink: 0,
+  },
+});

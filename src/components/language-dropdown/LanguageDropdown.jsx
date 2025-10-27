@@ -1,18 +1,9 @@
 import { MenuItem, Select, styled } from "@mui/material";
 
-import EurekaIcon from "../icon/EurekaIcon";
+import useFormLocale from "@/stores/useFormLocale";
+import useAvailableLocales from "@/hooks/useAvailableLocales";
+import LanguageIcon from "../icon/LanguageIcon";
 import LabeledInput from "../labeled-input/LabeledInput";
-
-const LanguageOptions = [
-  {
-    value: "en",
-    label: "English",
-  },
-  {
-    value: "fr",
-    label: "French",
-  },
-];
 
 const SelectStyled = styled(Select)(({ theme }) => ({
   "& .dropdown-item": {
@@ -25,32 +16,68 @@ const SelectStyled = styled(Select)(({ theme }) => ({
   },
 }));
 
-function LanguageDropdown({ className }) {
+function LanguageDropdown({ className, label, hideLabels }) {
+  const { available } = useAvailableLocales();
+
+  return (
+    <LanguageDropdownComponent
+      className={className}
+      label={label}
+      hideLabels={hideLabels}
+      options={available}
+    />
+  );
+}
+
+// function LanguageTourDropdown({ className }) {
+//   const { available } = useTourLanguages();
+
+//   return (
+//     <LanguageDropdownComponent className={className} options={available} />
+//   );
+// }
+
+// function LanguageProjectDropdown({ className }) {
+//   const { available } = useProjectLanguages();
+
+//   return (
+//     <LanguageDropdownComponent className={className} options={available} />
+//   );
+// }
+
+function LanguageDropdownComponent({
+  className,
+  label = "Input Language",
+  hideLabels,
+  options = [],
+}) {
+  const initialLocale = options[0]?.value || "en";
+
+  const { locale, setCurrentLocale } = useFormLocale(initialLocale);
+
   return (
     <LabeledInput
       id="language-switcher-label"
-      label="Input Language"
+      label={label}
       labelPlacement="left"
+      labelIcon="language"
       className={className}
     >
       <SelectStyled
         labelId="language-switcher-label"
         id="language-switcher"
-        value="en"
-        renderValue={(se) => (
+        value={locale}
+        className="language-select"
+        renderValue={(currentValue) => (
           <div className="dropdown-item">
-            <EurekaIcon
-              name="language"
-              fontSize="small"
-              className="filter-icon"
-            />
-            {LanguageOptions.find((option) => option.value === se)?.label}
+            <LanguageIcon code={currentValue} />
+            {!hideLabels &&
+              options.find((option) => option.value === currentValue)?.label}
           </div>
         )}
-        className="language-select"
-        onChange={() => {}}
+        onChange={(e) => setCurrentLocale(e.target.value)}
       >
-        {LanguageOptions.map((option) => (
+        {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>

@@ -1,39 +1,51 @@
-import { useNavigate } from "react-router";
-import { IconButton, styled, Typography } from "@mui/material";
+import { useParams } from "react-router";
+import { useFormContext, useWatch } from "react-hook-form";
+import { IconButton, Stack, styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";
+import { dateFormatters } from "@/utils/datetimeFormatters";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(1.5, 2),
   display: "flex",
-  alignItems: "center",
+  alignItems: "flex-start",
   justifyContent: "space-between",
+  gap: theme.spacing(4),
+  overflow: "hidden",
   "& .left-section": {
     display: "flex",
     alignItems: "center",
     gap: theme.spacing(2),
+    overflow: "hidden",
   },
   "& .right-section": {
     display: "flex",
-    alignItems: "center",
-    gap: theme.spacing(1),
+    flexDirection: "column",
+    alignItems: "flex-end",
+    gap: theme.spacing(0.5),
+    "& .timestamps": {
+      fontStyle: "italic",
+      color: theme.palette.text.secondary,
+    },
   },
 }));
 
-function TourHeaderSection({
-  tourTitle = "Downtown Heritage Walking Tour",
-  tourStatus,
-  lastModified,
-  onSave,
-  onPublish,
-  onArchive,
-}) {
-  const navigate = useNavigate();
-  const { routes } = useNavPaths();
+function TourHeaderSection({ onSave, onPublish, onArchive }) {
+  const { tourId } = useParams();
+  const isExisting = !!tourId;
 
-  const isEditing = lastModified ? "edit" : "create";
+  const { routes, navigate } = useNavPaths();
+
+  const {
+    formState: { isSubmitting },
+  } = useFormContext();
+
+  const tourStatus = useWatch({ name: "status", defaultValue: "draft" });
+  const createdAt = useWatch({ name: "createdAt" });
+  const updatedAt = useWatch({ name: "updatedAt" });
+  const lastModifiedAt = updatedAt ?? createdAt;
 
   const handleBackClick = () => {
     navigate(routes.tours.index);
@@ -45,15 +57,18 @@ function TourHeaderSection({
         <IconButton size="small" onClick={handleBackClick}>
           <EurekaIcon name="back" fontSize="small" />
         </IconButton>
-        <Typography variant="h4" component="h2">
-          {tourTitle}
+        <Typography variant="h4" component="h2" noWrap>
+          Editting Tour
         </Typography>
       </div>
-      <div className="right-section">
-        {isEditing ? (
-          <>
-            {lastModified}
-            <Button startIcon={<EurekaIcon name="save" />} onClick={onSave}>
+      {isExisting && (
+        <div className="right-section">
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <Button
+              startIcon={<EurekaIcon name="save" />}
+              type="submit"
+              isLoading={isSubmitting}
+            >
               Save Changes
             </Button>
             <Button
@@ -79,13 +94,13 @@ function TourHeaderSection({
                 Archive
               </Button>
             )}
-          </>
-        ) : (
-          <Button variant="filled" onClick={onSave}>
-            Create Tour
-          </Button>
-        )}
-      </div>
+          </Stack>
+          <Typography className="timestamps">
+            {"Last modified: "}
+            {dateFormatters.lastUpdatedLike(lastModifiedAt)}
+          </Typography>
+        </div>
+      )}
     </ContainerStyled>
   );
 }

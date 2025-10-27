@@ -6,6 +6,13 @@ export const baseUrls = {
   users: "/api/users",
   tours: (projectId) => `/api/projects/${projectId}/tours`,
   tour: (projectId, tourId) => `/api/projects/${projectId}/tours/${tourId}`,
-  pois: (projectId, tourId) =>
+  tourPois: (projectId, tourId) =>
     `/api/projects/${projectId}/tours/${tourId}/pois`,
+  tourPoi: (projectId, tourId, poiId) =>
+    `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}`,
+  pois: (projectId) => `/api/projects/${projectId}/pois`,
+  poiAssets: (projectId, tourId, poiId) =>
+    `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}/assets`,
+  poiAsset: (projectId, tourId, poiId, assetId) =>
+    `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}/assets/${assetId}`,
 };

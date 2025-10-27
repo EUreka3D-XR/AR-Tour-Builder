@@ -7,6 +7,7 @@ const HeaderStyled = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  borderBottom: `1px solid ${theme.palette.divider}`,
   "& .left-section": {
     display: "flex",
     alignItems: "center",

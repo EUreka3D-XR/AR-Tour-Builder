@@ -5,6 +5,7 @@ import {
   CardContent,
   CardMedia,
   Chip,
+  Skeleton,
   styled,
   Typography,
 } from "@mui/material";
@@ -112,5 +113,19 @@ function ProjectCard({ project }) {
     </ProjectCardStyled>
   );
 }
+
+const SkeletonCard = () => (
+  <Card>
+    <Skeleton variant="rectangular" height={200} />
+    <CardContent>
+      <Skeleton width="60%" height={32} />
+      <Skeleton width="100%" />
+      <Skeleton width="90%" />
+      <Skeleton width="80%" />
+    </CardContent>
+  </Card>
+);
+
+ProjectCard.Skeleton = SkeletonCard;
 
 export default ProjectCard;

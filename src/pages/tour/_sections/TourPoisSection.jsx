@@ -4,9 +4,18 @@ import {
   useNavigate,
   useOutletContext,
 } from "react-router";
-import { Divider, FormControlLabel, styled, Switch } from "@mui/material";
+import { useWatch } from "react-hook-form";
+import {
+  Divider,
+  FormControlLabel,
+  Stack,
+  styled,
+  Switch,
+  Typography,
+} from "@mui/material";
 
 import Button from "@/components/button/Button";
+import CenteredArea from "@/components/centered/Centered";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";
 import PoiItem from "../_components/PoiItem";
@@ -23,7 +32,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
     flexShrink: 0,
   },
   "& .pois-list": {
-    padding: theme.spacing(2, 3, 0, 3),
+    paddingTop: theme.spacing(2),
     flex: 1,
     display: "flex",
     flexDirection: "column",
@@ -36,28 +45,69 @@ const ContainerStyled = styled("div")(({ theme }) => ({
       overflowY: "auto",
       paddingBottom: theme.spacing(3),
     },
+    "& .poi-item-flex-item": {
+      margin: theme.spacing(0, 3),
+      "&.is-hovered": {
+        "& .poi-card": {
+          boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+          transform: "translateY(-2px)",
+        },
+      },
+    },
   },
 }));
 
 function TourPoisSection() {
-  const { pois } = useOutletContext();
-
+  const { containerRef } = useOutletContext();
   const location = useLocation();
   const navigate = useNavigate();
   const { routes } = useNavPaths();
 
+  const pois = useWatch({ name: "pois" });
+
   const handleEdit = (poiId) => {
+    navigate(routes.pois.edit(poiId), {
+      state: { backgroundLocation: location },
+    });
+  };
+
+  const handleClick = (poiId) => {
     navigate(routes.pois.one(poiId), {
       state: { backgroundLocation: location },
     });
   };
+
+  if (!pois?.length) {
+    return (
+      <CenteredArea className="empty-pois-section">
+        <Stack alignItems="center" justifyContent="center">
+          <Typography>
+            There are no points of interest associated to the tour yet.
+          </Typography>
+          <Typography>Click below to start adding points</Typography>
+          <br />
+          <Button
+            variant="filled"
+            href={routes.pois.new}
+            startIcon={<EurekaIcon name="add" />}
+          >
+            Add POI
+          </Button>
+        </Stack>
+      </CenteredArea>
+    );
+  }
 
   return (
     <>
       <ContainerStyled className="pois-section">
         <div className="pois-header">
           <FormControlLabel control={<Switch />} label="Guided Tour" />
-          <Button variant="filled" startIcon={<EurekaIcon name="add" />}>
+          <Button
+            variant="filled"
+            href={routes.pois.new}
+            startIcon={<EurekaIcon name="add" />}
+          >
             Add POI
           </Button>
         </div>
@@ -65,8 +115,35 @@ function TourPoisSection() {
         <div className="pois-list">
           <div className="pois-list-scrollable">
             {pois.map((poi) => (
-              <div key={poi.id} className="poi-item-flex-item">
-                <PoiItem poi={poi} onEdit={handleEdit} />
+              <div
+                key={poi.id}
+                className="poi-item-flex-item"
+                data-id={poi.id}
+                onPointerEnter={() => {
+                  if (containerRef?.current) {
+                    containerRef.current.dataset.hovered = poi.id;
+                    const markerEl = containerRef.current.querySelector(
+                      `.custom-poi-marker[data-id="${poi.id}"]`,
+                    );
+                    if (markerEl) markerEl.classList.add("is-hovered");
+                  }
+                }}
+                onPointerLeave={() => {
+                  if (containerRef?.current) {
+                    delete containerRef.current.dataset.hovered;
+                    const markerEl = containerRef.current.querySelector(
+                      `.custom-poi-marker[data-id="${poi.id}"]`,
+                    );
+                    if (markerEl) markerEl.classList.remove("is-hovered");
+                  }
+                }}
+              >
+                <PoiItem
+                  poi={poi}
+                  dataId={poi.id}
+                  onEdit={handleEdit}
+                  onClick={handleClick}
+                />
               </div>
             ))}
           </div>

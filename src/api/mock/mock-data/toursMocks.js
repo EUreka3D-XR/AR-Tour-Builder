@@ -31,12 +31,8 @@ export const mockTours = [
     distance: 1200, // 1.2 km
     coordinates: {
       lat: 37.9715,
-      long: 23.7267,
+      long: 23.7275,
     },
-    boundBox: [
-      { lat: 37.9693, long: 23.7196 },
-      { lat: 37.9755, long: 23.7286 },
-    ],
     createdAt: "2024-01-20T09:00:00Z",
     updatedAt: "2024-01-20T09:00:00Z",
   },
@@ -61,13 +57,9 @@ export const mockTours = [
     duration: 120, // 2 hours
     distance: 800, // 800m
     coordinates: {
-      lat: 37.9695,
-      long: 23.7265,
+      lat: 37.9689,
+      long: 23.7248,
     },
-    boundBox: [
-      { lat: 37.969, long: 23.724 },
-      { lat: 37.97, long: 23.729 },
-    ],
     createdAt: "2024-01-19T10:30:00Z",
     updatedAt: "2024-01-19T10:30:00Z",
   },
@@ -92,13 +84,9 @@ export const mockTours = [
     duration: 150, // 2.5 hours
     distance: 950, // 950m
     coordinates: {
-      lat: 37.972,
-      long: 23.725,
+      lat: 37.9735,
+      long: 23.7272,
     },
-    boundBox: [
-      { lat: 37.971, long: 23.724 },
-      { lat: 37.973, long: 23.727 },
-    ],
     createdAt: "2024-01-18T14:15:00Z",
     updatedAt: "2024-01-18T14:15:00Z",
   },
@@ -123,13 +111,9 @@ export const mockTours = [
     duration: 135, // 2.25 hours
     distance: 1100, // 1.1 km
     coordinates: {
-      lat: 37.974,
-      long: 23.722,
+      lat: 37.9678,
+      long: 23.73,
     },
-    boundBox: [
-      { lat: 37.972, long: 23.719 },
-      { lat: 37.976, long: 23.725 },
-    ],
     createdAt: "2024-01-17T11:45:00Z",
     updatedAt: "2024-01-17T11:45:00Z",
   },
@@ -154,13 +138,9 @@ export const mockTours = [
     duration: 165, // 2.75 hours
     distance: 1350, // 1.35 km
     coordinates: {
-      lat: 37.971,
-      long: 23.726,
+      lat: 37.9752,
+      long: 23.7223,
     },
-    boundBox: [
-      { lat: 37.969, long: 23.719 },
-      { lat: 37.976, long: 23.729 },
-    ],
     createdAt: "2024-01-16T13:20:00Z",
     updatedAt: "2024-01-16T13:20:00Z",
   },
@@ -185,13 +165,9 @@ export const mockTours = [
     duration: 90, // 1.5 hours
     distance: 600, // 600m
     coordinates: {
-      lat: 37.9715,
-      long: 23.7267,
+      lat: 37.9701,
+      long: 23.7205,
     },
-    boundBox: [
-      { lat: 37.971, long: 23.725 },
-      { lat: 37.972, long: 23.728 },
-    ],
     createdAt: "2024-01-15T16:30:00Z",
     updatedAt: "2024-01-15T16:30:00Z",
   },
@@ -216,13 +192,9 @@ export const mockTours = [
     duration: 195, // 3.25 hours
     distance: 1500, // 1.5 km
     coordinates: {
-      lat: 37.973,
-      long: 23.724,
+      lat: 37.9699,
+      long: 23.7288,
     },
-    boundBox: [
-      { lat: 37.969, long: 23.719 },
-      { lat: 37.977, long: 23.729 },
-    ],
     createdAt: "2024-01-14T09:45:00Z",
     updatedAt: "2024-01-20T14:30:00Z",
   },
@@ -247,13 +219,9 @@ export const mockTours = [
     duration: 105, // 1.75 hours
     distance: 750, // 750m
     coordinates: {
-      lat: 37.9705,
-      long: 23.7255,
+      lat: 37.9748,
+      long: 23.7249,
     },
-    boundBox: [
-      { lat: 37.9695, long: 23.724 },
-      { lat: 37.972, long: 23.727 },
-    ],
     createdAt: "2024-01-13T12:00:00Z",
     updatedAt: "2024-01-13T12:00:00Z",
   },
@@ -278,13 +246,9 @@ export const mockTours = [
     duration: 170, // 2.83 hours
     distance: 900, // 900m
     coordinates: {
-      lat: 37.9718,
-      long: 23.7263,
+      lat: 37.9729,
+      long: 23.7236,
     },
-    boundBox: [
-      { lat: 37.971, long: 23.725 },
-      { lat: 37.9725, long: 23.7275 },
-    ],
     createdAt: "2024-01-12T15:15:00Z",
     updatedAt: "2024-01-12T15:15:00Z",
   },
@@ -309,13 +273,9 @@ export const mockTours = [
     duration: 125, // 2.08 hours
     distance: 1000, // 1 km
     coordinates: {
-      lat: 37.9722,
-      long: 23.7245,
+      lat: 37.976,
+      long: 23.7278,
     },
-    boundBox: [
-      { lat: 37.97, long: 23.722 },
-      { lat: 37.9745, long: 23.727 },
-    ],
     createdAt: "2024-01-11T17:30:00Z",
     updatedAt: "2024-01-11T17:30:00Z",
   },

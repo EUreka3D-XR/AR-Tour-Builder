@@ -1,17 +1,18 @@
 import { api } from "@/api";
 
 import { useLocale } from "@/hooks/useLocale";
-import { useDataFetcher } from "./helpers/serviceHooks";
+import { useDataFetcher, useDataMutator } from "./helpers/serviceHooks";
 
 /**
  * @typedef {import('@/types/jsdoc-types').Tour} Tour
- * @typedef {import('@/types/jsdoc-types').FetchResultType<Tour[]>} ToursResult
- * @typedef {import('@/types/jsdoc-types').FetchResultType<Tour>} TourResult
+ * @typedef {import('@/types/jsdoc-types').FetchResultType<Tour[]>} ToursFetchResult
+ * @typedef {import('@/types/jsdoc-types').FetchResultType<Tour>} TourFetchResult
+ * @typedef {import('@/types/jsdoc-types').MutationResultType<Tour>} TourMutateResult
  */
 
 /**
  * @param {string} projectId
- * @returns {ToursResult}
+ * @returns {ToursFetchResult}
  */
 export const useProjectTours = (projectId, params) => {
   const locale = useLocale();
@@ -24,13 +25,15 @@ export const useProjectTours = (projectId, params) => {
 /**
  * @param {string} projectId
  * @param {string} tourId
- * @returns {TourResult}
+ * @returns {TourFetchResult}
  */
-export const useProjectTour = (projectId, tourId) => {
+export const useProjectTour = (projectId, tourId, propLocale) => {
   const locale = useLocale();
+  const effectiveLocale = propLocale || locale;
+
   return useDataFetcher({
-    fetcher: () => api.tours.fetchOne(projectId, tourId, locale),
-    queryKey: ["project-tour", projectId, tourId, locale],
+    fetcher: () => api.tours.fetchOne(projectId, tourId, effectiveLocale),
+    queryKey: ["project-tour", projectId, tourId, effectiveLocale],
     shouldStoreValue: true,
   });
 };
@@ -38,7 +41,7 @@ export const useProjectTour = (projectId, tourId) => {
 /**
  * @param {string} projectId
  * @param {string} tourId
- * @returns {TourResult}
+ * @returns {TourFetchResult}
  */
 export const useProjectTourMultilingual = (projectId, tourId) => {
   return useDataFetcher({
@@ -46,5 +49,30 @@ export const useProjectTourMultilingual = (projectId, tourId) => {
     queryKey: ["project-tour", projectId, tourId, "multilingual"],
     shouldStoreValue: true,
     enabled: !!tourId,
+  });
+};
+
+/**
+ * @param {string} projectId
+ * @returns {TourMutateResult}
+ */
+export const useCreateTour = (projectId) => {
+  return useDataMutator({
+    mutator: ({ data }) => api.tours.create(projectId, data),
+    mutationKey: ["create-tour", projectId],
+    invalidateKey: ["project-tours", projectId],
+  });
+};
+
+/**
+ * @param {string} projectId
+ * @param {string} tourId
+ * @returns {TourMutateResult}
+ */
+export const useUpdateTour = (projectId, tourId) => {
+  return useDataMutator({
+    mutator: ({ data }) => api.tours.update(projectId, tourId, data),
+    mutationKey: ["update-tour", projectId, tourId],
+    invalidateKey: ["project-tour", projectId, tourId],
   });
 };

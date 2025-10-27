@@ -55,6 +55,14 @@
  * @property {FetchStateType} fetchState - The fetch state
  */
 
+/**
+ * @template T
+ * @typedef {Object} MutationResultType
+ * @property {T} data - The mutated data
+ * @property {FetchStateType} fetchState - The fetch state
+ * @property {import('@tanstack/react-query').UseMutateAsyncFunction<T>} mutate - The mutate async function
+ */
+
 // =============================================================================
 // PROJECT TYPES
 // =============================================================================
@@ -69,6 +77,9 @@
  * @property {string} coverPhoto - The URL of the project's cover photo
  * @property {Tour[]} tours - Array of tours associated with this project
  * @property {User[]} members - Members of the project
+ * @property {number} totalTours - Total number of tours in the project
+ * @property {number} totalPois - Total number of POIs in the project
+ * @property {number} totalAssets - Total number of media assets in the project's library
  * @property {Status} [status] - Project status (draft, published, archived)
  * @property {string} lastUpdated - Last updated date in ISO format
  */
@@ -130,7 +141,7 @@
  * @property {string} id - Unique identifier for the media asset
  * @property {LocalesField} title - Media title
  * @property {LocalesField} [description] - Media description (optional)
- * @property {string} contentUrl - The URL of the asset's main content (e.g., image, video, etc.)
+ * @property {LocalesField} contentUrl - The URL of the asset's main content (e.g., image, video, etc.)
  * @property {string} filename - The filename of the asset
  * @property {string} landingPage - The URL of the asset's landing page
  * @property {string} source - The source URL of the asset

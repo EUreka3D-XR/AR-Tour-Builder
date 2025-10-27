@@ -8,15 +8,16 @@ const ImageUnstyled = ({
   width,
   height,
   objectFit,
+  fillParent,
   className,
 }) => {
   return (
     <img
-      src={src}
+      src={src || placeholderImage}
       alt={alt}
       className={className}
-      width={width}
-      height={height}
+      width={fillParent ? "100%" : width}
+      height={fillParent ? "100%" : height}
       style={{ objectFit }}
       onError={(e) => {
         e.target.onerror = null; // Prevent infinite loop

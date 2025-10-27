@@ -9,6 +9,7 @@
     "^@mui/(.*)$",
     "",
     "^@/routes/(.*)$",
+    "^@/stores/(.*)$",
     "^@/services/(.*)$",
     "^@/providers/(.*)$",
     "^@/layouts/(.*)$",

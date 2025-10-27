@@ -2,7 +2,7 @@ import { styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import useNavPaths from "@/hooks/useNavPaths";
-import ProjectForm from "../_components/ProjectForm";
+import CreateProjectForm from "../_forms/CreateProjectFormContainer";
 
 const ContainerStyled = styled("div")({
   margin: "auto",
@@ -26,7 +26,7 @@ const ContainerStyled = styled("div")({
 });
 
 function NewProjectPage() {
-  const { routes } = useNavPaths();
+  const { navigate } = useNavPaths();
   return (
     <ContainerStyled>
       <div className="header">
@@ -34,8 +34,10 @@ function NewProjectPage() {
           Create New Project
         </Typography>
         <div className="actions">
-          <Button href={routes.projects.index}>Cancel</Button>
-          <Button variant="filled">Create Project</Button>
+          <Button onClick={() => navigate(-1)}>Cancel</Button>
+          <Button variant="filled" type="submit" form="create-project-form">
+            Create Project
+          </Button>
         </div>
       </div>
       <Typography color="textSecondary" className="subtitle">
@@ -43,7 +45,7 @@ function NewProjectPage() {
         the form to set up your project and begin collaborating.
       </Typography>
       <div className="project-form-section">
-        <ProjectForm />
+        <CreateProjectForm />
       </div>
     </ContainerStyled>
   );

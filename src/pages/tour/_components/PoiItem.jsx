@@ -7,11 +7,15 @@ import {
 } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import MediaCounter from "@/components/media-counter/MediaCounter";
 
 const CardStyled = styled(Card)(({ theme }) => ({
-  boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+  cursor: "pointer",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+  transition: "box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out",
   "&:hover": {
-    boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+    transform: "translateY(-2px)",
   },
   "& .card-content": {
     padding: theme.spacing(2, 1.5, 0),
@@ -64,19 +68,7 @@ const PoiDescription = styled(Typography)(({ theme }) => ({
 }));
 
 const AssetsRow = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: theme.spacing(1),
   marginTop: theme.spacing(1),
-  "& .asset-item": {
-    display: "flex",
-    alignItems: "center",
-    gap: theme.spacing(0.5),
-    color: theme.palette.text.secondary,
-    "& .asset-icon": {
-      fontSize: "1rem",
-    },
-  },
 }));
 
 const CardFooter = styled("div")(({ theme }) => ({
@@ -103,6 +95,7 @@ const ActionButtons = styled("div")(() => ({
  * @param {Function} [props.onMoveDown] - Callback for moving POI down
  * @param {Function} [props.onEdit] - Callback for editing POI
  * @param {Function} [props.onDelete] - Callback for deleting POI
+ * @param {Function} [props.onClick] - Callback for clicking on POI
  * @returns {React.ReactElement} Rendered POI item card
  */
 function PoiItem({
@@ -114,23 +107,8 @@ function PoiItem({
   onEdit,
   onDelete,
   onCopy,
+  onClick,
 }) {
-  // Get asset type counts for display
-  const getAssetTypeIcon = (type) => {
-    switch (type) {
-      case "image":
-        return "image";
-      case "video":
-        return "video";
-      case "3d":
-        return "model";
-      case "audio":
-        return "file";
-      default:
-        return "file";
-    }
-  };
-
   // Group assets by type and count them
   const assetCounts =
     poi?.assets?.reduce((acc, asset) => {
@@ -140,7 +118,7 @@ function PoiItem({
     }, {}) || {};
 
   return (
-    <CardStyled className="poi-card">
+    <CardStyled className="poi-card" onClick={() => onClick(poi.id)}>
       <CardContent className="card-content">
         <ContentContainer>
           {/* First flex item: POI Number */}
@@ -155,20 +133,16 @@ function PoiItem({
               {poi?.description.locales.en || "No description available"}
             </PoiDescription>
 
-            {/* Assets indicators */}
-            {Object.keys(assetCounts).length > 0 && (
-              <AssetsRow className="assets-row">
-                {Object.entries(assetCounts).map(([type, count]) => (
-                  <div key={type} className="asset-item">
-                    <EurekaIcon
-                      name={getAssetTypeIcon(type)}
-                      className="asset-icon"
-                    />
-                    <Typography variant="caption">{count}</Typography>
-                  </div>
-                ))}
-              </AssetsRow>
-            )}
+            <AssetsRow className="assets-row">
+              <MediaCounter
+                images={assetCounts.image}
+                videos={assetCounts.video}
+                documents={assetCounts.text}
+                audios={assetCounts.audio}
+                models={assetCounts["3d"]}
+                noColor
+              />
+            </AssetsRow>
           </ContentSection>
         </ContentContainer>
       </CardContent>
@@ -177,31 +151,35 @@ function PoiItem({
         <ActionButtons>
           {isOrderable && (
             <>
-              <IconButton size="small" disabled={!onMoveUp} onClick={onMoveUp}>
+              <IconButtonCustom
+                size="small"
+                disabled={!onMoveUp}
+                onClick={onMoveUp}
+              >
                 <EurekaIcon name="arrowUp" fontSize="small" />
-              </IconButton>
-              <IconButton
+              </IconButtonCustom>
+              <IconButtonCustom
                 size="small"
                 disabled={!onMoveDown}
                 onClick={onMoveDown}
               >
                 <EurekaIcon name="arrowDown" fontSize="small" />
-              </IconButton>
+              </IconButtonCustom>
             </>
           )}
         </ActionButtons>
 
         {/* Action buttons on the right */}
         <ActionButtons>
-          <IconButton size="small" onClick={() => onCopy(poi.id)}>
+          <IconButtonCustom size="small" onClick={() => onCopy(poi.id)}>
             <EurekaIcon name="copy" fontSize="small" />
-          </IconButton>
-          <IconButton size="small" onClick={() => onEdit(poi.id)}>
+          </IconButtonCustom>
+          <IconButtonCustom size="small" onClick={() => onEdit(poi.id)}>
             <EurekaIcon name="edit" fontSize="small" />
-          </IconButton>
-          <IconButton size="small" onClick={() => onDelete(poi.id)}>
+          </IconButtonCustom>
+          <IconButtonCustom size="small" onClick={() => onDelete(poi.id)}>
             <EurekaIcon name="delete" fontSize="small" />
-          </IconButton>
+          </IconButtonCustom>
         </ActionButtons>
       </CardFooter>
     </CardStyled>
@@ -209,3 +187,15 @@ function PoiItem({
 }
 
 export default PoiItem;
+
+const IconButtonCustom = (props) => (
+  <IconButton
+    size="small"
+    {...props}
+    onClick={(e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      props.onClick();
+    }}
+  />
+);

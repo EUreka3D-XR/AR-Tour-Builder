@@ -26,7 +26,7 @@ function ErrorArea({
         <Typography color="textSecondary">{subtitle}</Typography>
         <Stack direction="row" spacing={2}>
           {!hideReload && (
-            <Button variant="outlined" onClick={() => navigate(-1)}>
+            <Button variant="outlined" onClick={() => window.location.reload()}>
               Refresh
             </Button>
           )}

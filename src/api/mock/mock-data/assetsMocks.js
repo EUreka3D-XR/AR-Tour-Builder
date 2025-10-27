@@ -208,8 +208,8 @@ export const mockVideoAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
-        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
+        en: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
+        fr: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
       },
     },
     filename: "parthenon_reconstruction_4k.mp4",
@@ -245,8 +245,8 @@ export const mockVideoAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
-        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
+        en: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
+        fr: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
       },
     },
     filename: "archaeological_excavation_doc.mp4",
@@ -281,8 +281,8 @@ export const mockVideoAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4",
-        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4",
+        en: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
+        fr: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
       },
     },
     filename: "greek_architecture_explained.mp4",
@@ -318,8 +318,8 @@ export const mockVideoAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1920x1080_1mb.mp4",
-        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1920x1080_1mb.mp4",
+        en: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
+        fr: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
       },
     },
     filename: "acropolis_sunrise_timelapse.mp4",
@@ -354,8 +354,8 @@ export const mockVideoAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4",
-        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4",
+        en: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
+        fr: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
       },
     },
     filename: "3d_laser_scanning_process.mp4",

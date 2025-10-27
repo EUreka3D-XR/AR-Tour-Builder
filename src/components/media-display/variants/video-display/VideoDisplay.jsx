@@ -1,5 +1,4 @@
-import ReactPlayer from "react-player";
-
+import Video from "@/components/video/Video";
 import DisplayStructure from "../../_common/DisplayStructure";
 
 /**
@@ -16,7 +15,7 @@ function VideoDisplay({ asset, onClose }) {
       description={asset.description}
       onClose={onClose}
     >
-      <ReactPlayer src={asset.contentUrl} />
+      <Video src={asset.contentUrl} />
     </DisplayStructure>
   );
 }

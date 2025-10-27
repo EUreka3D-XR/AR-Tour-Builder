@@ -208,8 +208,8 @@ export const mockVideoAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
-        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
+        en: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
+        fr: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
       },
     },
     filename: "parthenon_reconstruction_4k.mp4",
@@ -245,8 +245,8 @@ export const mockVideoAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
-        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
+        en: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
+        fr: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
       },
     },
     filename: "archaeological_excavation_doc.mp4",
@@ -281,8 +281,8 @@ export const mockVideoAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4",
-        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4",
+        en: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
+        fr: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
       },
     },
     filename: "greek_architecture_explained.mp4",
@@ -318,8 +318,8 @@ export const mockVideoAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1920x1080_1mb.mp4",
-        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1920x1080_1mb.mp4",
+        en: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
+        fr: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
       },
     },
     filename: "acropolis_sunrise_timelapse.mp4",
@@ -354,8 +354,8 @@ export const mockVideoAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4",
-        fr: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4",
+        en: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
+        fr: "https://leomav.github.io/demo-assets/rock_of_the_wivre/Palynologie-AV2.mp4",
       },
     },
     filename: "3d_laser_scanning_process.mp4",
@@ -554,6 +554,9 @@ export const mockAudioAssets = [
   },
 ];
 
+const githubModelsBaseUrl = (filePath) =>
+  // "https://raw.githubusercontent.com/leomav/demo-assets/main/" + filePath;
+  "https://leomav.github.io/demo-assets/" + filePath;
 /**
  * Array of 5 mock 3D model assets
  * @type {Asset[]}
@@ -575,8 +578,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://example.com/models/parthenon_complete.glb",
-        fr: "https://example.com/models/parthenon_complete.glb",
+        en: githubModelsBaseUrl("pc14/2015_34_1121_32.glb"),
+        fr: githubModelsBaseUrl("pc14/2015_34_1121_32.glb"),
       },
     },
     filename: "parthenon_complete_model.glb",
@@ -608,8 +611,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://example.com/models/ionic_capital.glb",
-        fr: "https://example.com/models/ionic_capital.glb",
+        en: githubModelsBaseUrl("pc14/829_Fosse_PC14_3D.glb"),
+        fr: githubModelsBaseUrl("pc14/829_Fosse_PC14_3D.glb"),
       },
     },
     filename: "ionic_capital_detailed.glb",
@@ -641,8 +644,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://example.com/models/greek_amphora.glb",
-        fr: "https://example.com/models/greek_amphora.glb",
+        en: githubModelsBaseUrl("pc2/849_PC2_Cave_AA_3D_3.glb"),
+        fr: githubModelsBaseUrl("pc2/849_PC2_Cave_AA_3D_3.glb"),
       },
     },
     filename: "ancient_amphora_red_figure.glb",
@@ -674,8 +677,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://example.com/models/caryatid_statue.glb",
-        fr: "https://example.com/models/caryatid_statue.glb",
+        en: githubModelsBaseUrl("pc2/2018_41_226_1.glb"),
+        fr: githubModelsBaseUrl("pc2/2018_41_226_1.glb"),
       },
     },
     filename: "caryatid_erechtheion_statue.glb",
@@ -707,8 +710,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://example.com/models/parthenon_frieze.glb",
-        fr: "https://example.com/models/parthenon_frieze.glb",
+        en: githubModelsBaseUrl("pc2/995_15_371_1.glb"),
+        fr: githubModelsBaseUrl("pc2/995_15_371_1.glb"),
       },
     },
     filename: "parthenon_frieze_procession.glb",
@@ -727,6 +730,188 @@ export const mockModelAssets = [
 ];
 
 /**
+ * Array of 5 mock document assets
+ * @type {Asset[]}
+ */
+export const mockDocumentAssets = [
+  {
+    id: "doc-001",
+    title: {
+      locales: {
+        en: "Theurot Mines Archaeological Report",
+        fr: "Rapport Archéologique des Mines de Theurot",
+      },
+    },
+    description: {
+      locales: {
+        en: "Comprehensive archaeological report on the Theurot mines, including excavation findings and historical analysis.",
+        fr: "Rapport archéologique complet sur les mines de Theurot, comprenant les résultats des fouilles et une analyse historique.",
+      },
+    },
+    contentUrl: {
+      locales: {
+        en: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+        fr: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+      },
+    },
+    filename: "AFEAF_45_A-C02.Cauuet-etal.pdf",
+    landingPage: "https://acropolis-museum.gr/theurot-mines-report",
+    source:
+      "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    url: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    type: "text",
+    metadata: {
+      format: "PDF",
+      author: "Cauuet et al.",
+      publishedAt: "2023-05-01T00:00:00Z",
+      pages: 45,
+    },
+    createdAt: "2024-02-01T10:00:00Z",
+    updatedAt: "2024-02-01T10:00:00Z",
+  },
+  {
+    id: "doc-002",
+    title: {
+      locales: {
+        en: "Mining Techniques in Theurot",
+        fr: "Techniques Minières à Theurot",
+      },
+    },
+    description: {
+      locales: {
+        en: "Detailed study of ancient mining techniques used in the Theurot mines, illustrated with diagrams and site photos.",
+        fr: "Étude détaillée des techniques minières anciennes utilisées dans les mines de Theurot, illustrée de schémas et de photos du site.",
+      },
+    },
+    contentUrl: {
+      locales: {
+        en: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+        fr: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+      },
+    },
+    filename: "AFEAF_45_A-C02.Cauuet-etal.pdf",
+    landingPage: "https://acropolis-museum.gr/mining-techniques-theurot",
+    source:
+      "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    url: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    type: "text",
+    metadata: {
+      format: "PDF",
+      author: "Cauuet et al.",
+      publishedAt: "2023-05-01T00:00:00Z",
+      pages: 45,
+    },
+    createdAt: "2024-02-02T11:00:00Z",
+    updatedAt: "2024-02-02T11:00:00Z",
+  },
+  {
+    id: "doc-003",
+    title: {
+      locales: {
+        en: "Theurot Mines: Historical Context",
+        fr: "Mines de Theurot : Contexte Historique",
+      },
+    },
+    description: {
+      locales: {
+        en: "Analysis of the historical context surrounding the Theurot mines and their significance in regional development.",
+        fr: "Analyse du contexte historique entourant les mines de Theurot et leur importance dans le développement régional.",
+      },
+    },
+    contentUrl: {
+      locales: {
+        en: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+        fr: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+      },
+    },
+    filename: "AFEAF_45_A-C02.Cauuet-etal.pdf",
+    landingPage: "https://acropolis-museum.gr/theurot-mines-history",
+    source:
+      "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    url: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    type: "text",
+    metadata: {
+      format: "PDF",
+      author: "Cauuet et al.",
+      publishedAt: "2023-05-01T00:00:00Z",
+      pages: 45,
+    },
+    createdAt: "2024-02-03T12:00:00Z",
+    updatedAt: "2024-02-03T12:00:00Z",
+  },
+  {
+    id: "doc-004",
+    title: {
+      locales: {
+        en: "Geological Survey of Theurot Mines",
+        fr: "Étude Géologique des Mines de Theurot",
+      },
+    },
+    description: {
+      locales: {
+        en: "Geological survey report detailing the mineral composition and structure of the Theurot mining site.",
+        fr: "Rapport d'étude géologique détaillant la composition minérale et la structure du site minier de Theurot.",
+      },
+    },
+    contentUrl: {
+      locales: {
+        en: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+        fr: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+      },
+    },
+    filename: "AFEAF_45_A-C02.Cauuet-etal.pdf",
+    landingPage: "https://acropolis-museum.gr/theurot-geology",
+    source:
+      "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    url: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    type: "text",
+    metadata: {
+      format: "PDF",
+      author: "Cauuet et al.",
+      publishedAt: "2023-05-01T00:00:00Z",
+      pages: 45,
+    },
+    createdAt: "2024-02-04T13:00:00Z",
+    updatedAt: "2024-02-04T13:00:00Z",
+  },
+  {
+    id: "doc-005",
+    title: {
+      locales: {
+        en: "Theurot Mines: Conservation Strategies",
+        fr: "Mines de Theurot : Stratégies de Conservation",
+      },
+    },
+    description: {
+      locales: {
+        en: "Recommendations and strategies for the conservation and preservation of the Theurot mines archaeological site.",
+        fr: "Recommandations et stratégies pour la conservation et la préservation du site archéologique des mines de Theurot.",
+      },
+    },
+    contentUrl: {
+      locales: {
+        en: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+        fr: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+      },
+    },
+    filename: "AFEAF_45_A-C02.Cauuet-etal.pdf",
+    landingPage: "https://acropolis-museum.gr/theurot-conservation",
+    source:
+      "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    url: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    type: "text",
+    metadata: {
+      format: "PDF",
+      author: "Cauuet et al.",
+      publishedAt: "2023-05-01T00:00:00Z",
+      pages: 45,
+    },
+    createdAt: "2024-02-05T14:00:00Z",
+    updatedAt: "2024-02-05T14:00:00Z",
+  },
+];
+
+/**
  * Returns a random combination of mock assets (images, videos, audios, models).
  * @param {number} count
  * @returns {Asset[]}
@@ -736,6 +921,7 @@ export function getMockAssets(count = 100) {
     ...mockImageAssets,
     ...mockVideoAssets,
     ...mockAudioAssets,
+    ...mockDocumentAssets,
     ...mockModelAssets,
   ];
   const shuffled = allAssets

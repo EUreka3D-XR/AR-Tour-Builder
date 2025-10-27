@@ -64,7 +64,6 @@ export default function DisplayLoading({ onClose }) {
           left: 0,
           right: 0,
           bottom: 0,
-          bgcolor: "background.default",
           px: 3,
           py: 2,
           boxShadow: 3,

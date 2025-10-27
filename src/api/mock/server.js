@@ -264,6 +264,9 @@ export const makeServer = ({ environment = "development" } = {}) => {
       this.namespace = "api";
       this.timing = 1000;
 
+      // Passthrough for external assets (GLB, images, PDFs, etc.)
+      this.passthrough("https://leomav.github.io/**");
+
       // Project
       this.get("/projects");
       this.get("/projects/:projectId", (schema, request) => {

@@ -727,6 +727,188 @@ export const mockModelAssets = [
 ];
 
 /**
+ * Array of 5 mock document assets
+ * @type {Asset[]}
+ */
+export const mockDocumentAssets = [
+  {
+    id: "doc-001",
+    title: {
+      locales: {
+        en: "Theurot Mines Archaeological Report",
+        fr: "Rapport Archéologique des Mines de Theurot",
+      },
+    },
+    description: {
+      locales: {
+        en: "Comprehensive archaeological report on the Theurot mines, including excavation findings and historical analysis.",
+        fr: "Rapport archéologique complet sur les mines de Theurot, comprenant les résultats des fouilles et une analyse historique.",
+      },
+    },
+    contentUrl: {
+      locales: {
+        en: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+        fr: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+      },
+    },
+    filename: "AFEAF_45_A-C02.Cauuet-etal.pdf",
+    landingPage: "https://acropolis-museum.gr/theurot-mines-report",
+    source:
+      "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    url: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    type: "text",
+    metadata: {
+      format: "PDF",
+      author: "Cauuet et al.",
+      publishedAt: "2023-05-01T00:00:00Z",
+      pages: 45,
+    },
+    createdAt: "2024-02-01T10:00:00Z",
+    updatedAt: "2024-02-01T10:00:00Z",
+  },
+  {
+    id: "doc-002",
+    title: {
+      locales: {
+        en: "Mining Techniques in Theurot",
+        fr: "Techniques Minières à Theurot",
+      },
+    },
+    description: {
+      locales: {
+        en: "Detailed study of ancient mining techniques used in the Theurot mines, illustrated with diagrams and site photos.",
+        fr: "Étude détaillée des techniques minières anciennes utilisées dans les mines de Theurot, illustrée de schémas et de photos du site.",
+      },
+    },
+    contentUrl: {
+      locales: {
+        en: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+        fr: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+      },
+    },
+    filename: "AFEAF_45_A-C02.Cauuet-etal.pdf",
+    landingPage: "https://acropolis-museum.gr/mining-techniques-theurot",
+    source:
+      "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    url: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    type: "text",
+    metadata: {
+      format: "PDF",
+      author: "Cauuet et al.",
+      publishedAt: "2023-05-01T00:00:00Z",
+      pages: 45,
+    },
+    createdAt: "2024-02-02T11:00:00Z",
+    updatedAt: "2024-02-02T11:00:00Z",
+  },
+  {
+    id: "doc-003",
+    title: {
+      locales: {
+        en: "Theurot Mines: Historical Context",
+        fr: "Mines de Theurot : Contexte Historique",
+      },
+    },
+    description: {
+      locales: {
+        en: "Analysis of the historical context surrounding the Theurot mines and their significance in regional development.",
+        fr: "Analyse du contexte historique entourant les mines de Theurot et leur importance dans le développement régional.",
+      },
+    },
+    contentUrl: {
+      locales: {
+        en: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+        fr: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+      },
+    },
+    filename: "AFEAF_45_A-C02.Cauuet-etal.pdf",
+    landingPage: "https://acropolis-museum.gr/theurot-mines-history",
+    source:
+      "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    url: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    type: "text",
+    metadata: {
+      format: "PDF",
+      author: "Cauuet et al.",
+      publishedAt: "2023-05-01T00:00:00Z",
+      pages: 45,
+    },
+    createdAt: "2024-02-03T12:00:00Z",
+    updatedAt: "2024-02-03T12:00:00Z",
+  },
+  {
+    id: "doc-004",
+    title: {
+      locales: {
+        en: "Geological Survey of Theurot Mines",
+        fr: "Étude Géologique des Mines de Theurot",
+      },
+    },
+    description: {
+      locales: {
+        en: "Geological survey report detailing the mineral composition and structure of the Theurot mining site.",
+        fr: "Rapport d'étude géologique détaillant la composition minérale et la structure du site minier de Theurot.",
+      },
+    },
+    contentUrl: {
+      locales: {
+        en: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+        fr: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+      },
+    },
+    filename: "AFEAF_45_A-C02.Cauuet-etal.pdf",
+    landingPage: "https://acropolis-museum.gr/theurot-geology",
+    source:
+      "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    url: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    type: "text",
+    metadata: {
+      format: "PDF",
+      author: "Cauuet et al.",
+      publishedAt: "2023-05-01T00:00:00Z",
+      pages: 45,
+    },
+    createdAt: "2024-02-04T13:00:00Z",
+    updatedAt: "2024-02-04T13:00:00Z",
+  },
+  {
+    id: "doc-005",
+    title: {
+      locales: {
+        en: "Theurot Mines: Conservation Strategies",
+        fr: "Mines de Theurot : Stratégies de Conservation",
+      },
+    },
+    description: {
+      locales: {
+        en: "Recommendations and strategies for the conservation and preservation of the Theurot mines archaeological site.",
+        fr: "Recommandations et stratégies pour la conservation et la préservation du site archéologique des mines de Theurot.",
+      },
+    },
+    contentUrl: {
+      locales: {
+        en: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+        fr: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+      },
+    },
+    filename: "AFEAF_45_A-C02.Cauuet-etal.pdf",
+    landingPage: "https://acropolis-museum.gr/theurot-conservation",
+    source:
+      "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    url: "https://leomav.github.io/demo-assets/theurot_mines/AFEAF_45_A-C02.Cauuet-etal.pdf",
+    type: "text",
+    metadata: {
+      format: "PDF",
+      author: "Cauuet et al.",
+      publishedAt: "2023-05-01T00:00:00Z",
+      pages: 45,
+    },
+    createdAt: "2024-02-05T14:00:00Z",
+    updatedAt: "2024-02-05T14:00:00Z",
+  },
+];
+
+/**
  * Returns a random combination of mock assets (images, videos, audios, models).
  * @param {number} count
  * @returns {Asset[]}
@@ -736,6 +918,7 @@ export function getMockAssets(count = 100) {
     ...mockImageAssets,
     ...mockVideoAssets,
     ...mockAudioAssets,
+    ...mockDocumentAssets,
     ...mockModelAssets,
   ];
   const shuffled = allAssets

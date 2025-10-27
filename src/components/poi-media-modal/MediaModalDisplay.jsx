@@ -1,3 +1,4 @@
+import DocumentDisplay from "../media-display/variants/document-display/DocumentDisplay";
 import ImageDisplay from "../media-display/variants/image-display/ImageDisplay";
 import VideoDisplay from "../media-display/variants/video-display/VideoDisplay";
 
@@ -20,6 +21,10 @@ function MediaModalDisplay({ asset, onClose }) {
 
   if (assetType === "video") {
     return <VideoDisplay asset={asset} onClose={onClose} />;
+  }
+
+  if (assetType === "text") {
+    return <DocumentDisplay asset={asset} onClose={onClose} />;
   }
 
   return null;

@@ -1,5 +1,6 @@
 import DocumentDisplay from "../media-display/variants/document-display/DocumentDisplay";
 import ImageDisplay from "../media-display/variants/image-display/ImageDisplay";
+import ModelDisplay from "../media-display/variants/model-display/Model3DDislpay";
 import VideoDisplay from "../media-display/variants/video-display/VideoDisplay";
 
 /**
@@ -25,6 +26,10 @@ function MediaModalDisplay({ asset, onClose }) {
 
   if (assetType === "text") {
     return <DocumentDisplay asset={asset} onClose={onClose} />;
+  }
+
+  if (assetType === "3d") {
+    return <ModelDisplay asset={asset} onClose={onClose} />;
   }
 
   return null;

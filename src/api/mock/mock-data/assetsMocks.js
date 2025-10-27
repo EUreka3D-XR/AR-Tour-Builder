@@ -554,6 +554,9 @@ export const mockAudioAssets = [
   },
 ];
 
+const githubModelsBaseUrl = (filePath) =>
+  // "https://raw.githubusercontent.com/leomav/demo-assets/main/" + filePath;
+  "https://leomav.github.io/demo-assets/" + filePath;
 /**
  * Array of 5 mock 3D model assets
  * @type {Asset[]}
@@ -575,8 +578,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://leomav.github.io/demo-assets/pc14/2015_34_1121_32.glb",
-        fr: "https://leomav.github.io/demo-assets/pc14/2015_34_1121_32.glb",
+        en: githubModelsBaseUrl("pc14/2015_34_1121_32.glb"),
+        fr: githubModelsBaseUrl("pc14/2015_34_1121_32.glb"),
       },
     },
     filename: "parthenon_complete_model.glb",
@@ -608,8 +611,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://leomav.github.io/demo-assets/pc14/829_Fosse_PC14_3D.glb",
-        fr: "https://leomav.github.io/demo-assets/pc14/829_Fosse_PC14_3D.glb",
+        en: githubModelsBaseUrl("pc14/829_Fosse_PC14_3D.glb"),
+        fr: githubModelsBaseUrl("pc14/829_Fosse_PC14_3D.glb"),
       },
     },
     filename: "ionic_capital_detailed.glb",
@@ -641,8 +644,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://leomav.github.io/demo-assets/pc2/849_PC2_Cave_AA_3D_3.glb",
-        fr: "https://leomav.github.io/demo-assets/pc2/849_PC2_Cave_AA_3D_3.glb",
+        en: githubModelsBaseUrl("pc2/849_PC2_Cave_AA_3D_3.glb"),
+        fr: githubModelsBaseUrl("pc2/849_PC2_Cave_AA_3D_3.glb"),
       },
     },
     filename: "ancient_amphora_red_figure.glb",
@@ -674,8 +677,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://leomav.github.io/demo-assets/pc2/2018_41_226_1.glb",
-        fr: "https://leomav.github.io/demo-assets/pc2/2018_41_226_1.glb",
+        en: githubModelsBaseUrl("pc2/2018_41_226_1.glb"),
+        fr: githubModelsBaseUrl("pc2/2018_41_226_1.glb"),
       },
     },
     filename: "caryatid_erechtheion_statue.glb",
@@ -707,8 +710,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://leomav.github.io/demo-assets/pc2/995_15_371_1.glb",
-        fr: "https://leomav.github.io/demo-assets/pc2/995_15_371_1.glb",
+        en: githubModelsBaseUrl("pc2/995_15_371_1.glb"),
+        fr: githubModelsBaseUrl("pc2/995_15_371_1.glb"),
       },
     },
     filename: "parthenon_frieze_procession.glb",

@@ -182,7 +182,7 @@ export const makeServer = ({ environment = "development" } = {}) => {
 
         const imageAssets = getRandomPoiAssets(assets, "image", 1, 5);
         const videoAssets = getRandomPoiAssets(assets, "video", 0, 2);
-        const threeDAssets = getRandomPoiAssets(assets, "3d", 0, 2);
+        const threeDAssets = getRandomPoiAssets(assets, "3d", 1, 2);
         const documentAssets = getRandomPoiAssets(assets, "text", 0, 2);
 
         const selectedPoiAssets = [
@@ -265,6 +265,7 @@ export const makeServer = ({ environment = "development" } = {}) => {
       this.timing = 1000;
 
       // Passthrough for external assets (GLB, images, PDFs, etc.)
+      this.passthrough((request) => request.url.startsWith("https://"));
       this.passthrough("https://leomav.github.io/**");
 
       // Project

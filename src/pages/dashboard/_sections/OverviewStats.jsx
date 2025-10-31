@@ -108,23 +108,23 @@ export default function OverviewStats({
   // Predefined stats configuration in the desired order
   const predefinedStats = [
     {
-      title: "Total Views",
+      title: "Total Tour Visits",
       value: totalViews,
       icon: "visibility",
       class: "total-views",
     },
     {
-      title: "Views This Month",
+      title: "Visits This Month",
       value: viewsThisMonth,
       icon: "chart",
       class: "monthly-views",
     },
-    {
-      title: "Growth Rate",
-      value: `${isGrowthPositive ? "+" : ""}${growthRate}%`,
-      icon: `${isGrowthPositive ? "growth" : "decline"}`,
-      class: `${isGrowthPositive ? "growth" : "decline"}`,
-    },
+    // {
+    //   title: "Growth Rate",
+    //   value: `${isGrowthPositive ? "+" : ""}${growthRate}%`,
+    //   icon: `${isGrowthPositive ? "growth" : "decline"}`,
+    //   class: `${isGrowthPositive ? "growth" : "decline"}`,
+    // },
     {
       title: "Completion Rate",
       value: `${completionRate}%`,

@@ -13,7 +13,15 @@ const MuiLinkStyled = styled(MuiLink)({
   textDecoration: "none",
 });
 
-function Link({ to, rel, children, openInNewTab = false, noWrap, className }) {
+function Link({
+  to,
+  rel,
+  children,
+  openInNewTab = false,
+  noWrap,
+  className,
+  onClick,
+}) {
   const href = typeof to === "string" ? to : String(to || "");
   const isExternal = /^(https?:|mailto:|tel:|\/\/)/i.test(href);
   const computedRel = rel ?? (openInNewTab ? "noopener noreferrer" : undefined);
@@ -26,6 +34,7 @@ function Link({ to, rel, children, openInNewTab = false, noWrap, className }) {
         rel={computedRel}
         className={className}
         noWrap={noWrap}
+        onClick={onClick}
       >
         {children}
       </MuiLinkStyled>
@@ -38,6 +47,7 @@ function Link({ to, rel, children, openInNewTab = false, noWrap, className }) {
       target={openInNewTab ? "_blank" : "_self"}
       rel={computedRel}
       className={className}
+      onClick={onClick}
     >
       {children}
     </RouterLinkStyled>

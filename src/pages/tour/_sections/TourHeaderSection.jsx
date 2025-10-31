@@ -4,6 +4,7 @@ import { IconButton, Stack, styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import InjectedLocaleValue from "@/components/inject-locale-value/InjectLocaleValue";
 import useNavPaths from "@/hooks/useNavPaths";
 import { dateFormatters } from "@/utils/datetimeFormatters";
 
@@ -42,6 +43,7 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
     formState: { isSubmitting },
   } = useFormContext();
 
+  const tourTitle = useWatch({ name: "title" });
   const tourStatus = useWatch({ name: "status", defaultValue: "draft" });
   const createdAt = useWatch({ name: "createdAt" });
   const updatedAt = useWatch({ name: "updatedAt" });
@@ -58,7 +60,7 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
           <EurekaIcon name="back" fontSize="small" />
         </IconButton>
         <Typography variant="h4" component="h2" noWrap>
-          Editing Tour
+          Editing Tour: <InjectedLocaleValue value={tourTitle} />
         </Typography>
       </div>
       {isExisting && (

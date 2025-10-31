@@ -18,7 +18,7 @@ const useUrlTabs = (tabs, defaultTabPath) => {
 
   // Find the current active tab by matching the current pathname with tab values
   const activeTab =
-    tabs.find((tab) => location.pathname.endsWith(tab.value))?.value ||
+    tabs.find((tab) => location.pathname.startsWith(tab.value))?.value ||
     defaultTabPath ||
     tabs[0]?.value;
 

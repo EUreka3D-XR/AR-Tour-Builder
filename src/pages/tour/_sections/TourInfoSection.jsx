@@ -133,7 +133,7 @@ function TourInfoSection() {
                       ),
                       endAdornment: (
                         <span className="input-adornment end-adornment">
-                          min
+                          km
                         </span>
                       ),
                     },

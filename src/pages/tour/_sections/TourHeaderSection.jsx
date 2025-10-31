@@ -58,7 +58,7 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
           <EurekaIcon name="back" fontSize="small" />
         </IconButton>
         <Typography variant="h4" component="h2" noWrap>
-          Editting Tour
+          Editing Tour
         </Typography>
       </div>
       {isExisting && (

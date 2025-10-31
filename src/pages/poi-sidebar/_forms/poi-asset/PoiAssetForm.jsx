@@ -77,7 +77,7 @@ function PoiAssetForm({ onSubmit, onClose }) {
       <ContainerStyled className="poi-asset-form-wrapper">
         <NoShrink>
           <PoiAssetHeaderSection
-            title={isNewAsset ? "Create Asset" : "Editting Asset"}
+            title={isNewAsset ? "Create Asset" : "Editing Asset"}
             onBack={onClose}
           />
           <Divider />

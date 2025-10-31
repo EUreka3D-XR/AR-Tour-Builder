@@ -20,7 +20,7 @@ function EditPoiSidebar() {
           <>
             <div className="no-shrink">
               <PoiSidebarHeader
-                title="Editting Point of Interest"
+                title="Editing Point of Interest"
                 onClose={onClosePoi}
               />
             </div>

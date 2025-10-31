@@ -12,10 +12,6 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   "& .language-selector": {
     alignSelf: "flex-end",
   },
-  "& .poi-thumbnail-dropzone": {
-    width: 250,
-    height: 250,
-  },
 }));
 function PoiDetailsTab() {
   return (
@@ -46,12 +42,8 @@ function PoiDetailsTab() {
       {/* <FormInput
         name="thumbnail"
         render={({ field }) => ( */}
-      <LabeledInput label="Thumbnail Image">
-        <ImageInput
-          placeholderText="Click to upload photo"
-          maxFileSize={5}
-          className="poi-thumbnail-dropzone"
-        />
+      <LabeledInput label="Cover Photo">
+        <ImageInput placeholderText="Click to upload photo" maxFileSize={5} />
       </LabeledInput>
       {/* )}
       /> */}

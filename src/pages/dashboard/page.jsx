@@ -18,6 +18,8 @@ const ContainerStyled = styled("div")(({ theme }) => ({
       marginTop: theme.spacing(16),
     },
     "&.dash-grid": {
+      minHeight: "400px",
+
       display: "grid",
       gap: theme.spacing(4),
       "&.equal": {
@@ -74,11 +76,11 @@ function DashboardPage({ project }) {
               growthRate={18}
               completionRate={75}
             />
-            <ToursStats />
+            <RecentTours projectId={projectId} />
           </div>
           <div className="dash-section dash-grid equal">
+            {/* <ToursStats /> */}
             <Members projectId={projectId} />
-            <RecentTours projectId={projectId} />
           </div>
         </>
       )}

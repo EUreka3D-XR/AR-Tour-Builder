@@ -30,6 +30,7 @@ function EditTourForm({ initialTour }) {
       createdAt: initialTour.createdAt,
       updatedAt: initialTour.updatedAt,
       boundBox: initialTour.boundBox,
+      guided: initialTour.guided ?? false,
       coordinates: initialTour.coordinates,
       status: initialTour.status,
     },

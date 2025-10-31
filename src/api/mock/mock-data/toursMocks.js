@@ -30,6 +30,7 @@ export const mockTours = [
     status: "published",
     duration: 180, // 3 hours
     distance: 1200, // 1.2 km
+    guided: true,
     coordinates: {
       lat: 37.9715,
       long: 23.7275,
@@ -56,6 +57,7 @@ export const mockTours = [
     status: "published",
     duration: 120, // 2 hours
     distance: 800, // 800m
+    guided: false,
     coordinates: {
       lat: 37.9689,
       long: 23.7248,
@@ -82,6 +84,7 @@ export const mockTours = [
     status: "published",
     duration: 150, // 2.5 hours
     distance: 950, // 950m
+    guided: false,
     coordinates: {
       lat: 37.9735,
       long: 23.7272,
@@ -108,6 +111,7 @@ export const mockTours = [
     status: "published",
     duration: 135, // 2.25 hours
     distance: 1100, // 1.1 km
+    guided: false,
     coordinates: {
       lat: 37.9678,
       long: 23.73,
@@ -134,6 +138,7 @@ export const mockTours = [
     status: "published",
     duration: 165, // 2.75 hours
     distance: 1350, // 1.35 km
+    guided: false,
     coordinates: {
       lat: 37.9752,
       long: 23.7223,

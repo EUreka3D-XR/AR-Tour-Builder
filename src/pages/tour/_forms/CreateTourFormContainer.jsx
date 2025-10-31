@@ -19,6 +19,7 @@ function CreateTourForm() {
       pois: [],
       duration: 0,
       distance: 0,
+      guided: false,
       thumbnail: "",
     },
   });

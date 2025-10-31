@@ -101,7 +101,9 @@ const ActionButtons = styled("div")(() => ({
 function PoiItem({
   poi,
   index = 1,
-  isOrderable = true,
+  isOrderable,
+  isMoveUpDisabled,
+  isMoveDownDisabled,
   onMoveUp,
   onMoveDown,
   onEdit,
@@ -153,14 +155,14 @@ function PoiItem({
             <>
               <IconButtonCustom
                 size="small"
-                disabled={!onMoveUp}
+                disabled={isMoveUpDisabled || !onMoveUp}
                 onClick={onMoveUp}
               >
                 <EurekaIcon name="arrowUp" fontSize="small" />
               </IconButtonCustom>
               <IconButtonCustom
                 size="small"
-                disabled={!onMoveDown}
+                disabled={isMoveDownDisabled || !onMoveDown}
                 onClick={onMoveDown}
               >
                 <EurekaIcon name="arrowDown" fontSize="small" />

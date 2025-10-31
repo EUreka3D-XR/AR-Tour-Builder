@@ -4,7 +4,7 @@ import {
   useNavigate,
   useOutletContext,
 } from "react-router";
-import { useWatch } from "react-hook-form";
+import { useFieldArray, useWatch } from "react-hook-form";
 import {
   Divider,
   FormControlLabel,
@@ -16,6 +16,7 @@ import {
 
 import Button from "@/components/button/Button";
 import CenteredArea from "@/components/centered/Centered";
+import FormInput from "@/components/form/FormInput";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";
 import PoiItem from "../_components/PoiItem";
@@ -63,7 +64,10 @@ function TourPoisSection() {
   const navigate = useNavigate();
   const { routes } = useNavPaths();
 
-  const pois = useWatch({ name: "pois" });
+  const isGuided = useWatch({ name: "guided" });
+  const { fields: pois, move } = useFieldArray({
+    name: "pois",
+  });
 
   const handleEdit = (poiId) => {
     navigate(routes.pois.edit(poiId), {
@@ -102,7 +106,17 @@ function TourPoisSection() {
     <>
       <ContainerStyled className="pois-section">
         <div className="pois-header">
-          <FormControlLabel control={<Switch />} label="Guided Tour" />
+          <FormInput
+            name="guided"
+            render={({ field }) => {
+              return (
+                <FormControlLabel
+                  control={<Switch {...field} checked={field.value} />}
+                  label="Guided Tour"
+                />
+              );
+            }}
+          />
           <Button
             variant="filled"
             href={routes.pois.new}
@@ -114,7 +128,7 @@ function TourPoisSection() {
         <Divider />
         <div className="pois-list">
           <div className="pois-list-scrollable">
-            {pois.map((poi) => (
+            {pois.map((poi, index) => (
               <div
                 key={poi.id}
                 className="poi-item-flex-item"
@@ -140,7 +154,13 @@ function TourPoisSection() {
               >
                 <PoiItem
                   poi={poi}
+                  index={index + 1}
                   dataId={poi.id}
+                  isOrderable={isGuided}
+                  isMoveUpDisabled={index === 0}
+                  isMoveDownDisabled={index === pois.length - 1}
+                  onMoveUp={() => move(index, index - 1)}
+                  onMoveDown={() => move(index, index + 1)}
                   onEdit={handleEdit}
                   onClick={handleClick}
                 />

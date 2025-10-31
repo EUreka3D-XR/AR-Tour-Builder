@@ -4,7 +4,7 @@ import {
   useNavigate,
   useOutletContext,
 } from "react-router";
-import { useFieldArray, useWatch } from "react-hook-form";
+import { useWatch } from "react-hook-form";
 import {
   Divider,
   FormControlLabel,
@@ -18,6 +18,7 @@ import Button from "@/components/button/Button";
 import CenteredArea from "@/components/centered/Centered";
 import FormInput from "@/components/form/FormInput";
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import { useFieldArrayWithId } from "@/hooks/useFieldArrayWithId";
 import useNavPaths from "@/hooks/useNavPaths";
 import PoiItem from "../_components/PoiItem";
 
@@ -65,7 +66,7 @@ function TourPoisSection() {
   const { routes } = useNavPaths();
 
   const isGuided = useWatch({ name: "guided" });
-  const { fields: pois, move } = useFieldArray({
+  const { fields: pois, move } = useFieldArrayWithId({
     name: "pois",
   });
 

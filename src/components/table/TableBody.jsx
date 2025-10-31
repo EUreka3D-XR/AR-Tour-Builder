@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { TableBody as MuiTableBody, TableCell, TableRow } from "@mui/material";
 
+import getColumnStyle from "./_utils/columnWidth";
+
 /**
  * Props for TableBody component
  * @typedef {Object} TableBodyProps
@@ -26,24 +28,14 @@ function TableBody({ columns, rows, pageSize }) {
         return (
           <TableRow tabIndex={-1} key={row.id}>
             {columns.map((column) => {
-              const width = column.width ?? 250;
-              const colStyle = {
-                maxWidth: width,
-                ...(column.wrap
-                  ? {}
-                  : {
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                    }),
-              };
+              const style = getColumnStyle(column);
 
               return column.renderCell ? (
-                <TableCell key={column.value} width={width} sx={colStyle}>
+                <TableCell key={column.value} sx={style}>
                   {column.renderCell(row)}
                 </TableCell>
               ) : (
-                <TableCell key={column.value} width={width} sx={colStyle}>
+                <TableCell key={column.value} sx={style}>
                   {row[column.value]}
                 </TableCell>
               );

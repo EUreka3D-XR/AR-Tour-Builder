@@ -7,6 +7,8 @@ import {
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 
+import getColumnStyle from "./_utils/columnWidth";
+
 /**
  * Props for TableHeader component
  * @typedef {Object} TableHeaderProps
@@ -29,44 +31,45 @@ function TableHeader({ columns = [], order, orderBy, onRequestSort }) {
   return (
     <TableHead>
       <TableRow>
-        {columns.map((headCell) => (
-          <TableCell
-            key={headCell.value}
-            width={headCell.width ?? 250}
-            align={headCell.numeric ? "right" : "left"}
-            sortDirection={
-              headCell.disableSorting
-                ? false
-                : orderBy === headCell.value
-                  ? order
-                  : false
-            }
-            sx={{
-              fontWeight: 600,
-              minWidth: headCell.width ?? 250,
-              maxWidth: headCell.width ?? 250,
-            }}
-          >
-            {!headCell.disableSorting ? (
-              <TableSortLabel
-                active={orderBy === headCell.value}
-                direction={orderBy === headCell.value ? order : "asc"}
-                onClick={createSortHandler(headCell.label)}
-              >
-                {headCell.label}
-                {orderBy === headCell.value ? (
-                  <Box component="span" sx={visuallyHidden}>
-                    {order === "desc"
-                      ? "sorted descending"
-                      : "sorted ascending"}
-                  </Box>
-                ) : null}
-              </TableSortLabel>
-            ) : (
-              headCell.label
-            )}
-          </TableCell>
-        ))}
+        {columns.map((headCell) => {
+          const style = getColumnStyle(headCell);
+          return (
+            <TableCell
+              key={headCell.value}
+              align={headCell.numeric ? "right" : "left"}
+              sortDirection={
+                headCell.disableSorting
+                  ? false
+                  : orderBy === headCell.value
+                    ? order
+                    : false
+              }
+              sx={{
+                ...style,
+                fontWeight: 600,
+              }}
+            >
+              {!headCell.disableSorting ? (
+                <TableSortLabel
+                  active={orderBy === headCell.value}
+                  direction={orderBy === headCell.value ? order : "asc"}
+                  onClick={createSortHandler(headCell.label)}
+                >
+                  {headCell.label}
+                  {orderBy === headCell.value ? (
+                    <Box component="span" sx={visuallyHidden}>
+                      {order === "desc"
+                        ? "sorted descending"
+                        : "sorted ascending"}
+                    </Box>
+                  ) : null}
+                </TableSortLabel>
+              ) : (
+                headCell.label
+              )}
+            </TableCell>
+          );
+        })}
       </TableRow>
     </TableHead>
   );

@@ -17,6 +17,8 @@ import TableHeader from "./TableHeader";
  * @property {string} value - Unique value for the column
  * @property {string} label - Display label for the column header
  * @property {number|string} [width] - Width of the column (e.g., '100px' or 100)
+ * @property {number|string} [minWidth] - Minimum width of the column (e.g., '100px' or 100)
+ * @property {number|string} [maxWidth] - Maximum width of the column (e.g., '100px' or 100)
  * @property {boolean} [numeric] - Whether the column contains numeric data
  * @property {boolean} [disableSorting] - Whether sorting is disabled for the column
  * @property {string} [align] - Text alignment for the column ('left'|'center'|'right')

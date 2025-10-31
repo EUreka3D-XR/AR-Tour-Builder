@@ -23,14 +23,14 @@ const columns = [
   {
     label: "Filename",
     value: "filename",
-    width: 300,
+    minWidth: 300,
     disableSorting: true,
   },
   {
     label: "",
     value: "action",
     disableSorting: true,
-    width: "auto",
+    width: 150,
     renderCell: () => {
       return <AssetActionsCell />;
     },

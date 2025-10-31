@@ -83,9 +83,7 @@ export default function DisplayStructure({
         </TopBar>
         <DisplayArea>{children}</DisplayArea>
         <InfoArea>
-          <ExpandableText text={description}>
-            {description + description + description + description}
-          </ExpandableText>
+          <ExpandableText text={description}>{description}</ExpandableText>
         </InfoArea>
       </ContentContainer>
     </Root>

@@ -80,6 +80,7 @@
  * @property {number} totalTours - Total number of tours in the project
  * @property {number} totalPois - Total number of POIs in the project
  * @property {number} totalAssets - Total number of media assets in the project's library
+ * @property {string[]} locales - Supported locales for the project
  * @property {Status} [status] - Project status (draft, published, archived)
  * @property {string} lastUpdated - Last updated date in ISO format
  */
@@ -99,6 +100,7 @@
  * @property {Status} status - Tour status (draft, published, archived)
  * @property {number} duration - Estimated duration in minutes
  * @property {number} distance - Estimated distance in meters
+ * @property {boolean} guided - Indicates if the tour is guided
  * @property {Coordinates} [coordinates] - Geographic coordinates
  * @property {Coordinates[]} [boundBox] - Bounding box of the tour pois
  * @property {string} createdAt - Creation timestamp

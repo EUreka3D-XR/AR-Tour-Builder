@@ -1,3 +1,7 @@
+export const getGithubBaseUrl = (filePath) =>
+  // "https://raw.githubusercontent.com/leomav/demo-assets/main/" + filePath;
+  "https://leomav.github.io/demo-assets/" + filePath;
+
 /**
  * @typedef {import('@/types/jsdoc-types').Asset} Asset
  * @typedef {import('@/types/jsdoc-types').PoiAsset} PoiAsset
@@ -25,8 +29,8 @@ export const mockImageAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://images.unsplash.com/photo-1555993539-1732b0258235?w=1200&h=800&fit=crop",
-        fr: "https://images.unsplash.com/photo-1555993539-1732b0258235?w=1200&h=800&fit=crop",
+        en: getGithubBaseUrl("pc14/104648.jpg.jpg"),
+        fr: getGithubBaseUrl("pc14/104648.jpg.jpg"),
       },
     },
     filename: "parthenon_east_facade_4k.jpg",
@@ -60,8 +64,8 @@ export const mockImageAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop",
-        fr: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop",
+        en: getGithubBaseUrl("pc14/57980.jpg"),
+        fr: getGithubBaseUrl("pc14/57980.jpg"),
       },
     },
     filename: "ionic_capital_detail.jpg",
@@ -95,8 +99,8 @@ export const mockImageAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://images.unsplash.com/photo-1594736797933-d0f06ba07c45?w=1200&h=800&fit=crop",
-        fr: "https://images.unsplash.com/photo-1594736797933-d0f06ba07c45?w=1200&h=800&fit=crop",
+        en: getGithubBaseUrl("pc2/141183.jpg"),
+        fr: getGithubBaseUrl("pc2/141183.jpg"),
       },
     },
     filename: "pottery_fragment_red_figure.jpg",
@@ -130,8 +134,8 @@ export const mockImageAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=600&fit=crop",
-        fr: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=600&fit=crop",
+        en: getGithubBaseUrl("pc2/bibracte_antoine_maillier_141174_805.jpg"),
+        fr: getGithubBaseUrl("pc2/bibracte_antoine_maillier_141174_805.jpg"),
       },
     },
     filename: "acropolis_panorama_sunset.jpg",
@@ -165,8 +169,8 @@ export const mockImageAssets = [
     },
     contentUrl: {
       locales: {
-        en: "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=1200&h=800&fit=crop",
-        fr: "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=1200&h=800&fit=crop",
+        en: getGithubBaseUrl("rock_of_the_wivre/123522.jpg"),
+        fr: getGithubBaseUrl("rock_of_the_wivre/123522.jpg"),
       },
     },
     filename: "marble_sculpture_frieze_detail.jpg",
@@ -554,9 +558,6 @@ export const mockAudioAssets = [
   },
 ];
 
-const githubModelsBaseUrl = (filePath) =>
-  // "https://raw.githubusercontent.com/leomav/demo-assets/main/" + filePath;
-  "https://leomav.github.io/demo-assets/" + filePath;
 /**
  * Array of 5 mock 3D model assets
  * @type {Asset[]}
@@ -578,8 +579,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: githubModelsBaseUrl("pc14/2015_34_1121_32.glb"),
-        fr: githubModelsBaseUrl("pc14/2015_34_1121_32.glb"),
+        en: getGithubBaseUrl("pc14/2015_34_1121_32.glb"),
+        fr: getGithubBaseUrl("pc14/2015_34_1121_32.glb"),
       },
     },
     filename: "parthenon_complete_model.glb",
@@ -611,8 +612,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: githubModelsBaseUrl("pc14/829_Fosse_PC14_3D.glb"),
-        fr: githubModelsBaseUrl("pc14/829_Fosse_PC14_3D.glb"),
+        en: getGithubBaseUrl("pc14/829_Fosse_PC14_3D.glb"),
+        fr: getGithubBaseUrl("pc14/829_Fosse_PC14_3D.glb"),
       },
     },
     filename: "ionic_capital_detailed.glb",
@@ -644,8 +645,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: githubModelsBaseUrl("pc2/849_PC2_Cave_AA_3D_3.glb"),
-        fr: githubModelsBaseUrl("pc2/849_PC2_Cave_AA_3D_3.glb"),
+        en: getGithubBaseUrl("pc2/849_PC2_Cave_AA_3D_3.glb"),
+        fr: getGithubBaseUrl("pc2/849_PC2_Cave_AA_3D_3.glb"),
       },
     },
     filename: "ancient_amphora_red_figure.glb",
@@ -677,8 +678,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: githubModelsBaseUrl("pc2/2018_41_226_1.glb"),
-        fr: githubModelsBaseUrl("pc2/2018_41_226_1.glb"),
+        en: getGithubBaseUrl("pc2/2018_41_226_1.glb"),
+        fr: getGithubBaseUrl("pc2/2018_41_226_1.glb"),
       },
     },
     filename: "caryatid_erechtheion_statue.glb",
@@ -710,8 +711,8 @@ export const mockModelAssets = [
     },
     contentUrl: {
       locales: {
-        en: githubModelsBaseUrl("pc2/995_15_371_1.glb"),
-        fr: githubModelsBaseUrl("pc2/995_15_371_1.glb"),
+        en: getGithubBaseUrl("pc2/995_15_371_1.glb"),
+        fr: getGithubBaseUrl("pc2/995_15_371_1.glb"),
       },
     },
     filename: "parthenon_frieze_procession.glb",

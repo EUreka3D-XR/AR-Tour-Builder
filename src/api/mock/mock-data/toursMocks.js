@@ -2,6 +2,8 @@
  * @typedef {import('@/types/jsdoc-types').Tour} Tour
  */
 
+import { getGithubBaseUrl } from "./assetsMocks";
+
 // import { getMockPois } from "./poisMocks.js";
 
 /**
@@ -13,18 +15,17 @@ export const mockTours = [
     // id: "tour-001",
     title: {
       locales: {
-        en: "Complete Acropolis Experience",
-        fr: "Expérience Complète de l'Acropole",
+        en: "Bibracte Highlights",
+        fr: "Points Forts de Bibracte",
       },
     },
     description: {
       locales: {
-        en: "A comprehensive tour covering all major monuments of the Acropolis, including the Parthenon, Erechtheion, and surrounding temples with detailed historical context.",
-        fr: "Une visite complète couvrant tous les monuments majeurs de l'Acropole, y compris le Parthénon, l'Érechthéion et les temples environnants avec un contexte historique détaillé.",
+        en: "A comprehensive tour covering all major monuments of Bibracte, including the PC2 domus, PC14 enclosure, and surrounding sites with detailed historical context.",
+        fr: "Une visite complète couvrant tous les monuments majeurs de Bibracte, y compris la domus PC2, l'enclos PC14 et les sites environnants avec un contexte historique détaillé.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1555993539-1732b0258235?w=600&h=400&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour1_Thumbnail.jpg"),
     // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 180, // 3 hours
@@ -40,18 +41,17 @@ export const mockTours = [
     // id: "tour-002",
     title: {
       locales: {
-        en: "Ancient Theatres of Athens",
-        fr: "Théâtres Antiques d'Athènes",
+        en: "Bibracte Entrance Monuments Tour",
+        fr: "Visite des Monuments d'Entrée de Bibracte",
       },
     },
     description: {
       locales: {
-        en: "Explore the birthplace of drama and theatre, visiting the Theatre of Dionysus and Odeon of Herodes Atticus with insights into ancient Greek performances.",
-        fr: "Explorez le berceau du drame et du théâtre, en visitant le Théâtre de Dionysos et l'Odéon d'Hérode Atticus avec des aperçus des représentations grecques antiques.",
+        en: "Explore the entrance monuments of Bibracte, including the impressive gates and fortifications that once protected this ancient site.",
+        fr: "Explorez les monuments d'entrée de Bibracte, y compris les impressionnantes portes et fortifications qui protégeaient autrefois ce site antique.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=600&h=400&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour2_Thumbnail.jpg"),
     // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 120, // 2 hours
@@ -77,8 +77,7 @@ export const mockTours = [
         fr: "Une visite axée sur la signification religieuse et architecturale des temples grecs antiques, explorant différents ordres architecturaux et leurs significations.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour3_Thumbnail.jpg"),
     // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 150, // 2.5 hours
@@ -104,8 +103,7 @@ export const mockTours = [
         fr: "Découvrez le berceau de la démocratie en visitant l'Agora antique, la colline de l'Aréopage et d'autres sites où la politique athénienne antique a pris forme.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=600&h=400&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour2_Thumbnail.jpg"),
     // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 135, // 2.25 hours
@@ -131,8 +129,7 @@ export const mockTours = [
         fr: "Voyage à travers la mythologie grecque antique en visitant des sites liés aux dieux, déesses et héros légendaires d'Athènes.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1594736797933-d0f06ba07c45?w=600&h=400&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour1_Thumbnail.jpg"),
     // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 165, // 2.75 hours
@@ -158,8 +155,7 @@ export const mockTours = [
         fr: "Vivez la magie du lever du soleil à l'Acropole avec un accès matinal pour voir la lumière dorée illuminer le marbre antique.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour3_Thumbnail.jpg"),
     // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 90, // 1.5 hours
@@ -185,8 +181,7 @@ export const mockTours = [
         fr: "Suivez les traces des archéologues et apprenez les découvertes récentes, les techniques d'excavation et la recherche en cours dans la région.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1539650116574-75c0c6d73c6e?w=600&h=400&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour1_Thumbnail.jpg"),
     // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "draft",
     duration: 195, // 3.25 hours
@@ -212,8 +207,7 @@ export const mockTours = [
         fr: "Une visite engageante conçue pour les familles avec enfants, avec des récits interactifs et des activités pratiques pour donner vie à l'histoire ancienne.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1571045034717-14cf9ffe1b69?w=600&h=400&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour2_Thumbnail.jpg"),
     // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 105, // 1.75 hours
@@ -239,8 +233,7 @@ export const mockTours = [
         fr: "Focus sur les réalisations artistiques de la Grèce antique, explorant sculptures, frises et décorations architecturales avec des commentaires d'expert en histoire de l'art.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=600&h=400&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour3_Thumbnail.jpg"),
     // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 170, // 2.83 hours
@@ -266,8 +259,7 @@ export const mockTours = [
         fr: "Parfait pour les passionnés de photographie, cette visite du soir capture l'éclairage de l'heure dorée et de l'heure bleue aux endroits les plus photogéniques autour de l'Acropole.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour1_Thumbnail.jpg"),
     // pois: getMockPois(Math.floor(Math.random() * 6) + 5), // Random 5-10
     status: "published",
     duration: 125, // 2.08 hours

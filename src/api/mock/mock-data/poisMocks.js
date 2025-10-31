@@ -2,6 +2,10 @@
  * @typedef {import('@/types/jsdoc-types').Poi} Poi
  */
 
+const getGithubBaseUrl = (filePath) =>
+  // "https://raw.githubusercontent.com/leomav/demo-assets/main/" + filePath;
+  "https://leomav.github.io/demo-assets/" + filePath;
+
 // import { getMockAssets } from "./assetsMocks.js";
 
 /**
@@ -13,22 +17,21 @@ export const mockPOIs = [
     id: "poi-001",
     title: {
       locales: {
-        en: "The Parthenon",
-        fr: "Le Parthénon",
+        en: "The PC2 domus",
+        fr: "La domus PC2",
       },
     },
     description: {
       locales: {
-        en: "The Parthenon is a former temple on the Athenian Acropolis, Greece, dedicated to the goddess Athena, whom the people of Athens considered their patron.",
-        fr: "Le Parthénon est un ancien temple de l'Acropole d'Athènes, en Grèce, dédié à la déesse Athéna, que les Athéniens considéraient comme leur patronne.",
+        en: "Built on nearly 1,500 m2 during the last days of the oppidum, this house is organized according to a typically Roman plan, like many prestigious residences of Bibracte. It stands out, however, for the mastery and care taken in its construction. Built on a vast artificial terrace, it rests on imposing masonry foundations that have allowed the preservation of remains prior to its construction. Its extensive exploration, undertaken since 2016 by the Bibracte school site, reveals a complex stratigraphic scenario that spans the entire duration of the 1st century BC…",
+        fr: "Construite sur près de 1 500 m2 durant les derniers temps de l’oppidum, cette maison est organisée selon un plan typiquement romain, à l’instar de nombreuses demeures de prestige de Bibracte. Elle s’en démarque cependant par la maîtrise et le soin portés à sa construction. Édifiée sur une vaste terrasse artificielle, elle repose sur d’imposants soubassements maçonnés qui ont permis la conservation de vestiges antérieurs à sa construction. Son exploration extensive, engagée depuis 2016 par le chantier école de Bibracte, révèle un scénario stratigraphique complexe qui s’échelonne sur toute la durée du Ier siècle avant notre ère…",
       },
     },
     coordinates: {
-      lat: 37.9715,
-      long: 23.7267,
+      lat: 46.92406,
+      long: 4.03447,
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1555993539-1732b0258235?w=400&h=300&fit=crop",
+    thumbnail: getGithubBaseUrl("pc14/PC14_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
       locales: {
@@ -69,22 +72,21 @@ export const mockPOIs = [
     id: "poi-002",
     title: {
       locales: {
-        en: "The Erechtheion",
-        fr: "L'Érechthéion",
+        en: "The PC14 enclosure",
+        fr: "L’enclos PC14",
       },
     },
     description: {
       locales: {
-        en: "The Erechtheion is an ancient Greek temple on the north side of the Acropolis, famous for its Caryatid porch.",
-        fr: "L'Érechthéion est un ancien temple grec du côté nord de l'Acropole, célèbre pour son portique des Cariatides.",
+        en: "PC 14 forms a large artificial terrace, 80 m long and of unknown width, whose precise purpose eludes us. It belongs to the last developments in this sector, contemporary with the last restructuring of the neighboring platform PC15, at the end of the 1st century BC. It yielded a large number of remains, including an amphorae dumping pit that you can discover in 3D and several stampswhich indicate the name of the wine producer or the amphora maker. The example presented here, also in 3D, is one of more than 1,000 stamps of Dressel 1 type wine amphorae. This is the largest collection recorded in the Roman world for this type of amphora! This bears witness to the importance of wine in Bibracte, which was the hub of this trade between the Saône, the Loire and the Seine.",
+        fr: "PC 14 forme une grande terrasse artificielle longue de 80 m et de largeur inconnue, dont la destination précise nous échappe. Elle appartient aux derniers aménagements de ce secteur, contemporains de la dernière restructuration de la plateforme voisine PC15, à la fin du Ier siècle avant notre ère. Elle a livré un grand nombre de vestige, dont une fosse dépotoir d’amphores que vous pouvez découvrir en 3D et plusieurs timbres qui indiquent le nom du producteur du vin ou celui du fabriquant de l’amphore. L’exemplaires présentés ici, également en 3D, fait partie des plus de 1000 timbres d’amphores à vin de type Dressel 1. C’est la plus importante collection recensée à l’échelle du monde romain pour ce type d’amphore ! Ce qui témoignent de l’importance du vin à Bibracte, qui était la plaque tournante de ce commerce entre la Saône, la Loire et la Seine.",
       },
     },
     coordinates: {
-      lat: 37.9721,
-      long: 23.7262,
+      lat: 46.92633,
+      long: 4.03447,
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+    thumbnail: getGithubBaseUrl("pc2/PC2_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
       locales: {
@@ -125,22 +127,21 @@ export const mockPOIs = [
     id: "poi-003",
     title: {
       locales: {
-        en: "Temple of Athena Nike",
-        fr: "Temple d'Athéna Niké",
+        en: "PC15",
+        fr: "PC15",
       },
     },
     description: {
       locales: {
-        en: "The Temple of Athena Nike is a temple on the Acropolis of Athens, dedicated to the goddesses Athena and Nike.",
-        fr: "Le temple d'Athéna Niké est un temple de l'Acropole d'Athènes, dédié aux déesses Athéna et Niké.",
+        en: "PC 15 was an exceptional architectural ensemble. Rebuilt several times, it initially took the form of a square courtyard surrounded by a gallery, before an imposing central building replaced them. In its final form, stone replaced wood, including in the boundary wall. This is undoubtedly Bibracte's first public space, which operated until the town was abandoned.",
+        fr: "PC 15 était un ensemble architectural exceptionnel. Reconstruit plusieurs fois, il prend d'abord la forme d'une cour carrée entourée d’une galerie, avant qu'un bâtiment central imposant ne les remplace. Dans le dernier état, la pierre se substitue au bois, y compris dans le mur de clôture. Il faut sans doute voir ici le premier espace public de Bibracte, qui fonctionna jusqu'à l'abandon de la ville.",
       },
     },
     coordinates: {
-      lat: 37.9712,
-      long: 23.7255,
+      lat: 46.926887,
+      long: 4.032669,
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1594736797933-d0f06ba07c45?w=400&h=300&fit=crop",
+    thumbnail: getGithubBaseUrl("pc15/PC15_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
       locales: {
@@ -181,22 +182,21 @@ export const mockPOIs = [
     id: "poi-004",
     title: {
       locales: {
-        en: "Propylaea",
-        fr: "Propylées",
+        en: "The Rock of the Wire",
+        fr: "The Rock of the Wire",
       },
     },
     description: {
       locales: {
-        en: "The Propylaea is the classical Greek Doric building complex that functioned as the monumental ceremonial gateway to the Acropolis.",
-        fr: "Les Propylées sont le complexe de bâtiments doriques grecs classiques qui servait d'entrée cérémonielle monumentale à l'Acropole.",
+        en: "This is one of the oldest preserved photographs of Mount Beuvray, whose excavations received little attention from photographers before the very end of the 19th century. The old view invites us to remove the curtain of conifers to discover the vast panorama towards Mount Préneley, whose slope visible in the background was almost entirely cultivated in the 19th century, whereas it has now almost completely reverted to forest. The open space in the foreground is characteristic of the basic maintenance of the rangelands occupying the peaks of the Morvan, where herds found occasional pasture.",
+        fr: "Il s’agit d’un des plus anciens clichés conservés du mont Beuvray, dont les fouilles ont peu bénéficié de l’attention des photographes avant la toute fin du XIXe siècle. La vue ancienne invite à supprimer le rideau de résineux pour retrouver le vaste panorama vers le mont Préneley dont le versant visible à l’arrière-plan était presque entièrement cultivé au XIXe siècle, alors qu’il est quasi complètement retourné à la forêt. L’espace ouvert du premier plan est caractéristique de l’entretien sommaire des terrains de parcours occupant les sommets du Morvan, où les troupeaux trouvaient un pâturage occasionnel.",
       },
     },
     coordinates: {
-      lat: 37.9718,
-      long: 23.7248,
+      lat: 46.9318528,
+      long: 4.0357166,
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+    thumbnail: getGithubBaseUrl("rock_of_the_wivre/Wivre_Rock_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
       locales: {
@@ -237,22 +237,21 @@ export const mockPOIs = [
     id: "poi-005",
     title: {
       locales: {
-        en: "Theatre of Dionysus",
-        fr: "Théâtre de Dionysos",
+        en: "The Theurot de la Roche",
+        fr: "Le Theurot de la Roche",
       },
     },
     description: {
       locales: {
-        en: "The Theatre of Dionysus is an ancient Greek theatre built on the south slope of the Acropolis hill, considered the world's first theatre.",
-        fr: "Le Théâtre de Dionysos est un ancien théâtre grec construit sur le versant sud de la colline de l'Acropole, considéré comme le premier théâtre du monde.",
+        en: "This rocky hillock was once the site of significant mining activity. This is evidenced by two extraction shafts approximately 8 m deep, dug in steps into the rock to extract silver ore. They are now filled in, but you can explore the depths of one of them using its 3D model. This discovery, and that of another silver mine on the oppidum, has raised questions on potential outlets of this silver production by the inhabitants of Bibracte. The study of Aedui coins and the discovery of at least two monetary dies on the site suggest that a monetary workshop operated on the very site of Bibracte.",
+        fr: "Cette butte rocheuse a été le terrain d’une activité minière importante. En attestent deux puits d'extraction profonds d'environ 8 m qui ont été creusés en gradins dans la roche pour extraire du minerai d’argent. Ils sont aujourd’hui comblés mais vous pouvez explorer les profondeurs de l’un d’eux grâce à son modèle 3D. Cette découverte, et celle d’une autre minière d’argent sur l’oppidum, a permis de s’interroger sur les débouchés potentiels de cette production d’argent par les habitants de Bibracte. L’étude des monnaies éduennes et la découverte d’au moins deux coins monétaires sur le site suggèrent qu’un atelier monétaire a fonctionné sur le site même de Bibracte.",
       },
     },
     coordinates: {
-      lat: 37.9697,
-      long: 23.7286,
+      lat: 46.92678,
+      long: 4.03221,
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=400&h=300&fit=crop",
+    thumbnail: getGithubBaseUrl("theurot_mines/Theurot_Tumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
       locales: {

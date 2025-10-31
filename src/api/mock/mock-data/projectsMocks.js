@@ -2,6 +2,8 @@
  * @typedef {import('@/types/jsdoc-types').Project} Project
  */
 
+import { getGithubBaseUrl } from "./assetsMocks";
+
 // import { getMockTours } from "./toursMocks.js";
 
 /**
@@ -13,20 +15,18 @@ export const mockProjects = [
     id: "1",
     title: {
       locales: {
-        en: "Ancient Athens Acropolis",
-        fr: "Acropole d'Athènes antique",
+        en: "Bibracte Exploration",
+        fr: "Bibracte Exploration",
       },
     },
     description: {
       locales: {
-        en: "Explore the iconic Acropolis of Athens, featuring the Parthenon and other ancient Greek monuments that showcase classical architecture and history.",
-        fr: "Explorez l'iconique Acropole d'Athènes, avec le Parthénon et d'autres monuments grecs anciens qui mettent en valeur l'architecture et l'histoire classiques.",
+        en: "Explore the iconic Bibracte site, featuring the PC2 domus and other ancient monuments that showcase classical architecture and history.",
+        fr: "Explorez l'iconique site de Bibracte, avec la domus PC2 et d'autres monuments anciens qui mettent en valeur l'architecture et l'histoire classiques.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1555993539-1732b0258235?w=400&h=250&fit=crop",
-    coverPhoto:
-      "https://images.unsplash.com/photo-1555993539-1732b0258235?w=1200&h=600&fit=crop",
+    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour1_Thumbnail.jpg"),
+    coverPhoto: getGithubBaseUrl("tour_thumbnails/Tour2_Thumbnail.jpg"),
     // tours: getMockTours(Math.floor(Math.random() * 3) + 1), // Random 1-3
     totalTours: 5,
     totalPois: 12,

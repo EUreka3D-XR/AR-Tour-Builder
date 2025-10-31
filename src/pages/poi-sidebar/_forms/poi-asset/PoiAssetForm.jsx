@@ -68,6 +68,7 @@ function PoiAssetForm({ onSubmit, onClose }) {
   const isNewAsset = !searchParams.get("mediaId");
 
   const assetType = useWatch({ name: "type" });
+  const isGeoreferenced = useWatch({ name: "isGeoreferenced" });
   const helperTextForUrl = useMemo(() => {
     return getExtensionsHelperForType(assetType);
   }, [assetType]);
@@ -226,32 +227,34 @@ function PoiAssetForm({ onSubmit, onClose }) {
                     />
                   )}
                 />
-                <CoordinatesRow className="coordinates-row">
-                  <FormInput
-                    name="georeference.lat"
-                    render={({ field }) => (
-                      <LabeledInput label="Latitude">
-                        <TextField
-                          {...field}
-                          className="coordinate-field"
-                          placeholder="ex. 3.123456"
-                        />
-                      </LabeledInput>
-                    )}
-                  />
-                  <FormInput
-                    name="georeference.long"
-                    render={({ field }) => (
-                      <LabeledInput label="Longitude">
-                        <TextField
-                          {...field}
-                          className="coordinate-field"
-                          placeholder="ex. 76.123456"
-                        />
-                      </LabeledInput>
-                    )}
-                  />
-                </CoordinatesRow>
+                {isGeoreferenced && (
+                  <CoordinatesRow className="coordinates-row">
+                    <FormInput
+                      name="georeference.lat"
+                      render={({ field }) => (
+                        <LabeledInput label="Latitude">
+                          <TextField
+                            {...field}
+                            className="coordinate-field"
+                            placeholder="ex. 3.123456"
+                          />
+                        </LabeledInput>
+                      )}
+                    />
+                    <FormInput
+                      name="georeference.long"
+                      render={({ field }) => (
+                        <LabeledInput label="Longitude">
+                          <TextField
+                            {...field}
+                            className="coordinate-field"
+                            placeholder="ex. 76.123456"
+                          />
+                        </LabeledInput>
+                      )}
+                    />
+                  </CoordinatesRow>
+                )}
               </div>
               <Divider />
               <div>

@@ -6,10 +6,12 @@ import {
   CardMedia,
   Chip,
   Skeleton,
+  Stack,
   styled,
   Typography,
 } from "@mui/material";
 
+import FlagsGroup from "@/components/flags-group/FlagsGroup";
 import Image from "@/components/image/Image";
 import useNavPaths from "@/hooks/useNavPaths";
 
@@ -29,7 +31,6 @@ const ProjectCardStyled = styled(Card)({
 const StatsContainer = styled(Box)({
   display: "flex",
   gap: "0.5rem",
-  marginTop: "1rem",
   flexWrap: "wrap",
 });
 
@@ -86,26 +87,34 @@ function ProjectCard({ project }) {
         >
           {project.description}
         </Typography>
-        <StatsContainer>
-          <StatChip
-            label={`${project.totalTours} Tours`}
-            size="small"
-            color="primary"
-            variant="outlined"
-          />
-          <StatChip
-            label={`${project.totalPois} POIs`}
-            size="small"
-            color="secondary"
-            variant="outlined"
-          />
-          <StatChip
-            label={`${project.totalAssets} Assets`}
-            size="small"
-            color="default"
-            variant="outlined"
-          />
-        </StatsContainer>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          mt={2}
+        >
+          <StatsContainer>
+            <StatChip
+              label={`${project.totalTours} Tours`}
+              size="small"
+              color="primary"
+              variant="outlined"
+            />
+            <StatChip
+              label={`${project.totalPois} POIs`}
+              size="small"
+              color="secondary"
+              variant="outlined"
+            />
+            <StatChip
+              label={`${project.totalAssets} Assets`}
+              size="small"
+              color="default"
+              variant="outlined"
+            />
+          </StatsContainer>
+          <FlagsGroup locales={project.locales} show={2} />
+        </Stack>
         <LastUpdated>
           Last updated: {new Date(project.lastUpdated).toLocaleDateString()}
         </LastUpdated>

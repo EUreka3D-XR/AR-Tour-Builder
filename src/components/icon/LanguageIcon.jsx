@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { styled } from "@mui/material";
 
 const getLanguageImagePath = (code) => {
-  return `/flag-${code}.png`;
+  return `/flags/${code}.webp`;
 };
 
 const ImageStyled = styled("img")({

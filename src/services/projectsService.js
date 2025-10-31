@@ -17,6 +17,7 @@ export const useProjects = () => {
   return useDataFetcher({
     fetcher: () => api.projects.fetchAll(locale),
     queryKey: ["projects", locale],
+    storeValue: true,
   });
 };
 
@@ -39,6 +40,7 @@ export const useProject = (projectId) => {
   return useDataFetcher({
     fetcher: () => api.projects.fetchOne(projectId, locale),
     queryKey: ["project", projectId, locale],
+    storeValue: true,
   });
 };
 

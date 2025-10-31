@@ -1,11 +1,13 @@
+import { useParams } from "react-router";
 import clsx from "clsx";
 import { Add } from "@mui/icons-material";
 import { Divider, styled } from "@mui/material";
 
+import { useProject, useProjects } from "@/services/projectsService";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import useNavPaths from "@/hooks/useNavPaths";
 import { useToggle } from "@/hooks/useToggle";
-import projectImg from "@/assets/images/ntua-logo.jpeg";
+import Image from "../image/Image";
 import Link from "../link/Link";
 
 const ContainerStyled = styled("div")({
@@ -59,20 +61,11 @@ const MainProjectItem = styled(ProjectItem)({
   },
 });
 
-const dummyProjects = [
-  {
-    id: 1,
-    name: "Bibrakte Project",
-    src: projectImg,
-  },
-  {
-    id: 2,
-    name: "Girona Project with a big title that should be truncated",
-    src: projectImg,
-  },
-];
-
 function NavbarProjects() {
+  const { projectId } = useParams();
+  const { data: selectedProject } = useProject(projectId);
+  const { data: projects } = useProjects();
+
   const { isNavMenuOpen } = useGeneralProvider();
   const { routes } = useNavPaths();
   const {
@@ -89,8 +82,8 @@ function NavbarProjects() {
           onClick={openProjectMenu}
         >
           <span className="thumbnail-container">
-            <img
-              src={projectImg}
+            <Image
+              src={selectedProject?.thumbnail}
               alt="project-thumbnail"
               className="project-thumbnail"
             />
@@ -100,12 +93,12 @@ function NavbarProjects() {
               hidden: !isNavMenuOpen,
             })}
           >
-            Bibrakte Project
+            {selectedProject?.title}
           </span>
         </MainProjectItem>
       ) : (
         <>
-          {dummyProjects.map((project) => (
+          {projects?.map((project) => (
             <ProjectItem
               key={project.id}
               className={clsx("project-item", {
@@ -114,8 +107,8 @@ function NavbarProjects() {
               onClick={closeProjectMenu}
             >
               <span className="thumbnail-container">
-                <img
-                  src={project.src}
+                <Image
+                  src={project.thumbnail}
                   alt="project-thumbnail"
                   className="project-thumbnail"
                 />
@@ -125,7 +118,7 @@ function NavbarProjects() {
                   hidden: !isNavMenuOpen,
                 })}
               >
-                {project.name}
+                {project.title}
               </span>
             </ProjectItem>
           ))}

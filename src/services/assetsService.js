@@ -41,7 +41,7 @@ export const usePoiAsset = (projectId, tourId, poiId, assetId, propLocale) => {
       api.assets.fetchOne(projectId, tourId, poiId, assetId, effectiveLocale),
     queryKey: ["poi-asset", projectId, tourId, poiId, assetId, effectiveLocale],
     enabled: !!assetId,
-    shouldStoreValue: true,
+    storeValue: true,
   });
 };
 
@@ -56,7 +56,7 @@ export const usePoiAssetMultilingual = (projectId, tourId, poiId, assetId) => {
   return useDataFetcher({
     fetcher: () => api.assets.fetchOne(projectId, tourId, poiId, assetId),
     queryKey: ["poi-asset", projectId, tourId, poiId, assetId, "multilingual"],
-    shouldStoreValue: true,
+    storeValue: true,
     enabled: !!assetId,
   });
 };

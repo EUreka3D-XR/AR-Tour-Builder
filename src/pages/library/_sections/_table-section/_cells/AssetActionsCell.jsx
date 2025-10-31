@@ -18,17 +18,17 @@ function AssetActionsCell() {
   return (
     <CellStyled>
       <Tooltip title="View Asset">
-        <IconButtonStyled title="View Asset" size="small">
+        <IconButtonStyled size="small">
           <EurekaIcon name="visibility" fontSize="small" />
         </IconButtonStyled>
       </Tooltip>
       <Tooltip title="Edit Asset">
-        <IconButtonStyled title="Edit Asset" size="small">
+        <IconButtonStyled size="small">
           <EurekaIcon name="edit" fontSize="small" />
         </IconButtonStyled>
       </Tooltip>
       <Tooltip title="Delete Asset">
-        <IconButtonStyled title="Delete Asset" size="small">
+        <IconButtonStyled size="small">
           <EurekaIcon name="delete" fontSize="small" />
         </IconButtonStyled>
       </Tooltip>

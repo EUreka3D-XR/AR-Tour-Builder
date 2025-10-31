@@ -37,7 +37,7 @@ export const useTourPoi = (projectId, tourId, poiId, propLocale) => {
   return useDataFetcher({
     fetcher: () => api.pois.fetchOne(projectId, tourId, poiId, effectiveLocale),
     queryKey: ["project-tour-poi", projectId, tourId, poiId, effectiveLocale],
-    shouldStoreValue: true,
+    storeValue: true,
   });
 };
 
@@ -51,7 +51,7 @@ export const useTourPoiMultilingual = (projectId, tourId, poiId) => {
   return useDataFetcher({
     fetcher: () => api.pois.fetchOne(projectId, tourId, poiId),
     queryKey: ["project-tour-poi", projectId, tourId, poiId, "multilingual"],
-    shouldStoreValue: true,
+    storeValue: true,
     enabled: !!poiId,
   });
 };

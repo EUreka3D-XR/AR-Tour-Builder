@@ -34,7 +34,7 @@ export const useProjectTour = (projectId, tourId, propLocale) => {
   return useDataFetcher({
     fetcher: () => api.tours.fetchOne(projectId, tourId, effectiveLocale),
     queryKey: ["project-tour", projectId, tourId, effectiveLocale],
-    shouldStoreValue: true,
+    storeValue: true,
   });
 };
 
@@ -47,7 +47,7 @@ export const useProjectTourMultilingual = (projectId, tourId) => {
   return useDataFetcher({
     fetcher: () => api.tours.fetchOne(projectId, tourId),
     queryKey: ["project-tour", projectId, tourId, "multilingual"],
-    shouldStoreValue: true,
+    storeValue: true,
     enabled: !!tourId,
   });
 };

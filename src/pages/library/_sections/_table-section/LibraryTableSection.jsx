@@ -8,12 +8,14 @@ const columns = [
   { label: "Title", value: "title", width: 250, wrap: true },
   {
     label: "Type",
+    value: "type",
     width: 120,
     disableSorting: true,
     renderCell: (row) => <AssetTypeCell type={row.type} />,
   },
   {
     label: "URL",
+    value: "url",
     width: 300,
     disableSorting: true,
     renderCell: (row) => <AssetURLCell url={row.url} />,
@@ -21,11 +23,14 @@ const columns = [
   {
     label: "Filename",
     value: "filename",
+    width: 300,
     disableSorting: true,
   },
   {
     label: "",
+    value: "action",
     disableSorting: true,
+    width: "auto",
     renderCell: () => {
       return <AssetActionsCell />;
     },

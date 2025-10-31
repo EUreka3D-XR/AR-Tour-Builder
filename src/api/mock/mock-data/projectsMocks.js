@@ -2,6 +2,8 @@
  * @typedef {import('@/types/jsdoc-types').Project} Project
  */
 
+import bibracteThumbnail from "@/assets/images/bibracte-logo.jpg";
+import ntuaThumbnail from "@/assets/images/ntua-logo.jpeg";
 import { getGithubBaseUrl } from "./assetsMocks";
 
 // import { getMockTours } from "./toursMocks.js";
@@ -25,7 +27,7 @@ export const mockProjects = [
         fr: "Explorez l'iconique site de Bibracte, avec la domus PC2 et d'autres monuments anciens qui mettent en valeur l'architecture et l'histoire classiques.",
       },
     },
-    thumbnail: getGithubBaseUrl("tour_thumbnails/Tour1_Thumbnail.jpg"),
+    thumbnail: bibracteThumbnail,
     coverPhoto: getGithubBaseUrl("tour_thumbnails/Tour2_Thumbnail.jpg"),
     // tours: getMockTours(Math.floor(Math.random() * 3) + 1), // Random 1-3
     totalTours: 5,
@@ -48,8 +50,7 @@ export const mockProjects = [
         fr: "Voyagez au cœur de la Rome antique, découvrant les ruines de temples, basiliques et espaces publics qui formaient autrefois le centre de l'Empire romain.",
       },
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=250&fit=crop",
+    thumbnail: ntuaThumbnail,
     coverPhoto:
       "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&h=600&fit=crop",
     // tours: getMockTours(Math.floor(Math.random() * 3) + 1), // Random 1-3

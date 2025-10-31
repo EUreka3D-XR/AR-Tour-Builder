@@ -125,7 +125,7 @@ function NavbarProjects() {
           <Link to={routes.projects.new} className="add-new-btn">
             <Add />
             <span className={clsx({ hidden: !isNavMenuOpen })}>
-              Add new project
+              Create new project
             </span>
           </Link>
         </>

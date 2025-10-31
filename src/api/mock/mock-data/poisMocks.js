@@ -303,11 +303,10 @@ export const mockPOIs = [
       },
     },
     coordinates: {
-      lat: 37.9693,
-      long: 23.7244,
+      lat: 46.92306,
+      long: 4.03347,
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1571045034717-14cf9ffe1b69?w=400&h=300&fit=crop",
+    thumbnail: getGithubBaseUrl("pc14/PC14_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
       locales: {
@@ -359,11 +358,10 @@ export const mockPOIs = [
       },
     },
     coordinates: {
-      lat: 37.9729,
-      long: 23.7221,
+      lat: 46.92206,
+      long: 4.03247,
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1539650116574-75c0c6d73c6e?w=400&h=300&fit=crop",
+    thumbnail: getGithubBaseUrl("pc2/PC2_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
       locales: {
@@ -415,11 +413,10 @@ export const mockPOIs = [
       },
     },
     coordinates: {
-      lat: 37.9753,
-      long: 23.7214,
+      lat: 46.93206,
+      long: 4.04247,
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=400&h=300&fit=crop",
+    thumbnail: getGithubBaseUrl("pc15/PC15_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
       locales: {
@@ -471,11 +468,10 @@ export const mockPOIs = [
       },
     },
     coordinates: {
-      lat: 37.9755,
-      long: 23.7196,
+      lat: 46.93606,
+      long: 4.02247,
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    thumbnail: getGithubBaseUrl("rock_of_the_wivre/Wivre_Rock_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
       locales: {
@@ -527,11 +523,10 @@ export const mockPOIs = [
       },
     },
     coordinates: {
-      lat: 37.9748,
-      long: 23.7225,
+      lat: 46.92606,
+      long: 4.02347,
     },
-    thumbnail:
-      "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop",
+    thumbnail: getGithubBaseUrl("theurot_mines/Theurot_Tumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
       locales: {

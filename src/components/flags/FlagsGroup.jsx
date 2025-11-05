@@ -1,5 +1,7 @@
 import { Avatar, AvatarGroup } from "@mui/material";
 
+import { getFlagUrl } from "./flagUtils";
+
 /**
  *
  * @param {Object} props
@@ -15,6 +17,7 @@ const FlagsGroup = ({
   spacing = "medium",
   size = "2rem",
 }) => {
+  console.log(locales);
   return (
     <AvatarGroup
       spacing={spacing}
@@ -33,9 +36,9 @@ const FlagsGroup = ({
         },
       }}
     >
-      {locales.slice(0, show).map((locale) => (
-        <Avatar key={locale} alt={locale} src={`/flags/${locale}.webp`} />
-      ))}
+      {locales.slice(0, show).map((locale) => {
+        return <Avatar key={locale} alt={locale} src={getFlagUrl(locale)} />;
+      })}
     </AvatarGroup>
   );
 };

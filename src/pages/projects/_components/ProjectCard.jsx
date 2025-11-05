@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import FlagsGroup from "@/components/flags-group/FlagsGroup";
+import FlagsGroup from "@/components/flags/FlagsGroup";
 import Image from "@/components/image/Image";
 import useNavPaths from "@/hooks/useNavPaths";
 

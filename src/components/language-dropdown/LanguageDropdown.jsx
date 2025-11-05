@@ -2,7 +2,7 @@ import { MenuItem, Select, styled } from "@mui/material";
 
 import useFormLocale from "@/stores/useFormLocale";
 import useAvailableLocales from "@/hooks/useAvailableLocales";
-import LanguageIcon from "../icon/LanguageIcon";
+import FlagIcon from "../flags/FlagIcon";
 import LabeledInput from "../labeled-input/LabeledInput";
 
 const SelectStyled = styled(Select)(({ theme }) => ({
@@ -70,7 +70,7 @@ function LanguageDropdownComponent({
         className="language-select"
         renderValue={(currentValue) => (
           <div className="dropdown-item">
-            <LanguageIcon code={currentValue} />
+            <FlagIcon locale={currentValue} />
             {!hideLabels &&
               options.find((option) => option.value === currentValue)?.label}
           </div>

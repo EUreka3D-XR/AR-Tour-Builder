@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import clsx from "clsx";
 import { styled } from "@mui/material";
 
-import LanguageIcon from "../icon/LanguageIcon";
+import FlagIcon from "../flags/FlagIcon";
 
 const ContainerStyled = styled("div")({
   display: "flex",
@@ -46,11 +46,12 @@ function InputLocaleIndicators({ className, value, size, alignment = "end" }) {
   return (
     <ContainerStyled className={clsx(alignment, className)}>
       {existingLocales.map((locale) => (
-        <LanguageIcon
+        <FlagIcon
           key={locale}
-          variant="round"
+          variant="circle"
           size={size}
-          code={locale}
+          locale={locale}
+          // code={locale}
           className="language-icon"
         />
       ))}

@@ -15,4 +15,5 @@ export const baseUrls = {
     `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}/assets`,
   poiAsset: (projectId, tourId, poiId, assetId) =>
     `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}/assets/${assetId}`,
+  localesCDN: (locale) => `https://flagcdn.com/${locale}/codes.json`,
 };

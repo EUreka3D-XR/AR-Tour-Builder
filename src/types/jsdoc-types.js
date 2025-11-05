@@ -134,6 +134,22 @@
  */
 
 // =============================================================================
+// LOCALES TYPES
+// =============================================================================
+
+/**
+ * Locale from CDN
+ * @typedef {{[key: string]: string}} LocaleFromApi
+ */
+
+/**
+ * Locale
+ * @typedef {Object} Locale
+ * @property {string} code - Locale code (e.g., 'en', 'fr')
+ * @property {string} label - Human-readable label (e.g., 'English', 'French')
+ */
+
+// =============================================================================
 // MEDIA TYPES
 // =============================================================================
 

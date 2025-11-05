@@ -29,7 +29,8 @@ const get = async (url, { params, locale, fromDTO, signal } = {}) => {
       params: { ...params, locale },
       signal,
     });
-    return fromDTO ? fromDTO(response.data) : response.data;
+    const data = response.data ?? response;
+    return fromDTO ? fromDTO(data) : data;
   } catch (error) {
     handleApiError(error, "GET", url);
     throw error;

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Avatar, styled } from "@mui/material";
 
-import { getFlagUrl } from "./flagUtils";
+import { getFlagUrl } from "@/utils/localesUtils";
 
 const ImageStyled = styled("img")(({ theme }) => ({
   objectFit: "cover",

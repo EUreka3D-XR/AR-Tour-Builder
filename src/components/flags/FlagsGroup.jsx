@@ -1,6 +1,6 @@
 import { Avatar, AvatarGroup } from "@mui/material";
 
-import { getFlagUrl } from "./flagUtils";
+import { getFlagUrl } from "@/utils/localesUtils";
 
 /**
  *

@@ -1,9 +1,13 @@
+import { useFormContext } from "react-hook-form";
 import { styled, TextField, Typography } from "@mui/material";
 
+import FormInput from "@/components/form/FormInput";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/HorizontalFieldWrapper";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import ImageInput from "@/components/image-input/ImageInput";
+import PrimaryLanguageInput from "@/components/languages-input/primary/PrimaryLanguageAutocomplete";
+import ProjectSupportedLanguagesInput from "@/components/languages-input/supported/ProjectSupportedLanguagesInput";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -20,30 +24,45 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function ProjectForm({ onSubmit }) {
+  const { setValue } = useFormContext();
+
   return (
     <form id="create-project-form" onSubmit={onSubmit}>
       <ContainerStyled className="project-form">
-        {/* <div className="group-title-section">
-        <Typography variant="h4" component="h4" fontWeight={400}>
-          Languages
-        </Typography>
-      </div>
-      <HorizontalFieldWrapper
-        label="Supported Languages"
-        description="Specify the languages your project supports."
-      >
-        <Autocomplete
-          fullWidth
-          multiple
-          options={["English", "French", "German"]}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              placeholder="e.g., English, Spanish, French"
-            />
-          )}
-        />
-      </HorizontalFieldWrapper> */}
+        <div className="group-title-section">
+          <Typography variant="h4" component="h4" fontWeight={400}>
+            Languages Configuration
+          </Typography>
+        </div>
+        <HorizontalFieldWrapper
+          label="Supported Languages"
+          description="Specify the languages your project supports. You can populate content in multiple languages later in the project's settings."
+        >
+          <FormInput
+            name="locales"
+            render={({ field }) => (
+              <ProjectSupportedLanguagesInput
+                value={field.value}
+                onChange={(val) => setValue("locales", val)}
+              />
+            )}
+          />
+        </HorizontalFieldWrapper>
+        <HorizontalFieldWrapper
+          label="Primary Language"
+          description="Specify the primary language for your project. The form will be submitted with this language."
+        >
+          <FormInput
+            name="primaryLocale"
+            render={({ field }) => (
+              <PrimaryLanguageInput
+                value={field.value}
+                onChange={(val) => setValue("primaryLocale", val)}
+              />
+            )}
+          />
+        </HorizontalFieldWrapper>
+
         <div className="group-title-section">
           <Typography variant="h4" component="h4" fontWeight={400}>
             Basic Information

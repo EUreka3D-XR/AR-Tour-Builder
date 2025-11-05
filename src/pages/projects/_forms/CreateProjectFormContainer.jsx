@@ -24,6 +24,7 @@ function CreateProjectForm() {
           fr: "",
         },
       },
+      locales: ["en"],
     },
   });
 
@@ -38,7 +39,7 @@ function CreateProjectForm() {
 
   return (
     <FormProvider {...methods}>
-      <ProjectForm onSubmit={handleSubmit(onSubmit)} />;
+      <ProjectForm onSubmit={handleSubmit(onSubmit)} />
     </FormProvider>
   );
 }

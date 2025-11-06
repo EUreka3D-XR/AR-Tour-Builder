@@ -2,27 +2,15 @@ import { create } from "zustand";
 
 /**
  * Store for tour languages.
- * - available: Array<string>
+ * - available: Array<Locale>
  * - primary: string (value)
  */
 const useStore = create((set) => ({
   available: [],
   primary: null,
 
-  // Replace the available languages with an array of codes
   setLanguages: (languages = []) => {
-    const normalized = Array.isArray(languages)
-      ? languages.map((l) => String(l))
-      : [];
-
-    set((state) => {
-      const current = state.primary;
-      const exists = normalized.includes(current);
-      return {
-        available: normalized,
-        primary: exists ? current : (normalized[0] ?? null),
-      };
-    });
+    set({ available: languages });
   },
 
   // Set primary language if it exists in available
@@ -32,22 +20,6 @@ const useStore = create((set) => ({
       primary: state.available.includes(val) ? val : state.primary,
     }));
   },
-
-  // Set both languages and primary at once
-  setLanguagesAndPrimary: (languages = [], primaryValue = null) => {
-    const normalized = Array.isArray(languages)
-      ? languages.map((l) => String(l))
-      : [];
-
-    const primary =
-      primaryValue != null ? String(primaryValue) : (normalized[0] ?? null);
-    const exists = normalized.includes(primary);
-
-    set({
-      available: normalized,
-      primary: exists ? primary : (normalized[0] ?? null),
-    });
-  },
 }));
 
 /**
@@ -56,7 +28,6 @@ const useStore = create((set) => ({
  * @property {string[]} available
  * @property {(value: string) => void} setPrimary
  * @property {(languages: string[]) => void} setLanguages
- * @property {(languages: string[], primaryValue: string|null) => void} setLanguagesAndPrimary
  */
 /**
  * @returns {TourLanguagesReturnValue}
@@ -66,14 +37,12 @@ const useTourLanguages = () => {
   const primary = useStore((s) => s.primary);
   const setLanguages = useStore((s) => s.setLanguages);
   const setPrimary = useStore((s) => s.setPrimary);
-  const setLanguagesAndPrimary = useStore((s) => s.setLanguagesAndPrimary);
 
   return {
     available,
     primary,
     setLanguages,
     setPrimary,
-    setLanguagesAndPrimary,
   };
 };
 

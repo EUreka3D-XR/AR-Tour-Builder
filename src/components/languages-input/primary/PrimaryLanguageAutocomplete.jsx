@@ -14,7 +14,6 @@ function PrimaryLanguageInput({ value, onChange, syncWithFormInputLocale }) {
   }, [locales, data]);
 
   const handleChange = (val) => {
-    console.log(val);
     onChange?.(val);
   };
 

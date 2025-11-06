@@ -3,7 +3,7 @@ import { useWatch } from "react-hook-form";
 import { styled } from "@mui/material";
 
 import useFormLocale from "@/stores/useFormLocale";
-import useAvailableLocales from "@/hooks/useAvailableLocales";
+import { useAvailableLocalesProvider } from "@/providers/locales/AvailableLocalesContext";
 import { inputLocaleName } from "@/utils/inputLocale";
 import InputLocaleIndicators from "./InputLocaleIndicators";
 
@@ -24,7 +24,7 @@ const ContainerStyled = styled("div")({
 
 function InputLocale({ className, children, name, hideLocaleIndicators }) {
   const { locale } = useFormLocale();
-  const { available } = useAvailableLocales();
+  const { available } = useAvailableLocalesProvider();
 
   const hasLocaleIndicators = !hideLocaleIndicators;
 

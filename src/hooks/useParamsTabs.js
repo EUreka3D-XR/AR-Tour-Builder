@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useSearchParams } from "react-router";
 
 /**
@@ -21,7 +21,9 @@ const useParamsTabs = (paramName = "tab", tabs, initialTab) => {
   useEffect(() => {
     const tabFromParams = searchParams.get(paramName);
     if (!tabFromParams && initialTab) {
-      setSearchParams({ [paramName]: initialTab }, { replace: true });
+      setSearchParams((prev) => ({ ...prev, [paramName]: initialTab }), {
+        replace: true,
+      });
     }
   }, [initialTab, paramName, setSearchParams, searchParams]);
 
@@ -30,12 +32,15 @@ const useParamsTabs = (paramName = "tab", tabs, initialTab) => {
    * @param {Event|string} event - Event object or tab value string
    * @param {string} value - Tab value (when called from MUI Tabs component)
    */
-  const setActiveTab = (event, value) => {
-    // Handle both direct calls and MUI Tabs onChange format
-    const tabValue = value != null ? value : event;
+  const setActiveTab = useCallback(
+    (event, value) => {
+      // Handle both direct calls and MUI Tabs onChange format
+      const tabValue = value != null ? value : event;
 
-    setSearchParams({ [paramName]: tabValue });
-  };
+      setSearchParams((prev) => ({ ...prev, [paramName]: tabValue }));
+    },
+    [paramName, setSearchParams],
+  );
 
   /**
    * Go to the next tab

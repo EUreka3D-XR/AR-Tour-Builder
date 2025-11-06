@@ -9,8 +9,8 @@ const MainAreaStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(5),
 }));
 
-function ProjectFormMain() {
-  const { activeTab } = useParamsTabs("projectTab");
+function ProjectFormMain({ paramKey }) {
+  const { activeTab } = useParamsTabs(paramKey);
 
   return (
     <MainAreaStyled>

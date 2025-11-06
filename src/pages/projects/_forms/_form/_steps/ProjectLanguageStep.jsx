@@ -7,6 +7,10 @@ import { ProjectFormSection } from "../_layout/ProjectFormLayout";
 
 function ProjectLanguageStep() {
   const { setValue } = useFormContext();
+
+  const handleChange = (val) => {
+    setValue("locales", val);
+  };
   return (
     <ProjectFormSection>
       <HorizontalFieldWrapper
@@ -21,7 +25,7 @@ function ProjectLanguageStep() {
                 value={field.value}
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
-                onChange={(val) => setValue("locales", val)}
+                onChange={handleChange}
               />
             );
           }}

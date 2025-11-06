@@ -17,7 +17,6 @@ const FlagsGroup = ({
   spacing = "medium",
   size = "2rem",
 }) => {
-  console.log(locales);
   return (
     <AvatarGroup
       spacing={spacing}

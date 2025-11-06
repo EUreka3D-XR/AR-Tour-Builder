@@ -1,12 +1,16 @@
-import { TextField } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
 
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/HorizontalFieldWrapper";
+import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 import { ProjectFormSection } from "../_layout/ProjectFormLayout";
 
 function ProjectBasicStep() {
   return (
     <ProjectFormSection>
+      <Stack direction="row" justifyContent="flex-end">
+        <LanguageDropdown />
+      </Stack>
       <HorizontalFieldWrapper
         label="Project Title"
         description="This is the title the project will appear with to the visitors too"

@@ -1,7 +1,7 @@
 import { MenuItem, Select, styled } from "@mui/material";
 
 import useFormLocale from "@/stores/useFormLocale";
-import useAvailableLocales from "@/hooks/useAvailableLocales";
+import { useAvailableLocalesProvider } from "@/providers/locales/AvailableLocalesContext";
 import FlagIcon from "../flags/FlagIcon";
 import LabeledInput from "../labeled-input/LabeledInput";
 
@@ -17,7 +17,7 @@ const SelectStyled = styled(Select)(({ theme }) => ({
 }));
 
 function LanguageDropdown({ className, label, hideLabels }) {
-  const { available } = useAvailableLocales();
+  const { available } = useAvailableLocalesProvider();
 
   return (
     <LanguageDropdownComponent

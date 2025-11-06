@@ -33,7 +33,7 @@ export const mockProjects = [
     totalTours: 5,
     totalPois: 12,
     totalAssets: 34,
-    locales: ["en", "fr"],
+    locales: ["en", "fr", "it"],
     status: "published",
     lastUpdated: "2024-01-15T10:30:00Z",
   },

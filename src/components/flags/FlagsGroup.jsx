@@ -14,9 +14,10 @@ import { getFlagUrl } from "@/utils/localesUtils";
 const FlagsGroup = ({
   locales = [],
   show = 2,
-  spacing = "medium",
+  spacing: propsSpacing = "medium",
   size = "2rem",
 }) => {
+  const spacing = propsSpacing === "large" ? 0 : propsSpacing;
   return (
     <AvatarGroup
       spacing={spacing}

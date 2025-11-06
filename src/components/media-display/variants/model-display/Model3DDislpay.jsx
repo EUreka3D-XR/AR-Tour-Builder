@@ -15,7 +15,7 @@ function ModelDisplay({ asset, onClose }) {
       description={asset.description}
       onClose={onClose}
     >
-      <Model3DViewer src={asset.contentUrl} />
+      <Model3DViewer src={asset.contentUrl} showControls />
     </DisplayStructure>
   );
 }

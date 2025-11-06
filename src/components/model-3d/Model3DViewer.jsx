@@ -16,6 +16,7 @@ const ContainerStyled = styled("div")(() => ({
 /**
  * @typedef {Object} Model3DViewerProps
  * @property {string} src - URL of the 3D model file (.glb or .gltf)
+ * @property {boolean} [showControls] - Whether to show viewer controls (default: true)
  * @property {string} viewerUrl - URL of the hosted viewer page (e.g., https://your-username.github.io/threejs-viewer/index.html)
  * @property {(data: any) => void} [onCameraChange] - Callback when the camera moves or zooms
  * @property {(error: any) => void} [onError] - Callback when the viewer reports an error
@@ -29,6 +30,7 @@ const ContainerStyled = styled("div")(() => ({
  */
 function Model3DViewer({
   src,
+  showControls,
   viewerUrl = DEFAULT_URL,
   onCameraChange,
   onError,
@@ -36,7 +38,7 @@ function Model3DViewer({
   const iframeRef = useRef(null);
 
   // Construct viewer iframe URL
-  const iframeSrc = `${viewerUrl}?file=${encodeURIComponent(src)}`;
+  const iframeSrc = `${viewerUrl}?file=${encodeURIComponent(src)}&showControls=${Boolean(showControls)}`;
 
   // Listen for messages from the iframe
   useEffect(() => {
@@ -81,7 +83,7 @@ function Model3DViewer({
         title="3D Viewer"
         style={{
           width: "100%",
-          height: "600px",
+          height: "100%",
           border: "none",
           borderRadius: "8px",
           overflow: "hidden",

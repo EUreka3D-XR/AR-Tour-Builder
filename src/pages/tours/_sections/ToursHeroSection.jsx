@@ -1,7 +1,6 @@
-import { useParams } from "react-router";
 import { styled, Typography } from "@mui/material";
 
-import { useProject } from "@/services/projectsService";
+import { useProjectProvider } from "@/providers/project/ProjectContext";
 import RouterBreadcrumbs from "@/components/breadcrumbs/RouterBreadcrumbs";
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -27,8 +26,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 
 function ToursHeroSection() {
   const { routes } = useNavPaths();
-  const { projectId } = useParams();
-  const { data: project, fetchState } = useProject(projectId);
+  const { project, fetchState } = useProjectProvider();
 
   return (
     <ContainerStyled>

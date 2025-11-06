@@ -54,7 +54,6 @@ export const AvailableLocalesProvider = ({ children }) => {
   }, [isDataFetched, cachedLocalesKeys]);
 
   const available = useMemo(() => {
-    console.log(isProjectContext, availableProjectLocales);
     if (
       isTourContext &&
       Array.isArray(availableTourLocales) &&
@@ -126,11 +125,9 @@ const LocaleDefaultOptions = [
 
 const populateLocales = (localeCodes, allLocalesPopulated = []) => {
   return localeCodes?.map((code) => {
-    console.log(code, allLocalesPopulated);
     const populatedLocale = allLocalesPopulated.find(
       (loc) => loc.value === code,
     );
-    console.log(populatedLocale);
     return populatedLocale || { value: code, label: code };
   });
 };

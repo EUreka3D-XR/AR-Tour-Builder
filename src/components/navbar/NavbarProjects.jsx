@@ -1,9 +1,9 @@
-import { useParams } from "react-router";
 import clsx from "clsx";
 import { Divider, styled } from "@mui/material";
 
-import { useProject, useProjects } from "@/services/projectsService";
+import { useProjects } from "@/services/projectsService";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
+import { useProjectProvider } from "@/providers/project/ProjectContext";
 import useNavPaths from "@/hooks/useNavPaths";
 import { useToggle } from "@/hooks/useToggle";
 import Button from "../button/Button";
@@ -59,8 +59,7 @@ const ProjectItem = styled(Link)({
 });
 
 function NavbarProjects() {
-  const { projectId } = useParams();
-  const { data: selectedProject } = useProject(projectId);
+  const { project: selectedProject } = useProjectProvider();
   const { data: projects } = useProjects();
 
   const { isNavMenuOpen } = useGeneralProvider();

@@ -1,14 +1,10 @@
-import { useParams } from "react-router";
-
-import { useProject } from "@/services/projectsService";
+import { useProjectProvider } from "@/providers/project/ProjectContext";
 import ErrorPage from "@/components/error/ErrorPage";
 import DashboardLoadingPage from "./loading";
 import DashboardPage from "./page";
 
 function DashboardPageContainer() {
-  const { projectId } = useParams();
-
-  const { data: project, fetchState } = useProject(projectId);
+  const { project, fetchState } = useProjectProvider();
 
   if (fetchState.isError) {
     return <ErrorPage hideReload />;

@@ -1,18 +1,43 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormProvider, useForm } from "react-hook-form";
 import { Divider } from "@mui/material";
 
+import FormNavigationFooter from "@/components/form/FormNavigationFooter";
+import FormNavigationHeader from "@/components/form/FormNavigationHeader";
+import useParamsTabs from "@/hooks/useParamsTabs";
 import ProjectFormMain from "./_layout/ProjectFormMain";
-import ProjectFormNavigationTabs from "./_layout/ProjectFormNavigationTabs";
 
-function ProjectForm({ onSubmit }) {
+const PARAM_KEY = "projectTab";
+
+function ProjectForm({ isNew, defaultValues, validationSchemas, onSubmit }) {
+  const { activeTabIndex } = useParamsTabs(PARAM_KEY, projectTabs);
+  const currentValidationSchema = validationSchemas[activeTabIndex];
+
+  const methods = useForm({
+    defaultValues,
+    resolver: yupResolver(currentValidationSchema),
+  });
+
+  const { handleSubmit } = methods;
+
   return (
-    <form id="create-project-form" onSubmit={onSubmit}>
-      <ProjectFormNavigationTabs
-        tabs={projectTabs}
-        fieldsPerStep={fieldsPerStep}
-      />
-      <Divider />
-      <ProjectFormMain />
-    </form>
+    <FormProvider {...methods}>
+      <form id="create-project-form" onSubmit={handleSubmit(onSubmit)}>
+        <FormNavigationHeader
+          isNew={isNew}
+          paramKey={PARAM_KEY}
+          initialTab="languages"
+          tabs={projectTabs}
+        />
+        <Divider />
+        <ProjectFormMain />
+        <FormNavigationFooter
+          isNew={isNew}
+          paramKey={PARAM_KEY}
+          tabs={projectTabs}
+        />
+      </form>
+    </FormProvider>
   );
 }
 
@@ -22,10 +47,4 @@ const projectTabs = [
   { icon: "diamond_shine", value: "languages", label: "Supported Languages" },
   { icon: "info", value: "basic-info", label: "Basic Information" },
   { icon: "language", value: "branding", label: "Branding" },
-];
-// const steps = projectTabs.map((tab) => tab.value);
-const fieldsPerStep = [
-  ["locales"],
-  ["title", "description"],
-  ["logo", "coverPhoto"],
 ];

@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 
 import FormInput from "@/components/form/FormInput";
 import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/HorizontalFieldWrapper";
-import ProjectSupportedLanguagesInput from "@/components/languages-input/supported/ProjectSupportedLanguagesInput";
+import SupportedLanguagesInput from "@/components/languages-input/supported/SupportedLanguagesInput";
 import { ProjectFormSection } from "../_layout/ProjectFormLayout";
 
 function ProjectLanguageSection() {
@@ -15,12 +15,16 @@ function ProjectLanguageSection() {
       >
         <FormInput
           name="locales"
-          render={({ field }) => (
-            <ProjectSupportedLanguagesInput
-              value={field.value}
-              onChange={(val) => setValue("locales", val)}
-            />
-          )}
+          render={({ field, fieldState }) => {
+            return (
+              <SupportedLanguagesInput
+                value={field.value}
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                onChange={(val) => setValue("locales", val)}
+              />
+            );
+          }}
         />
       </HorizontalFieldWrapper>
     </ProjectFormSection>

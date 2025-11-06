@@ -9,11 +9,24 @@ import TourSupportedLanguagesInput from "./TourSupportedLanguagesInput";
  * @param {"project" | "tour"} props.scope
  * @returns
  */
-function SupportedLanguagesInput({ value, onChange, scope }) {
+function SupportedLanguagesInput({
+  value,
+  onChange,
+  error,
+  helperText,
+  scope,
+}) {
   if (scope === "tour") {
     return <TourSupportedLanguagesInput value={value} onChange={onChange} />;
   }
-  return <ProjectSupportedLanguagesInput value={value} onChange={onChange} />;
+  return (
+    <ProjectSupportedLanguagesInput
+      value={value}
+      error={error}
+      helperText={helperText}
+      onChange={onChange}
+    />
+  );
 }
 
 export default SupportedLanguagesInput;

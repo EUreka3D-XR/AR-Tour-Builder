@@ -1,7 +1,12 @@
 import { useAllLocales } from "@/services/localesService";
 import LanguagesAutocomplete from "../_common/LanguagesAutocomplete";
 
-function ProjectSupportedLanguagesInput({ value, onChange }) {
+function ProjectSupportedLanguagesInput({
+  value,
+  onChange,
+  error,
+  helperText,
+}) {
   const { data, fetchState } = useAllLocales();
 
   return (
@@ -10,6 +15,8 @@ function ProjectSupportedLanguagesInput({ value, onChange }) {
       options={data}
       multiple
       isLoading={fetchState.isLoading}
+      error={error}
+      helperText={helperText}
       onChange={onChange}
     />
   );

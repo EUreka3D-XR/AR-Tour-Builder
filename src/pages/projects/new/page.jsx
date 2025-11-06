@@ -2,7 +2,7 @@ import { styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import useNavPaths from "@/hooks/useNavPaths";
-import CreateProjectForm from "../_forms/CreateProjectFormContainer";
+import CreateProjectForm from "../_forms/CreateProjectForm";
 
 const ContainerStyled = styled("div")({
   margin: "auto",

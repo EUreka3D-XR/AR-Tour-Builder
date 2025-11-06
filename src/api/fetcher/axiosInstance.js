@@ -4,16 +4,43 @@ import axios from "axios";
 // https://github.com/miragejs/miragejs/issues/1006 comment of Jan 20 2025
 const axiosInstance = axios.create({
   baseURL: "",
-  // A very simple example that will result in resolved passthrough requests in MirageJS
   adapter: async (config) => {
-    // Axios separate the base and the one used when you call API.get("/url...")
-    const url = config.baseURL + config.url;
+    // Combine base URL and endpoint URL
+    let url = config.baseURL + config.url;
 
-    // You want to add more things here if you want to work with other methods or security
+    // Serialize params and append to URL as query string
+    if (config.params) {
+      const searchParams = new URLSearchParams();
+      Object.entries(config.params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          searchParams.append(key, value);
+        }
+      });
+      const queryString = searchParams.toString();
+      if (queryString) {
+        url += (url.includes("?") ? "&" : "?") + queryString;
+      }
+    }
+
+    // Make the fetch request
     return fetch(url, {
-      // Axios adds a lot of extra properties to the original headers, I'm just being lazy here
+      method: config.method?.toUpperCase() || "GET",
       headers: config.headers,
-    }).then((response) => response.json());
+      body: config.data ? JSON.stringify(config.data) : undefined,
+      signal: config.signal,
+    }).then(async (response) => {
+      const data = await response.json();
+
+      // Return in axios response format
+      return {
+        data,
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers,
+        config,
+        request: response,
+      };
+    });
   },
 });
 

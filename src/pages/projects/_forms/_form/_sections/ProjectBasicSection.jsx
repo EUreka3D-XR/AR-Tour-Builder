@@ -13,9 +13,17 @@ function ProjectBasicSection() {
       >
         <FormInputMultilingual
           name="title"
-          render={({ field }) => (
-            <TextField fullWidth placeholder="Enter project title" {...field} />
-          )}
+          render={({ field, formState }) => {
+            return (
+              <TextField
+                fullWidth
+                placeholder="Enter project title"
+                error={!!formState.errors.title}
+                helperText={formState.errors.title?.message}
+                {...field}
+              />
+            );
+          }}
         />
       </HorizontalFieldWrapper>
       <HorizontalFieldWrapper
@@ -25,15 +33,19 @@ function ProjectBasicSection() {
       >
         <FormInputMultilingual
           name="description"
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              placeholder="Enter project description"
-              multiline
-              rows={4}
-              {...field}
-            />
-          )}
+          render={({ field, formState }) => {
+            return (
+              <TextField
+                fullWidth
+                placeholder="Enter project description"
+                multiline
+                rows={4}
+                error={!!formState.errors.description}
+                helperText={formState.errors.description?.message}
+                {...field}
+              />
+            );
+          }}
         />
       </HorizontalFieldWrapper>
     </ProjectFormSection>

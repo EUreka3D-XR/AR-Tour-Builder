@@ -16,6 +16,8 @@ function LanguagesAutocomplete({
   options = [],
   isLoading,
   multiple,
+  error,
+  helperText,
   onChange,
 }) {
   const handleChange = (_, newValue) => {
@@ -52,9 +54,16 @@ function LanguagesAutocomplete({
       disabled={isLoading}
       options={options}
       getOptionLabel={(option) => option.label}
-      renderInput={(params) => (
-        <TextField {...params} placeholder="e.g., English, French, Spanish" />
-      )}
+      renderInput={(params) => {
+        return (
+          <TextField
+            {...params}
+            error={error}
+            helperText={helperText}
+            placeholder="e.g., English, French, Spanish"
+          />
+        );
+      }}
       onChange={handleChange}
     />
   );

@@ -1,4 +1,4 @@
-import Yup from "./yupImporter";
+import Yup from "@/utils/yupImporter";
 
 const validateLocaleString = (value = "") => {
   return value.trim().length > 0;

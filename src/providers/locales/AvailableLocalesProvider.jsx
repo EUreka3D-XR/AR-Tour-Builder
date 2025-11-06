@@ -14,14 +14,12 @@ export const AvailableLocalesProvider = ({ children }) => {
 
   const { data: allLocales, fetchState } = useAllLocales();
   const isDataFetched = fetchState.isSuccess && Array.isArray(allLocales);
-  const params = useParams();
-  const { tourId, projectId } = params || {};
-  console.log(params);
 
+  const { tourId, projectId } = useParams();
   const [searchParams] = useSearchParams();
+
   const isProjectContext =
     Boolean(searchParams.get("projectForm")) || !!projectId;
-  console.log(projectId);
   const isTourContext = Boolean(searchParams.get("tourForm")) || !!tourId;
 
   const { available: availableTourLocales, setLanguages: setTourLanguages } =
@@ -64,7 +62,6 @@ export const AvailableLocalesProvider = ({ children }) => {
     ) {
       return availableTourLocales;
     }
-    console.log(isProjectContext, availableProjectLocales);
     if (
       isProjectContext &&
       Array.isArray(availableProjectLocales) &&
@@ -72,7 +69,6 @@ export const AvailableLocalesProvider = ({ children }) => {
     ) {
       return availableProjectLocales;
     }
-    console.log("hi");
     return LocaleDefaultOptions;
   }, [
     isTourContext,

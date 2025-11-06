@@ -3,7 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import useNavPaths from "@/hooks/useNavPaths";
 import wait from "@/utils/wait";
-import ProjectForm from "./ProjectForm";
+import ProjectForm from "./_form/ProjectForm";
 
 function CreateProjectForm() {
   const { routes } = useNavPaths();

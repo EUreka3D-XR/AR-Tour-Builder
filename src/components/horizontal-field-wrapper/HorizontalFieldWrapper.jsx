@@ -5,7 +5,7 @@ const FieldSection = styled("div")(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "1fr 1fr",
   alignItems: "start",
-  gap: theme.spacing(2),
+  gap: theme.spacing(4),
   "& .field-label": {
     display: "flex",
     flexDirection: "column",

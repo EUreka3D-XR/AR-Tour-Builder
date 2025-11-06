@@ -1,6 +1,7 @@
 import { styled, Typography } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import { icons } from "@/components/icon/icons";
 import DashboardCard from "../_common/DashboardCard";
 
 /**
@@ -11,7 +12,7 @@ import DashboardCard from "../_common/DashboardCard";
  * @typedef {Object} OverviewStatsProps
  * @property {number} totalViews - Total number of views
  * @property {number} viewsThisMonth - Number of views this month
- * @property {number} growthRate - Growth rate percentage
+ * @property {number} locales - Number of locales
  * @property {number} completionRate - Completion rate percentage
  */
 
@@ -101,10 +102,9 @@ const StatValue = styled("div")(({ theme }) => ({
 export default function OverviewStats({
   totalViews = 0,
   viewsThisMonth = 0,
-  growthRate = 0,
+  locales = 0,
   completionRate = 0,
 }) {
-  const isGrowthPositive = growthRate >= 0;
   // Predefined stats configuration in the desired order
   const predefinedStats = [
     {
@@ -119,12 +119,6 @@ export default function OverviewStats({
       icon: "chart",
       class: "monthly-views",
     },
-    // {
-    //   title: "Growth Rate",
-    //   value: `${isGrowthPositive ? "+" : ""}${growthRate}%`,
-    //   icon: `${isGrowthPositive ? "growth" : "decline"}`,
-    //   class: `${isGrowthPositive ? "growth" : "decline"}`,
-    // },
     {
       title: "Completion Rate",
       value: `${completionRate}%`,
@@ -132,6 +126,12 @@ export default function OverviewStats({
       class: "completion",
       color: "#7b1fa2",
       textColor: "#7b1fa2",
+    },
+    {
+      title: "Supported Languages",
+      value: locales,
+      icon: icons.language,
+      class: "growth",
     },
   ];
 

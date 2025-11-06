@@ -7,7 +7,6 @@ import "@/config/translations/i18next-config.js";
 
 import ErrorBoundary from "./components/error/ErrorBoundary";
 import { GeneralProvider } from "./providers/general/GeneralProvider";
-import { AvailableLocalesProvider } from "./providers/locales/AvailableLocalesProvider";
 import EurekaRoutes from "./routes/EurekaRoutes";
 
 const queryClient = new QueryClient({
@@ -25,11 +24,9 @@ export default function App() {
       <BrowserRouter>
         <ErrorBoundary>
           <QueryClientProvider client={queryClient}>
-            <AvailableLocalesProvider>
-              <GeneralProvider>
-                <EurekaRoutes />
-              </GeneralProvider>
-            </AvailableLocalesProvider>
+            <GeneralProvider>
+              <EurekaRoutes />
+            </GeneralProvider>
           </QueryClientProvider>
         </ErrorBoundary>
       </BrowserRouter>

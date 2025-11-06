@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import OverviewStats from "@/pages/dashboard/_sections/OverviewStats";
-import { styled } from "@mui/material";
+import { Stack, styled } from "@mui/material";
 
+import FlagsGroup from "@/components/flags/FlagsGroup";
 import EmptyProjectSection from "./_sections/EmptyProjectSection";
 import Members from "./_sections/Members";
 import ProjectBanner from "./_sections/ProjectBanner";
@@ -69,11 +70,20 @@ function DashboardPage({ project }) {
         </div>
       ) : (
         <>
+          <div className="dash-section">
+            <Stack
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <FlagsGroup locales={project.locales} show={10} spacing="large" />
+            </Stack>
+          </div>
           <div className="dash-section dash-grid one-two-thirds">
             <OverviewStats
               totalViews={2812}
               viewsThisMonth={512}
-              growthRate={18}
+              locales={project.locales.length}
               completionRate={75}
             />
             <RecentTours projectId={projectId} />

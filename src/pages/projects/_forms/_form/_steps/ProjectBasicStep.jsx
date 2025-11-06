@@ -14,6 +14,7 @@ function ProjectBasicStep() {
       <HorizontalFieldWrapper
         label="Project Title"
         description="This is the title the project will appear with to the visitors too"
+        isMultilingual
       >
         <FormInputMultilingual
           name="title"
@@ -34,6 +35,7 @@ function ProjectBasicStep() {
         label="Description"
         description="A brief overview of your project that helps users understand its
             purpose"
+        isMultilingual
       >
         <FormInputMultilingual
           name="description"

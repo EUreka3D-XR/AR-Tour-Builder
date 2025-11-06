@@ -8,13 +8,14 @@ import { useSearchParams } from "react-router";
  * @param {Array} tabs - Array of tab objects with value properties
  * @param {string} initialTab - Default tab to use when no tab parameter is specified in URL
  * @param {string} paramName - URL parameter name to use for the tab (default: 'tab')
- * @returns {{tabs: Array, activeTab: string, setActiveTab: function}} Object containing tabs, activeTab, and setActiveTab function
+ * @returns {{tabs: Array, activeTab: string, activeTabIndex: number, setActiveTab: function, goToNextTab: function, goToPreviousTab: function}} Object containing tabs, activeTab, setActiveTab, goToNextTab, and goToPreviousTab functions
  */
 const useParamsTabs = (paramName = "tab", tabs, initialTab) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Get current tab from search parameters
   const activeTab = searchParams.get(paramName) || initialTab;
+  const activeTabIndex = tabs?.findIndex((tab) => tab.value === activeTab);
 
   // If no tab is set in URL, use the initialTab
   useEffect(() => {
@@ -36,10 +37,35 @@ const useParamsTabs = (paramName = "tab", tabs, initialTab) => {
     setSearchParams({ [paramName]: tabValue });
   };
 
+  /**
+   * Go to the next tab
+   * @returns {void}
+   */
+  const goToNextTab = () => {
+    const nextTab = tabs?.[activeTabIndex + 1];
+    if (nextTab) {
+      setActiveTab(null, nextTab.value);
+    }
+  };
+
+  /**
+   * Go to the previous tab
+   * @returns {void}
+   */
+  const goToPreviousTab = () => {
+    const previousTab = tabs?.[activeTabIndex - 1];
+    if (previousTab) {
+      setActiveTab(null, previousTab.value);
+    }
+  };
+
   return {
     tabs,
     activeTab,
+    activeTabIndex,
     setActiveTab,
+    goToNextTab,
+    goToPreviousTab,
   };
 };
 

@@ -4,7 +4,7 @@ import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/HorizontalFieldWrapper";
 import { ProjectFormSection } from "../_layout/ProjectFormLayout";
 
-function ProjectBasicSection() {
+function ProjectBasicStep() {
   return (
     <ProjectFormSection>
       <HorizontalFieldWrapper
@@ -52,4 +52,4 @@ function ProjectBasicSection() {
   );
 }
 
-export default ProjectBasicSection;
+export default ProjectBasicStep;

@@ -2,7 +2,7 @@ import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/Horizo
 import ImageInput from "@/components/image-input/ImageInput";
 import { ProjectFormSection } from "../_layout/ProjectFormLayout";
 
-function ProjectBrandingSection() {
+function ProjectBrandingStep() {
   return (
     <ProjectFormSection>
       <HorizontalFieldWrapper
@@ -26,4 +26,4 @@ function ProjectBrandingSection() {
   );
 }
 
-export default ProjectBrandingSection;
+export default ProjectBrandingStep;

@@ -1,9 +1,9 @@
 import { styled } from "@mui/material";
 
 import useParamsTabs from "@/hooks/useParamsTabs";
-import ProjectBasicSection from "../_sections/ProjectBasicSection";
-import ProjectBrandingSection from "../_sections/ProjectBrandingSection";
-import ProjectLanguageSection from "../_sections/ProjectLanguageSection";
+import ProjectBasicStep from "../_steps/ProjectBasicStep";
+import ProjectBrandingStep from "../_steps/ProjectBrandingStep";
+import ProjectLanguageStep from "../_steps/ProjectLanguageStep";
 
 const MainAreaStyled = styled("div")(({ theme }) => ({
   padding: theme.spacing(5),
@@ -14,9 +14,9 @@ function ProjectFormMain() {
 
   return (
     <MainAreaStyled>
-      {activeTab === "languages" && <ProjectLanguageSection />}
-      {activeTab === "basic-info" && <ProjectBasicSection />}
-      {activeTab === "branding" && <ProjectBrandingSection />}
+      {activeTab === "languages" && <ProjectLanguageStep />}
+      {activeTab === "basic-info" && <ProjectBasicStep />}
+      {activeTab === "branding" && <ProjectBrandingStep />}
     </MainAreaStyled>
   );
 }

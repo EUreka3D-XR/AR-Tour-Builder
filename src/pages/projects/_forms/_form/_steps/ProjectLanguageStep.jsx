@@ -5,7 +5,7 @@ import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/Horizo
 import SupportedLanguagesInput from "@/components/languages-input/supported/SupportedLanguagesInput";
 import { ProjectFormSection } from "../_layout/ProjectFormLayout";
 
-function ProjectLanguageSection() {
+function ProjectLanguageStep() {
   const { setValue } = useFormContext();
   return (
     <ProjectFormSection>
@@ -31,4 +31,4 @@ function ProjectLanguageSection() {
   );
 }
 
-export default ProjectLanguageSection;
+export default ProjectLanguageStep;

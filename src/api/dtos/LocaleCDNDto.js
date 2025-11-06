@@ -10,7 +10,7 @@ export default class LocaleCDNDto {
     const localesArray = Object.entries(data).map(([key, value]) => {
       return {
         value: key,
-        label: value,
+        label: value === "United Kingdom" ? "English" : value,
       };
     });
     // remove locales like us-en, gb-en keeping only en, fr, de, etc

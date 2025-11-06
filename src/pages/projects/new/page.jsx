@@ -1,7 +1,7 @@
 import { styled, Typography } from "@mui/material";
 
-import Button from "@/components/button/Button";
-import useNavPaths from "@/hooks/useNavPaths";
+// import Button from "@/components/button/Button";
+// import useNavPaths from "@/hooks/useNavPaths";
 import CreateProjectForm from "../_forms/CreateProjectForm";
 
 const ContainerStyled = styled("div")({
@@ -26,19 +26,19 @@ const ContainerStyled = styled("div")({
 });
 
 function NewProjectPage() {
-  const { navigate } = useNavPaths();
+  // const { navigate } = useNavPaths();
   return (
     <ContainerStyled>
       <div className="header">
         <Typography variant="h2" component="h2" gutterBottom>
           Create New Project
         </Typography>
-        <div className="actions">
+        {/* <div className="actions">
           <Button onClick={() => navigate(-1)}>Cancel</Button>
           <Button variant="filled" type="submit" form="create-project-form">
             Create Project
           </Button>
-        </div>
+        </div> */}
       </div>
       <Typography color="textSecondary" className="subtitle">
         Start a new project by providing the required details below. Fill out

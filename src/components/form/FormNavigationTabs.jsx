@@ -1,4 +1,4 @@
-import { styled, Tab, Tabs } from "@mui/material";
+import { Divider, styled, Tab, Tabs } from "@mui/material";
 
 import useParamsTabs from "@/hooks/useParamsTabs";
 import EurekaIcon from "../icon/EurekaIcon";
@@ -49,6 +49,7 @@ function FormNavigationTabs({
           );
         })}
       </Tabs>
+      <Divider />
     </NavigationAreaStyled>
   );
 }

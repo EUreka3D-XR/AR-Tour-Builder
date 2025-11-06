@@ -1,6 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
-import { Divider } from "@mui/material";
 
 import FormNavigationFooter from "@/components/form/FormNavigationFooter";
 import FormNavigationHeader from "@/components/form/FormNavigationHeader";
@@ -23,19 +22,20 @@ function ProjectForm({ isNew, defaultValues, validationSchemas, onSubmit }) {
   return (
     <FormProvider {...methods}>
       <form id="create-project-form" onSubmit={handleSubmit(onSubmit)}>
-        <FormNavigationHeader
-          isNew={isNew}
-          paramKey={PARAM_KEY}
-          initialTab="languages"
-          tabs={projectTabs}
-        />
-        <Divider />
-        <ProjectFormMain />
-        <FormNavigationFooter
-          isNew={isNew}
-          paramKey={PARAM_KEY}
-          tabs={projectTabs}
-        />
+        <div>
+          <FormNavigationHeader
+            isNew={isNew}
+            paramKey={PARAM_KEY}
+            initialTab="languages"
+            tabs={projectTabs}
+          />
+          <ProjectFormMain />
+          <FormNavigationFooter
+            isNew={isNew}
+            paramKey={PARAM_KEY}
+            tabs={projectTabs}
+          />
+        </div>
       </form>
     </FormProvider>
   );

@@ -3,9 +3,6 @@ import { Step, StepLabel, Stepper, styled } from "@mui/material";
 import useParamsTabs from "@/hooks/useParamsTabs";
 
 const NavigationAreaStyled = styled("div")(({ theme }) => ({
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
   "& .tabs-row": {
     padding: theme.spacing(1, 3, 0),
     "& .tab-item": {

@@ -26,6 +26,7 @@ function EditPoiForm({ onClose }) {
       description: initialPoi?.description,
       thumbnail: initialPoi?.thumbnail,
       coordinates: initialPoi?.coordinates,
+      radius: initialPoi?.radius,
       externalLinks: initialPoi?.externalLinks,
       quizLinks: initialPoi?.quizLinks,
       assets: initialPoi?.assets,

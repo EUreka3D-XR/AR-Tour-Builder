@@ -1,9 +1,11 @@
 import { styled, TextField } from "@mui/material";
 
+import FormInput from "@/components/form/FormInput";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import ImageInput from "@/components/image-input/ImageInput";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
+import NumberInput from "@/components/number-input/NumberInput";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -35,6 +37,20 @@ function PoiDetailsTab() {
               fullWidth
               multiline
               rows={4}
+            />
+          </LabeledInput>
+        )}
+      />
+      <FormInput
+        name="radius"
+        render={({ field }) => (
+          <LabeledInput label="Poi Radius">
+            <NumberInput
+              {...field}
+              placeholder="ex. 20"
+              iconName="radius"
+              endAdornmentText="m"
+              sx={{ width: "200px" }}
             />
           </LabeledInput>
         )}

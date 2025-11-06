@@ -17,6 +17,7 @@ const DEFAULT_POI_VALUES = {
     lat: 0,
     long: 0,
   },
+  radius: 20,
   thumbnai: "",
   externalLinks: [],
   quizLinks: [],

@@ -36,6 +36,7 @@ export const icons = {
   palette: "palette",
   poi: "location_on",
   publish: "publish",
+  radius: "filter_tilt_shift",
   reset: "replay",
   route: "route",
   save: "save",

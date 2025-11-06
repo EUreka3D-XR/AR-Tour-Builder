@@ -31,6 +31,7 @@ export const mockPOIs = [
       lat: 46.92406,
       long: 4.03447,
     },
+    radius: 20,
     thumbnail: getGithubBaseUrl("pc14/PC14_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
@@ -86,6 +87,7 @@ export const mockPOIs = [
       lat: 46.92633,
       long: 4.03447,
     },
+    radius: 20,
     thumbnail: getGithubBaseUrl("pc2/PC2_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
@@ -141,6 +143,7 @@ export const mockPOIs = [
       lat: 46.926887,
       long: 4.032669,
     },
+    radius: 20,
     thumbnail: getGithubBaseUrl("pc15/PC15_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
@@ -196,6 +199,7 @@ export const mockPOIs = [
       lat: 46.9318528,
       long: 4.0357166,
     },
+    radius: 20,
     thumbnail: getGithubBaseUrl("rock_of_the_wivre/Wivre_Rock_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
@@ -251,6 +255,7 @@ export const mockPOIs = [
       lat: 46.92678,
       long: 4.03221,
     },
+    radius: 20,
     thumbnail: getGithubBaseUrl("theurot_mines/Theurot_Tumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
@@ -306,6 +311,7 @@ export const mockPOIs = [
       lat: 46.92306,
       long: 4.03347,
     },
+    radius: 20,
     thumbnail: getGithubBaseUrl("pc14/PC14_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
@@ -361,6 +367,7 @@ export const mockPOIs = [
       lat: 46.92206,
       long: 4.03247,
     },
+    radius: 20,
     thumbnail: getGithubBaseUrl("pc2/PC2_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
@@ -416,6 +423,7 @@ export const mockPOIs = [
       lat: 46.93206,
       long: 4.04247,
     },
+    radius: 20,
     thumbnail: getGithubBaseUrl("pc15/PC15_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
@@ -471,6 +479,7 @@ export const mockPOIs = [
       lat: 46.93606,
       long: 4.02247,
     },
+    radius: 20,
     thumbnail: getGithubBaseUrl("rock_of_the_wivre/Wivre_Rock_Thumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {
@@ -526,6 +535,7 @@ export const mockPOIs = [
       lat: 46.92606,
       long: 4.02347,
     },
+    radius: 20,
     thumbnail: getGithubBaseUrl("theurot_mines/Theurot_Tumbnail.jpg"),
     // assets: getMockAssets(Math.floor(Math.random() * 5) + 4), // Random 4-8
     externalLinks: {

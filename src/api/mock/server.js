@@ -266,7 +266,7 @@ export const makeServer = ({ environment = "development" } = {}) => {
 
       // Passthrough for external assets (GLB, images, PDFs, etc.)
       this.passthrough((request) => request.url.startsWith("https://"));
-      this.passthrough("https://leomav.github.io/**");
+      // this.passthrough((request) => request.url.startsWith("http://"));
 
       // Project
       this.get("/projects");

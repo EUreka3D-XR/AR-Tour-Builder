@@ -5,10 +5,10 @@ import { styled, TextField } from "@mui/material";
 import Button from "@/components/button/Button";
 import FormInput from "@/components/form/FormInput";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
-import EurekaIcon from "@/components/icon/EurekaIcon";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 import LanguageRow from "@/components/language-dropdown/LanguageRow";
+import NumberInput from "@/components/number-input/NumberInput";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   height: "100%",
@@ -90,26 +90,11 @@ function TourInfoSection() {
             name="duration"
             render={({ field }) => (
               <LabeledInput label="Estimated Time (minutes)">
-                <TextField
-                  fullWidth
-                  type="number"
-                  slotProps={{
-                    input: {
-                      startAdornment: (
-                        <EurekaIcon
-                          name="time"
-                          fontSize="small"
-                          className="input-adornment"
-                        />
-                      ),
-                      endAdornment: (
-                        <span className="input-adornment end-adornment">
-                          min
-                        </span>
-                      ),
-                    },
-                  }}
+                <NumberInput
                   {...field}
+                  fullWidth
+                  iconName="time"
+                  endAdornmentText="min"
                   className="small-text-input"
                 />
               </LabeledInput>
@@ -119,26 +104,11 @@ function TourInfoSection() {
             name="distance"
             render={({ field }) => (
               <LabeledInput label="Estimated Distance (kilometers)">
-                <TextField
-                  fullWidth
-                  type="number"
-                  slotProps={{
-                    input: {
-                      startAdornment: (
-                        <EurekaIcon
-                          name="route"
-                          fontSize="small"
-                          className="input-adornment"
-                        />
-                      ),
-                      endAdornment: (
-                        <span className="input-adornment end-adornment">
-                          km
-                        </span>
-                      ),
-                    },
-                  }}
+                <NumberInput
                   {...field}
+                  fullWidth
+                  iconName="route"
+                  endAdornmentText="km"
                   className="small-text-input"
                 />
               </LabeledInput>

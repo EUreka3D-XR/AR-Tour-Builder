@@ -541,6 +541,22 @@ export const makeServer = ({ environment = "development" } = {}) => {
         return library.assets;
       });
 
+      this.get("/projects/:projectId/library/:assetId", (schema, request) => {
+        const { projectId, assetId } = request.params;
+        const library = schema.libraries.where({ projectId }).models[0];
+
+        if (!library) {
+          return new Response(
+            404,
+            {},
+            { error: `Library of project ${projectId} not found` },
+          );
+        }
+
+        let asset = schema.assets.find(assetId);
+        return asset;
+      });
+
       this.post("/projects/:projectId/library", (schema, request) => {
         const { projectId } = request.params;
         const attrs = JSON.parse(request.requestBody);
@@ -611,7 +627,10 @@ export const makeServer = ({ environment = "development" } = {}) => {
         },
       );
 
-      // Project Members
+      // -------------------------------------------------
+      // ----------------- MEMBERS
+      // ------------------------------------------------
+
       this.get("/projects/:projectId/members", (schema, request) => {
         const projectId = request.params.projectId;
         const project = schema.projects.find(projectId);

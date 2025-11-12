@@ -1,7 +1,4 @@
-import DocumentDisplay from "../media-display/variants/document-display/DocumentDisplay";
-import ImageDisplay from "../media-display/variants/image-display/ImageDisplay";
-import ModelDisplay from "../media-display/variants/model-display/Model3DDislpay";
-import VideoDisplay from "../media-display/variants/video-display/VideoDisplay";
+import MediaDisplay from "../media-display/MediaDisplay";
 
 /**
  * Media Modal Component
@@ -14,25 +11,7 @@ function MediaModalDisplay({ asset, onClose }) {
   if (!asset) {
     return null;
   }
-  const assetType = asset.type;
-
-  if (assetType === "image") {
-    return <ImageDisplay asset={asset} onClose={onClose} />;
-  }
-
-  if (assetType === "video") {
-    return <VideoDisplay asset={asset} onClose={onClose} />;
-  }
-
-  if (assetType === "text") {
-    return <DocumentDisplay asset={asset} onClose={onClose} />;
-  }
-
-  if (assetType === "3d") {
-    return <ModelDisplay asset={asset} onClose={onClose} />;
-  }
-
-  return null;
+  return <MediaDisplay asset={asset} onClose={onClose} />;
 }
 
 export default MediaModalDisplay;

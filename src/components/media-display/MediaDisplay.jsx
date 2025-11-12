@@ -1,5 +1,5 @@
-import PDFViewer from "@/components/document/PDFViewer";
-import DisplayStructure from "../../_common/DisplayStructure";
+import MediaPreview from "../media-preview/MediaPreview";
+import DisplayStructure from "./_common/DisplayStructure";
 
 /**
  * Document display component
@@ -8,16 +8,18 @@ import DisplayStructure from "../../_common/DisplayStructure";
  * @param {Function} props.onClose
  * @returns
  */
-function DocumentDisplay({ asset, onClose }) {
+function MediaDisplay({ asset, onClose }) {
+  if (!asset) return null;
+
   return (
     <DisplayStructure
       title={asset.title}
       description={asset.description}
       onClose={onClose}
     >
-      <PDFViewer src={asset.contentUrl} />
+      <MediaPreview url={asset.contentUrl} type={asset.type} />
     </DisplayStructure>
   );
 }
 
-export default DocumentDisplay;
+export default MediaDisplay;

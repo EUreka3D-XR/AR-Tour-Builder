@@ -26,7 +26,8 @@ const axiosInstance = axios.create({
     return fetch(url, {
       method: config.method?.toUpperCase() || "GET",
       headers: config.headers,
-      body: config.data ? JSON.stringify(config.data) : undefined,
+      // body: config.data ? JSON.stringify(config.data) : undefined,
+      body: config.data,
       signal: config.signal,
     }).then(async (response) => {
       const data = await response.json();

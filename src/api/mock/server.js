@@ -268,7 +268,10 @@ export const makeServer = ({ environment = "development" } = {}) => {
       this.passthrough((request) => request.url.startsWith("https://"));
       // this.passthrough((request) => request.url.startsWith("http://"));
 
-      // Project
+      // -------------------------------------------------
+      // ----------------- PROJECTS
+      // ------------------------------------------------
+
       this.get("/projects");
       this.get("/projects/:projectId", (schema, request) => {
         const projectId = request.params.projectId;
@@ -281,7 +284,10 @@ export const makeServer = ({ environment = "development" } = {}) => {
         return project;
       });
 
-      // Tours
+      // -------------------------------------------------
+      // ----------------- TOURS
+      // ------------------------------------------------
+
       this.get("/projects/:projectId/tours", (schema, request) => {
         const projectId = request.params.projectId;
         const project = schema.projects.find(projectId);
@@ -351,7 +357,10 @@ export const makeServer = ({ environment = "development" } = {}) => {
         return new Response(204);
       });
 
-      // Pois
+      // -------------------------------------------------
+      // ----------------- POIS
+      // ------------------------------------------------
+
       this.get("/projects/:projectId/tours/:tourId/pois", (schema, request) => {
         const { tourId } = request.params;
         const tour = schema.tours.find(tourId);
@@ -433,7 +442,10 @@ export const makeServer = ({ environment = "development" } = {}) => {
         },
       );
 
-      // POI Assets CRUD
+      // -------------------------------------------------
+      // ----------------- POI ASSETS
+      // ------------------------------------------------
+
       // Get all assets for a POI
       this.get(
         "/projects/:projectId/tours/:tourId/pois/:poiId/assets",
@@ -511,7 +523,10 @@ export const makeServer = ({ environment = "development" } = {}) => {
         },
       );
 
-      // Library
+      // -------------------------------------------------
+      // ----------------- LIBRARY
+      // ------------------------------------------------
+
       this.get("/projects/:projectId/library", (schema, request) => {
         const projectId = request.params.projectId;
         const library = schema.libraries.where({ projectId }).models[0];
@@ -525,6 +540,76 @@ export const makeServer = ({ environment = "development" } = {}) => {
         }
         return library.assets;
       });
+
+      this.post("/projects/:projectId/library", (schema, request) => {
+        const { projectId } = request.params;
+        const attrs = JSON.parse(request.requestBody);
+        const library = schema.libraries.where({ projectId }).models[0];
+
+        if (!library) {
+          return new Response(
+            404,
+            {},
+            { error: `Library of project ${projectId} not found` },
+          );
+        }
+
+        const asset = schema.assets.create(attrs);
+        library.assetIds = [...(library.assetIds || []), asset.id];
+        library.save();
+
+        return asset;
+      });
+
+      this.put("/projects/:projectId/library/:assetId", (schema, request) => {
+        const { projectId, assetId } = request.params;
+        const attrs = JSON.parse(request.requestBody);
+        const library = schema.libraries.where({ projectId }).models[0];
+
+        if (!library) {
+          return new Response(
+            404,
+            {},
+            { error: `Library of project ${projectId} not found` },
+          );
+        }
+
+        let asset = schema.assets.find(assetId);
+        if (!asset) {
+          return new Response(404, {}, { error: "Asset not found" });
+        }
+
+        asset.update(attrs);
+        return asset;
+      });
+
+      this.delete(
+        "/projects/:projectId/library/:assetId",
+        (schema, request) => {
+          const { projectId, assetId } = request.params;
+          const library = schema.libraries.where({ projectId }).models[0];
+
+          if (!library) {
+            return new Response(
+              404,
+              {},
+              { error: `Library of project ${projectId} not found` },
+            );
+          }
+
+          let asset = schema.assets.find(assetId);
+          if (!asset) {
+            return new Response(404, {}, { error: "Asset not found" });
+          }
+
+          // Remove asset from library's assetIds
+          library.assetIds = library.assetIds.filter((id) => id !== assetId);
+          library.save();
+
+          asset.destroy();
+          return new Response(204);
+        },
+      );
 
       // Project Members
       this.get("/projects/:projectId/members", (schema, request) => {

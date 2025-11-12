@@ -33,7 +33,7 @@ const deletePoiAsset = async (projectId, tourId, poiId, assetId) => {
   return fetcher.delete(url);
 };
 
-export const assetsApi = {
+export const poiAssetsApi = {
   fetchAll: getPoiAssets,
   fetchOne: getPoiAsset,
   create: createPoiAsset,

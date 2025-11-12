@@ -20,7 +20,7 @@ export const usePoiAssets = (projectId, tourId, poiId, params) => {
   const locale = useLocale();
   return useDataFetcher({
     fetcher: () =>
-      api.assets.fetchAll(projectId, tourId, poiId, { params, locale }),
+      api.poiAssets.fetchAll(projectId, tourId, poiId, { params, locale }),
     queryKey: ["poi-assets", projectId, tourId, poiId, locale],
   });
 };
@@ -38,7 +38,13 @@ export const usePoiAsset = (projectId, tourId, poiId, assetId, propLocale) => {
 
   return useDataFetcher({
     fetcher: () =>
-      api.assets.fetchOne(projectId, tourId, poiId, assetId, effectiveLocale),
+      api.poiAssets.fetchOne(
+        projectId,
+        tourId,
+        poiId,
+        assetId,
+        effectiveLocale,
+      ),
     queryKey: ["poi-asset", projectId, tourId, poiId, assetId, effectiveLocale],
     enabled: !!assetId,
     storeValue: true,
@@ -54,7 +60,7 @@ export const usePoiAsset = (projectId, tourId, poiId, assetId, propLocale) => {
  */
 export const usePoiAssetMultilingual = (projectId, tourId, poiId, assetId) => {
   return useDataFetcher({
-    fetcher: () => api.assets.fetchOne(projectId, tourId, poiId, assetId),
+    fetcher: () => api.poiAssets.fetchOne(projectId, tourId, poiId, assetId),
     queryKey: ["poi-asset", projectId, tourId, poiId, assetId, "multilingual"],
     storeValue: true,
     enabled: !!assetId,
@@ -69,7 +75,7 @@ export const usePoiAssetMultilingual = (projectId, tourId, poiId, assetId) => {
  */
 export const useCreatePoiAsset = (projectId, tourId, poiId) => {
   return useDataMutator({
-    mutator: ({ data }) => api.assets.create(projectId, tourId, poiId, data),
+    mutator: ({ data }) => api.poiAssets.create(projectId, tourId, poiId, data),
     mutationKey: ["create-poi-asset", projectId, tourId, poiId],
     invalidateKey: ["poi-assets", projectId, tourId, poiId],
   });
@@ -79,12 +85,13 @@ export const useCreatePoiAsset = (projectId, tourId, poiId) => {
  * @param {string} projectId
  * @param {string} tourId
  * @param {string} poiId
+ * @param {string} assetId
  * @returns {PoiAssetMutateResult}
  */
 export const useUpdatePoiAsset = (projectId, tourId, poiId, assetId) => {
   return useDataMutator({
     mutator: ({ data }) =>
-      api.assets.update(projectId, tourId, poiId, assetId, data),
+      api.poiAssets.update(projectId, tourId, poiId, assetId, data),
     mutationKey: ["update-poi-asset", projectId, tourId, poiId, assetId],
     invalidateKey: ["poi-asset", projectId, tourId, poiId, assetId],
   });

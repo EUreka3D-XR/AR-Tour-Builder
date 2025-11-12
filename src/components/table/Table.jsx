@@ -57,7 +57,7 @@ export default function Table({
   onChangePage,
   onChangePageSize,
   pageSize = 10,
-  page,
+  page: propsPage,
   order,
   orderBy,
   rows,
@@ -76,6 +76,8 @@ export default function Table({
     },
     [onChangePageSize, pageSize],
   );
+
+  const page = Number(propsPage);
 
   return (
     <div>

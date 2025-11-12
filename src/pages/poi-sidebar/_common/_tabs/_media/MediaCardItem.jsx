@@ -179,9 +179,11 @@ function MediaCardItem({ asset, onEdit }) {
             </TitleSection>
 
             <ActionButtons>
-              <IconButton size="small" onClick={handleEdit}>
-                <EurekaIcon name="edit" fontSize="small" />
-              </IconButton>
+              {onEdit && (
+                <IconButton size="small" onClick={handleEdit}>
+                  <EurekaIcon name="edit" fontSize="small" />
+                </IconButton>
+              )}
               <IconButton size="small" onClick={handleDelete}>
                 <EurekaIcon name="delete" fontSize="small" />
               </IconButton>

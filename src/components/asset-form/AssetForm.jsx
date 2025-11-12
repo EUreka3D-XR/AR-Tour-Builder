@@ -16,8 +16,11 @@ import FormInputCommonMultilingual from "@/components/form/FormInputCommonMultil
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
+import { useLocale } from "@/hooks/useLocale";
 import { fileTypes, getExtensionsHelperForType } from "@/utils/fileExtensions";
+import { localeValue } from "@/utils/inputLocale";
 import AssetFormFooter from "./AssetFormFooter";
+import AssetFormPreview from "./AssetFormPreview";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   height: "100%",
@@ -60,9 +63,11 @@ const CoordinatesRow = styled("div")(({ theme }) => ({
 }));
 
 function AssetForm({ isPoiAsset, onSubmit, onClose }) {
-  const [isMultilingual, setIsMultilingual] = useState(false);
+  const locale = useLocale();
 
+  const [isMultilingual, setIsMultilingual] = useState(false);
   const assetType = useWatch({ name: "type" });
+  const contentUrl = useWatch({ name: "contentUrl" });
   const isGeoreferenced = useWatch({ name: "isGeoreferenced" });
   const helperTextForUrl = useMemo(() => {
     return getExtensionsHelperForType(assetType);
@@ -165,6 +170,10 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
               )}
             />
           )}
+          <AssetFormPreview
+            url={localeValue(contentUrl, locale)}
+            type={assetType}
+          />
           {assetType === "3d" && (
             <>
               <Divider />

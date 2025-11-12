@@ -7,6 +7,7 @@ import Link from "../link/Link";
  * Props for ButtonNewUnstyled component
  * @typedef {Object} ButtonNewUnstyledProps
  * @property {React.ReactNode} children - Button content
+ * @property {boolean} [autoFocus] - Auto focus on mount
  * @property {'filled'|'outlined'|'text'|'unstyled'} variant - Button style variant
  * @property {'primary'|'secondary'|'error'|'success'|'warning'|'info'|'inherit'} [color] - Button color theme
  * @property {'round'|'square'} [corners='square'] - Button corner style
@@ -68,6 +69,7 @@ const VARIANTS_DICT = {
  * @returns {React.ReactElement} Rendered button component
  */
 function ButtonNewUnstyled({
+  autoFocus,
   children,
   variant = "outlined",
   color,
@@ -88,6 +90,7 @@ function ButtonNewUnstyled({
   return (
     <ButtonStyled
       variant={VARIANTS_DICT[variant]}
+      autoFocus={autoFocus}
       color={color}
       fullWidth={isFullwidth}
       loading={isLoading}

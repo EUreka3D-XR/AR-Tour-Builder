@@ -6,15 +6,17 @@ import { create } from "zustand";
  * @property {string} [message] - The message content of the confirmation dialog
  * @property {string} [confirmText] - The text for the confirm button
  * @property {string} [cancelText] - The text for the cancel button
+ * @property {() => void | Promise<void>} [action] - Function executed when confirming; can be synchronous or async
  */
 
 /**
  * @typedef {Object} ConfirmState
  * @property {boolean} isOpen - Whether the confirmation dialog is open
  * @property {ConfirmOptions} [options] - The options for the confirmation dialog
- * @property {(value: boolean) => void} [resolve] - The promise resolve function
- * @property {(options: ConfirmOptions) => Promise<boolean>} confirm - Show confirmation dialog and return promise
- * @property {() => void} onConfirm - Handle confirmation action
+ * @property {boolean} isLoading - Whether the confirmation action is in progress
+ * @property {(() => void) | undefined} [resolve] - Internal promise resolver function
+ * @property {(options: ConfirmOptions) => Promise<void>} confirm - Show confirmation dialog and return promise
+ * @property {() => Promise<void>} onConfirm - Handle confirmation action (async)
  * @property {() => void} onCancel - Handle cancel action
  */
 
@@ -24,36 +26,63 @@ import { create } from "zustand";
  */
 const useStore = create((set, get) => ({
   isOpen: false,
+  isLoading: false,
   options: undefined,
   resolve: undefined,
 
   confirm: (options) => {
     return new Promise((resolve) => {
-      set({ isOpen: true, options, resolve });
+      set({
+        isOpen: true,
+        options,
+        resolve, // ✅ store the resolver
+      });
     });
   },
 
-  onConfirm: () => {
-    const resolve = get().resolve;
-    resolve?.(true);
-    set({ isOpen: false, options: undefined, resolve: undefined });
+  onConfirm: async () => {
+    const { options, resolve } = get();
+    if (!options) return;
+
+    set({ isLoading: true });
+
+    try {
+      if (options.action) await options.action();
+      resolve?.(true); // ✅ resolve the original Promise
+    } catch (error) {
+      console.error(error);
+    } finally {
+      set({
+        isOpen: false,
+        isLoading: false,
+        options: undefined,
+        resolve: undefined,
+      });
+    }
   },
 
   onCancel: () => {
-    const resolve = get().resolve;
+    const { resolve } = get();
     resolve?.(false);
-    set({ isOpen: false, options: undefined, resolve: undefined });
+    set({
+      isOpen: false,
+      isLoading: false,
+      options: undefined,
+      resolve: undefined,
+    });
   },
 }));
 
 export const useConfirmationState = () => {
   const isOpen = useStore((s) => s.isOpen);
+  const isLoading = useStore((s) => s.isLoading);
   const options = useStore((s) => s.options);
   const onConfirm = useStore((s) => s.onConfirm);
   const onCancel = useStore((s) => s.onCancel);
 
   return {
     isOpen,
+    isLoading,
     options,
     onConfirm,
     onCancel,

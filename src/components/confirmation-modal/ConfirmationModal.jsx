@@ -1,5 +1,4 @@
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -8,9 +7,11 @@ import {
 } from "@mui/material";
 
 import { useConfirmationState } from "@/stores/useConfirmStore";
+import Button from "../button/Button";
 
 export const ConfirmationModal = () => {
-  const { isOpen, options, onConfirm, onCancel } = useConfirmationState();
+  const { isOpen, isLoading, options, onConfirm, onCancel } =
+    useConfirmationState();
 
   if (!options) return null;
 
@@ -35,10 +36,14 @@ export const ConfirmationModal = () => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onCancel} color="inherit">
-          {cancelText}
-        </Button>
-        <Button onClick={onConfirm} color="error" variant="contained" autoFocus>
+        <Button onClick={isLoading ? undefined : onCancel}>{cancelText}</Button>
+        <Button
+          variant="filled"
+          color="error"
+          autoFocus
+          isLoading={isLoading}
+          onClick={onConfirm}
+        >
           {confirmText}
         </Button>
       </DialogActions>

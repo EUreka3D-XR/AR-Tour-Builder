@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSearchParams } from "react-router";
 
-import PoiMediaModalContainer from "@/components/media-modal/container";
+import PoiMediaModal from "@/components/media-modal/poi-media/PoiMediaModal";
 import Sidebar from "@/components/sidebar/sidebar";
 import useNavPaths from "@/hooks/useNavPaths";
 
@@ -39,7 +39,7 @@ function PoiSidebar({ children }) {
             onClosePoi: handleCloseSidebar,
           })}
       </Sidebar>
-      <PoiMediaModalContainer />
+      <PoiMediaModal />
     </>
   );
 }

@@ -31,8 +31,9 @@ function AssetActionsCell({ assetId }) {
   const { routes, navigate } = useNavPaths();
   const confirm = useConfirm();
 
-  // TODO: -
-  const handleView = () => {};
+  const handleView = () => {
+    navigate(routes.library.one(assetId));
+  };
 
   const handleEdit = () => {
     navigate(routes.library.edit(assetId));

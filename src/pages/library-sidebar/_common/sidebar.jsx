@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import PoiMediaModalContainer from "@/components/media-modal/container";
+import LibraryMediaModal from "@/components/media-modal/library-media/LibraryMediaModal";
 import Sidebar from "@/components/sidebar/sidebar";
 import useNavPaths from "@/hooks/useNavPaths";
 
@@ -19,7 +19,7 @@ function AssetSidebar({ children }) {
             onClose: handleCloseSidebar,
           })}
       </Sidebar>
-      <PoiMediaModalContainer />
+      <LibraryMediaModal />
     </>
   );
 }

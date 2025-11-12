@@ -1,4 +1,4 @@
-import PoiSidebarHeader from "../_common/_sections/PoiSidebarHeader";
+import SidebarHeader from "@/components/sidebar/_sections/SidebarHeaderSection";
 import SidebarFormArea from "../_common/_utils/SidebarFormArea";
 import ToggleVisibility from "../_common/_utils/ToggleVisibility";
 import PoiSidebar from "../_common/sidebar";
@@ -18,12 +18,10 @@ function EditPoiSidebar() {
       }) => {
         return (
           <>
-            <div className="no-shrink">
-              <PoiSidebarHeader
-                title="Editing Point of Interest"
-                onClose={onClosePoi}
-              />
-            </div>
+            <SidebarHeader
+              title="Editing Point of Interest"
+              onClose={onClosePoi}
+            />
             <SidebarFormArea className="sidebar-form-area">
               <ToggleVisibility show={showPoiForm}>
                 <div className="main-area">

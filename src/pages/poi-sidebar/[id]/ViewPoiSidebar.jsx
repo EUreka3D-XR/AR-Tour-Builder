@@ -1,4 +1,4 @@
-import PoiSidebarHeader from "../_common/_sections/PoiSidebarHeader";
+import SidebarHeader from "@/components/sidebar/_sections/SidebarHeaderSection";
 import SidebarFormArea from "../_common/_utils/SidebarFormArea";
 import PoiSidebar from "../_common/sidebar";
 import ViewPoiSidebarContainer from "./container";
@@ -9,12 +9,7 @@ function ViewPoiSidebar() {
       {({ onClosePoi }) => {
         return (
           <>
-            <div className="no-shrink">
-              <PoiSidebarHeader
-                title="Point of Interest"
-                onClose={onClosePoi}
-              />
-            </div>
+            <SidebarHeader title="Point of Interest" onClose={onClosePoi} />
             <SidebarFormArea className="sidebar-form-area">
               <div className="main-area">
                 <ViewPoiSidebarContainer />

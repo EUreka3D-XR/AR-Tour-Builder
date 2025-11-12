@@ -1,17 +1,12 @@
 import { useMemo } from "react";
 import { useParams } from "react-router";
 import { useFormContext } from "react-hook-form";
-import { Stack, styled } from "@mui/material";
+import { Stack } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import SidebarFooterSection from "@/components/sidebar/_sections/SidebarFooterSection";
 import useParamsTabs from "@/hooks/useParamsTabs";
-
-const FooterStyled = styled("div")(({ theme }) => ({
-  padding: theme.spacing(2, 4),
-  borderTop: `1px solid ${theme.palette.divider}`,
-  backgroundColor: theme.palette.grey[50],
-}));
 
 function PoiFooterSection({ onCancel, steps = [], fieldsPerStep = [] }) {
   const { activeTab, setActiveTab } = useParamsTabs("poiTab");
@@ -60,46 +55,44 @@ function PoiFooterSection({ onCancel, steps = [], fieldsPerStep = [] }) {
   }, [errors, currentStep, fieldsPerStep]);
 
   return (
-    <FooterStyled className="poi-sidebar-footer">
-      <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <Button onClick={onCancel}>Cancel</Button>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          spacing={1}
-        >
-          {renderPreviousButton && (
-            <Button variant="outlined" onClick={handlePreviousStep}>
-              Previous
-            </Button>
-          )}
-          {renderNextButton && (
-            <Button
-              variant="filled"
-              isDisabled={isNextDisabled}
-              onClick={handleNextStep}
-            >
-              Next Step
-            </Button>
-          )}
-          {renderCreateButton && (
-            <Button type="submit" variant="filled">
-              Create and add media
-            </Button>
-          )}
-          {renderUpdateButton && (
-            <Button
-              type="submit"
-              variant="filled"
-              startIcon={<EurekaIcon name="save" />}
-            >
-              Save Changes
-            </Button>
-          )}
-        </Stack>
+    <SidebarFooterSection>
+      <Button onClick={onCancel}>Cancel</Button>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        spacing={1}
+      >
+        {renderPreviousButton && (
+          <Button variant="outlined" onClick={handlePreviousStep}>
+            Previous
+          </Button>
+        )}
+        {renderNextButton && (
+          <Button
+            variant="filled"
+            isDisabled={isNextDisabled}
+            onClick={handleNextStep}
+          >
+            Next Step
+          </Button>
+        )}
+        {renderCreateButton && (
+          <Button type="submit" variant="filled">
+            Create and add media
+          </Button>
+        )}
+        {renderUpdateButton && (
+          <Button
+            type="submit"
+            variant="filled"
+            startIcon={<EurekaIcon name="save" />}
+          >
+            Save Changes
+          </Button>
+        )}
       </Stack>
-    </FooterStyled>
+    </SidebarFooterSection>
   );
 }
 

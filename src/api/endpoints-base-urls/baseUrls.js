@@ -2,6 +2,8 @@ export const baseUrls = {
   projects: "/api/projects",
   project: (projectId) => `/api/projects/${projectId}`,
   library: (projectId) => `/api/projects/${projectId}/library`,
+  libraryAsset: (projectId, assetId) =>
+    `/api/projects/${projectId}/library/${assetId}`,
   members: (projectId) => `/api/projects/${projectId}/members`,
   users: "/api/users",
   tours: (projectId) => `/api/projects/${projectId}/tours`,

@@ -14,7 +14,7 @@ import { useConfirm } from "@/stores/useConfirmStore";
 import { useDeletePoiAsset } from "@/services/assetsService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import InjectedLocaleValue from "@/components/inject-locale-value/InjectLocaleValue";
-import MediaPreview from "@/components/media-preview/MediaPreview";
+import MediaThumbnail from "@/components/media-thumbnail/MediaThumbnail";
 import { useLocale } from "@/hooks/useLocale";
 import { localeValue } from "@/utils/inputLocale";
 
@@ -37,7 +37,7 @@ const CardContentStyled = styled(CardContent)(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 
-const MediaPreviewStyled = styled(MediaPreview)({
+const MediaThumbnailStyled = styled(MediaThumbnail)({
   width: 80,
   height: 80,
 });
@@ -159,8 +159,8 @@ function MediaCardItem({ asset, onEdit }) {
   return (
     <CardStyled onClick={handleClick}>
       <CardContentStyled>
-        {/* Media Preview */}
-        <MediaPreviewStyled
+        {/* Media Thumbnail */}
+        <MediaThumbnailStyled
           type={asset?.type}
           url={localeValue(asset?.contentUrl, locale)}
           title={<InjectedLocaleValue value={asset?.title} />}

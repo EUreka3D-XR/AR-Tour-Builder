@@ -4,7 +4,7 @@ import CenteredArea from "../centered/Centered";
 import MediaIcon from "../icon/MediaIcon";
 import Image from "../image/Image";
 
-const MediaPreviewStyled = styled(CenteredArea)(({ theme }) => ({
+const MediaThumbnailStyled = styled(CenteredArea)(({ theme }) => ({
   borderRadius: theme.spacing(0.5),
   backgroundColor: theme.palette.grey[200],
   "& img": {
@@ -17,16 +17,16 @@ const MediaPreviewStyled = styled(CenteredArea)(({ theme }) => ({
   },
 }));
 
-function MediaPreview({ type, url, title, className }) {
+function MediaThumbnail({ type, url, title, className }) {
   return (
-    <MediaPreviewStyled className={className}>
+    <MediaThumbnailStyled className={className}>
       {type === "image" ? (
         <Image src={url} alt={title?.locales?.en || "Media"} />
       ) : (
         <MediaIcon type={type} className="media-icon" />
       )}
-    </MediaPreviewStyled>
+    </MediaThumbnailStyled>
   );
 }
 
-export default MediaPreview;
+export default MediaThumbnail;

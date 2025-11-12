@@ -4,7 +4,7 @@ import { lighten, styled, Typography } from "@mui/material";
 
 import { useLibraryAssets } from "@/services/libraryService";
 import MediaIcon from "@/components/icon/MediaIcon";
-import MediaPreview from "@/components/media-preview/MediaPreview";
+import MediaThumbnail from "@/components/media-thumbnail/MediaThumbnail";
 
 const PresentationStyled = styled("div")(({ theme }) => ({
   "&.grid-view": {
@@ -152,7 +152,7 @@ function AssetsPresentation({
               onClick={() => handleSelectAsset(asset)}
             >
               <div className="preview">
-                <MediaPreview
+                <MediaThumbnail
                   type={asset.type}
                   url={asset.url}
                   title={asset.title}

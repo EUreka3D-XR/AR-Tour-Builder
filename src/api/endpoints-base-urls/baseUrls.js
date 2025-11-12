@@ -13,6 +13,7 @@ export const baseUrls = {
   tourPoi: (projectId, tourId, poiId) =>
     `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}`,
   pois: (projectId) => `/api/projects/${projectId}/pois`,
+  poi: (projectId, poiId) => `/api/projects/${projectId}/pois/${poiId}`,
   poiAssets: (projectId, tourId, poiId) =>
     `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}/assets`,
   poiAsset: (projectId, tourId, poiId, assetId) =>

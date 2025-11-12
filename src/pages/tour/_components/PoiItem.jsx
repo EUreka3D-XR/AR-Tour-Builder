@@ -1,3 +1,4 @@
+import { useParams } from "react-router";
 import {
   Card,
   CardContent,
@@ -6,6 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useConfirm } from "@/stores/useConfirmStore";
+import { useDeleteTourPoi } from "@/services/poiService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import MediaCounter from "@/components/media-counter/MediaCounter";
 
@@ -107,10 +110,22 @@ function PoiItem({
   onMoveUp,
   onMoveDown,
   onEdit,
-  onDelete,
   onCopy,
   onClick,
 }) {
+  const { projectId, tourId } = useParams();
+  const confirm = useConfirm();
+  const { mutate: deletePoi } = useDeleteTourPoi(projectId, tourId, poi.id);
+
+  const handleDelete = async () => {
+    await confirm({
+      title: "Delete POI",
+      message: `Are you sure you want to delete the POI? This action cannot be undone.`,
+      confirmText: "Delete",
+      action: deletePoi,
+    });
+  };
+
   // Group assets by type and count them
   const assetCounts =
     poi?.assets?.reduce((acc, asset) => {
@@ -179,7 +194,7 @@ function PoiItem({
           <IconButtonCustom size="small" onClick={() => onEdit(poi.id)}>
             <EurekaIcon name="edit" fontSize="small" />
           </IconButtonCustom>
-          <IconButtonCustom size="small" onClick={() => onDelete(poi.id)}>
+          <IconButtonCustom size="small" onClick={handleDelete}>
             <EurekaIcon name="delete" fontSize="small" />
           </IconButtonCustom>
         </ActionButtons>

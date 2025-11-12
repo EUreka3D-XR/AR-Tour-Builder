@@ -82,3 +82,17 @@ export const useUpdateTourPoi = (projectId, tourId, poiId) => {
     invalidateKey: ["project-tour-pois", projectId, tourId, poiId],
   });
 };
+
+/**
+ * @param {string} projectId
+ * @param {string} tourId
+ * @param {string} poiId
+ * @returns {PoiMutateResult}
+ */
+export const useDeleteTourPoi = (projectId, tourId, poiId) => {
+  return useDataMutator({
+    mutator: () => api.pois.delete(projectId, tourId, poiId),
+    mutationKey: ["delete-tour-poi", projectId, tourId, poiId],
+    invalidateKey: ["project-tour-pois", projectId, tourId],
+  });
+};

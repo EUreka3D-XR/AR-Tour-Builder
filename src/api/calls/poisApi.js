@@ -17,12 +17,12 @@ const createPoi = async (projectId, tourId, data, locale) => {
 };
 
 const updatePoi = async (projectId, tourId, poiId, data, locale) => {
-  const url = baseUrls.pois(projectId, tourId, poiId);
+  const url = baseUrls.tourPoi(projectId, tourId, poiId);
   return fetcher.put(url, { data, locale });
 };
 
 const deletePoi = async (projectId, tourId, poiId) => {
-  const url = baseUrls.pois(projectId, tourId, poiId);
+  const url = baseUrls.tourPoi(projectId, tourId, poiId);
   return fetcher.delete(url);
 };
 

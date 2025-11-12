@@ -5,6 +5,7 @@ import MyThemeProvider from "@/providers/theme/MyThemeProvider";
 
 import "@/config/translations/i18next-config.js";
 
+import { ConfirmationModal } from "./components/confirmation-modal/ConfirmationModal";
 import ErrorBoundary from "./components/error/ErrorBoundary";
 import { GeneralProvider } from "./providers/general/GeneralProvider";
 import EurekaRoutes from "./routes/EurekaRoutes";
@@ -26,6 +27,7 @@ export default function App() {
           <QueryClientProvider client={queryClient}>
             <GeneralProvider>
               <EurekaRoutes />
+              <ConfirmationModal />
             </GeneralProvider>
           </QueryClientProvider>
         </ErrorBoundary>

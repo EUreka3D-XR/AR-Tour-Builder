@@ -1,5 +1,8 @@
+import { useParams } from "react-router";
 import { IconButton, styled, Tooltip } from "@mui/material";
 
+import { useConfirm } from "@/stores/useConfirmStore";
+import { useDeleteAsset } from "@/services/libraryService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";
 
@@ -22,7 +25,11 @@ const IconButtonStyled = styled(IconButton)(({ theme }) => ({
  * @returns
  */
 function AssetActionsCell({ assetId }) {
+  const { projectId } = useParams();
+  const { mutate: deleteAsset } = useDeleteAsset(projectId, assetId);
+
   const { routes, navigate } = useNavPaths();
+  const confirm = useConfirm();
 
   // TODO: -
   const handleView = () => {};
@@ -31,8 +38,15 @@ function AssetActionsCell({ assetId }) {
     navigate(routes.library.edit(assetId));
   };
 
-  // TODO: -
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    await confirm({
+      title: "Delete Asset",
+      description:
+        "Are you sure you want to delete this asset? This action cannot be undone.",
+      confirmText: "Delete",
+      action: deleteAsset,
+    });
+  };
 
   return (
     <CellStyled>

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useSearchParams } from "react-router";
 import { useWatch } from "react-hook-form";
 import {
   Checkbox,
@@ -21,6 +22,7 @@ import { fileTypes, getExtensionsHelperForType } from "@/utils/fileExtensions";
 import { localeValue } from "@/utils/inputLocale";
 import AssetFormFooter from "./AssetFormFooter";
 import AssetFormPreview from "./AssetFormPreview";
+import PoiAssetHeaderSection from "./PoiAssetHeaderSection";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   height: "100%",
@@ -63,9 +65,13 @@ const CoordinatesRow = styled("div")(({ theme }) => ({
 }));
 
 function AssetForm({ isPoiAsset, onSubmit, onClose }) {
+  const [isMultilingual, setIsMultilingual] = useState(false);
   const locale = useLocale();
 
-  const [isMultilingual, setIsMultilingual] = useState(false);
+  const [searchParams] = useSearchParams();
+
+  const isNewPoiAsset = !searchParams.get("mediaId");
+
   const assetType = useWatch({ name: "type" });
   const contentUrl = useWatch({ name: "contentUrl" });
   const isGeoreferenced = useWatch({ name: "isGeoreferenced" });
@@ -76,6 +82,15 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
   return (
     <form id="poi-asset-form" onSubmit={onSubmit}>
       <ContainerStyled className="poi-asset-form-wrapper">
+        {isPoiAsset && (
+          <NoShrink>
+            <PoiAssetHeaderSection
+              title={isNewPoiAsset ? "Create Asset" : "Editing Asset"}
+              onBack={onClose}
+            />
+            <Divider />
+          </NoShrink>
+        )}
         <div className="poi-asset-form-inner">
           <LanguageDropdown className="language-selector" />
           <FormInputMultilingual

@@ -76,3 +76,16 @@ export const useUpdateTour = (projectId, tourId) => {
     invalidateKey: ["project-tour", projectId, tourId],
   });
 };
+
+/**
+ * @param {string} projectId
+ * @param {string} tourId
+ * @returns {TourMutateResult}
+ */
+export const useDeleteTour = (projectId, tourId) => {
+  return useDataMutator({
+    mutator: () => api.tours.delete(projectId, tourId),
+    mutationKey: ["delete-tour", projectId, tourId],
+    invalidateKey: ["project-tours", projectId],
+  });
+};

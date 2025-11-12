@@ -2,6 +2,8 @@ import { useParams } from "react-router";
 import { useFormContext, useWatch } from "react-hook-form";
 import { IconButton, Stack, styled, Typography } from "@mui/material";
 
+import { useConfirm } from "@/stores/useConfirmStore";
+import { useDeleteTour } from "@/services/toursService";
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import InjectedLocaleValue from "@/components/inject-locale-value/InjectLocaleValue";
@@ -33,8 +35,8 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-function TourHeaderSection({ onSave, onPublish, onArchive }) {
-  const { tourId } = useParams();
+function TourHeaderSection() {
+  const { projectId, tourId } = useParams();
   const isExisting = !!tourId;
 
   const { routes, navigate } = useNavPaths();
@@ -50,6 +52,26 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
   const lastModifiedAt = updatedAt ?? createdAt;
 
   const handleBackClick = () => {
+    navigate(routes.tours.index);
+  };
+
+  const confirm = useConfirm();
+  const { mutate: deleteTour } = useDeleteTour(projectId, tourId);
+
+  // TODO: - implement publish handler
+  const handlePublish = () => {};
+
+  // TODO: - implement archive handler
+  const handleArchive = () => {};
+
+  const handleDelete = async () => {
+    await confirm({
+      title: "Delete Tour",
+      message:
+        "Are you sure you want to delete this tour? This action cannot be undone.",
+      confirmText: "Delete",
+      action: deleteTour,
+    });
     navigate(routes.tours.index);
   };
 
@@ -76,14 +98,14 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
             <Button
               startIcon={<EurekaIcon name="delete" />}
               color="error"
-              onClick={onSave}
+              onClick={handleDelete}
             >
               Delete Tour
             </Button>
             {tourStatus === "draft" && (
               <Button
                 startIcon={<EurekaIcon name="publish" />}
-                onClick={onPublish}
+                onClick={handlePublish}
               >
                 Publish
               </Button>
@@ -91,7 +113,7 @@ function TourHeaderSection({ onSave, onPublish, onArchive }) {
             {tourStatus === "published" && (
               <Button
                 startIcon={<EurekaIcon name="archive" />}
-                onClick={onArchive}
+                onClick={handleArchive}
               >
                 Archive
               </Button>

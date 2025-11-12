@@ -47,7 +47,7 @@ function TourForm({ onSubmit }) {
     <ContainerStyled className="tour-form-wrapper">
       <form onSubmit={onSubmit}>
         <div className="tour-form-inner">
-          <TourHeaderSection onSave={onSubmit} />
+          <TourHeaderSection />
           <TourNavigationTabsSection />
           <Divider />
           <div className="main-content" ref={containerRef}>

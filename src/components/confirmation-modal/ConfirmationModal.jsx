@@ -16,11 +16,18 @@ export const ConfirmationModal = () => {
   if (!options) return null;
 
   const {
-    title = "Are you sure?",
-    message = "Please confirm your action.",
-    confirmText = "Confirm",
-    cancelText = "Cancel",
+    title: optionsTitle,
+    message: optionsMessage,
+    confirmText: optionsConfirmText,
+    cancelText: optionsCancelText,
   } = options;
+
+  const title = optionsTitle || "Confirm Action";
+  const message = optionsMessage || "Are you sure you want to proceed?";
+  const confirmText = optionsConfirmText || "Confirm";
+  const cancelText = optionsCancelText || "Cancel";
+
+  console.log(options);
 
   return (
     <Dialog

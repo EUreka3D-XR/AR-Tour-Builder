@@ -42,7 +42,7 @@ function AssetActionsCell({ assetId }) {
   const handleDelete = async () => {
     await confirm({
       title: "Delete Asset",
-      description:
+      message:
         "Are you sure you want to delete this asset? This action cannot be undone.",
       confirmText: "Delete",
       action: deleteAsset,

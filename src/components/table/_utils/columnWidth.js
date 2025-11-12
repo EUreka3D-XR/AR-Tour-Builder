@@ -4,6 +4,8 @@ const getColumnStyle = (column) => {
     width,
     maxWidth: width ?? column.maxWidth,
     minWidth: width ?? column.minWidth ?? "min-content",
+    paddingTop: "0.5rem",
+    paddingBottom: "0.5rem",
     ...(column.wrap
       ? {}
       : {

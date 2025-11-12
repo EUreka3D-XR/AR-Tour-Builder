@@ -55,9 +55,13 @@ import TableHeader from "./TableHeader";
 
 const ContainerStyled = styled("div")(() => ({
   label: "table-wrapper",
+  height: "100%",
   display: "flex",
   flexDirection: "column",
   overflow: "hidden",
+  "& .expanded-table": {
+    flex: 1,
+  },
   "& .pagination-footer": {
     flexShrink: 0,
   },
@@ -97,7 +101,7 @@ export default function Table({
 
   return (
     <ContainerStyled>
-      <MuiTableContainer>
+      <MuiTableContainer className="expanded-table">
         <MuiTable stickyHeader>
           <TableHeader
             columns={columns}

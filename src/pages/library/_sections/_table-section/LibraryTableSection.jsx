@@ -1,5 +1,7 @@
+import { Box } from "@mui/material";
+
 import Table from "@/components/table/Table";
-import useDashboardParams from "../../../../hooks/useDashboardParams";
+import useDashboardParams from "@/hooks/useDashboardParams";
 import AssetActionsCell from "./_cells/AssetActionsCell";
 import AssetTypeCell from "./_cells/AssetTypeCell";
 import AssetURLCell from "./_cells/AssetUrlCell";
@@ -40,16 +42,18 @@ const columns = [
 function LibraryTableSection({ assets = [], total, fetchState }) {
   const { filterParams, updateParams } = useDashboardParams();
   return (
-    <Table
-      rows={assets}
-      columns={columns}
-      page={filterParams.page || 0}
-      total={total ?? 0}
-      pageSize={filterParams.pageSize || 10}
-      fetchState={fetchState}
-      onChangePage={(page) => updateParams({ page })}
-      onChangePageSize={(pageSize) => updateParams({ pageSize, page: 0 })}
-    />
+    <Box sx={{ flex: 1 }}>
+      <Table
+        rows={assets}
+        columns={columns}
+        page={filterParams.page || 0}
+        total={total ?? 0}
+        pageSize={filterParams.pageSize || 10}
+        fetchState={fetchState}
+        onChangePage={(page) => updateParams({ page })}
+        onChangePageSize={(pageSize) => updateParams({ pageSize, page: 0 })}
+      />
+    </Box>
   );
 }
 

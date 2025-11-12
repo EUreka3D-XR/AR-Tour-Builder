@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import PoiMediaModalContainer from "@/components/poi-media-modal/container";
+import PoiMediaModalContainer from "@/components/media-modal/container";
 import Sidebar from "@/components/sidebar/sidebar";
 import useNavPaths from "@/hooks/useNavPaths";
 

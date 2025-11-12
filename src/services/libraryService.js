@@ -24,13 +24,14 @@ export const useLibraryAssets = (projectId, params) => {
 
 /**
  * @param {string} projectId
- * @returns {AssetMutateResult}
+ * @param {string} assetId
+ * @returns {AssetsResult}
  */
-export const useUpdateAsset = (projectId, assetId) => {
-  return useDataMutator({
-    mutator: ({ data }) => api.library.update(projectId, assetId, data),
-    mutationKey: ["update-library-asset", projectId, assetId],
-    invalidateKey: ["library-asset", projectId, assetId],
+export const useLibraryAsset = (projectId, assetId) => {
+  const locale = useLocale();
+  return useDataFetcher({
+    fetcher: () => api.library.fetchOne(projectId, assetId, locale),
+    queryKey: ["library-asset", projectId, assetId, locale],
   });
 };
 
@@ -57,6 +58,18 @@ export const useCreateAsset = (projectId) => {
     mutator: ({ data }) => api.library.create(projectId, data),
     mutationKey: ["create-library-asset", projectId],
     invalidateKey: ["library-assets", projectId],
+  });
+};
+
+/**
+ * @param {string} projectId
+ * @returns {AssetMutateResult}
+ */
+export const useUpdateAsset = (projectId, assetId) => {
+  return useDataMutator({
+    mutator: ({ data }) => api.library.update(projectId, assetId, data),
+    mutationKey: ["update-library-asset", projectId, assetId],
+    invalidateKey: ["library-asset", projectId, assetId],
   });
 };
 

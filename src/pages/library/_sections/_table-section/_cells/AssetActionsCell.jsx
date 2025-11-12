@@ -1,6 +1,7 @@
 import { IconButton, styled, Tooltip } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import useNavPaths from "@/hooks/useNavPaths";
 
 const CellStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -14,21 +15,39 @@ const IconButtonStyled = styled(IconButton)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
 }));
 
-function AssetActionsCell() {
+/**
+ *
+ * @param {Object} props
+ * @param {string} props.assetId
+ * @returns
+ */
+function AssetActionsCell({ assetId }) {
+  const { routes, navigate } = useNavPaths();
+
+  // TODO: -
+  const handleView = () => {};
+
+  const handleEdit = () => {
+    navigate(routes.library.edit(assetId));
+  };
+
+  // TODO: -
+  const handleDelete = () => {};
+
   return (
     <CellStyled>
       <Tooltip title="View Asset">
-        <IconButtonStyled size="small">
+        <IconButtonStyled size="small" onClick={handleView}>
           <EurekaIcon name="visibility" fontSize="small" />
         </IconButtonStyled>
       </Tooltip>
       <Tooltip title="Edit Asset">
-        <IconButtonStyled size="small">
+        <IconButtonStyled size="small" onClick={handleEdit}>
           <EurekaIcon name="edit" fontSize="small" />
         </IconButtonStyled>
       </Tooltip>
       <Tooltip title="Delete Asset">
-        <IconButtonStyled size="small">
+        <IconButtonStyled size="small" onClick={handleDelete}>
           <EurekaIcon name="delete" fontSize="small" />
         </IconButtonStyled>
       </Tooltip>

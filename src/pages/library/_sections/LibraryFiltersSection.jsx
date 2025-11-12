@@ -3,6 +3,7 @@ import { Chip, FormControl, MenuItem, Select, styled } from "@mui/material";
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import SearchInput from "@/components/search-input/SearchInput";
+import useNavPaths from "@/hooks/useNavPaths";
 import useDashboardParams from "../../../hooks/useDashboardParams";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
@@ -42,6 +43,7 @@ const typeOptions = [
 ];
 
 function LibraryFiltersSection() {
+  const { routes } = useNavPaths();
   const { filterParams, updateParams } = useDashboardParams();
 
   const handleParamsChange = (key) => (event) => {
@@ -80,6 +82,7 @@ function LibraryFiltersSection() {
         <Button
           startIcon={<EurekaIcon name="add" />}
           variant="filled"
+          href={routes.library.new}
           className="item-no-shrink"
         >
           Add New Asset

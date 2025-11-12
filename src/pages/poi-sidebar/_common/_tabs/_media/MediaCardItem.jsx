@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 import {
   Box,
   Card,
@@ -10,6 +10,8 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useConfirm } from "@/stores/useConfirmStore";
+import { useDeletePoiAsset } from "@/services/assetsService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import InjectedLocaleValue from "@/components/inject-locale-value/InjectLocaleValue";
 import MediaPreview from "@/components/media-preview/MediaPreview";
@@ -108,10 +110,18 @@ const MediaDescription = styled(Typography)(() => ({
  * @param {Function} [props.onDelete] - Delete button click handler
  * @returns {React.ReactElement} Rendered media card item
  */
-function MediaCardItem({ asset, onEdit, onDelete }) {
+function MediaCardItem({ asset, onEdit }) {
   const [, setSearchParams] = useSearchParams();
-
   const locale = useLocale();
+
+  const { projectId, tourId, poiId } = useParams();
+  const { mutate: deletePoiAsset } = useDeletePoiAsset(
+    projectId,
+    tourId,
+    poiId,
+    asset.id,
+  );
+  const confirm = useConfirm();
 
   // Check if asset should show AR pill
   const showArPill =
@@ -134,10 +144,16 @@ function MediaCardItem({ asset, onEdit, onDelete }) {
     onEdit?.(asset);
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.stopPropagation();
     e.preventDefault();
-    onDelete?.(asset);
+
+    await confirm({
+      title: "Delete Media Asset",
+      message: "Are you sure you want to delete this media asset?",
+      confirmText: "Delete",
+      action: deletePoiAsset,
+    });
   };
 
   return (

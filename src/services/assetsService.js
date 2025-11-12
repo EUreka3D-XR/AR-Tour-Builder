@@ -96,3 +96,18 @@ export const useUpdatePoiAsset = (projectId, tourId, poiId, assetId) => {
     invalidateKey: ["poi-asset", projectId, tourId, poiId, assetId],
   });
 };
+
+/**
+ * @param {string} projectId
+ * @param {string} tourId
+ * @param {string} poiId
+ * @param {string} assetId
+ * @returns {PoiAssetMutateResult}
+ */
+export const useDeletePoiAsset = (projectId, tourId, poiId, assetId) => {
+  return useDataMutator({
+    mutator: () => api.poiAssets.delete(projectId, tourId, poiId, assetId),
+    mutationKey: ["delete-poi-asset", projectId, tourId, poiId, assetId],
+    invalidateKey: ["poi-assets", projectId, tourId, poiId],
+  });
+};

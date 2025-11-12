@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
+import { styled } from "@mui/material";
 import MuiTable from "@mui/material/Table";
 import MuiTableContainer from "@mui/material/TableContainer";
 import MuiTablePagination from "@mui/material/TablePagination";
@@ -51,18 +52,35 @@ import TableHeader from "./TableHeader";
  * @param {TableProps} props - Table props
  * @returns {React.ReactElement} Rendered table component
  */
+
+const ContainerStyled = styled("div")(() => ({
+  label: "table-wrapper",
+  display: "flex",
+  flexDirection: "column",
+  overflow: "hidden",
+  "& .pagination-footer": {
+    flexShrink: 0,
+  },
+}));
+
 export default function Table({
   pageSizeOptions = [10, 25, 50],
   onRequestSort,
   onChangePage,
   onChangePageSize,
   pageSize = 10,
-  page: propsPage,
+  page,
+  total,
   order,
   orderBy,
   rows,
   columns,
 }) {
+  const rowsPaged = useMemo(() => {
+    if (!Array.isArray(rows)) return [];
+    return rows.slice(page * pageSize, (page + 1) * pageSize);
+  }, [rows, page, pageSize]);
+
   const handleChangePage = useCallback(
     (_, newPage) => {
       onChangePage(newPage);
@@ -77,30 +95,29 @@ export default function Table({
     [onChangePageSize, pageSize],
   );
 
-  const page = Number(propsPage);
-
   return (
-    <div>
+    <ContainerStyled>
       <MuiTableContainer>
-        <MuiTable>
+        <MuiTable stickyHeader>
           <TableHeader
             columns={columns}
             order={order}
             orderBy={orderBy}
             onRequestSort={onRequestSort}
           />
-          <TableBody columns={columns} rows={rows} pageSize={pageSize} />
+          <TableBody columns={columns} rows={rowsPaged} pageSize={pageSize} />
         </MuiTable>
       </MuiTableContainer>
       <MuiTablePagination
         rowsPerPageOptions={pageSizeOptions}
         component="div"
-        count={rows.length}
+        count={total}
         rowsPerPage={pageSize}
         page={page >= 0 ? page : 0}
+        className="pagination-footer"
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangePageSize}
       />
-    </div>
+    </ContainerStyled>
   );
 }

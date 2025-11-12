@@ -1,12 +1,21 @@
+import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const useDashboardParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const filterParams = {};
-  for (const [key, value] of searchParams.entries()) {
-    filterParams[key] = value;
-  }
+  const filterParams = useMemo(() => {
+    const params = {};
+    for (const [key, value] of searchParams.entries()) {
+      params[key] = value;
+    }
+
+    return {
+      ...params,
+      page: params.page ? Number(params.page) : 0,
+      pageSize: params.pageSize ? Number(params.pageSize) : 10,
+    };
+  }, [searchParams]);
 
   const updateParams = (updates) => {
     const newParams = new URLSearchParams(searchParams);

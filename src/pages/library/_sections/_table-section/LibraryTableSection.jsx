@@ -31,19 +31,20 @@ const columns = [
     value: "action",
     disableSorting: true,
     width: 150,
-    renderCell: () => {
-      return <AssetActionsCell />;
+    renderCell: (asset) => {
+      return <AssetActionsCell assetId={asset.id} />;
     },
   },
 ];
 
-function LibraryTableSection({ assets = [], fetchState }) {
+function LibraryTableSection({ assets = [], total, fetchState }) {
   const { filterParams, updateParams } = useDashboardParams();
   return (
     <Table
       rows={assets}
       columns={columns}
       page={filterParams.page || 0}
+      total={total ?? 0}
       pageSize={filterParams.pageSize || 10}
       fetchState={fetchState}
       onChangePage={(page) => updateParams({ page })}

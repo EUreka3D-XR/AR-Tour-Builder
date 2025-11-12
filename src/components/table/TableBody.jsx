@@ -9,6 +9,7 @@ import getColumnStyle from "./_utils/columnWidth";
  * @property {import('./Table').TableColumn[]} columns - Array of table column definitions
  * @property {import('./Table').TableRow[]} rows - Array of table row data
  * @property {number} pageSize - Number of rows to display per page
+ * @property {string} [className] - Optional additional class name for the table body
  */
 
 /**
@@ -16,14 +17,14 @@ import getColumnStyle from "./_utils/columnWidth";
  * @param {TableBodyProps} props - TableBody props
  * @returns {React.ReactElement} Rendered table body component
  */
-function TableBody({ columns, rows, pageSize }) {
+function TableBody({ columns, rows, pageSize, className }) {
   const emptyRows = useMemo(
     () => pageSize - Math.min(pageSize, rows.length),
     [pageSize, rows.length],
   );
 
   return (
-    <MuiTableBody>
+    <MuiTableBody className={className}>
       {rows.map((row) => {
         return (
           <TableRow tabIndex={-1} key={row.id}>

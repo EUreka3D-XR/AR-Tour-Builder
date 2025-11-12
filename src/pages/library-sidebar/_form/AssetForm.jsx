@@ -171,29 +171,6 @@ function AssetForm({ onSubmit, onClose }) {
               <Typography variant="h5">3D Model Attributes</Typography>
               <div className="models-details">
                 <FormInput
-                  name="modelAssetAttributes.viewInAR"
-                  render={({ field }) => (
-                    <FormControlLabelStyled
-                      control={
-                        <Checkbox
-                          checked={Boolean(field.value)}
-                          onChange={(e) => field.onChange(e.target.checked)}
-                        />
-                      }
-                      label={
-                        <div className="checkbox-label">
-                          <Typography variant="body2">View in AR</Typography>
-                          <Typography variant="caption">
-                            Enable this option to allow users to view the 3D
-                            model in Augmented Reality (AR) on supported
-                            devices.
-                          </Typography>
-                        </div>
-                      }
-                    />
-                  )}
-                />
-                <FormInput
                   name="isGeoreferenced"
                   render={({ field }) => (
                     <FormControlLabelStyled
@@ -244,40 +221,6 @@ function AssetForm({ onSubmit, onClose }) {
                   </CoordinatesRow>
                 )}
               </div>
-              <Divider />
-              <div>
-                <Typography variant="h5">Linked Audio</Typography>
-                <Typography variant="caption">
-                  Upload audio files in multiple languages for users to enjoy
-                  while exploring the 3D model.
-                </Typography>
-              </div>
-
-              <FormInputMultilingual
-                name="modelAssetAttributes.linkedAsset.title"
-                render={({ field }) => (
-                  <LabeledInput label="Audio Title" isMultilingual>
-                    <TextField
-                      {...field}
-                      placeholder="Enter audio title"
-                      fullWidth
-                    />
-                  </LabeledInput>
-                )}
-              />
-              <FormInputMultilingual
-                name="modelAssetAttributes.linkedAsset.contentUrl"
-                render={({ field }) => (
-                  <LabeledInput label="Audio URL" isMultilingual>
-                    <TextField
-                      {...field}
-                      placeholder="https://example.com/audio-url.mp3"
-                      fullWidth
-                      type="url"
-                    />
-                  </LabeledInput>
-                )}
-              />
             </>
           )}
         </div>

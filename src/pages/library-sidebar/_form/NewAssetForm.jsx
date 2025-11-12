@@ -23,6 +23,11 @@ const DEFAULT_VALUES = {
     },
   },
   type: "",
+  georeference: {
+    lat: "",
+    long: "",
+  },
+  isGeoreferenced: false,
 };
 function NewAssetForm({ onClose }) {
   const { projectId } = useParams();

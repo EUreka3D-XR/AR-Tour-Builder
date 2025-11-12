@@ -27,8 +27,6 @@ export const ConfirmationModal = () => {
   const confirmText = optionsConfirmText || "Confirm";
   const cancelText = optionsCancelText || "Cancel";
 
-  console.log(options);
-
   return (
     <Dialog
       open={isOpen}

@@ -66,7 +66,11 @@ function TourPoisSection() {
   const { routes } = useNavPaths();
 
   const isGuided = useWatch({ name: "guided" });
-  const { fields: pois, move } = useFieldArrayWithId({
+  const {
+    fields: pois,
+    move,
+    remove,
+  } = useFieldArrayWithId({
     name: "pois",
   });
 
@@ -164,6 +168,7 @@ function TourPoisSection() {
                   onMoveDown={() => move(index, index + 1)}
                   onEdit={handleEdit}
                   onClick={handleClick}
+                  onRemove={() => remove(index)}
                 />
               </div>
             ))}

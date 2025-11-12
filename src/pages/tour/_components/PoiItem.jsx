@@ -111,6 +111,7 @@ function PoiItem({
   onMoveDown,
   onEdit,
   onCopy,
+  onRemove,
   onClick,
 }) {
   const { projectId, tourId } = useParams();
@@ -118,12 +119,13 @@ function PoiItem({
   const { mutate: deletePoi } = useDeleteTourPoi(projectId, tourId, poi.id);
 
   const handleDelete = async () => {
-    await confirm({
+    const confirmed = await confirm({
       title: "Delete POI",
       message: `Are you sure you want to delete the POI? This action cannot be undone.`,
       confirmText: "Delete",
       action: deletePoi,
     });
+    if (confirmed) onRemove(poi.id);
   };
 
   // Group assets by type and count them

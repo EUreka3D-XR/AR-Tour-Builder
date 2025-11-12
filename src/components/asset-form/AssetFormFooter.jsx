@@ -1,13 +1,15 @@
-import { useSearchParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 import { Stack } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import SidebarFooterSection from "@/components/sidebar/_sections/SidebarFooterSection";
 
-function PoiAssetFooterSection({ onCancel }) {
+function AssetFormFooter({ isPoiAsset, onCancel }) {
+  const { assetId } = useParams();
   const [searchParams] = useSearchParams();
-  const isNew = !searchParams.get("poiId");
+  const paramsAssetId = searchParams.get("mediaId");
+  const isNew = !assetId && !paramsAssetId;
 
   return (
     <SidebarFooterSection>
@@ -24,7 +26,7 @@ function PoiAssetFooterSection({ onCancel }) {
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >
-            Create Media Asset
+            {isPoiAsset ? "Create Media Asset" : "Create  Asset"}
           </Button>
         ) : (
           <Button
@@ -40,4 +42,4 @@ function PoiAssetFooterSection({ onCancel }) {
   );
 }
 
-export default PoiAssetFooterSection;
+export default AssetFormFooter;

@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 
-import AssetForm from "./AssetForm";
+import AssetForm from "@/components/asset-form/AssetForm";
 
 function AssetFormContainer({ defaultValues, onSubmit, onClose }) {
   const methods = useForm({

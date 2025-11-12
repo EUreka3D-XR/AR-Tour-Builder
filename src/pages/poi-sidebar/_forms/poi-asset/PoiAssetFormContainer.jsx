@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 
-import PoiAssetForm from "./PoiAssetForm";
+import AssetForm from "@/components/asset-form/AssetForm";
 
 function PoiAssetFormContainer({ defaultValues, onSubmit, onClose }) {
   const methods = useForm({
@@ -12,7 +12,11 @@ function PoiAssetFormContainer({ defaultValues, onSubmit, onClose }) {
 
   return (
     <FormProvider {...methods}>
-      <PoiAssetForm onSubmit={handleSubmit(onSubmit)} onClose={onClose} />
+      <AssetForm
+        isPoiAsset
+        onSubmit={handleSubmit(onSubmit)}
+        onClose={onClose}
+      />
     </FormProvider>
   );
 }

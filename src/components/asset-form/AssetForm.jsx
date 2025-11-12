@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { useSearchParams } from "react-router";
 import { useWatch } from "react-hook-form";
 import {
   Checkbox,
@@ -18,8 +17,7 @@ import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 import { fileTypes, getExtensionsHelperForType } from "@/utils/fileExtensions";
-import PoiAssetFooterSection from "../../_common/_sections/PoiAssetFooterSection";
-import PoiAssetHeaderSection from "../../_common/_sections/PoiAssetHeaderSection";
+import AssetFormFooter from "./AssetFormFooter";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   height: "100%",
@@ -61,11 +59,8 @@ const CoordinatesRow = styled("div")(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 
-function PoiAssetForm({ onSubmit, onClose }) {
+function AssetForm({ isPoiAsset, onSubmit, onClose }) {
   const [isMultilingual, setIsMultilingual] = useState(false);
-
-  const [searchParams] = useSearchParams();
-  const isNewAsset = !searchParams.get("mediaId");
 
   const assetType = useWatch({ name: "type" });
   const isGeoreferenced = useWatch({ name: "isGeoreferenced" });
@@ -76,13 +71,6 @@ function PoiAssetForm({ onSubmit, onClose }) {
   return (
     <form id="poi-asset-form" onSubmit={onSubmit}>
       <ContainerStyled className="poi-asset-form-wrapper">
-        <NoShrink>
-          <PoiAssetHeaderSection
-            title={isNewAsset ? "Create Asset" : "Editing Asset"}
-            onBack={onClose}
-          />
-          <Divider />
-        </NoShrink>
         <div className="poi-asset-form-inner">
           <LanguageDropdown className="language-selector" />
           <FormInputMultilingual
@@ -182,29 +170,31 @@ function PoiAssetForm({ onSubmit, onClose }) {
               <Divider />
               <Typography variant="h5">3D Model Attributes</Typography>
               <div className="models-details">
-                <FormInput
-                  name="modelAssetAttributes.viewInAR"
-                  render={({ field }) => (
-                    <FormControlLabelStyled
-                      control={
-                        <Checkbox
-                          checked={Boolean(field.value)}
-                          onChange={(e) => field.onChange(e.target.checked)}
-                        />
-                      }
-                      label={
-                        <div className="checkbox-label">
-                          <Typography variant="body2">View in AR</Typography>
-                          <Typography variant="caption">
-                            Enable this option to allow users to view the 3D
-                            model in Augmented Reality (AR) on supported
-                            devices.
-                          </Typography>
-                        </div>
-                      }
-                    />
-                  )}
-                />
+                {isPoiAsset && (
+                  <FormInput
+                    name="modelAssetAttributes.viewInAR"
+                    render={({ field }) => (
+                      <FormControlLabelStyled
+                        control={
+                          <Checkbox
+                            checked={Boolean(field.value)}
+                            onChange={(e) => field.onChange(e.target.checked)}
+                          />
+                        }
+                        label={
+                          <div className="checkbox-label">
+                            <Typography variant="body2">View in AR</Typography>
+                            <Typography variant="caption">
+                              Enable this option to allow users to view the 3D
+                              model in Augmented Reality (AR) on supported
+                              devices.
+                            </Typography>
+                          </div>
+                        }
+                      />
+                    )}
+                  />
+                )}
                 <FormInput
                   name="isGeoreferenced"
                   render={({ field }) => (
@@ -256,49 +246,53 @@ function PoiAssetForm({ onSubmit, onClose }) {
                   </CoordinatesRow>
                 )}
               </div>
-              <Divider />
-              <div>
-                <Typography variant="h5">Linked Audio</Typography>
-                <Typography variant="caption">
-                  Upload audio files in multiple languages for users to enjoy
-                  while exploring the 3D model.
-                </Typography>
-              </div>
+              {isPoiAsset && (
+                <>
+                  <Divider />
+                  <div>
+                    <Typography variant="h5">Linked Audio</Typography>
+                    <Typography variant="caption">
+                      Upload audio files in multiple languages for users to
+                      enjoy while exploring the 3D model.
+                    </Typography>
+                  </div>
 
-              <FormInputMultilingual
-                name="modelAssetAttributes.linkedAsset.title"
-                render={({ field }) => (
-                  <LabeledInput label="Audio Title" isMultilingual>
-                    <TextField
-                      {...field}
-                      placeholder="Enter audio title"
-                      fullWidth
-                    />
-                  </LabeledInput>
-                )}
-              />
-              <FormInputMultilingual
-                name="modelAssetAttributes.linkedAsset.contentUrl"
-                render={({ field }) => (
-                  <LabeledInput label="Audio URL" isMultilingual>
-                    <TextField
-                      {...field}
-                      placeholder="https://example.com/audio-url.mp3"
-                      fullWidth
-                      type="url"
-                    />
-                  </LabeledInput>
-                )}
-              />
+                  <FormInputMultilingual
+                    name="modelAssetAttributes.linkedAsset.title"
+                    render={({ field }) => (
+                      <LabeledInput label="Audio Title" isMultilingual>
+                        <TextField
+                          {...field}
+                          placeholder="Enter audio title"
+                          fullWidth
+                        />
+                      </LabeledInput>
+                    )}
+                  />
+                  <FormInputMultilingual
+                    name="modelAssetAttributes.linkedAsset.contentUrl"
+                    render={({ field }) => (
+                      <LabeledInput label="Audio URL" isMultilingual>
+                        <TextField
+                          {...field}
+                          placeholder="https://example.com/audio-url.mp3"
+                          fullWidth
+                          type="url"
+                        />
+                      </LabeledInput>
+                    )}
+                  />
+                </>
+              )}
             </>
           )}
         </div>
         <NoShrink>
-          <PoiAssetFooterSection onCancel={onClose} />
+          <AssetFormFooter isPoiAsset={isPoiAsset} onCancel={onClose} />
         </NoShrink>
       </ContainerStyled>
     </form>
   );
 }
 
-export default PoiAssetForm;
+export default AssetForm;

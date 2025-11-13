@@ -56,9 +56,7 @@ function AssetsModal({
   const [selectedAssets, setSelectedAssets] = useState([]);
 
   const handleImport = () => {
-    console.log("Importing assets:", selectedAssets);
-    // Implement the import logic here
-    onClose();
+    onClose(selectedAssets);
   };
 
   return (

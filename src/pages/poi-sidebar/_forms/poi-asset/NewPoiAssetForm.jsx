@@ -1,6 +1,9 @@
-import { useParams } from "react-router";
+import { useMemo } from "react";
+import { useParams, useSearchParams } from "react-router";
 
 import { useCreatePoiAsset } from "@/services/assetsService";
+import { useLibraryAssetMultilingual } from "@/services/libraryService";
+import SidebarSkeleton from "../../_common/_utils/SidebarSkeleton";
 import PoiAssetFormContainer from "./PoiAssetFormContainer";
 
 const DEFAULT_VALUES = {
@@ -48,7 +51,20 @@ const DEFAULT_VALUES = {
 };
 function NewPoiAssetForm({ onClose }) {
   const { projectId, tourId, poiId } = useParams();
+  const [searchParams] = useSearchParams();
+  const assetId = searchParams.get("libraryMedia");
+
+  const { data, fetchState } = useLibraryAssetMultilingual(projectId, assetId);
   const { mutate: createAsset } = useCreatePoiAsset(projectId, tourId, poiId);
+
+  const defaultValues = useMemo(() => {
+    if (assetId && data) {
+      return { ...DEFAULT_VALUES, ...data };
+    }
+  }, [assetId, data]);
+
+  if (fetchState.isLoading) return <SidebarSkeleton />;
+  if (fetchState.isError) return <div>Error loading asset.</div>;
 
   const onSubmit = async (data) => {
     await createAsset({ data });
@@ -56,7 +72,7 @@ function NewPoiAssetForm({ onClose }) {
   };
   return (
     <PoiAssetFormContainer
-      defaultValues={DEFAULT_VALUES}
+      defaultValues={defaultValues}
       onSubmit={onSubmit}
       onClose={onClose}
     />

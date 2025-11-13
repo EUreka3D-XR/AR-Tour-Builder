@@ -39,6 +39,18 @@ function AddMediaButton() {
     handleMenuClose();
     open();
   };
+
+  const handleBrowserClose = (selectedAssets = []) => {
+    if (selectedAssets.length) {
+      const selectedAssetId = selectedAssets[0].id;
+      setSearchParams((prev) => {
+        prev.set("mediaForm", "new");
+        prev.set("libraryMedia", selectedAssetId);
+        return prev;
+      });
+    }
+    close();
+  };
   return (
     <>
       <Button
@@ -79,7 +91,7 @@ function AddMediaButton() {
           Browse Library
         </MenuItemStyled>
       </Menu>
-      {isOpen && <AssetsModal onClose={close} />}
+      {isOpen && <AssetsModal onClose={handleBrowserClose} />}
     </>
   );
 }

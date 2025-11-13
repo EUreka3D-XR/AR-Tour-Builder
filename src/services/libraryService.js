@@ -40,7 +40,7 @@ export const useLibraryAsset = (projectId, assetId) => {
  * @param {string} assetId
  * @returns {AssetResult}
  */
-export const useAssetMultilingual = (projectId, assetId) => {
+export const useLibraryAssetMultilingual = (projectId, assetId) => {
   return useDataFetcher({
     fetcher: () => api.library.fetchOne(projectId, assetId),
     queryKey: ["library-asset", projectId, assetId, "multilingual"],

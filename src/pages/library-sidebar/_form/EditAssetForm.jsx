@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 
 import {
-  useAssetMultilingual,
+  useLibraryAssetMultilingual,
   useUpdateAsset,
 } from "@/services/libraryService";
 import SidebarSkeleton from "../_common/_utils/SidebarSkeleton";
@@ -10,8 +10,7 @@ import AssetFormContainer from "./AssetFormContainer";
 function EditAssetForm({ onClose }) {
   const { projectId, assetId } = useParams();
 
-  const { data, fetchState } = useAssetMultilingual(projectId, assetId);
-  console.log(data);
+  const { data, fetchState } = useLibraryAssetMultilingual(projectId, assetId);
   const { mutate: updateAsset } = useUpdateAsset(projectId, assetId);
 
   if (fetchState.isLoading) return <SidebarSkeleton />;

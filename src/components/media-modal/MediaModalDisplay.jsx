@@ -22,7 +22,13 @@ function MediaModalDisplay() {
   }
 
   if (sourceType === "libraryAsset") {
-    return <LibraryMediaModal projectId={projectId} assetId={assetId} />;
+    return (
+      <LibraryMediaModal
+        projectId={projectId}
+        assetId={assetId}
+        onClose={closeModal}
+      />
+    );
   }
 
   return null;

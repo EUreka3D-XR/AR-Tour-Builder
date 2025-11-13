@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { Outlet, useParams } from "react-router";
 import { styled } from "@mui/material";
 
 import { useLibraryAssets } from "@/services/libraryService";
@@ -28,6 +28,7 @@ function LibraryPage() {
         total={data?.length}
         fetchState={fetchState}
       />
+      <Outlet />
     </ContainerStyled>
   );
 }

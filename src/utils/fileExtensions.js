@@ -115,3 +115,22 @@ export const getExtensionsHelperForType = (type) => {
   const allowed = allowedFileExtensions[type] || [];
   return allowed.map((ext) => String(ext.value).toUpperCase()).join(", ");
 };
+
+export const checkAssetUrlValidity = (url) => {
+  if (!url || typeof url !== "string") return false;
+
+  try {
+    new URL(url);
+  } catch {
+    return false;
+  }
+  const type = findTypeFromFileExtension(url);
+
+  const allowedExtensions = allowedFileExtensions[type];
+  if (!allowedExtensions || allowedExtensions.length === 0) return false;
+
+  const urlLower = url.toLowerCase();
+  return allowedExtensions.some((ext) =>
+    urlLower.endsWith(ext.value.toLowerCase()),
+  );
+};

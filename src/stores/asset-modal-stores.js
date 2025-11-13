@@ -6,6 +6,7 @@ import { create } from "zustand";
  * @property {string} [tourId] - The ID of the tour
  * @property {string} [poiId] - The ID of the poi
  * @property {string} assetId - The ID of the asset
+ * @property {string} [url] - The url of the asset
  *
  */
 
@@ -16,6 +17,7 @@ import { create } from "zustand";
  * @property {AssetModalOptions} options - The message content of the confirmation dialog
  * @property {(options: AssetModalOptions) => void } [openPoiMediaModal] - Function executed when confirming; can be synchronous or async
  * @property {(options: AssetModalOptions) => void } [openLibraryMediaModal] - Function executed when confirming; can be synchronous or async
+ * @property {(options: AssetModalOptions) => void } [openModal] - Function executed when confirming; can be synchronous or async
  * @property {() => void } [closeModal] - Function executed when canceling; can be synchronous or async
  */
 
@@ -29,7 +31,6 @@ const useStore = create((set) => ({
   options: undefined,
 
   openLibraryMediaModal: (options) => {
-    console.log("haha");
     if (!options.projectId || !options.assetId) {
       console.error("Asset Modal: assetId and projectId are required");
       return;
@@ -39,7 +40,6 @@ const useStore = create((set) => ({
   },
 
   openPoiMediaModal: (options) => {
-    console.log("hoho");
     if (!options.projectId || !options.assetId) {
       console.error("Asset Modal: assetId and projectId are required");
       return;
@@ -51,6 +51,13 @@ const useStore = create((set) => ({
       return;
     }
     set({ isOpen: true, options, sourceType: "poiAsset" });
+  },
+  openModal: (options) => {
+    if (!options.url) {
+      console.error("Asset Modal: url is required for openModal");
+      return;
+    }
+    set({ isOpen: true, options });
   },
   closeModal: () =>
     set({ isOpen: false, options: undefined, sourceType: undefined }),
@@ -66,10 +73,11 @@ export const useAssetModalState = () => {
 };
 
 export const useAssetModal = () => {
+  const openAssetModalWithUrl = useStore((state) => state.openModal);
   const openLibraryMediaModal = useStore(
     (state) => state.openLibraryMediaModal,
   );
   const openPoiMediaModal = useStore((state) => state.openPoiMediaModal);
 
-  return { openLibraryMediaModal, openPoiMediaModal };
+  return { openLibraryMediaModal, openPoiMediaModal, openAssetModalWithUrl };
 };

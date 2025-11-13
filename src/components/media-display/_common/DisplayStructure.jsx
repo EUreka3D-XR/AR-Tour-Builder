@@ -36,6 +36,7 @@ const TopBar = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  flexDirection: "row-reverse",
   zIndex: 2,
   color: theme.palette.common.white,
 }));
@@ -72,19 +73,23 @@ export default function DisplayStructure({
     <Root>
       <ContentContainer>
         <TopBar>
-          <Typography variant="h5" noWrap>
-            {title}
-          </Typography>
           {onClose && (
-            <IconButton size="large" onClick={onClose} color="inherit">
+            <IconButton size="large" color="inherit" onClick={onClose}>
               <EurekaIcon name="close" color="inherit" />
             </IconButton>
           )}
+          {title && (
+            <Typography variant="h5" noWrap>
+              {title}
+            </Typography>
+          )}
         </TopBar>
         <DisplayArea>{children}</DisplayArea>
-        <InfoArea>
-          <ExpandableText text={description}>{description}</ExpandableText>
-        </InfoArea>
+        {description && (
+          <InfoArea>
+            <ExpandableText text={description}>{description}</ExpandableText>
+          </InfoArea>
+        )}
       </ContentContainer>
     </Root>
   );

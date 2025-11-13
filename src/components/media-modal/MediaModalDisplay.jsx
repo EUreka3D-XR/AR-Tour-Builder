@@ -1,10 +1,24 @@
 import { useAssetModalState } from "@/stores/asset-modal-stores";
+import AssetMediaModal from "./asset-media/AssetMediaModal";
 import LibraryMediaModal from "./library-media/LibraryMediaModal";
 import PoiMediaModal from "./poi-media/PoiMediaModal";
 
-function MediaModalDisplay() {
-  const { assetId, projectId, tourId, poiId, sourceType, isOpen, closeModal } =
-    useAssetModalState();
+function MediaModal() {
+  const {
+    assetId,
+    projectId,
+    tourId,
+    poiId,
+    sourceType,
+    url,
+    isOpen,
+    closeModal,
+  } = useAssetModalState();
+
+  if (url) {
+    return <AssetMediaModal url={url} onClose={closeModal} />;
+  }
+
   if (!assetId || !isOpen) {
     return null;
   }
@@ -34,4 +48,4 @@ function MediaModalDisplay() {
   return null;
 }
 
-export default MediaModalDisplay;
+export default MediaModal;

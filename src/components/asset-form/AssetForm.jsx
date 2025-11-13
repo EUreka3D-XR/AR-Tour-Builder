@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 import { useWatch } from "react-hook-form";
 import {
+  Box,
   Checkbox,
   Divider,
   FormControlLabel,
@@ -12,14 +13,20 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useAssetModal } from "@/stores/asset-modal-stores";
 import FormInput from "@/components/form/FormInput";
 import FormInputCommonMultilingual from "@/components/form/FormInputCommonMultilingual";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 import { useLocale } from "@/hooks/useLocale";
-import { fileTypes, getExtensionsHelperForType } from "@/utils/fileExtensions";
+import {
+  checkAssetUrlValidity,
+  fileTypes,
+  getExtensionsHelperForType,
+} from "@/utils/fileExtensions";
 import { localeValue } from "@/utils/inputLocale";
+import Link from "../link/Link";
 import AssetFormFooter from "./AssetFormFooter";
 import AssetFormPreview from "./AssetFormPreview";
 import PoiAssetHeaderSection from "./PoiAssetHeaderSection";
@@ -68,6 +75,8 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
   const [isMultilingual, setIsMultilingual] = useState(false);
   const locale = useLocale();
 
+  const { openAssetModalWithUrl } = useAssetModal();
+
   const [searchParams] = useSearchParams();
 
   const isNewPoiAsset = !searchParams.get("mediaId");
@@ -78,6 +87,11 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
   const helperTextForUrl = useMemo(() => {
     return getExtensionsHelperForType(assetType);
   }, [assetType]);
+
+  const isValidUrl = useMemo(() => {
+    const url = localeValue(contentUrl, locale);
+    return checkAssetUrlValidity(url);
+  }, [contentUrl, locale]);
 
   return (
     <form id="poi-asset-form" onSubmit={onSubmit}>
@@ -154,41 +168,60 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
               </div>
             }
           />
-          {isMultilingual ? (
-            <FormInputMultilingual
-              name="contentUrl"
-              render={({ field }) => (
-                <LabeledInput label="Media URL" isMultilingual>
-                  <TextField
-                    {...field}
-                    placeholder="https://example.com/media-url.png"
-                    fullWidth
-                    helperText={helperTextForUrl}
-                    type="url"
-                  />
-                </LabeledInput>
-              )}
-            />
-          ) : (
-            <FormInputCommonMultilingual
-              name="contentUrl"
-              render={({ field }) => (
-                <LabeledInput label="Media URL">
-                  <TextField
-                    {...field}
-                    placeholder="https://example.com/media-url.png"
-                    fullWidth
-                    helperText={helperTextForUrl}
-                    type="url"
-                  />
-                </LabeledInput>
-              )}
+          <div>
+            {isMultilingual ? (
+              <FormInputMultilingual
+                name="contentUrl"
+                render={({ field }) => (
+                  <LabeledInput label="Media URL" isMultilingual>
+                    <TextField
+                      {...field}
+                      placeholder="https://example.com/media-url.png"
+                      fullWidth
+                      helperText={helperTextForUrl}
+                      type="url"
+                    />
+                  </LabeledInput>
+                )}
+              />
+            ) : (
+              <FormInputCommonMultilingual
+                name="contentUrl"
+                render={({ field }) => (
+                  <LabeledInput label="Media URL">
+                    <TextField
+                      {...field}
+                      placeholder="https://example.com/media-url.png"
+                      fullWidth
+                      helperText={helperTextForUrl}
+                      type="url"
+                    />
+                  </LabeledInput>
+                )}
+              />
+            )}
+            {isValidUrl && (
+              <Box sx={{ mt: 1, ml: 1 }}>
+                <Link
+                  to="#"
+                  underline="always"
+                  onClick={() =>
+                    openAssetModalWithUrl({
+                      url: localeValue(contentUrl, locale),
+                    })
+                  }
+                >
+                  Preview fullscreen
+                </Link>
+              </Box>
+            )}
+          </div>
+          {isValidUrl && (
+            <AssetFormPreview
+              url={localeValue(contentUrl, locale)}
+              type={assetType}
             />
           )}
-          <AssetFormPreview
-            url={localeValue(contentUrl, locale)}
-            type={assetType}
-          />
           {assetType === "3d" && (
             <>
               <Divider />

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import { styled } from "@mui/material";
 
-import MediaModalDisplay from "@/components/media-modal/MediaModalDisplay";
+import MediaModal from "@/components/media-modal/MediaModalDisplay";
 import Navbar from "@/components/navbar/Navbar";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
@@ -21,7 +21,7 @@ function ProjectLayout() {
       <div className="project-content">
         <Outlet />
       </div>
-      <MediaModalDisplay />
+      <MediaModal />
     </ContainerStyled>
   );
 }

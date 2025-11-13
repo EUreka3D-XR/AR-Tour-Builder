@@ -66,15 +66,19 @@ function NewPoiAssetForm({ onClose }) {
   if (fetchState.isLoading) return <SidebarSkeleton />;
   if (fetchState.isError) return <div>Error loading asset.</div>;
 
+  const handleClose = () => {
+    onClose();
+  };
+
   const onSubmit = async (data) => {
     await createAsset({ data });
-    onClose();
+    handleClose();
   };
   return (
     <PoiAssetFormContainer
       defaultValues={defaultValues}
       onSubmit={onSubmit}
-      onClose={onClose}
+      onClose={handleClose}
     />
   );
 }

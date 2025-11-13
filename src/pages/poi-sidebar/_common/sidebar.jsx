@@ -22,6 +22,7 @@ function PoiSidebar({ children }) {
     setSearchParams((prev) => {
       prev.delete("mediaForm");
       prev.delete("mediaId");
+      prev.delete("libraryMedia");
       return prev;
     });
   }, [setSearchParams]);

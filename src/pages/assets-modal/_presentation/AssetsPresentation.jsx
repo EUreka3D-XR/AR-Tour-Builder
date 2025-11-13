@@ -79,6 +79,7 @@ const ListAssetItem = styled("div")(({ theme }) => ({
  * @param {boolean} props.isListView - Toggle between list view and grid view
  * @param {boolean} props.allowMultiple - Allow multiple asset selection
  * @param {Function} props.setSelected - Function to set the selected assets
+ * @param {{searchTerm: string; type: string; sortBy: 'title-asc' | 'title-desc'}} props.filters - Filters applied to the asset list
  * @param {Array<import("@/types/jsdoc-types").PoiAsset>} props.selected - List of currently selected assets
  * @param {Array<import("@/types/jsdoc-types").PoiAsset>} props.assets - List of assets to display
  * Each asset should have the following structure:
@@ -88,22 +89,40 @@ function AssetsPresentation({
   isListView,
   setSelected,
   selected = [],
+  filters,
   allowMultiple,
 }) {
   const { projectId } = useParams();
   const { data: assets, fetchState } = useLibraryAssets(projectId);
 
-  if (fetchState === "loading") {
+  if (fetchState.isLoading) {
     return <div>Loading assets...</div>;
   }
 
-  if (fetchState === "error") {
+  if (fetchState.isError) {
     return <div>Error loading assets.</div>;
   }
 
   if (!assets || assets.length === 0) {
     return <div>No assets available.</div>;
   }
+
+  const filteredAssets = assets
+    .filter((asset) => {
+      const matchesSearchTerm = asset.title
+        .toLowerCase()
+        .includes(filters.searchTerm.toLowerCase());
+      const matchesType = filters.type ? asset.type === filters.type : true;
+      return matchesSearchTerm && matchesType;
+    })
+    .sort((a, b) => {
+      if (filters.sortBy === "title-asc") {
+        return a.title.localeCompare(b.title);
+      } else if (filters.sortBy === "title-desc") {
+        return b.title.localeCompare(a.title);
+      }
+      return 0;
+    });
 
   const handleSelectAsset = (asset) => {
     if (allowMultiple) {
@@ -127,7 +146,7 @@ function AssetsPresentation({
       })}
     >
       {isListView &&
-        assets.map((asset) => {
+        filteredAssets.map((asset) => {
           const isSelected = selected.some((a) => a.id === asset.id);
           return (
             <ListAssetItem
@@ -143,7 +162,7 @@ function AssetsPresentation({
           );
         })}
       {!isListView &&
-        assets.map((asset) => {
+        filteredAssets.map((asset) => {
           const isSelected = selected.some((a) => a.id === asset.id);
           return (
             <GridAssetItem

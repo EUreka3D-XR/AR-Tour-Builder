@@ -50,7 +50,7 @@ const ModalPaper = styled("div")(({ theme }) => ({
  */
 function AssetsModal({
   onClose,
-  allowMultiple,
+  allowMultiple = false,
   allowedSources = ["library", "external"],
 }) {
   const [selectedAssets, setSelectedAssets] = useState([]);

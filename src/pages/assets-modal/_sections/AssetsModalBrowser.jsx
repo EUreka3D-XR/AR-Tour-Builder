@@ -58,22 +58,28 @@ const sortOptionsMap = sortOptions.reduce((acc, option) => {
 function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
   const { isOpen: isListView, toggle: toggleListView } = useToggle(true);
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedType, setSelectedType] = useState("");
-  const [sortBy, setSortBy] = useState(sortOptions[0].value);
+  const [filters, setFilters] = useState({
+    searchTerm: "",
+    type: "",
+    sortBy: sortOptions[0].value,
+  });
 
   return (
     <BrowsingContent className="browsing-form">
       <FilterRow>
         <SearchInput
-          value={searchTerm}
-          onChange={setSearchTerm}
+          value={filters.searchTerm}
+          onChange={(term) =>
+            setFilters((prev) => ({ ...prev, searchTerm: term }))
+          }
           placeholder="Search media assets..."
         />
         <Select
-          value={selectedType}
+          value={filters.type}
           displayEmpty
-          onChange={(e) => setSelectedType(e.target.value)}
+          onChange={(e) =>
+            setFilters((prev) => ({ ...prev, type: e.target.value }))
+          }
         >
           <MenuItem value="">All File Types</MenuItem>
           <MenuItem value="image">Images</MenuItem>
@@ -93,8 +99,10 @@ function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
                 {sortOptionsMap[se]}
               </div>
             )}
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            value={filters.sortBy}
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, sortBy: e.target.value }))
+            }
           >
             {sortOptions.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -116,6 +124,7 @@ function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
         <AssetsPresentation
           isListView={isListView}
           allowMultiple={allowMultiple}
+          filters={filters}
           selected={selected}
           setSelected={setSelected}
         />

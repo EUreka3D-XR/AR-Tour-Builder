@@ -79,7 +79,7 @@ function AddMediaButton() {
           Browse Library
         </MenuItemStyled>
       </Menu>
-      {isOpen && <AssetsModal allowMultiple onClose={close} />}
+      {isOpen && <AssetsModal onClose={close} />}
     </>
   );
 }

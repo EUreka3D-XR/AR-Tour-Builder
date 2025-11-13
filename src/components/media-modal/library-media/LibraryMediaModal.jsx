@@ -16,9 +16,8 @@ function LibraryMediaModal({ projectId, assetId, onClose }) {
           <ErrorArea />
         </CenteredArea>
       )}
-      {fetchState.isSuccess && (
-        <MediaModalDisplay asset={data} onClose={onClose} />
-      )}
+      {fetchState.isSuccess &&
+        (data ? <MediaModalDisplay asset={data} onClose={onClose} /> : null)}
     </MediaModal>
   );
 }

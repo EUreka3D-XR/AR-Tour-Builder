@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router";
+import { useParams } from "react-router";
 import {
   Box,
   Card,
@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useAssetModal } from "@/stores/asset-modal-stores";
 import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeletePoiAsset } from "@/services/assetsService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -111,7 +112,7 @@ const MediaDescription = styled(Typography)(() => ({
  * @returns {React.ReactElement} Rendered media card item
  */
 function MediaCardItem({ asset, onEdit }) {
-  const [, setSearchParams] = useSearchParams();
+  const { openPoiMediaModal } = useAssetModal();
   const locale = useLocale();
 
   const { projectId, tourId, poiId } = useParams();
@@ -132,10 +133,7 @@ function MediaCardItem({ asset, onEdit }) {
     asset?.type === "3d" && asset?.modelAssetAttributes?.georeference;
 
   const handleClick = () => {
-    setSearchParams((prev) => {
-      prev.set("displayMedia", asset.id);
-      return prev;
-    });
+    openPoiMediaModal({ assetId: asset.id, projectId, tourId, poiId });
   };
 
   const handleEdit = (e) => {

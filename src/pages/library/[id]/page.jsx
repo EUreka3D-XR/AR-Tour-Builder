@@ -1,7 +1,5 @@
-import LibraryMediaModal from "@/components/media-modal/library-media/LibraryMediaModal";
-
 function ViewLibraryAssetPage() {
-  return <LibraryMediaModal />;
+  return <></>;
 }
 
 export default ViewLibraryAssetPage;

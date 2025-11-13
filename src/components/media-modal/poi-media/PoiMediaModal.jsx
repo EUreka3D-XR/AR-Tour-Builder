@@ -1,38 +1,24 @@
-import { useParams, useSearchParams } from "react-router";
-
 import { usePoiAsset } from "@/services/assetsService";
+import MediaDisplay from "@/components/media-display/MediaDisplay";
 import CenteredArea from "../../centered/Centered";
 import ErrorArea from "../../error/ErrorArea";
 import DisplayLoading from "../../media-display/_common/DisplayLoading";
 import MediaModal from "../layout";
-import MediaModalDisplay from "../MediaModalDisplay";
 
-function PoiMediaModal() {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const assetId = searchParams.get("displayMedia");
-
-  const { projectId, tourId, poiId } = useParams();
-
+function PoiMediaModal({ projectId, tourId, poiId, assetId, onClose }) {
   const { data, fetchState } = usePoiAsset(projectId, tourId, poiId, assetId);
 
-  const isOpen = !!assetId;
-  const handleClose = () => {
-    searchParams.delete("displayMedia");
-    setSearchParams(searchParams);
-  };
-
   return (
-    <MediaModal isOpen={isOpen} onClose={handleClose}>
+    <MediaModal isOpen onClose={onClose}>
       {fetchState.isLoading && <DisplayLoading />}
       {fetchState.isError && (
         <CenteredArea>
           <ErrorArea />
         </CenteredArea>
       )}
-      {fetchState.isSuccess && (
-        <MediaModalDisplay asset={data} onClose={handleClose} />
-      )}
+
+      {fetchState.isSuccess &&
+        (data ? <MediaDisplay asset={data} onClose={onClose} /> : null)}
     </MediaModal>
   );
 }

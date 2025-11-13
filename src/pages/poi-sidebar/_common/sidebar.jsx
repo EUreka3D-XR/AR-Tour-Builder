@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { useSearchParams } from "react-router";
 
-import PoiMediaModal from "@/components/media-modal/poi-media/PoiMediaModal";
 import Sidebar from "@/components/sidebar/sidebar";
 import useNavPaths from "@/hooks/useNavPaths";
 
@@ -28,19 +27,16 @@ function PoiSidebar({ children }) {
   }, [setSearchParams]);
 
   return (
-    <>
-      <Sidebar onClose={handleCloseSidebar}>
-        {typeof children === "function" &&
-          children({
-            showCreateAssetForm: isInsideCreateAssetForm,
-            showEditAssetForm: isInsideEditAssetForm,
-            showPoiForm: !isInsideCreateAssetForm && !isInsideEditAssetForm,
-            onCloseAsset: handleCloseAsset,
-            onClosePoi: handleCloseSidebar,
-          })}
-      </Sidebar>
-      <PoiMediaModal />
-    </>
+    <Sidebar onClose={handleCloseSidebar}>
+      {typeof children === "function" &&
+        children({
+          showCreateAssetForm: isInsideCreateAssetForm,
+          showEditAssetForm: isInsideEditAssetForm,
+          showPoiForm: !isInsideCreateAssetForm && !isInsideEditAssetForm,
+          onCloseAsset: handleCloseAsset,
+          onClosePoi: handleCloseSidebar,
+        })}
+    </Sidebar>
   );
 }
 

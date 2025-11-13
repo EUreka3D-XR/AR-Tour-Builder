@@ -1,17 +1,31 @@
-import MediaDisplay from "../media-display/MediaDisplay";
+import { useAssetModalState } from "@/stores/asset-modal-stores";
+import LibraryMediaModal from "./library-media/LibraryMediaModal";
+import PoiMediaModal from "./poi-media/PoiMediaModal";
 
-/**
- * Media Modal Component
- * @param {Object} props
- * @param {import('@/types/jsdoc-types').Asset} props.asset
- * @param {Function} props.onClose
- * @returns
- */
-function MediaModalDisplay({ asset, onClose }) {
-  if (!asset) {
+function MediaModalDisplay() {
+  const { assetId, projectId, tourId, poiId, sourceType, isOpen, closeModal } =
+    useAssetModalState();
+  if (!assetId || !isOpen) {
     return null;
   }
-  return <MediaDisplay asset={asset} onClose={onClose} />;
+
+  if (sourceType === "poiAsset") {
+    return (
+      <PoiMediaModal
+        projectId={projectId}
+        tourId={tourId}
+        poiId={poiId}
+        assetId={assetId}
+        onClose={closeModal}
+      />
+    );
+  }
+
+  if (sourceType === "libraryAsset") {
+    return <LibraryMediaModal projectId={projectId} assetId={assetId} />;
+  }
+
+  return null;
 }
 
 export default MediaModalDisplay;

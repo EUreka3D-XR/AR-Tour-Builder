@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { IconButton, styled, Tooltip } from "@mui/material";
 
+import { useAssetModal } from "@/stores/asset-modal-stores";
 import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeleteAsset } from "@/services/libraryService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -26,13 +27,14 @@ const IconButtonStyled = styled(IconButton)(({ theme }) => ({
  */
 function AssetActionsCell({ assetId }) {
   const { projectId } = useParams();
+  const { openLibraryMediaModal } = useAssetModal();
   const { mutate: deleteAsset } = useDeleteAsset(projectId, assetId);
 
   const { routes, navigate } = useNavPaths();
   const confirm = useConfirm();
 
   const handleView = () => {
-    navigate(routes.library.one(assetId));
+    openLibraryMediaModal({ assetId, projectId });
   };
 
   const handleEdit = () => {

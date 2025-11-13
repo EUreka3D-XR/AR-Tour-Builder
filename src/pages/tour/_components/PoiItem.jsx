@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useConfirm } from "@/stores/useConfirmStore";
+import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeleteTourPoi } from "@/services/poiService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import MediaCounter from "@/components/media-counter/MediaCounter";

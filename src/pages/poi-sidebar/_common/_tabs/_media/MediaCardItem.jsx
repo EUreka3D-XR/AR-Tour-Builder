@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useConfirm } from "@/stores/useConfirmStore";
+import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeletePoiAsset } from "@/services/assetsService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import InjectedLocaleValue from "@/components/inject-locale-value/InjectLocaleValue";

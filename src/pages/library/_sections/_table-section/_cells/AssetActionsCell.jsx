@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { IconButton, styled, Tooltip } from "@mui/material";
 
-import { useConfirm } from "@/stores/useConfirmStore";
+import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeleteAsset } from "@/services/libraryService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";

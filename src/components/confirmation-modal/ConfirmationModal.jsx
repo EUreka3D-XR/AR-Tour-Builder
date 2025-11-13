@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-import { useConfirmationState } from "@/stores/useConfirmStore";
+import { useConfirmationState } from "@/stores/confirmation-modal-stores";
 import Button from "../button/Button";
 
 export const ConfirmationModal = () => {

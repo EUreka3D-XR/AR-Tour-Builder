@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { useFormContext, useWatch } from "react-hook-form";
 import { IconButton, Stack, styled, Typography } from "@mui/material";
 
-import { useConfirm } from "@/stores/useConfirmStore";
+import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeleteTour } from "@/services/toursService";
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";

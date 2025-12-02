@@ -21,16 +21,17 @@ function AuthFormBox({ children, onSubmit, defaultValues }) {
   return (
     <StyledPaper elevation={3}>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}></form>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 3,
-          }}
-        >
-          {children}
-        </Box>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 3,
+            }}
+          >
+            {children}
+          </Box>
+        </form>
       </FormProvider>
     </StyledPaper>
   );

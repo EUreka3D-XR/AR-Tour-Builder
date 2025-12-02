@@ -50,6 +50,7 @@ export const icons = {
   users: "group",
   video: "videocam",
   visibility: "visibility",
+  visibilityOff: "visibility_off",
 };
 
 /**

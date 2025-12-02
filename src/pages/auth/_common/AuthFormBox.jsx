@@ -1,3 +1,4 @@
+import { FormProvider, useForm } from "react-hook-form";
 import { Box, Paper, styled } from "@mui/material";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -10,18 +11,27 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
 }));
 
-function AuthFormBox({ children }) {
+function AuthFormBox({ children, onSubmit, defaultValues }) {
+  const methods = useForm({
+    defaultValues,
+  });
+
+  const { handleSubmit } = methods;
+
   return (
     <StyledPaper elevation={3}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 3,
-        }}
-      >
-        {children}
-      </Box>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}></form>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 3,
+          }}
+        >
+          {children}
+        </Box>
+      </FormProvider>
     </StyledPaper>
   );
 }

@@ -1,10 +1,20 @@
 import { NavLink as RouterLink } from "react-router";
+import clsx from "clsx";
 import { Link as MuiLink, styled } from "@mui/material";
 
 const RouterLinkStyled = styled(RouterLink)({
   color: "inherit",
   fontSize: "inherit",
   textDecoration: "none",
+  "&.underline-hover": {
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
+  "&.underline-always": {
+    textDecoration: "underline",
+  },
 });
 
 const MuiLinkStyled = styled(MuiLink)({
@@ -25,7 +35,7 @@ const MuiLinkStyled = styled(MuiLink)({
  * @param {function} [props.onClick]
  * @returns
  */
-function Link({
+function LinkUnstyled({
   to,
   rel,
   children,
@@ -74,12 +84,20 @@ function Link({
       to={to}
       target={openInNewTab ? "_blank" : "_self"}
       rel={computedRel}
-      className={className}
+      className={clsx(
+        {
+          "underline-always": underline === "always",
+          "underline-hover": underline === "hover",
+        },
+        className,
+      )}
       onClick={onClick}
     >
       {children}
     </RouterLinkStyled>
   );
 }
+
+const Link = styled(LinkUnstyled)({});
 
 export default Link;

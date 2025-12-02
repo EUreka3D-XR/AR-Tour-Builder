@@ -1,6 +1,6 @@
 import { api } from "@/api";
-import { useQueryClient } from "@tanstack/react-query";
 
+import { localeStorageAPI } from "@/utils/local-storage-utils";
 import { useDataMutator } from "./helpers/serviceHooks";
 
 // /**
@@ -10,6 +10,10 @@ export const useLogin = () => {
   return useDataMutator({
     mutator: (payload) => api.auth.login(payload),
     mutationKey: ["login"],
+    onSuccess: (data) => {
+      localeStorageAPI.auth.setToken(data.token);
+      console.log(data);
+    },
   });
 };
 
@@ -17,17 +21,16 @@ export const useSignup = () => {
   return useDataMutator({
     mutator: (payload) => api.auth.signup(payload),
     mutationKey: ["signup"],
+    onSuccess: (data) => {
+      localeStorageAPI.auth.setToken(data.token);
+    },
   });
 };
 
 export const useLogout = () => {
-  const qc = useQueryClient();
-
   return useDataMutator({
     mutator: () => api.auth.logout(),
     mutationKey: ["logout"],
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["profile"] });
-    },
+    invalidateKey: ["profile"],
   });
 };

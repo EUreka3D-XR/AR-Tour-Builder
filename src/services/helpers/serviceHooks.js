@@ -50,17 +50,26 @@ export const useDataFetcher = ({
  * @param {(data: TData) => Promise<TResult>} params.mutator - The function to mutate data that returns Promise<TResult>
  * @param {String[]} params.mutationKey - The key for the mutation (mutationKey for useMutation).
  * @param {String[]} [params.invalidateKey] - The key for the query to invalidate upon successful mutation.
+ * @param {() => void} [params.onSuccess] - Optional callback to execute on successful mutation.
  * @returns {MutateResultType<TResult>}
  */
-export const useDataMutator = ({ mutator, mutationKey, invalidateKey }) => {
+export const useDataMutator = ({
+  mutator,
+  mutationKey,
+  invalidateKey,
+  onSuccess,
+}) => {
   const queryClient = useQueryClient();
 
   const { data, ...mutation } = useMutation({
     mutationKey,
     mutationFn: mutator,
-    onSuccess: () => {
+    onSuccess: (data) => {
       if (invalidateKey) {
         queryClient.invalidateQueries({ queryKey: invalidateKey });
+      }
+      if (typeof onSuccess === "function") {
+        onSuccess(data);
       }
     },
   });

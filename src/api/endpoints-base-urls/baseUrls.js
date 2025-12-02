@@ -1,5 +1,6 @@
 export const baseUrls = {
   login: "/api/auth/login",
+  logout: "/api/auth/logout",
   signup: "/api/auth/signup",
   forgotPassword: "/api/auth/forgot-password",
   resetPassword: "/api/auth/reset-password",

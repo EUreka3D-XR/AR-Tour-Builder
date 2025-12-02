@@ -11,7 +11,13 @@ const signup = async (payload) => {
   return fetcher.post(url, payload);
 };
 
+const logout = async () => {
+  const url = baseUrls.logout;
+  return fetcher.post(url);
+};
+
 export const authApi = {
   login,
+  logout,
   signup,
 };

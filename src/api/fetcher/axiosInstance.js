@@ -1,9 +1,11 @@
 import axios from "axios";
 
-// fix for axios and mirage passthrough issue:
+import { localeStorageAPI } from "@/utils/local-storage-utils";
+
+// fix for axios and mirage passthrough issue (see adapter):
 // https://github.com/miragejs/miragejs/issues/1006 comment of Jan 20 2025
 const axiosInstance = axios.create({
-  baseURL: "",
+  baseURL: "http://localhost:8000",
   adapter: async (config) => {
     // Combine base URL and endpoint URL
     let url = config.baseURL + config.url;
@@ -44,5 +46,32 @@ const axiosInstance = axios.create({
     });
   },
 });
+
+// Request interceptor to add Bearer token
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localeStorageAPI.auth.getToken(); // or your token key
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+// Optional: Response interceptor to handle 401 (unauthorized)
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expired or invalid - clear token and redirect to login
+      localeStorageAPI.auth.removeToken();
+      // window.location.href = '/login'; // or use your navigation method
+    }
+    return Promise.reject(error);
+  },
+);
 
 export default axiosInstance;

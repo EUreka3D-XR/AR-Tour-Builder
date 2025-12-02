@@ -1,4 +1,9 @@
 export const baseUrls = {
+  login: "/api/auth/login",
+  signup: "/api/auth/signup",
+  forgotPassword: "/api/auth/forgot-password",
+  resetPassword: "/api/auth/reset-password",
+  me: "/api/auth/me",
   projects: "/api/projects",
   project: (projectId) => `/api/projects/${projectId}`,
   library: (projectId) => `/api/projects/${projectId}/library`,

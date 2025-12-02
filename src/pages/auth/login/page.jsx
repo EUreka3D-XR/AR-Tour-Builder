@@ -1,29 +1,38 @@
 import { Stack, TextField, Typography } from "@mui/material";
 
+import { useLogin } from "@/services/authService";
 import Button from "@/components/button/Button";
 import FormInput from "@/components/form/FormInput";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import Link from "@/components/link/Link";
 import PasswordInput from "@/components/password-input/PasswordInput";
+import useNavPaths from "@/hooks/useNavPaths";
 import AuthFormBox from "../_common/AuthFormBox";
 import HelperBottomText from "../_common/HelperBottomText";
 
 const defaultValues = {
-  email: "",
+  login: "",
   password: "",
 };
 
 function LoginPage() {
-  const handleSubmit = async () => {};
+  const { navigate, routes } = useNavPaths();
+  const { mutate: login, fetchState } = useLogin();
+
+  const handleSubmit = async (data) => {
+    await login(data);
+    navigate(routes.home);
+  };
+
   return (
     <AuthFormBox defaultValues={defaultValues} onSubmit={handleSubmit}>
       <Typography variant="h5" component="h1" align="center" fontWeight="bold">
         Login
       </Typography>
       <FormInput
-        name="email"
+        name="login"
         render={({ field }) => (
-          <LabeledInput label="Email">
+          <LabeledInput label="Email or username">
             <TextField
               {...field}
               placeholder="ex. user@example.com"
@@ -49,7 +58,12 @@ function LoginPage() {
           Forgot Password?
         </Link>
       </Stack>
-      <Button variant="filled" isFullwidth type="submit">
+      <Button
+        variant="filled"
+        isFullwidth
+        type="submit"
+        isLoading={fetchState.isLoading}
+      >
         Login
       </Button>
       <HelperBottomText

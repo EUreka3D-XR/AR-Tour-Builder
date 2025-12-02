@@ -35,7 +35,7 @@ const axiosInstance = axios.create({
       const data = await response.json();
 
       // Return in axios response format
-      return {
+      const axiosResponse = {
         data,
         status: response.status,
         statusText: response.statusText,
@@ -43,6 +43,18 @@ const axiosInstance = axios.create({
         config,
         request: response,
       };
+
+      // Reject promise for non-2xx status codes (like axios does)
+      if (response.status < 200 || response.status >= 300) {
+        const error = new Error(
+          `Request failed with status ${response.status}`,
+        );
+        error.response = axiosResponse;
+        error.config = config;
+        return Promise.reject(error);
+      }
+
+      return axiosResponse;
     });
   },
 });
@@ -65,10 +77,12 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.log("haha");
     if (error.response?.status === 401) {
+      console.log("hahahaha");
       // Token expired or invalid - clear token and redirect to login
       localeStorageAPI.auth.removeToken();
-      // window.location.href = '/login'; // or use your navigation method
+      window.location.href = "/auth/login";
     }
     return Promise.reject(error);
   },

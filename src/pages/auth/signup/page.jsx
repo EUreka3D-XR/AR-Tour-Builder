@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-import AuthFormBox from "@/components/auth/AuthFormBox";
+import AuthFormBox from "../_common/AuthFormBox";
 
 function SignupPage() {
   return (

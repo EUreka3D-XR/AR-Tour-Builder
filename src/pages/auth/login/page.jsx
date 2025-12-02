@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-import AuthFormBox from "@/components/auth/AuthFormBox";
+import AuthFormBox from "../_common/AuthFormBox";
 
 function LoginPage() {
   return (
@@ -8,7 +8,6 @@ function LoginPage() {
       <Typography variant="h5" component="h1" align="center" fontWeight="bold">
         Login
       </Typography>
-      {/* Form fields will be added here */}
     </AuthFormBox>
   );
 }

@@ -2,6 +2,7 @@ import { IconButton, styled } from "@mui/material";
 
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import logo from "@/assets/images/dummy-logo.webp";
+import DropdownMenu from "../dropdown/DropdownMenu";
 import EurekaIcon from "../icon/EurekaIcon";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
@@ -36,9 +37,20 @@ function Header() {
         <img src={logo} alt="logo" className="logo" />
       </div>
       <div className="side-header right-header">
-        <IconButton size="small">
-          <EurekaIcon name="user" variant="filled" />
-        </IconButton>
+        <DropdownMenu
+          id="account-menu"
+          items={[
+            // { label: "Profile", to: "/profile" },
+            // { label: "Settings", to: "/settings" },
+            { label: "Logout", to: "/logout" },
+          ]}
+        >
+          {({ toggle }) => (
+            <IconButton size="small" onClick={toggle}>
+              <EurekaIcon name="user" variant="filled" />
+            </IconButton>
+          )}
+        </DropdownMenu>
       </div>
     </ContainerStyled>
   );

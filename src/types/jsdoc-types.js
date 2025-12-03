@@ -79,6 +79,7 @@
  * @property {User[]} members - Members of the project
  * @property {number} totalTours - Total number of tours in the project
  * @property {number} totalPois - Total number of POIs in the project
+ * @property {number} totalMembers - Total number of members in the project
  * @property {number} totalAssets - Total number of media assets in the project's library
  * @property {string[]} locales - Supported locales for the project
  * @property {Status} [status] - Project status (draft, published, archived)

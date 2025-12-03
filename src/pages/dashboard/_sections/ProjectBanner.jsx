@@ -79,9 +79,9 @@ function ProjectBanner({ project = {} }) {
     description,
     status,
     tours,
-    members,
+    totalMembers,
     totalPois,
-    totalAssets,
+    // totalAssets,
   } = project;
 
   const isPublished = status === "published";
@@ -117,13 +117,13 @@ function ProjectBanner({ project = {} }) {
                   <EurekaIcon name="poi" />
                   <span>{totalPois} POIs</span>
                 </div>
-                <div className="stat">
+                {/* <div className="stat">
                   <EurekaIcon name="media" />
                   <span>{totalAssets} Assets</span>
-                </div>
+                </div> */}
                 <div className="stat">
                   <EurekaIcon name="users" />
-                  <span>{members?.length} Members</span>
+                  <span>{totalMembers} Members</span>
                 </div>
               </div>
             </div>

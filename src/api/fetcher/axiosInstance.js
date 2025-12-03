@@ -65,7 +65,7 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const token = localeStorageAPI.auth.getToken(); // or your token key
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Token ${token}`;
     }
 
     // Don't transform FormData keys

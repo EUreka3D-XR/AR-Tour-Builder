@@ -114,9 +114,9 @@ function PoiItem({
   onRemove,
   onClick,
 }) {
-  const { projectId, tourId } = useParams();
+  const { tourId } = useParams();
   const confirm = useConfirm();
-  const { mutate: deletePoi } = useDeleteTourPoi(projectId, tourId, poi.id);
+  const { mutate: deletePoi } = useDeleteTourPoi(tourId, poi.id);
 
   const handleDelete = async () => {
     const confirmed = await confirm({

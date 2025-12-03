@@ -8,10 +8,10 @@ import ViewPoiSidebarLayout from "./layout";
 import ViewPoiSidebarLoading from "./loading";
 
 function ViewPoiSidebarContainer() {
-  const { projectId, tourId, poiId } = useParams();
+  const { poiId } = useParams();
   const { locale } = useFormLocale();
 
-  const { data, fetchState } = useTourPoi(projectId, tourId, poiId, locale);
+  const { data, fetchState } = useTourPoi(poiId, locale);
 
   if (fetchState.isLoading) {
     return (

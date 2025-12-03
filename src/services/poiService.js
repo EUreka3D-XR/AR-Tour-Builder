@@ -12,87 +12,78 @@ import { useDataFetcher, useDataMutator } from "./helpers/serviceHooks";
  */
 
 /**
- * @param {string} projectId
  * @param {string} tourId
  * @returns {PoisResult}
  */
-export const useTourPois = (projectId, tourId, params) => {
+export const useTourPois = (tourId, params) => {
   const locale = useLocale();
   return useDataFetcher({
-    fetcher: () => api.pois.fetchAll(projectId, tourId, { params, locale }),
-    queryKey: ["project-tour-pois", projectId, tourId, locale],
+    fetcher: () => api.pois.fetchAll(tourId, { params, locale }),
+    queryKey: ["our-pois", tourId],
   });
 };
 
 /**
- * @param {string} projectId
- * @param {string} tourId
  * @param {string} poiId
  * @returns {PoiResult}
  */
-export const useTourPoi = (projectId, tourId, poiId, propLocale) => {
+export const useTourPoi = (poiId, propLocale) => {
   const locale = useLocale();
   const effectiveLocale = propLocale || locale;
 
   return useDataFetcher({
-    fetcher: () => api.pois.fetchOne(projectId, tourId, poiId, effectiveLocale),
-    queryKey: ["project-tour-poi", projectId, tourId, poiId, effectiveLocale],
+    fetcher: () => api.pois.fetchOne(poiId, effectiveLocale),
+    queryKey: ["tour-poi", poiId, effectiveLocale],
     storeValue: true,
   });
 };
 
 /**
- * @param {string} projectId
- * @param {string} tourId
  * @param {string} poiId
  * @returns {PoiResult}
  */
-export const useTourPoiMultilingual = (projectId, tourId, poiId) => {
+export const useTourPoiMultilingual = (poiId) => {
   return useDataFetcher({
-    fetcher: () => api.pois.fetchOne(projectId, tourId, poiId),
-    queryKey: ["project-tour-poi", projectId, tourId, poiId, "multilingual"],
+    fetcher: () => api.pois.fetchOne(poiId),
+    queryKey: ["tour-poi", poiId, "multilingual"],
     storeValue: true,
     enabled: !!poiId,
   });
 };
 
 /**
- * @param {string} projectId
  * @param {string} tourId
  * @returns {PoiMutateResult}
  */
-export const useCreateTourPoi = (projectId, tourId) => {
+export const useCreateTourPoi = (tourId) => {
   return useDataMutator({
-    mutator: ({ data }) => api.pois.create(projectId, tourId, data),
-    mutationKey: ["create-tour-poi", projectId, tourId],
-    invalidateKey: ["project-tour-pois"],
+    mutator: ({ data }) => api.pois.create(tourId, data),
+    mutationKey: ["create-tour-poi", tourId],
+    invalidateKey: ["tour-pois", tourId],
   });
 };
 
 /**
- * @param {string} projectId
- * @param {string} tourId
  * @param {string} poiId
  * @returns {PoiMutateResult}
  */
-export const useUpdateTourPoi = (projectId, tourId, poiId) => {
+export const useUpdateTourPoi = (poiId) => {
   return useDataMutator({
-    mutator: ({ data }) => api.pois.update(projectId, tourId, poiId, data),
-    mutationKey: ["update-tour-poi", projectId, tourId, poiId],
-    invalidateKey: ["project-tour-pois", projectId, tourId, poiId],
+    mutator: ({ data }) => api.pois.update(poiId, data),
+    mutationKey: ["update-tour-poi", poiId],
+    invalidateKey: ["tour-pois", poiId],
   });
 };
 
 /**
- * @param {string} projectId
  * @param {string} tourId
  * @param {string} poiId
  * @returns {PoiMutateResult}
  */
-export const useDeleteTourPoi = (projectId, tourId, poiId) => {
+export const useDeleteTourPoi = (tourId, poiId) => {
   return useDataMutator({
-    mutator: () => api.pois.delete(projectId, tourId, poiId),
-    mutationKey: ["delete-tour-poi", projectId, tourId, poiId],
-    invalidateKey: ["project-tour-pois", projectId, tourId],
+    mutator: () => api.pois.delete(poiId),
+    mutationKey: ["delete-tour-poi", poiId],
+    invalidateKey: ["tour-pois", tourId],
   });
 };

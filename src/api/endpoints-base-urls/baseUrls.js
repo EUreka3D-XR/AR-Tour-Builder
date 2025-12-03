@@ -13,12 +13,8 @@ export const baseUrls = {
   users: "/api/users",
   tours: (projectId) => `/api/projects/${projectId}/tours`,
   tour: (projectId, tourId) => `/api/projects/${projectId}/tours/${tourId}`,
-  tourPois: (projectId, tourId) =>
-    `/api/projects/${projectId}/tours/${tourId}/pois`,
-  tourPoi: (projectId, tourId, poiId) =>
-    `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}`,
-  pois: (projectId) => `/api/projects/${projectId}/pois`,
-  poi: (projectId, poiId) => `/api/projects/${projectId}/pois/${poiId}`,
+  pois: "/api/pois",
+  poi: (poiId) => `/api/pois/${poiId}`,
   poiAssets: "/api/poi-assets",
   poiAsset: (assetId) => `/api/poi-assets/${assetId}`,
   localesCDN: (locale) => `https://flagcdn.com/${locale}/codes.json`,

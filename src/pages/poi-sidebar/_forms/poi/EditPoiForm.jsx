@@ -11,14 +11,10 @@ import PoiFormContainer from "./PoiFormContainer";
 
 function EditPoiForm({ onClose }) {
   const { routes, navigate } = useNavPaths();
-  const { projectId, tourId, poiId } = useParams();
+  const { poiId } = useParams();
 
-  const { data: initialPoi, fetchState } = useTourPoiMultilingual(
-    projectId,
-    tourId,
-    poiId,
-  );
-  const { mutate: updatePoi } = useUpdateTourPoi(projectId, tourId, poiId);
+  const { data: initialPoi, fetchState } = useTourPoiMultilingual(poiId);
+  const { mutate: updatePoi } = useUpdateTourPoi(poiId);
 
   const defaultValues = useMemo(
     () => ({

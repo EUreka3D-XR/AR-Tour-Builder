@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import LogoutPage from "@/pages/logout/page";
 
 import AuthRoutes from "./AuthRoutes";
 import DefaultRoutes from "./DefaultRoutes";
@@ -13,8 +12,6 @@ function EurekaRoutes() {
       <Route path="/" element={<Navigate to="/projects" replace />} />
       {/* 📁 Projects */}
       <Route path="/projects/*" element={<DefaultRoutes />} />
-      {/* Logout */}
-      <Route path="/logout" element={<LogoutPage />} />
       {/* 404 - Not Found */}
       {/* <Route path="*" element={<Navigate to="/projects" replace />} /> */}
     </Routes>

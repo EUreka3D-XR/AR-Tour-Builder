@@ -1,5 +1,6 @@
 import { IconButton, styled } from "@mui/material";
 
+import { useLogout } from "@/services/authService";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import logo from "@/assets/images/dummy-logo.webp";
 import DropdownMenu from "../dropdown/DropdownMenu";
@@ -26,6 +27,8 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 function Header() {
   const { isInsideAProject, toggleNavMenu } = useGeneralProvider();
 
+  const { mutate: logout } = useLogout();
+
   return (
     <ContainerStyled className="header">
       <div className="side-header left-header">
@@ -42,7 +45,7 @@ function Header() {
           items={[
             // { label: "Profile", to: "/profile" },
             // { label: "Settings", to: "/settings" },
-            { label: "Logout", to: "/logout" },
+            { label: "Logout", onClick: logout },
           ]}
         >
           {({ toggle }) => (

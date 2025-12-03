@@ -2,20 +2,23 @@ import { PoiListDto } from "./PoiDto";
 
 export class TourDto {
   static fromApi(data) {
-    const { distanceMeters, durationMinutes, pois, ...restData } = data || {};
+    const { distanceMeters, durationMinutes, isPublic, pois, ...restData } =
+      data || {};
     return {
       ...restData,
       pois: PoiListDto.fromApi(pois),
+      status: isPublic ? "published" : "draft",
       distance: distanceMeters,
       duration: durationMinutes,
     };
   }
 
   static toApi(data) {
-    const { distance, duration, pois, ...restData } = data || {};
+    const { distance, duration, status, pois, ...restData } = data || {};
     return {
       ...restData,
       pois: PoiListDto.toApi(pois),
+      isPublic: status === "published",
       distanceMeters: distance,
       durationMinutes: duration,
     };

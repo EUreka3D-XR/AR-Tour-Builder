@@ -99,10 +99,10 @@
  * @property {string} thumbnail - Tour thumbnail image URL
  * @property {Poi[]} pois - Array of Points of Interest in this tour
  * @property {Status} status - Tour status (draft, published, archived)
+ * @property {number} totalPois - Total number of POIs in the tour
  * @property {number} duration - Estimated duration in minutes
  * @property {number} distance - Estimated distance in meters
  * @property {boolean} guided - Indicates if the tour is guided
- * @property {boolean} isPublic - Indicates if the tour is public
  * @property {Coordinates} [coordinates] - Geographic coordinates
  * @property {Coordinates[]} [boundBox] - Bounding box of the tour pois
  * @property {string} createdAt - Creation timestamp

@@ -31,5 +31,8 @@ export const useLogout = () => {
     mutator: () => api.auth.logout(),
     mutationKey: ["logout"],
     invalidateKey: ["profile"],
+    onSuccess: () => {
+      localeStorageAPI.auth.removeToken();
+    },
   });
 };

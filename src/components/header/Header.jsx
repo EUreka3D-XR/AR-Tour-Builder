@@ -2,6 +2,7 @@ import { IconButton, styled } from "@mui/material";
 
 import { useLogout } from "@/services/authService";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
+import useNavPaths from "@/hooks/useNavPaths";
 import logo from "@/assets/images/dummy-logo.webp";
 import DropdownMenu from "../dropdown/DropdownMenu";
 import EurekaIcon from "../icon/EurekaIcon";
@@ -25,9 +26,16 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function Header() {
+  const { navigate, routes } = useNavPaths();
   const { isInsideAProject, toggleNavMenu } = useGeneralProvider();
 
   const { mutate: logout } = useLogout();
+
+  const handleLogout = () => {
+    logout().then(() => {
+      navigate(routes.login);
+    });
+  };
 
   return (
     <ContainerStyled className="header">
@@ -45,7 +53,7 @@ function Header() {
           items={[
             // { label: "Profile", to: "/profile" },
             // { label: "Settings", to: "/settings" },
-            { label: "Logout", onClick: logout },
+            { label: "Logout", onClick: handleLogout },
           ]}
         >
           {({ toggle }) => (

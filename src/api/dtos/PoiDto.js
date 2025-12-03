@@ -1,10 +1,14 @@
+import { PoiAssetListDto } from "./PoiAssetDto";
+
 export class PoiDto {
   static fromApi(data) {
-    return data;
+    const { assets, ...restData } = data || {};
+    return { ...restData, assets: PoiAssetListDto.fromApi(assets) };
   }
 
   static toApi(data) {
-    return data;
+    const { assets, ...restData } = data || {};
+    return { ...restData, assets: PoiAssetListDto.toApi(assets) };
   }
 }
 

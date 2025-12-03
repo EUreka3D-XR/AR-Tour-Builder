@@ -17,10 +17,10 @@ const columns = [
   },
   {
     label: "URL",
-    value: "url",
+    value: "contentUrl",
     width: 300,
     disableSorting: true,
-    renderCell: (row) => <AssetURLCell url={row.url} />,
+    renderCell: (row) => <AssetURLCell url={row.contentUrl} />,
   },
   {
     label: "Filename",

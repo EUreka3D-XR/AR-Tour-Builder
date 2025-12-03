@@ -1,10 +1,22 @@
+import { TourListDto } from "./TourDto";
+
 export class ProjectDto {
   static fromApi(data) {
-    return { ...data, members: data.groupMembers };
+    const { groupMembers, tours, ...restData } = data || {};
+    return {
+      ...restData,
+      tours: TourListDto.fromApi(tours),
+      members: groupMembers,
+    };
   }
 
   static toApi(data) {
-    return { ...data, groupMembers: data.members };
+    const { members, tours, ...restData } = data || {};
+    return {
+      ...restData,
+      groupMembers: members,
+      tours: TourListDto.toApi(tours),
+    };
   }
 }
 

@@ -1,10 +1,24 @@
+import { PoiListDto } from "./PoiDto";
+
 export class TourDto {
   static fromApi(data) {
-    return data;
+    const { distanceMeters, durationMinutes, pois, ...restData } = data || {};
+    return {
+      ...restData,
+      pois: PoiListDto.fromApi(pois),
+      distance: distanceMeters,
+      duration: durationMinutes,
+    };
   }
 
   static toApi(data) {
-    return data;
+    const { distance, duration, pois, ...restData } = data || {};
+    return {
+      ...restData,
+      pois: PoiListDto.toApi(pois),
+      distanceMeters: distance,
+      durationMinutes: duration,
+    };
   }
 }
 

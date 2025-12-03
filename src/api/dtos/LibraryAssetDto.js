@@ -1,10 +1,14 @@
+import { AssetBaseDto } from "./AssetBaseDto";
+
 export class LibraryAssetDto {
   static fromApi(data) {
-    return data;
+    const newData = AssetBaseDto.fromApi(data);
+    return newData;
   }
 
   static toApi(data) {
-    return data;
+    const newData = AssetBaseDto.toApi(data);
+    return newData;
   }
 }
 

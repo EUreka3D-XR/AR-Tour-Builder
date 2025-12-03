@@ -77,10 +77,11 @@ axiosInstance.interceptors.request.use(
       config.data &&
       !isFormData
     ) {
-      return {
-        ...config,
-        data: transformKeysToSnake(config.data),
-      };
+      config.data = transformKeysToSnake(config.data);
+    }
+
+    if (config?.params) {
+      config.params = transformKeysToSnake(config.params);
     }
 
     return config;

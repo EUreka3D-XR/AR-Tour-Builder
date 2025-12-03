@@ -188,7 +188,7 @@ function TourCard({ tour, isFullWidth, isHighlighted, onTourClick }) {
 
           <div className="stat-item">
             <EurekaIcon name="poi" variant="filled" className="stat-icon" />
-            <Typography variant="body2">{tour.poisCount} </Typography>
+            <Typography variant="body2">{tour.totalPois} </Typography>
           </div>
 
           <div className="stat-item">

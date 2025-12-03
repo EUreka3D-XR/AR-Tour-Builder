@@ -1,4 +1,3 @@
-import { useProjectTours } from "@/services/toursService";
 import {
   Chip,
   IconButton,
@@ -10,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useProjectTours } from "@/services/toursService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import usePaginatedItems from "@/hooks/usePaginatedItems";
 import DashboardCard from "../_common/DashboardCard";
@@ -109,7 +109,7 @@ function ToursList({ tours }) {
             <div className="tour-meta">
               <div className="tour-meta-item">
                 <EurekaIcon name="poi" sx={{ fontSize: 16 }} />
-                <span>{tour.poisCount || tour.pois?.length || 0} POIs</span>
+                <span>{tour.totalPois || tour.pois?.length || 0} POIs</span>
               </div>
               <div className="tour-meta-item">
                 <EurekaIcon name="time" sx={{ fontSize: 16 }} />

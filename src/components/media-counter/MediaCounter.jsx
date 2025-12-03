@@ -60,7 +60,7 @@ function MediaCounter({
       )}
       {models > 0 && (
         <div className="asset-counter">
-          <MediaIcon type="3d" noColor={noColor} className="asset-icon" />
+          <MediaIcon type="model3d" noColor={noColor} className="asset-icon" />
           <span className="asset-count">{models}</span>
         </div>
       )}

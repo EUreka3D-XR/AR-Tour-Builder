@@ -587,7 +587,7 @@ export const mockModelAssets = [
     landingPage: "https://acropolis-museum.gr/3d-models/parthenon",
     source: "https://commons.wikimedia.org/wiki/File:Parthenon_3D_model.glb",
     url: "https://example.com/models/parthenon_complete.glb",
-    type: "3d",
+    type: "model3d",
     metadata: {
       format: "GLB",
       photographer: "Digital Heritage Lab",
@@ -620,7 +620,7 @@ export const mockModelAssets = [
     landingPage: "https://acropolis-museum.gr/3d-models/ionic-capital",
     source: "https://commons.wikimedia.org/wiki/File:Ionic_capital_3D.glb",
     url: "https://example.com/models/ionic_capital.glb",
-    type: "3d",
+    type: "model3d",
     metadata: {
       format: "GLB",
       photographer: "Archaeological 3D Scanning Unit",
@@ -653,7 +653,7 @@ export const mockModelAssets = [
     landingPage: "https://acropolis-museum.gr/3d-models/amphora",
     source: "https://commons.wikimedia.org/wiki/File:Greek_amphora_3D.glb",
     url: "https://example.com/models/greek_amphora.glb",
-    type: "3d",
+    type: "model3d",
     metadata: {
       format: "GLB",
       photographer: "Museum Digital Archive Team",
@@ -686,7 +686,7 @@ export const mockModelAssets = [
     landingPage: "https://acropolis-museum.gr/3d-models/caryatid",
     source: "https://commons.wikimedia.org/wiki/File:Caryatid_3D_model.glb",
     url: "https://example.com/models/caryatid_statue.glb",
-    type: "3d",
+    type: "model3d",
     metadata: {
       format: "GLB",
       photographer: "Hellenic Ministry of Culture 3D Lab",
@@ -719,7 +719,7 @@ export const mockModelAssets = [
     landingPage: "https://acropolis-museum.gr/3d-models/frieze",
     source: "https://commons.wikimedia.org/wiki/File:Parthenon_frieze_3D.glb",
     url: "https://example.com/models/parthenon_frieze.glb",
-    type: "3d",
+    type: "model3d",
     metadata: {
       format: "GLB",
       photographer: "International Heritage Preservation Society",
@@ -946,7 +946,7 @@ export function getMockPoiAssets(assets, count = 100) {
       priority: "normal",
       modelAssetAttributes: {},
     };
-    if (asset.type === "3d") {
+    if (asset.type === "model3d") {
       poiAsset.modelAssetAttributes = { viewInAr: true };
       if (!isModel3dIncluded) {
         poiAsset.priority = "high";

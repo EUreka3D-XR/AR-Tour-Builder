@@ -8,7 +8,7 @@ function MediaPreview({ url, type }) {
     return <Image src={url} alt={"Image"} objectFit="contain" fillParent />;
   }
 
-  if (type === "3d") {
+  if (type === "model3d") {
     return <Model3DViewer src={url} showControls />;
   }
 

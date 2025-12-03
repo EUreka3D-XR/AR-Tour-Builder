@@ -40,7 +40,7 @@ export const allowedFileExtensions = {
     { value: ".aac", label: "AAC (Advanced Audio Codec)" },
     { value: ".flac", label: "FLAC (Free Lossless Audio Codec)" },
   ],
-  "3d": [
+  model3d: [
     // { value: ".gltf", label: "glTF (GL Transmission Format)" },
     { value: ".glb", label: "glTF Binary (GLB)" },
     // { value: ".obj", label: "OBJ" },
@@ -102,7 +102,7 @@ export const fileTypes = [
     label: "Audio",
   },
   {
-    value: "3d",
+    value: "model3d",
     label: "3D Model",
   },
   {

@@ -121,11 +121,11 @@ function MediaCardItem({ asset, onEdit }) {
 
   // Check if asset should show AR pill
   const showArPill =
-    asset?.type === "3d" && asset?.modelAssetAttributes?.viewInAr;
+    asset?.type === "model3d" && asset?.modelAssetAttributes?.viewInAr;
 
   // Check if asset should show Georeferenced pill
   const showGeoferencedPill =
-    asset?.type === "3d" && asset?.modelAssetAttributes?.georeference;
+    asset?.type === "model3d" && asset?.modelAssetAttributes?.georeference;
 
   const handleClick = () => {
     openPoiMediaModal({ assetId: asset.id, projectId, tourId, poiId });

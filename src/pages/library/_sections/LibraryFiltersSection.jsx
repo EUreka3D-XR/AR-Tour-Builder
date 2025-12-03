@@ -38,7 +38,7 @@ const typeOptions = [
   { value: "image", label: "Image" },
   { value: "video", label: "Video" },
   { value: "audio", label: "Audio" },
-  { value: "3d", label: "3D Model" },
+  { value: "model3d", label: "3D Model" },
   { value: "text", label: "Document" },
 ];
 

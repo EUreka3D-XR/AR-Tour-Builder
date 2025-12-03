@@ -36,6 +36,16 @@
  * @typedef {'draft'|'published'} Status
  */
 
+/**
+ * Assets Stats for pois
+ * @typedef {Object} AssetStats
+ * @property {number} image - Number of image assets
+ * @property {number} video - Number of video assets
+ * @property {number} audio - Number of audio assets
+ * @property {number} model3d - Number of 3D model assets
+ * @property {number} text - Number of text assets
+ */
+
 // =============================================================================
 // API TYPES
 // =============================================================================
@@ -122,6 +132,8 @@
  * @property {Coordinates} coordinates - Geographic location
  * @property {string} thumbnail - POI thumbnail image URL
  * @property {PoiAsset[]} assets - Associated media assets
+ * @property {number} order - Order/index of the POI within its tour
+ * @property {AssetStats} stats - POI status (draft, published, archived)
  * @property {ExternalLink[]} externalLinks - Associated external links
  * @property {ExternalLink[]} quizLinks - Associated quiz links
  * @property {string} createdAt - Creation timestamp
@@ -178,7 +190,7 @@
 
 /**
  * Asset Types
- * @typedef {'image'|'video'|'audio'|'3d'|'text'} AssetType
+ * @typedef {'image'|'video'|'audio'|'model3d'|'text'} AssetType
  */
 
 /**

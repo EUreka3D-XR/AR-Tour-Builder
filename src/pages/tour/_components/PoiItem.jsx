@@ -129,12 +129,12 @@ function PoiItem({
   };
 
   // Group assets by type and count them
-  const assetCounts =
-    poi?.assets?.reduce((acc, asset) => {
-      const type = asset.type || "image";
-      acc[type] = (acc[type] || 0) + 1;
-      return acc;
-    }, {}) || {};
+  // const assetCounts =
+  //   poi?.assets?.reduce((acc, asset) => {
+  //     const type = asset.type || "image";
+  //     acc[type] = (acc[type] || 0) + 1;
+  //     return acc;
+  //   }, {}) || {};
 
   return (
     <CardStyled className="poi-card" onClick={() => onClick(poi.id)}>
@@ -154,11 +154,11 @@ function PoiItem({
 
             <AssetsRow className="assets-row">
               <MediaCounter
-                images={assetCounts.image}
-                videos={assetCounts.video}
-                documents={assetCounts.text}
-                audios={assetCounts.audio}
-                models={assetCounts["3d"]}
+                images={poi.stats.image}
+                videos={poi.stats.video}
+                documents={poi.stats.text}
+                audios={poi.stats.audio}
+                models={poi.stats.model3d}
                 noColor
               />
             </AssetsRow>

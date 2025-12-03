@@ -16,7 +16,7 @@ const EurekaIconStyled = styled(EurekaIcon)(({ theme }) => ({
   "&.icon-text": {
     color: theme.palette.success.light,
   },
-  "&.icon-3d": {
+  "&.icon-model3d": {
     color: theme.palette.warning.light,
   },
   "&.no-color": {
@@ -27,7 +27,7 @@ const EurekaIconStyled = styled(EurekaIcon)(({ theme }) => ({
 const MediaIconsNames = {
   image: "image",
   video: "video",
-  "3d": "model",
+  model3d: "model",
   audio: "audio",
   text: "document",
 };
@@ -35,7 +35,7 @@ const MediaIconsNames = {
 /**
  * MediaIcon component props
  * @typedef {Omit<import("./EurekaIcon").EurekaIconProps, 'name'> & {
- *   type: 'image'|'video'|'3d'|'audio'|'text',
+ *   type: 'image'|'video'|'model3d'|'audio'|'text',
  *   noColor?: boolean
  * }} MediaIconProps
  */

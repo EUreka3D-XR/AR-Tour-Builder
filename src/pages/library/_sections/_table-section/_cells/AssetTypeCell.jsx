@@ -27,7 +27,7 @@ const CellStyled = styled("div")(({ theme }) => ({
     backgroundColor: lighten(theme.palette.success.light, 0.9),
     color: theme.palette.success.dark,
   },
-  "&.icon-3d": {
+  "&.icon-model3d": {
     backgroundColor: lighten(theme.palette.warning.light, 0.9),
     color: theme.palette.warning.dark,
   },

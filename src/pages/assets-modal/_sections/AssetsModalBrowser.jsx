@@ -84,7 +84,7 @@ function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
           <MenuItem value="">All File Types</MenuItem>
           <MenuItem value="image">Images</MenuItem>
           <MenuItem value="video">Videos</MenuItem>
-          <MenuItem value="3d">3D Models</MenuItem>
+          <MenuItem value="model3d">3D Models</MenuItem>
           <MenuItem value="text">Documents</MenuItem>
         </Select>
         <SortByFormControlStyled size="small">

@@ -222,7 +222,7 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
               type={assetType}
             />
           )}
-          {assetType === "3d" && (
+          {assetType === "model3d" && (
             <>
               <Divider />
               <Typography variant="h5">3D Model Attributes</Typography>

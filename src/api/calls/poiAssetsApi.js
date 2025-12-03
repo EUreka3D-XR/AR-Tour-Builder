@@ -1,35 +1,31 @@
 import { baseUrls } from "../endpoints-base-urls/baseUrls";
 import fetcher from "../fetcher/api-fetcher";
 
-const getPoiAssets = async (projectId, tourId, poiId, { params, locale }) => {
-  const url = baseUrls.poiAssets(projectId, tourId, poiId);
+const getPoiAssets = async (poiId, { params: propsParams, locale }) => {
+  const url = baseUrls.poiAssets;
+  const params = { ...propsParams, poiId };
   return fetcher.get(url, { locale, params });
 };
 
-const getPoiAsset = async (projectId, tourId, poiId, assetId, locale) => {
-  const url = baseUrls.poiAsset(projectId, tourId, poiId, assetId);
+const getPoiAsset = async (assetId, locale) => {
+  const url = baseUrls.poiAsset(assetId);
   return fetcher.get(url, { locale });
 };
 
-const createPoiAsset = async (projectId, tourId, poiId, data, locale) => {
-  const url = baseUrls.poiAssets(projectId, tourId, poiId);
-  return fetcher.post(url, { data, locale });
+const createPoiAsset = async (poiId, data, locale) => {
+  const url = baseUrls.poiAssets;
+  const fullData = { ...data, poiId };
+
+  return fetcher.post(url, { data: fullData, locale });
 };
 
-const updatePoiAsset = async (
-  projectId,
-  tourId,
-  poiId,
-  assetId,
-  data,
-  locale,
-) => {
-  const url = baseUrls.poiAsset(projectId, tourId, poiId, assetId);
+const updatePoiAsset = async (assetId, data, locale) => {
+  const url = baseUrls.poiAsset(assetId);
   return fetcher.put(url, { data, locale });
 };
 
-const deletePoiAsset = async (projectId, tourId, poiId, assetId) => {
-  const url = baseUrls.poiAsset(projectId, tourId, poiId, assetId);
+const deletePoiAsset = async (assetId) => {
+  const url = baseUrls.poiAsset(assetId);
   return fetcher.delete(url);
 };
 

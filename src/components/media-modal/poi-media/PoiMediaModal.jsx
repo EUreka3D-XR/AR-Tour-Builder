@@ -5,8 +5,8 @@ import ErrorArea from "../../error/ErrorArea";
 import DisplayLoading from "../../media-display/_common/DisplayLoading";
 import MediaModal from "../layout";
 
-function PoiMediaModal({ projectId, tourId, poiId, assetId, onClose }) {
-  const { data, fetchState } = usePoiAsset(projectId, tourId, poiId, assetId);
+function PoiMediaModal({ assetId, onClose }) {
+  const { data, fetchState } = usePoiAsset(assetId);
 
   return (
     <MediaModal isOpen onClose={onClose}>

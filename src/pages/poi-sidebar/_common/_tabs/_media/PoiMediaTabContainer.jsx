@@ -4,11 +4,11 @@ import { usePoiAssets } from "@/services/assetsService";
 import PoiMediaTab from "./PoiMediaTab";
 
 function PoiMediaTabContainer() {
-  const { projectId, tourId, poiId } = useParams();
+  const { poiId } = useParams();
 
   const [, setSearchParams] = useSearchParams();
 
-  const { data, fetchState } = usePoiAssets(projectId, tourId, poiId);
+  const { data, fetchState } = usePoiAssets(poiId);
 
   const handleEditPoiAsset = (asset) => {
     setSearchParams((prev) => {

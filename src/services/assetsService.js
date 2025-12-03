@@ -11,103 +11,79 @@ import { useDataFetcher, useDataMutator } from "./helpers/serviceHooks";
  */
 
 /**
- * @param {string} projectId
- * @param {string} tourId
  * @param {string} poiId
  * @returns {PoiAssetsResult}
  */
-export const usePoiAssets = (projectId, tourId, poiId, params) => {
+export const usePoiAssets = (poiId, params) => {
   const locale = useLocale();
   return useDataFetcher({
-    fetcher: () =>
-      api.poiAssets.fetchAll(projectId, tourId, poiId, { params, locale }),
-    queryKey: ["poi-assets", projectId, tourId, poiId, locale],
+    fetcher: () => api.poiAssets.fetchAll(poiId, { params, locale }),
+    queryKey: ["poi-assets", poiId],
   });
 };
 
 /**
- * @param {string} projectId
- * @param {string} tourId
- * @param {string} poiId
  * @param {string} assetId
  * @returns {PoiAssetResult}
  */
-export const usePoiAsset = (projectId, tourId, poiId, assetId, propLocale) => {
+export const usePoiAsset = (assetId, propLocale) => {
   const locale = useLocale();
   const effectiveLocale = propLocale || locale;
 
   return useDataFetcher({
-    fetcher: () =>
-      api.poiAssets.fetchOne(
-        projectId,
-        tourId,
-        poiId,
-        assetId,
-        effectiveLocale,
-      ),
-    queryKey: ["poi-asset", projectId, tourId, poiId, assetId, effectiveLocale],
+    fetcher: () => api.poiAssets.fetchOne(assetId, effectiveLocale),
+    queryKey: ["poi-asset", assetId, effectiveLocale],
     enabled: !!assetId,
     storeValue: true,
   });
 };
 
 /**
- * @param {string} projectId
- * @param {string} tourId
- * @param {string} poiId
  * @param {string} assetId
  * @returns {PoiAssetResult}
  */
-export const usePoiAssetMultilingual = (projectId, tourId, poiId, assetId) => {
+export const usePoiAssetMultilingual = (assetId) => {
   return useDataFetcher({
-    fetcher: () => api.poiAssets.fetchOne(projectId, tourId, poiId, assetId),
-    queryKey: ["poi-asset", projectId, tourId, poiId, assetId, "multilingual"],
+    fetcher: () => api.poiAssets.fetchOne(assetId),
+    queryKey: ["poi-asset", assetId, "multilingual"],
     storeValue: true,
     enabled: !!assetId,
   });
 };
 
 /**
- * @param {string} projectId
- * @param {string} tourId
  * @param {string} poiId
  * @returns {PoiAssetMutateResult}
  */
-export const useCreatePoiAsset = (projectId, tourId, poiId) => {
+export const useCreatePoiAsset = (poiId) => {
   return useDataMutator({
-    mutator: ({ data }) => api.poiAssets.create(projectId, tourId, poiId, data),
-    mutationKey: ["create-poi-asset", projectId, tourId, poiId],
-    invalidateKey: ["poi-assets", projectId, tourId, poiId],
+    mutator: ({ data }) => api.poiAssets.create(poiId, data),
+    mutationKey: ["create-poi-asset", poiId],
+    invalidateKey: ["poi-assets", poiId],
   });
 };
 
 /**
- * @param {string} projectId
- * @param {string} tourId
- * @param {string} poiId
  * @param {string} assetId
  * @returns {PoiAssetMutateResult}
  */
-export const useUpdatePoiAsset = (projectId, tourId, poiId, assetId) => {
+export const useUpdatePoiAsset = (assetId) => {
   return useDataMutator({
-    mutator: ({ data }) =>
-      api.poiAssets.update(projectId, tourId, poiId, assetId, data),
-    mutationKey: ["update-poi-asset", projectId, tourId, poiId, assetId],
-    invalidateKey: ["poi-asset", projectId, tourId, poiId, assetId],
+    mutator: ({ data }) => api.poiAssets.update(assetId, data),
+    mutationKey: ["update-poi-asset", assetId],
+    invalidateKey: ["poi-asset", assetId],
   });
 };
 
 /**
- * @param {string} projectId
- * @param {string} tourId
  * @param {string} poiId
  * @param {string} assetId
  * @returns {PoiAssetMutateResult}
  */
-export const useDeletePoiAsset = (projectId, tourId, poiId, assetId) => {
+export const useDeletePoiAsset = (poiId, assetId) => {
   return useDataMutator({
-    mutator: () => api.poiAssets.delete(projectId, tourId, poiId, assetId),
-    mutationKey: ["delete-poi-asset", projectId, tourId, poiId, assetId],
-    invalidateKey: ["poi-assets", projectId, tourId, poiId],
+    mutator: () => api.poiAssets.delete(assetId),
+    mutationKey: ["delete-poi-asset", assetId],
+    invalidateKey: ["poi-assets", poiId],
   });
 };

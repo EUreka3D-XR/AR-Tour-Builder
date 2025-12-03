@@ -4,16 +4,7 @@ import LibraryMediaModal from "./library-media/LibraryMediaModal";
 import PoiMediaModal from "./poi-media/PoiMediaModal";
 
 function MediaModal() {
-  const {
-    assetId,
-    projectId,
-    tourId,
-    poiId,
-    sourceType,
-    url,
-    isOpen,
-    closeModal,
-  } = useAssetModalState();
+  const { assetId, sourceType, url, isOpen, closeModal } = useAssetModalState();
 
   if (url) {
     return <AssetMediaModal url={url} onClose={closeModal} />;
@@ -24,15 +15,7 @@ function MediaModal() {
   }
 
   if (sourceType === "poiAsset") {
-    return (
-      <PoiMediaModal
-        projectId={projectId}
-        tourId={tourId}
-        poiId={poiId}
-        assetId={assetId}
-        onClose={closeModal}
-      />
-    );
+    return <PoiMediaModal assetId={assetId} onClose={closeModal} />;
   }
 
   if (sourceType === "libraryAsset") {

@@ -19,9 +19,7 @@ export const baseUrls = {
     `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}`,
   pois: (projectId) => `/api/projects/${projectId}/pois`,
   poi: (projectId, poiId) => `/api/projects/${projectId}/pois/${poiId}`,
-  poiAssets: (projectId, tourId, poiId) =>
-    `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}/assets`,
-  poiAsset: (projectId, tourId, poiId, assetId) =>
-    `/api/projects/${projectId}/tours/${tourId}/pois/${poiId}/assets/${assetId}`,
+  poiAssets: "/api/poi-assets",
+  poiAsset: (assetId) => `/api/poi-assets/${assetId}`,
   localesCDN: (locale) => `https://flagcdn.com/${locale}/codes.json`,
 };

@@ -7,9 +7,8 @@ export const baseUrls = {
   me: "/api/auth/me",
   projects: "/api/projects",
   project: (projectId) => `/api/projects/${projectId}`,
-  library: (projectId) => `/api/projects/${projectId}/library`,
-  libraryAsset: (projectId, assetId) =>
-    `/api/projects/${projectId}/library/${assetId}`,
+  library: "/api/assets",
+  libraryAsset: (assetId) => `/api/assets/${assetId}`,
   members: (projectId) => `/api/projects/${projectId}/members`,
   users: "/api/users",
   tours: (projectId) => `/api/projects/${projectId}/tours`,

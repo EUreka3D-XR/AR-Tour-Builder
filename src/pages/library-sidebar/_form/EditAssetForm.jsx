@@ -8,10 +8,10 @@ import SidebarSkeleton from "../_common/_utils/SidebarSkeleton";
 import AssetFormContainer from "./AssetFormContainer";
 
 function EditAssetForm({ onClose }) {
-  const { projectId, assetId } = useParams();
+  const { assetId } = useParams();
 
-  const { data, fetchState } = useLibraryAssetMultilingual(projectId, assetId);
-  const { mutate: updateAsset } = useUpdateAsset(projectId, assetId);
+  const { data, fetchState } = useLibraryAssetMultilingual(assetId);
+  const { mutate: updateAsset } = useUpdateAsset(assetId);
 
   if (fetchState.isLoading) return <SidebarSkeleton />;
   if (fetchState.isError) return <div>Error loading asset.</div>;

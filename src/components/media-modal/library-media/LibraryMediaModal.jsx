@@ -5,8 +5,8 @@ import ErrorArea from "../../error/ErrorArea";
 import DisplayLoading from "../../media-display/_common/DisplayLoading";
 import MediaModal from "../layout";
 
-function LibraryMediaModal({ projectId, assetId, onClose }) {
-  const { data, fetchState } = useLibraryAsset(projectId, assetId);
+function LibraryMediaModal({ assetId, onClose }) {
+  const { data, fetchState } = useLibraryAsset(assetId);
 
   return (
     <MediaModal isOpen onClose={onClose}>

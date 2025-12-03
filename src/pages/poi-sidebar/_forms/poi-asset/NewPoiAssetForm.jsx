@@ -54,7 +54,7 @@ function NewPoiAssetForm({ onClose }) {
   const [searchParams] = useSearchParams();
   const assetId = searchParams.get("libraryMedia");
 
-  const { data, fetchState } = useLibraryAssetMultilingual(projectId, assetId);
+  const { data, fetchState } = useLibraryAssetMultilingual(assetId);
   const { mutate: createAsset } = useCreatePoiAsset(projectId, tourId, poiId);
 
   const defaultValues = useMemo(() => {

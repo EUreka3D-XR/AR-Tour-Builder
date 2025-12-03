@@ -23,27 +23,25 @@ export const useLibraryAssets = (projectId, params) => {
 };
 
 /**
- * @param {string} projectId
  * @param {string} assetId
  * @returns {AssetsResult}
  */
-export const useLibraryAsset = (projectId, assetId) => {
+export const useLibraryAsset = (assetId) => {
   const locale = useLocale();
   return useDataFetcher({
-    fetcher: () => api.library.fetchOne(projectId, assetId, locale),
-    queryKey: ["library-asset", projectId, assetId, locale],
+    fetcher: () => api.library.fetchOne(assetId, locale),
+    queryKey: ["library-asset", assetId, locale],
   });
 };
 
 /**
- * @param {string} projectId
  * @param {string} assetId
  * @returns {AssetResult}
  */
-export const useLibraryAssetMultilingual = (projectId, assetId) => {
+export const useLibraryAssetMultilingual = (assetId) => {
   return useDataFetcher({
-    fetcher: () => api.library.fetchOne(projectId, assetId),
-    queryKey: ["library-asset", projectId, assetId, "multilingual"],
+    fetcher: () => api.library.fetchOne(assetId),
+    queryKey: ["library-asset", assetId, "multilingual"],
     storeValue: true,
     enabled: !!assetId,
   });
@@ -62,26 +60,25 @@ export const useCreateAsset = (projectId) => {
 };
 
 /**
- * @param {string} projectId
+ * @param {string} assetId
  * @returns {AssetMutateResult}
  */
-export const useUpdateAsset = (projectId, assetId) => {
+export const useUpdateAsset = (assetId) => {
   return useDataMutator({
-    mutator: ({ data }) => api.library.update(projectId, assetId, data),
-    mutationKey: ["update-library-asset", projectId, assetId],
-    invalidateKey: ["library-asset", projectId, assetId],
+    mutator: ({ data }) => api.library.update(assetId, data),
+    mutationKey: ["update-library-asset", assetId],
+    invalidateKey: ["library-asset", assetId],
   });
 };
 
 /**
- * @param {string} projectId
  * @param {string} assetId
  * @returns {AssetMutateResult}
  */
 export const useDeleteAsset = (projectId, assetId) => {
   return useDataMutator({
-    mutator: () => api.library.delete(projectId, assetId),
-    mutationKey: ["delete-library-asset", projectId, assetId],
+    mutator: () => api.library.delete(assetId),
+    mutationKey: ["delete-library-asset", assetId],
     invalidateKey: ["library-assets", projectId],
   });
 };

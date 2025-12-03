@@ -36,13 +36,7 @@ function MediaModal() {
   }
 
   if (sourceType === "libraryAsset") {
-    return (
-      <LibraryMediaModal
-        projectId={projectId}
-        assetId={assetId}
-        onClose={closeModal}
-      />
-    );
+    return <LibraryMediaModal assetId={assetId} onClose={closeModal} />;
   }
 
   return null;

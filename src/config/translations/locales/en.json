@@ -4,5 +4,12 @@
     "tours": "Tours",
     "library": "Library",
     "dashboard": "Dashboard"
+  },
+  "dates": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow",
+    "last_week": "Last Week",
+    "next_week": "Next Week"
   }
 }

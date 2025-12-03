@@ -1,0 +1,15 @@
+{
+  "nav_menu": {
+    "home": "Accueil",
+    "tours": "Visites",
+    "library": "Bibliothèque",
+    "dashboard": "Tableau de bord"
+  },
+  "dates": {
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "tomorrow": "Demain",
+    "last_week": "La semaine dernière",
+    "next_week": "La semaine prochaine"
+  }
+}

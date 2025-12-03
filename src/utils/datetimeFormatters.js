@@ -1,6 +1,7 @@
 import differenceInMinutes from "date-fns/differenceInMinutes";
 import format from "date-fns/format";
 import isSameDay from "date-fns/isSameDay";
+import { t } from "i18next";
 
 function lastUpdatedLike(inputDate) {
   const date = new Date(inputDate);
@@ -19,7 +20,7 @@ function lastUpdatedLike(inputDate) {
 
   // Case 3: same day → "hh:mm"
   if (isSameDay(date, now)) {
-    return format(date, "HH:mm");
+    return t("dates.today") + " " + format(date, "HH:mm");
   }
 
   // Case 4: older → "MMM d, yyyy" (e.g. "Oct 25, 2025")

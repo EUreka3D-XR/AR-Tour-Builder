@@ -12,7 +12,6 @@ export const useLogin = () => {
     mutationKey: ["login"],
     onSuccess: (data) => {
       localeStorageAPI.auth.setToken(data.token);
-      console.log(data);
     },
   });
 };

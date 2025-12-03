@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { localeStorageAPI } from "@/utils/local-storage-utils";
+import { transformKeysToCamel, transformKeysToSnake } from "./transformKeys";
 
 // fix for axios and mirage passthrough issue (see adapter):
 // https://github.com/miragejs/miragejs/issues/1006 comment of Jan 20 2025
@@ -66,6 +67,22 @@ axiosInstance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+    // Don't transform FormData keys
+    const isFormData = config.data instanceof FormData;
+
+    if (
+      config &&
+      config.method.toLowerCase() !== "get" &&
+      config.data &&
+      !isFormData
+    ) {
+      return {
+        ...config,
+        data: transformKeysToSnake(config.data),
+      };
+    }
+
     return config;
   },
   (error) => {
@@ -75,11 +92,19 @@ axiosInstance.interceptors.request.use(
 
 // Optional: Response interceptor to handle 401 (unauthorized)
 axiosInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    const { data } = response;
+
+    const shouldApplyCamelCase =
+      Boolean(data) && response.config?.responseType !== "blob";
+
+    if (shouldApplyCamelCase) {
+      return { ...response, data: transformKeysToCamel(data) };
+    }
+    return response;
+  },
   (error) => {
-    console.log("haha");
     if (error.response?.status === 401) {
-      console.log("hahahaha");
       // Token expired or invalid - clear token and redirect to login
       localeStorageAPI.auth.removeToken();
       window.location.href = "/auth/login";

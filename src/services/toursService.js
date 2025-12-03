@@ -23,30 +23,28 @@ export const useProjectTours = (projectId, params) => {
 };
 
 /**
- * @param {string} projectId
  * @param {string} tourId
  * @returns {TourFetchResult}
  */
-export const useProjectTour = (projectId, tourId, propLocale) => {
+export const useProjectTour = (tourId, propLocale) => {
   const locale = useLocale();
   const effectiveLocale = propLocale || locale;
 
   return useDataFetcher({
-    fetcher: () => api.tours.fetchOne(projectId, tourId, effectiveLocale),
-    queryKey: ["project-tour", projectId, tourId, effectiveLocale],
+    fetcher: () => api.tours.fetchOne(tourId, effectiveLocale),
+    queryKey: ["project-tour", tourId, effectiveLocale],
     storeValue: true,
   });
 };
 
 /**
- * @param {string} projectId
  * @param {string} tourId
  * @returns {TourFetchResult}
  */
-export const useProjectTourMultilingual = (projectId, tourId) => {
+export const useProjectTourMultilingual = (tourId) => {
   return useDataFetcher({
-    fetcher: () => api.tours.fetchOne(projectId, tourId),
-    queryKey: ["project-tour", projectId, tourId, "multilingual"],
+    fetcher: () => api.tours.fetchOne(tourId),
+    queryKey: ["project-tour", tourId, "multilingual"],
     storeValue: true,
     enabled: !!tourId,
   });
@@ -65,15 +63,14 @@ export const useCreateTour = (projectId) => {
 };
 
 /**
- * @param {string} projectId
  * @param {string} tourId
  * @returns {TourMutateResult}
  */
-export const useUpdateTour = (projectId, tourId) => {
+export const useUpdateTour = (tourId) => {
   return useDataMutator({
-    mutator: ({ data }) => api.tours.update(projectId, tourId, data),
-    mutationKey: ["update-tour", projectId, tourId],
-    invalidateKey: ["project-tour", projectId, tourId],
+    mutator: ({ data }) => api.tours.update(tourId, data),
+    mutationKey: ["update-tour", tourId],
+    invalidateKey: ["project-tour", tourId],
   });
 };
 
@@ -84,8 +81,20 @@ export const useUpdateTour = (projectId, tourId) => {
  */
 export const useDeleteTour = (projectId, tourId) => {
   return useDataMutator({
-    mutator: () => api.tours.delete(projectId, tourId),
-    mutationKey: ["delete-tour", projectId, tourId],
+    mutator: () => api.tours.delete(tourId),
+    mutationKey: ["delete-tour", tourId],
     invalidateKey: ["project-tours", projectId],
+  });
+};
+
+/**
+ * @param {string} tourId
+ * @returns {TourMutateResult}
+ */
+export const usePublishTour = (tourId) => {
+  return useDataMutator({
+    mutator: ({ publish }) => api.tours.publish(tourId, publish),
+    mutationKey: ["publish-tour", tourId],
+    invalidateKey: ["project-tour", tourId],
   });
 };

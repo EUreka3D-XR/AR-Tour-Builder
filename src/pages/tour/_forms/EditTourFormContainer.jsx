@@ -14,9 +14,9 @@ import TourForm from "./TourForm";
 function EditTourForm({ initialTour }) {
   const { routes, navigate } = useNavPaths();
 
-  const { projectId, tourId } = useParams();
+  const { tourId } = useParams();
 
-  const { mutate: updateTour } = useUpdateTour(projectId, tourId);
+  const { mutate: updateTour } = useUpdateTour(tourId);
 
   const methods = useForm({
     shouldUnregister: false,

@@ -6,9 +6,9 @@ import TourPageLoading from "./loading";
 import TourPage from "./page";
 
 function TourPageContainer() {
-  const { tourId, projectId } = useParams();
+  const { tourId } = useParams();
 
-  const { data, fetchState } = useProjectTourMultilingual(projectId, tourId);
+  const { data, fetchState } = useProjectTourMultilingual(tourId);
 
   if (fetchState.isError) {
     return <ErrorPage />;

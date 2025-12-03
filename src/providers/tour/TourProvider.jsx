@@ -6,9 +6,9 @@ import { useAvailableLocalesProvider } from "../locales/AvailableLocalesContext"
 import { TourContext } from "./TourContext";
 
 export const TourProvider = ({ children }) => {
-  const { projectId, tourId } = useParams();
+  const { tourId } = useParams();
 
-  const { data, fetchState } = useProjectTour(projectId, tourId);
+  const { data, fetchState } = useProjectTour(tourId);
 
   const { updateTourLocales } = useAvailableLocalesProvider();
 

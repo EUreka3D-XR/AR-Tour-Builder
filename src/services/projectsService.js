@@ -1,7 +1,7 @@
 import { api } from "@/api";
 
 import { useLocale } from "@/hooks/useLocale";
-import { useDataFetcher } from "./helpers/serviceHooks";
+import { useDataFetcher, useDataMutator } from "./helpers/serviceHooks";
 
 /**
  * @typedef {import('@/types/jsdoc-types').Project} Project
@@ -52,6 +52,41 @@ const useProjectMultilingual = (projectId) => {
   return useDataFetcher({
     fetcher: () => api.projects.fetchOne(projectId),
     queryKey: ["project", projectId, "multilingual"],
+  });
+};
+
+/**
+ * @returns {ProjectResult}
+ */
+export const useCreateProject = () => {
+  return useDataMutator({
+    fetcher: ({ data }) => api.projects.create(data),
+    mutationKey: ["create-project"],
+    invalidateKey: ["projects"],
+  });
+};
+
+/**
+ * @param {string} projectId
+ * @returns {ProjectResult}
+ */
+export const useUpdateProject = (projectId) => {
+  return useDataMutator({
+    fetcher: ({ data }) => api.projects.update(projectId, data),
+    mutationKey: ["update-project", projectId],
+    invalidateKey: ["project", projectId],
+  });
+};
+
+/**
+ * @param {string} projectId
+ * @returns {ProjectResult}
+ */
+export const useDeleteProject = (projectId) => {
+  return useDataMutator({
+    mutator: () => api.projects.delete(projectId),
+    mutationKey: ["delete-project", projectId],
+    invalidateKey: ["projects"],
   });
 };
 

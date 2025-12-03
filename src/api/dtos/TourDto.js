@@ -6,7 +6,7 @@ export class TourDto {
       data || {};
     return {
       ...restData,
-      pois: PoiListDto.fromApi(pois),
+      pois: pois ? PoiListDto.fromApi(pois) : undefined,
       status: isPublic ? "published" : "draft",
       distance: distanceMeters,
       duration: durationMinutes,
@@ -17,7 +17,7 @@ export class TourDto {
     const { distance, duration, status, pois, ...restData } = data || {};
     return {
       ...restData,
-      pois: PoiListDto.toApi(pois),
+      pois: pois ? PoiListDto.toApi(pois) : undefined,
       isPublic: status === "published",
       distanceMeters: distance,
       durationMinutes: duration,

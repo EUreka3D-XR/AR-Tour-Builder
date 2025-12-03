@@ -5,7 +5,7 @@ export class ProjectDto {
     const { groupMembers, tours, ...restData } = data || {};
     return {
       ...restData,
-      tours: TourListDto.fromApi(tours),
+      tours: tours ? TourListDto.fromApi(tours) : undefined,
       members: groupMembers,
     };
   }
@@ -15,7 +15,7 @@ export class ProjectDto {
     return {
       ...restData,
       groupMembers: members,
-      tours: TourListDto.toApi(tours),
+      tours: tours ? TourListDto.toApi(tours) : undefined,
     };
   }
 }

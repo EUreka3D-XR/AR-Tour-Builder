@@ -1,17 +1,16 @@
-import { useNavigate } from "react-router";
 import {
   projectBasicInfoSchema,
   projectBrandingSchema,
   projectLanguagesSchema,
 } from "@/validation-schemas/projectSchema";
 
+import { useCreateProject } from "@/services/projectsService";
 import useNavPaths from "@/hooks/useNavPaths";
-import wait from "@/utils/wait";
 import ProjectForm from "./_form/ProjectForm";
 
 function CreateProjectForm() {
-  const { routes } = useNavPaths();
-  const navigate = useNavigate();
+  const { navigate, routes } = useNavPaths();
+  const { mutate: createProject } = useCreateProject();
 
   const validationSchemas = [
     projectLanguagesSchema,
@@ -37,11 +36,9 @@ function CreateProjectForm() {
     coverPhoto: "",
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    wait(1000).then(() => {
-      navigate(`${routes.projects.one("new-project-id")}`);
-    });
+  const onSubmit = async (data) => {
+    const newProject = await createProject({ data });
+    navigate(routes.projects.one(newProject.id));
   };
 
   return (

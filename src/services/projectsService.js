@@ -60,7 +60,7 @@ const useProjectMultilingual = (projectId) => {
  */
 export const useCreateProject = () => {
   return useDataMutator({
-    fetcher: ({ data }) => api.projects.create(data),
+    mutator: ({ data }) => api.projects.create(data),
     mutationKey: ["create-project"],
     invalidateKey: ["projects"],
   });

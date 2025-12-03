@@ -213,8 +213,7 @@
  * @property {string} id - Unique user identifier
  * @property {string} email - User email address
  * @property {string} username - Unique username
- * @property {string} firstName - User's first name
- * @property {string} lastName - User's last name
+ * @property {string} name - User's name
  * @property {string} [avatar] - Avatar image URL
  * @property {UserRole} [role] - User role (admin, editor, viewer)
  */

@@ -1,4 +1,3 @@
-import { useProjectMembers } from "@/services/usersService";
 import {
   Avatar,
   List,
@@ -8,6 +7,7 @@ import {
   Skeleton,
 } from "@mui/material";
 
+import { useProjectMembers } from "@/services/usersService";
 import usePaginatedItems from "@/hooks/usePaginatedItems";
 import DashboardCard from "../_common/DashboardCard";
 
@@ -51,10 +51,7 @@ function MembersList({ members }) {
           <ListItemAvatar>
             <Avatar src={member.avatar} />
           </ListItemAvatar>
-          <ListItemText
-            primary={member.firstName + " " + member.lastName}
-            secondary={member.role}
-          />
+          <ListItemText primary={member.name} secondary={member.role} />
         </ListItem>
       ))}
     </List>

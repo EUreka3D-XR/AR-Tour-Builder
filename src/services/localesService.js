@@ -21,6 +21,6 @@ export const useAllLocales = ({ disabled = false } = {}) => {
     fetcher: () => api.locales.fetch(locale),
     queryKey: ["all-locales", locale],
     enabled: !disabled,
-    storeValue: 10 * 60 * 1000, // 5 minutes
+    storeValue: 10 * 60 * 1000, // 10 minutes
   });
 };

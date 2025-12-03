@@ -9,7 +9,9 @@ const axiosInstance = axios.create({
   baseURL: "http://localhost:8000",
   adapter: async (config) => {
     // Combine base URL and endpoint URL
-    let url = config.baseURL + config.url;
+    let url = config.url.startsWith("http")
+      ? config.url
+      : config.baseURL + config.url;
 
     // Serialize params and append to URL as query string
     if (config.params) {

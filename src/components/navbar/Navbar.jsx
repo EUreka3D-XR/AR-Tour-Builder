@@ -49,6 +49,11 @@ function Navbar() {
         name={navLinks.library.label}
         icon="media"
       />
+      <NavbarItem
+        to={navLinks.settings.to}
+        name={navLinks.settings.label}
+        icon="settings"
+      />
     </MenuListStyled>
   );
 }

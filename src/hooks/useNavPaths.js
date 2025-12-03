@@ -42,6 +42,9 @@ const useNavPaths = () => {
     // Helper function for auth routes
     const internalAuthRoute = (route) => `${authBase}${route}`;
 
+    const internalSettingsRoute = (route) =>
+      projectId ? `${projectsBase.one(projectId)}/settings${route}` : route;
+
     return {
       home: "/",
       projects: projectsBase,
@@ -51,7 +54,11 @@ const useNavPaths = () => {
       tourInfo: internalTourRoute("/info"),
       pois: constructPaths(internalTourRoute("/pois")),
       library: constructPaths(internalProjectRoute("/library")),
-      settings: "/settings",
+      projectSettings: internalSettingsRoute(""),
+      projectGeneral: internalSettingsRoute("/general"),
+      projectLocales: internalSettingsRoute("/languages"),
+      projectMembers: internalSettingsRoute("/members"),
+      projectBranding: internalSettingsRoute("/branding"),
       auth: authBase,
       login: internalAuthRoute("/login"),
       signup: internalAuthRoute("/signup"),
@@ -70,6 +77,7 @@ const useNavPaths = () => {
       projects: { label: t("nav_menu.projects"), to: routes.projects.index },
       tours: { label: t("nav_menu.tours"), to: routes.tours.index },
       library: { label: t("nav_menu.library"), to: routes.library.index },
+      settings: { label: t("nav_menu.settings"), to: routes.projectSettings },
     }),
     [routes, t],
   );

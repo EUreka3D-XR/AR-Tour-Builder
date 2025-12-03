@@ -3,7 +3,8 @@
     "home": "Accueil",
     "tours": "Visites",
     "library": "Bibliothèque",
-    "dashboard": "Tableau de bord"
+    "dashboard": "Tableau de bord",
+    "settings": "Paramètres"
   },
   "dates": {
     "today": "Aujourd'hui",

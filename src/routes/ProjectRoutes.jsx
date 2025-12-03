@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router";
 import { ProjectProvider } from "@/providers/project/ProjectProvider";
 import ProjectLayout from "@/layouts/ProjectLayout";
 import LibraryRoutes from "./LibraryRoutes";
+import ProjectSettingsRoutes from "./ProjectSettingsRoutes";
 import TourRoutes from "./TourRoutes";
 
 // Lazy-loaded page components
@@ -21,6 +22,7 @@ function ProjectRoutes() {
           <Route path="edit" element={<></>} />
           <Route path="tours/*" element={<TourRoutes />} />
           <Route path="library/*" element={<LibraryRoutes />} />
+          <Route path="settings/*" element={<ProjectSettingsRoutes />} />
         </Route>
       </Routes>
     </ProjectProvider>

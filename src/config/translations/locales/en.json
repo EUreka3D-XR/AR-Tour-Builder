@@ -3,7 +3,8 @@
     "home": "Home",
     "tours": "Tours",
     "library": "Library",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "settings": "Project Settings"
   },
   "dates": {
     "today": "Today",

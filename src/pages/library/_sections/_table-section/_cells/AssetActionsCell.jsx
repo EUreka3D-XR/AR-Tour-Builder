@@ -28,7 +28,7 @@ const IconButtonStyled = styled(IconButton)(({ theme }) => ({
 function AssetActionsCell({ assetId }) {
   const { projectId } = useParams();
   const { openLibraryMediaModal } = useAssetModal();
-  const { mutate: deleteAsset } = useDeleteAsset(assetId);
+  const { mutate: deleteAsset } = useDeleteAsset(projectId, assetId);
 
   const { routes, navigate } = useNavPaths();
   const confirm = useConfirm();

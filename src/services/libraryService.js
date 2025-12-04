@@ -18,7 +18,7 @@ export const useLibraryAssets = (projectId, params) => {
   const locale = useLocale();
   return useDataFetcher({
     fetcher: () => api.library.fetchAll(projectId, { params, locale }),
-    queryKey: ["library-assets", projectId, locale],
+    queryKey: ["library-assets", projectId],
   });
 };
 
@@ -60,18 +60,23 @@ export const useCreateAsset = (projectId) => {
 };
 
 /**
+ * @param {string} projectId
  * @param {string} assetId
  * @returns {AssetMutateResult}
  */
-export const useUpdateAsset = (assetId) => {
+export const useUpdateAsset = (projectId, assetId) => {
   return useDataMutator({
     mutator: ({ data }) => api.library.update(assetId, data),
     mutationKey: ["update-library-asset", assetId],
-    invalidateKey: ["library-asset", assetId],
+    invalidateKey: [
+      ["library-asset", assetId],
+      ["library-assets", projectId],
+    ],
   });
 };
 
 /**
+ * @param {string} projectId
  * @param {string} assetId
  * @returns {AssetMutateResult}
  */

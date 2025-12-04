@@ -135,6 +135,7 @@
  * @property {number} order - Order/index of the POI within its tour
  * @property {AssetStats} stats - POI status (draft, published, archived)
  * @property {ExternalLink[]} externalLinks - Associated external links
+ * @property {ExternalLink[]} quizLinks - Associated quiz links
  * @property {string} createdAt - Creation timestamp
  * @property {string} updatedAt - Last update timestamp
  */
@@ -144,7 +145,6 @@
  * @typedef {Object} ExternalLink
  * @property {string} title - Link title
  * @property {string} url - Link URL
- * @property {'blog' | 'quiz'} type - Type of external link
  */
 
 // =============================================================================

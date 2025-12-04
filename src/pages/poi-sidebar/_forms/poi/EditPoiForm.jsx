@@ -33,7 +33,6 @@ function EditPoiForm({ onClose }) {
   );
 
   const onSubmit = async (data) => {
-    console.log(data);
     await updatePoi({ data });
     navigate(`${routes.pois.one(poiId)}`);
   };

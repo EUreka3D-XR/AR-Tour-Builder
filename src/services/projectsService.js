@@ -102,7 +102,7 @@ export const useUpdateProject = (projectId) => {
   return useDataMutator({
     mutator: ({ data }) => api.projects.update(projectId, data),
     mutationKey: ["update-project", projectId],
-    // invalidateKey: ["project", projectId],
+    invalidateKey: ["project", projectId, "localized"],
     onSuccess: (_, variables) => {
       const updateQuery = (queryKey) => {
         qc.setQueryData(queryKey, (oldData) => {

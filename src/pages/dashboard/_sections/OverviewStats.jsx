@@ -1,4 +1,5 @@
 import { styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import { icons } from "@/components/icon/icons";
@@ -105,22 +106,24 @@ export default function OverviewStats({
   locales = 0,
   completionRate = 0,
 }) {
+  const { t } = useTranslation();
+
   // Predefined stats configuration in the desired order
   const predefinedStats = [
     {
-      title: "Total Tour Visits",
+      title: t("dashboard.overviewStats.totalTourVisits"),
       value: totalViews,
       icon: "visibility",
       class: "total-views",
     },
     {
-      title: "Visits This Month",
+      title: t("dashboard.overviewStats.visitsThisMonth"),
       value: viewsThisMonth,
       icon: "chart",
       class: "monthly-views",
     },
     {
-      title: "Completion Rate",
+      title: t("dashboard.overviewStats.completionRate"),
       value: `${completionRate}%`,
       icon: "time",
       class: "completion",
@@ -128,7 +131,7 @@ export default function OverviewStats({
       textColor: "#7b1fa2",
     },
     {
-      title: "Supported Languages",
+      title: t("dashboard.overviewStats.supportedLanguages"),
       value: locales,
       icon: icons.language,
       class: "growth",
@@ -136,7 +139,7 @@ export default function OverviewStats({
   ];
 
   return (
-    <DashboardCardStyled title="Overview">
+    <DashboardCardStyled title={t("dashboard.overviewStats.title")}>
       <StatsGrid>
         {predefinedStats.map((stat, index) => (
           <StatItem key={index}>

@@ -256,5 +256,62 @@
       "title": "Reset Password",
       "description": "Enter your new password below."
     }
+  },
+  "dashboard": {
+    "toursStats": {
+      "title": "Top Visited Tours",
+      "views": "views",
+      "popularity": "Popularity",
+      "completion": "Completion"
+    },
+    "emptyProject": {
+      "allEmpty": {
+        "title": "Project is empty",
+        "description": "This project doesn't have any content yet. You can populate the media library or start creating tours."
+      },
+      "noMedia": {
+        "title": "No media in the project",
+        "description": "Add images, videos and 3D models to the project's media library so you can attach them to POIs and tours."
+      },
+      "noTours": {
+        "title": "No tours yet",
+        "description": "Start by creating your first tour and adding Points of Interest to map out the visitor experience."
+      },
+      "buttons": {
+        "addMedia": "Add media",
+        "createFirstTour": "Create first tour"
+      }
+    },
+    "overviewStats": {
+      "title": "Overview",
+      "totalTourVisits": "Total Tour Visits",
+      "visitsThisMonth": "Visits This Month",
+      "completionRate": "Completion Rate",
+      "supportedLanguages": "Supported Languages"
+    },
+    "members": {
+      "title": "Members"
+    },
+    "projectBanner": {
+      "tours": "Tours",
+      "pois": "POIs",
+      "members": "Members"
+    },
+    "recentTours": {
+      "title": "Recent Tours",
+      "pois": "POIs",
+      "status": {
+        "published": "Published",
+        "draft": "Draft"
+      },
+      "relativeTime": {
+        "today": "Updated today",
+        "oneDayAgo": "Updated 1 day ago",
+        "daysAgo": "Updated {{days}} days ago",
+        "oneWeekAgo": "Updated 1 week ago",
+        "weeksAgo": "Updated {{weeks}} weeks ago",
+        "monthAgo": "Updated over a month ago"
+      }
+    }
   }
 }

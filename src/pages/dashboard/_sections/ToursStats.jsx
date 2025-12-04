@@ -1,4 +1,5 @@
 import { LinearProgress, styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import DashboardCard from "../_common/DashboardCard";
 
@@ -81,8 +82,10 @@ const TourItemStyled = styled("div")(({ theme }) => ({
 }));
 
 function ToursStats() {
+  const { t } = useTranslation();
+
   return (
-    <DashboardCardStyled title="Top Visited Tours">
+    <DashboardCardStyled title={t("dashboard.toursStats.title")}>
       {mockToursStats.map((stats, index) => (
         <TourItemStyled key={stats.id}>
           <div className="top-row">
@@ -90,13 +93,13 @@ function ToursStats() {
               <span className="seq">{index + 1}</span>
               <span className="name">{stats.name}</span>
             </div>
-            <span className="views">{stats.views} views</span>
+            <span className="views">{stats.views} {t("dashboard.toursStats.views")}</span>
           </div>
           <div className="bottom-row">
             <div className="stat-item">
               <div className="stat-title">
                 <Typography variant="body2" color="textSecondary">
-                  Popularity
+                  {t("dashboard.toursStats.popularity")}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
                   {stats.popularity}%
@@ -111,7 +114,7 @@ function ToursStats() {
             <div className="stat-item">
               <div className="stat-title">
                 <Typography variant="body2" color="textSecondary">
-                  Completion
+                  {t("dashboard.toursStats.completion")}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
                   {stats.completion}%

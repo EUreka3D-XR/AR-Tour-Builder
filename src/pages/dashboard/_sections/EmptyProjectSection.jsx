@@ -1,4 +1,5 @@
 import { Stack, styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -12,24 +13,22 @@ const ContainerStyled = styled("section")(() => ({
 }));
 
 function EmptyProjectSection({ hasNoMedia, hasNoTours }) {
+  const { t } = useTranslation();
   const { routes } = useNavPaths();
 
   const libraryLink = routes.library.index;
   const toursLink = routes.tours.index;
 
   // decide title and description based on what's missing
-  let title = "Project is empty";
-  let description =
-    "This project doesn't have any content yet. You can populate the media library or start creating tours.";
+  let title = t("dashboard.emptyProject.allEmpty.title");
+  let description = t("dashboard.emptyProject.allEmpty.description");
 
   if (hasNoMedia && !hasNoTours) {
-    title = "No media in the project";
-    description =
-      "Add images, videos and 3D models to the project's media library so you can attach them to POIs and tours.";
+    title = t("dashboard.emptyProject.noMedia.title");
+    description = t("dashboard.emptyProject.noMedia.description");
   } else if (!hasNoMedia && hasNoTours) {
-    title = "No tours yet";
-    description =
-      "Start by creating your first tour and adding Points of Interest to map out the visitor experience.";
+    title = t("dashboard.emptyProject.noTours.title");
+    description = t("dashboard.emptyProject.noTours.description");
   }
 
   return (
@@ -51,7 +50,7 @@ function EmptyProjectSection({ hasNoMedia, hasNoTours }) {
             startIcon={<EurekaIcon name="media" />}
             href={libraryLink}
           >
-            Add media
+            {t("dashboard.emptyProject.buttons.addMedia")}
           </Button>
         )}
 
@@ -61,7 +60,7 @@ function EmptyProjectSection({ hasNoMedia, hasNoTours }) {
             startIcon={<EurekaIcon name="tour" />}
             href={toursLink}
           >
-            Create first tour
+            {t("dashboard.emptyProject.buttons.createFirstTour")}
           </Button>
         )}
       </Stack>

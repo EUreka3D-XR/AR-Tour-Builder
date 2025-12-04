@@ -6,12 +6,14 @@ import {
   ListItemText,
   Skeleton,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useProjectMembers } from "@/services/usersService";
 import usePaginatedItems from "@/hooks/usePaginatedItems";
 import DashboardCard from "../_common/DashboardCard";
 
 function Members({ projectId }) {
+  const { t } = useTranslation();
   const { data: members, fetchState } = useProjectMembers(projectId);
 
   const { data: membersPaginated, meta } = usePaginatedItems({
@@ -20,7 +22,7 @@ function Members({ projectId }) {
   });
 
   return (
-    <DashboardCard title="Members" pagination={meta}>
+    <DashboardCard title={t("dashboard.members.title")} pagination={meta}>
       <>
         {fetchState.isLoading && <MembersSkeleton />}
         {fetchState.isSuccess && membersPaginated && (

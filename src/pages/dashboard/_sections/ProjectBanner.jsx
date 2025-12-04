@@ -1,4 +1,5 @@
 import { Avatar, Badge, styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Banner from "@/components/banner/Banner";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -72,6 +73,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
  * @returns {JSX.Element}
  */
 function ProjectBanner({ project = {} }) {
+  const { t } = useTranslation();
   const {
     thumbnail,
     coverPhoto,
@@ -111,11 +113,11 @@ function ProjectBanner({ project = {} }) {
               <div className="stats-info">
                 <div className="stat">
                   <EurekaIcon name="tour" />
-                  <span>{tours?.length} Tours</span>
+                  <span>{tours?.length} {t("dashboard.projectBanner.tours")}</span>
                 </div>
                 <div className="stat">
                   <EurekaIcon name="poi" />
-                  <span>{totalPois} POIs</span>
+                  <span>{totalPois} {t("dashboard.projectBanner.pois")}</span>
                 </div>
                 {/* <div className="stat">
                   <EurekaIcon name="media" />
@@ -123,7 +125,7 @@ function ProjectBanner({ project = {} }) {
                 </div> */}
                 <div className="stat">
                   <EurekaIcon name="users" />
-                  <span>{totalMembers} Members</span>
+                  <span>{totalMembers} {t("dashboard.projectBanner.members")}</span>
                 </div>
               </div>
             </div>

@@ -202,5 +202,59 @@
       "error": "Error loading assets.",
       "noAssets": "No assets available."
     }
+  },
+  "auth": {
+    "logoAlt": "Logo",
+    "signup": {
+      "title": "Sign Up",
+      "labels": {
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
+      },
+      "placeholders": {
+        "email": "ex. user@example.com",
+        "password": "*******",
+        "confirmPassword": "*******"
+      },
+      "buttons": {
+        "createAccount": "Create Account"
+      },
+      "helpers": {
+        "alreadyHaveAccount": "Already have an account?"
+      },
+      "links": {
+        "login": "Login"
+      }
+    },
+    "login": {
+      "title": "Login",
+      "labels": {
+        "emailOrUsername": "Email or username",
+        "password": "Password"
+      },
+      "placeholders": {
+        "emailOrUsername": "ex. user@example.com",
+        "password": "*******"
+      },
+      "buttons": {
+        "login": "Login"
+      },
+      "helpers": {
+        "dontHaveAccount": "Don't have an account?"
+      },
+      "links": {
+        "forgotPassword": "Forgot Password?",
+        "signup": "Sign Up"
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "description": "Enter your email address and we'll send you a link to reset your password."
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Enter your new password below."
+    }
   }
 }

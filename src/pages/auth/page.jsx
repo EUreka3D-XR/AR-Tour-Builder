@@ -1,9 +1,12 @@
 import { Outlet } from "react-router";
+import { useTranslation } from "react-i18next";
 import { Box } from "@mui/material";
 
 import dummyLogo from "@/assets/images/dummy-logo.webp";
 
 function AuthPage() {
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -28,7 +31,7 @@ function AuthPage() {
         <Box
           component="img"
           src={dummyLogo}
-          alt="Logo"
+          alt={t("auth.logoAlt")}
           sx={{
             height: 80,
             width: "auto",

@@ -1,4 +1,5 @@
 import { Stack, TextField, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useLogin } from "@/services/authService";
 import Button from "@/components/button/Button";
@@ -16,6 +17,7 @@ const defaultValues = {
 };
 
 function LoginPage() {
+  const { t } = useTranslation();
   const { navigate, routes } = useNavPaths();
   const { mutate: login, fetchState } = useLogin();
 
@@ -27,15 +29,15 @@ function LoginPage() {
   return (
     <AuthFormBox defaultValues={defaultValues} onSubmit={handleSubmit}>
       <Typography variant="h5" component="h1" align="center" fontWeight="bold">
-        Login
+        {t("auth.login.title")}
       </Typography>
       <FormInput
         name="login"
         render={({ field }) => (
-          <LabeledInput label="Email or username">
+          <LabeledInput label={t("auth.login.labels.emailOrUsername")}>
             <TextField
               {...field}
-              placeholder="ex. user@example.com"
+              placeholder={t("auth.login.placeholders.emailOrUsername")}
               fullWidth
             />
           </LabeledInput>
@@ -44,8 +46,8 @@ function LoginPage() {
       <FormInput
         name="password"
         render={({ field }) => (
-          <LabeledInput label="Password">
-            <PasswordInput {...field} placeholder="*******" fullWidth />
+          <LabeledInput label={t("auth.login.labels.password")}>
+            <PasswordInput {...field} placeholder={t("auth.login.placeholders.password")} fullWidth />
           </LabeledInput>
         )}
       />
@@ -55,7 +57,7 @@ function LoginPage() {
           underline="hover"
           sx={{ fontWeight: 500, color: (theme) => theme.palette.primary.main }}
         >
-          Forgot Password?
+          {t("auth.login.links.forgotPassword")}
         </Link>
       </Stack>
       <Button
@@ -64,11 +66,11 @@ function LoginPage() {
         type="submit"
         isLoading={fetchState.isLoading}
       >
-        Login
+        {t("auth.login.buttons.login")}
       </Button>
       <HelperBottomText
-        text={"Don't have an account?"}
-        linkText="Sign Up"
+        text={t("auth.login.helpers.dontHaveAccount")}
+        linkText={t("auth.login.links.signup")}
         linkUrl="/auth/signup"
       />
     </AuthFormBox>

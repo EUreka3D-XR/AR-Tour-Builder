@@ -45,7 +45,7 @@ function TourForm({ onSubmit }) {
 
   return (
     <ContainerStyled className="tour-form-wrapper">
-      <form onSubmit={onSubmit}>
+      <form id="tour-form" onSubmit={onSubmit}>
         <div className="tour-form-inner">
           <TourHeaderSection />
           <TourNavigationTabsSection />

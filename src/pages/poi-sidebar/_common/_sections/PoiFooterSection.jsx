@@ -8,7 +8,12 @@ import EurekaIcon from "@/components/icon/EurekaIcon";
 import SidebarFooterSection from "@/components/sidebar/_sections/SidebarFooterSection";
 import useParamsTabs from "@/hooks/useParamsTabs";
 
-function PoiFooterSection({ onCancel, steps = [], fieldsPerStep = [] }) {
+function PoiFooterSection({
+  onCancel,
+  onSubmit,
+  steps = [],
+  fieldsPerStep = [],
+}) {
   const { activeTab, setActiveTab } = useParamsTabs("poiTab");
   const { poiId } = useParams();
   const isNew = !poiId;
@@ -54,6 +59,16 @@ function PoiFooterSection({ onCancel, steps = [], fieldsPerStep = [] }) {
     return currentStepFields.some((field) => errors[field]);
   }, [errors, currentStep, fieldsPerStep]);
 
+  const handleFormSubmit = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (onSubmit) {
+      onSubmit(e);
+    }
+  };
+
   return (
     <SidebarFooterSection>
       <Button onClick={onCancel}>Cancel</Button>
@@ -78,14 +93,13 @@ function PoiFooterSection({ onCancel, steps = [], fieldsPerStep = [] }) {
           </Button>
         )}
         {renderCreateButton && (
-          <Button type="submit" form="poi-form" variant="filled">
+          <Button onClick={handleFormSubmit} variant="filled">
             Create and add media
           </Button>
         )}
         {renderUpdateButton && (
           <Button
-            type="submit"
-            form="poi-form"
+            onClick={handleFormSubmit}
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >

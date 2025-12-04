@@ -30,6 +30,7 @@ function PoiForm({ onSubmit, onClose }) {
           steps={steps}
           fieldsPerStep={fieldsPerStep}
           onCancel={onClose}
+          onSubmit={onSubmit}
         />
       </NoShrink>
     </>

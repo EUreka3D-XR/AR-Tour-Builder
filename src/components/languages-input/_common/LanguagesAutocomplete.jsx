@@ -22,13 +22,42 @@ function LanguagesAutocomplete({
   helperText,
   onChange,
 }) {
+  const isValueDisabled = (optionValue) => {
+    if (!disabledValue) return false;
+    if (Array.isArray(disabledValue)) {
+      return disabledValue.includes(optionValue);
+    }
+    return disabledValue === optionValue;
+  };
+
   const handleChange = (_, newValue) => {
     if (multiple && Array.isArray(newValue)) {
-      const localesCodes = newValue.map((val) => val.value);
-      onChange(localesCodes);
+      // Filter out disabled values that were removed
+      const newCodes = newValue.map((val) => val.value);
+
+      // If user cleared all (newValue is empty), keep only disabled values
+      if (newCodes.length === 0) {
+        const disabledValues = Array.isArray(disabledValue)
+          ? disabledValue
+          : disabledValue
+            ? [disabledValue]
+            : [];
+        onChange(disabledValues);
+        return;
+      }
+
+      // Otherwise, ensure disabled values are always included
+      const disabledValues = Array.isArray(disabledValue)
+        ? disabledValue
+        : disabledValue
+          ? [disabledValue]
+          : [];
+
+      const mergedValues = [...new Set([...newCodes, ...disabledValues])];
+      onChange(mergedValues);
       return;
     }
-    onChange(newValue.value);
+    onChange(newValue?.value || null);
   };
 
   const optionsDict = useMemo(() => {
@@ -42,18 +71,10 @@ function LanguagesAutocomplete({
   const finalValue = useMemo(() => {
     if (Object.keys(optionsDict).length === 0) return multiple ? [] : null;
     if (multiple) {
-      return value.map((val) => optionsDict[val]);
+      return value.map((val) => optionsDict[val]).filter(Boolean);
     }
-    return optionsDict[value];
+    return optionsDict[value] || null;
   }, [value, optionsDict, multiple]);
-
-  const isValueDisabled = (optionValue) => {
-    if (!disabledValue) return false;
-    if (Array.isArray(disabledValue)) {
-      return disabledValue.includes(optionValue);
-    }
-    return disabledValue === optionValue;
-  };
 
   return (
     <Autocomplete

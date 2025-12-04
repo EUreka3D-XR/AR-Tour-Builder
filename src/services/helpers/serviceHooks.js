@@ -72,7 +72,6 @@ export const useDataMutator = ({
           : [invalidateKey];
 
         keysToInvalidate.forEach((key) => {
-          console.log(key);
           queryClient.invalidateQueries({ queryKey: key });
         });
       }

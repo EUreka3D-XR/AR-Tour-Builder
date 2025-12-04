@@ -25,7 +25,7 @@ const createTour = async (projectId, data) => {
 
 const updateTour = async (tourId, data) => {
   const url = baseUrls.tour(tourId);
-  return fetcher.put(url, {
+  return fetcher.patch(url, {
     data,
     toDTO: TourDto.toApi,
     fromDTO: TourDto.fromApi,

@@ -33,7 +33,7 @@ const createAsset = async (projectId, data, locale) => {
 
 const updateAsset = async (assetId, data, locale) => {
   const url = baseUrls.libraryAsset(assetId);
-  return fetcher.put(url, {
+  return fetcher.patch(url, {
     data,
     locale,
     toDTO: LibraryAssetDto.toApi,

@@ -27,7 +27,7 @@ const createPoiAsset = async (poiId, data, locale) => {
 
 const updatePoiAsset = async (assetId, data, locale) => {
   const url = baseUrls.poiAsset(assetId);
-  return fetcher.put(url, {
+  return fetcher.patch(url, {
     data,
     locale,
     toDTO: PoiAssetDto.toApi,

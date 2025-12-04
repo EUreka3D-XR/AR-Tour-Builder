@@ -26,7 +26,7 @@ const createPoi = async (tourId, data, locale) => {
 
 const updatePoi = async (poiId, data, locale) => {
   const url = baseUrls.poi(poiId);
-  return fetcher.put(url, {
+  return fetcher.patch(url, {
     data,
     locale,
     toDTO: TourDto.toApi,

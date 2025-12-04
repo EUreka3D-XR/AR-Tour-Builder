@@ -2,7 +2,6 @@ import { useParams } from "react-router";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { useUpdateTour } from "@/services/toursService";
-import useNavPaths from "@/hooks/useNavPaths";
 import TourForm from "./TourForm";
 
 /**
@@ -12,8 +11,6 @@ import TourForm from "./TourForm";
  * @returns
  */
 function EditTourForm({ initialTour }) {
-  const { routes, navigate } = useNavPaths();
-
   const { tourId } = useParams();
 
   const { mutate: updateTour } = useUpdateTour(tourId);
@@ -40,8 +37,6 @@ function EditTourForm({ initialTour }) {
 
   const onSubmit = async (data) => {
     await updateTour({ data });
-
-    navigate(`${routes.tours.one(tourId)}`);
   };
 
   return (

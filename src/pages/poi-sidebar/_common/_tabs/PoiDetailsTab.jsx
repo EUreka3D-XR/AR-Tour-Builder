@@ -1,4 +1,5 @@
 import { styled, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import FormInput from "@/components/form/FormInput";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
@@ -16,24 +17,26 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 function PoiDetailsTab() {
+  const { t } = useTranslation();
+
   return (
     <ContainerStyled>
       <LanguageDropdown className="language-selector" />
       <FormInputMultilingual
         name="title"
         render={({ field }) => (
-          <LabeledInput label="Title" isMultilingual>
-            <TextField {...field} placeholder="Enter title" fullWidth />
+          <LabeledInput label={t("poiSidebar.detailsTab.title")} isMultilingual>
+            <TextField {...field} placeholder={t("poiSidebar.detailsTab.titlePlaceholder")} fullWidth />
           </LabeledInput>
         )}
       />
       <FormInputMultilingual
         name="description"
         render={({ field }) => (
-          <LabeledInput label="Description" isMultilingual>
+          <LabeledInput label={t("poiSidebar.detailsTab.description")} isMultilingual>
             <TextField
               {...field}
-              placeholder="Enter description"
+              placeholder={t("poiSidebar.detailsTab.descriptionPlaceholder")}
               fullWidth
               multiline
               rows={4}
@@ -44,10 +47,10 @@ function PoiDetailsTab() {
       <FormInput
         name="radius"
         render={({ field }) => (
-          <LabeledInput label="Poi Radius">
+          <LabeledInput label={t("poiSidebar.detailsTab.poiRadius")}>
             <NumberInput
               {...field}
-              placeholder="ex. 20"
+              placeholder={t("poiSidebar.detailsTab.radiusPlaceholder")}
               iconName="radius"
               endAdornmentText="m"
               sx={{ width: "200px" }}
@@ -58,8 +61,8 @@ function PoiDetailsTab() {
       {/* <FormInput
         name="thumbnail"
         render={({ field }) => ( */}
-      <LabeledInput label="Cover Photo">
-        <ImageInput placeholderText="Click to upload photo" maxFileSize={5} />
+      <LabeledInput label={t("poiSidebar.detailsTab.coverPhoto")}>
+        <ImageInput placeholderText={t("poiSidebar.detailsTab.coverPhotoPlaceholder")} maxFileSize={5} />
       </LabeledInput>
       {/* )}
       /> */}

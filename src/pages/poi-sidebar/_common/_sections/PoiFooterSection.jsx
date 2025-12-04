@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useParams } from "react-router";
 import { useFormContext } from "react-hook-form";
 import { Stack } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -14,6 +15,7 @@ function PoiFooterSection({
   steps = [],
   fieldsPerStep = [],
 }) {
+  const { t } = useTranslation();
   const { activeTab, setActiveTab } = useParamsTabs("poiTab");
   const { poiId } = useParams();
   const isNew = !poiId;
@@ -71,7 +73,7 @@ function PoiFooterSection({
 
   return (
     <SidebarFooterSection>
-      <Button onClick={onCancel}>Cancel</Button>
+      <Button onClick={onCancel}>{t("poiSidebar.footer.cancel")}</Button>
       <Stack
         direction="row"
         alignItems="center"
@@ -80,7 +82,7 @@ function PoiFooterSection({
       >
         {renderPreviousButton && (
           <Button variant="outlined" onClick={handlePreviousStep}>
-            Previous
+            {t("poiSidebar.footer.previous")}
           </Button>
         )}
         {renderNextButton && (
@@ -89,12 +91,12 @@ function PoiFooterSection({
             isDisabled={isNextDisabled}
             onClick={handleNextStep}
           >
-            Next Step
+            {t("poiSidebar.footer.nextStep")}
           </Button>
         )}
         {renderCreateButton && (
           <Button onClick={handleFormSubmit} variant="filled">
-            Create and add media
+            {t("poiSidebar.footer.createAndAddMedia")}
           </Button>
         )}
         {renderUpdateButton && (
@@ -103,7 +105,7 @@ function PoiFooterSection({
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >
-            Save Changes
+            {t("poiSidebar.footer.saveChanges")}
           </Button>
         )}
       </Stack>

@@ -1,4 +1,5 @@
 import { styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import FormInput from "@/components/form/FormInput";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -28,13 +29,14 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function PoiLocationTab() {
+  const { t } = useTranslation();
+
   return (
     <ContainerStyled>
       <div className="instructions">
         <EurekaIcon name="help" />
         <Typography variant="body1" color="text.secondary" sx={{ mb: 1 }}>
-          Place a point of interest on the map or add its coordinates in the
-          Latitude and Longitude fields below.
+          {t("poiSidebar.locationTab.instructions")}
         </Typography>
       </div>
       <div className="map-container">
@@ -47,16 +49,16 @@ function PoiLocationTab() {
         <FormInput
           name="coordinates.lat"
           render={({ field }) => (
-            <LabeledInput label="Latitude">
-              <NumberInput {...field} placeholder="ex. 3.123456" />
+            <LabeledInput label={t("poiSidebar.locationTab.latitude")}>
+              <NumberInput {...field} placeholder={t("poiSidebar.locationTab.latitudePlaceholder")} />
             </LabeledInput>
           )}
         />
         <FormInput
           name="coordinates.long"
           render={({ field }) => (
-            <LabeledInput label="Longitude">
-              <NumberInput {...field} placeholder="ex. 101.123456" />
+            <LabeledInput label={t("poiSidebar.locationTab.longitude")}>
+              <NumberInput {...field} placeholder={t("poiSidebar.locationTab.longitudePlaceholder")} />
             </LabeledInput>
           )}
         />

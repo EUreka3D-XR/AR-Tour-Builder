@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSearchParams } from "react-router";
 import AssetsModal from "@/pages/assets-modal/modal";
 import { Menu, MenuItem, styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -14,6 +15,7 @@ const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
 }));
 
 function AddMediaButton() {
+  const { t } = useTranslation();
   const [, setSearchParams] = useSearchParams();
   const { isOpen, open, close } = useToggle();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -61,7 +63,7 @@ function AddMediaButton() {
         aria-haspopup="true"
         aria-expanded={isMenuOpen ? "true" : undefined}
       >
-        Add
+        {t("poiSidebar.addMediaButton.add")}
       </Button>
       <Menu
         id="add-media-menu"
@@ -84,11 +86,11 @@ function AddMediaButton() {
       >
         <MenuItemStyled onClick={handleCreateNew}>
           <EurekaIcon name="add" color="success" />
-          Create New
+          {t("poiSidebar.addMediaButton.createNew")}
         </MenuItemStyled>
         <MenuItemStyled onClick={handleBrowseLibrary}>
           <EurekaIcon name="browse" color="primary" />
-          Browse Library
+          {t("poiSidebar.addMediaButton.browseLibrary")}
         </MenuItemStyled>
       </Menu>
       {isOpen && <AssetsModal onClose={handleBrowserClose} />}

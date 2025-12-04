@@ -1,4 +1,5 @@
 import { styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import FormArray from "@/components/form/FormArray";
 import InputLocale from "@/components/input-locale/InputLocale";
@@ -14,6 +15,8 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function PoiExternalLinksTab() {
+  const { t } = useTranslation();
+
   return (
     <ContainerStyled>
       <LanguageDropdown className="language-selector" />
@@ -22,9 +25,9 @@ function PoiExternalLinksTab() {
           <FormArray>
             <FormArray.URLInput
               name={localizedName}
-              label="Quiz Links"
-              labelPlaceholder="Quiz Name"
-              urlPlaceholder="URL: ex. https://quiz-platform.com/quiz/123"
+              label={t("poiSidebar.externalLinksTab.quizLinks")}
+              labelPlaceholder={t("poiSidebar.externalLinksTab.quizNamePlaceholder")}
+              urlPlaceholder={t("poiSidebar.externalLinksTab.quizUrlPlaceholder")}
             />
             <FormArray.Display
               name={localizedName}
@@ -39,9 +42,9 @@ function PoiExternalLinksTab() {
           <FormArray>
             <FormArray.URLInput
               name={localizedName}
-              label="External Links"
-              labelPlaceholder="Name"
-              urlPlaceholder="URL: ex. https://some-blog.com/page"
+              label={t("poiSidebar.externalLinksTab.externalLinks")}
+              labelPlaceholder={t("poiSidebar.externalLinksTab.namePlaceholder")}
+              urlPlaceholder={t("poiSidebar.externalLinksTab.externalUrlPlaceholder")}
             />
             <FormArray.Display
               name={localizedName}

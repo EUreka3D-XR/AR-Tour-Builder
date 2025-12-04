@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import SidebarHeader from "@/components/sidebar/_sections/SidebarHeaderSection";
 import SidebarFormArea from "../_common/_utils/SidebarFormArea";
 import ToggleVisibility from "../_common/_utils/ToggleVisibility";
@@ -7,6 +9,8 @@ import NewPoiAssetForm from "../_forms/poi-asset/NewPoiAssetForm";
 import NewPoiForm from "../_forms/poi/NewPoiForm";
 
 function NewPoiSidebar() {
+  const { t } = useTranslation();
+
   return (
     <PoiSidebar>
       {({
@@ -19,7 +23,7 @@ function NewPoiSidebar() {
         return (
           <>
             <SidebarHeader
-              title="Create a Point of Interest"
+              title={t("poiSidebar.new.title")}
               onClose={onClosePoi}
             />
             <SidebarFormArea className="sidebar-form-area">

@@ -363,5 +363,56 @@
       "createAsset": "Create Media Asset",
       "saveChanges": "Save Changes"
     }
+  },
+  "poiSidebar": {
+    "new": {
+      "title": "Create a Point of Interest"
+    },
+    "edit": {
+      "title": "Editing Point of Interest"
+    },
+    "footer": {
+      "cancel": "Cancel",
+      "previous": "Previous",
+      "nextStep": "Next Step",
+      "createAndAddMedia": "Create and add media",
+      "saveChanges": "Save Changes"
+    },
+    "tabs": {
+      "location": "Location",
+      "details": "Details",
+      "externalLinks": "External Links",
+      "media": "Media"
+    },
+    "detailsTab": {
+      "title": "Title",
+      "titlePlaceholder": "Enter title",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter description",
+      "poiRadius": "Poi Radius",
+      "radiusPlaceholder": "ex. 20",
+      "coverPhoto": "Cover Photo",
+      "coverPhotoPlaceholder": "Click to upload photo"
+    },
+    "locationTab": {
+      "instructions": "Place a point of interest on the map or add its coordinates in the Latitude and Longitude fields below.",
+      "latitude": "Latitude",
+      "latitudePlaceholder": "ex. 3.123456",
+      "longitude": "Longitude",
+      "longitudePlaceholder": "ex. 101.123456"
+    },
+    "externalLinksTab": {
+      "quizLinks": "Quiz Links",
+      "quizNamePlaceholder": "Quiz Name",
+      "quizUrlPlaceholder": "URL: ex. https://quiz-platform.com/quiz/123",
+      "externalLinks": "External Links",
+      "namePlaceholder": "Name",
+      "externalUrlPlaceholder": "URL: ex. https://some-blog.com/page"
+    },
+    "addMediaButton": {
+      "add": "Add",
+      "createNew": "Create New",
+      "browseLibrary": "Browse Library"
+    }
   }
 }

@@ -1,4 +1,6 @@
 import { Divider, styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
 
 import PoiFooterSection from "../../_common/_sections/PoiFooterSection";
 import PoiMainSection from "../../_common/_sections/PoiMainSection";
@@ -11,6 +13,17 @@ const ScrollableArea = styled("div")({
 });
 
 function PoiForm({ onSubmit, onClose }) {
+  const { t } = useTranslation();
+
+  const poiTabs = useMemo(() => [
+    { icon: "poi", value: "location", label: t("poiSidebar.tabs.location") },
+    { icon: "info", value: "details", label: t("poiSidebar.tabs.details") },
+    { icon: "link", value: "external-links", label: t("poiSidebar.tabs.externalLinks") },
+    { icon: "media", value: "media", label: t("poiSidebar.tabs.media") },
+  ], [t]);
+
+  const steps = useMemo(() => poiTabs.map((tab) => tab.value), [poiTabs]);
+
   return (
     <>
       <NoShrink>
@@ -39,13 +52,6 @@ function PoiForm({ onSubmit, onClose }) {
 
 export default PoiForm;
 
-const poiTabs = [
-  { icon: "poi", value: "location", label: "Location" },
-  { icon: "info", value: "details", label: "Details" },
-  { icon: "link", value: "external-links", label: "External Links" },
-  { icon: "media", value: "media", label: "Media" },
-];
-const steps = poiTabs.map((tab) => tab.value);
 const fieldsPerStep = [
   ["coordinates"],
   ["title", "description", "thumbnail"],

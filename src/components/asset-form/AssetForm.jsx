@@ -345,7 +345,11 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
           )}
         </div>
         <NoShrink>
-          <AssetFormFooter isPoiAsset={isPoiAsset} onCancel={onClose} />
+          <AssetFormFooter
+            isPoiAsset={isPoiAsset}
+            onCancel={onClose}
+            onSubmit={onSubmit}
+          />
         </NoShrink>
       </ContainerStyled>
     </form>

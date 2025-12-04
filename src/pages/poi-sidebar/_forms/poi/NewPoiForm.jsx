@@ -1,3 +1,7 @@
+import { useParams } from "react-router";
+
+import { useCreateTourPoi } from "@/services/poiService";
+import useNavPaths from "@/hooks/useNavPaths";
 import PoiFormContainer from "./PoiFormContainer";
 
 const DEFAULT_POI_VALUES = {
@@ -24,9 +28,13 @@ const DEFAULT_POI_VALUES = {
   poiAssets: [],
 };
 function NewPoiForm({ onClose }) {
-  const onSubmit = (data) => {
-    console.log(data);
-    // navigate(`${routes.pois.one("new-poi-id")}`);
+  const { tourId } = useParams();
+  const { routes, navigate } = useNavPaths();
+
+  const { mutate: createPoi } = useCreateTourPoi(tourId);
+  const onSubmit = async (data) => {
+    await createPoi({ data });
+    navigate(`${routes.pois.one("new-poi-id")}`);
   };
 
   return (

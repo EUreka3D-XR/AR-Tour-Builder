@@ -26,7 +26,6 @@ function EditPoiForm({ onClose }) {
       externalLinks: initialPoi?.externalLinks,
       quizLinks: initialPoi?.quizLinks,
       assets: initialPoi?.assets,
-      order: initialPoi?.order,
       createdAt: initialPoi?.createdAt,
       updatedAt: initialPoi?.updatedAt,
     }),

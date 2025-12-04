@@ -29,6 +29,7 @@ const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
       width: "100%",
       "& .nav-item-name": {
         fontSize: "12px",
+        textWrap: "wrap",
       },
     },
   },

@@ -1,19 +1,4 @@
-const deepTransformKeys = (obj, transform, exclude = []) => {
-  if (typeof obj !== "object" || obj === null) {
-    return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map((item) => deepTransformKeys(item, transform));
-  }
-
-  return Object.fromEntries(
-    Object.entries(obj).map(([key, value]) => {
-      const finalKey = exclude.includes(key) ? key : transform(key);
-      return [finalKey, deepTransformKeys(value, transform)];
-    }),
-  );
-};
+import { deepTransformKeys } from "@/utils/deepTransformObjects";
 
 const snakeToCamel = (str) => {
   return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());

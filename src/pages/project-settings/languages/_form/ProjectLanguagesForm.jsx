@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import { FormProvider, useForm } from "react-hook-form";
+import { Typography } from "@mui/material";
 
 import { useUpdateProject } from "@/services/projectsService";
 import FormInput from "@/components/form/FormInput";
@@ -31,6 +32,11 @@ function ProjectLanguagesForm({ defaultValues }) {
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SettingsFormLayout>
+          <Typography mb={2}>
+            <span style={{ fontWeight: "bold" }}>Note: </span>
+            You cannot remove languages that already have content associated
+            with them. This is to prevent data loss.
+          </Typography>
           <HorizontalFieldWrapper
             label="Supported Languages"
             description="Specify the languages your project supports. You can populate content in multiple languages later in the project's settings."

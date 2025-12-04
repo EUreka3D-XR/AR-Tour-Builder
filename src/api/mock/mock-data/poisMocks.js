@@ -40,28 +40,24 @@ export const mockPOIs = [
           {
             title: "UNESCO World Heritage",
             url: "https://whc.unesco.org/en/list/404",
+            type: "blog",
+          },
+          {
+            title: "Parthenon Architecture Quiz",
+            url: "https://example.com/quiz/parthenon",
+            type: "quiz",
           },
         ],
         fr: [
           {
             title: "Patrimoine mondial de l'UNESCO",
             url: "https://whc.unesco.org/en/list/404",
+            type: "blog",
           },
-        ],
-      },
-    },
-    quizLinks: {
-      locales: {
-        en: [
-          {
-            title: "Parthenon Architecture Quiz",
-            url: "https://example.com/quiz/parthenon",
-          },
-        ],
-        fr: [
           {
             title: "Quiz sur l'architecture du Parthénon",
             url: "https://example.com/quiz/parthenon",
+            type: "quiz",
           },
         ],
       },
@@ -96,28 +92,24 @@ export const mockPOIs = [
           {
             title: "Ancient History Encyclopedia",
             url: "https://www.worldhistory.org/Erechtheion/",
+            type: "blog",
+          },
+          {
+            title: "Caryatids Knowledge Test",
+            url: "https://example.com/quiz/caryatids",
+            type: "quiz",
           },
         ],
         fr: [
           {
             title: "Encyclopédie d'Histoire Ancienne",
             url: "https://www.worldhistory.org/Erechtheion/",
+            type: "blog",
           },
-        ],
-      },
-    },
-    quizLinks: {
-      locales: {
-        en: [
-          {
-            title: "Caryatids Knowledge Test",
-            url: "https://example.com/quiz/caryatids",
-          },
-        ],
-        fr: [
           {
             title: "Test de Connaissance sur les Cariatides",
             url: "https://example.com/quiz/caryatids",
+            type: "quiz",
           },
         ],
       },
@@ -152,28 +144,24 @@ export const mockPOIs = [
           {
             title: "Greek Ministry of Culture",
             url: "https://www.culture.gr/en/monument/SitePages/view.aspx?nID=1348",
+            type: "blog",
+          },
+          {
+            title: "Victory Goddess Quiz",
+            url: "https://example.com/quiz/athena-nike",
+            type: "quiz",
           },
         ],
         fr: [
           {
             title: "Ministère grec de la Culture",
             url: "https://www.culture.gr/en/monument/SitePages/view.aspx?nID=1348",
+            type: "blog",
           },
-        ],
-      },
-    },
-    quizLinks: {
-      locales: {
-        en: [
-          {
-            title: "Victory Goddess Quiz",
-            url: "https://example.com/quiz/athena-nike",
-          },
-        ],
-        fr: [
           {
             title: "Quiz sur la Déesse de la Victoire",
             url: "https://example.com/quiz/athena-nike",
+            type: "quiz",
           },
         ],
       },
@@ -208,28 +196,24 @@ export const mockPOIs = [
           {
             title: "Acropolis Museum",
             url: "https://www.theacropolismuseum.gr/en/propylaia",
+            type: "blog",
+          },
+          {
+            title: "Ancient Gateways Quiz",
+            url: "https://example.com/quiz/propylaea",
+            type: "quiz",
           },
         ],
         fr: [
           {
             title: "Musée de l'Acropole",
             url: "https://www.theacropolismuseum.gr/en/propylaia",
+            type: "blog",
           },
-        ],
-      },
-    },
-    quizLinks: {
-      locales: {
-        en: [
-          {
-            title: "Ancient Gateways Quiz",
-            url: "https://example.com/quiz/propylaea",
-          },
-        ],
-        fr: [
           {
             title: "Quiz sur les Portails Anciens",
             url: "https://example.com/quiz/propylaea",
+            type: "quiz",
           },
         ],
       },
@@ -264,28 +248,24 @@ export const mockPOIs = [
           {
             title: "Ancient Theatre Archive",
             url: "https://www.ancient-theatre.com/greece/athens-theatre-dionysus",
+            type: "blog",
+          },
+          {
+            title: "Greek Drama Quiz",
+            url: "https://example.com/quiz/dionysus-theatre",
+            type: "quiz",
           },
         ],
         fr: [
           {
             title: "Archives du Théâtre Ancien",
             url: "https://www.ancient-theatre.com/greece/athens-theatre-dionysus",
+            type: "blog",
           },
-        ],
-      },
-    },
-    quizLinks: {
-      locales: {
-        en: [
-          {
-            title: "Greek Drama Quiz",
-            url: "https://example.com/quiz/dionysus-theatre",
-          },
-        ],
-        fr: [
           {
             title: "Quiz sur le Drame Grec",
             url: "https://example.com/quiz/dionysus-theatre",
+            type: "quiz",
           },
         ],
       },
@@ -320,28 +300,24 @@ export const mockPOIs = [
           {
             title: "Athens Festival",
             url: "https://www.greekfestival.gr/en/venues/odeon-herodes-atticus",
+            type: "blog",
+          },
+          {
+            title: "Roman Architecture Quiz",
+            url: "https://example.com/quiz/odeon",
+            type: "quiz",
           },
         ],
         fr: [
           {
             title: "Festival d'Athènes",
             url: "https://www.greekfestival.gr/en/venues/odeon-herodes-atticus",
+            type: "blog",
           },
-        ],
-      },
-    },
-    quizLinks: {
-      locales: {
-        en: [
-          {
-            title: "Roman Architecture Quiz",
-            url: "https://example.com/quiz/odeon",
-          },
-        ],
-        fr: [
           {
             title: "Quiz sur l'Architecture Romaine",
             url: "https://example.com/quiz/odeon",
+            type: "quiz",
           },
         ],
       },
@@ -376,28 +352,24 @@ export const mockPOIs = [
           {
             title: "Ancient Agora Museum",
             url: "https://www.agathe.gr/areopagus.html",
+            type: "blog",
+          },
+          {
+            title: "Ancient Democracy Quiz",
+            url: "https://example.com/quiz/areopagus",
+            type: "quiz",
           },
         ],
         fr: [
           {
             title: "Musée de l'Agora Antique",
             url: "https://www.agathe.gr/areopagus.html",
+            type: "blog",
           },
-        ],
-      },
-    },
-    quizLinks: {
-      locales: {
-        en: [
-          {
-            title: "Ancient Democracy Quiz",
-            url: "https://example.com/quiz/areopagus",
-          },
-        ],
-        fr: [
           {
             title: "Quiz sur la Démocratie Ancienne",
             url: "https://example.com/quiz/areopagus",
+            type: "quiz",
           },
         ],
       },
@@ -432,28 +404,24 @@ export const mockPOIs = [
           {
             title: "American School of Classical Studies",
             url: "https://www.agathe.gr/",
+            type: "blog",
+          },
+          {
+            title: "Ancient Marketplace Quiz",
+            url: "https://example.com/quiz/agora",
+            type: "quiz",
           },
         ],
         fr: [
           {
             title: "École Américaine d'Études Classiques",
             url: "https://www.agathe.gr/",
+            type: "blog",
           },
-        ],
-      },
-    },
-    quizLinks: {
-      locales: {
-        en: [
-          {
-            title: "Ancient Marketplace Quiz",
-            url: "https://example.com/quiz/agora",
-          },
-        ],
-        fr: [
           {
             title: "Quiz sur le Marché Ancien",
             url: "https://example.com/quiz/agora",
+            type: "quiz",
           },
         ],
       },
@@ -488,28 +456,24 @@ export const mockPOIs = [
           {
             title: "Hellenic Ministry of Culture",
             url: "https://www.culture.gr/en/monument/SitePages/view.aspx?nID=1347",
+            type: "blog",
+          },
+          {
+            title: "Greek Gods Quiz",
+            url: "https://example.com/quiz/hephaestus",
+            type: "quiz",
           },
         ],
         fr: [
           {
             title: "Ministère Hellénique de la Culture",
             url: "https://www.culture.gr/en/monument/SitePages/view.aspx?nID=1347",
+            type: "blog",
           },
-        ],
-      },
-    },
-    quizLinks: {
-      locales: {
-        en: [
-          {
-            title: "Greek Gods Quiz",
-            url: "https://example.com/quiz/hephaestus",
-          },
-        ],
-        fr: [
           {
             title: "Quiz sur les Dieux Grecs",
             url: "https://example.com/quiz/hephaestus",
+            type: "quiz",
           },
         ],
       },
@@ -541,28 +505,27 @@ export const mockPOIs = [
     externalLinks: {
       locales: {
         en: [
-          { title: "Agora Museum", url: "https://www.agathe.gr/museum.html" },
+          {
+            title: "Agora Museum",
+            url: "https://www.agathe.gr/museum.html",
+            type: "blog",
+          },
+          {
+            title: "Ancient Architecture Quiz",
+            url: "https://example.com/quiz/stoa",
+            type: "quiz",
+          },
         ],
         fr: [
           {
             title: "Musée de l'Agora",
             url: "https://www.agathe.gr/museum.html",
+            type: "blog",
           },
-        ],
-      },
-    },
-    quizLinks: {
-      locales: {
-        en: [
-          {
-            title: "Ancient Architecture Quiz",
-            url: "https://example.com/quiz/stoa",
-          },
-        ],
-        fr: [
           {
             title: "Quiz sur l'Architecture Ancienne",
             url: "https://example.com/quiz/stoa",
+            type: "quiz",
           },
         ],
       },

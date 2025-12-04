@@ -43,6 +43,7 @@ function NavbarItem({ to, name, className, icon }) {
 
   return (
     <MenuItemStyled
+      dense
       selected={isSelected}
       className={clsx("navbar-item", { expanded: isNavMenuOpen }, className)}
     >

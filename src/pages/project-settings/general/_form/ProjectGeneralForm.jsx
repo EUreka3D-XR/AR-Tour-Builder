@@ -3,12 +3,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Stack, TextField } from "@mui/material";
 
 import { useUpdateProject } from "@/services/projectsService";
-import Button from "@/components/button/Button";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/HorizontalFieldWrapper";
-import EurekaIcon from "@/components/icon/EurekaIcon";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 import { SettingsFormLayout } from "../../_sections/SettingsFormLayout";
+import SettingsSaveRow from "../../_sections/SettingsSaveRow";
 
 function ProjectGeneralForm({ defaultValues }) {
   const { projectId } = useParams();
@@ -17,10 +16,14 @@ function ProjectGeneralForm({ defaultValues }) {
     defaultValues,
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
 
-  const onSubmit = (data) => {
-    updateProject({ data });
+  const onSubmit = async (data) => {
+    const newData = await updateProject({ data });
+    reset({
+      title: newData.title,
+      description: newData.description,
+    });
   };
 
   return (
@@ -73,21 +76,7 @@ function ProjectGeneralForm({ defaultValues }) {
               }}
             />
           </HorizontalFieldWrapper>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="flex-end"
-            spacing={1}
-            mt={6}
-          >
-            <Button
-              type="submit"
-              variant="filled"
-              startIcon={<EurekaIcon name="save" />}
-            >
-              Save Changes
-            </Button>
-          </Stack>
+          <SettingsSaveRow />
         </SettingsFormLayout>
       </form>
     </FormProvider>

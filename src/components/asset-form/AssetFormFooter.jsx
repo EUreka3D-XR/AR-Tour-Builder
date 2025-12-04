@@ -5,11 +5,21 @@ import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import SidebarFooterSection from "@/components/sidebar/_sections/SidebarFooterSection";
 
-function AssetFormFooter({ isPoiAsset, onCancel }) {
+function AssetFormFooter({ onSubmit, isPoiAsset, onCancel }) {
   const { assetId } = useParams();
   const [searchParams] = useSearchParams();
   const paramsAssetId = searchParams.get("mediaId");
   const isNew = !assetId && !paramsAssetId;
+
+  const handleFormSubmit = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (onSubmit) {
+      onSubmit(e);
+    }
+  };
 
   return (
     <SidebarFooterSection>
@@ -22,7 +32,7 @@ function AssetFormFooter({ isPoiAsset, onCancel }) {
       >
         {isNew ? (
           <Button
-            type="submit"
+            onClick={handleFormSubmit}
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >
@@ -30,7 +40,7 @@ function AssetFormFooter({ isPoiAsset, onCancel }) {
           </Button>
         ) : (
           <Button
-            type="submit"
+            onClick={handleFormSubmit}
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >

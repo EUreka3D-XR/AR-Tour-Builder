@@ -1,17 +1,19 @@
 import { useSearchParams } from "react-router";
 import { Stack } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import SidebarFooterSection from "@/components/sidebar/_sections/SidebarFooterSection";
 
 function AssetFooterSection({ onCancel }) {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const isNew = !searchParams.get("poiId");
 
   return (
     <SidebarFooterSection>
-      <Button onClick={onCancel}>Cancel</Button>
+      <Button onClick={onCancel}>{t("librarySidebar.footer.cancel")}</Button>
       <Stack
         direction="row"
         alignItems="center"
@@ -24,7 +26,7 @@ function AssetFooterSection({ onCancel }) {
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >
-            Create Media Asset
+            {t("librarySidebar.footer.createAsset")}
           </Button>
         ) : (
           <Button
@@ -32,7 +34,7 @@ function AssetFooterSection({ onCancel }) {
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >
-            Save Changes
+            {t("librarySidebar.footer.saveChanges")}
           </Button>
         )}
       </Stack>

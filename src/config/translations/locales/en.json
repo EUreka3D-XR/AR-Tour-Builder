@@ -349,5 +349,19 @@
         "confirmText": "Delete"
       }
     }
+  },
+  "librarySidebar": {
+    "new": {
+      "title": "Create a Media Asset"
+    },
+    "edit": {
+      "title": "Editing Asset",
+      "error": "Error loading asset."
+    },
+    "footer": {
+      "cancel": "Cancel",
+      "createAsset": "Create Media Asset",
+      "saveChanges": "Save Changes"
+    }
   }
 }

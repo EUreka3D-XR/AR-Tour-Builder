@@ -31,7 +31,7 @@ function PoiFooterSection({
   const renderPreviousButton = isNew && currentStep > 0;
   const renderNextButton = isNew && currentStep < steps.length - 2;
   const renderCreateButton = isNew && currentStep === steps.length - 2;
-  const renderUpdateButton = !isNew;
+  const renderUpdateButton = !isNew && activeTab !== "media";
 
   const handleNextStep = async () => {
     await validateStep(currentStep);

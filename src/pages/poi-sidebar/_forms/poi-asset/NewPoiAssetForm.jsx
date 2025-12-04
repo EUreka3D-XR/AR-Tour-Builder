@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from "react-router";
 
 import { useCreatePoiAsset } from "@/services/assetsService";
 import { useLibraryAssetMultilingual } from "@/services/libraryService";
+import { useLocale } from "@/hooks/useLocale";
 import SidebarSkeleton from "../../_common/_utils/SidebarSkeleton";
 import PoiAssetFormContainer from "./PoiAssetFormContainer";
 
@@ -50,12 +51,14 @@ const DEFAULT_VALUES = {
   },
 };
 function NewPoiAssetForm({ onClose }) {
-  const { projectId, tourId, poiId } = useParams();
+  const { poiId } = useParams();
   const [searchParams] = useSearchParams();
   const assetId = searchParams.get("libraryMedia");
 
+  const locale = useLocale();
+
   const { data, fetchState } = useLibraryAssetMultilingual(assetId);
-  const { mutate: createAsset } = useCreatePoiAsset(projectId, tourId, poiId);
+  const { mutate: createAsset } = useCreatePoiAsset(poiId, locale);
 
   const defaultValues = useMemo(() => {
     if (assetId && data) {

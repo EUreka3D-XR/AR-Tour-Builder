@@ -1,6 +1,8 @@
 import { api } from "@/api";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { useLocale } from "@/hooks/useLocale";
+import { localizeData } from "@/utils/inputLocale";
 import { useDataFetcher, useDataMutator } from "./helpers/serviceHooks";
 
 /**
@@ -53,25 +55,56 @@ export const usePoiAssetMultilingual = (assetId) => {
 
 /**
  * @param {string} poiId
+ * @param {string} locale
  * @returns {PoiAssetMutateResult}
  */
-export const useCreatePoiAsset = (poiId) => {
+export const useCreatePoiAsset = (poiId, locale) => {
+  const qc = useQueryClient();
   return useDataMutator({
     mutator: ({ data }) => api.poiAssets.create(poiId, data),
     mutationKey: ["create-poi-asset", poiId],
     invalidateKey: ["poi-assets", poiId],
+    onSuccess: (data) => {
+      let newData = data;
+      if (locale) {
+        newData = localizeData(data, locale);
+      }
+      qc.setQueryData(["poi-assets", poiId], (oldData) => {
+        if (!oldData) return [newData];
+        return [newData, ...oldData];
+      });
+    },
   });
 };
 
 /**
+ * @param {string} poiId
  * @param {string} assetId
+ * @param {string} locale
  * @returns {PoiAssetMutateResult}
  */
-export const useUpdatePoiAsset = (assetId) => {
+export const useUpdatePoiAsset = (poiId, assetId, locale) => {
+  const qc = useQueryClient();
+
   return useDataMutator({
     mutator: ({ data }) => api.poiAssets.update(assetId, data),
     mutationKey: ["update-poi-asset", assetId],
     invalidateKey: ["poi-asset", assetId],
+    onSuccess: (data) => {
+      // The update returns multilingual data, but the list cache expects localized data
+      // So we need to extract the current locale's data from the multilingual response
+      let newData = data;
+      if (locale) {
+        newData = localizeData(data, locale);
+      }
+
+      qc.setQueryData(["poi-assets", poiId], (oldData) => {
+        if (!oldData) return oldData;
+        return oldData.map((asset) =>
+          asset.id === newData.id ? newData : asset,
+        );
+      });
+    },
   });
 };
 
@@ -81,9 +114,17 @@ export const useUpdatePoiAsset = (assetId) => {
  * @returns {PoiAssetMutateResult}
  */
 export const useDeletePoiAsset = (poiId, assetId) => {
+  const qc = useQueryClient();
+
   return useDataMutator({
     mutator: () => api.poiAssets.delete(assetId),
     mutationKey: ["delete-poi-asset", assetId],
     invalidateKey: ["poi-assets", poiId],
+    onSuccess: () => {
+      qc.setQueryData(["poi-assets", poiId], (oldData) => {
+        if (!oldData) return oldData;
+        return oldData.filter((asset) => String(asset.id) !== String(assetId));
+      });
+    },
   });
 };

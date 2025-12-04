@@ -49,7 +49,7 @@ export const useFetchState = (initialState) => {
 };
 
 export const useFetchStateHelper = (
-  { error, isPending, isError, isSuccess },
+  { error, isPending, isFetching, isError, isSuccess },
   setFetchState,
 ) => {
   const [allowUpdates, setAllowUpdates] = useState(false);
@@ -61,11 +61,11 @@ export const useFetchStateHelper = (
   const fetchState = useMemo(
     () => ({
       error,
-      isLoading: isPending,
+      isLoading: isPending && isFetching,
       isError,
       isSuccess,
     }),
-    [error, isPending, isError, isSuccess],
+    [error, isPending, isFetching, isError, isSuccess],
   );
 
   useEffect(() => {

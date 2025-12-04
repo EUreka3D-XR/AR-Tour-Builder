@@ -32,7 +32,7 @@ function EditPoiForm({ onClose }) {
     [initialPoi],
   );
 
-  const onSubmit = async (data) => {
+  const handleSubmit = async (data) => {
     await updatePoi({ data });
     navigate(`${routes.pois.one(poiId)}`);
   };
@@ -44,7 +44,7 @@ function EditPoiForm({ onClose }) {
   return (
     <PoiFormContainer
       defaultValues={defaultValues}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       onClose={onClose}
     />
   );

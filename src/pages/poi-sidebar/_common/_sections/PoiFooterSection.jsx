@@ -78,13 +78,14 @@ function PoiFooterSection({ onCancel, steps = [], fieldsPerStep = [] }) {
           </Button>
         )}
         {renderCreateButton && (
-          <Button type="submit" variant="filled">
+          <Button type="submit" form="poi-form" variant="filled">
             Create and add media
           </Button>
         )}
         {renderUpdateButton && (
           <Button
             type="submit"
+            form="poi-form"
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >

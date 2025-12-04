@@ -86,6 +86,30 @@ const put = async (url, { data, locale, fromDTO, toDTO, signal } = {}) => {
 };
 
 /**
+ * PUT request handler
+ * @param {string} url - The endpoint URL
+ * @param {FetcherPostOptions} options - Request options
+ * @returns {Promise<any>} The response data
+ */
+const patch = async (url, { data, locale, fromDTO, toDTO, signal } = {}) => {
+  try {
+    const finalData = toDTO ? toDTO(data) : data;
+    const config = { signal };
+
+    // Add locale as query parameter if provided
+    if (locale) {
+      config.params = { locale };
+    }
+
+    const response = await axiosInstance.patch(url, finalData, config);
+    return fromDTO ? fromDTO(response.data) : response.data;
+  } catch (error) {
+    handleApiError(error, "PATCH", url);
+    throw error;
+  }
+};
+
+/**
  * DELETE request handler
  * @param {string} url - The endpoint URL
  * @param {Object} options - Request options
@@ -132,6 +156,7 @@ const handleApiError = (error, method, url) => {
 const fetcher = {
   get,
   post,
+  patch,
   put,
   delete: del, // 'delete' is a reserved keyword
 };

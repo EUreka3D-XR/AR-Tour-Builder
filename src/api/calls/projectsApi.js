@@ -12,6 +12,11 @@ const getProject = async (projectId, locale) => {
   return fetcher.get(url, { locale, fromDTO: ProjectDto.fromApi });
 };
 
+const getProjectPopulated = async (projectId, locale) => {
+  const url = baseUrls.projectPopulated(projectId);
+  return fetcher.get(url, { locale, fromDTO: ProjectDto.fromApi });
+};
+
 const createProject = async (data, locale) => {
   const url = baseUrls.projects;
   return fetcher.post(url, {
@@ -24,7 +29,7 @@ const createProject = async (data, locale) => {
 
 const updateProject = async (projectId, data, locale) => {
   const url = baseUrls.project(projectId);
-  return fetcher.put(url, {
+  return fetcher.patch(url, {
     data,
     locale,
     toDTO: ProjectDto.toApi,
@@ -40,6 +45,7 @@ const deleteProject = async (projectId) => {
 export const projectsApi = {
   fetchAll: getAllProjects,
   fetchOne: getProject,
+  fetchOnePopulated: getProjectPopulated,
   create: createProject,
   update: updateProject,
   delete: deleteProject,

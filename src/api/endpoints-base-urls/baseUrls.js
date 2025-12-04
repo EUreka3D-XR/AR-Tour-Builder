@@ -7,6 +7,7 @@ export const baseUrls = {
   me: "/api/auth/me",
   projects: "/api/projects",
   project: (projectId) => `/api/projects/${projectId}`,
+  projectPopulated: (projectId) => `/api/projects/${projectId}/populated`,
   library: "/api/assets",
   libraryAsset: (assetId) => `/api/assets/${assetId}`,
   members: (projectId) => `/api/projects/${projectId}/members`,

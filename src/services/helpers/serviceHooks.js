@@ -64,12 +64,12 @@ export const useDataMutator = ({
   const { data, ...mutation } = useMutation({
     mutationKey,
     mutationFn: mutator,
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       if (invalidateKey) {
         queryClient.invalidateQueries({ queryKey: invalidateKey });
       }
       if (typeof onSuccess === "function") {
-        onSuccess(data);
+        onSuccess(data, variables);
       }
     },
   });

@@ -42,7 +42,7 @@ function TourHeaderSection() {
   const { routes, navigate } = useNavPaths();
 
   const {
-    formState: { isSubmitting },
+    formState: { isSubmitting, isDirty },
   } = useFormContext();
 
   const tourTitle = useWatch({ name: "title" });
@@ -84,9 +84,10 @@ function TourHeaderSection() {
             <Button
               startIcon={<EurekaIcon name="save" />}
               type="submit"
+              isDisabled={!isDirty}
               isLoading={isSubmitting}
             >
-              Save Changes
+              {isSubmitting ? "Saving..." : "Save Changes"}
             </Button>
             <Button
               startIcon={<EurekaIcon name="delete" />}

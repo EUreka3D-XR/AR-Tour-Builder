@@ -17,26 +17,14 @@ function EditTourForm({ initialTour }) {
 
   const methods = useForm({
     shouldUnregister: false,
-    defaultValues: {
-      title: initialTour.title,
-      description: initialTour.description,
-      pois: initialTour.pois,
-      duration: initialTour.duration ?? 0,
-      distance: initialTour.distance ?? 0,
-      thumbnail: initialTour.thumbnail,
-      createdAt: initialTour.createdAt,
-      updatedAt: initialTour.updatedAt,
-      boundBox: initialTour.boundBox,
-      guided: initialTour.guided ?? false,
-      coordinates: initialTour.coordinates,
-      status: initialTour.status,
-    },
+    defaultValues: parseTourDefaultValues(initialTour),
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onSubmit = async (data) => {
-    await updateTour({ data });
+    const updatedTour = await updateTour({ data });
+    reset(parseTourDefaultValues(updatedTour));
   };
 
   return (
@@ -47,3 +35,20 @@ function EditTourForm({ initialTour }) {
 }
 
 export default EditTourForm;
+
+const parseTourDefaultValues = (tour) => {
+  return {
+    title: tour.title,
+    description: tour.description,
+    pois: tour.pois,
+    duration: tour.duration ?? 0,
+    distance: tour.distance ?? 0,
+    thumbnail: tour.thumbnail,
+    createdAt: tour.createdAt,
+    updatedAt: tour.updatedAt,
+    boundBox: tour.boundBox,
+    guided: tour.guided ?? false,
+    coordinates: tour.coordinates,
+    status: tour.status,
+  };
+};

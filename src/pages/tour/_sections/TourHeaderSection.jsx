@@ -84,6 +84,7 @@ function TourHeaderSection() {
             <Button
               startIcon={<EurekaIcon name="save" />}
               type="submit"
+              variant="filled"
               isDisabled={!isDirty}
               isLoading={isSubmitting}
             >

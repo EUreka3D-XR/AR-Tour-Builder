@@ -1,4 +1,5 @@
 import { IconButton, styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useLogout } from "@/services/authService";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
@@ -26,6 +27,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function Header() {
+  const { t } = useTranslation();
   const { navigate, routes } = useNavPaths();
   const { isInsideAProject, toggleNavMenu } = useGeneralProvider();
 
@@ -45,7 +47,7 @@ function Header() {
             <EurekaIcon name="menu" />
           </IconButton>
         )}
-        <img src={logo} alt="logo" className="logo" />
+        <img src={logo} alt={t("common.alt.logo")} className="logo" />
       </div>
       <div className="side-header right-header">
         <DropdownMenu
@@ -53,7 +55,7 @@ function Header() {
           items={[
             // { label: "Profile", to: "/profile" },
             // { label: "Settings", to: "/settings" },
-            { label: "Logout", onClick: handleLogout },
+            { label: t("header.action.logout"), onClick: handleLogout },
           ]}
         >
           {({ toggle }) => (

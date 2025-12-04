@@ -42,7 +42,7 @@ const SearchInputUnstyled = ({
   return (
     <TextField
       name="search-input"
-      placeholder={placeholder || t("Components.Searchbar")}
+      placeholder={placeholder || t("searchbar.placeholder")}
       value={finalValue}
       onChange={handleChange}
       disabled={isDisabled}

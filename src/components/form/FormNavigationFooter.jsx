@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { styled } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -16,6 +17,7 @@ const FooterStyled = styled("div")(({ theme }) => ({
 }));
 
 function FormNavigationFooter({ isNew, paramKey, tabs = [] }) {
+  const { t } = useTranslation();
   const { activeTabIndex, goToNextTab, goToPreviousTab } = useParamsTabs(
     paramKey,
     tabs,
@@ -44,17 +46,17 @@ function FormNavigationFooter({ isNew, paramKey, tabs = [] }) {
       <div className="footer-actions">
         {showBackButton && (
           <Button onClick={handleBack} variant="outlined">
-            Back
+            {t("form.navigation.back")}
           </Button>
         )}
         {showNextButton && (
           <Button onClick={handleNext} variant="filled">
-            Next
+            {t("form.navigation.next")}
           </Button>
         )}
         {showSaveButton && (
           <Button type="submit" variant="filled">
-            Save
+            {t("form.navigation.save")}
           </Button>
         )}
       </div>

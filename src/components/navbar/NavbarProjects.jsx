@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 import { Divider, styled } from "@mui/material";
 
 import { useProjects } from "@/services/projectsService";
@@ -59,6 +60,7 @@ const ProjectItem = styled(Link)({
 });
 
 function NavbarProjects() {
+  const { t } = useTranslation();
   const { project: selectedProject } = useProjectProvider();
   const { data: projects } = useProjects();
 
@@ -98,7 +100,7 @@ function NavbarProjects() {
               <span className="thumbnail-container">
                 <Image
                   src={project.thumbnail}
-                  alt="project-thumbnail"
+                  alt={t("common.alt.project_thumbnail")}
                   className="project-thumbnail"
                 />
               </span>
@@ -120,7 +122,7 @@ function NavbarProjects() {
         className="add-new-btn"
       >
         <span className={clsx({ hidden: !isNavMenuOpen })}>
-          Create new project
+          {t("navbar.action.create_new_project")}
         </span>
       </Button>
       <Divider />

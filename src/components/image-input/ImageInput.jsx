@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import clsx from "clsx";
 import { useDropzone } from "react-dropzone";
+import { useTranslation } from "react-i18next";
 import { styled, Typography } from "@mui/material";
 
 import CenteredArea from "../centered/Centered.jsx";
@@ -30,15 +31,18 @@ const ImagePreview = styled(Image)(() => ({
 }));
 
 function ImageInput({
-  placeholderText = "Click to upload photo",
+  placeholderText,
   onChange,
   className,
   height = 200,
   width = "100%",
   maxFileSize = DEFAULT_FILE_SIZE,
 }) {
+  const { t } = useTranslation();
   const [preview, setPreview] = useState(null);
   const [error, setError] = useState("");
+
+  const defaultPlaceholder = placeholderText || t("image_input.placeholder.default");
 
   const onDrop = useCallback(
     (acceptedFiles, fileRejections) => {
@@ -47,7 +51,7 @@ function ImageInput({
         const reason = fileRejections[0].errors[0];
         if (reason.code === "file-too-large") {
           setError(
-            "File is too large. Max size is " + Math.round(maxFileSize) + "MB.",
+            t("image_input.error.file_too_large", { maxSize: Math.round(maxFileSize) }),
           );
         } else {
           setError(reason.message);
@@ -58,7 +62,7 @@ function ImageInput({
       setPreview(URL.createObjectURL(imgFile));
       if (onChange) onChange(imgFile);
     },
-    [onChange, maxFileSize],
+    [onChange, maxFileSize, t],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -72,8 +76,8 @@ function ImageInput({
   });
 
   const helperText = useMemo(
-    () => `PNG, JPG up to ${maxFileSize}MB`,
-    [maxFileSize],
+    () => t("image_input.helper.accepted_formats", { maxSize: maxFileSize }),
+    [maxFileSize, t],
   );
 
   return (
@@ -93,14 +97,14 @@ function ImageInput({
       {preview ? (
         <ImagePreview
           src={preview}
-          alt="Preview"
+          alt={t("common.alt.preview")}
           objectFit="cover"
           className="image-preview"
         />
       ) : (
         <PlaceholderStyled className="input-placeholder">
           <EurekaIcon name="uploadImage" size={48} color="disabled" />
-          <Typography color="textSecondary">{placeholderText}</Typography>
+          <Typography color="textSecondary">{defaultPlaceholder}</Typography>
           <Typography variant="caption" color="textSecondary">
             {helperText}
           </Typography>

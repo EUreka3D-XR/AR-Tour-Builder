@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 import { useWatch } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import {
   Box,
   Checkbox,
@@ -72,6 +73,7 @@ const CoordinatesRow = styled("div")(({ theme }) => ({
 }));
 
 function AssetForm({ isPoiAsset, onSubmit, onClose }) {
+  const { t } = useTranslation();
   const [isMultilingual, setIsMultilingual] = useState(false);
   const locale = useLocale();
 
@@ -99,7 +101,7 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
         {isPoiAsset && (
           <NoShrink>
             <PoiAssetHeaderSection
-              title={isNewPoiAsset ? "Create Asset" : "Editing Asset"}
+              title={isNewPoiAsset ? t("asset.form.section.create_asset") : t("asset.form.section.editing_asset")}
               onBack={onClose}
             />
             <Divider />
@@ -110,10 +112,10 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
           <FormInputMultilingual
             name="title"
             render={({ field }) => (
-              <LabeledInput label="Title" isMultilingual>
+              <LabeledInput label={t("asset.form.field.title")} isMultilingual>
                 <TextField
                   {...field}
-                  placeholder="Enter media title"
+                  placeholder={t("asset.form.placeholder.enter_media_title")}
                   fullWidth
                 />
               </LabeledInput>
@@ -122,10 +124,10 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
           <FormInputMultilingual
             name="description"
             render={({ field }) => (
-              <LabeledInput label="Description" isMultilingual>
+              <LabeledInput label={t("asset.form.field.description")} isMultilingual>
                 <TextField
                   {...field}
-                  placeholder="Enter media description"
+                  placeholder={t("asset.form.placeholder.enter_media_description")}
                   fullWidth
                   multiline
                   rows={4}
@@ -136,10 +138,10 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
           <FormInput
             name="type"
             render={({ field }) => (
-              <LabeledInput label="Media Type">
+              <LabeledInput label={t("asset.form.field.media_type")}>
                 <Select {...field} fullWidth displayEmpty>
                   <MenuItem value="" disabled>
-                    <em>Select media type</em>
+                    <em>{t("asset.form.placeholder.select_media_type")}</em>
                   </MenuItem>
                   {fileTypes.map((type) => (
                     <MenuItem key={type.value} value={type.value}>
@@ -159,11 +161,9 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
             }
             label={
               <div className="checkbox-label">
-                <Typography variant="body2">Multilingual Media</Typography>
+                <Typography variant="body2">{t("asset.form.field.multilingual_media")}</Typography>
                 <Typography variant="caption">
-                  Enable this option to provide media content in multiple
-                  languages. This is helpful for media containing text or audio
-                  that needs to be accessible to a diverse audience.
+                  {t("asset.form.help.multilingual_media_description")}
                 </Typography>
               </div>
             }
@@ -173,10 +173,10 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
               <FormInputMultilingual
                 name="contentUrl"
                 render={({ field }) => (
-                  <LabeledInput label="Media URL" isMultilingual>
+                  <LabeledInput label={t("asset.form.field.media_url")} isMultilingual>
                     <TextField
                       {...field}
-                      placeholder="https://example.com/media-url.png"
+                      placeholder={t("asset.form.placeholder.media_url_example")}
                       fullWidth
                       helperText={helperTextForUrl}
                       type="url"
@@ -188,10 +188,10 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
               <FormInputCommonMultilingual
                 name="contentUrl"
                 render={({ field }) => (
-                  <LabeledInput label="Media URL">
+                  <LabeledInput label={t("asset.form.field.media_url")}>
                     <TextField
                       {...field}
-                      placeholder="https://example.com/media-url.png"
+                      placeholder={t("asset.form.placeholder.media_url_example")}
                       fullWidth
                       helperText={helperTextForUrl}
                       type="url"
@@ -211,7 +211,7 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                     })
                   }
                 >
-                  Preview fullscreen
+                  {t("asset.form.action.preview_fullscreen")}
                 </Link>
               </Box>
             )}
@@ -225,7 +225,7 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
           {assetType === "model3d" && (
             <>
               <Divider />
-              <Typography variant="h5">3D Model Attributes</Typography>
+              <Typography variant="h5">{t("asset.form.section.model_attributes")}</Typography>
               <div className="models-details">
                 {isPoiAsset && (
                   <FormInput
@@ -240,11 +240,9 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                         }
                         label={
                           <div className="checkbox-label">
-                            <Typography variant="body2">View in AR</Typography>
+                            <Typography variant="body2">{t("asset.form.field.view_in_ar")}</Typography>
                             <Typography variant="caption">
-                              Enable this option to allow users to view the 3D
-                              model in Augmented Reality (AR) on supported
-                              devices.
+                              {t("asset.form.help.view_in_ar_description")}
                             </Typography>
                           </div>
                         }
@@ -264,10 +262,9 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                       }
                       label={
                         <div className="checkbox-label">
-                          <Typography variant="body2">Georeferenced</Typography>
+                          <Typography variant="body2">{t("asset.form.field.georeferenced")}</Typography>
                           <Typography variant="caption">
-                            Check this box if the 3D model is georeferenced and
-                            should be placed at specific coordinates.
+                            {t("asset.form.help.georeferenced_description")}
                           </Typography>
                         </div>
                       }
@@ -279,11 +276,11 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                     <FormInput
                       name="georeference.lat"
                       render={({ field }) => (
-                        <LabeledInput label="Latitude">
+                        <LabeledInput label={t("asset.form.field.latitude")}>
                           <TextField
                             {...field}
                             className="coordinate-field"
-                            placeholder="ex. 3.123456"
+                            placeholder={t("asset.form.placeholder.latitude_example")}
                           />
                         </LabeledInput>
                       )}
@@ -291,11 +288,11 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                     <FormInput
                       name="georeference.long"
                       render={({ field }) => (
-                        <LabeledInput label="Longitude">
+                        <LabeledInput label={t("asset.form.field.longitude")}>
                           <TextField
                             {...field}
                             className="coordinate-field"
-                            placeholder="ex. 76.123456"
+                            placeholder={t("asset.form.placeholder.longitude_example")}
                           />
                         </LabeledInput>
                       )}
@@ -307,20 +304,19 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                 <>
                   <Divider />
                   <div>
-                    <Typography variant="h5">Linked Audio</Typography>
+                    <Typography variant="h5">{t("asset.form.section.linked_audio")}</Typography>
                     <Typography variant="caption">
-                      Upload audio files in multiple languages for users to
-                      enjoy while exploring the 3D model.
+                      {t("asset.form.help.linked_audio_description")}
                     </Typography>
                   </div>
 
                   <FormInputMultilingual
                     name="modelAssetAttributes.linkedAsset.title"
                     render={({ field }) => (
-                      <LabeledInput label="Audio Title" isMultilingual>
+                      <LabeledInput label={t("asset.form.field.audio_title")} isMultilingual>
                         <TextField
                           {...field}
-                          placeholder="Enter audio title"
+                          placeholder={t("asset.form.placeholder.enter_audio_title")}
                           fullWidth
                         />
                       </LabeledInput>
@@ -329,10 +325,10 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                   <FormInputMultilingual
                     name="modelAssetAttributes.linkedAsset.contentUrl"
                     render={({ field }) => (
-                      <LabeledInput label="Audio URL" isMultilingual>
+                      <LabeledInput label={t("asset.form.field.audio_url")} isMultilingual>
                         <TextField
                           {...field}
-                          placeholder="https://example.com/audio-url.mp3"
+                          placeholder={t("asset.form.placeholder.audio_url_example")}
                           fullWidth
                           type="url"
                         />

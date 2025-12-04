@@ -6,6 +6,7 @@ import {
   TableSortLabel,
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
+import { useTranslation } from "react-i18next";
 
 import getColumnStyle from "./_utils/columnWidth";
 
@@ -24,6 +25,8 @@ import getColumnStyle from "./_utils/columnWidth";
  * @returns {React.ReactElement} Rendered table header component
  */
 function TableHeader({ columns = [], order, orderBy, onRequestSort }) {
+  const { t } = useTranslation();
+
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -59,8 +62,8 @@ function TableHeader({ columns = [], order, orderBy, onRequestSort }) {
                   {orderBy === headCell.value ? (
                     <Box component="span" sx={visuallyHidden}>
                       {order === "desc"
-                        ? "sorted descending"
-                        : "sorted ascending"}
+                        ? t("table.aria.sorted_descending")
+                        : t("table.aria.sorted_ascending")}
                     </Box>
                   ) : null}
                 </TableSortLabel>

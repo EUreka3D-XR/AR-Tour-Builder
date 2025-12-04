@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { styled } from "@mui/material";
 
 const DEFAULT_URL = "https://leomav.github.io/model-inspector/";
@@ -35,6 +36,7 @@ function Model3DViewer({
   onCameraChange,
   onError,
 }) {
+  const { t } = useTranslation();
   const iframeRef = useRef(null);
 
   // Construct viewer iframe URL
@@ -80,7 +82,7 @@ function Model3DViewer({
       <iframe
         ref={iframeRef}
         src={iframeSrc}
-        title="3D Viewer"
+        title={t("model_viewer.alt.viewer_title")}
         style={{
           width: "100%",
           height: "100%",

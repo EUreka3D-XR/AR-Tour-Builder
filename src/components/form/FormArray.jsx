@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useWatch } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Chip, IconButton, styled, TextField, Tooltip } from "@mui/material";
 
 import { useFieldArrayWithId } from "@/hooks/useFieldArrayWithId";
@@ -86,6 +87,7 @@ function FormArrayURLInput({
   urlPlaceholder,
   isLabelRequired,
 }) {
+  const { t } = useTranslation();
   const [errors, setErrors] = useState({});
   const [submits, setSubmits] = useState(0);
 
@@ -111,13 +113,13 @@ function FormArrayURLInput({
     const labelValue = labelRef.current?.value ?? "";
     if (isLabelRequired) {
       if (!labelValue || labelValue.trim() === "") {
-        newErrors.title = "Label is required";
+        newErrors.title = t("validation.label_required");
       }
     }
 
     const urlValue = urlRef.current.value;
     if (!urlValue || urlValue.trim() === "") {
-      newErrors.url = "URL is required";
+      newErrors.url = t("validation.url_required");
     }
 
     setErrors(newErrors);
@@ -137,7 +139,7 @@ function FormArrayURLInput({
 
     const value = e.target.value;
     if (isLabelRequired && (!value || value.trim() === "")) {
-      setErrors((prev) => ({ ...prev, title: "Label is required" }));
+      setErrors((prev) => ({ ...prev, title: t("validation.label_required") }));
     } else {
       setErrors((prev) => ({ ...prev, title: null }));
     }
@@ -148,7 +150,7 @@ function FormArrayURLInput({
 
     const value = e.target.value;
     if (!value || value.trim() === "") {
-      setErrors((prev) => ({ ...prev, url: "URL is required" }));
+      setErrors((prev) => ({ ...prev, url: t("validation.url_required") }));
     } else {
       setErrors((prev) => ({ ...prev, url: null }));
     }

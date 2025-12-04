@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Autocomplete, Chip, TextField } from "@mui/material";
 
 /**
@@ -22,6 +23,8 @@ function LanguagesAutocomplete({
   helperText,
   onChange,
 }) {
+  const { t } = useTranslation();
+
   const isValueDisabled = (optionValue) => {
     if (!disabledValue) return false;
     if (Array.isArray(disabledValue)) {
@@ -109,7 +112,7 @@ function LanguagesAutocomplete({
             {...params}
             error={error}
             helperText={helperText}
-            placeholder="e.g., English, French, Spanish"
+            placeholder={t("language_autocomplete.placeholder.examples")}
           />
         );
       }}

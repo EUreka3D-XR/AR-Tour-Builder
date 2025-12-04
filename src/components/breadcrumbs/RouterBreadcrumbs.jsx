@@ -1,15 +1,10 @@
 import { useMemo } from "react";
 import { useLocation } from "react-router";
+import { useTranslation } from "react-i18next";
 import { Breadcrumbs, styled } from "@mui/material";
 
 import EurekaIcon from "../icon/EurekaIcon";
 import Link from "../link/Link";
-
-const LINK_LABELS = {
-  projects: "My Projects",
-  tours: "Tours",
-  library: "Project's Library",
-};
 
 const BreadcrumbsStyled = styled(Breadcrumbs)({
   "& .breadcrumb-link:hover": {
@@ -30,7 +25,14 @@ const BreadcrumbsStyled = styled(Breadcrumbs)({
  * @returns {JSX.Element} The rendered breadcrumbs component.
  */
 function RouterBreadcrumbs({ className, projectTitle, fetchState }) {
+  const { t } = useTranslation();
   const location = useLocation();
+
+  const LINK_LABELS = useMemo(() => ({
+    projects: t("breadcrumbs.my_projects"),
+    tours: t("breadcrumbs.tours"),
+    library: t("breadcrumbs.projects_library"),
+  }), [t]);
 
   const links = useMemo(() => {
     const segments = location.pathname.split("/").filter(Boolean);
@@ -53,7 +55,7 @@ function RouterBreadcrumbs({ className, projectTitle, fetchState }) {
         to: navTo,
       };
     });
-  }, [fetchState, location.pathname, projectTitle]);
+  }, [fetchState, location.pathname, projectTitle, LINK_LABELS]);
 
   return (
     <BreadcrumbsStyled

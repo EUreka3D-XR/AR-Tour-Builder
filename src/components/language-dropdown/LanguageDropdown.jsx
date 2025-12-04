@@ -1,4 +1,5 @@
 import { MenuItem, Select, styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import useFormLocale from "@/stores/useFormLocale";
 import { useAvailableLocalesProvider } from "@/providers/locales/AvailableLocalesContext";
@@ -51,18 +52,20 @@ function LanguageDropdown({ className, label, hideLabels }) {
 
 function LanguageDropdownComponent({
   className,
-  label = "Input Language",
+  label,
   hideLabels,
   options = [],
 }) {
+  const { t } = useTranslation();
   const initialLocale = options[0]?.value || "en";
 
   const { locale, setCurrentLocale } = useFormLocale(initialLocale);
+  const defaultLabel = label || t("language_dropdown.label.input_language");
 
   return (
     <LabeledInput
       id="language-switcher-label"
-      label={label}
+      label={defaultLabel}
       labelPlacement="left"
       labelIcon="language"
       className={className}

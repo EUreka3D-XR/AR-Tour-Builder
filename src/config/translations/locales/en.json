@@ -12,5 +12,157 @@
     "tomorrow": "Tomorrow",
     "last_week": "Last Week",
     "next_week": "Next Week"
+  },
+  "common": {
+    "action": {
+      "cancel": "Cancel",
+      "refresh": "Refresh",
+      "go_back": "Go back"
+    },
+    "alt": {
+      "logo": "logo",
+      "preview": "Preview",
+      "project_thumbnail": "project-thumbnail"
+    }
+  },
+  "asset": {
+    "form": {
+      "section": {
+        "create_asset": "Create Asset",
+        "editing_asset": "Editing Asset",
+        "model_attributes": "3D Model Attributes",
+        "linked_audio": "Linked Audio"
+      },
+      "field": {
+        "title": "Title",
+        "description": "Description",
+        "media_type": "Media Type",
+        "multilingual_media": "Multilingual Media",
+        "media_url": "Media URL",
+        "view_in_ar": "View in AR",
+        "georeferenced": "Georeferenced",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "audio_title": "Audio Title",
+        "audio_url": "Audio URL"
+      },
+      "placeholder": {
+        "enter_media_title": "Enter media title",
+        "enter_media_description": "Enter media description",
+        "select_media_type": "Select media type",
+        "media_url_example": "https://example.com/media-url.png",
+        "latitude_example": "ex. 3.123456",
+        "longitude_example": "ex. 76.123456",
+        "enter_audio_title": "Enter audio title",
+        "audio_url_example": "https://example.com/audio-url.mp3"
+      },
+      "help": {
+        "multilingual_media_description": "Enable this option to provide media content in multiple languages. This allows you to upload different media files for each supported language.",
+        "view_in_ar_description": "Enable this option to allow users to view the 3D model in Augmented Reality (AR) mode on compatible devices.",
+        "georeferenced_description": "Check this box if the 3D model is georeferenced and has specific latitude/longitude coordinates associated with it.",
+        "linked_audio_description": "Upload audio files in multiple languages to accompany this asset. Each language can have its own audio track."
+      },
+      "action": {
+        "preview_fullscreen": "Preview fullscreen",
+        "create_media_asset": "Create Media Asset",
+        "create_asset": "Create Asset",
+        "save_changes": "Save Changes"
+      }
+    }
+  },
+  "breadcrumbs": {
+    "my_projects": "My Projects",
+    "tours": "Tours",
+    "projects_library": "Project's Library"
+  },
+  "modal": {
+    "confirmation": {
+      "default_title": "Confirm Action",
+      "default_message": "Are you sure you want to proceed?",
+      "confirm_button": "Confirm",
+      "cancel_button": "Cancel"
+    }
+  },
+  "error": {
+    "default_title": "Something went wrong",
+    "default_message": "Our system encountered a temporary issue. Please try again or contact support if the problem persists.",
+    "action": {
+      "refresh": "Refresh",
+      "go_back": "Go back"
+    }
+  },
+  "components": {
+    "expandable_text": {
+      "show_less": "Show less",
+      "show_more": "Show more"
+    }
+  },
+  "validation": {
+    "label_required": "Label is required",
+    "url_required": "URL is required"
+  },
+  "form": {
+    "navigation": {
+      "back": "Back",
+      "next": "Next",
+      "save": "Save"
+    }
+  },
+  "header": {
+    "action": {
+      "logout": "Logout"
+    }
+  },
+  "image_input": {
+    "placeholder": {
+      "default": "Click to upload photo"
+    },
+    "error": {
+      "file_too_large": "File is too large. Max size is {{maxSize}}MB."
+    },
+    "helper": {
+      "accepted_formats": "PNG, JPG up to {{maxSize}}MB"
+    }
+  },
+  "language_dropdown": {
+    "label": {
+      "input_language": "Input Language"
+    }
+  },
+  "language_autocomplete": {
+    "placeholder": {
+      "examples": "e.g., English, French, Spanish"
+    }
+  },
+  "navbar": {
+    "action": {
+      "create_new_project": "Create new project"
+    }
+  },
+  "file_formats": {
+    "helper": {
+      "text": "To read more on the accepted file formats, ",
+      "link_text": "click here"
+    },
+    "title": "Accepted File Formats"
+  },
+  "document": {
+    "alt": {
+      "pdf_viewer": "PDF Viewer"
+    }
+  },
+  "model_viewer": {
+    "alt": {
+      "viewer_title": "3D Viewer"
+    }
+  },
+  "table": {
+    "aria": {
+      "sorted_descending": "sorted descending",
+      "sorted_ascending": "sorted ascending"
+    }
+  },
+  "searchbar": {
+    "placeholder": "Search..."
   }
 }

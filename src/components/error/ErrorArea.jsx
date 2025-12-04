@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 import { Stack, styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -10,29 +11,33 @@ const Content = styled("div")({
 });
 
 function ErrorArea({
-  title = "Something went wrong",
-  subtitle = "Our system encountered a temporary issue. Try refreshing the page or come back in a few moments. If the problem persists, contact support.",
+  title,
+  subtitle,
   hideReload,
   hideGoBack,
 }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const defaultTitle = title || t("error.default_title");
+  const defaultSubtitle = subtitle || t("error.default_message");
   return (
     <Content>
       <Stack spacing={2} alignItems="center">
         <EurekaIcon name="error" size={40} color="error" />
         <Typography variant="h4" gutterBottom>
-          {title}
+          {defaultTitle}
         </Typography>
-        <Typography color="textSecondary">{subtitle}</Typography>
+        <Typography color="textSecondary">{defaultSubtitle}</Typography>
         <Stack direction="row" spacing={2}>
           {!hideReload && (
             <Button variant="outlined" onClick={() => window.location.reload()}>
-              Refresh
+              {t("error.action.refresh")}
             </Button>
           )}
           {!hideGoBack && (
             <Button variant="outlined" onClick={() => navigate(-1)}>
-              Go back
+              {t("error.action.go_back")}
             </Button>
           )}
         </Stack>

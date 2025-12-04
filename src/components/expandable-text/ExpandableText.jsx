@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Stack, Typography } from "@mui/material";
 
 import Button from "../button/Button";
 
 const ExpandableText = ({ children, lines = 1, props }) => {
+  const { t } = useTranslation();
   const [expanded, setExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const textRef = useRef(null);
@@ -47,7 +49,7 @@ const ExpandableText = ({ children, lines = 1, props }) => {
           disableGutters
           onClick={() => setExpanded((prev) => !prev)}
         >
-          {expanded ? "Show less" : "Show more"}
+          {expanded ? t("components.expandable_text.show_less") : t("components.expandable_text.show_more")}
         </Button>
       )}
     </Stack>

@@ -1,4 +1,5 @@
 import { useParams, useSearchParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { Stack } from "@mui/material";
 
 import Button from "@/components/button/Button";
@@ -6,6 +7,7 @@ import EurekaIcon from "@/components/icon/EurekaIcon";
 import SidebarFooterSection from "@/components/sidebar/_sections/SidebarFooterSection";
 
 function AssetFormFooter({ onSubmit, isPoiAsset, onCancel }) {
+  const { t } = useTranslation();
   const { assetId } = useParams();
   const [searchParams] = useSearchParams();
   const paramsAssetId = searchParams.get("mediaId");
@@ -23,7 +25,7 @@ function AssetFormFooter({ onSubmit, isPoiAsset, onCancel }) {
 
   return (
     <SidebarFooterSection>
-      <Button onClick={onCancel}>Cancel</Button>
+      <Button onClick={onCancel}>{t("common.action.cancel")}</Button>
       <Stack
         direction="row"
         alignItems="center"
@@ -36,7 +38,7 @@ function AssetFormFooter({ onSubmit, isPoiAsset, onCancel }) {
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >
-            {isPoiAsset ? "Create Media Asset" : "Create  Asset"}
+            {isPoiAsset ? t("asset.form.action.create_media_asset") : t("asset.form.action.create_asset")}
           </Button>
         ) : (
           <Button
@@ -44,7 +46,7 @@ function AssetFormFooter({ onSubmit, isPoiAsset, onCancel }) {
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >
-            Save Changes
+            {t("asset.form.action.save_changes")}
           </Button>
         )}
       </Stack>

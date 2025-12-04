@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Popover, styled, Typography } from "@mui/material";
 
 import { allowedFileExtensions } from "@/utils/fileExtensions";
 
 function UrlHelperText() {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -22,8 +24,8 @@ function UrlHelperText() {
   return (
     <>
       <span>
-        To read more on the accepted file formats,{" "}
-        <HelperSpanButton onClick={handleClick}> click here</HelperSpanButton>.
+        {t("file_formats.helper.text")}
+        <HelperSpanButton onClick={handleClick}>{t("file_formats.helper.link_text")}</HelperSpanButton>.
       </span>
       <Popover
         id={id}
@@ -34,7 +36,7 @@ function UrlHelperText() {
       >
         <PopoverContent>
           <Typography variant="h6" sx={{ mb: 1 }}>
-            Accepted File Formats
+            {t("file_formats.title")}
           </Typography>
 
           {source.map(([key, list]) => (

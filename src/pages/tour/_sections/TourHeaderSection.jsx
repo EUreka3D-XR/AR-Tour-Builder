@@ -3,7 +3,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { IconButton, Stack, styled, Typography } from "@mui/material";
 
 import { useConfirm } from "@/stores/confirmation-modal-stores";
-import { useDeleteTour } from "@/services/toursService";
+import { useDeleteTour, usePublishTour } from "@/services/toursService";
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import InjectedLocaleValue from "@/components/inject-locale-value/InjectLocaleValue";
@@ -46,7 +46,6 @@ function TourHeaderSection() {
   } = useFormContext();
 
   const tourTitle = useWatch({ name: "title" });
-  const tourStatus = useWatch({ name: "status", defaultValue: "draft" });
   const createdAt = useWatch({ name: "createdAt" });
   const updatedAt = useWatch({ name: "updatedAt" });
   const lastModifiedAt = updatedAt ?? createdAt;
@@ -57,12 +56,6 @@ function TourHeaderSection() {
 
   const confirm = useConfirm();
   const { mutate: deleteTour } = useDeleteTour(projectId, tourId);
-
-  // TODO: - implement publish handler
-  const handlePublish = () => {};
-
-  // TODO: - implement archive handler
-  const handleArchive = () => {};
 
   const handleDelete = async () => {
     await confirm({
@@ -102,22 +95,7 @@ function TourHeaderSection() {
             >
               Delete Tour
             </Button>
-            {tourStatus === "draft" && (
-              <Button
-                startIcon={<EurekaIcon name="publish" />}
-                onClick={handlePublish}
-              >
-                Publish
-              </Button>
-            )}
-            {tourStatus === "published" && (
-              <Button
-                startIcon={<EurekaIcon name="archive" />}
-                onClick={handleArchive}
-              >
-                Archive
-              </Button>
-            )}
+            <PublishButton />
           </Stack>
           <Typography className="timestamps">
             {"Last modified: "}
@@ -130,3 +108,44 @@ function TourHeaderSection() {
 }
 
 export default TourHeaderSection;
+
+const PublishButton = () => {
+  const { tourId } = useParams();
+
+  const tourStatus = useWatch({ name: "status", defaultValue: "draft" });
+
+  const { setValue } = useFormContext();
+
+  const { mutate: publishTour } = usePublishTour(tourId);
+
+  const handlePublish = async () => {
+    await publishTour({ publish: true });
+    setValue("status", "published");
+  };
+
+  const handleArchive = async () => {
+    await publishTour({ publish: false });
+    setValue("status", "draft");
+  };
+
+  return (
+    <>
+      {tourStatus === "draft" && (
+        <Button
+          startIcon={<EurekaIcon name="publish" />}
+          onClick={handlePublish}
+        >
+          Publish
+        </Button>
+      )}
+      {tourStatus === "published" && (
+        <Button
+          startIcon={<EurekaIcon name="archive" />}
+          onClick={handleArchive}
+        >
+          Archive
+        </Button>
+      )}
+    </>
+  );
+};

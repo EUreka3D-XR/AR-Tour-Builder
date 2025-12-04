@@ -29,7 +29,7 @@ function CreateTourForm() {
   const onSubmit = async (data) => {
     const newTour = await createTour({ data });
 
-    navigate(`${routes.tours.one(newTour.id)}`);
+    navigate(`${routes.tours.one(newTour.id)}/pois`);
   };
 
   return (

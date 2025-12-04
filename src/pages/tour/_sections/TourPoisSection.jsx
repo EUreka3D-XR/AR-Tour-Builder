@@ -88,22 +88,25 @@ function TourPoisSection() {
 
   if (!pois?.length) {
     return (
-      <CenteredArea className="empty-pois-section">
-        <Stack alignItems="center" justifyContent="center">
-          <Typography>
-            There are no points of interest associated to the tour yet.
-          </Typography>
-          <Typography>Click below to start adding points</Typography>
-          <br />
-          <Button
-            variant="filled"
-            href={routes.pois.new}
-            startIcon={<EurekaIcon name="add" />}
-          >
-            Add POI
-          </Button>
-        </Stack>
-      </CenteredArea>
+      <>
+        <CenteredArea className="empty-pois-section">
+          <Stack alignItems="center" justifyContent="center">
+            <Typography>
+              There are no points of interest associated to the tour yet.
+            </Typography>
+            <Typography>Click below to start adding points</Typography>
+            <br />
+            <Button
+              variant="filled"
+              href={routes.pois.new}
+              startIcon={<EurekaIcon name="add" />}
+            >
+              Add POI
+            </Button>
+          </Stack>
+        </CenteredArea>
+        <Outlet />
+      </>
     );
   }
 

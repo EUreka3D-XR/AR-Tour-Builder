@@ -1,4 +1,5 @@
 import { IconButton, styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 
@@ -11,10 +12,12 @@ const ModalHeader = styled("div")(({ theme }) => ({
 }));
 
 function AssetsModalHeader({ onClose }) {
+  const { t } = useTranslation();
+
   return (
     <ModalHeader>
       <Typography variant="h5" id="assets-modal-title">
-        Import Media Assets
+        {t("assetsModal.header.title")}
       </Typography>
       <IconButton onClick={onClose}>
         <EurekaIcon name="close" />

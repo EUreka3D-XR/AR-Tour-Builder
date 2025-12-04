@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Box,
   FormControl,
@@ -45,18 +46,19 @@ const SortByFormControlStyled = styled(FormControl)(({ theme }) => ({
   },
 }));
 
-const sortOptions = [
-  { value: "title-asc", label: "Title (A-Z)" },
-  { value: "title-desc", label: "Title (Z-A)" },
-];
-
-const sortOptionsMap = sortOptions.reduce((acc, option) => {
-  acc[option.value] = option.label;
-  return acc;
-}, {});
-
 function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
+  const { t } = useTranslation();
   const { isOpen: isListView, toggle: toggleListView } = useToggle(true);
+
+  const sortOptions = useMemo(() => [
+    { value: "title-asc", label: t("assetsModal.browser.sortOptions.titleAsc") },
+    { value: "title-desc", label: t("assetsModal.browser.sortOptions.titleDesc") },
+  ], [t]);
+
+  const sortOptionsMap = useMemo(() => sortOptions.reduce((acc, option) => {
+    acc[option.value] = option.label;
+    return acc;
+  }, {}), [sortOptions]);
 
   const [filters, setFilters] = useState({
     searchTerm: "",
@@ -72,7 +74,7 @@ function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
           onChange={(term) =>
             setFilters((prev) => ({ ...prev, searchTerm: term }))
           }
-          placeholder="Search media assets..."
+          placeholder={t("assetsModal.browser.searchPlaceholder")}
         />
         <Select
           value={filters.type}
@@ -81,11 +83,11 @@ function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
             setFilters((prev) => ({ ...prev, type: e.target.value }))
           }
         >
-          <MenuItem value="">All File Types</MenuItem>
-          <MenuItem value="image">Images</MenuItem>
-          <MenuItem value="video">Videos</MenuItem>
-          <MenuItem value="model3d">3D Models</MenuItem>
-          <MenuItem value="text">Documents</MenuItem>
+          <MenuItem value="">{t("assetsModal.browser.fileTypes.all")}</MenuItem>
+          <MenuItem value="image">{t("assetsModal.browser.fileTypes.images")}</MenuItem>
+          <MenuItem value="video">{t("assetsModal.browser.fileTypes.videos")}</MenuItem>
+          <MenuItem value="model3d">{t("assetsModal.browser.fileTypes.models3d")}</MenuItem>
+          <MenuItem value="text">{t("assetsModal.browser.fileTypes.documents")}</MenuItem>
         </Select>
         <SortByFormControlStyled size="small">
           <Select

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { styled, Tab, Tabs } from "@mui/material";
 
 import { useTabs } from "@/hooks/useTabs";
@@ -14,17 +15,19 @@ const SourcesRow = styled("div")(({ theme }) => ({
   },
 }));
 
-const sourcesTabs = [
-  { value: "library", label: "Library" },
-  { value: "external", label: "External" },
-  { value: "upload", label: "Upload" },
-];
-
 function AssetsModalSourcesRow({ allowedSources }) {
+  const { t } = useTranslation();
+
+  const sourcesTabs = useMemo(() => [
+    { value: "library", label: t("assetsModal.sources.libraryTab") },
+    { value: "external", label: t("assetsModal.sources.externalTab") },
+    { value: "upload", label: t("assetsModal.sources.uploadTab") },
+  ], [t]);
+
   const allowedTabs = useMemo(() => {
     if (allowedSources === "all") return sourcesTabs;
     return sourcesTabs.filter((tab) => allowedSources.includes(tab.value));
-  }, [allowedSources]);
+  }, [allowedSources, sourcesTabs]);
 
   const { activeTab, setActiveTab, tabs } = useTabs(allowedTabs);
 

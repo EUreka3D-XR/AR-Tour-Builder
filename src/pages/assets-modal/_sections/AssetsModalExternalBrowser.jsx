@@ -1,4 +1,5 @@
 import { MenuItem, Select, styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 
@@ -11,11 +12,13 @@ const BrowsingContent = styled("div")(({ theme }) => ({
 }));
 
 function AssetsModalExternalBrowser() {
+  const { t } = useTranslation();
+
   return (
     <BrowsingContent className="browsing-form">
       <LabeledInput
         id="external-source-label"
-        label="External Source"
+        label={t("assetsModal.externalBrowser.sourceLabel")}
         labelPlacement="left"
       >
         <Select
@@ -24,13 +27,11 @@ function AssetsModalExternalBrowser() {
           displayEmpty
           value=""
         >
-          <MenuItem value="">Select a source</MenuItem>
+          <MenuItem value="">{t("assetsModal.externalBrowser.selectSourcePlaceholder")}</MenuItem>
         </Select>
       </LabeledInput>
       <Typography color="textSecondary" align="center" sx={{ mt: 20 }}>
-        Select an external source to
-        <br />
-        browse available assets
+        {t("assetsModal.externalBrowser.description")}
       </Typography>
     </BrowsingContent>
   );

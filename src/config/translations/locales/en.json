@@ -164,5 +164,43 @@
   },
   "searchbar": {
     "placeholder": "Search..."
+  },
+  "assetsModal": {
+    "header": {
+      "title": "Import Media Assets"
+    },
+    "sources": {
+      "libraryTab": "Library",
+      "externalTab": "External",
+      "uploadTab": "Upload"
+    },
+    "externalBrowser": {
+      "sourceLabel": "External Source",
+      "selectSourcePlaceholder": "Select a source",
+      "description": "Select an external source to browse available assets"
+    },
+    "browser": {
+      "searchPlaceholder": "Search media assets...",
+      "sortOptions": {
+        "titleAsc": "Title (A-Z)",
+        "titleDesc": "Title (Z-A)"
+      },
+      "fileTypes": {
+        "all": "All File Types",
+        "images": "Images",
+        "videos": "Videos",
+        "models3d": "3D Models",
+        "documents": "Documents"
+      }
+    },
+    "footer": {
+      "selectedLabel": "selected",
+      "importButton": "Import selected media"
+    },
+    "presentation": {
+      "loading": "Loading assets...",
+      "error": "Error loading assets.",
+      "noAssets": "No assets available."
+    }
   }
 }

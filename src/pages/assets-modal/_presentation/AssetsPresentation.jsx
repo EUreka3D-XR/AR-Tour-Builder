@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { lighten, styled, Typography } from "@mui/material";
 
@@ -92,19 +93,20 @@ function AssetsPresentation({
   filters,
   allowMultiple,
 }) {
+  const { t } = useTranslation();
   const { projectId } = useParams();
   const { data: assets, fetchState } = useLibraryAssets(projectId);
 
   if (fetchState.isLoading) {
-    return <div>Loading assets...</div>;
+    return <div>{t("assetsModal.presentation.loading")}</div>;
   }
 
   if (fetchState.isError) {
-    return <div>Error loading assets.</div>;
+    return <div>{t("assetsModal.presentation.error")}</div>;
   }
 
   if (!assets || assets.length === 0) {
-    return <div>No assets available.</div>;
+    return <div>{t("assetsModal.presentation.noAssets")}</div>;
   }
 
   const filteredAssets = assets

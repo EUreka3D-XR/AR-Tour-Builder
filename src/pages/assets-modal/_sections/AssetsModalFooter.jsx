@@ -1,4 +1,5 @@
 import { IconButton, styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -17,13 +18,15 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function AssetsModalFooter({ onCancel, onImport, numberOfSelected }) {
+  const { t } = useTranslation();
+
   return (
     <ContainerStyled className="asset-modal-footer">
       <div className="left-section">
         <IconButton onClick={onCancel}>
           <EurekaIcon name="close" color="primary" />
         </IconButton>
-        <span>{numberOfSelected} selected</span>
+        <span>{numberOfSelected} {t("assetsModal.footer.selectedLabel")}</span>
       </div>
       <div className="right-section">
         <Button
@@ -31,7 +34,7 @@ function AssetsModalFooter({ onCancel, onImport, numberOfSelected }) {
           onClick={onImport}
           disabled={numberOfSelected === 0}
         >
-          Import selected media
+          {t("assetsModal.footer.importButton")}
         </Button>
       </div>
     </ContainerStyled>

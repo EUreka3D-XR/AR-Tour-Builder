@@ -6,6 +6,10 @@ import FlagIcon from "../flags/FlagIcon";
 import LabeledInput from "../labeled-input/LabeledInput";
 
 const SelectStyled = styled(Select)(({ theme }) => ({
+  '& .MuiSelect-select[role="combobox"]': {
+    display: "flex",
+    alignItems: "center",
+  },
   "& .dropdown-item": {
     display: "flex",
     alignItems: "center",

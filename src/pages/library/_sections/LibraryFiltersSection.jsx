@@ -1,4 +1,6 @@
 import { Chip, FormControl, MenuItem, Select, styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -33,18 +35,19 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-const typeOptions = [
-  { value: "all", label: "All Types" },
-  { value: "image", label: "Image" },
-  { value: "video", label: "Video" },
-  { value: "audio", label: "Audio" },
-  { value: "model3d", label: "3D Model" },
-  { value: "text", label: "Document" },
-];
-
 function LibraryFiltersSection() {
+  const { t } = useTranslation();
   const { routes } = useNavPaths();
   const { filterParams, updateParams } = useDashboardParams();
+
+  const typeOptions = useMemo(() => [
+    { value: "all", label: t("library.filters.typeOptions.all") },
+    { value: "image", label: t("library.filters.typeOptions.image") },
+    { value: "video", label: t("library.filters.typeOptions.video") },
+    { value: "audio", label: t("library.filters.typeOptions.audio") },
+    { value: "model3d", label: t("library.filters.typeOptions.model3d") },
+    { value: "text", label: t("library.filters.typeOptions.document") },
+  ], [t]);
 
   const handleParamsChange = (key) => (event) => {
     if (event.target?.value) {
@@ -62,7 +65,7 @@ function LibraryFiltersSection() {
     <ContainerStyled className="filters-section">
       <div className="filter-row">
         <SearchInput
-          label="Search assets"
+          label={t("library.filters.searchLabel")}
           value={filterParams.searchTerm || ""}
           onChange={handleParamsChange("searchTerm")}
         />
@@ -85,7 +88,7 @@ function LibraryFiltersSection() {
           href={routes.library.new}
           className="item-no-shrink"
         >
-          Add New Asset
+          {t("library.filters.addNewAsset")}
         </Button>
       </div>
       <div className="filter-pills">

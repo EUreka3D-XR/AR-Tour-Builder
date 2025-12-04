@@ -313,5 +313,41 @@
         "monthAgo": "Updated over a month ago"
       }
     }
+  },
+  "library": {
+    "header": {
+      "title": "Asset Library",
+      "subtitle": "Manage and organize your project assets"
+    },
+    "filters": {
+      "searchLabel": "Search assets",
+      "addNewAsset": "Add New Asset",
+      "typeOptions": {
+        "all": "All Types",
+        "image": "Image",
+        "video": "Video",
+        "audio": "Audio",
+        "model3d": "3D Model",
+        "document": "Document"
+      }
+    },
+    "table": {
+      "columns": {
+        "title": "Title",
+        "type": "Type",
+        "url": "URL",
+        "filename": "Filename"
+      }
+    },
+    "actions": {
+      "view": "View Asset",
+      "edit": "Edit Asset",
+      "delete": "Delete Asset",
+      "deleteConfirm": {
+        "title": "Delete Asset",
+        "message": "Are you sure you want to delete this asset? This action cannot be undone.",
+        "confirmText": "Delete"
+      }
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import { IconButton, styled, Tooltip } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useAssetModal } from "@/stores/asset-modal-stores";
 import { useConfirm } from "@/stores/confirmation-modal-stores";
@@ -26,6 +27,7 @@ const IconButtonStyled = styled(IconButton)(({ theme }) => ({
  * @returns
  */
 function AssetActionsCell({ assetId }) {
+  const { t } = useTranslation();
   const { projectId } = useParams();
   const { openLibraryMediaModal } = useAssetModal();
   const { mutate: deleteAsset } = useDeleteAsset(projectId, assetId);
@@ -43,27 +45,26 @@ function AssetActionsCell({ assetId }) {
 
   const handleDelete = async () => {
     await confirm({
-      title: "Delete Asset",
-      message:
-        "Are you sure you want to delete this asset? This action cannot be undone.",
-      confirmText: "Delete",
+      title: t("library.actions.deleteConfirm.title"),
+      message: t("library.actions.deleteConfirm.message"),
+      confirmText: t("library.actions.deleteConfirm.confirmText"),
       action: deleteAsset,
     });
   };
 
   return (
     <CellStyled>
-      <Tooltip title="View Asset">
+      <Tooltip title={t("library.actions.view")}>
         <IconButtonStyled size="small" onClick={handleView}>
           <EurekaIcon name="visibility" fontSize="small" />
         </IconButtonStyled>
       </Tooltip>
-      <Tooltip title="Edit Asset">
+      <Tooltip title={t("library.actions.edit")}>
         <IconButtonStyled size="small" onClick={handleEdit}>
           <EurekaIcon name="edit" fontSize="small" />
         </IconButtonStyled>
       </Tooltip>
-      <Tooltip title="Delete Asset">
+      <Tooltip title={t("library.actions.delete")}>
         <IconButtonStyled size="small" onClick={handleDelete}>
           <EurekaIcon name="delete" fontSize="small" />
         </IconButtonStyled>

@@ -1,10 +1,11 @@
 import { useMemo } from "react";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, Chip, TextField } from "@mui/material";
 
 /**
  *
  * @param {Object} props
- * @param {string} props.value - Selected language options
+ * @param {string | Array<string>} props.value - Selected language options
+ * @param {string | Array<string>} props.disabledValue - Language options to disable
  * @param {Array<import("@/types/jsdoc-types").Locale>} props.options - Available language options
  * @param {boolean} props.multiple - Allow multiple selections
  * @param {boolean} props.isLoading - Loading state
@@ -12,6 +13,7 @@ import { Autocomplete, TextField } from "@mui/material";
  * @returns {JSX.Element}
  */
 function LanguagesAutocomplete({
+  disabledValue,
   value,
   options = [],
   isLoading,
@@ -45,6 +47,14 @@ function LanguagesAutocomplete({
     return optionsDict[value];
   }, [value, optionsDict, multiple]);
 
+  const isValueDisabled = (optionValue) => {
+    if (!disabledValue) return false;
+    if (Array.isArray(disabledValue)) {
+      return disabledValue.includes(optionValue);
+    }
+    return disabledValue === optionValue;
+  };
+
   return (
     <Autocomplete
       value={finalValue}
@@ -54,6 +64,24 @@ function LanguagesAutocomplete({
       disabled={isLoading}
       options={options}
       getOptionLabel={(option) => option.label}
+      getOptionDisabled={(option) => {
+        return isValueDisabled(option.value);
+      }}
+      renderTags={(tagValue, getTagProps) =>
+        tagValue.map((option, index) => {
+          const { key, ...tagProps } = getTagProps({ index });
+          const disabled = isValueDisabled(option.value);
+
+          return (
+            <Chip
+              key={key}
+              label={option.label}
+              {...tagProps}
+              onDelete={disabled ? undefined : tagProps.onDelete}
+            />
+          );
+        })
+      }
       renderInput={(params) => {
         return (
           <TextField

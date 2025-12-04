@@ -2,6 +2,7 @@ import { useAllLocales } from "@/services/localesService";
 import LanguagesAutocomplete from "../_common/LanguagesAutocomplete";
 
 function ProjectSupportedLanguagesInput({
+  disabledValue,
   value,
   onChange,
   error,
@@ -11,6 +12,7 @@ function ProjectSupportedLanguagesInput({
 
   return (
     <LanguagesAutocomplete
+      disabledValue={disabledValue}
       value={value}
       options={data}
       multiple

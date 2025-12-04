@@ -4,12 +4,14 @@ import TourSupportedLanguagesInput from "./TourSupportedLanguagesInput";
 /**
  *
  * @param {Object} props
+ * @param {Array<String>} props.initialValue
  * @param {Array<import("@/types/jsdoc-types").Locale>} props.value
  * @param {function} props.onChange
  * @param {"project" | "tour"} props.scope
  * @returns
  */
 function SupportedLanguagesInput({
+  initialValue,
   value,
   onChange,
   error,
@@ -21,6 +23,7 @@ function SupportedLanguagesInput({
   }
   return (
     <ProjectSupportedLanguagesInput
+      disabledValue={initialValue}
       value={value}
       error={error}
       helperText={helperText}

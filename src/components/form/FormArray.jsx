@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useWatch } from "react-hook-form";
 import { Chip, IconButton, styled, TextField, Tooltip } from "@mui/material";
 
 import { useFieldArrayWithId } from "@/hooks/useFieldArrayWithId";
@@ -110,7 +111,7 @@ function FormArrayURLInput({
     const labelValue = labelRef.current?.value ?? "";
     if (isLabelRequired) {
       if (!labelValue || labelValue.trim() === "") {
-        newErrors.label = "Label is required";
+        newErrors.title = "Label is required";
       }
     }
 
@@ -124,7 +125,7 @@ function FormArrayURLInput({
       return;
     }
 
-    const value = { label: labelValue, url: urlValue };
+    const value = { title: labelValue, url: urlValue };
 
     insert(0, value);
     labelRef.current.value = "";
@@ -136,9 +137,9 @@ function FormArrayURLInput({
 
     const value = e.target.value;
     if (isLabelRequired && (!value || value.trim() === "")) {
-      setErrors((prev) => ({ ...prev, label: "Label is required" }));
+      setErrors((prev) => ({ ...prev, title: "Label is required" }));
     } else {
-      setErrors((prev) => ({ ...prev, label: null }));
+      setErrors((prev) => ({ ...prev, title: null }));
     }
   };
 
@@ -160,8 +161,8 @@ function FormArrayURLInput({
           inputRef={labelRef}
           placeholder={labelPlaceholderText}
           fullWidth
-          helperText={errors.label}
-          error={!!errors.label}
+          helperText={errors.title}
+          error={!!errors.title}
           required={isLabelRequired}
           onChange={validateLabel}
         />
@@ -205,7 +206,9 @@ function FormArrayDisplay({
     name,
   });
 
-  const { fields: items, remove } = arrayMethods;
+  const { remove } = arrayMethods;
+
+  const items = useWatch({ name }) ?? [];
 
   if (typeof renderItems === "function") {
     return renderItems(arrayMethods);

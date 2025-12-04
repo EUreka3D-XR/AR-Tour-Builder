@@ -35,7 +35,21 @@ const axiosInstance = axios.create({
       body: config.data,
       signal: config.signal,
     }).then(async (response) => {
-      const data = await response.json();
+      // Check if response has content before parsing JSON
+      const contentType = response.headers.get("content-type");
+      const hasJsonContent =
+        contentType && contentType.includes("application/json");
+      const hasContent = response.headers.get("content-length") !== "0";
+
+      let data = null;
+      if (hasJsonContent && hasContent) {
+        try {
+          data = await response.json();
+        } catch {
+          // Empty response or invalid JSON - keep data as null
+          data = null;
+        }
+      }
 
       // Return in axios response format
       const axiosResponse = {

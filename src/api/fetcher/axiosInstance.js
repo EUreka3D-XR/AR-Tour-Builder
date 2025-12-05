@@ -7,7 +7,7 @@ import { transformKeysToCamel, transformKeysToSnake } from "./transformKeys";
 // https://github.com/miragejs/miragejs/issues/1006 comment of Jan 20 2025
 const axiosInstance = axios.create({
   // baseURL: "http://localhost:8000",
-  baseURL: "",
+  baseURL: "https://eureka.ails.ece.ntua.gr",
   adapter: async (config) => {
     // Combine base URL and endpoint URL
     let url = config.url.startsWith("http")

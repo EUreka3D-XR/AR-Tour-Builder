@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import FormInput from "@/components/form/FormInput";
 import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/HorizontalFieldWrapper";
@@ -6,6 +7,7 @@ import SupportedLanguagesInput from "@/components/languages-input/supported/Supp
 import { ProjectFormSection } from "../_layout/ProjectFormLayout";
 
 function ProjectLanguageStep() {
+  const { t } = useTranslation();
   const { setValue } = useFormContext();
 
   const handleChange = (val) => {
@@ -14,8 +16,8 @@ function ProjectLanguageStep() {
   return (
     <ProjectFormSection>
       <HorizontalFieldWrapper
-        label="Supported Languages"
-        description="Specify the languages your project supports. You can populate content in multiple languages later in the project's settings."
+        label={t("projects.form.languages.label")}
+        description={t("projects.form.languages.description")}
       >
         <FormInput
           name="locales"

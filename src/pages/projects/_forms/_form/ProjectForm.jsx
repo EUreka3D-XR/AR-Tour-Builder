@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { useAvailableLocalesProvider } from "@/providers/locales/AvailableLocalesContext";
 import FormNavigationFooter from "@/components/form/FormNavigationFooter";
@@ -11,7 +12,25 @@ import ProjectFormMain from "./_layout/ProjectFormMain";
 const PARAM_KEY = "projectForm";
 
 function ProjectForm({ isNew, defaultValues, validationSchemas, onSubmit }) {
+  const { t } = useTranslation();
   const { updateProjectLocales } = useAvailableLocalesProvider();
+
+  const projectTabs = useMemo(
+    () => [
+      {
+        icon: "diamond_shine",
+        value: "languages",
+        label: t("projects.form.tabs.languages"),
+      },
+      {
+        icon: "info",
+        value: "basic-info",
+        label: t("projects.form.tabs.basicInfo"),
+      },
+      { icon: "language", value: "branding", label: t("projects.form.tabs.branding") },
+    ],
+    [t],
+  );
 
   const { activeTabIndex, setActiveTab } = useParamsTabs(
     PARAM_KEY,
@@ -64,9 +83,3 @@ function ProjectForm({ isNew, defaultValues, validationSchemas, onSubmit }) {
 }
 
 export default ProjectForm;
-
-const projectTabs = [
-  { icon: "diamond_shine", value: "languages", label: "Supported Languages" },
-  { icon: "info", value: "basic-info", label: "Basic Information" },
-  { icon: "language", value: "branding", label: "Branding" },
-];

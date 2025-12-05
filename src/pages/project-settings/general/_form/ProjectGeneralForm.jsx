@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { FormProvider, useForm } from "react-hook-form";
 import { Stack, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useUpdateProject } from "@/services/projectsService";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
@@ -10,6 +11,7 @@ import { SettingsFormLayout } from "../../_sections/SettingsFormLayout";
 import SettingsSaveRow from "../../_sections/SettingsSaveRow";
 
 function ProjectGeneralForm({ defaultValues }) {
+  const { t } = useTranslation();
   const { projectId } = useParams();
   const { mutate: updateProject } = useUpdateProject(projectId);
   const methods = useForm({
@@ -34,8 +36,8 @@ function ProjectGeneralForm({ defaultValues }) {
             <LanguageDropdown />
           </Stack>
           <HorizontalFieldWrapper
-            label="Project Title"
-            description="This is the title the project will appear with to the visitors too"
+            label={t("projectSettings.general.projectTitle.label")}
+            description={t("projectSettings.general.projectTitle.description")}
             isMultilingual
           >
             <FormInputMultilingual
@@ -44,7 +46,7 @@ function ProjectGeneralForm({ defaultValues }) {
                 return (
                   <TextField
                     fullWidth
-                    placeholder="Enter project title"
+                    placeholder={t("projectSettings.general.projectTitle.placeholder")}
                     error={!!formState.errors.title}
                     helperText={formState.errors.title?.message}
                     {...field}
@@ -54,9 +56,8 @@ function ProjectGeneralForm({ defaultValues }) {
             />
           </HorizontalFieldWrapper>
           <HorizontalFieldWrapper
-            label="Description"
-            description="A brief overview of your project that helps users understand its
-            purpose"
+            label={t("projectSettings.general.description.label")}
+            description={t("projectSettings.general.description.description")}
             isMultilingual
           >
             <FormInputMultilingual
@@ -65,7 +66,7 @@ function ProjectGeneralForm({ defaultValues }) {
                 return (
                   <TextField
                     fullWidth
-                    placeholder="Enter project description"
+                    placeholder={t("projectSettings.general.description.placeholder")}
                     multiline
                     rows={4}
                     error={!!formState.errors.description}

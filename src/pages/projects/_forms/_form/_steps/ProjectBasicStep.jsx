@@ -1,4 +1,5 @@
 import { Stack, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/HorizontalFieldWrapper";
@@ -6,14 +7,15 @@ import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 import { ProjectFormSection } from "../_layout/ProjectFormLayout";
 
 function ProjectBasicStep() {
+  const { t } = useTranslation();
   return (
     <ProjectFormSection>
       <Stack direction="row" justifyContent="flex-end">
         <LanguageDropdown />
       </Stack>
       <HorizontalFieldWrapper
-        label="Project Title"
-        description="This is the title the project will appear with to the visitors too"
+        label={t("projects.form.basic.title.label")}
+        description={t("projects.form.basic.title.description")}
         isMultilingual
       >
         <FormInputMultilingual
@@ -22,7 +24,7 @@ function ProjectBasicStep() {
             return (
               <TextField
                 fullWidth
-                placeholder="Enter project title"
+                placeholder={t("projects.form.basic.title.placeholder")}
                 error={!!formState.errors.title}
                 helperText={formState.errors.title?.message}
                 {...field}
@@ -32,9 +34,8 @@ function ProjectBasicStep() {
         />
       </HorizontalFieldWrapper>
       <HorizontalFieldWrapper
-        label="Description"
-        description="A brief overview of your project that helps users understand its
-            purpose"
+        label={t("projects.form.basic.description.label")}
+        description={t("projects.form.basic.description.description")}
         isMultilingual
       >
         <FormInputMultilingual
@@ -43,7 +44,7 @@ function ProjectBasicStep() {
             return (
               <TextField
                 fullWidth
-                placeholder="Enter project description"
+                placeholder={t("projects.form.basic.description.placeholder")}
                 multiline
                 rows={4}
                 error={!!formState.errors.description}

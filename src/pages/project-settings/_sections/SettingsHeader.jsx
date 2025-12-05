@@ -1,4 +1,5 @@
 import { styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 
@@ -37,6 +38,8 @@ const HeaderSection = styled("div")(({ theme }) => ({
 }));
 
 function SettingsHeader() {
+  const { t } = useTranslation();
+
   return (
     <HeaderSection>
       <div className="icon-section">
@@ -44,10 +47,10 @@ function SettingsHeader() {
       </div>
       <div className="title-section">
         <Typography variant="h3" component="h1" className="title">
-          Settings
+          {t("projectSettings.header.title")}
         </Typography>
         <Typography variant="body1" className="subtitle">
-          Manage your project settings and configurations
+          {t("projectSettings.header.subtitle")}
         </Typography>
       </div>
     </HeaderSection>

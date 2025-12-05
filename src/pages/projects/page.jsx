@@ -1,4 +1,5 @@
 import { styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useProjects } from "@/services/projectsService";
 import Button from "@/components/button/Button";
@@ -39,6 +40,7 @@ const ErrorSection = styled(CenteredArea)({
 });
 
 function ProjectsPage() {
+  const { t } = useTranslation();
   const { data: projects, fetchState } = useProjects();
   const { routes } = useNavPaths();
 
@@ -46,35 +48,34 @@ function ProjectsPage() {
     <ContainerStyled>
       <div className="header">
         <Typography variant="h2" component="h2" gutterBottom>
-          My Projects
+          {t("projects.page.title")}
         </Typography>
         <Button
           variant="filled"
           startIcon={<EurekaIcon name="add" />}
           href={routes.projects.new}
         >
-          New Project
+          {t("projects.page.newProjectButton")}
         </Button>
       </div>
       <Typography color="textSecondary" className="subtitle">
-        Browse and manage your projects. Here you can view details, create new
-        projects, and keep track of your progress.
+        {t("projects.page.subtitle")}
       </Typography>
 
       {fetchState.isError && (
         <ErrorSection>
           <Typography variant="subtitle1" sx={{ textAlign: "center" }}>
-            Oops! Something went wrong while fetching your projects. Please try
-            again later.
+            {t("projects.page.error")}
           </Typography>
         </ErrorSection>
       )}
       {fetchState.isSuccess && !projects?.length && (
         <ErrorSection>
-          <Typography variant="subtitle1" sx={{ textAlign: "center" }}>
-            You have no projects yet. <br /> Click New Project to create your
-            first one.
-          </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{ textAlign: "center" }}
+            dangerouslySetInnerHTML={{ __html: t("projects.page.empty") }}
+          />
         </ErrorSection>
       )}
       <ProjectsGrid>

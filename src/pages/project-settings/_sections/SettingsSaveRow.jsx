@@ -1,10 +1,12 @@
 import { useFormContext } from "react-hook-form";
 import { Stack } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 
 function SettingsSaveRow() {
+  const { t } = useTranslation();
   const {
     formState: { isDirty, isSubmitting },
   } = useFormContext();
@@ -23,7 +25,7 @@ function SettingsSaveRow() {
         isLoading={isSubmitting}
         startIcon={<EurekaIcon name="save" />}
       >
-        Save Changes
+        {t("projectSettings.saveButton")}
       </Button>
     </Stack>
   );

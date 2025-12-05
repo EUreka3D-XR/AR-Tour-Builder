@@ -10,6 +10,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import FlagsGroup from "@/components/flags/FlagsGroup";
 import Image from "@/components/image/Image";
@@ -52,6 +53,7 @@ const LastUpdated = styled(Typography)({
  * @returns {JSX.Element}
  */
 function ProjectCard({ project }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { routes } = useNavPaths();
 
@@ -95,19 +97,19 @@ function ProjectCard({ project }) {
         >
           <StatsContainer>
             <StatChip
-              label={`${project.totalTours} Tours`}
+              label={`${project.totalTours} ${t("projects.card.tours")}`}
               size="small"
               color="primary"
               variant="outlined"
             />
             <StatChip
-              label={`${project.totalPois} POIs`}
+              label={`${project.totalPois} ${t("projects.card.pois")}`}
               size="small"
               color="secondary"
               variant="outlined"
             />
             <StatChip
-              label={`${project.totalAssets} Assets`}
+              label={`${project.totalAssets} ${t("projects.card.assets")}`}
               size="small"
               color="default"
               variant="outlined"
@@ -116,7 +118,9 @@ function ProjectCard({ project }) {
           <FlagsGroup locales={project.locales} show={2} />
         </Stack>
         <LastUpdated>
-          Last updated: {new Date(project.lastUpdated).toLocaleDateString()}
+          {t("projects.card.lastUpdated", {
+            date: new Date(project.lastUpdated).toLocaleDateString(),
+          })}
         </LastUpdated>
       </CardContent>
     </ProjectCardStyled>

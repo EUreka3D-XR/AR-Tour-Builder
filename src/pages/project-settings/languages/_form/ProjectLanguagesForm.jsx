@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { FormProvider, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useUpdateProject } from "@/services/projectsService";
 import FormInput from "@/components/form/FormInput";
@@ -10,6 +11,7 @@ import { SettingsFormLayout } from "../../_sections/SettingsFormLayout";
 import SettingsSaveRow from "../../_sections/SettingsSaveRow";
 
 function ProjectLanguagesForm({ defaultValues }) {
+  const { t } = useTranslation();
   const { projectId } = useParams();
   const { mutate: updateProject } = useUpdateProject(projectId);
   const methods = useForm({
@@ -33,13 +35,12 @@ function ProjectLanguagesForm({ defaultValues }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <SettingsFormLayout>
           <Typography mb={2}>
-            <span style={{ fontWeight: "bold" }}>Note: </span>
-            You cannot remove languages that already have content associated
-            with them. This is to prevent data loss.
+            <span style={{ fontWeight: "bold" }}>{t("projectSettings.languages.note")}</span>
+            {t("projectSettings.languages.noteDescription")}
           </Typography>
           <HorizontalFieldWrapper
-            label="Supported Languages"
-            description="Specify the languages your project supports. You can populate content in multiple languages later in the project's settings."
+            label={t("projectSettings.languages.supportedLanguages.label")}
+            description={t("projectSettings.languages.supportedLanguages.description")}
           >
             <FormInput
               name="locales"

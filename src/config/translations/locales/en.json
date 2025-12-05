@@ -418,5 +418,88 @@
       "createNew": "Create New",
       "browseLibrary": "Browse Library"
     }
+  },
+  "projectSettings": {
+    "header": {
+      "title": "Settings",
+      "subtitle": "Manage your project settings and configurations"
+    },
+    "tabs": {
+      "general": "General",
+      "supportedLanguages": "Supported Languages",
+      "branding": "Branding",
+      "members": "Members"
+    },
+    "saveButton": "Save Changes",
+    "general": {
+      "projectTitle": {
+        "label": "Project Title",
+        "description": "This is the title the project will appear with to the visitors too",
+        "placeholder": "Enter project title"
+      },
+      "description": {
+        "label": "Description",
+        "description": "A brief overview of your project that helps users understand its purpose",
+        "placeholder": "Enter project description"
+      }
+    },
+    "languages": {
+      "note": "Note: ",
+      "noteDescription": "You cannot remove languages that already have content associated with them. This is to prevent data loss.",
+      "supportedLanguages": {
+        "label": "Supported Languages",
+        "description": "Specify the languages your project supports. You can populate content in multiple languages later in the project's settings."
+      }
+    }
+  },
+  "projects": {
+    "page": {
+      "title": "My Projects",
+      "newProjectButton": "New Project",
+      "subtitle": "Browse and manage your projects. Here you can view details, create new projects, and keep track of your progress.",
+      "error": "Oops! Something went wrong while fetching your projects. Please try again later.",
+      "empty": "You have no projects yet. <br /> Click New Project to create your first one."
+    },
+    "card": {
+      "tours": "Tours",
+      "pois": "POIs",
+      "assets": "Assets",
+      "lastUpdated": "Last updated: {{date}}"
+    },
+    "form": {
+      "tabs": {
+        "languages": "Supported Languages",
+        "basicInfo": "Basic Information",
+        "branding": "Branding"
+      },
+      "basic": {
+        "title": {
+          "label": "Project Title",
+          "description": "This is the title the project will appear with to the visitors too",
+          "placeholder": "Enter project title"
+        },
+        "description": {
+          "label": "Description",
+          "description": "A brief overview of your project that helps users understand its purpose",
+          "placeholder": "Enter project description"
+        }
+      },
+      "languages": {
+        "label": "Supported Languages",
+        "description": "Specify the languages your project supports. You can populate content in multiple languages later in the project's settings."
+      },
+      "branding": {
+        "logo": {
+          "label": "Project Logo",
+          "description": "Upload your project logo. This will be displayed on the project homepage and tour listings.",
+          "placeholder": "Click to upload Logo"
+        },
+        "coverPhoto": {
+          "label": "Cover Photo",
+          "description": "A hero image for your project. This appears at the top of your project page and inside the tour cards.",
+          "placeholder": "Click to upload a cover photo"
+        }
+      }
+    }
   }
 }

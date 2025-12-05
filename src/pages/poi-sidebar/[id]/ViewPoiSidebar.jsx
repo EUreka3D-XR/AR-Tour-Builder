@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import SidebarHeader from "@/components/sidebar/_sections/SidebarHeaderSection";
 import SidebarFormArea from "../_common/_utils/SidebarFormArea";
 import ToggleVisibility from "../_common/_utils/ToggleVisibility";
@@ -6,12 +8,13 @@ import EditPoiAssetForm from "../_forms/poi-asset/EditPoiAssetForm";
 import ViewPoiSidebarContainer from "./container";
 
 function ViewPoiSidebar() {
+  const { t } = useTranslation();
   return (
     <PoiSidebar>
       {({ onClosePoi, onCloseAsset, showPoiForm, showEditAssetForm }) => {
         return (
           <>
-            <SidebarHeader title="Point of Interest" onClose={onClosePoi} />
+            <SidebarHeader title={t("tour.pois.view.title")} onClose={onClosePoi} />
             <SidebarFormArea className="sidebar-form-area">
               <ToggleVisibility show={showPoiForm}>
                 <div className="main-area">

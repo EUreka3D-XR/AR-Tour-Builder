@@ -4,6 +4,8 @@
  * @property {string} label - Human-friendly label or description for the extension.
  */
 
+import { t } from "@/config/translations/i18next-config";
+
 /**
  * Mapping of asset types to their allowed file extensions.
  * Keys are of type AssetType.
@@ -91,23 +93,23 @@ export const allAllowedFileExtensions = Object.values(allowedFileExtensions)
 export const fileTypes = [
   {
     value: "image",
-    label: "Image",
+    label: t("fileTypes.image"),
   },
   {
     value: "video",
-    label: "Video",
+    label: t("fileTypes.video"),
   },
   {
     value: "audio",
-    label: "Audio",
+    label: t("fileTypes.audio"),
   },
   {
     value: "model3d",
-    label: "3D Model",
+    label: t("fileTypes.model3d"),
   },
   {
     value: "text",
-    label: "Document",
+    label: t("fileTypes.document"),
   },
 ];
 

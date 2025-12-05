@@ -23,6 +23,9 @@
       "logo": "logo",
       "preview": "Preview",
       "project_thumbnail": "project-thumbnail"
+    },
+    "errors": {
+      "invalidCoordinates": "Invalid coordinates"
     }
   },
   "asset": {
@@ -546,6 +549,19 @@
         "untitled": "Untitled POI",
         "noDescription": "No description available"
       }
+    },
+    "media": {
+      "untitled": "Untitled Media",
+      "ar": "AR",
+      "georeferenced": "Georeferenced",
+      "deleteConfirm": {
+        "title": "Delete Media Asset",
+        "message": "Are you sure you want to delete this media asset?",
+        "confirmText": "Delete"
+      }
+    },
+    "view": {
+      "title": "Point of Interest"
     }
   },
   "tours": {
@@ -594,5 +610,12 @@
       "freeRoam": "Free roam",
       "published": "Published"
     }
+  },
+  "fileTypes": {
+    "image": "Image",
+    "video": "Video",
+    "audio": "Audio",
+    "model3d": "3D Model",
+    "document": "Document"
   }
 }

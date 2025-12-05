@@ -9,6 +9,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useAssetModal } from "@/stores/asset-modal-stores";
 import { useConfirm } from "@/stores/confirmation-modal-stores";
@@ -112,6 +113,7 @@ const MediaDescription = styled(Typography)(() => ({
  * @returns {React.ReactElement} Rendered media card item
  */
 function MediaCardItem({ asset, onEdit }) {
+  const { t } = useTranslation();
   const { openPoiMediaModal } = useAssetModal();
   const locale = useLocale();
 
@@ -142,9 +144,9 @@ function MediaCardItem({ asset, onEdit }) {
     e.preventDefault();
 
     await confirm({
-      title: "Delete Media Asset",
-      message: "Are you sure you want to delete this media asset?",
-      confirmText: "Delete",
+      title: t("tour.pois.media.deleteConfirm.title"),
+      message: t("tour.pois.media.deleteConfirm.message"),
+      confirmText: t("tour.pois.media.deleteConfirm.confirmText"),
       action: deletePoiAsset,
     });
   };
@@ -164,7 +166,7 @@ function MediaCardItem({ asset, onEdit }) {
           <HeaderRow>
             <TitleSection>
               <MediaTitle variant="subtitle2" component="h4">
-                <InjectedLocaleValue value={asset?.title || "Untitled Media"} />
+                <InjectedLocaleValue value={asset?.title || t("tour.pois.media.untitled")} />
               </MediaTitle>
               <MediaDescription variant="body2" color="text.secondary">
                 <InjectedLocaleValue value={asset?.description} />
@@ -187,7 +189,7 @@ function MediaCardItem({ asset, onEdit }) {
           <PillsRow>
             {showArPill && (
               <PillStyled
-                label="AR"
+                label={t("tour.pois.media.ar")}
                 size="small"
                 variant="filled"
                 className="ar-pill"
@@ -195,7 +197,7 @@ function MediaCardItem({ asset, onEdit }) {
             )}
             {showGeoferencedPill && (
               <PillStyled
-                label="Georeferenced"
+                label={t("tour.pois.media.georeferenced")}
                 size="small"
                 variant="filled"
                 className="georeference-pill"

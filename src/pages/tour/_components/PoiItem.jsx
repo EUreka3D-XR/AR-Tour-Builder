@@ -6,6 +6,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeleteTourPoi } from "@/services/poiService";
@@ -114,15 +115,16 @@ function PoiItem({
   onRemove,
   onClick,
 }) {
+  const { t } = useTranslation();
   const { tourId } = useParams();
   const confirm = useConfirm();
   const { mutate: deletePoi } = useDeleteTourPoi(tourId, poi.id);
 
   const handleDelete = async () => {
     const confirmed = await confirm({
-      title: "Delete POI",
-      message: `Are you sure you want to delete the POI? This action cannot be undone.`,
-      confirmText: "Delete",
+      title: t("tour.pois.deleteConfirm.title"),
+      message: t("tour.pois.deleteConfirm.message"),
+      confirmText: t("tour.pois.deleteConfirm.confirmText"),
       action: deletePoi,
     });
     if (confirmed) onRemove(poi.id);
@@ -146,10 +148,10 @@ function PoiItem({
           {/* Second flex item: Title, Description, and Media Icons */}
           <ContentSection>
             <PoiTitle variant="h6" component="h3">
-              {poi?.title.locales.en || "Untitled POI"}
+              {poi?.title.locales.en || t("tour.pois.item.untitled")}
             </PoiTitle>
             <PoiDescription variant="body2">
-              {poi?.description.locales.en || "No description available"}
+              {poi?.description.locales.en || t("tour.pois.item.noDescription")}
             </PoiDescription>
 
             <AssetsRow className="assets-row">

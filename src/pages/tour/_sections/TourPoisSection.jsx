@@ -13,6 +13,7 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import CenteredArea from "@/components/centered/Centered";
@@ -60,6 +61,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function TourPoisSection() {
+  const { t } = useTranslation();
   const { containerRef } = useOutletContext();
   const location = useLocation();
   const navigate = useNavigate();
@@ -91,17 +93,15 @@ function TourPoisSection() {
       <>
         <CenteredArea className="empty-pois-section">
           <Stack alignItems="center" justifyContent="center">
-            <Typography>
-              There are no points of interest associated to the tour yet.
-            </Typography>
-            <Typography>Click below to start adding points</Typography>
+            <Typography>{t("tour.pois.empty.line1")}</Typography>
+            <Typography>{t("tour.pois.empty.line2")}</Typography>
             <br />
             <Button
               variant="filled"
               href={routes.pois.new}
               startIcon={<EurekaIcon name="add" />}
             >
-              Add POI
+              {t("tour.pois.addPoi")}
             </Button>
           </Stack>
         </CenteredArea>
@@ -120,7 +120,7 @@ function TourPoisSection() {
               return (
                 <FormControlLabel
                   control={<Switch {...field} checked={field.value} />}
-                  label="Guided Tour"
+                  label={t("tour.pois.guidedTour")}
                 />
               );
             }}
@@ -130,7 +130,7 @@ function TourPoisSection() {
             href={routes.pois.new}
             startIcon={<EurekaIcon name="add" />}
           >
-            Add POI
+            {t("tour.pois.addPoi")}
           </Button>
         </div>
         <Divider />

@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { useParams } from "react-router";
 import { styled, Tab, Tabs } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";
@@ -32,24 +34,30 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function TourNavigationTabsSection() {
+  const { t } = useTranslation();
   const { tourId } = useParams();
   const tourStatus = tourId ? "existing" : "new";
 
   const { routes } = useNavPaths();
 
-  const { tabs, activeTab, setActiveTab } = useUrlTabs([
-    {
-      icon: "info",
-      label: "Tour Information",
-      value: routes.tourInfo,
-    },
-    {
-      icon: "poi",
-      label: "Points of Interest",
-      value: routes.pois.index,
-      disableForStatus: "new",
-    },
-  ]);
+  const tabsConfig = useMemo(
+    () => [
+      {
+        icon: "info",
+        label: t("tour.tabs.information"),
+        value: routes.tourInfo,
+      },
+      {
+        icon: "poi",
+        label: t("tour.tabs.pois"),
+        value: routes.pois.index,
+        disableForStatus: "new",
+      },
+    ],
+    [t, routes],
+  );
+
+  const { tabs, activeTab, setActiveTab } = useUrlTabs(tabsConfig);
 
   return (
     <ContainerStyled className="tour-navigation-tabs-section">

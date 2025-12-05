@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { useFormContext } from "react-hook-form";
 import { styled, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import FormInput from "@/components/form/FormInput";
@@ -49,6 +50,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function TourInfoSection() {
+  const { t } = useTranslation();
   const { tourId } = useParams();
   const isNew = !tourId;
 
@@ -65,7 +67,7 @@ function TourInfoSection() {
         <FormInputMultilingual
           name="title"
           render={({ field }) => (
-            <LabeledInput label="Tour Title" isMultilingual>
+            <LabeledInput label={t("tour.info.tourTitle")} isMultilingual>
               <TextField fullWidth {...field} />
             </LabeledInput>
           )}
@@ -73,7 +75,7 @@ function TourInfoSection() {
         <FormInputMultilingual
           name="description"
           render={({ field }) => (
-            <LabeledInput label="Description" isMultilingual>
+            <LabeledInput label={t("tour.info.description")} isMultilingual>
               <TextField
                 fullWidth
                 multiline
@@ -89,12 +91,12 @@ function TourInfoSection() {
           <FormInput
             name="duration"
             render={({ field }) => (
-              <LabeledInput label="Estimated Time (minutes)">
+              <LabeledInput label={t("tour.info.estimatedTime")}>
                 <NumberInput
                   {...field}
                   fullWidth
                   iconName="time"
-                  endAdornmentText="min"
+                  endAdornmentText={t("tour.info.estimatedTimeUnit")}
                   className="small-text-input"
                 />
               </LabeledInput>
@@ -103,12 +105,12 @@ function TourInfoSection() {
           <FormInput
             name="distance"
             render={({ field }) => (
-              <LabeledInput label="Estimated Distance (kilometers)">
+              <LabeledInput label={t("tour.info.estimatedDistance")}>
                 <NumberInput
                   {...field}
                   fullWidth
                   iconName="route"
-                  endAdornmentText="km"
+                  endAdornmentText={t("tour.info.estimatedDistanceUnit")}
                   className="small-text-input"
                 />
               </LabeledInput>
@@ -119,7 +121,7 @@ function TourInfoSection() {
       {isNew && (
         <div className="bottom-actions">
           <Button variant="filled" type="submit" isLoading={isSubmitting}>
-            Create tour and start editing
+            {t("tour.info.createButton")}
           </Button>
         </div>
       )}

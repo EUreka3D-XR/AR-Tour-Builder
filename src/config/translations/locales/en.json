@@ -501,5 +501,51 @@
         }
       }
     }
+  },
+  "tour": {
+    "header": {
+      "editingTour": "Editing Tour:",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "deleteTour": "Delete Tour",
+      "publish": "Publish",
+      "archive": "Archive",
+      "lastModified": "Last modified: {{date}}",
+      "deleteConfirm": {
+        "title": "Delete Tour",
+        "message": "Are you sure you want to delete this tour? This action cannot be undone.",
+        "confirmText": "Delete"
+      }
+    },
+    "tabs": {
+      "information": "Tour Information",
+      "pois": "Points of Interest"
+    },
+    "info": {
+      "tourTitle": "Tour Title",
+      "description": "Description",
+      "estimatedTime": "Estimated Time (minutes)",
+      "estimatedTimeUnit": "min",
+      "estimatedDistance": "Estimated Distance (kilometers)",
+      "estimatedDistanceUnit": "km",
+      "createButton": "Create tour and start editing"
+    },
+    "pois": {
+      "guidedTour": "Guided Tour",
+      "addPoi": "Add POI",
+      "empty": {
+        "line1": "There are no points of interest associated to the tour yet.",
+        "line2": "Click below to start adding points"
+      },
+      "deleteConfirm": {
+        "title": "Delete POI",
+        "message": "Are you sure you want to delete the POI? This action cannot be undone.",
+        "confirmText": "Delete"
+      },
+      "item": {
+        "untitled": "Untitled POI",
+        "noDescription": "No description available"
+      }
+    }
   }
 }

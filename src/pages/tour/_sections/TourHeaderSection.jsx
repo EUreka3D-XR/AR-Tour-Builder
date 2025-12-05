@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { useFormContext, useWatch } from "react-hook-form";
 import { IconButton, Stack, styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeleteTour, usePublishTour } from "@/services/toursService";
@@ -36,6 +37,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function TourHeaderSection() {
+  const { t } = useTranslation();
   const { projectId, tourId } = useParams();
   const isExisting = !!tourId;
 
@@ -59,10 +61,9 @@ function TourHeaderSection() {
 
   const handleDelete = async () => {
     await confirm({
-      title: "Delete Tour",
-      message:
-        "Are you sure you want to delete this tour? This action cannot be undone.",
-      confirmText: "Delete",
+      title: t("tour.header.deleteConfirm.title"),
+      message: t("tour.header.deleteConfirm.message"),
+      confirmText: t("tour.header.deleteConfirm.confirmText"),
       action: deleteTour,
     });
     navigate(routes.tours.index);
@@ -75,7 +76,7 @@ function TourHeaderSection() {
           <EurekaIcon name="back" fontSize="small" />
         </IconButton>
         <Typography variant="h4" component="h2" noWrap>
-          Editing Tour: <InjectedLocaleValue value={tourTitle} />
+          {t("tour.header.editingTour")} <InjectedLocaleValue value={tourTitle} />
         </Typography>
       </div>
       {isExisting && (
@@ -88,20 +89,21 @@ function TourHeaderSection() {
               isDisabled={!isDirty}
               isLoading={isSubmitting}
             >
-              {isSubmitting ? "Saving..." : "Save Changes"}
+              {isSubmitting ? t("tour.header.saving") : t("tour.header.saveChanges")}
             </Button>
             <Button
               startIcon={<EurekaIcon name="delete" />}
               color="error"
               onClick={handleDelete}
             >
-              Delete Tour
+              {t("tour.header.deleteTour")}
             </Button>
             <PublishButton />
           </Stack>
           <Typography className="timestamps">
-            {"Last modified: "}
-            {dateFormatters.lastUpdatedLike(lastModifiedAt)}
+            {t("tour.header.lastModified", {
+              date: dateFormatters.lastUpdatedLike(lastModifiedAt),
+            })}
           </Typography>
         </div>
       )}
@@ -112,6 +114,7 @@ function TourHeaderSection() {
 export default TourHeaderSection;
 
 const PublishButton = () => {
+  const { t } = useTranslation();
   const { tourId } = useParams();
 
   const tourStatus = useWatch({ name: "status", defaultValue: "draft" });
@@ -137,7 +140,7 @@ const PublishButton = () => {
           startIcon={<EurekaIcon name="publish" />}
           onClick={handlePublish}
         >
-          Publish
+          {t("tour.header.publish")}
         </Button>
       )}
       {tourStatus === "published" && (
@@ -145,7 +148,7 @@ const PublishButton = () => {
           startIcon={<EurekaIcon name="archive" />}
           onClick={handleArchive}
         >
-          Archive
+          {t("tour.header.archive")}
         </Button>
       )}
     </>

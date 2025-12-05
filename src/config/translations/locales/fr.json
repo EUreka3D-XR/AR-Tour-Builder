@@ -1,10 +1,10 @@
 {
   "nav_menu": {
     "home": "Accueil",
-    "tours": "Visites",
+    "tours": "Éditeur de Visites",
     "library": "Bibliothèque",
     "dashboard": "Tableau de bord",
-    "settings": "Paramètres"
+    "settings": "Paramètres du Projet"
   },
   "dates": {
     "today": "Aujourd'hui",
@@ -12,5 +12,610 @@
     "tomorrow": "Demain",
     "last_week": "La semaine dernière",
     "next_week": "La semaine prochaine"
+  },
+  "common": {
+    "action": {
+      "cancel": "Annuler",
+      "refresh": "Actualiser",
+      "go_back": "Retour"
+    },
+    "alt": {
+      "logo": "logo",
+      "preview": "Aperçu",
+      "project_thumbnail": "miniature-projet"
+    },
+    "errors": {
+      "invalidCoordinates": "Coordonnées invalides"
+    }
+  },
+  "asset": {
+    "form": {
+      "section": {
+        "create_asset": "Créer un Actif",
+        "editing_asset": "Modification de l'Actif",
+        "model_attributes": "Attributs du Modèle 3D",
+        "linked_audio": "Audio Lié"
+      },
+      "field": {
+        "title": "Titre",
+        "description": "Description",
+        "media_type": "Type de Média",
+        "multilingual_media": "Média Multilingue",
+        "media_url": "URL du Média",
+        "view_in_ar": "Voir en RA",
+        "georeferenced": "Géoréférencé",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "audio_title": "Titre Audio",
+        "audio_url": "URL Audio"
+      },
+      "placeholder": {
+        "enter_media_title": "Entrez le titre du média",
+        "enter_media_description": "Entrez la description du média",
+        "select_media_type": "Sélectionnez le type de média",
+        "media_url_example": "https://exemple.com/url-media.png",
+        "latitude_example": "ex. 3.123456",
+        "longitude_example": "ex. 76.123456",
+        "enter_audio_title": "Entrez le titre audio",
+        "audio_url_example": "https://exemple.com/url-audio.mp3"
+      },
+      "help": {
+        "multilingual_media_description": "Activez cette option pour fournir du contenu média dans plusieurs langues. Cela vous permet de télécharger différents fichiers média pour chaque langue prise en charge.",
+        "view_in_ar_description": "Activez cette option pour permettre aux utilisateurs de visualiser le modèle 3D en mode Réalité Augmentée (RA) sur les appareils compatibles.",
+        "georeferenced_description": "Cochez cette case si le modèle 3D est géoréférencé et possède des coordonnées latitude/longitude spécifiques qui lui sont associées.",
+        "linked_audio_description": "Téléchargez des fichiers audio dans plusieurs langues pour accompagner cet actif. Chaque langue peut avoir sa propre piste audio."
+      },
+      "action": {
+        "preview_fullscreen": "Aperçu plein écran",
+        "create_media_asset": "Créer un Actif Média",
+        "create_asset": "Créer un Actif",
+        "save_changes": "Enregistrer les Modifications"
+      }
+    }
+  },
+  "breadcrumbs": {
+    "my_projects": "Mes Projets",
+    "tours": "Visites",
+    "projects_library": "Bibliothèque du Projet"
+  },
+  "modal": {
+    "confirmation": {
+      "default_title": "Confirmer l'Action",
+      "default_message": "Êtes-vous sûr de vouloir continuer ?",
+      "confirm_button": "Confirmer",
+      "cancel_button": "Annuler"
+    }
+  },
+  "error": {
+    "default_title": "Une erreur s'est produite",
+    "default_message": "Notre système a rencontré un problème temporaire. Veuillez réessayer ou contacter le support si le problème persiste.",
+    "action": {
+      "refresh": "Actualiser",
+      "go_back": "Retour"
+    }
+  },
+  "components": {
+    "expandable_text": {
+      "show_less": "Afficher moins",
+      "show_more": "Afficher plus"
+    }
+  },
+  "validation": {
+    "label_required": "Le libellé est requis",
+    "url_required": "L'URL est requise"
+  },
+  "form": {
+    "navigation": {
+      "back": "Retour",
+      "next": "Suivant",
+      "save": "Enregistrer"
+    }
+  },
+  "header": {
+    "action": {
+      "logout": "Déconnexion"
+    }
+  },
+  "image_input": {
+    "placeholder": {
+      "default": "Cliquez pour télécharger une photo"
+    },
+    "error": {
+      "file_too_large": "Le fichier est trop volumineux. La taille maximale est de {{maxSize}}MB."
+    },
+    "helper": {
+      "accepted_formats": "PNG, JPG jusqu'à {{maxSize}}MB"
+    }
+  },
+  "language_dropdown": {
+    "label": {
+      "input_language": "Langue de Saisie"
+    }
+  },
+  "language_autocomplete": {
+    "placeholder": {
+      "examples": "p. ex., Anglais, Français, Espagnol"
+    }
+  },
+  "navbar": {
+    "action": {
+      "create_new_project": "Créer un nouveau projet"
+    }
+  },
+  "file_formats": {
+    "helper": {
+      "text": "Pour en savoir plus sur les formats de fichiers acceptés, ",
+      "link_text": "cliquez ici"
+    },
+    "title": "Formats de Fichiers Acceptés"
+  },
+  "document": {
+    "alt": {
+      "pdf_viewer": "Visionneuse PDF"
+    }
+  },
+  "model_viewer": {
+    "alt": {
+      "viewer_title": "Visionneuse 3D"
+    }
+  },
+  "table": {
+    "aria": {
+      "sorted_descending": "trié par ordre décroissant",
+      "sorted_ascending": "trié par ordre croissant"
+    }
+  },
+  "searchbar": {
+    "placeholder": "Rechercher..."
+  },
+  "assetsModal": {
+    "header": {
+      "title": "Importer des Actifs Média"
+    },
+    "sources": {
+      "libraryTab": "Bibliothèque",
+      "externalTab": "Externe",
+      "uploadTab": "Télécharger"
+    },
+    "externalBrowser": {
+      "sourceLabel": "Source Externe",
+      "selectSourcePlaceholder": "Sélectionnez une source",
+      "description": "Sélectionnez une source externe pour parcourir les actifs disponibles"
+    },
+    "browser": {
+      "searchPlaceholder": "Rechercher des actifs média...",
+      "sortOptions": {
+        "titleAsc": "Titre (A-Z)",
+        "titleDesc": "Titre (Z-A)"
+      },
+      "fileTypes": {
+        "all": "Tous les Types de Fichiers",
+        "images": "Images",
+        "videos": "Vidéos",
+        "models3d": "Modèles 3D",
+        "documents": "Documents"
+      }
+    },
+    "footer": {
+      "selectedLabel": "sélectionné(s)",
+      "importButton": "Importer le média sélectionné"
+    },
+    "presentation": {
+      "loading": "Chargement des actifs...",
+      "error": "Erreur lors du chargement des actifs.",
+      "noAssets": "Aucun actif disponible."
+    }
+  },
+  "auth": {
+    "logoAlt": "Logo",
+    "signup": {
+      "title": "S'inscrire",
+      "labels": {
+        "email": "Email",
+        "password": "Mot de passe",
+        "confirmPassword": "Confirmer le Mot de passe",
+        "username": "Nom d'utilisateur",
+        "name": "Nom Complet"
+      },
+      "placeholders": {
+        "email": "ex. utilisateur@exemple.com",
+        "password": "*******",
+        "confirmPassword": "*******",
+        "username": "ex. jean_dupont",
+        "name": "ex. Jean Dupont"
+      },
+      "buttons": {
+        "createAccount": "Créer un Compte"
+      },
+      "helpers": {
+        "alreadyHaveAccount": "Vous avez déjà un compte ?"
+      },
+      "links": {
+        "login": "Se connecter"
+      }
+    },
+    "login": {
+      "title": "Connexion",
+      "labels": {
+        "emailOrUsername": "Email ou nom d'utilisateur",
+        "password": "Mot de passe"
+      },
+      "placeholders": {
+        "emailOrUsername": "ex. utilisateur@exemple.com",
+        "password": "*******"
+      },
+      "buttons": {
+        "login": "Se connecter"
+      },
+      "helpers": {
+        "dontHaveAccount": "Vous n'avez pas de compte ?"
+      },
+      "links": {
+        "forgotPassword": "Mot de passe oublié ?",
+        "signup": "S'inscrire"
+      }
+    },
+    "forgotPassword": {
+      "title": "Mot de passe oublié",
+      "description": "Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe."
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le Mot de passe",
+      "description": "Entrez votre nouveau mot de passe ci-dessous."
+    }
+  },
+  "dashboard": {
+    "toursStats": {
+      "title": "Visites les Plus Visitées",
+      "views": "vues",
+      "popularity": "Popularité",
+      "completion": "Achèvement"
+    },
+    "emptyProject": {
+      "allEmpty": {
+        "title": "Le projet est vide",
+        "description": "Ce projet n'a pas encore de contenu. Vous pouvez remplir la bibliothèque de médias ou commencer à créer des visites."
+      },
+      "noMedia": {
+        "title": "Aucun média dans le projet",
+        "description": "Ajoutez des images, des vidéos et des modèles 3D à la bibliothèque de médias du projet afin de pouvoir les attacher aux POI et aux visites."
+      },
+      "noTours": {
+        "title": "Aucune visite pour le moment",
+        "description": "Commencez par créer votre première visite et ajoutez des Points d'Intérêt pour cartographier l'expérience des visiteurs."
+      },
+      "buttons": {
+        "addMedia": "Ajouter un média",
+        "createFirstTour": "Créer la première visite"
+      }
+    },
+    "overviewStats": {
+      "title": "Aperçu",
+      "totalTourVisits": "Total des Visites de Visite",
+      "visitsThisMonth": "Visites ce Mois",
+      "completionRate": "Taux d'Achèvement",
+      "supportedLanguages": "Langues Prises en Charge"
+    },
+    "members": {
+      "title": "Membres"
+    },
+    "projectBanner": {
+      "tours": "Visites",
+      "pois": "POIs",
+      "members": "Membres"
+    },
+    "recentTours": {
+      "title": "Visites Récentes",
+      "pois": "POIs",
+      "status": {
+        "published": "Publié",
+        "draft": "Brouillon"
+      },
+      "relativeTime": {
+        "today": "Mis à jour aujourd'hui",
+        "oneDayAgo": "Mis à jour il y a 1 jour",
+        "daysAgo": "Mis à jour il y a {{days}} jours",
+        "oneWeekAgo": "Mis à jour il y a 1 semaine",
+        "weeksAgo": "Mis à jour il y a {{weeks}} semaines",
+        "monthAgo": "Mis à jour il y a plus d'un mois"
+      }
+    }
+  },
+  "library": {
+    "header": {
+      "title": "Bibliothèque d'Actifs",
+      "subtitle": "Gérez et organisez les actifs de votre projet"
+    },
+    "filters": {
+      "searchLabel": "Rechercher des actifs",
+      "addNewAsset": "Ajouter un Nouvel Actif",
+      "typeOptions": {
+        "all": "Tous les Types",
+        "image": "Image",
+        "video": "Vidéo",
+        "audio": "Audio",
+        "model3d": "Modèle 3D",
+        "document": "Document"
+      }
+    },
+    "table": {
+      "columns": {
+        "title": "Titre",
+        "type": "Type",
+        "url": "URL",
+        "filename": "Nom de fichier"
+      }
+    },
+    "actions": {
+      "view": "Voir l'Actif",
+      "edit": "Modifier l'Actif",
+      "delete": "Supprimer l'Actif",
+      "deleteConfirm": {
+        "title": "Supprimer l'Actif",
+        "message": "Êtes-vous sûr de vouloir supprimer cet actif ? Cette action ne peut pas être annulée.",
+        "confirmText": "Supprimer"
+      }
+    }
+  },
+  "librarySidebar": {
+    "new": {
+      "title": "Créer un Actif Média"
+    },
+    "edit": {
+      "title": "Modification de l'Actif",
+      "error": "Erreur lors du chargement de l'actif."
+    },
+    "footer": {
+      "cancel": "Annuler",
+      "createAsset": "Créer un Actif Média",
+      "saveChanges": "Enregistrer les Modifications"
+    }
+  },
+  "poiSidebar": {
+    "new": {
+      "title": "Créer un Point d'Intérêt"
+    },
+    "edit": {
+      "title": "Modification du Point d'Intérêt"
+    },
+    "footer": {
+      "cancel": "Annuler",
+      "previous": "Précédent",
+      "nextStep": "Étape Suivante",
+      "createAndAddMedia": "Créer et ajouter un média",
+      "saveChanges": "Enregistrer les Modifications"
+    },
+    "tabs": {
+      "location": "Emplacement",
+      "details": "Détails",
+      "externalLinks": "Liens Externes",
+      "media": "Média"
+    },
+    "detailsTab": {
+      "title": "Titre",
+      "titlePlaceholder": "Entrez le titre",
+      "description": "Description",
+      "descriptionPlaceholder": "Entrez la description",
+      "poiRadius": "Rayon du POI",
+      "radiusPlaceholder": "ex. 20",
+      "coverPhoto": "Photo de Couverture",
+      "coverPhotoPlaceholder": "Cliquez pour télécharger une photo"
+    },
+    "locationTab": {
+      "instructions": "Placez un point d'intérêt sur la carte ou ajoutez ses coordonnées dans les champs Latitude et Longitude ci-dessous.",
+      "latitude": "Latitude",
+      "latitudePlaceholder": "ex. 3.123456",
+      "longitude": "Longitude",
+      "longitudePlaceholder": "ex. 101.123456"
+    },
+    "externalLinksTab": {
+      "quizLinks": "Liens de Quiz",
+      "quizNamePlaceholder": "Nom du Quiz",
+      "quizUrlPlaceholder": "URL : ex. https://plateforme-quiz.com/quiz/123",
+      "externalLinks": "Liens Externes",
+      "namePlaceholder": "Nom",
+      "externalUrlPlaceholder": "URL : ex. https://un-blog.com/page"
+    },
+    "addMediaButton": {
+      "add": "Ajouter",
+      "createNew": "Créer Nouveau",
+      "browseLibrary": "Parcourir la Bibliothèque"
+    }
+  },
+  "projectSettings": {
+    "header": {
+      "title": "Paramètres",
+      "subtitle": "Gérez les paramètres et configurations de votre projet"
+    },
+    "tabs": {
+      "general": "Général",
+      "supportedLanguages": "Langues Prises en Charge",
+      "branding": "Image de Marque",
+      "members": "Membres"
+    },
+    "saveButton": "Enregistrer les Modifications",
+    "general": {
+      "projectTitle": {
+        "label": "Titre du Projet",
+        "description": "C'est le titre avec lequel le projet apparaîtra également aux visiteurs",
+        "placeholder": "Entrez le titre du projet"
+      },
+      "description": {
+        "label": "Description",
+        "description": "Un bref aperçu de votre projet qui aide les utilisateurs à comprendre son objectif",
+        "placeholder": "Entrez la description du projet"
+      }
+    },
+    "languages": {
+      "note": "Remarque : ",
+      "noteDescription": "Vous ne pouvez pas supprimer les langues qui ont déjà du contenu associé. Ceci afin d'éviter toute perte de données.",
+      "supportedLanguages": {
+        "label": "Langues Prises en Charge",
+        "description": "Spécifiez les langues que votre projet prend en charge. Vous pourrez renseigner du contenu dans plusieurs langues ultérieurement dans les paramètres du projet."
+      }
+    }
+  },
+  "projects": {
+    "page": {
+      "title": "Mes Projets",
+      "newProjectButton": "Nouveau Projet",
+      "subtitle": "Parcourez et gérez vos projets. Ici, vous pouvez afficher les détails, créer de nouveaux projets et suivre votre progression.",
+      "error": "Oups ! Une erreur s'est produite lors de la récupération de vos projets. Veuillez réessayer plus tard.",
+      "empty": "Vous n'avez pas encore de projets. <br /> Cliquez sur Nouveau Projet pour créer votre premier."
+    },
+    "card": {
+      "tours": "Visites",
+      "pois": "POIs",
+      "assets": "Actifs",
+      "lastUpdated": "Dernière mise à jour : {{date}}"
+    },
+    "form": {
+      "tabs": {
+        "languages": "Langues Prises en Charge",
+        "basicInfo": "Informations de Base",
+        "branding": "Image de Marque"
+      },
+      "basic": {
+        "title": {
+          "label": "Titre du Projet",
+          "description": "C'est le titre avec lequel le projet apparaîtra également aux visiteurs",
+          "placeholder": "Entrez le titre du projet"
+        },
+        "description": {
+          "label": "Description",
+          "description": "Un bref aperçu de votre projet qui aide les utilisateurs à comprendre son objectif",
+          "placeholder": "Entrez la description du projet"
+        }
+      },
+      "languages": {
+        "label": "Langues Prises en Charge",
+        "description": "Spécifiez les langues que votre projet prend en charge. Vous pourrez renseigner du contenu dans plusieurs langues ultérieurement dans les paramètres du projet."
+      },
+      "branding": {
+        "logo": {
+          "label": "Logo du Projet",
+          "description": "Téléchargez le logo de votre projet. Il sera affiché sur la page d'accueil du projet et dans les listes de visites.",
+          "placeholder": "Cliquez pour télécharger le Logo"
+        },
+        "coverPhoto": {
+          "label": "Photo de Couverture",
+          "description": "Une image principale pour votre projet. Elle apparaît en haut de la page de votre projet et à l'intérieur des cartes de visite.",
+          "placeholder": "Cliquez pour télécharger une photo de couverture"
+        }
+      }
+    }
+  },
+  "tour": {
+    "header": {
+      "editingTour": "Modification de la Visite :",
+      "saveChanges": "Enregistrer les Modifications",
+      "saving": "Enregistrement...",
+      "deleteTour": "Supprimer la Visite",
+      "publish": "Publier",
+      "archive": "Archiver",
+      "lastModified": "Dernière modification : {{date}}",
+      "deleteConfirm": {
+        "title": "Supprimer la Visite",
+        "message": "Êtes-vous sûr de vouloir supprimer cette visite ? Cette action ne peut pas être annulée.",
+        "confirmText": "Supprimer"
+      }
+    },
+    "tabs": {
+      "information": "Informations sur la Visite",
+      "pois": "Points d'Intérêt"
+    },
+    "info": {
+      "tourTitle": "Titre de la Visite",
+      "description": "Description",
+      "estimatedTime": "Temps Estimé (minutes)",
+      "estimatedTimeUnit": "min",
+      "estimatedDistance": "Distance Estimée (kilomètres)",
+      "estimatedDistanceUnit": "km",
+      "createButton": "Créer la visite et commencer l'édition"
+    },
+    "pois": {
+      "guidedTour": "Visite Guidée",
+      "addPoi": "Ajouter un POI",
+      "empty": {
+        "line1": "Il n'y a pas encore de points d'intérêt associés à la visite.",
+        "line2": "Cliquez ci-dessous pour commencer à ajouter des points"
+      },
+      "deleteConfirm": {
+        "title": "Supprimer le POI",
+        "message": "Êtes-vous sûr de vouloir supprimer le POI ? Cette action ne peut pas être annulée.",
+        "confirmText": "Supprimer"
+      },
+      "item": {
+        "untitled": "POI Sans Titre",
+        "noDescription": "Aucune description disponible"
+      },
+      "media": {
+        "untitled": "Média Sans Titre",
+        "ar": "RA",
+        "georeferenced": "Géoréférencé",
+        "deleteConfirm": {
+          "title": "Supprimer l'Actif Média",
+          "message": "Êtes-vous sûr de vouloir supprimer cet actif média ?",
+          "confirmText": "Supprimer"
+        }
+      },
+      "view": {
+        "title": "Point d'Intérêt"
+      }
+    }
+  },
+  "tours": {
+    "hero": {
+      "title": "Visites du Projet",
+      "createButton": "Créer une Nouvelle Visite",
+      "subtitle": "Gérez et organisez des expériences immersives du patrimoine culturel. Créez des visites guidées, ajoutez des points d'intérêt et publiez des parcours archéologiques interactifs pour vos visiteurs."
+    },
+    "filters": {
+      "searchPlaceholder": "Rechercher des visites...",
+      "filter": "Filtrer",
+      "reset": "Réinitialiser",
+      "showOnMap": "Afficher sur la Carte",
+      "closeMap": "Fermer la Carte",
+      "sort": {
+        "latest": "Date (Plus Récent)",
+        "oldest": "Date (Plus Ancien)",
+        "titleAsc": "Titre (A-Z)",
+        "titleDesc": "Titre (Z-A)",
+        "durationShort": "Durée (Plus Courte)",
+        "durationLong": "Durée (Plus Longue)"
+      },
+      "popper": {
+        "title": "Filtrer",
+        "tourType": {
+          "label": "Type de Visite",
+          "all": "Tous les Types",
+          "guided": "Guidée",
+          "freeRoam": "Libre"
+        },
+        "status": {
+          "label": "Statut",
+          "all": "Tous les Statuts",
+          "published": "Publié",
+          "draft": "Brouillon",
+          "archived": "Archivé"
+        }
+      }
+    },
+    "list": {
+      "toursCount": "Visites ({{count}})",
+      "empty": "Aucune visite trouvée. Veuillez créer une nouvelle visite pour commencer."
+    },
+    "card": {
+      "guided": "Guidée",
+      "freeRoam": "Libre",
+      "published": "Publié"
+    }
+  },
+  "fileTypes": {
+    "image": "Image",
+    "video": "Vidéo",
+    "audio": "Audio",
+    "model3d": "Modèle 3D",
+    "document": "Document"
   }
 }

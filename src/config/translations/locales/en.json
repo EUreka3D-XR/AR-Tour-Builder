@@ -210,12 +210,16 @@
       "labels": {
         "email": "Email",
         "password": "Password",
-        "confirmPassword": "Confirm Password"
+        "confirmPassword": "Confirm Password",
+        "username": "Username",
+        "name": "Full Name"
       },
       "placeholders": {
         "email": "ex. user@example.com",
         "password": "*******",
-        "confirmPassword": "*******"
+        "confirmPassword": "*******",
+        "username": "ex. john_doe",
+        "name": "ex. John Doe"
       },
       "buttons": {
         "createAccount": "Create Account"

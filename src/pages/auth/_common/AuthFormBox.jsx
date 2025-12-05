@@ -1,3 +1,4 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
 import { Box, Paper, styled } from "@mui/material";
 
@@ -11,9 +12,10 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
 }));
 
-function AuthFormBox({ children, onSubmit, defaultValues }) {
+function AuthFormBox({ children, onSubmit, validationSchema, defaultValues }) {
   const methods = useForm({
     defaultValues,
+    resolver: yupResolver(validationSchema),
   });
 
   const { handleSubmit } = methods;

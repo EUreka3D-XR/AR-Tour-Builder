@@ -1,5 +1,6 @@
-import { Stack, TextField, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { loginSchema } from "@/validation-schemas/loginSchema";
+import { Stack, TextField, Typography } from "@mui/material";
 
 import { useLogin } from "@/services/authService";
 import Button from "@/components/button/Button";
@@ -27,7 +28,11 @@ function LoginPage() {
   };
 
   return (
-    <AuthFormBox defaultValues={defaultValues} onSubmit={handleSubmit}>
+    <AuthFormBox
+      defaultValues={defaultValues}
+      validationSchema={loginSchema}
+      onSubmit={handleSubmit}
+    >
       <Typography variant="h5" component="h1" align="center" fontWeight="bold">
         {t("auth.login.title")}
       </Typography>
@@ -47,7 +52,11 @@ function LoginPage() {
         name="password"
         render={({ field }) => (
           <LabeledInput label={t("auth.login.labels.password")}>
-            <PasswordInput {...field} placeholder={t("auth.login.placeholders.password")} fullWidth />
+            <PasswordInput
+              {...field}
+              placeholder={t("auth.login.placeholders.password")}
+              fullWidth
+            />
           </LabeledInput>
         )}
       />

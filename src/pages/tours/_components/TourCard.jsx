@@ -8,6 +8,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import Image from "@/components/image/Image";
@@ -151,6 +152,7 @@ const CardStyled = styled(Card)(({ theme }) => ({
  * @returns {React.ReactElement} Rendered tour card component
  */
 function TourCard({ tour, isFullWidth, isHighlighted, onTourClick }) {
+  const { t } = useTranslation();
   const handleCardClick = () => {
     onTourClick?.(tour.id);
     // navigate(routes.tours.one(tour.id));
@@ -181,7 +183,7 @@ function TourCard({ tour, isFullWidth, isHighlighted, onTourClick }) {
         {/* Tour Stats */}
         <div className="stats-row">
           <Chip
-            label={tour.isGuided ? "Guided" : "Free roam"}
+            label={tour.isGuided ? t("tours.card.guided") : t("tours.card.freeRoam")}
             size="small"
             className={clsx("tour-type")}
           />
@@ -205,7 +207,7 @@ function TourCard({ tour, isFullWidth, isHighlighted, onTourClick }) {
             <div className="stat-item success">
               <EurekaIcon name="checkCircle" className="stat-icon" />
               {isFullWidth && (
-                <Typography variant="body2">Published</Typography>
+                <Typography variant="body2">{t("tours.card.published")}</Typography>
               )}
             </div>
           )}

@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Divider, FormControl, MenuItem, Select, styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -25,19 +26,6 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-const sortOptions = [
-  { value: "latest", label: "Date (Newest)" },
-  { value: "oldest", label: "Date (Oldest)" },
-  { value: "title-asc", label: "Title (A-Z)" },
-  { value: "title-desc", label: "Title (Z-A)" },
-  { value: "duration-short", label: "Duration (Shortest)" },
-  { value: "duration-long", label: "Duration (Longest)" },
-];
-
-const sortOptionsMap = sortOptions.reduce((acc, option) => {
-  acc[option.value] = option.label;
-  return acc;
-}, {});
 
 /**
  * Props for ToursFiltersSection component
@@ -54,7 +42,29 @@ const sortOptionsMap = sortOptions.reduce((acc, option) => {
  * @returns {React.ReactElement} Rendered tours filters section
  */
 function ToursFiltersSection({ defaultTourId }) {
+  const { t } = useTranslation();
   const { filterParams, updateParams, resetParams } = useDashboardParams();
+
+  const sortOptions = useMemo(
+    () => [
+      { value: "latest", label: t("tours.filters.sort.latest") },
+      { value: "oldest", label: t("tours.filters.sort.oldest") },
+      { value: "title-asc", label: t("tours.filters.sort.titleAsc") },
+      { value: "title-desc", label: t("tours.filters.sort.titleDesc") },
+      { value: "duration-short", label: t("tours.filters.sort.durationShort") },
+      { value: "duration-long", label: t("tours.filters.sort.durationLong") },
+    ],
+    [t],
+  );
+
+  const sortOptionsMap = useMemo(
+    () =>
+      sortOptions.reduce((acc, option) => {
+        acc[option.value] = option.label;
+        return acc;
+      }, {}),
+    [sortOptions],
+  );
 
   const filters = useMemo(
     () => ({
@@ -87,7 +97,7 @@ function ToursFiltersSection({ defaultTourId }) {
   return (
     <ContainerStyled>
       <SearchInput
-        placeholder="Search tours..."
+        placeholder={t("tours.filters.searchPlaceholder")}
         value={filterParams.searchTerm || ""}
         onChange={handleFilterChange("searchTerm")}
       />
@@ -131,7 +141,9 @@ function ToursFiltersSection({ defaultTourId }) {
         }
         onClick={handleToggleMapView}
       >
-        {filterParams.viewMode === "map" ? "Close Map" : "Show on Map"}
+        {filterParams.viewMode === "map"
+          ? t("tours.filters.closeMap")
+          : t("tours.filters.showOnMap")}
       </Button>
     </ContainerStyled>
   );

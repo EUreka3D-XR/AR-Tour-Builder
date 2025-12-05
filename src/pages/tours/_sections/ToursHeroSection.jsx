@@ -1,4 +1,5 @@
 import { styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useProjectProvider } from "@/providers/project/ProjectContext";
 import RouterBreadcrumbs from "@/components/breadcrumbs/RouterBreadcrumbs";
@@ -25,6 +26,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function ToursHeroSection() {
+  const { t } = useTranslation();
   const { routes } = useNavPaths();
   const { project, fetchState } = useProjectProvider();
 
@@ -36,20 +38,18 @@ function ToursHeroSection() {
       />
       <div className="top-row">
         <Typography variant="h2" component="h1" className="title">
-          Project Tours
+          {t("tours.hero.title")}
         </Typography>
         <Button
           href={routes.tours.new}
           variant="text"
           startIcon={<EurekaIcon name="add" />}
         >
-          Create New Tour
+          {t("tours.hero.createButton")}
         </Button>
       </div>
       <Typography className="subtitle">
-        Manage and organize immersive cultural heritage experiences. Create
-        guided tours, add points of interest, and publish interactive
-        archaeological journeys for your visitors.
+        {t("tours.hero.subtitle")}
       </Typography>
     </ContainerStyled>
   );

@@ -2,6 +2,7 @@ import { useMemo, useRef } from "react";
 import { useNavigate } from "react-router";
 import clsx from "clsx";
 import { Box, Skeleton, styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import CenteredArea from "@/components/centered/Centered";
 import ErrorArea from "@/components/error/ErrorArea";
@@ -82,6 +83,7 @@ const TourItem = styled(Box)(({ theme }) => ({
  * @returns {React.ReactElement} Rendered tours list section with map
  */
 function ToursListSection({ tours = [], fetchState }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { searchParams, updateParams } = useDashboardParams();
   const viewMode = searchParams.get("viewMode") ?? "list";
@@ -126,7 +128,7 @@ function ToursListSection({ tours = [], fetchState }) {
       <ContainerStyled className="tours-main-area">
         <CenteredArea sx={{ mt: -8 }}>
           <Typography variant="h6" sx={{ textAlign: "center" }}>
-            No tours found. Please create a new tour to get started.
+            {t("tours.list.empty")}
           </Typography>
         </CenteredArea>
       </ContainerStyled>
@@ -138,7 +140,7 @@ function ToursListSection({ tours = [], fetchState }) {
       {/* Tours List - Left Side */}
       <ToursListContainer className={clsx({ "full-width": isFullWidth })}>
         <Typography variant="h6" sx={{ mb: 0, ml: 2, fontWeight: 600 }}>
-          Tours ({tours.length})
+          {t("tours.list.toursCount", { count: tours.length })}
         </Typography>
 
         <ToursScrollableArea>

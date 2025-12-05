@@ -547,5 +547,52 @@
         "noDescription": "No description available"
       }
     }
+  },
+  "tours": {
+    "hero": {
+      "title": "Project Tours",
+      "createButton": "Create New Tour",
+      "subtitle": "Manage and organize immersive cultural heritage experiences. Create guided tours, add points of interest, and publish interactive archaeological journeys for your visitors."
+    },
+    "filters": {
+      "searchPlaceholder": "Search tours...",
+      "filter": "Filter",
+      "reset": "Reset",
+      "showOnMap": "Show on Map",
+      "closeMap": "Close Map",
+      "sort": {
+        "latest": "Date (Newest)",
+        "oldest": "Date (Oldest)",
+        "titleAsc": "Title (A-Z)",
+        "titleDesc": "Title (Z-A)",
+        "durationShort": "Duration (Shortest)",
+        "durationLong": "Duration (Longest)"
+      },
+      "popper": {
+        "title": "Filter",
+        "tourType": {
+          "label": "Tour Type",
+          "all": "All Types",
+          "guided": "Guided",
+          "freeRoam": "Free Roam"
+        },
+        "status": {
+          "label": "Status",
+          "all": "All Status",
+          "published": "Published",
+          "draft": "Draft",
+          "archived": "Archived"
+        }
+      }
+    },
+    "list": {
+      "toursCount": "Tours ({{count}})",
+      "empty": "No tours found. Please create a new tour to get started."
+    },
+    "card": {
+      "guided": "Guided",
+      "freeRoam": "Free roam",
+      "published": "Published"
+    }
   }
 }

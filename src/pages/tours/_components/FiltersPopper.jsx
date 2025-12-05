@@ -8,6 +8,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -38,6 +39,7 @@ function FiltersPopper({
   onReset,
   filters,
 }) {
+  const { t } = useTranslation();
   return (
     <Popper
       open={isOpen}
@@ -60,7 +62,7 @@ function FiltersPopper({
         <FilterCardStyled>
           <div className="title-row">
             <Typography variant="h6" fontWeight={600}>
-              Filter
+              {t("tours.filters.popper.title")}
             </Typography>
             <Button
               onClick={onReset}
@@ -72,7 +74,7 @@ function FiltersPopper({
                 />
               }
             >
-              Reset
+              {t("tours.filters.reset")}
             </Button>
           </div>
 
@@ -84,7 +86,7 @@ function FiltersPopper({
                 color="text.secondary"
                 sx={{ mb: 1 }}
               >
-                Tour Type
+                {t("tours.filters.popper.tourType.label")}
               </Typography>
               <FormControl fullWidth size="small">
                 <Select
@@ -102,13 +104,13 @@ function FiltersPopper({
                   onChange={(e) => onChange("tourType")(e.target.value)}
                 >
                   <MenuItem value="all" className="inside-menu">
-                    All Types
+                    {t("tours.filters.popper.tourType.all")}
                   </MenuItem>
                   <MenuItem value="guided" className="inside-menu">
-                    Guided
+                    {t("tours.filters.popper.tourType.guided")}
                   </MenuItem>
                   <MenuItem value="free-roam" className="inside-menu">
-                    Free Roam
+                    {t("tours.filters.popper.tourType.freeRoam")}
                   </MenuItem>
                 </Select>
               </FormControl>
@@ -121,7 +123,7 @@ function FiltersPopper({
                 color="text.secondary"
                 sx={{ mb: 1 }}
               >
-                Status
+                {t("tours.filters.popper.status.label")}
               </Typography>
               <FormControl fullWidth size="small">
                 <Select
@@ -136,16 +138,16 @@ function FiltersPopper({
                   onChange={(e) => onChange("status")(e.target.value)}
                 >
                   <MenuItem value="all" className="inside-menu">
-                    All Status
+                    {t("tours.filters.popper.status.all")}
                   </MenuItem>
                   <MenuItem value="published" className="inside-menu">
-                    Published
+                    {t("tours.filters.popper.status.published")}
                   </MenuItem>
                   <MenuItem value="draft" className="inside-menu">
-                    Draft
+                    {t("tours.filters.popper.status.draft")}
                   </MenuItem>
                   <MenuItem value="archived" className="inside-menu">
-                    Archived
+                    {t("tours.filters.popper.status.archived")}
                   </MenuItem>
                 </Select>
               </FormControl>

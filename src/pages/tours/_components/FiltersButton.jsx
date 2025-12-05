@@ -2,6 +2,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import { Badge, styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -21,6 +22,7 @@ const FilterButtonStyled = styled(Button)(({ theme }) => ({
 }));
 
 function FiltersButton({ onFilterChange, onResetFilter, filters }) {
+  const { t } = useTranslation();
   const [filterAnchorEl, setFilterAnchorEl] = useState(null);
 
   const isFilterOpen = Boolean(filterAnchorEl);
@@ -54,7 +56,7 @@ function FiltersButton({ onFilterChange, onResetFilter, filters }) {
         className={clsx("no-shrink", { active: hasActiveFilters })}
         onClick={handleFilterClick}
       >
-        Filter
+        {t("tours.filters.filter")}
       </FilterButtonStyled>
       <FiltersPopper
         filters={filters}

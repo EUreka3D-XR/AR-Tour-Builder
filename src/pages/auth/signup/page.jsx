@@ -12,6 +12,8 @@ import AuthFormBox from "../_common/AuthFormBox";
 import HelperBottomText from "../_common/HelperBottomText";
 
 const defaultValues = {
+  name: "",
+  username: "",
   email: "",
   password: "",
   confirmPassword: "",

@@ -1,5 +1,5 @@
-import { IconButton, styled } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { IconButton, styled } from "@mui/material";
 
 import { useLogout } from "@/services/authService";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
@@ -7,6 +7,7 @@ import useNavPaths from "@/hooks/useNavPaths";
 import logo from "@/assets/images/dummy-logo.webp";
 import DropdownMenu from "../dropdown/DropdownMenu";
 import EurekaIcon from "../icon/EurekaIcon";
+import AppLanguageDropdown from "../language-dropdown/AppLanguageDropdown";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   width: "100vw",
@@ -50,6 +51,7 @@ function Header() {
         <img src={logo} alt={t("common.alt.logo")} className="logo" />
       </div>
       <div className="side-header right-header">
+        <AppLanguageDropdown hideLabels />
         <DropdownMenu
           id="account-menu"
           items={[

@@ -617,5 +617,9 @@
     "audio": "Audio",
     "model3d": "Modèle 3D",
     "document": "Document"
+  },
+  "app_language_dropdown": {
+    "en": "Anglais",
+    "fr": "Français"
   }
 }

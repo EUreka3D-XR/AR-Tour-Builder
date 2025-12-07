@@ -3,12 +3,20 @@ import { AssetBaseDto } from "./AssetBaseDto";
 export class PoiAssetDto {
   static fromApi(data) {
     const newData = AssetBaseDto.fromApi(data);
-    return newData;
+    const { arPlacement, ...restData } = newData || {};
+
+    return {
+      ...restData,
+      isGroundPlaced: arPlacement === "ground",
+    };
   }
 
   static toApi(data) {
     const newData = AssetBaseDto.toApi(data);
-    return newData;
+    return {
+      ...newData,
+      arPlacement: data.isGroundPlaced ? "ground" : "free",
+    };
   }
 }
 

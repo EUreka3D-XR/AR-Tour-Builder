@@ -1,12 +1,21 @@
 export class AssetBaseDto {
   static fromApi(data) {
-    const { url, ...restData } = data || {};
-    return { ...restData, contentUrl: url };
+    const { url, coordinates, ...restData } = data || {};
+    return {
+      ...restData,
+      georeference: coordinates,
+      isGeoreferenced: !!coordinates,
+      contentUrl: url,
+    };
   }
 
   static toApi(data) {
-    const { contentUrl, ...restData } = data || {};
-    return { ...restData, url: contentUrl };
+    const { contentUrl, georeference, ...restData } = data || {};
+    return {
+      ...restData,
+      url: contentUrl,
+      coordinates: georeference,
+    };
   }
 }
 

@@ -1,6 +1,7 @@
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { signupSchema } from "@/validation-schemas/signupSchema";
-import { TextField, Typography } from "@mui/material";
+import { Alert, TextField, Typography } from "@mui/material";
 
 import { useSignup } from "@/services/authService";
 import Button from "@/components/button/Button";
@@ -25,9 +26,30 @@ function SignupPage() {
   const { mutate: signup, fetchState } = useSignup();
 
   const handleSubmit = async (data) => {
-    await signup(data);
-    navigate(routes.home);
+    try {
+      await signup(data);
+      navigate(routes.home);
+    } catch {
+      // Error is handled by fetchState.isError
+    }
   };
+
+  const errorMessage = useMemo(() => {
+    if (!fetchState.isError) {
+      return;
+    }
+    const status = fetchState.error?.response?.status;
+
+    if (status === 409) {
+      return t("auth.signup.errors.userAlreadyExists");
+    }
+
+    if (status === 400) {
+      return t("auth.signup.errors.invalidData");
+    }
+
+    return fetchState.error?.message || t("auth.signup.errors.signupFailed");
+  }, [fetchState.error, fetchState.isError, t]);
 
   return (
     <AuthFormBox
@@ -108,6 +130,11 @@ function SignupPage() {
           </LabeledInput>
         )}
       />
+      {errorMessage && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {errorMessage}
+        </Alert>
+      )}
       <Button
         variant="filled"
         isFullwidth

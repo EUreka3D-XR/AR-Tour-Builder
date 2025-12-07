@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { loginSchema } from "@/validation-schemas/loginSchema";
-import { Stack, TextField, Typography } from "@mui/material";
+import { Alert, Stack, TextField, Typography } from "@mui/material";
 
 import { useLogin } from "@/services/authService";
 import Button from "@/components/button/Button";
@@ -23,8 +23,12 @@ function LoginPage() {
   const { mutate: login, fetchState } = useLogin();
 
   const handleSubmit = async (data) => {
-    await login(data);
-    navigate(routes.home);
+    try {
+      await login(data);
+      navigate(routes.home);
+    } catch {
+      // Error is handled by fetchState.isError
+    }
   };
 
   return (
@@ -38,10 +42,12 @@ function LoginPage() {
       </Typography>
       <FormInput
         name="login"
-        render={({ field }) => (
+        render={({ field, formState }) => (
           <LabeledInput label={t("auth.login.labels.emailOrUsername")}>
             <TextField
               {...field}
+              error={!!formState.errors.login}
+              helperText={formState.errors.login?.message}
               placeholder={t("auth.login.placeholders.emailOrUsername")}
               fullWidth
             />
@@ -50,16 +56,24 @@ function LoginPage() {
       />
       <FormInput
         name="password"
-        render={({ field }) => (
+        render={({ field, formState }) => (
           <LabeledInput label={t("auth.login.labels.password")}>
             <PasswordInput
               {...field}
+              error={!!formState.errors.password}
+              helperText={formState.errors.password?.message}
               placeholder={t("auth.login.placeholders.password")}
               fullWidth
             />
           </LabeledInput>
         )}
       />
+      {fetchState.isError && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {t("auth.login.errors.loginFailed")}
+        </Alert>
+      )}
+
       <Stack direction="row" justifyContent="flex-end" mb={2}>
         <Link
           to="/auth/forgot-password"

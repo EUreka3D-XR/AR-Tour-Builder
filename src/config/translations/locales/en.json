@@ -234,6 +234,11 @@
       },
       "links": {
         "login": "Login"
+      },
+      "errors": {
+        "signupFailed": "An error occurred during signup. Please try again.",
+        "userAlreadyExists": "A user with this email or username already exists.",
+        "invalidData": "Invalid data provided. Please check your information."
       }
     },
     "login": {
@@ -255,6 +260,9 @@
       "links": {
         "forgotPassword": "Forgot Password?",
         "signup": "Sign Up"
+      },
+      "errors": {
+        "loginFailed": "An error occurred, make sure you provide the right credentials"
       }
     },
     "forgotPassword": {

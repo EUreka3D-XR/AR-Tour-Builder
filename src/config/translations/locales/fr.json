@@ -234,6 +234,11 @@
       },
       "links": {
         "login": "Se connecter"
+      },
+      "errors": {
+        "signupFailed": "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.",
+        "userAlreadyExists": "Un utilisateur avec cet email ou nom d'utilisateur existe déjà.",
+        "invalidData": "Données invalides fournies. Veuillez vérifier vos informations."
       }
     },
     "login": {
@@ -255,6 +260,9 @@
       "links": {
         "forgotPassword": "Mot de passe oublié ?",
         "signup": "S'inscrire"
+      },
+      "errors": {
+        "loginFailed": "Une erreur s'est produite, assurez-vous de fournir les bons identifiants"
       }
     },
     "forgotPassword": {

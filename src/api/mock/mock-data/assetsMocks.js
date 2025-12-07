@@ -944,10 +944,9 @@ export function getMockPoiAssets(assets, count = 100) {
       ...asset,
       assetId: asset.id,
       priority: "normal",
-      modelAssetAttributes: {},
     };
     if (asset.type === "model3d") {
-      poiAsset.modelAssetAttributes = { viewInAr: true };
+      poiAsset.viewInAr = true;
       if (!isModel3dIncluded) {
         poiAsset.priority = "high";
         isModel3dIncluded = true;

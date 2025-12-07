@@ -6,75 +6,75 @@ import { transformKeysToCamel, transformKeysToSnake } from "./transformKeys";
 // fix for axios and mirage passthrough issue (see adapter):
 // https://github.com/miragejs/miragejs/issues/1006 comment of Jan 20 2025
 const axiosInstance = axios.create({
-  // baseURL: "http://localhost:8000",
-  baseURL: "https://eureka.ails.ece.ntua.gr",
-  adapter: async (config) => {
-    // Combine base URL and endpoint URL
-    let url = config.url.startsWith("http")
-      ? config.url
-      : config.baseURL + config.url;
+  baseURL: "http://localhost:8000",
+  // baseURL: "https://eureka.ails.ece.ntua.gr",
+  // adapter: async (config) => {
+  //   // Combine base URL and endpoint URL
+  //   let url = config.url.startsWith("http")
+  //     ? config.url
+  //     : config.baseURL + config.url;
 
-    // Serialize params and append to URL as query string
-    if (config.params) {
-      const searchParams = new URLSearchParams();
-      Object.entries(config.params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          searchParams.append(key, value);
-        }
-      });
-      const queryString = searchParams.toString();
-      if (queryString) {
-        url += (url.includes("?") ? "&" : "?") + queryString;
-      }
-    }
+  //   // Serialize params and append to URL as query string
+  //   if (config.params) {
+  //     const searchParams = new URLSearchParams();
+  //     Object.entries(config.params).forEach(([key, value]) => {
+  //       if (value !== undefined && value !== null) {
+  //         searchParams.append(key, value);
+  //       }
+  //     });
+  //     const queryString = searchParams.toString();
+  //     if (queryString) {
+  //       url += (url.includes("?") ? "&" : "?") + queryString;
+  //     }
+  //   }
 
-    // Make the fetch request
-    return fetch(url, {
-      method: config.method?.toUpperCase() || "GET",
-      headers: config.headers,
-      // body: config.data ? JSON.stringify(config.data) : undefined,
-      body: config.data,
-      signal: config.signal,
-    }).then(async (response) => {
-      // Check if response has content before parsing JSON
-      const contentType = response.headers.get("content-type");
-      const hasJsonContent =
-        contentType && contentType.includes("application/json");
-      const hasContent = response.headers.get("content-length") !== "0";
+  //   // Make the fetch request
+  //   return fetch(url, {
+  //     method: config.method?.toUpperCase() || "GET",
+  //     headers: config.headers,
+  //     // body: config.data ? JSON.stringify(config.data) : undefined,
+  //     body: config.data,
+  //     signal: config.signal,
+  //   }).then(async (response) => {
+  //     // Check if response has content before parsing JSON
+  //     const contentType = response.headers.get("content-type");
+  //     const hasJsonContent =
+  //       contentType && contentType.includes("application/json");
+  //     const hasContent = response.headers.get("content-length") !== "0";
 
-      let data = null;
-      if (hasJsonContent && hasContent) {
-        try {
-          data = await response.json();
-        } catch {
-          // Empty response or invalid JSON - keep data as null
-          data = null;
-        }
-      }
+  //     let data = null;
+  //     if (hasJsonContent && hasContent) {
+  //       try {
+  //         data = await response.json();
+  //       } catch {
+  //         // Empty response or invalid JSON - keep data as null
+  //         data = null;
+  //       }
+  //     }
 
-      // Return in axios response format
-      const axiosResponse = {
-        data,
-        status: response.status,
-        statusText: response.statusText,
-        headers: response.headers,
-        config,
-        request: response,
-      };
+  //     // Return in axios response format
+  //     const axiosResponse = {
+  //       data,
+  //       status: response.status,
+  //       statusText: response.statusText,
+  //       headers: response.headers,
+  //       config,
+  //       request: response,
+  //     };
 
-      // Reject promise for non-2xx status codes (like axios does)
-      if (response.status < 200 || response.status >= 300) {
-        const error = new Error(
-          `Request failed with status ${response.status}`,
-        );
-        error.response = axiosResponse;
-        error.config = config;
-        return Promise.reject(error);
-      }
+  //     // Reject promise for non-2xx status codes (like axios does)
+  //     if (response.status < 200 || response.status >= 300) {
+  //       const error = new Error(
+  //         `Request failed with status ${response.status}`,
+  //       );
+  //       error.response = axiosResponse;
+  //       error.config = config;
+  //       return Promise.reject(error);
+  //     }
 
-      return axiosResponse;
-    });
-  },
+  //     return axiosResponse;
+  //   });
+  // },
 });
 
 // Request interceptor to add Bearer token

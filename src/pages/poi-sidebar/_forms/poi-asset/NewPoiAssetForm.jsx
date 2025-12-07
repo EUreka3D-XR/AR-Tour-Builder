@@ -32,20 +32,19 @@ const DEFAULT_VALUES = {
     long: "",
   },
   isGeoreferenced: false,
-  modelAssetAttributes: {
-    viewInAr: false,
-    linkedAsset: {
-      contentUrl: {
-        locales: {
-          en: "",
-          fr: "",
-        },
+  viewInAr: false,
+  isGroundPlaced: false,
+  linkedAsset: {
+    contentUrl: {
+      locales: {
+        en: "",
+        fr: "",
       },
-      title: {
-        locales: {
-          en: "",
-          fr: "",
-        },
+    },
+    title: {
+      locales: {
+        en: "",
+        fr: "",
       },
     },
   },

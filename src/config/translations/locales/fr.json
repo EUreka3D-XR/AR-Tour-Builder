@@ -42,8 +42,9 @@
         "media_type": "Type de Média",
         "multilingual_media": "Média Multilingue",
         "media_url": "URL du Média",
-        "view_in_ar": "Voir en RA",
+        "view_in_ar": "Voir en AR",
         "georeferenced": "Géoréférencé",
+        "ground_placed": "Placement du Modèle 3D en AR",
         "latitude": "Latitude",
         "longitude": "Longitude",
         "audio_title": "Titre Audio",
@@ -61,9 +62,10 @@
       },
       "help": {
         "multilingual_media_description": "Activez cette option pour fournir du contenu média dans plusieurs langues. Cela vous permet de télécharger différents fichiers média pour chaque langue prise en charge.",
-        "view_in_ar_description": "Activez cette option pour permettre aux utilisateurs de visualiser le modèle 3D en mode Réalité Augmentée (RA) sur les appareils compatibles.",
+        "view_in_ar_description": "Activez cette option pour permettre aux utilisateurs de visualiser le modèle 3D en mode Réalité Augmentée (AR) sur les appareils compatibles.",
         "georeferenced_description": "Cochez cette case si le modèle 3D est géoréférencé et possède des coordonnées latitude/longitude spécifiques qui lui sont associées.",
-        "linked_audio_description": "Téléchargez des fichiers audio dans plusieurs langues pour accompagner cet actif. Chaque langue peut avoir sa propre piste audio."
+        "linked_audio_description": "Téléchargez des fichiers audio dans plusieurs langues pour accompagner cet actif. Chaque langue peut avoir sa propre piste audio.",
+        "ground_placed_description": "Spécifiez si l'objet doit être positionné sur le sol ou librement devant l'utilisateur en mode Réalité Augmentée (AR)."
       },
       "action": {
         "preview_fullscreen": "Aperçu plein écran",
@@ -551,7 +553,7 @@
       },
       "media": {
         "untitled": "Média Sans Titre",
-        "ar": "RA",
+        "ar": "AR",
         "georeferenced": "Géoréférencé",
         "deleteConfirm": {
           "title": "Supprimer l'Actif Média",

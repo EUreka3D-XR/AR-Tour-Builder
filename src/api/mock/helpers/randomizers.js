@@ -30,10 +30,9 @@ export const getRandomPoiAssets = (assets, type, min, max) => {
       ...restAsset,
       assetId,
       priority: "normal",
-      modelAssetAttributes: {},
     };
     if (restAsset.type === "model3d") {
-      poiAsset.modelAssetAttributes = { viewInAr: true };
+      poiAsset.viewInAr = true;
       if (!isModel3dIncluded) {
         poiAsset.priority = "high";
         isModel3dIncluded = true;

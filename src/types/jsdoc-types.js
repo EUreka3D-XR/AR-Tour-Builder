@@ -185,7 +185,7 @@
 
 /**
  * POI-specific asset schema extending the base Asset type
- * @typedef {Asset & {priority: AssetPriority, modelAssetAttributes: ModelAssetAttributes}} PoiAsset
+ * @typedef {Asset & {priority: AssetPriority} & ModelAssetAttributes} PoiAsset
  */
 
 /**
@@ -202,6 +202,7 @@
  * 3d Model Attributes
  * @typedef {Object} ModelAssetAttributes
  * @property {boolean} viewInAr - Indicates if the asset can be viewed in AR
+ * @property {boolean} isGroundPlaced - Indicates if the 3D model is ground placed in AR
  * @property {Asset} linkedAsset - Linked asset information
  * @property {Coordinates} georeference - Geographical reference for the asset
  */

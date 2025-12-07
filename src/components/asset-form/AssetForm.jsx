@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
-import { useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useFormContext, useWatch } from "react-hook-form";
 import {
   Box,
   Checkbox,
@@ -83,9 +83,13 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
 
   const isNewPoiAsset = !searchParams.get("mediaId");
 
+  const { setValue } = useFormContext();
+
   const assetType = useWatch({ name: "type" });
   const contentUrl = useWatch({ name: "contentUrl" });
   const isGeoreferenced = useWatch({ name: "isGeoreferenced" });
+  const isARShown = useWatch({ name: "viewInAr" });
+
   const helperTextForUrl = useMemo(() => {
     return getExtensionsHelperForType(assetType);
   }, [assetType]);
@@ -95,13 +99,24 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
     return checkAssetUrlValidity(url);
   }, [contentUrl, locale]);
 
+  useEffect(() => {
+    // when isGeoreferenced value changes, if true, set the arPlacement to true
+    if (isGeoreferenced) {
+      setValue("isGroundPlaced", true);
+    }
+  }, [isGeoreferenced, setValue]);
+
   return (
     <form id="poi-asset-form" onSubmit={onSubmit}>
       <ContainerStyled className="poi-asset-form-wrapper">
         {isPoiAsset && (
           <NoShrink>
             <PoiAssetHeaderSection
-              title={isNewPoiAsset ? t("asset.form.section.create_asset") : t("asset.form.section.editing_asset")}
+              title={
+                isNewPoiAsset
+                  ? t("asset.form.section.create_asset")
+                  : t("asset.form.section.editing_asset")
+              }
               onBack={onClose}
             />
             <Divider />
@@ -124,10 +139,15 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
           <FormInputMultilingual
             name="description"
             render={({ field }) => (
-              <LabeledInput label={t("asset.form.field.description")} isMultilingual>
+              <LabeledInput
+                label={t("asset.form.field.description")}
+                isMultilingual
+              >
                 <TextField
                   {...field}
-                  placeholder={t("asset.form.placeholder.enter_media_description")}
+                  placeholder={t(
+                    "asset.form.placeholder.enter_media_description",
+                  )}
                   fullWidth
                   multiline
                   rows={4}
@@ -161,7 +181,9 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
             }
             label={
               <div className="checkbox-label">
-                <Typography variant="body2">{t("asset.form.field.multilingual_media")}</Typography>
+                <Typography variant="body2">
+                  {t("asset.form.field.multilingual_media")}
+                </Typography>
                 <Typography variant="caption">
                   {t("asset.form.help.multilingual_media_description")}
                 </Typography>
@@ -173,10 +195,15 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
               <FormInputMultilingual
                 name="contentUrl"
                 render={({ field }) => (
-                  <LabeledInput label={t("asset.form.field.media_url")} isMultilingual>
+                  <LabeledInput
+                    label={t("asset.form.field.media_url")}
+                    isMultilingual
+                  >
                     <TextField
                       {...field}
-                      placeholder={t("asset.form.placeholder.media_url_example")}
+                      placeholder={t(
+                        "asset.form.placeholder.media_url_example",
+                      )}
                       fullWidth
                       helperText={helperTextForUrl}
                       type="url"
@@ -191,7 +218,9 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                   <LabeledInput label={t("asset.form.field.media_url")}>
                     <TextField
                       {...field}
-                      placeholder={t("asset.form.placeholder.media_url_example")}
+                      placeholder={t(
+                        "asset.form.placeholder.media_url_example",
+                      )}
                       fullWidth
                       helperText={helperTextForUrl}
                       type="url"
@@ -225,30 +254,68 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
           {assetType === "model3d" && (
             <>
               <Divider />
-              <Typography variant="h5">{t("asset.form.section.model_attributes")}</Typography>
+              <Typography variant="h5">
+                {t("asset.form.section.model_attributes")}
+              </Typography>
               <div className="models-details">
                 {isPoiAsset && (
-                  <FormInput
-                    name="modelAssetAttributes.viewInAR"
-                    render={({ field }) => (
-                      <FormControlLabelStyled
-                        control={
-                          <Checkbox
-                            checked={Boolean(field.value)}
-                            onChange={(e) => field.onChange(e.target.checked)}
+                  <>
+                    <FormInput
+                      name="viewInAr"
+                      render={({ field }) => (
+                        <FormControlLabelStyled
+                          control={
+                            <Checkbox
+                              checked={Boolean(field.value)}
+                              onChange={(e) => field.onChange(e.target.checked)}
+                            />
+                          }
+                          label={
+                            <div className="checkbox-label">
+                              <Typography variant="body2">
+                                {t("asset.form.field.view_in_ar")}
+                              </Typography>
+                              <Typography variant="caption">
+                                {t("asset.form.help.view_in_ar_description")}
+                              </Typography>
+                            </div>
+                          }
+                        />
+                      )}
+                    />
+                    {isARShown && (
+                      <FormInput
+                        name="isGroundPlaced"
+                        render={({ field }) => (
+                          <FormControlLabelStyled
+                            control={
+                              <Checkbox
+                                checked={
+                                  isGeoreferenced || Boolean(field.value)
+                                }
+                                onChange={(e) =>
+                                  field.onChange(e.target.checked)
+                                }
+                                disabled={isGeoreferenced}
+                              />
+                            }
+                            label={
+                              <div className="checkbox-label">
+                                <Typography variant="body2">
+                                  {t("asset.form.field.ground_placed")}
+                                </Typography>
+                                <Typography variant="caption">
+                                  {t(
+                                    "asset.form.help.ground_placed_description",
+                                  )}
+                                </Typography>
+                              </div>
+                            }
                           />
-                        }
-                        label={
-                          <div className="checkbox-label">
-                            <Typography variant="body2">{t("asset.form.field.view_in_ar")}</Typography>
-                            <Typography variant="caption">
-                              {t("asset.form.help.view_in_ar_description")}
-                            </Typography>
-                          </div>
-                        }
+                        )}
                       />
                     )}
-                  />
+                  </>
                 )}
                 <FormInput
                   name="isGeoreferenced"
@@ -262,7 +329,9 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                       }
                       label={
                         <div className="checkbox-label">
-                          <Typography variant="body2">{t("asset.form.field.georeferenced")}</Typography>
+                          <Typography variant="body2">
+                            {t("asset.form.field.georeferenced")}
+                          </Typography>
                           <Typography variant="caption">
                             {t("asset.form.help.georeferenced_description")}
                           </Typography>
@@ -280,7 +349,9 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                           <TextField
                             {...field}
                             className="coordinate-field"
-                            placeholder={t("asset.form.placeholder.latitude_example")}
+                            placeholder={t(
+                              "asset.form.placeholder.latitude_example",
+                            )}
                           />
                         </LabeledInput>
                       )}
@@ -292,7 +363,9 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                           <TextField
                             {...field}
                             className="coordinate-field"
-                            placeholder={t("asset.form.placeholder.longitude_example")}
+                            placeholder={t(
+                              "asset.form.placeholder.longitude_example",
+                            )}
                           />
                         </LabeledInput>
                       )}
@@ -304,31 +377,43 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                 <>
                   <Divider />
                   <div>
-                    <Typography variant="h5">{t("asset.form.section.linked_audio")}</Typography>
+                    <Typography variant="h5">
+                      {t("asset.form.section.linked_audio")}
+                    </Typography>
                     <Typography variant="caption">
                       {t("asset.form.help.linked_audio_description")}
                     </Typography>
                   </div>
 
                   <FormInputMultilingual
-                    name="modelAssetAttributes.linkedAsset.title"
+                    name="linkedAsset.title"
                     render={({ field }) => (
-                      <LabeledInput label={t("asset.form.field.audio_title")} isMultilingual>
+                      <LabeledInput
+                        label={t("asset.form.field.audio_title")}
+                        isMultilingual
+                      >
                         <TextField
                           {...field}
-                          placeholder={t("asset.form.placeholder.enter_audio_title")}
+                          placeholder={t(
+                            "asset.form.placeholder.enter_audio_title",
+                          )}
                           fullWidth
                         />
                       </LabeledInput>
                     )}
                   />
                   <FormInputMultilingual
-                    name="modelAssetAttributes.linkedAsset.contentUrl"
+                    name="linkedAsset.contentUrl"
                     render={({ field }) => (
-                      <LabeledInput label={t("asset.form.field.audio_url")} isMultilingual>
+                      <LabeledInput
+                        label={t("asset.form.field.audio_url")}
+                        isMultilingual
+                      >
                         <TextField
                           {...field}
-                          placeholder={t("asset.form.placeholder.audio_url_example")}
+                          placeholder={t(
+                            "asset.form.placeholder.audio_url_example",
+                          )}
                           fullWidth
                           type="url"
                         />

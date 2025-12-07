@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import {
   Box,
   Card,
@@ -9,7 +10,6 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
 import { useAssetModal } from "@/stores/asset-modal-stores";
 import { useConfirm } from "@/stores/confirmation-modal-stores";
@@ -122,12 +122,10 @@ function MediaCardItem({ asset, onEdit }) {
   const confirm = useConfirm();
 
   // Check if asset should show AR pill
-  const showArPill =
-    asset?.type === "model3d" && asset?.modelAssetAttributes?.viewInAr;
+  const showArPill = asset?.type === "model3d" && asset?.viewInAr;
 
   // Check if asset should show Georeferenced pill
-  const showGeoferencedPill =
-    asset?.type === "model3d" && asset?.modelAssetAttributes?.georeference;
+  const showGeoferencedPill = asset?.type === "model3d" && asset?.georeference;
 
   const handleClick = () => {
     openPoiMediaModal({ assetId: asset.id, projectId, tourId, poiId });
@@ -166,7 +164,9 @@ function MediaCardItem({ asset, onEdit }) {
           <HeaderRow>
             <TitleSection>
               <MediaTitle variant="subtitle2" component="h4">
-                <InjectedLocaleValue value={asset?.title || t("tour.pois.media.untitled")} />
+                <InjectedLocaleValue
+                  value={asset?.title || t("tour.pois.media.untitled")}
+                />
               </MediaTitle>
               <MediaDescription variant="body2" color="text.secondary">
                 <InjectedLocaleValue value={asset?.description} />

@@ -1,5 +1,9 @@
+import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { IconButton, Stack, styled, Typography } from "@mui/material";
 
+import { useConfirm } from "@/stores/confirmation-modal-stores";
+import { useDeleteTourPoi } from "@/services/poiService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 import Spacer from "@/components/spacer/Spacer";
@@ -13,15 +17,28 @@ const IconButtonStyled = styled(IconButton)(({ theme }) => ({
 }));
 
 function ViewPoiInfo({ poi }) {
+  const { t } = useTranslation();
+  const { tourId } = useParams();
+
   const { routes, navigate } = useNavPaths();
+
+  const confirm = useConfirm();
+  const { mutate: deletePoi } = useDeleteTourPoi(tourId, poi.id);
 
   const handleEdit = () => {
     navigate(routes.pois.edit(poi.id));
   };
 
-  const handleDelete = () => {
-    // TODO: - Delete
-    navigate(routes.pois.index);
+  const handleDelete = async () => {
+    const confirmed = await confirm({
+      title: t("tour.pois.deleteConfirm.title"),
+      message: t("tour.pois.deleteConfirm.message"),
+      confirmText: t("tour.pois.deleteConfirm.confirmText"),
+      action: deletePoi,
+    });
+    if (confirmed) {
+      navigate(routes.pois.index);
+    }
   };
 
   return (

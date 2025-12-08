@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 
 import { useCreateTourPoi } from "@/services/poiService";
+import { useLocale } from "@/hooks/useLocale";
 import useNavPaths from "@/hooks/useNavPaths";
 import PoiFormContainer from "./PoiFormContainer";
 
@@ -31,10 +32,12 @@ function NewPoiForm({ onClose }) {
   const { tourId } = useParams();
   const { routes, navigate } = useNavPaths();
 
-  const { mutate: createPoi } = useCreateTourPoi(tourId);
+  const locale = useLocale();
+
+  const { mutate: createPoi } = useCreateTourPoi(tourId, locale);
   const onSubmit = async (data) => {
-    await createPoi({ data });
-    navigate(`${routes.pois.one("new-poi-id")}`);
+    const newPoi = await createPoi({ data });
+    navigate(`${routes.pois.one(newPoi.id)}`);
   };
 
   return (

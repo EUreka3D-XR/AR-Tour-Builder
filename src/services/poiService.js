@@ -19,7 +19,7 @@ export const useTourPois = (tourId, params) => {
   const locale = useLocale();
   return useDataFetcher({
     fetcher: () => api.pois.fetchAll(tourId, { params, locale }),
-    queryKey: ["our-pois", tourId],
+    queryKey: ["tour-pois", tourId],
   });
 };
 
@@ -65,13 +65,17 @@ export const useCreateTourPoi = (tourId) => {
 
 /**
  * @param {string} poiId
+ * @param {string} tourId
  * @returns {PoiMutateResult}
  */
-export const useUpdateTourPoi = (poiId) => {
+export const useUpdateTourPoi = (poiId, tourId) => {
   return useDataMutator({
     mutator: ({ data }) => api.pois.update(poiId, data),
     mutationKey: ["update-tour-poi", poiId],
-    invalidateKey: ["tour-pois", poiId],
+    invalidateKey: [
+      ["tour-poi", poiId],
+      ["tour-pois", tourId],
+    ],
   });
 };
 

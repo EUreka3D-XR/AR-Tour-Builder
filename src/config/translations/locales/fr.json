@@ -552,6 +552,8 @@
     "pois": {
       "guidedTour": "Visite Guidée",
       "addPoi": "Ajouter un POI",
+      "errorLoading": "Une erreur s'est produite lors du chargement des points d'intérêt",
+
       "empty": {
         "line1": "Il n'y a pas encore de points d'intérêt associés à la visite.",
         "line2": "Cliquez ci-dessous pour commencer à ajouter des points"

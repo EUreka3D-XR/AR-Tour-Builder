@@ -552,6 +552,7 @@
     "pois": {
       "guidedTour": "Guided Tour",
       "addPoi": "Add POI",
+      "errorLoading": "There was an error loading the points of interest",
       "empty": {
         "line1": "There are no points of interest associated to the tour yet.",
         "line2": "Click below to start adding points"

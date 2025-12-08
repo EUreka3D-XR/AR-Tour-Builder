@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import {
   Card,
   CardContent,
@@ -6,7 +7,6 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
 import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeleteTourPoi } from "@/services/poiService";
@@ -130,14 +130,6 @@ function PoiItem({
     if (confirmed) onRemove(poi.id);
   };
 
-  // Group assets by type and count them
-  // const assetCounts =
-  //   poi?.assets?.reduce((acc, asset) => {
-  //     const type = asset.type || "image";
-  //     acc[type] = (acc[type] || 0) + 1;
-  //     return acc;
-  //   }, {}) || {};
-
   return (
     <CardStyled className="poi-card" onClick={() => onClick(poi.id)}>
       <CardContent className="card-content">
@@ -148,10 +140,10 @@ function PoiItem({
           {/* Second flex item: Title, Description, and Media Icons */}
           <ContentSection>
             <PoiTitle variant="h6" component="h3">
-              {poi?.title.locales.en || t("tour.pois.item.untitled")}
+              {poi?.title || t("tour.pois.item.untitled")}
             </PoiTitle>
             <PoiDescription variant="body2">
-              {poi?.description.locales.en || t("tour.pois.item.noDescription")}
+              {poi?.description || t("tour.pois.item.noDescription")}
             </PoiDescription>
 
             <AssetsRow className="assets-row">

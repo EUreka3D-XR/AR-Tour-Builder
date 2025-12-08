@@ -1,11 +1,8 @@
-import {
-  Outlet,
-  useLocation,
-  useNavigate,
-  useOutletContext,
-} from "react-router";
+import { Outlet, useLocation, useOutletContext, useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { useWatch } from "react-hook-form";
 import {
+  CircularProgress,
   Divider,
   FormControlLabel,
   Stack,
@@ -13,8 +10,8 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
+import { useTourPois } from "@/services/poiService";
 import Button from "@/components/button/Button";
 import CenteredArea from "@/components/centered/Centered";
 import FormInput from "@/components/form/FormInput";
@@ -63,16 +60,15 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 function TourPoisSection() {
   const { t } = useTranslation();
   const { containerRef } = useOutletContext();
+
+  const { tourId } = useParams();
   const location = useLocation();
-  const navigate = useNavigate();
-  const { routes } = useNavPaths();
+  const { routes, navigate } = useNavPaths();
+
+  const { data: pois, fetchState } = useTourPois(tourId);
 
   const isGuided = useWatch({ name: "guided" });
-  const {
-    fields: pois,
-    move,
-    remove,
-  } = useFieldArrayWithId({
+  const { move, remove } = useFieldArrayWithId({
     name: "pois",
   });
 
@@ -87,6 +83,24 @@ function TourPoisSection() {
       state: { backgroundLocation: location },
     });
   };
+
+  if (fetchState.isLoading) {
+    return (
+      <>
+        <CenteredArea className="empty-pois-section">
+          <CircularProgress size="60px" />
+        </CenteredArea>
+      </>
+    );
+  }
+
+  if (fetchState.isError) {
+    return (
+      <CenteredArea className="empty-pois-section">
+        <Typography>{t("tour.pois.errorLoading")}</Typography>
+      </CenteredArea>
+    );
+  }
 
   if (!pois?.length) {
     return (

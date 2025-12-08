@@ -4,7 +4,8 @@ import MediaPreview from "../media-preview/MediaPreview";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   label: "asset-form-preview-container",
-  height: "400px",
+  height: "250px",
+  width: "350px",
   border: theme.shape.borderRadius,
   flexShrink: 0,
 }));

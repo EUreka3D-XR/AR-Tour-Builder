@@ -33,6 +33,7 @@
       "section": {
         "create_asset": "Créer un Actif",
         "editing_asset": "Modification de l'Actif",
+        "media": "Média",
         "model_attributes": "Attributs du Modèle 3D",
         "linked_audio": "Audio Lié"
       },
@@ -48,7 +49,8 @@
         "latitude": "Latitude",
         "longitude": "Longitude",
         "audio_title": "Titre Audio",
-        "audio_url": "URL Audio"
+        "audio_url": "URL Audio",
+        "primary": "Définir comme Principal"
       },
       "placeholder": {
         "enter_media_title": "Entrez le titre du média",
@@ -65,7 +67,8 @@
         "view_in_ar_description": "Activez cette option pour permettre aux utilisateurs de visualiser le modèle 3D en mode Réalité Augmentée (AR) sur les appareils compatibles.",
         "georeferenced_description": "Cochez cette case si le modèle 3D est géoréférencé et possède des coordonnées latitude/longitude spécifiques qui lui sont associées.",
         "linked_audio_description": "Téléchargez des fichiers audio dans plusieurs langues pour accompagner cet actif. Chaque langue peut avoir sa propre piste audio.",
-        "ground_placed_description": "Spécifiez si l'objet doit être positionné sur le sol ou librement devant l'utilisateur en mode Réalité Augmentée (AR)."
+        "ground_placed_description": "Spécifiez si l'objet doit être positionné sur le sol ou librement devant l'utilisateur en mode Réalité Augmentée (AR).",
+        "primary_description": "Définissez cet actif comme principal pour qu'il soit affiché de manière plus proéminente."
       },
       "action": {
         "preview_fullscreen": "Aperçu plein écran",
@@ -425,6 +428,9 @@
       "externalLinks": "Liens Externes",
       "namePlaceholder": "Nom",
       "externalUrlPlaceholder": "URL : ex. https://un-blog.com/page"
+    },
+    "mediaTab": {
+      "tabTitle": "Média Actuel"
     },
     "addMediaButton": {
       "add": "Ajouter",

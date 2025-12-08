@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Skeleton, Stack, styled, Typography } from "@mui/material";
 
 import AddMediaButton from "./AddMediaButton";
@@ -20,11 +21,13 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 
 function PoiMediaTab({ mediaAssets = [], onEdit }) {
+  const { t } = useTranslation();
+
   return (
     <ContainerStyled>
       <div className="top-row">
         <Typography component="h3" variant="h4">
-          Current Media Assets
+          {t("poiSidebar.mediaTab.tabTitle")}
         </Typography>
         <AddMediaButton />
       </div>

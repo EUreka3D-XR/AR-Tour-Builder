@@ -185,7 +185,7 @@
 
 /**
  * POI-specific asset schema extending the base Asset type
- * @typedef {Asset & {priority: AssetPriority} & ModelAssetAttributes} PoiAsset
+ * @typedef {Asset & {priority: AssetPriority, isPrimary: boolean} & ModelAssetAttributes} PoiAsset
  */
 
 /**

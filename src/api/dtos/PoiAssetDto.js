@@ -3,11 +3,13 @@ import { AssetBaseDto } from "./AssetBaseDto";
 export class PoiAssetDto {
   static fromApi(data) {
     const newData = AssetBaseDto.fromApi(data);
-    const { arPlacement, ...restData } = newData || {};
+    const { arPlacement, priority, ...restData } = newData || {};
 
     return {
       ...restData,
       isGroundPlaced: arPlacement === "ground",
+      priority,
+      isPrimary: priority === "high",
     };
   }
 

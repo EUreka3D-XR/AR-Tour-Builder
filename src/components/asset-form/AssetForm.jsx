@@ -10,6 +10,7 @@ import {
   MenuItem,
   Select,
   styled,
+  Switch,
   TextField,
   Typography,
 } from "@mui/material";
@@ -99,6 +100,9 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
     return checkAssetUrlValidity(url);
   }, [contentUrl, locale]);
 
+  const values = useWatch();
+  console.log(values);
+
   useEffect(() => {
     // when isGeoreferenced value changes, if true, set the arPlacement to true
     if (isGeoreferenced) {
@@ -155,6 +159,33 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
               </LabeledInput>
             )}
           />
+          <FormInput
+            name="priority"
+            render={({ field }) => (
+              <FormControlLabelStyled
+                control={
+                  <Switch
+                    checked={field.value === "high"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked ? "high" : "normal")
+                    }
+                  />
+                }
+                label={
+                  <div className="checkbox-label">
+                    <Typography variant="body2">
+                      {t("asset.form.field.primary")}
+                    </Typography>
+                    <Typography variant="caption">
+                      {t("asset.form.help.primary_description")}
+                    </Typography>
+                  </div>
+                }
+              />
+            )}
+          />
+          <Divider />
+          <Typography variant="h5">{t("asset.form.section.media")}</Typography>
           <FormInput
             name="type"
             render={({ field }) => (

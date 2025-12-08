@@ -71,7 +71,12 @@ export const useCreatePoiAsset = (poiId, locale) => {
       }
       qc.setQueryData(["poi-assets", poiId], (oldData) => {
         if (!oldData) return [newData];
-        return [newData, ...oldData];
+        const oldDataWithUpdatedPriorities = oldData.map((asset) => ({
+          ...asset,
+          priority: "normal",
+          isPrimary: false,
+        }));
+        return [newData, ...oldDataWithUpdatedPriorities];
       });
     },
   });
@@ -101,7 +106,9 @@ export const useUpdatePoiAsset = (poiId, assetId, locale) => {
       qc.setQueryData(["poi-assets", poiId], (oldData) => {
         if (!oldData) return oldData;
         return oldData.map((asset) =>
-          asset.id === newData.id ? newData : asset,
+          asset.id === newData.id
+            ? newData
+            : { ...asset, priority: "normal", isPrimary: false },
         );
       });
     },
@@ -124,6 +131,36 @@ export const useDeletePoiAsset = (poiId, assetId) => {
       qc.setQueryData(["poi-assets", poiId], (oldData) => {
         if (!oldData) return oldData;
         return oldData.filter((asset) => String(asset.id) !== String(assetId));
+      });
+    },
+  });
+};
+
+/**
+ * @param {string} poiId
+ * @param {string} assetId
+ * @param {string} locale
+ * @returns {PoiAssetMutateResult}
+ */
+export const useChangePoiAssetPriority = (poiId, assetId, locale) => {
+  const qc = useQueryClient();
+
+  return useDataMutator({
+    mutator: ({ priority }) =>
+      api.poiAssets.changePriority(assetId, priority, locale),
+    mutationKey: ["change-poi-asset-priority", assetId],
+    invalidateKey: ["poi-asset", assetId],
+    onSuccess: (data) => {
+      // The update returns multilingual data, but the list cache expects localized data
+      // So we need to extract the current locale's data from the multilingual response
+      const newPriority = data.priority;
+
+      qc.setQueryData(["poi-assets", poiId], (oldData) => {
+        if (!oldData) return oldData;
+        return oldData.map((asset) => ({
+          ...asset,
+          priority: asset.id === assetId ? newPriority : "normal",
+        }));
       });
     },
   });

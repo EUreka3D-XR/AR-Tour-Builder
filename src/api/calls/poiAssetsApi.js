@@ -40,10 +40,17 @@ const deletePoiAsset = async (assetId) => {
   return fetcher.delete(url);
 };
 
+const changePriority = async (assetId, priority, locale) => {
+  const end = priority === "high" ? "set-primary" : "unset-primary";
+  const url = `${baseUrls.poiAsset(assetId)}/${end}`;
+  return fetcher.post(url, { locale });
+};
+
 export const poiAssetsApi = {
   fetchAll: getPoiAssets,
   fetchOne: getPoiAsset,
   create: createPoiAsset,
   update: updatePoiAsset,
   delete: deletePoiAsset,
+  changePriority,
 };

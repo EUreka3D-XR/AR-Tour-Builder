@@ -31,6 +31,7 @@ const DEFAULT_VALUES = {
     lat: "",
     long: "",
   },
+  priority: "normal",
   isGeoreferenced: false,
   viewInAr: false,
   isGroundPlaced: false,

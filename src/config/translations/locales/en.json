@@ -33,6 +33,7 @@
       "section": {
         "create_asset": "Create Asset",
         "editing_asset": "Editing Asset",
+        "media": "Media",
         "model_attributes": "3D Model Attributes",
         "linked_audio": "Linked Audio"
       },
@@ -48,7 +49,8 @@
         "latitude": "Latitude",
         "longitude": "Longitude",
         "audio_title": "Audio Title",
-        "audio_url": "Audio URL"
+        "audio_url": "Audio URL",
+        "primary": "Set as Primary"
       },
       "placeholder": {
         "enter_media_title": "Enter media title",
@@ -65,7 +67,8 @@
         "view_in_ar_description": "Enable this option to allow users to view the 3D model in Augmented Reality (AR) mode on compatible devices.",
         "georeferenced_description": "Check this box if the 3D model is georeferenced and has specific latitude/longitude coordinates associated with it.",
         "linked_audio_description": "Upload audio files in multiple languages to accompany this asset. Each language can have its own audio track.",
-        "ground_placed_description": "Specify if the object should be positioned on the ground or freely in front of the user in Augmented Reality (AR) mode."
+        "ground_placed_description": "Specify if the object should be positioned on the ground or freely in front of the user in Augmented Reality (AR) mode.",
+        "primary_description": "Set this asset as the primary one to be displayed more prominently."
       },
       "action": {
         "preview_fullscreen": "Preview fullscreen",
@@ -426,6 +429,9 @@
       "namePlaceholder": "Name",
       "externalUrlPlaceholder": "URL: ex. https://some-blog.com/page"
     },
+    "mediaTab": {
+      "tabTitle": "Current Media"
+    },
     "addMediaButton": {
       "add": "Add",
       "createNew": "Create New",
@@ -563,6 +569,7 @@
         "untitled": "Untitled Media",
         "ar": "AR",
         "georeferenced": "Georeferenced",
+        "primary": "Primary",
         "deleteConfirm": {
           "title": "Delete Media Asset",
           "message": "Are you sure you want to delete this media asset?",

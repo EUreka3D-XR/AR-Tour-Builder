@@ -46,7 +46,7 @@ const MediaThumbnailStyled = styled(MediaThumbnail)({
 
 const PillStyled = styled(Chip)(({ theme }) => ({
   fontSize: "0.75rem",
-  height: 20,
+  height: 28,
   fontWeight: 600,
   "&.ar-pill": {
     backgroundColor: lighten(theme.palette.secondary.light, 0.7),
@@ -123,9 +123,8 @@ function MediaCardItem({ asset, onEdit }) {
 
   // Check if asset should show AR pill
   const showArPill = asset?.type === "model3d" && asset?.viewInAr;
-
-  // Check if asset should show Georeferenced pill
   const showGeoferencedPill = asset?.type === "model3d" && asset?.georeference;
+  const isPrimaryAsset = asset?.isPrimary;
 
   const handleClick = () => {
     openPoiMediaModal({ assetId: asset.id, projectId, tourId, poiId });
@@ -187,6 +186,14 @@ function MediaCardItem({ asset, onEdit }) {
 
           {/* Pills Row */}
           <PillsRow>
+            {isPrimaryAsset && (
+              <PillStyled
+                label={t("tour.pois.media.primary")}
+                size="small"
+                variant="filled"
+                color="primary"
+              />
+            )}
             {showArPill && (
               <PillStyled
                 label={t("tour.pois.media.ar")}

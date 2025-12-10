@@ -1,5 +1,5 @@
-import { styled } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { styled } from "@mui/material";
 
 import FormArray from "@/components/form/FormArray";
 import InputLocale from "@/components/input-locale/InputLocale";
@@ -22,35 +22,53 @@ function PoiExternalLinksTab() {
       <LanguageDropdown className="language-selector" />
       <InputLocale name="quizLinks" hideLocaleIndicators>
         {({ name: localizedName }) => (
-          <FormArray>
-            <FormArray.URLInput
-              name={localizedName}
-              label={t("poiSidebar.externalLinksTab.quizLinks")}
-              labelPlaceholder={t("poiSidebar.externalLinksTab.quizNamePlaceholder")}
-              urlPlaceholder={t("poiSidebar.externalLinksTab.quizUrlPlaceholder")}
-            />
-            <FormArray.Display
-              name={localizedName}
-              displayMode="chips"
-              variant="url"
-            />
+          <FormArray name={localizedName}>
+            {({ insert, remove, fields: items }) => (
+              <>
+                <FormArray.URLInput
+                  label={t("poiSidebar.externalLinksTab.quizLinks")}
+                  labelPlaceholder={t(
+                    "poiSidebar.externalLinksTab.quizNamePlaceholder",
+                  )}
+                  urlPlaceholder={t(
+                    "poiSidebar.externalLinksTab.quizUrlPlaceholder",
+                  )}
+                  insert={insert}
+                />
+                <FormArray.Display
+                  displayMode="chips"
+                  variant="url"
+                  items={items}
+                  remove={remove}
+                />
+              </>
+            )}
           </FormArray>
         )}
       </InputLocale>
       <InputLocale name="externalLinks" hideLocaleIndicators>
         {({ name: localizedName }) => (
-          <FormArray>
-            <FormArray.URLInput
-              name={localizedName}
-              label={t("poiSidebar.externalLinksTab.externalLinks")}
-              labelPlaceholder={t("poiSidebar.externalLinksTab.namePlaceholder")}
-              urlPlaceholder={t("poiSidebar.externalLinksTab.externalUrlPlaceholder")}
-            />
-            <FormArray.Display
-              name={localizedName}
-              displayMode="chips"
-              variant="url"
-            />
+          <FormArray name={localizedName}>
+            {({ insert, remove, fields: items }) => (
+              <>
+                <FormArray.URLInput
+                  label={t("poiSidebar.externalLinksTab.externalLinks")}
+                  labelPlaceholder={t(
+                    "poiSidebar.externalLinksTab.namePlaceholder",
+                  )}
+                  urlPlaceholder={t(
+                    "poiSidebar.externalLinksTab.externalUrlPlaceholder",
+                  )}
+                  insert={insert}
+                />
+                <FormArray.Display
+                  displayMode="chips"
+                  variant="url"
+                  items={items}
+                  remove={remove}
+                />
+              </>
+            )}
           </FormArray>
         )}
       </InputLocale>

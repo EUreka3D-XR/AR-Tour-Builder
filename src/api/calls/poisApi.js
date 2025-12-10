@@ -1,16 +1,16 @@
-import { TourDto, TourListDto } from "../dtos/TourDto";
+import { PoiDto, PoiListDto } from "../dtos/PoiDto";
 import { baseUrls } from "../endpoints-base-urls/baseUrls";
 import fetcher from "../fetcher/api-fetcher";
 
 const getTourPois = async (tourId, { params: propsParams, locale }) => {
   const url = baseUrls.pois;
   const params = { ...propsParams, tourId };
-  return fetcher.get(url, { locale, params, fromDTO: TourListDto.fromApi });
+  return fetcher.get(url, { locale, params, fromDTO: PoiListDto.fromApi });
 };
 
 const getPoi = async (poiId, locale) => {
   const url = baseUrls.poi(poiId);
-  return fetcher.get(url, { locale, fromDTO: TourDto.fromApi });
+  return fetcher.get(url, { locale, fromDTO: PoiDto.fromApi });
 };
 
 const createPoi = async (tourId, data, locale) => {
@@ -19,8 +19,8 @@ const createPoi = async (tourId, data, locale) => {
   return fetcher.post(url, {
     data: fullData,
     locale,
-    toDTO: TourDto.toApi,
-    fromDTO: TourDto.fromApi,
+    toDTO: PoiDto.toApi,
+    fromDTO: PoiDto.fromApi,
   });
 };
 
@@ -29,8 +29,8 @@ const updatePoi = async (poiId, data, locale) => {
   return fetcher.patch(url, {
     data,
     locale,
-    toDTO: TourDto.toApi,
-    fromDTO: TourDto.fromApi,
+    toDTO: PoiDto.toApi,
+    fromDTO: PoiDto.fromApi,
   });
 };
 

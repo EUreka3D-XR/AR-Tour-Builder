@@ -24,9 +24,7 @@ const DEFAULT_POI_VALUES = {
   },
   radius: 20,
   thumbnai: "",
-  // externalLinks: [],
-  // quizLinks: [],
-  poiAssets: [],
+  assets: [],
 };
 function NewPoiForm({ onClose }) {
   const { tourId } = useParams();

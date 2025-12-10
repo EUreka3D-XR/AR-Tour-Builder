@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { MenuItem, Select, styled } from "@mui/material";
 
+import { useLocale } from "@/hooks/useLocale";
 import FlagIcon from "../flags/FlagIcon";
 
 const SelectStyled = styled(Select)(({ theme }) => ({
@@ -36,7 +37,7 @@ const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
 function AppLanguageDropdown({ className, hideLabels }) {
   const { t, i18n } = useTranslation();
 
-  const currentLanguage = i18n.language || "en";
+  const currentLanguage = useLocale();
 
   const handleLanguageChange = (event) => {
     i18n.changeLanguage(event.target.value);

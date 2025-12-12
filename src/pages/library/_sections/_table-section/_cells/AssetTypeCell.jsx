@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { lighten, styled } from "@mui/material";
 
 import MediaIcon from "@/components/icon/MediaIcon";
@@ -37,10 +38,11 @@ const CellStyled = styled("div")(({ theme }) => ({
 }));
 
 function AssetTypeCell({ type }) {
+  const { t } = useTranslation();
   return (
     <CellStyled className={`asset-type-cell icon-${type}`}>
       <MediaIcon type={type} />
-      {type}
+      {t(`fileTypes.${type}`)}
     </CellStyled>
   );
 }

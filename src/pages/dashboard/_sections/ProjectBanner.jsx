@@ -1,8 +1,11 @@
-import { Avatar, Badge, styled, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import clsx from "clsx";
+import { Avatar, Badge, styled, Typography } from "@mui/material";
 
 import Banner from "@/components/banner/Banner";
+import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import useNavPaths from "@/hooks/useNavPaths";
 import DashboardCard from "../_common/DashboardCard";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -35,17 +38,25 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const ContainerStyled = styled("div")(({ theme }) => ({
+  label: "project-content-container",
   "& .info-wrapper": {
     padding: theme.spacing(2, 4),
     display: "flex",
     alignItems: "flex-end",
     gap: theme.spacing(4),
+    width: "100%",
     "& .project-logo": {
       height: theme.spacing(16),
       width: theme.spacing(16),
       marginBottom: theme.spacing(2),
+      "&.no-img": {
+        fontSize: "1.5rem",
+        fontWeight: "bold",
+        backgroundColor: theme.palette.grey[700],
+      },
     },
     "& .project-info": {
+      flex: 1,
       color: "white",
       textShadow: "2px 2px 4px rgba(0,0,0,0.7)",
     },
@@ -63,6 +74,10 @@ const ContainerStyled = styled("div")(({ theme }) => ({
         },
       },
     },
+    "& .edit-button": {
+      border: "none",
+      color: theme.palette.text.secondary,
+    },
   },
 }));
 
@@ -74,50 +89,38 @@ const ContainerStyled = styled("div")(({ theme }) => ({
  */
 function ProjectBanner({ project = {} }) {
   const { t } = useTranslation();
+  const { routes } = useNavPaths();
   const {
-    thumbnail,
     coverPhoto,
     title,
     description,
-    status,
     tours,
     totalMembers,
     totalPois,
     // totalAssets,
   } = project;
 
-  const isPublished = status === "published";
-
   return (
     <DashboardCard noPadding>
       <Banner src={coverPhoto}>
         <ContainerStyled>
           <div className="info-wrapper">
-            {isPublished ? (
-              <StyledBadge
-                badgeContent=" "
-                overlap="circular"
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-              >
-                <Avatar src={thumbnail} alt={title} className="project-logo" />
-              </StyledBadge>
-            ) : (
-              <Avatar src={thumbnail} alt={title} className="project-logo" />
-            )}
+            <ProjectLogoAvatar project={project} />
             <div className="project-info">
               <Typography variant="h2">{title}</Typography>
               <Typography>{description}</Typography>
               <div className="stats-info">
                 <div className="stat">
                   <EurekaIcon name="tour" />
-                  <span>{tours?.length} {t("dashboard.projectBanner.tours")}</span>
+                  <span>
+                    {tours?.length} {t("dashboard.projectBanner.tours")}
+                  </span>
                 </div>
                 <div className="stat">
                   <EurekaIcon name="poi" />
-                  <span>{totalPois} {t("dashboard.projectBanner.pois")}</span>
+                  <span>
+                    {totalPois} {t("dashboard.projectBanner.pois")}
+                  </span>
                 </div>
                 {/* <div className="stat">
                   <EurekaIcon name="media" />
@@ -125,10 +128,21 @@ function ProjectBanner({ project = {} }) {
                 </div> */}
                 <div className="stat">
                   <EurekaIcon name="users" />
-                  <span>{totalMembers} {t("dashboard.projectBanner.members")}</span>
+                  <span>
+                    {totalMembers} {t("dashboard.projectBanner.members")}
+                  </span>
                 </div>
               </div>
             </div>
+            <Button
+              href={routes.projectSettings}
+              variant="outlined"
+              startIcon={<EurekaIcon name="edit" />}
+              disableGutters
+              className="edit-button"
+            >
+              {t("dashboard.projectBanner.edit")}
+            </Button>
           </div>
           <div className="actions-wrapper"></div>
         </ContainerStyled>
@@ -138,3 +152,40 @@ function ProjectBanner({ project = {} }) {
 }
 
 export default ProjectBanner;
+
+function ProjectLogoAvatar({ project }) {
+  const {
+    thumbnail,
+    title,
+    status,
+    // totalAssets,
+  } = project;
+  const isPublished = status === "published";
+
+  return isPublished ? (
+    <StyledBadge
+      badgeContent=" "
+      overlap="circular"
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "right",
+      }}
+    >
+      <Avatar
+        src={thumbnail}
+        alt={title}
+        className={clsx("project-logo", { "no-img": !thumbnail })}
+      >
+        {!thumbnail && "LOGO"}
+      </Avatar>
+    </StyledBadge>
+  ) : (
+    <Avatar
+      src={thumbnail}
+      alt={title}
+      className={clsx("project-logo", { "no-img": !thumbnail })}
+    >
+      {!thumbnail && "LOGO"}
+    </Avatar>
+  );
+}

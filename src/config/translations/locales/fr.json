@@ -315,7 +315,8 @@
     "projectBanner": {
       "tours": "Visites",
       "pois": "POIs",
-      "members": "Membres"
+      "members": "Membres",
+      "edit": "Modifier"
     },
     "recentTours": {
       "title": "Visites Récentes",

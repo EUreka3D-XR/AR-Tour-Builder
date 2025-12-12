@@ -11,6 +11,7 @@ const BannerContainer = styled("div")(({ theme }) => ({
   alignItems: "flex-end",
   overflow: "hidden",
   "& .content": {
+    width: "100%",
     position: "relative",
     zIndex: 2,
   },

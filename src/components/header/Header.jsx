@@ -4,7 +4,7 @@ import { IconButton, styled } from "@mui/material";
 import { useLogout } from "@/services/authService";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import useNavPaths from "@/hooks/useNavPaths";
-import logo from "@/assets/images/dummy-logo.webp";
+import logo from "@/assets/images/eureka3d-xr-logo.webp";
 import DropdownMenu from "../dropdown/DropdownMenu";
 import EurekaIcon from "../icon/EurekaIcon";
 import AppLanguageDropdown from "../language-dropdown/AppLanguageDropdown";

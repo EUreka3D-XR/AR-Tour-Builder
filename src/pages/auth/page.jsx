@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Box } from "@mui/material";
 
-import dummyLogo from "@/assets/images/dummy-logo.webp";
+import dummyLogo from "@/assets/images/eureka3d-xr-logo.webp";
 
 function AuthPage() {
   const { t } = useTranslation();

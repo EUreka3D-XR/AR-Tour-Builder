@@ -45,7 +45,7 @@ function InputLocaleIndicators({ className, value, size, alignment = "end" }) {
 
   return (
     <ContainerStyled className={clsx(alignment, className)}>
-      {existingLocales.map((locale) => (
+      {/* {existingLocales.map((locale) => (
         <FlagIcon
           key={locale}
           variant="circle"
@@ -54,7 +54,7 @@ function InputLocaleIndicators({ className, value, size, alignment = "end" }) {
           // code={locale}
           className="language-icon"
         />
-      ))}
+      ))} */}
     </ContainerStyled>
   );
 }

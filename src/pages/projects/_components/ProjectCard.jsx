@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   Box,
   Card,
@@ -10,7 +11,6 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
 import FlagsGroup from "@/components/flags/FlagsGroup";
 import Image from "@/components/image/Image";
@@ -106,12 +106,6 @@ function ProjectCard({ project }) {
               label={`${project.totalPois} ${t("projects.card.pois")}`}
               size="small"
               color="secondary"
-              variant="outlined"
-            />
-            <StatChip
-              label={`${project.totalAssets} ${t("projects.card.assets")}`}
-              size="small"
-              color="default"
               variant="outlined"
             />
           </StatsContainer>

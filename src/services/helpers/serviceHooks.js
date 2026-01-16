@@ -1,6 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { useFetchStateHelper } from "@/hooks/useFetchState";
+import {
+  useFetchStateHelper,
+  useMutateStateHelper,
+} from "@/hooks/useFetchState";
 
 const STORE_VALUE_TIME = 20 * 60 * 1000; // 20 minutes
 
@@ -39,7 +42,7 @@ export const useDataFetcher = ({
 
 /**
  * @template T
- * @typedef {import("@/types/jsdoc-types").MutateResultType<T>} MutateResultType
+ * @typedef {import("@/types/jsdoc-types").MutationResultType<T>} MutationResultType
  */
 
 /**
@@ -51,7 +54,7 @@ export const useDataFetcher = ({
  * @param {String[]} params.mutationKey - The key for the mutation (mutationKey for useMutation).
  * @param {String[] | String[][]} [params.invalidateKey] - The key(s) for the query/queries to invalidate upon successful mutation. Can be a single key or array of keys.
  * @param {(data: TResult, variables: TData) => void} [params.onSuccess] - Optional callback to execute on successful mutation.
- * @returns {MutateResultType<TResult>}
+ * @returns {MutationResultType<TResult>}
  */
 export const useDataMutator = ({
   mutator,
@@ -80,7 +83,7 @@ export const useDataMutator = ({
       }
     },
   });
-  const { fetchState } = useFetchStateHelper(mutation);
+  const { fetchState } = useMutateStateHelper(mutation);
 
   return { data, mutate: mutation.mutateAsync, fetchState };
 };

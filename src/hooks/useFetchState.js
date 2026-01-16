@@ -76,3 +76,32 @@ export const useFetchStateHelper = (
 
   return useMemo(() => ({ fetchState, trigger }), [fetchState, trigger]);
 };
+
+export const useMutateStateHelper = (
+  { error, isPending, isError, isSuccess },
+  setFetchState,
+) => {
+  const [allowUpdates, setAllowUpdates] = useState(false);
+
+  const trigger = useCallback(() => {
+    setAllowUpdates(true);
+  }, []);
+
+  const fetchState = useMemo(
+    () => ({
+      error,
+      isLoading: isPending,
+      isError,
+      isSuccess,
+    }),
+    [error, isPending, isError, isSuccess],
+  );
+
+  useEffect(() => {
+    if (allowUpdates) {
+      setFetchState?.(fetchState);
+    }
+  }, [fetchState, allowUpdates, setFetchState]);
+
+  return useMemo(() => ({ fetchState, trigger }), [fetchState, trigger]);
+};

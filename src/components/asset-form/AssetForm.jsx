@@ -28,6 +28,7 @@ import {
   getExtensionsHelperForType,
 } from "@/utils/fileExtensions";
 import { localeValue } from "@/utils/inputLocale";
+import CoordinatesInput from "../coordinates-input/CoordinatesInput";
 import Link from "../link/Link";
 import AssetFormFooter from "./AssetFormFooter";
 import AssetFormPreview from "./AssetFormPreview";
@@ -64,13 +65,6 @@ const FormControlLabelStyled = styled(FormControlLabel)(({ theme }) => ({
     flexDirection: "column",
     gap: theme.spacing(0.25),
   },
-}));
-
-const CoordinatesRow = styled("div")(({ theme }) => ({
-  marginLeft: theme.spacing(3),
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: theme.spacing(2),
 }));
 
 function AssetForm({ isPoiAsset, onSubmit, onClose }) {
@@ -369,36 +363,11 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                   )}
                 />
                 {isGeoreferenced && (
-                  <CoordinatesRow className="coordinates-row">
-                    <FormInput
-                      name="georeference.lat"
-                      render={({ field }) => (
-                        <LabeledInput label={t("asset.form.field.latitude")}>
-                          <TextField
-                            {...field}
-                            className="coordinate-field"
-                            placeholder={t(
-                              "asset.form.placeholder.latitude_example",
-                            )}
-                          />
-                        </LabeledInput>
-                      )}
-                    />
-                    <FormInput
-                      name="georeference.long"
-                      render={({ field }) => (
-                        <LabeledInput label={t("asset.form.field.longitude")}>
-                          <TextField
-                            {...field}
-                            className="coordinate-field"
-                            placeholder={t(
-                              "asset.form.placeholder.longitude_example",
-                            )}
-                          />
-                        </LabeledInput>
-                      )}
-                    />
-                  </CoordinatesRow>
+                  <CoordinatesInput
+                    name="georeference"
+                    showMap
+                    mapHeight={300}
+                  />
                 )}
               </div>
               {isPoiAsset && (

@@ -13,6 +13,17 @@
     "last_week": "Last Week",
     "next_week": "Next Week"
   },
+  "coordinates_input": {
+    "latitude": {
+      "label": "Latitude",
+      "placeholder": "ex. 3.123456"
+    },
+    "longitude": {
+      "label": "Longitude",
+      "placeholder": "ex. 101.123456"
+    },
+    "helper": "Place a point of interest on the map or add its coordinates in the Latitude and Longitude fields below."
+  },
   "common": {
     "action": {
       "cancel": "Cancel",
@@ -46,8 +57,6 @@
         "view_in_ar": "View in AR",
         "georeferenced": "Georeferenced",
         "ground_placed": "Placement of 3D Model in AR",
-        "latitude": "Latitude",
-        "longitude": "Longitude",
         "audio_title": "Audio Title",
         "audio_url": "Audio URL",
         "primary": "Set as Primary"
@@ -57,8 +66,6 @@
         "enter_media_description": "Enter media description",
         "select_media_type": "Select media type",
         "media_url_example": "https://example.com/media-url.png",
-        "latitude_example": "ex. 3.123456",
-        "longitude_example": "ex. 76.123456",
         "enter_audio_title": "Enter audio title",
         "audio_url_example": "https://example.com/audio-url.mp3"
       },
@@ -414,13 +421,6 @@
       "radiusPlaceholder": "ex. 20",
       "coverPhoto": "Cover Photo",
       "coverPhotoPlaceholder": "Click to upload photo"
-    },
-    "locationTab": {
-      "instructions": "Place a point of interest on the map or add its coordinates in the Latitude and Longitude fields below.",
-      "latitude": "Latitude",
-      "latitudePlaceholder": "ex. 3.123456",
-      "longitude": "Longitude",
-      "longitudePlaceholder": "ex. 101.123456"
     },
     "externalLinksTab": {
       "quizLinks": "Quiz Links",

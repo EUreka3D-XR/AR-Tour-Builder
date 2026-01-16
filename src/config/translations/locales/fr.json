@@ -13,6 +13,17 @@
     "last_week": "La semaine dernière",
     "next_week": "La semaine prochaine"
   },
+  "coordinates_input": {
+    "latitude": {
+      "label": "Latitude",
+      "placeholder": "ex. 3.123456"
+    },
+    "longitude": {
+      "label": "Longitude",
+      "placeholder": "ex. 101.123456"
+    },
+    "helper": "Placez un point d'intérêt sur la carte ou ajoutez ses coordonnées dans les champs Latitude et Longitude ci-dessous."
+  },
   "common": {
     "action": {
       "cancel": "Annuler",
@@ -46,8 +57,6 @@
         "view_in_ar": "Voir en AR",
         "georeferenced": "Géoréférencé",
         "ground_placed": "Placement du Modèle 3D en AR",
-        "latitude": "Latitude",
-        "longitude": "Longitude",
         "audio_title": "Titre Audio",
         "audio_url": "URL Audio",
         "primary": "Définir comme Principal"
@@ -57,8 +66,6 @@
         "enter_media_description": "Entrez la description du média",
         "select_media_type": "Sélectionnez le type de média",
         "media_url_example": "https://exemple.com/url-media.png",
-        "latitude_example": "ex. 3.123456",
-        "longitude_example": "ex. 76.123456",
         "enter_audio_title": "Entrez le titre audio",
         "audio_url_example": "https://exemple.com/url-audio.mp3"
       },
@@ -414,13 +421,6 @@
       "radiusPlaceholder": "ex. 20",
       "coverPhoto": "Photo de Couverture",
       "coverPhotoPlaceholder": "Cliquez pour télécharger une photo"
-    },
-    "locationTab": {
-      "instructions": "Placez un point d'intérêt sur la carte ou ajoutez ses coordonnées dans les champs Latitude et Longitude ci-dessous.",
-      "latitude": "Latitude",
-      "latitudePlaceholder": "ex. 3.123456",
-      "longitude": "Longitude",
-      "longitudePlaceholder": "ex. 101.123456"
     },
     "externalLinksTab": {
       "quizLinks": "Liens de Quiz",

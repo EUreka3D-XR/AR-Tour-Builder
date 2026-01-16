@@ -57,6 +57,7 @@ function Header() {
           items={[
             // { label: "Profile", to: "/profile" },
             // { label: "Settings", to: "/settings" },
+            { label: t("header.action.projects"), href: routes.projects.index },
             { label: t("header.action.logout"), onClick: handleLogout },
           ]}
         >

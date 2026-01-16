@@ -125,6 +125,7 @@
   },
   "header": {
     "action": {
+      "projects": "My Projects",
       "logout": "Logout"
     }
   },
@@ -151,6 +152,7 @@
   },
   "navbar": {
     "action": {
+      "projects_overview": "Projects overview",
       "create_new_project": "Create new project"
     }
   },

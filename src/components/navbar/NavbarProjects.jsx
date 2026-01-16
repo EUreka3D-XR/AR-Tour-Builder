@@ -14,13 +14,15 @@ import Link from "../link/Link";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   paddingBottom: "1rem",
-  "& .add-new-btn": {
-    padding: theme.spacing(1),
+  "& .actions": {
     margin: theme.spacing(2, 0),
-    color: "inherit",
-  },
-  "& .hidden": {
-    display: "none",
+    "& .add-new-btn": {
+      padding: theme.spacing(1),
+      color: "inherit",
+    },
+    "& .hidden": {
+      display: "none",
+    },
   },
 }));
 
@@ -120,17 +122,30 @@ function NavbarProjects() {
             </ProjectItem>
           );
         })}
-      <Button
-        href={routes.projects.new}
-        startIcon={<EurekaIcon name="add" fontSize="large" />}
-        variant="text"
-        isFullwidth
-        className="add-new-btn"
-      >
-        <span className={clsx({ hidden: !isNavMenuOpen })}>
-          {t("navbar.action.create_new_project")}
-        </span>
-      </Button>
+      <div className="actions">
+        <Button
+          href={routes.projects.index}
+          startIcon={<EurekaIcon name="projectsOverview" fontSize="large" />}
+          variant="text"
+          isFullwidth
+          className="add-new-btn"
+        >
+          <span className={clsx({ hidden: !isNavMenuOpen })}>
+            {t("navbar.action.projects_overview")}
+          </span>
+        </Button>
+        <Button
+          href={routes.projects.new}
+          startIcon={<EurekaIcon name="add" fontSize="large" />}
+          variant="text"
+          isFullwidth
+          className="add-new-btn"
+        >
+          <span className={clsx({ hidden: !isNavMenuOpen })}>
+            {t("navbar.action.create_new_project")}
+          </span>
+        </Button>
+      </div>
       <Divider />
     </ContainerStyled>
   );

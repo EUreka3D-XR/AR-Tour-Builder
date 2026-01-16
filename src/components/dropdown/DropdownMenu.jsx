@@ -63,8 +63,8 @@ function DropdownMenu({
     if (item.onClick) {
       item.onClick();
     }
-    if (item.to) {
-      navigate(item.to);
+    if (item.href) {
+      navigate(item.href);
     }
     handleClose();
   };

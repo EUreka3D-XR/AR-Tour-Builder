@@ -35,6 +35,7 @@ export const icons = {
   openInNew: "open_in_new",
   palette: "palette",
   poi: "location_on",
+  projectsOverview: "dashboard",
   publish: "publish",
   radius: "filter_tilt_shift",
   reset: "replay",

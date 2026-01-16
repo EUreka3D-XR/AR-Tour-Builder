@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { IconButton, styled } from "@mui/material";
+import { IconButton, styled, Typography } from "@mui/material";
 
 import { useLogout } from "@/services/authService";
+import { useProfile } from "@/services/profileService";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import useNavPaths from "@/hooks/useNavPaths";
 import logo from "@/assets/images/eureka3d-xr-logo.webp";
@@ -24,6 +25,10 @@ const ContainerStyled = styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
     gap: "1rem",
+    "& .user-box": {
+      display: "flex",
+      alignItems: "center",
+    },
   },
 }));
 
@@ -31,6 +36,7 @@ function Header() {
   const { t } = useTranslation();
   const { navigate, routes } = useNavPaths();
   const { isInsideAProject, toggleNavMenu } = useGeneralProvider();
+  const { data: profile } = useProfile();
 
   const { mutate: logout } = useLogout();
 
@@ -39,6 +45,8 @@ function Header() {
       navigate(routes.login);
     });
   };
+
+  const displayName = profile?.name ?? profile?.username ?? profile?.email;
 
   return (
     <ContainerStyled className="header">
@@ -52,21 +60,27 @@ function Header() {
       </div>
       <div className="side-header right-header">
         <AppLanguageDropdown hideLabels />
-        <DropdownMenu
-          id="account-menu"
-          items={[
-            // { label: "Profile", to: "/profile" },
-            // { label: "Settings", to: "/settings" },
-            { label: t("header.action.projects"), href: routes.projects.index },
-            { label: t("header.action.logout"), onClick: handleLogout },
-          ]}
-        >
-          {({ toggle }) => (
-            <IconButton size="small" onClick={toggle}>
-              <EurekaIcon name="user" variant="filled" />
-            </IconButton>
-          )}
-        </DropdownMenu>
+        <div className="user-box">
+          <Typography>{displayName}</Typography>
+          <DropdownMenu
+            id="account-menu"
+            items={[
+              // { label: "Profile", to: "/profile" },
+              // { label: "Settings", to: "/settings" },
+              {
+                label: t("header.action.projects"),
+                href: routes.projects.index,
+              },
+              { label: t("header.action.logout"), onClick: handleLogout },
+            ]}
+          >
+            {({ toggle }) => (
+              <IconButton size="small" onClick={toggle}>
+                <EurekaIcon name="user" variant="filled" />
+              </IconButton>
+            )}
+          </DropdownMenu>
+        </div>
       </div>
     </ContainerStyled>
   );

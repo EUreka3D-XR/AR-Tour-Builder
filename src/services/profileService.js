@@ -6,6 +6,6 @@ export const useProfile = () => {
   return useDataFetcher({
     fetcher: () => api.profile.fetch(),
     queryKey: ["profile"],
-    storeValue: true,
+    storeValue: 20,
   });
 };

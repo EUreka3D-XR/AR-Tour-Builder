@@ -33,6 +33,7 @@ function CoordinatesInput({
   mapHeight = 400,
   showHelperText,
   showMap,
+  defaultBounds,
 }) {
   const { t } = useTranslation();
 
@@ -48,7 +49,7 @@ function CoordinatesInput({
       )}
       {showMap && (
         <div className="map-container" style={{ height: mapHeight }}>
-          <Map>
+          <Map bounds={defaultBounds}>
             <MarkerInput name={name} />
             <MarkerInputFollower name={name} />
           </Map>

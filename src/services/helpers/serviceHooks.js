@@ -5,7 +5,7 @@ import {
   useMutateStateHelper,
 } from "@/hooks/useFetchState";
 
-const STORE_VALUE_TIME = 20 * 60 * 1000; // 20 minutes
+const STORE_VALUE_TIME = 10; // 10 minutes
 
 /**
  * @typedef {import("@/types/jsdoc-types").FetchStateType} FetchStateType
@@ -19,20 +19,23 @@ const STORE_VALUE_TIME = 20 * 60 * 1000; // 20 minutes
  * @param {Object} params
  * @param {() => Promise<T>} params.fetcher - The function to fetch data that returns Promise<T>
  * @param {String[]} params.queryKey - The key for the query (queryKey for useQuery).
- * @param {boolean} [params.storeValue=false] - Whether to store the fetched value for a certain time and not refetch it.
- * @param {boolean} [params.enabled=true] - Whether the query should be enabled.
+ * @param {boolean | number} [params.storeValue=false] - Whether to store the fetched value for a certain time and not refetch it.
+ * @param {boolean } [params.enabled=true] - Whether the query should be enabled.
  * @returns {FetchResultType<T>} - Object containing fetched data and fetch state.
  */
 export const useDataFetcher = ({
   fetcher,
   queryKey,
-  storeValue,
+  storeValue = false,
   enabled = true,
 }) => {
+  const storeValueTime =
+    (storeValue === true ? STORE_VALUE_TIME : storeValue) * 60 * 1000;
+
   const { data, ...queryResponse } = useQuery({
     queryKey,
     queryFn: fetcher,
-    staleTime: storeValue ? STORE_VALUE_TIME : 0,
+    staleTime: storeValue ? storeValueTime : 0,
     enabled,
   });
   const { fetchState } = useFetchStateHelper(queryResponse);

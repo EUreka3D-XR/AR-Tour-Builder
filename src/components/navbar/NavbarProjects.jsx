@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import clsx from "clsx";
 import { Divider, styled } from "@mui/material";
 
 import { useProjects } from "@/services/projectsService";
@@ -88,6 +88,12 @@ function NavbarProjects() {
                 to: routes.projects.one(project.id),
                 onClick: isProjectMenuOpen ? closeProjectMenu : openProjectMenu,
               };
+          const projectTitle = isSelected
+            ? selectedProject?.title
+            : project.title;
+          const projectThumbnail = isSelected
+            ? selectedProject?.thumbnail
+            : project.thumbnail;
           return (
             <ProjectItem
               key={project.id}
@@ -99,7 +105,7 @@ function NavbarProjects() {
             >
               <span className="thumbnail-container">
                 <Image
-                  src={project.thumbnail}
+                  src={projectThumbnail}
                   alt={t("common.alt.project_thumbnail")}
                   className="project-thumbnail"
                 />
@@ -109,7 +115,7 @@ function NavbarProjects() {
                   hidden: !isNavMenuOpen,
                 })}
               >
-                {project.title}
+                {projectTitle}
               </span>
             </ProjectItem>
           );

@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { useFormContext } from "react-hook-form";
 import { Stack } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -22,7 +22,7 @@ function PoiFooterSection({
 
   const {
     trigger,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useFormContext();
 
   const currentStep = useMemo(() => {
@@ -33,7 +33,7 @@ function PoiFooterSection({
   const renderPreviousButton = isNew && currentStep > 0;
   const renderNextButton = isNew && currentStep < steps.length - 2;
   const renderCreateButton = isNew && currentStep === steps.length - 2;
-  const renderUpdateButton = !isNew && activeTab !== "media";
+  const renderUpdateButton = !isNew;
 
   const handleNextStep = async () => {
     await validateStep(currentStep);
@@ -101,9 +101,10 @@ function PoiFooterSection({
         )}
         {renderUpdateButton && (
           <Button
-            onClick={handleFormSubmit}
             variant="filled"
+            isDisabled={!isDirty}
             startIcon={<EurekaIcon name="save" />}
+            onClick={handleFormSubmit}
           >
             {t("poiSidebar.footer.saveChanges")}
           </Button>

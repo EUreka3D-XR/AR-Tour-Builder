@@ -43,7 +43,7 @@ function CoordinatesInput({
         <div className="instructions">
           <EurekaIcon name="help" />
           <Typography variant="body1" color="text.secondary" sx={{ mb: 1 }}>
-            {t("poiSidebar.locationTab.instructions")}
+            {t("coordinates_input.helper")}
           </Typography>
         </div>
       )}

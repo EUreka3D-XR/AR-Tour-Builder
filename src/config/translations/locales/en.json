@@ -524,6 +524,11 @@
       }
     }
   },
+  "project_new": {
+    "back_to_projects": "Back to projects",
+    "title": "Create New Project",
+    "subtitle": "Start a new project by providing the required details below. Fill out the form to set up your project and begin collaborating."
+  },
   "tour": {
     "header": {
       "editingTour": "Editing Tour:",

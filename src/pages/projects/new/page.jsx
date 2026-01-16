@@ -1,13 +1,18 @@
-import { styled, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { IconButton, Stack, styled, Typography } from "@mui/material";
 
-// import Button from "@/components/button/Button";
-// import useNavPaths from "@/hooks/useNavPaths";
+import EurekaIcon from "@/components/icon/EurekaIcon";
+import Link from "@/components/link/Link";
+import useNavPaths from "@/hooks/useNavPaths";
 import CreateProjectForm from "../_forms/CreateProjectForm";
 
 const ContainerStyled = styled("div")({
   margin: "auto",
   maxWidth: "1200px",
   padding: "2rem",
+  "& .top-action": {
+    marginBottom: "1rem",
+  },
   "& .header": {
     display: "flex",
     alignItems: "center",
@@ -26,23 +31,29 @@ const ContainerStyled = styled("div")({
 });
 
 function NewProjectPage() {
-  // const { navigate } = useNavPaths();
+  const { t } = useTranslation();
+  const { routes } = useNavPaths();
   return (
     <ContainerStyled>
+      <div className="top-action">
+        <Link to={routes.projects.index}>
+          <Stack direction="row" alignItems="center" spacing={2}>
+            <IconButton>
+              <EurekaIcon name="back" />
+            </IconButton>
+            <span className="header-title">
+              {t("project_new.back_to_projects")}
+            </span>
+          </Stack>
+        </Link>
+      </div>
       <div className="header">
         <Typography variant="h2" component="h2" gutterBottom>
-          Create New Project
+          {t("project_new.title")}
         </Typography>
-        {/* <div className="actions">
-          <Button onClick={() => navigate(-1)}>Cancel</Button>
-          <Button variant="filled" type="submit" form="create-project-form">
-            Create Project
-          </Button>
-        </div> */}
       </div>
       <Typography color="textSecondary" className="subtitle">
-        Start a new project by providing the required details below. Fill out
-        the form to set up your project and begin collaborating.
+        {t("project_new.subtitle")}
       </Typography>
       <div className="project-form-section">
         <CreateProjectForm />

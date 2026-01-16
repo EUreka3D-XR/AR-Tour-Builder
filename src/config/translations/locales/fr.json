@@ -524,6 +524,11 @@
       }
     }
   },
+  "project_new": {
+    "back_to_projects": "Retour aux projets",
+    "title": "Créer un Nouveau Projet",
+    "subtitle": "Commencez un nouveau projet en fournissant les détails requis ci-dessous. Remplissez le formulaire pour configurer votre projet et commencer à collaborer."
+  },
   "tour": {
     "header": {
       "editingTour": "Modification de la Visite :",

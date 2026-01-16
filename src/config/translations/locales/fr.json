@@ -587,7 +587,7 @@
     "hero": {
       "title": "Visites du Projet",
       "createButton": "Créer une Nouvelle Visite",
-      "subtitle": "Gérez et organisez des expériences immersives du patrimoine culturel. Créez des visites guidées, ajoutez des points d'intérêt et publiez des parcours archéologiques interactifs pour vos visiteurs."
+      "subtitle": "Gérez et organisez des expériences immersives de patrimoine culturel. Créez des visites guidées, ajoutez des points d'intérêt et publiez des parcours archéologiques interactifs pour vos visiteurs."
     },
     "filters": {
       "searchPlaceholder": "Rechercher des visites...",

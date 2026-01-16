@@ -64,6 +64,7 @@ function NewPoiAssetForm({ onClose }) {
     if (assetId && data) {
       return { ...DEFAULT_VALUES, ...data };
     }
+    return DEFAULT_VALUES;
   }, [assetId, data]);
 
   if (fetchState.isLoading) return <SidebarSkeleton />;

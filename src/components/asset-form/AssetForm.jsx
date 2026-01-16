@@ -100,9 +100,6 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
     return checkAssetUrlValidity(url);
   }, [contentUrl, locale]);
 
-  const values = useWatch();
-  console.log(values);
-
   useEffect(() => {
     // when isGeoreferenced value changes, if true, set the arPlacement to true
     if (isGeoreferenced) {

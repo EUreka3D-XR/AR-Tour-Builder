@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { useFormContext, useWatch } from "react-hook-form";
 import { IconButton, Stack, styled, Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
 import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeleteTour, usePublishTour } from "@/services/toursService";
@@ -76,7 +76,8 @@ function TourHeaderSection() {
           <EurekaIcon name="back" fontSize="small" />
         </IconButton>
         <Typography variant="h4" component="h2" noWrap>
-          {t("tour.header.editingTour")} <InjectedLocaleValue value={tourTitle} />
+          {t("tour.header.editingTour")}{" "}
+          <InjectedLocaleValue value={tourTitle} />
         </Typography>
       </div>
       {isExisting && (
@@ -89,7 +90,9 @@ function TourHeaderSection() {
               isDisabled={!isDirty}
               isLoading={isSubmitting}
             >
-              {isSubmitting ? t("tour.header.saving") : t("tour.header.saveChanges")}
+              {isSubmitting
+                ? t("tour.header.saving")
+                : t("tour.header.saveChanges")}
             </Button>
             <Button
               startIcon={<EurekaIcon name="delete" />}

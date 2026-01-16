@@ -587,7 +587,7 @@
     "hero": {
       "title": "Project Tours",
       "createButton": "Create New Tour",
-      "subtitle": "Manage and organize immersive cultural heritage experiences. Create guided tours, add points of interest, and publish interactive archaeological journeys for your visitors."
+      "subtitle": "Manage and organize immersive cultural heritage experiences. Create guided tours, add points of interest, and publish interactive archaeological trails for your visitors."
     },
     "filters": {
       "searchPlaceholder": "Search tours...",

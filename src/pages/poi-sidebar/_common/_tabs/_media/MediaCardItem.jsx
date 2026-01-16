@@ -118,7 +118,7 @@ function MediaCardItem({ asset, onEdit }) {
   const locale = useLocale();
 
   const { projectId, tourId, poiId } = useParams();
-  const { mutate: deletePoiAsset } = useDeletePoiAsset(poiId, asset.id);
+  const { mutate: deletePoiAsset } = useDeletePoiAsset(tourId, poiId, asset.id);
   const confirm = useConfirm();
 
   // Check if asset should show AR pill

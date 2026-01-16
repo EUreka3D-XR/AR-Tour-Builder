@@ -54,16 +54,20 @@ export const usePoiAssetMultilingual = (assetId) => {
 };
 
 /**
+ * @param {string} tourId
  * @param {string} poiId
  * @param {string} locale
  * @returns {PoiAssetMutateResult}
  */
-export const useCreatePoiAsset = (poiId, locale) => {
+export const useCreatePoiAsset = (tourId, poiId, locale) => {
   const qc = useQueryClient();
   return useDataMutator({
     mutator: ({ data }) => api.poiAssets.create(poiId, data),
     mutationKey: ["create-poi-asset", poiId],
-    invalidateKey: ["poi-assets", poiId],
+    invalidateKey: [
+      ["poi-assets", poiId],
+      ["tour-pois", tourId],
+    ],
     onSuccess: (data) => {
       let newData = data;
       if (locale) {
@@ -83,18 +87,22 @@ export const useCreatePoiAsset = (poiId, locale) => {
 };
 
 /**
+ * @param {string} tourId
  * @param {string} poiId
  * @param {string} assetId
  * @param {string} locale
  * @returns {PoiAssetMutateResult}
  */
-export const useUpdatePoiAsset = (poiId, assetId, locale) => {
+export const useUpdatePoiAsset = (tourId, poiId, assetId, locale) => {
   const qc = useQueryClient();
 
   return useDataMutator({
     mutator: ({ data }) => api.poiAssets.update(assetId, data),
     mutationKey: ["update-poi-asset", assetId],
-    invalidateKey: ["poi-asset", assetId],
+    invalidateKey: [
+      ["poi-asset", assetId],
+      ["tour-pois", tourId],
+    ],
     onSuccess: (data) => {
       // The update returns multilingual data, but the list cache expects localized data
       // So we need to extract the current locale's data from the multilingual response
@@ -116,17 +124,21 @@ export const useUpdatePoiAsset = (poiId, assetId, locale) => {
 };
 
 /**
+ * @param {string} tourId
  * @param {string} poiId
  * @param {string} assetId
  * @returns {PoiAssetMutateResult}
  */
-export const useDeletePoiAsset = (poiId, assetId) => {
+export const useDeletePoiAsset = (tourId, poiId, assetId) => {
   const qc = useQueryClient();
 
   return useDataMutator({
     mutator: () => api.poiAssets.delete(assetId),
     mutationKey: ["delete-poi-asset", assetId],
-    invalidateKey: ["poi-assets", poiId],
+    invalidateKey: [
+      ["poi-assets", poiId],
+      ["tour-pois", tourId],
+    ],
     onSuccess: () => {
       qc.setQueryData(["poi-assets", poiId], (oldData) => {
         if (!oldData) return oldData;

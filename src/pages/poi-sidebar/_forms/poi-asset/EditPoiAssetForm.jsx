@@ -9,7 +9,7 @@ import SidebarSkeleton from "../../_common/_utils/SidebarSkeleton";
 import PoiAssetFormContainer from "./PoiAssetFormContainer";
 
 function EditPoiAssetForm({ onClose }) {
-  const { poiId } = useParams();
+  const { poiId, tourId } = useParams();
 
   const [searchParams] = useSearchParams();
   const mediaId = searchParams.get("mediaId");
@@ -17,7 +17,12 @@ function EditPoiAssetForm({ onClose }) {
   const locale = useLocale();
 
   const { data, fetchState } = usePoiAssetMultilingual(mediaId);
-  const { mutate: updateAsset } = useUpdatePoiAsset(poiId, mediaId, locale);
+  const { mutate: updateAsset } = useUpdatePoiAsset(
+    tourId,
+    poiId,
+    mediaId,
+    locale,
+  );
 
   if (fetchState.isLoading) return <SidebarSkeleton />;
   if (fetchState.isError) return <div>Error loading asset.</div>;

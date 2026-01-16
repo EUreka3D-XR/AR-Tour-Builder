@@ -51,14 +51,14 @@ const DEFAULT_VALUES = {
   },
 };
 function NewPoiAssetForm({ onClose }) {
-  const { poiId } = useParams();
+  const { poiId, tourId } = useParams();
   const [searchParams] = useSearchParams();
   const assetId = searchParams.get("libraryMedia");
 
   const locale = useLocale();
 
   const { data, fetchState } = useLibraryAssetMultilingual(assetId);
-  const { mutate: createAsset } = useCreatePoiAsset(poiId, locale);
+  const { mutate: createAsset } = useCreatePoiAsset(tourId, poiId, locale);
 
   const defaultValues = useMemo(() => {
     if (assetId && data) {

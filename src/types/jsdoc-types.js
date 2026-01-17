@@ -203,6 +203,7 @@
  * @typedef {Object} ModelAssetAttributes
  * @property {boolean} viewInAr - Indicates if the asset can be viewed in AR
  * @property {boolean} isGroundPlaced - Indicates if the 3D model is ground placed in AR
+ * @property {number} spawnRadius - Radius within which the model can spawn in AR (in meters)
  * @property {Asset} linkedAsset - Linked asset information
  * @property {Coordinates} georeference - Geographical reference for the asset
  */

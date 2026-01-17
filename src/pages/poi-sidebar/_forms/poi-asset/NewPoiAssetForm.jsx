@@ -35,6 +35,7 @@ const DEFAULT_VALUES = {
   isGeoreferenced: false,
   viewInAr: false,
   isGroundPlaced: false,
+  spawnRadius: 5,
   linkedAsset: {
     contentUrl: {
       locales: {

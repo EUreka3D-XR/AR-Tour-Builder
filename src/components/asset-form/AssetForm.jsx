@@ -10,7 +10,6 @@ import {
   MenuItem,
   Select,
   styled,
-  Switch,
   TextField,
   Typography,
 } from "@mui/material";
@@ -30,6 +29,8 @@ import {
 import { localeValue } from "@/utils/inputLocale";
 import CoordinatesInput from "../coordinates-input/CoordinatesInput";
 import Link from "../link/Link";
+import NumberInput from "../number-input/NumberInput";
+import SwitchToggle from "../switch/SwitchToggle";
 import AssetFormFooter from "./AssetFormFooter";
 import AssetFormPreview from "./AssetFormPreview";
 import PoiAssetHeaderSection from "./PoiAssetHeaderSection";
@@ -60,6 +61,25 @@ const NoShrink = styled("div")({ flexShrink: 0 });
 
 const FormControlLabelStyled = styled(FormControlLabel)(({ theme }) => ({
   alignItems: "flex-start",
+  gap: theme.spacing(1),
+  "& .checkbox-label": {
+    display: "flex",
+    flexDirection: "column",
+    gap: theme.spacing(0.25),
+  },
+}));
+
+const SubGroup = styled("div")(({ theme }) => ({
+  paddingLeft: theme.spacing(4),
+  "& .grid": {
+    display: "grid",
+    gridTemplateColumns: "max-content 1fr",
+    gap: theme.spacing(2) /* Row + column gap */,
+    alignItems: "start",
+    "& .col-1": {
+      maxWidth: "200px",
+    },
+  },
   "& .checkbox-label": {
     display: "flex",
     flexDirection: "column",
@@ -155,7 +175,7 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
             render={({ field }) => (
               <FormControlLabelStyled
                 control={
-                  <Switch
+                  <Checkbox
                     checked={field.value === "high"}
                     onChange={(e) =>
                       field.onChange(e.target.checked ? "high" : "normal")
@@ -280,6 +300,38 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                 {t("asset.form.section.model_attributes")}
               </Typography>
               <div className="models-details">
+                <FormInput
+                  name="isGeoreferenced"
+                  render={({ field }) => (
+                    <FormControlLabelStyled
+                      control={
+                        <Checkbox
+                          checked={Boolean(field.value)}
+                          onChange={(e) => field.onChange(e.target.checked)}
+                        />
+                      }
+                      label={
+                        <div className="checkbox-label">
+                          <Typography variant="body2">
+                            {t("asset.form.field.georeferenced")}
+                          </Typography>
+                          <Typography variant="caption">
+                            {t("asset.form.help.georeferenced_description")}
+                          </Typography>
+                        </div>
+                      }
+                    />
+                  )}
+                />
+                {isGeoreferenced && (
+                  <SubGroup>
+                    <CoordinatesInput
+                      name="georeference"
+                      showMap
+                      mapHeight={300}
+                    />
+                  </SubGroup>
+                )}
                 {isPoiAsset && (
                   <>
                     <FormInput
@@ -306,22 +358,56 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                       )}
                     />
                     {isARShown && (
-                      <FormInput
-                        name="isGroundPlaced"
-                        render={({ field }) => (
-                          <FormControlLabelStyled
-                            control={
-                              <Checkbox
-                                checked={
-                                  isGeoreferenced || Boolean(field.value)
-                                }
-                                onChange={(e) =>
-                                  field.onChange(e.target.checked)
-                                }
-                                disabled={isGeoreferenced}
+                      <>
+                        <SubGroup>
+                          <div className="grid">
+                            <div className="col-1">
+                              <FormInput
+                                name="spawnRadius"
+                                render={({ field }) => (
+                                  <NumberInput
+                                    {...field}
+                                    iconName="radius"
+                                    endAdornmentText="m"
+                                    sx={{ maxWidth: "130px" }}
+                                  />
+                                )}
                               />
-                            }
-                            label={
+                            </div>
+                            <div className="col-2">
+                              <div className="checkbox-label">
+                                <Typography variant="body2">
+                                  {t("asset.form.field.spawn_radius")}
+                                </Typography>
+                                <Typography variant="caption">
+                                  {t(
+                                    "asset.form.help.spawn_radius_description",
+                                  )}
+                                </Typography>
+                              </div>
+                            </div>
+                            <div className="col-1">
+                              <FormInput
+                                name="isGroundPlaced"
+                                render={({ field }) => (
+                                  <SwitchToggle
+                                    value={Boolean(field.value)}
+                                    options={[
+                                      { label: t("In Air"), value: "air" },
+                                      {
+                                        label: t("On Ground"),
+                                        value: "ground",
+                                        actAsChecked: true,
+                                      },
+                                    ]}
+                                    onChange={(newValue) =>
+                                      field.onChange(newValue)
+                                    }
+                                  />
+                                )}
+                              />
+                            </div>
+                            <div className="col-2">
                               <div className="checkbox-label">
                                 <Typography variant="body2">
                                   {t("asset.form.field.ground_placed")}
@@ -332,42 +418,12 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                                   )}
                                 </Typography>
                               </div>
-                            }
-                          />
-                        )}
-                      />
+                            </div>
+                          </div>
+                        </SubGroup>
+                      </>
                     )}
                   </>
-                )}
-                <FormInput
-                  name="isGeoreferenced"
-                  render={({ field }) => (
-                    <FormControlLabelStyled
-                      control={
-                        <Checkbox
-                          checked={Boolean(field.value)}
-                          onChange={(e) => field.onChange(e.target.checked)}
-                        />
-                      }
-                      label={
-                        <div className="checkbox-label">
-                          <Typography variant="body2">
-                            {t("asset.form.field.georeferenced")}
-                          </Typography>
-                          <Typography variant="caption">
-                            {t("asset.form.help.georeferenced_description")}
-                          </Typography>
-                        </div>
-                      }
-                    />
-                  )}
-                />
-                {isGeoreferenced && (
-                  <CoordinatesInput
-                    name="georeference"
-                    showMap
-                    mapHeight={300}
-                  />
                 )}
               </div>
               {isPoiAsset && (

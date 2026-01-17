@@ -60,6 +60,7 @@
         "view_in_ar": "View in AR",
         "georeferenced": "Georeference",
         "ground_placed": "Place model on the ground",
+        "spawn_radius": "Spawn Radius",
         "audio_title": "Audio Title",
         "audio_url": "Audio URL",
         "primary": "Set as Primary"
@@ -78,6 +79,7 @@
         "georeferenced_description": "Check this box if the 3D model is georeferenced and has specific latitude/longitude coordinates associated with it.",
         "linked_audio_description": "Upload audio files in multiple languages to accompany this asset. Each language can have its own audio track.",
         "ground_placed_description": "Specify if the object should be positioned on the ground or freely in front of the user in Augmented Reality (AR) mode.",
+        "spawn_radius_description": "Specify the radius within which the object can spawn in Augmented Reality (AR) mode.",
         "primary_description": "Set this asset as the primary one to be displayed more prominently."
       },
       "action": {

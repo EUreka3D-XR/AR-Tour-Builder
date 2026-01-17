@@ -60,6 +60,7 @@
         "view_in_ar": "Voir en AR",
         "georeferenced": "Géoréférencé",
         "ground_placed": "Placer le modèle au sol",
+        "spawn_radius": "Rayon d'apparition",
         "audio_title": "Titre Audio",
         "audio_url": "URL Audio",
         "primary": "Définir comme Principal"
@@ -78,6 +79,7 @@
         "georeferenced_description": "Cochez cette case si le modèle 3D est géoréférencé et possède des coordonnées latitude/longitude spécifiques qui lui sont associées.",
         "linked_audio_description": "Téléchargez des fichiers audio dans plusieurs langues pour accompagner cet actif. Chaque langue peut avoir sa propre piste audio.",
         "ground_placed_description": "Spécifiez si l'objet doit être positionné sur le sol ou librement devant l'utilisateur en mode Réalité Augmentée (AR).",
+        "spawn_radius_description": "Spécifiez le rayon dans lequel l'objet peut apparaître en mode Réalité Augmentée (AR).",
         "primary_description": "Définissez cet actif comme principal pour qu'il soit affiché de manière plus proéminente."
       },
       "action": {

@@ -90,6 +90,20 @@ function MyThemeProvider({ children }) {
             }),
           },
         },
+        MuiToggleButtonGroup: {
+          defaultProps: {
+            size: "small",
+            color: "primary",
+          },
+        },
+        MuiToggleButton: {
+          styleOverrides: {
+            root: {
+              whiteSpace: "nowrap",
+              textTransform: "none",
+            },
+          },
+        },
         MuiIcon: {
           defaultProps: {
             baseClassName: "material-icons-outlined",

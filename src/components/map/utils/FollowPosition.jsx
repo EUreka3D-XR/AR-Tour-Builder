@@ -20,8 +20,8 @@ export default function FollowPosition({
   const map = useMap();
 
   useEffect(() => {
-    if (!map || !coordinates || coordinates.lat === 0 || coordinates.long === 0)
-      return;
+    console.log(coordinates, !coordinates);
+    if (!map || !coordinatesExist(coordinates)) return;
 
     const targetZoom =
       typeof maxZoom === "number"
@@ -41,3 +41,13 @@ export default function FollowPosition({
 
   return null;
 }
+
+const coordinatesExist = (coordinates) => {
+  return (
+    coordinates &&
+    typeof coordinates.lat === "number" &&
+    coordinates.lat !== 0 &&
+    typeof coordinates.long === "number" &&
+    coordinates.long !== 0
+  );
+};

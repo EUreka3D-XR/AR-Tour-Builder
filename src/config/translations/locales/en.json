@@ -87,6 +87,10 @@
         "create_media_asset": "Create Media Asset",
         "create_asset": "Create Asset",
         "save_changes": "Save Changes"
+      },
+      "ground_placed_options": {
+        "ground": "On Ground",
+        "free": "On Air"
       }
     }
   },
@@ -563,7 +567,10 @@
       "createButton": "Create tour and start editing"
     },
     "pois": {
-      "guidedTour": "Guided Tour",
+      "guided_options": {
+        "guided": "Guided",
+        "free_roam": "Free Roam"
+      },
       "addPoi": "Add POI",
       "errorLoading": "There was an error loading the points of interest",
       "empty": {

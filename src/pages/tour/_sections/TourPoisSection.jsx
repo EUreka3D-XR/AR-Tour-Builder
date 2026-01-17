@@ -17,17 +17,18 @@ import EurekaIcon from "@/components/icon/EurekaIcon";
 import SwitchToggle from "@/components/switch/SwitchToggle";
 import { useFieldArrayWithId } from "@/hooks/useFieldArrayWithId";
 import useNavPaths from "@/hooks/useNavPaths";
+import { t } from "@/config/translations/i18next-config";
 import PoiItem from "../_components/PoiItem";
 
 const GUIDED_SWITCH_OPTIONS = [
   {
-    label: "Free roam",
+    label: t("tour.pois.guided_options.free_roam"),
     ariaLabel: "Disable guided tour",
     value: "free",
     actAsChecked: false,
   },
   {
-    label: "Guided",
+    label: t("tour.pois.guided_options.guided"),
     ariaLabel: "Enable guided tour",
     value: "guided",
     actAsChecked: true,

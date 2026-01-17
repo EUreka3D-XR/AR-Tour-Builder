@@ -87,6 +87,10 @@
         "create_media_asset": "Créer un Actif Média",
         "create_asset": "Créer un Actif",
         "save_changes": "Enregistrer les Modifications"
+      },
+      "ground_placed_options": {
+        "ground": "Au Sol",
+        "free": "En Vol"
       }
     }
   },
@@ -563,7 +567,10 @@
       "createButton": "Créer la visite et commencer l'édition"
     },
     "pois": {
-      "guidedTour": "Visite Guidée",
+      "guided_options": {
+        "guided": "Guidée",
+        "freeRoam": "Libre"
+      },
       "addPoi": "Ajouter un POI",
       "errorLoading": "Une erreur s'est produite lors du chargement des points d'intérêt",
 

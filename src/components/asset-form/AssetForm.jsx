@@ -393,9 +393,16 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                                   <SwitchToggle
                                     value={Boolean(field.value)}
                                     options={[
-                                      { label: t("In Air"), value: "air" },
                                       {
-                                        label: t("On Ground"),
+                                        label: t(
+                                          "asset.form.ground_placed_options.free",
+                                        ),
+                                        value: "air",
+                                      },
+                                      {
+                                        label: t(
+                                          "asset.form.ground_placed_options.ground",
+                                        ),
                                         value: "ground",
                                         actAsChecked: true,
                                       },

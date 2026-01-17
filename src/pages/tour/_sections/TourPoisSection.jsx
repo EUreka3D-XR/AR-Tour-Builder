@@ -4,10 +4,8 @@ import { useWatch } from "react-hook-form";
 import {
   CircularProgress,
   Divider,
-  FormControlLabel,
   Stack,
   styled,
-  Switch,
   Typography,
 } from "@mui/material";
 
@@ -16,9 +14,25 @@ import Button from "@/components/button/Button";
 import CenteredArea from "@/components/centered/Centered";
 import FormInput from "@/components/form/FormInput";
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import SwitchToggle from "@/components/switch/SwitchToggle";
 import { useFieldArrayWithId } from "@/hooks/useFieldArrayWithId";
 import useNavPaths from "@/hooks/useNavPaths";
 import PoiItem from "../_components/PoiItem";
+
+const GUIDED_SWITCH_OPTIONS = [
+  {
+    label: "Free roam",
+    ariaLabel: "Disable guided tour",
+    value: "free",
+    actAsChecked: false,
+  },
+  {
+    label: "Guided",
+    ariaLabel: "Enable guided tour",
+    value: "guided",
+    actAsChecked: true,
+  },
+];
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   height: "100%",
@@ -132,10 +146,7 @@ function TourPoisSection() {
             name="guided"
             render={({ field }) => {
               return (
-                <FormControlLabel
-                  control={<Switch {...field} checked={field.value} />}
-                  label={t("tour.pois.guidedTour")}
-                />
+                <SwitchToggle {...field} options={GUIDED_SWITCH_OPTIONS} />
               );
             }}
           />

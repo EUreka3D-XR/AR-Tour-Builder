@@ -24,6 +24,9 @@
     },
     "helper": "Place a point of interest on the map or add its coordinates in the Latitude and Longitude fields below."
   },
+  "placeable_marker": {
+    "tooltip": "Click to place a marker"
+  },
   "common": {
     "action": {
       "cancel": "Cancel",
@@ -55,8 +58,8 @@
         "multilingual_media": "Multilingual Media",
         "media_url": "Media URL",
         "view_in_ar": "View in AR",
-        "georeferenced": "Georeferenced",
-        "ground_placed": "Placement of 3D Model in AR",
+        "georeferenced": "Georeference",
+        "ground_placed": "Place model on the ground",
         "audio_title": "Audio Title",
         "audio_url": "Audio URL",
         "primary": "Set as Primary"

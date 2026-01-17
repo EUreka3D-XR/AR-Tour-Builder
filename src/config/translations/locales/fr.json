@@ -24,6 +24,9 @@
     },
     "helper": "Placez un point d'intérêt sur la carte ou ajoutez ses coordonnées dans les champs Latitude et Longitude ci-dessous."
   },
+  "placeable_marker": {
+    "tooltip": "Cliquez pour placer un marqueur"
+  },
   "common": {
     "action": {
       "cancel": "Annuler",
@@ -56,7 +59,7 @@
         "media_url": "URL du Média",
         "view_in_ar": "Voir en AR",
         "georeferenced": "Géoréférencé",
-        "ground_placed": "Placement du Modèle 3D en AR",
+        "ground_placed": "Placer le modèle au sol",
         "audio_title": "Titre Audio",
         "audio_url": "URL Audio",
         "primary": "Définir comme Principal"

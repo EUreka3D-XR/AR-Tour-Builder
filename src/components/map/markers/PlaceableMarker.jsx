@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import ReactDOM from "react-dom";
 import { Marker, useMap, useMapEvents } from "react-leaflet";
 import { Box } from "@mui/material";
@@ -17,6 +18,8 @@ export default function PlaceableMarker({
   position: propPosition = null,
   onChange,
 }) {
+  const { t } = useTranslation();
+
   const map = useMap();
   // local state, initialize from prop if provided
 
@@ -146,7 +149,7 @@ export default function PlaceableMarker({
         fontSize: 12,
       }}
     >
-      Click to place a marker
+      {t("placeable_marker.tooltip")}
     </Box>
   );
 

@@ -369,7 +369,7 @@ function AssetForm({ isPoiAsset, onSubmit, onClose }) {
                                     {...field}
                                     iconName="radius"
                                     endAdornmentText="m"
-                                    sx={{ maxWidth: "130px" }}
+                                    sx={{ maxWidth: "140px" }}
                                   />
                                 )}
                               />

@@ -91,8 +91,17 @@
       "ground_placed_options": {
         "ground": "On Ground",
         "free": "On Air"
+      },
+      "import_from_europeana": {
+        "click_here": "Click here",
+        "text": "to import the 3D model URL from Europeana or enter it manually below."
       }
     }
+  },
+  "europeana_import_url_modal": {
+    "title": "Import 3D model URL from Europeana",
+    "description": "Please enter below the URL from Europeana and the URL of the 3D model will be imported automatically for you.",
+    "import_action": "Import URL"
   },
   "breadcrumbs": {
     "my_projects": "My Projects",

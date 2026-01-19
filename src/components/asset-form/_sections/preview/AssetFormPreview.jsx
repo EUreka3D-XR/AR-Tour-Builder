@@ -1,6 +1,6 @@
 import { styled } from "@mui/material";
 
-import MediaPreview from "../media-preview/MediaPreview";
+import MediaPreview from "@/components/media-preview/MediaPreview";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   label: "asset-form-preview-container",

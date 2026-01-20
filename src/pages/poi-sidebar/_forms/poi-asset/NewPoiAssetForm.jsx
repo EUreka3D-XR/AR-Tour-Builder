@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { useParams, useSearchParams } from "react-router";
+import { useTranslation } from "react-i18next";
 
+import { useOptionsListDialog } from "@/stores/dialog-modal-stores";
 import { useCreatePoiAsset } from "@/services/assetsService";
 import { useLibraryAssetMultilingual } from "@/services/libraryService";
 import { useLocale } from "@/hooks/useLocale";
@@ -31,6 +33,7 @@ const DEFAULT_VALUES = {
     lat: "",
     long: "",
   },
+  sourceAssetId: "",
   priority: "normal",
   isGeoreferenced: false,
   viewInAr: false,
@@ -52,18 +55,22 @@ const DEFAULT_VALUES = {
   },
 };
 function NewPoiAssetForm({ onClose }) {
+  const { t } = useTranslation();
+
   const { poiId, tourId } = useParams();
   const [searchParams] = useSearchParams();
   const assetId = searchParams.get("libraryMedia");
 
   const locale = useLocale();
+  const open = useOptionsListDialog();
 
   const { data, fetchState } = useLibraryAssetMultilingual(assetId);
   const { mutate: createAsset } = useCreatePoiAsset(tourId, poiId, locale);
 
   const defaultValues = useMemo(() => {
     if (assetId && data) {
-      return { ...DEFAULT_VALUES, ...data };
+      const { id: sourceAssetId, ...restData } = data;
+      return { ...DEFAULT_VALUES, ...restData, sourceAssetId };
     }
     return DEFAULT_VALUES;
   }, [assetId, data]);
@@ -76,7 +83,32 @@ function NewPoiAssetForm({ onClose }) {
   };
 
   const onSubmit = async (data) => {
-    await createAsset({ data });
+    const { sourceAssetId, ...restData } = data;
+
+    if (sourceAssetId) {
+      const res = await open({
+        title: t("asset.form.variation_dialog.title"),
+        message: t("asset.form.variation_dialog.message"),
+        options: [
+          { label: t("asset.form.variation_dialog.yes"), value: "yes" },
+          { label: t("asset.form.variation_dialog.no"), value: "no" },
+        ],
+      });
+
+      if (!res) {
+        return;
+      }
+
+      if (res === "yes") {
+        await createAsset({ data: restData }); // Does not contain the sourceAssetId, creates a new asset variation
+      } else if (res === "no") {
+        await createAsset({ data }); // Contains the sourceAssetId, does not create a variation
+      }
+      handleClose();
+      return;
+    }
+
+    await createAsset({ data }); // Does not contain the sourceAssetId, creates a new asset variation
     handleClose();
   };
   return (

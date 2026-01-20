@@ -184,8 +184,16 @@
  */
 
 /**
+ * Schema for additional info for poi asset
+ * @typedef {Object} PoiAssetExtraInfo
+ * @property {string} sourceAssetId - ID of the source asset
+ * @property {AssetPriority} priority - Asset priority (normal, high)
+ * @property {boolean} isPrimary - Indicates if this asset is the primary asset for the POI
+ */
+
+/**
  * POI-specific asset schema extending the base Asset type
- * @typedef {Asset & {priority: AssetPriority, isPrimary: boolean} & ModelAssetAttributes} PoiAsset
+ * @typedef {Asset & PoiAssetExtraInfo & ModelAssetAttributes} PoiAsset
  */
 
 /**

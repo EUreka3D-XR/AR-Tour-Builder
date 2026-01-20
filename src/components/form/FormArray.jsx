@@ -59,7 +59,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
         bottom: 0,
         borderRadius: "50%",
         border: `0.5px solid ${theme.palette.primary.main}`,
-        animation: "ripplePulse 1s ease-out 3",
+        animation: "ripplePulse 1s ease-out infinite",
       },
     },
   },

@@ -24,8 +24,10 @@ const DEFAULT_VALUES = {
   },
   type: "",
   georeference: {
-    lat: "",
-    long: "",
+    coordinates: {
+      lat: "",
+      long: "",
+    },
   },
   isGeoreferenced: false,
 };

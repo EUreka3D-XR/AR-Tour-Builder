@@ -54,7 +54,11 @@ function AssetFormModelAttributes({ isPoiAsset }) {
         />
         {isGeoreferenced && (
           <SubGroup>
-            <CoordinatesInput name="georeference" showMap mapHeight={300} />
+            <CoordinatesInput
+              name="georeference.coordinates"
+              showMap
+              mapHeight={300}
+            />
           </SubGroup>
         )}
         {isPoiAsset && (

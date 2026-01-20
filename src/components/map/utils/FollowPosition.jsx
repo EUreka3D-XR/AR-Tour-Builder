@@ -20,7 +20,6 @@ export default function FollowPosition({
   const map = useMap();
 
   useEffect(() => {
-    console.log(coordinates, !coordinates);
     if (!map || !coordinatesExist(coordinates)) return;
 
     const targetZoom =

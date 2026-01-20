@@ -123,7 +123,8 @@ function MediaCardItem({ asset, onEdit }) {
 
   // Check if asset should show AR pill
   const showArPill = asset?.type === "model3d" && asset?.viewInAr;
-  const showGeoferencedPill = asset?.type === "model3d" && asset?.georeference;
+  const showGeoferencedPill =
+    asset?.type === "model3d" && asset?.isGeoreferenced;
   const isPrimaryAsset = asset?.isPrimary;
 
   const handleClick = () => {

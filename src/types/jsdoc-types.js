@@ -32,6 +32,12 @@
  */
 
 /**
+ * Asset's georeference information
+ * @typedef {Object} Georeference
+ * @property {Coordinates} coordinates - Geographic coordinates
+ */
+
+/**
  * Status type for entities
  * @typedef {'draft'|'published'} Status
  */
@@ -213,7 +219,8 @@
  * @property {boolean} isGroundPlaced - Indicates if the 3D model is ground placed in AR
  * @property {number} spawnRadius - Radius within which the model can spawn in AR (in meters)
  * @property {Asset} linkedAsset - Linked asset information
- * @property {Coordinates} georeference - Geographical reference for the asset
+ * @property {Georeference} georeference - Geographical reference information for the asset
+ * @property {boolean} isGeoreferenced - Indicates if the asset is georeferenced
  */
 
 /**

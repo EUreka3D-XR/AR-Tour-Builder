@@ -33,3 +33,14 @@ export const useDebouncedEffect = (effect, deps, delay = 500) => {
 export const useDebouncedCallback = (callback, delay = 300) => {
   return useMemo(() => debounce(callback, delay), [delay]);
 };
+
+export const useDebouncedValue = (value, delay = 300) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+
+  return debouncedValue;
+};

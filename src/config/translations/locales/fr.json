@@ -95,6 +95,12 @@
       "import_from_europeana": {
         "click_here": "Cliquez ici",
         "text": "pour importer l'URL du modèle 3D depuis Europeana ou la saisir manuellement ci-dessous."
+      },
+      "variation_dialog": {
+        "title": "Créer une nouvelle variation de cet actif dans la bibliothèque ?",
+        "message": "En choisissant de créer une nouvelle variation, un nouvel actif sera créé dans la bibliothèque du projet avec les informations que vous venez de fournir.",
+        "yes": "Créer une variation",
+        "no": "Ne pas créer"
       }
     }
   },
@@ -114,6 +120,11 @@
       "default_message": "Êtes-vous sûr de vouloir continuer ?",
       "confirm_button": "Confirmer",
       "cancel_button": "Annuler"
+    },
+    "options": {
+      "default_title": "Choisissez une option",
+      "default_message": "Veuillez sélectionner l'une des options ci-dessous :",
+      "confirm_button": "Confirmer"
     }
   },
   "error": {

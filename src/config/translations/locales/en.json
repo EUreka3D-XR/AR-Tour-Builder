@@ -95,6 +95,12 @@
       "import_from_europeana": {
         "click_here": "Click here",
         "text": "to import the 3D model URL from Europeana or enter it manually below."
+      },
+      "variation_dialog": {
+        "title": "Create a new variation of this asset in the library?",
+        "message": "Choosing to create a new variation of this media asset will save it as a new asset in the project's library. If you don't wish that, choose 'Don't create'.",
+        "yes": "Create variation",
+        "no": "Don't create"
       }
     }
   },
@@ -114,6 +120,11 @@
       "default_message": "Are you sure you want to proceed?",
       "confirm_button": "Confirm",
       "cancel_button": "Cancel"
+    },
+    "options": {
+      "default_title": "Choose an Option",
+      "default_message": "Please select one of the options below:",
+      "confirm_button": "Confirm"
     }
   },
   "error": {

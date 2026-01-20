@@ -5,6 +5,7 @@ export const baseUrls = {
   forgotPassword: "/api/auth/forgot-password",
   resetPassword: "/api/auth/reset-password",
   me: "/api/auth/me",
+  europeana: "/api/external/europeana",
   projects: "/api/projects",
   project: (projectId) => `/api/projects/${projectId}`,
   projectPopulated: (projectId) => `/api/projects/${projectId}/populated`,

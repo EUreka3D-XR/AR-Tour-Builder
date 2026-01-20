@@ -139,6 +139,13 @@
       "back": "Retour",
       "next": "Suivant",
       "save": "Enregistrer"
+    },
+    "optional": "Optionnel",
+    "array": {
+      "helper": {
+        "link": "Insérez l'URL et le titre du lien, puis cliquez sur le bouton + pour l'ajouter à la liste.",
+        "text": "Insérez le texte, puis cliquez sur le bouton + pour l'ajouter à la liste."
+      }
     }
   },
   "header": {

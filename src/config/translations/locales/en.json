@@ -139,6 +139,13 @@
       "back": "Back",
       "next": "Next",
       "save": "Save"
+    },
+    "optional": "Optional",
+    "array": {
+      "helper": {
+        "link": "Insert the URL and title of the link and click the + button to add it to the list.",
+        "text": "Insert the text and click the + button to add it to the list."
+      }
     }
   },
   "header": {

@@ -1,6 +1,13 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Chip, IconButton, styled, TextField, Tooltip } from "@mui/material";
+import {
+  Chip,
+  IconButton,
+  styled,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 
 import { useFieldArrayWithId } from "@/hooks/useFieldArrayWithId";
 import EurekaIcon from "../icon/EurekaIcon";
@@ -22,6 +29,16 @@ import Spacer from "../spacer/Spacer";
  */
 
 const ContainerStyled = styled("div")(({ theme }) => ({
+  "@keyframes ripplePulse": {
+    "0%": {
+      transform: "scale(1)",
+      opacity: 1,
+    },
+    "100%": {
+      transform: "scale(1.5)",
+      opacity: 0,
+    },
+  },
   "& .input-area-wrapper": {
     width: "100%",
     display: "flex",
@@ -29,6 +46,21 @@ const ContainerStyled = styled("div")(({ theme }) => ({
     gap: theme.spacing(2),
     "& .input-area": {
       flex: 1,
+    },
+    "& .add-button-pulse": {
+      position: "relative",
+      color: theme.palette.primary.dark,
+      "&::after": {
+        content: '""',
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        borderRadius: "50%",
+        border: `0.5px solid ${theme.palette.primary.main}`,
+        animation: "ripplePulse 1s ease-out 3",
+      },
     },
   },
   "& .items-display": {
@@ -81,7 +113,16 @@ export default function FormArray({ children, name }) {
  * @returns
  */
 function FormArrayTextInput({ label, placeholder, insert }) {
+  const { t } = useTranslation();
+  const [isValid, setIsValid] = useState(false);
+
   const inputRef = useRef(null);
+
+  const handleValidation = (e) => {
+    const inputValue = e.target.value ?? "";
+    const inputValid = inputValue.trim() !== "";
+    setIsValid(inputValid);
+  };
 
   const handleInsert = () => {
     if (inputRef.current) {
@@ -94,9 +135,18 @@ function FormArrayTextInput({ label, placeholder, insert }) {
   };
 
   return (
-    <FormArrayInputWrapper onAdd={handleInsert}>
+    <FormArrayInputWrapper
+      helper={t("form.array.helper.text")}
+      isValid={isValid}
+      onAdd={handleInsert}
+    >
       <LabeledInput label={label}>
-        <TextField placeholder={placeholder} inputRef={inputRef} fullWidth />
+        <TextField
+          placeholder={placeholder}
+          inputRef={inputRef}
+          fullWidth
+          onChange={handleValidation}
+        />
       </LabeledInput>
     </FormArrayInputWrapper>
   );
@@ -122,13 +172,22 @@ function FormArrayURLInput({
   const { t } = useTranslation();
   const [errors, setErrors] = useState({});
   const [submits, setSubmits] = useState(0);
+  const [isValid, setIsValid] = useState(false);
 
   const labelRef = useRef(null);
   const urlRef = useRef(null);
 
+  const computeIsValid = () => {
+    const labelValue = labelRef.current?.value ?? "";
+    const urlValue = urlRef.current?.value ?? "";
+    const labelValid = !isLabelRequired || labelValue.trim() !== "";
+    const urlValid = urlValue.trim() !== "";
+    setIsValid(labelValid && urlValid);
+  };
+
   const labelPlaceholderText = isLabelRequired
     ? labelPlaceholder
-    : labelPlaceholder + " (Optional)";
+    : labelPlaceholder + ` (${t("form.optional")})`;
 
   const handleInsert = () => {
     setSubmits((prev) => prev + 1);
@@ -164,6 +223,7 @@ function FormArrayURLInput({
   };
 
   const validateLabel = (e) => {
+    computeIsValid();
     if (submits === 0) return;
 
     const value = e.target.value;
@@ -175,6 +235,7 @@ function FormArrayURLInput({
   };
 
   const validateURL = (e) => {
+    computeIsValid();
     if (submits === 0) return;
 
     const value = e.target.value;
@@ -187,7 +248,11 @@ function FormArrayURLInput({
 
   return (
     <LabeledInput label={label}>
-      <FormArrayInputWrapper onAdd={handleInsert}>
+      <FormArrayInputWrapper
+        helper={t("form.array.helper.link")}
+        isValid={isValid}
+        onAdd={handleInsert}
+      >
         <TextField
           inputRef={labelRef}
           placeholder={labelPlaceholderText}
@@ -212,14 +277,26 @@ function FormArrayURLInput({
   );
 }
 
-function FormArrayInputWrapper({ children, onAdd, isDisabled }) {
+function FormArrayInputWrapper({
+  children,
+  helper,
+  onAdd,
+  isDisabled,
+  isValid,
+}) {
   return (
     <div className="input-area-wrapper">
-      <div className="input-area">{children}</div>
+      <div className="input-area">
+        {children}
+        <Typography variant="caption" fontStyle="italic">
+          {helper}
+        </Typography>
+      </div>
       <IconButton
         onClick={onAdd}
         sx={{ height: "fit-content" }}
         disabled={isDisabled}
+        className={isValid ? "add-button-pulse" : ""}
       >
         <EurekaIcon name="add" />
       </IconButton>

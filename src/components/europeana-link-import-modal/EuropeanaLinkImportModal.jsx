@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { europeanaExtractUrlSchema } from "@/validation-schemas/europeanaExtractUrlSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,17 +12,18 @@ import {
   TextField,
 } from "@mui/material";
 
+// import { useEuropeanaZipUrl } from "@/services/europeanaService";
+// import { useDebouncedValue } from "@/hooks/useDebounce";
 import Button from "../button/Button";
 import FormInput from "../form/FormInput";
 
 function LinkImportModal({ onClose, onExtract }) {
   const { t } = useTranslation();
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const methods = useForm({
     defaultValues: {
       europeanaUrl: "",
+      eurekaHubItemUrl: "",
     },
     resolver: yupResolver(europeanaExtractUrlSchema),
   });
@@ -30,6 +31,8 @@ function LinkImportModal({ onClose, onExtract }) {
   const {
     handleSubmit,
     reset,
+    // watch,
+    // setValue,
     formState: { isValid },
   } = methods;
 
@@ -39,21 +42,21 @@ function LinkImportModal({ onClose, onExtract }) {
   };
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
-    try {
-      // TODO: Replace with actual API call
-      const response = await new Promise((resolve) =>
-        setTimeout(() => resolve({ modelUrl: data.europeanaUrl }), 1000),
-      );
-
-      onExtract(response);
-      handleClose();
-    } catch (error) {
-      console.error("Failed to extract URL:", error);
-    } finally {
-      setIsLoading(false);
-    }
+    onExtract(data.eurekaHubItemUrl);
+    handleClose();
   };
+
+  // const europeanaUrl = watch("europeanaUrl");
+  // const debouncedEuropeanaUrl = useDebouncedValue(europeanaUrl, 300);
+
+  // const res = useEuropeanaZipUrl(debouncedEuropeanaUrl);
+  // const { zipUrl, isLoading } = useEurekaZipUrl(europeanaUrl);
+
+  // useEffect(() => {
+  //   setValue("eurekaHubItemUrl", zipUrl);
+  // }, [zipUrl, setValue]);
+
+  const isLoading = false;
 
   return (
     <Dialog

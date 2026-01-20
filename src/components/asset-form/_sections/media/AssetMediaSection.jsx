@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 
 import { useAssetModal } from "@/stores/asset-modal-stores";
-import EuropeanaLinkImportModal from "@/components/europeana-link-import-modal/EuropeanaLinkImportModal";
+// import EuropeanaLinkImportModal from "@/components/europeana-link-import-modal/EuropeanaLinkImportModal";
 import FormInput from "@/components/form/FormInput";
 import FormInputCommonMultilingual from "@/components/form/FormInputCommonMultilingual";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
@@ -36,11 +36,11 @@ function AssetFormMediaSection() {
   const { openAssetModalWithUrl } = useAssetModal();
 
   const { isOpen: isMultilingual, toggle: toggleMultilingual } = useToggle();
-  const {
-    isOpen: isEurekaImportModalOpen,
-    open: openEurekaImportModal,
-    close: closeEurekaImportModal,
-  } = useToggle();
+  // const {
+  //   isOpen: isEurekaImportModalOpen,
+  //   open: openEurekaImportModal,
+  //   close: closeEurekaImportModal,
+  // } = useToggle();
 
   const assetType = useWatch({ name: "type" });
   const contentUrl = useWatch({ name: "contentUrl" });
@@ -91,7 +91,7 @@ function AssetFormMediaSection() {
         }
       />
       <div>
-        <Box mb={2}>
+        {/* <Box mb={2}>
           <span>
             <Link
               to="#"
@@ -103,7 +103,7 @@ function AssetFormMediaSection() {
             </Link>{" "}
             {t("asset.form.import_from_europeana.text")}
           </span>
-        </Box>
+        </Box> */}
         {isMultilingual ? (
           <FormInputMultilingual
             name="contentUrl"
@@ -160,11 +160,11 @@ function AssetFormMediaSection() {
           type={assetType}
         />
       )}
-      <EuropeanaLinkImportModal
+      {/* <EuropeanaLinkImportModal
         isOpen={isEurekaImportModalOpen}
         onClose={closeEurekaImportModal}
         onExtract={() => {}}
-      />
+      /> */}
     </>
   );
 }

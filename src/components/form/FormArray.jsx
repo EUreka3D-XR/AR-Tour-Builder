@@ -220,6 +220,7 @@ function FormArrayURLInput({
     insert(0, value);
     labelRef.current.value = "";
     urlRef.current.value = "";
+    setIsValid(false);
   };
 
   const validateLabel = (e) => {

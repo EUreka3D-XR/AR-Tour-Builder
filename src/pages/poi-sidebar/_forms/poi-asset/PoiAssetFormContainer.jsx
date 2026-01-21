@@ -42,11 +42,16 @@ function PoiAssetFormContainer({
 
 export default PoiAssetFormContainer;
 
+/**
+ *
+ * @param {import("@/types/jsdoc-types").Georeference} georeference
+ * @returns
+ */
 const georeferenceExists = (georeference) => {
   return (
     georeference &&
     georeference.coordinates &&
-    georeference.coordinates.latitude != null &&
-    georeference.coordinates.longitude != null
+    georeference.coordinates.lat != null &&
+    georeference.coordinates.long != null
   );
 };

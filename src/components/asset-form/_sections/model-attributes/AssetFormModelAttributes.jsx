@@ -96,6 +96,8 @@ function AssetFormModelAttributes({ isPoiAsset }) {
                         render={({ field }) => (
                           <NumberInput
                             {...field}
+                            min={3}
+                            max={30}
                             iconName="radius"
                             endAdornmentText="m"
                             sx={{ maxWidth: "140px" }}

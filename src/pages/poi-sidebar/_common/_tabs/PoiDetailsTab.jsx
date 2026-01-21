@@ -1,5 +1,5 @@
-import { styled, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { styled, TextField } from "@mui/material";
 
 import FormInput from "@/components/form/FormInput";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
@@ -26,14 +26,21 @@ function PoiDetailsTab() {
         name="title"
         render={({ field }) => (
           <LabeledInput label={t("poiSidebar.detailsTab.title")} isMultilingual>
-            <TextField {...field} placeholder={t("poiSidebar.detailsTab.titlePlaceholder")} fullWidth />
+            <TextField
+              {...field}
+              placeholder={t("poiSidebar.detailsTab.titlePlaceholder")}
+              fullWidth
+            />
           </LabeledInput>
         )}
       />
       <FormInputMultilingual
         name="description"
         render={({ field }) => (
-          <LabeledInput label={t("poiSidebar.detailsTab.description")} isMultilingual>
+          <LabeledInput
+            label={t("poiSidebar.detailsTab.description")}
+            isMultilingual
+          >
             <TextField
               {...field}
               placeholder={t("poiSidebar.detailsTab.descriptionPlaceholder")}
@@ -50,6 +57,8 @@ function PoiDetailsTab() {
           <LabeledInput label={t("poiSidebar.detailsTab.poiRadius")}>
             <NumberInput
               {...field}
+              min={5}
+              max={100}
               placeholder={t("poiSidebar.detailsTab.radiusPlaceholder")}
               iconName="radius"
               endAdornmentText="m"
@@ -62,7 +71,10 @@ function PoiDetailsTab() {
         name="thumbnail"
         render={({ field }) => ( */}
       <LabeledInput label={t("poiSidebar.detailsTab.coverPhoto")}>
-        <ImageInput placeholderText={t("poiSidebar.detailsTab.coverPhotoPlaceholder")} maxFileSize={5} />
+        <ImageInput
+          placeholderText={t("poiSidebar.detailsTab.coverPhotoPlaceholder")}
+          maxFileSize={5}
+        />
       </LabeledInput>
       {/* )}
       /> */}

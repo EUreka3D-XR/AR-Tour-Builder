@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { useFormContext } from "react-hook-form";
 import { styled, TextField } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import FormInput from "@/components/form/FormInput";
@@ -95,6 +95,7 @@ function TourInfoSection() {
                 <NumberInput
                   {...field}
                   fullWidth
+                  min={0}
                   iconName="time"
                   endAdornmentText={t("tour.info.estimatedTimeUnit")}
                   className="small-text-input"
@@ -109,6 +110,7 @@ function TourInfoSection() {
                 <NumberInput
                   {...field}
                   fullWidth
+                  min={0}
                   iconName="route"
                   endAdornmentText={t("tour.info.estimatedDistanceUnit")}
                   className="small-text-input"

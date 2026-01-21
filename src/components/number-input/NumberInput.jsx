@@ -18,10 +18,10 @@ const TextFieldStyled = styled(TextField)(({ theme }) => ({
 /**
  * NumberInput component
  * Accepts the same props as MUI's TextField.
- * @param {import('@mui/material/TextField').TextFieldProps & { iconName?: string, endAdornmentText?: string, onChange?: (value: number) => void }} props
+ * @param {import('@mui/material/TextField').TextFieldProps & { iconName?: string, endAdornmentText?: string, onChange?: (value: number) => void, min?: number, max?: number }} props
  * @returns {JSX.Element}
  */
-function NumberInput({ iconName, endAdornmentText, onChange, ...props }) {
+function NumberInput({ iconName, endAdornmentText, onChange, min, max, ...props }) {
   const handleChange = (e) => {
     onChange(e.target.valueAsNumber);
   };
@@ -44,6 +44,10 @@ function NumberInput({ iconName, endAdornmentText, onChange, ...props }) {
               {endAdornmentText}
             </span>
           ) : null,
+        },
+        htmlInput: {
+          min,
+          max,
         },
       }}
       onChange={handleChange}

@@ -1,11 +1,10 @@
 import clsx from "clsx";
-import { useWatch } from "react-hook-form";
 import { styled } from "@mui/material";
 
 import useFormLocale from "@/stores/useFormLocale";
 import { useAvailableLocalesProvider } from "@/providers/locales/AvailableLocalesContext";
 import { inputLocaleName } from "@/utils/inputLocale";
-import InputLocaleIndicators from "./InputLocaleIndicators";
+import InputCurrentLocaleIndicator from "./InputCurrentLocaleIndicator";
 
 const ContainerStyled = styled("div")({
   "& .input-wrapper": {
@@ -28,7 +27,7 @@ function InputLocale({ className, children, name, hideLocaleIndicators }) {
 
   const hasLocaleIndicators = !hideLocaleIndicators;
 
-  const localizedValue = useWatch({ name });
+  // const localizedValue = useWatch({ name });
 
   return (
     <ContainerStyled className={clsx("input-localized-wrapper", className)}>
@@ -41,10 +40,7 @@ function InputLocale({ className, children, name, hideLocaleIndicators }) {
             ? children({ name: inputLocaleName(name, loc.value), locale })
             : children}
           {hasLocaleIndicators && (
-            <InputLocaleIndicators
-              value={localizedValue}
-              className="indicator"
-            />
+            <InputCurrentLocaleIndicator className="indicator" />
           )}
         </div>
       ))}

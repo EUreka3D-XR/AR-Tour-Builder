@@ -91,3 +91,17 @@ export const useDeleteTourPoi = (tourId, poiId) => {
     invalidateKey: ["tour-pois", tourId],
   });
 };
+
+/**
+ *
+ * @param {string} poiId
+ * @returns
+ */
+export const useTourPoiCoordinates = (poiId) => {
+  const { data, fetchState } = useTourPoiMultilingual(poiId);
+
+  return {
+    data: data ? data.coordinates : null,
+    fetchState,
+  };
+};

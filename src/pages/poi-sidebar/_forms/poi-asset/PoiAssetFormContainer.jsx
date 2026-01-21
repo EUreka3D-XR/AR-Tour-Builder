@@ -21,7 +21,6 @@ function PoiAssetFormContainer({
     let existingGeoreference = propsDefaultValues?.georeference;
     if (!existingGeoreference || !georeferenceExists(existingGeoreference)) {
       existingGeoreference = {
-        isGeoreferenced: false,
         coordinates,
       };
     }

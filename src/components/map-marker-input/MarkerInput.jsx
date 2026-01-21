@@ -25,10 +25,6 @@ function MarkerInput({ name }) {
     );
   };
 
-  if (!value) {
-    return null;
-  }
-
   return <PlaceableMarker position={value} onChange={handleChange} />;
 }
 

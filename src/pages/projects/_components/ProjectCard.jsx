@@ -113,7 +113,7 @@ function ProjectCard({ project }) {
         </Stack>
         <LastUpdated>
           {t("projects.card.lastUpdated", {
-            date: new Date(project.lastUpdated).toLocaleDateString(),
+            date: new Date(project.updatedAt).toLocaleDateString(),
           })}
         </LastUpdated>
       </CardContent>

@@ -99,7 +99,8 @@
  * @property {number} totalAssets - Total number of media assets in the project's library
  * @property {string[]} locales - Supported locales for the project
  * @property {Status} [status] - Project status (draft, published, archived)
- * @property {string} lastUpdated - Last updated date in ISO format
+ * @property {string} createdAt - Creation timestamp
+ * @property {string} updatedAt - Last updated timestamp
  */
 
 // =============================================================================

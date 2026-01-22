@@ -8,9 +8,10 @@ export class AssetBaseDto {
   }
 
   static toApi(data) {
-    const { contentUrl, ...restData } = data || {};
+    const { contentUrl, georeference, ...restData } = data || {};
     return {
       ...restData,
+      georeference: georeferenceExists(georeference) ? georeference : null,
       url: contentUrl,
     };
   }
@@ -25,3 +26,20 @@ export class LibraryAssetListDto {
     return dataList.map(AssetBaseDto.toApi);
   }
 }
+
+/**
+ *
+ * @param {import("@/types/jsdoc-types").Georeference} georeference
+ * @returns
+ */
+const georeferenceExists = (georeference) => {
+  const doesNotExist =
+    !georeference ||
+    !georeference.coordinates ||
+    georeference.coordinates.lat == null ||
+    georeference.coordinates.lat === "" ||
+    georeference.coordinates.long == null ||
+    georeference.coordinates.long === "";
+
+  return !doesNotExist;
+};

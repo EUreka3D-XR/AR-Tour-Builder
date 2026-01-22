@@ -469,7 +469,7 @@
       "externalUrlPlaceholder": "URL: ex. https://some-blog.com/page"
     },
     "mediaTab": {
-      "tabTitle": "Current Media"
+      "tabTitle": "Media and Files Associated"
     },
     "addMediaButton": {
       "add": "Add",

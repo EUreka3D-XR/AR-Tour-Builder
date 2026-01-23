@@ -1,4 +1,5 @@
 import Yup from "@/utils/yupImporter";
+import { localeText } from "./localeSchemas";
 
 const projectLanguagesSchema = Yup.object().shape({
   locales: Yup.array()
@@ -8,10 +9,8 @@ const projectLanguagesSchema = Yup.object().shape({
 });
 const projectBasicInfoSchema = Yup.object()
   .shape({
-    title: Yup.object().localesTextRequired("Project title is required"),
-    description: Yup.object().localesTextRequired(
-      "Project description is required",
-    ),
+    title: localeText("Project title is required"),
+    description: localeText("Project description is required"),
   })
   .required();
 

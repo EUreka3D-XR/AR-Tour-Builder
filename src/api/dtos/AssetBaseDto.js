@@ -8,10 +8,15 @@ export class AssetBaseDto {
   }
 
   static toApi(data) {
-    const { contentUrl, georeference, ...restData } = data || {};
+    const { contentUrl, georeference, isGeoreferenced, ...restData } =
+      data || {};
+
+    const georeferenceFinal = isGeoreferenced ? georeference : null;
     return {
       ...restData,
-      georeference: georeferenceExists(georeference) ? georeference : null,
+      georeference: georeferenceExists(georeferenceFinal)
+        ? georeferenceFinal
+        : null,
       url: contentUrl,
     };
   }

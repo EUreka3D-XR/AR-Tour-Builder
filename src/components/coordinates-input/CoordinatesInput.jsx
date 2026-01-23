@@ -58,10 +58,12 @@ function CoordinatesInput({
       <div className="coordinates-inputs">
         <FormInput
           name={`${name}.lat`}
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <LabeledInput label={t("coordinates_input.latitude.label")}>
               <NumberInput
                 {...field}
+                error={!!fieldState.error}
+                helperText={fieldState?.error?.message}
                 placeholder={t("coordinates_input.latitude.placeholder")}
               />
             </LabeledInput>
@@ -69,10 +71,12 @@ function CoordinatesInput({
         />
         <FormInput
           name={`${name}.long`}
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <LabeledInput label={t("coordinates_input.longitude.label")}>
               <NumberInput
                 {...field}
+                error={!!fieldState.error}
+                helperText={fieldState?.error?.message}
                 placeholder={t("coordinates_input.longitude.placeholder")}
               />
             </LabeledInput>

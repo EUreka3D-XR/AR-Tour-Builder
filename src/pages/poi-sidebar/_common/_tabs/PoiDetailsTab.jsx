@@ -24,21 +24,26 @@ function PoiDetailsTab() {
       <LanguageDropdown className="language-selector" />
       <FormInputMultilingual
         name="title"
-        render={({ field, fieldState }) => (
-          <LabeledInput label={t("poiSidebar.detailsTab.title")} isMultilingual>
-            <TextField
-              {...field}
-              placeholder={t("poiSidebar.detailsTab.titlePlaceholder")}
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
-              fullWidth
-            />
-          </LabeledInput>
-        )}
+        render={({ field, parentFieldState }) => {
+          return (
+            <LabeledInput
+              label={t("poiSidebar.detailsTab.title")}
+              isMultilingual
+            >
+              <TextField
+                {...field}
+                placeholder={t("poiSidebar.detailsTab.titlePlaceholder")}
+                error={!!parentFieldState.error}
+                helperText={parentFieldState.error?.message}
+                fullWidth
+              />
+            </LabeledInput>
+          );
+        }}
       />
       <FormInputMultilingual
         name="description"
-        render={({ field, fieldState }) => (
+        render={({ field, parentFieldState }) => (
           <LabeledInput
             label={t("poiSidebar.detailsTab.description")}
             isMultilingual
@@ -46,8 +51,8 @@ function PoiDetailsTab() {
             <TextField
               {...field}
               placeholder={t("poiSidebar.detailsTab.descriptionPlaceholder")}
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
+              error={!!parentFieldState.error}
+              helperText={parentFieldState.error?.message}
               fullWidth
               multiline
               rows={4}

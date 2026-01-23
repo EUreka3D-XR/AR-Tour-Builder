@@ -1,4 +1,6 @@
+import { useCallback } from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { debounce } from "@mui/material/utils";
 
 import InputLocale from "../input-locale/InputLocale";
 
@@ -8,12 +10,21 @@ import InputLocale from "../input-locale/InputLocale";
  * @param {(params: {
  *   field: import("react-hook-form").ControllerRenderProps<import("react-hook-form").FieldValues, any>,
  *   fieldState: import("react-hook-form").ControllerFieldState,
+ *   parentFieldState: import("react-hook-form").ControllerFieldState,
  *   formState: import("react-hook-form").UseFormStateReturn<import("react-hook-form").FieldValues>
  * }) => JSX.Element} props.render
  * @returns {JSX.Element}
  */
 function FormInputCommonMultilingual({ name, render }) {
-  const { control, setValue, getValues } = useFormContext();
+  const { control, setValue, getValues, getFieldState, formState, trigger } =
+    useFormContext();
+  const parentFieldState = getFieldState(name, formState);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedTrigger = useCallback(
+    debounce((fieldName) => trigger(fieldName), 300),
+    [trigger],
+  );
 
   const updateAllLocalesWithSingleValue = (input) => {
     const value = input?.target ? input.target.value : input;
@@ -28,9 +39,10 @@ function FormInputCommonMultilingual({ name, render }) {
     setValue(name, updatedValues, {
       shouldDirty: true,
       shouldTouch: true,
-      shouldValidate: true,
     });
+    debouncedTrigger(name);
   };
+
   return (
     <InputLocale name={name} hideLocaleIndicators>
       {({ name: localizedName }) => (
@@ -40,6 +52,7 @@ function FormInputCommonMultilingual({ name, render }) {
           render={({ field, ...rest }) =>
             render({
               ...rest,
+              parentFieldState,
               field: { ...field, onChange: updateAllLocalesWithSingleValue },
             })
           }

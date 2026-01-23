@@ -37,7 +37,7 @@ function InputLocale({ className, children, name, hideLocaleIndicators }) {
           className={clsx("input-wrapper", { show: loc.value === locale })}
         >
           {typeof children === "function"
-            ? children({ name: inputLocaleName(name, loc.value), locale })
+            ? children({ name: inputLocaleName(name, loc.value), locale: loc.value })
             : children}
           {hasLocaleIndicators && (
             <InputCurrentLocaleIndicator className="indicator" />

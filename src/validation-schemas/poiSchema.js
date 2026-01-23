@@ -10,6 +10,7 @@ const poiDetailsSchema = Yup.object().shape({
   title: localeText("POI title is required"),
   description: localeText("POI description is required"),
   radius: Yup.number()
+    .typeError("Radius must be a number")
     .min(5, "Radius must be at least 5")
     .required("Radius is required"),
   thumbnail: Yup.string().nullable(),

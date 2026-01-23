@@ -35,8 +35,6 @@ export const DialogOptionsList = ({
 }) => {
   const [selectedValue, setSelectedValue] = useState("");
 
-  console.log();
-
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };

@@ -8,24 +8,19 @@ import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import SidebarFooterSection from "@/components/sidebar/_sections/SidebarFooterSection";
 import useParamsTabs from "@/hooks/useParamsTabs";
+import { useValidateCurrentPoiStep } from "../_utils/usePoiTabsValidation";
 
-function PoiFooterSection({
-  onCancel,
-  onSubmit,
-  steps = [],
-  fieldsPerStep = [],
-}) {
+function PoiFooterSection({ onCancel, onSubmit, steps = [] }) {
   const { t } = useTranslation();
   const { activeTab, setActiveTab } = useParamsTabs("poiTab");
   const { poiId } = useParams();
   const isNew = !poiId;
 
   const {
-    trigger,
-    formState: { errors, isDirty },
+    formState: { isDirty },
   } = useFormContext();
 
-  console.log(errors);
+  const isCurrentStepValid = useValidateCurrentPoiStep();
 
   const currentStep = useMemo(() => {
     if (!steps) return 0;
@@ -38,7 +33,7 @@ function PoiFooterSection({
   const renderUpdateButton = !isNew;
 
   const handleNextStep = async () => {
-    const isValid = await validateStep(currentStep);
+    const isValid = isCurrentStepValid;
 
     if (!isValid) {
       return;
@@ -55,17 +50,6 @@ function PoiFooterSection({
       setActiveTab(prevStep);
     }
   };
-
-  const validateStep = async (step) => {
-    const currentStepFields = fieldsPerStep[step] || [];
-    const isValid = await trigger(currentStepFields);
-    return isValid;
-  };
-
-  const isNextDisabled = useMemo(() => {
-    const currentStepFields = fieldsPerStep[currentStep] || [];
-    return currentStepFields.some((field) => errors[field]);
-  }, [errors, currentStep, fieldsPerStep]);
 
   const handleFormSubmit = (e) => {
     if (e) {
@@ -94,7 +78,7 @@ function PoiFooterSection({
         {renderNextButton && (
           <Button
             variant="filled"
-            isDisabled={isNextDisabled}
+            isDisabled={!isCurrentStepValid}
             onClick={handleNextStep}
           >
             {t("poiSidebar.footer.nextStep")}

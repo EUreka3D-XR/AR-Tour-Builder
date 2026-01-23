@@ -28,6 +28,8 @@ function PoiFormContainer({ defaultValues, onSubmit, onClose }) {
 
   const methods = useForm({
     shouldUnregister: false,
+    mode: "all",
+    revalidate: "onChange",
     resolver: (values, context, options) => {
       const schema = SchemaPerPoiTab[activeTab];
       if (!schema) return { values, errors: {} };

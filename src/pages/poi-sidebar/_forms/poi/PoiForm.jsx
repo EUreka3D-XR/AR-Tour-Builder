@@ -17,10 +17,7 @@ function PoiForm({ poiTabs = [], onSubmit, onClose }) {
   return (
     <>
       <NoShrink>
-        <PoiNavigationTabsSection
-          tabs={poiTabs}
-          fieldsPerStep={fieldsPerStep}
-        />
+        <PoiNavigationTabsSection tabs={poiTabs} />
         <Divider />
       </NoShrink>
       <ScrollableArea className="scrollable-area">
@@ -31,7 +28,6 @@ function PoiForm({ poiTabs = [], onSubmit, onClose }) {
       <NoShrink>
         <PoiFooterSection
           steps={steps}
-          fieldsPerStep={fieldsPerStep}
           onCancel={onClose}
           onSubmit={onSubmit}
         />
@@ -41,10 +37,3 @@ function PoiForm({ poiTabs = [], onSubmit, onClose }) {
 }
 
 export default PoiForm;
-
-const fieldsPerStep = [
-  ["coordinates"],
-  ["title", "description", "thumbnail"],
-  ["quizLinks", "externalLinks"],
-  [],
-];

@@ -3,7 +3,7 @@ import { styled, Tab, Tabs } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useParamsTabs from "@/hooks/useParamsTabs";
-import usePoiEnabledTabs from "../_utils/usePoiTabsEnablement";
+import { usePoiEnabledTabs } from "../_utils/usePoiTabsValidation";
 
 const NavigationAreaStyled = styled("div")(({ theme }) => ({
   display: "flex",

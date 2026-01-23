@@ -22,7 +22,11 @@ export const usePoiEnabledTabs = (poiTabs = []) => {
     poiTabs.forEach((tab, index) => {
       const isPreviousOrCurrent = index <= currentIndex;
       const isNextStep = index === currentIndex + 1 && isCurrentStepValid;
-      enabled[tab.value] = isNew ? isPreviousOrCurrent || isNextStep : true;
+      if (tab.value === "media" && isNew) {
+        enabled[tab.value] = false;
+      } else {
+        enabled[tab.value] = isNew ? isPreviousOrCurrent || isNextStep : true;
+      }
     });
 
     return enabled;
@@ -46,4 +50,21 @@ export const useValidateCurrentPoiStep = () => {
   }, [values, activeTab]);
 
   return isValid;
+};
+
+export const useValidationPerPoiTab = () => {
+  const values = useWatch();
+  const validationPerTab = useMemo(() => {
+    const result = {};
+    for (const [tabKey, schema] of Object.entries(SchemaPerPoiTab)) {
+      if (!schema) {
+        result[tabKey] = true;
+        continue;
+      }
+      // Synchronously check validity
+      result[tabKey] = schema.isValidSync(values);
+    }
+    return result;
+  }, [values]);
+  return validationPerTab;
 };

@@ -8,4 +8,5 @@ export const SchemaPerPoiTab = {
   location: poiLocationSchema,
   details: poiDetailsSchema,
   "external-links": poiExternalLinksSchema,
+  media: null,
 };

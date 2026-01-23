@@ -442,7 +442,9 @@
       "previous": "Précédent",
       "nextStep": "Étape Suivante",
       "createAndAddMedia": "Créer et ajouter un média",
-      "saveChanges": "Enregistrer les Modifications"
+      "saveChanges": "Enregistrer les Modifications",
+      "noChanges": "Aucune modification effectuée",
+      "unsavedChanges": "Vous avez des modifications non enregistrées"
     },
     "tabs": {
       "location": "Emplacement",

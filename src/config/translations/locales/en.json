@@ -442,7 +442,9 @@
       "previous": "Previous",
       "nextStep": "Next Step",
       "createAndAddMedia": "Create and add media",
-      "saveChanges": "Save Changes"
+      "saveChanges": "Save Changes",
+      "noChanges": "No changes made",
+      "unsavedChanges": "You have unsaved changes"
     },
     "tabs": {
       "location": "Location",

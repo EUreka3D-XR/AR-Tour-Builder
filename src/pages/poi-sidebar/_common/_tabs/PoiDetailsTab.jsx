@@ -24,11 +24,13 @@ function PoiDetailsTab() {
       <LanguageDropdown className="language-selector" />
       <FormInputMultilingual
         name="title"
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <LabeledInput label={t("poiSidebar.detailsTab.title")} isMultilingual>
             <TextField
               {...field}
               placeholder={t("poiSidebar.detailsTab.titlePlaceholder")}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
               fullWidth
             />
           </LabeledInput>
@@ -36,7 +38,7 @@ function PoiDetailsTab() {
       />
       <FormInputMultilingual
         name="description"
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <LabeledInput
             label={t("poiSidebar.detailsTab.description")}
             isMultilingual
@@ -44,6 +46,8 @@ function PoiDetailsTab() {
             <TextField
               {...field}
               placeholder={t("poiSidebar.detailsTab.descriptionPlaceholder")}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
               fullWidth
               multiline
               rows={4}
@@ -53,12 +57,14 @@ function PoiDetailsTab() {
       />
       <FormInput
         name="radius"
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <LabeledInput label={t("poiSidebar.detailsTab.poiRadius")}>
             <NumberInput
               {...field}
               min={5}
               max={100}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
               placeholder={t("poiSidebar.detailsTab.radiusPlaceholder")}
               iconName="radius"
               endAdornmentText="m"

@@ -18,10 +18,7 @@ const DEFAULT_POI_VALUES = {
       fr: "",
     },
   },
-  coordinates: {
-    lat: 0,
-    long: 0,
-  },
+  coordinates: null,
   radius: 20,
   thumbnai: "",
   assets: [],

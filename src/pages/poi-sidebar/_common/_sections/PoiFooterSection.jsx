@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useFormContext } from "react-hook-form";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
@@ -25,6 +25,8 @@ function PoiFooterSection({
     formState: { errors, isDirty },
   } = useFormContext();
 
+  console.log(errors);
+
   const currentStep = useMemo(() => {
     if (!steps) return 0;
     return steps.findIndex((step) => step === activeTab);
@@ -36,7 +38,11 @@ function PoiFooterSection({
   const renderUpdateButton = !isNew;
 
   const handleNextStep = async () => {
-    await validateStep(currentStep);
+    const isValid = await validateStep(currentStep);
+
+    if (!isValid) {
+      return;
+    }
 
     const nextStep = steps[currentStep + 1];
     if (nextStep) {
@@ -100,14 +106,26 @@ function PoiFooterSection({
           </Button>
         )}
         {renderUpdateButton && (
-          <Button
-            variant="filled"
-            isDisabled={!isDirty}
-            startIcon={<EurekaIcon name="save" />}
-            onClick={handleFormSubmit}
-          >
-            {t("poiSidebar.footer.saveChanges")}
-          </Button>
+          <Stack direction="row" spacing={2} alignItems="baseline">
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              mt={0.5}
+              fontStyle="italic"
+            >
+              {isDirty
+                ? t("poiSidebar.footer.unsavedChanges")
+                : t("poiSidebar.footer.noChanges")}
+            </Typography>
+            <Button
+              variant="filled"
+              isDisabled={!isDirty}
+              startIcon={<EurekaIcon name="save" />}
+              onClick={handleFormSubmit}
+            >
+              {t("poiSidebar.footer.saveChanges")}
+            </Button>
+          </Stack>
         )}
       </Stack>
     </SidebarFooterSection>

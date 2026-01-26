@@ -38,7 +38,9 @@ function AssetFormFooter({ onSubmit, isPoiAsset, onCancel }) {
             variant="filled"
             startIcon={<EurekaIcon name="save" />}
           >
-            {isPoiAsset ? t("asset.form.action.create_media_asset") : t("asset.form.action.create_asset")}
+            {isPoiAsset
+              ? t("asset.form.action.add_media_asset")
+              : t("asset.form.action.create_media_asset")}
           </Button>
         ) : (
           <Button

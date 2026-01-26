@@ -85,7 +85,7 @@
       "action": {
         "preview_fullscreen": "Aperçu plein écran",
         "create_media_asset": "Créer un Actif Média",
-        "create_asset": "Créer un Actif",
+        "add_media_asset": "Ajouter un Actif Média",
         "save_changes": "Enregistrer les Modifications"
       },
       "ground_placed_options": {

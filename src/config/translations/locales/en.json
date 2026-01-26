@@ -85,7 +85,7 @@
       "action": {
         "preview_fullscreen": "Preview fullscreen",
         "create_media_asset": "Create Media Asset",
-        "create_asset": "Create Asset",
+        "add_media_asset": "Add Media Asset",
         "save_changes": "Save Changes"
       },
       "ground_placed_options": {

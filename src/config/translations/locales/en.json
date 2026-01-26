@@ -49,7 +49,7 @@
         "editing_asset": "Editing Asset",
         "media": "Media",
         "model_attributes": "3D Model Attributes",
-        "linked_audio": "Linked Audio"
+        "linked_audio": "Linked Audio (Optional)"
       },
       "field": {
         "title": "Title",
@@ -92,6 +92,7 @@
         "ground": "On Ground",
         "free": "On Air"
       },
+      "google_drive_warning": "ℹ️ In order for the Google Drive URL to be valid, the correct format is:",
       "import_from_europeana": {
         "click_here": "Click here",
         "text": "to import the 3D model URL from Europeana or enter it manually below."

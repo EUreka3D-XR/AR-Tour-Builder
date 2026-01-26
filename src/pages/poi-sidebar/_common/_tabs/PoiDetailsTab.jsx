@@ -55,7 +55,8 @@ function PoiDetailsTab() {
               helperText={parentFieldState.error?.message}
               fullWidth
               multiline
-              rows={4}
+              minRows={4}
+              maxRows={10}
             />
           </LabeledInput>
         )}

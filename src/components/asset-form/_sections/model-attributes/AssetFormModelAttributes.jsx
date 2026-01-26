@@ -90,31 +90,35 @@ function AssetFormModelAttributes({ isPoiAsset }) {
               <>
                 <SubGroup>
                   <div className="grid">
-                    <div className="col-1">
-                      <FormInput
-                        name="spawnRadius"
-                        render={({ field }) => (
-                          <NumberInput
-                            {...field}
-                            min={3}
-                            max={30}
-                            iconName="radius"
-                            endAdornmentText="m"
-                            sx={{ maxWidth: "140px" }}
+                    {isGeoreferenced && (
+                      <>
+                        <div className="col-1">
+                          <FormInput
+                            name="spawnRadius"
+                            render={({ field }) => (
+                              <NumberInput
+                                {...field}
+                                min={3}
+                                max={30}
+                                iconName="radius"
+                                endAdornmentText="m"
+                                sx={{ maxWidth: "140px" }}
+                              />
+                            )}
                           />
-                        )}
-                      />
-                    </div>
-                    <div className="col-2">
-                      <div className="checkbox-label">
-                        <Typography variant="body2">
-                          {t("asset.form.field.spawn_radius")}
-                        </Typography>
-                        <Typography variant="caption">
-                          {t("asset.form.help.spawn_radius_description")}
-                        </Typography>
-                      </div>
-                    </div>
+                        </div>
+                        <div className="col-2">
+                          <div className="checkbox-label">
+                            <Typography variant="body2">
+                              {t("asset.form.field.spawn_radius")}
+                            </Typography>
+                            <Typography variant="caption">
+                              {t("asset.form.help.spawn_radius_description")}
+                            </Typography>
+                          </div>
+                        </div>
+                      </>
+                    )}
                     <div className="col-1">
                       <FormInput
                         name="isGroundPlaced"

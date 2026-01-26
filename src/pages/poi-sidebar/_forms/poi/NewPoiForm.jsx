@@ -32,7 +32,7 @@ function NewPoiForm({ onClose }) {
   const { mutate: createPoi } = useCreateTourPoi(tourId, locale);
   const onSubmit = async (data) => {
     const newPoi = await createPoi({ data });
-    navigate(`${routes.pois.one(newPoi.id)}`);
+    navigate(`${routes.pois.edit(newPoi.id)}?poiTab=media`);
   };
 
   return (

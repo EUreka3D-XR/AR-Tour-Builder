@@ -17,7 +17,7 @@ function LibraryTableSection({ assets = [], total, fetchState }) {
       {
         label: t("library.table.columns.title"),
         value: "title",
-        width: 250,
+        width: 350,
         wrap: true,
       },
       {

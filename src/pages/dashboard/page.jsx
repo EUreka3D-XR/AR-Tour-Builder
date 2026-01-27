@@ -80,18 +80,20 @@ function DashboardPage({ project }) {
             </Stack>
           </div>
           <div className="dash-section dash-grid one-two-thirds">
-            <OverviewStats
+            <Members projectId={projectId} />
+
+            {/* <OverviewStats
               totalViews={2812}
               viewsThisMonth={512}
               locales={project.locales.length}
               completionRate={75}
-            />
+            /> */}
             <RecentTours projectId={projectId} />
           </div>
-          <div className="dash-section dash-grid equal">
-            {/* <ToursStats /> */}
+          {/* <div className="dash-section dash-grid equal">
+            <ToursStats /> 
             <Members projectId={projectId} />
-          </div>
+          </div> */}
         </>
       )}
     </ContainerStyled>

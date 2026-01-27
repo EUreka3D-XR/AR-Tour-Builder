@@ -35,7 +35,8 @@ function AssetBasicInfo({ isPoiAsset = false }) {
               placeholder={t("asset.form.placeholder.enter_media_description")}
               fullWidth
               multiline
-              rows={4}
+              minRows={4}
+              maxRows={10}
             />
           </LabeledInput>
         )}

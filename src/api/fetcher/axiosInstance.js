@@ -1,13 +1,13 @@
 import axios from "axios";
 
+import { config } from "@/config/base-url/config";
 import { localeStorageAPI } from "@/utils/local-storage-utils";
 import { transformKeysToCamel, transformKeysToSnake } from "./transformKeys";
 
 // fix for axios and mirage passthrough issue (see adapter):
 // https://github.com/miragejs/miragejs/issues/1006 comment of Jan 20 2025
 const axiosInstance = axios.create({
-  // baseURL: "http://localhost:8000",
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: config.apiBaseUrl,
   // adapter: async (config) => {
   //   // Combine base URL and endpoint URL
   //   let url = config.url.startsWith("http")

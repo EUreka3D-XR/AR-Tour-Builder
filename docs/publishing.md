@@ -39,6 +39,16 @@ To push to both remotes at once:
 git push origin main && git push org main
 ```
 
+## Note for DevOps
+
+The container now uses **runtime config injection**. The `VITE_API_BASE_URL` environment variable **must** be passed when running the container:
+
+```bash
+docker run -e VITE_API_BASE_URL=https://api.production.example.com ...
+```
+
+If this variable is not set, API calls will fail. See [docs/environment-variables.md](environment-variables.md) for full details on how runtime configuration works.
+
 ## Typical Workflow
 
 1. Develop and commit on `main` (or a feature branch merged into `main`)

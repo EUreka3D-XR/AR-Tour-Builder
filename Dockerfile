@@ -20,11 +20,15 @@ FROM nginx:alpine
 # Copy built assets from build stage
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy custom nginx config if needed
-# COPY nginx.conf /etc/nginx/nginx.conf
+# Copy nginx config for SPA routing
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy the entrypoint script that injects runtime config
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
 # Expose port 80
 EXPOSE 80
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Run envsubst on config template, then start Nginx
+CMD ["/docker-entrypoint.sh"]

@@ -108,20 +108,40 @@ The goal of runtime config is to build the frontend **once** and deploy it to mu
 
    This script runs before the app bundle, so `window.RUNTIME_CONFIG` is available when the app initializes.
 
-### Docker Example
+### Docker
 
-In a Docker entrypoint script:
-
-```bash
-#!/bin/sh
-envsubst < /usr/share/nginx/html/config.template.js > /usr/share/nginx/html/config.js
-nginx -g "daemon off;"
-```
+The project includes a `Dockerfile` and a `docker-entrypoint.sh` script that handles runtime config injection automatically. The entrypoint runs `envsubst` on the template to produce `config.js` before starting nginx.
 
 Pass the environment variable when running the container:
 
 ```bash
 docker run -e VITE_API_BASE_URL=https://api.production.example.com myapp
+```
+
+### Testing the Docker Setup Locally
+
+You can build and run the Docker image locally to verify everything works:
+
+```bash
+# Build the image
+docker build -t eureka-frontend-test .
+
+# Run it with the runtime env var on port 3000
+docker run --rm -d --name eureka-test -p 3000:80 -e VITE_API_BASE_URL=https://eureka.ails.ece.ntua.gr eureka-frontend-test
+```
+
+**Important:** Use port 3000 (`-p 3000:80`) rather than other ports. The backend has CORS configured for `localhost:3000`, so using a different port will result in CORS errors.
+
+Then open `http://localhost:3000` in your browser and verify:
+
+1. The app loads correctly
+2. Open DevTools console and type `window.RUNTIME_CONFIG` — it should show the injected URL
+3. Check the Network tab to confirm API calls go to the correct URL
+
+To stop the container:
+
+```bash
+docker stop eureka-test
 ```
 
 ## Adding New Environment Variables

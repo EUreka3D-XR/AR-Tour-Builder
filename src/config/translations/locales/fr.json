@@ -259,6 +259,7 @@
   },
   "auth": {
     "logoAlt": "Logo",
+    "welcomeBack": "Bienvenue dans AR Tour Builder",
     "egiLogin": "Se connecter avec EGI Check-in",
     "or": "ou",
     "signup": {

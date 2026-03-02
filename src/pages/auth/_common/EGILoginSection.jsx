@@ -1,8 +1,40 @@
 import { useTranslation } from "react-i18next";
-import { Stack, Typography } from "@mui/material";
+import clsx from "clsx";
+import { Stack, styled, Typography } from "@mui/material";
 
 import Button from "@/components/button/Button";
 import egiLogoWhite from "@/assets/images/egi_logo_white.svg";
+import egiLogo from "@/assets/images/egi_logo.svg";
+
+const EGI_BLUE = "#005faa";
+
+const EGIButton = styled(Button)(({ theme }) => ({
+  gap: theme.spacing(1.5),
+  paddingTop: theme.spacing(1.5),
+  paddingBottom: theme.spacing(1.5),
+  backgroundColor: EGI_BLUE,
+  border: `2px solid ${EGI_BLUE}`,
+  "&:hover": {
+    backgroundColor: "#ffffff",
+    borderColor: EGI_BLUE,
+    color: EGI_BLUE,
+    "& .egi-logo.egi-logo-white": {
+      display: "none",
+    },
+    "& .egi-logo.egi-logo-color": {
+      display: "block",
+    },
+  },
+  "& .egi-logo": {
+    height: 24,
+    "&.egi-logo-white": {
+      display: "block",
+    },
+    "&.egi-logo-color": {
+      display: "none",
+    },
+  },
+}));
 
 function EGILoginSection() {
   const { t } = useTranslation();
@@ -20,20 +52,26 @@ function EGILoginSection() {
         </Typography>
         <span style={{ flex: 1, height: 1, backgroundColor: "#ccc" }} />
       </Stack>
-      <Button
+      <EGIButton
         variant="filled"
         corners="round"
         startIcon={
-          <img
-            src={egiLogoWhite}
-            alt={t("auth.logoAlt")}
-            style={{ height: 28 }}
-          />
+          <span>
+            <img
+              className={clsx("egi-logo", "egi-logo-white")}
+              src={egiLogoWhite}
+              alt={t("auth.logoAlt")}
+            />
+            <img
+              className={clsx("egi-logo", "egi-logo-color")}
+              src={egiLogo}
+              alt={t("auth.logoAlt")}
+            />
+          </span>
         }
-        sx={{ paddingTop: 1.5, paddingBottom: 1.5 }}
       >
         {t("auth.egiLogin")}
-      </Button>
+      </EGIButton>
     </Stack>
   );
 }

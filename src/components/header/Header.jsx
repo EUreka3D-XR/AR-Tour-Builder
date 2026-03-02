@@ -5,7 +5,6 @@ import { useLogout } from "@/services/authService";
 import { useProfile } from "@/services/profileService";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import useNavPaths from "@/hooks/useNavPaths";
-import logo from "@/assets/images/eureka3d-xr-logo.webp";
 import DropdownMenu from "../dropdown/DropdownMenu";
 import EurekaIcon from "../icon/EurekaIcon";
 import AppLanguageDropdown from "../language-dropdown/AppLanguageDropdown";
@@ -56,7 +55,7 @@ function Header() {
             <EurekaIcon name="menu" />
           </IconButton>
         )}
-        <img src={logo} alt={t("common.alt.logo")} className="logo" />
+        <img src={"/logo.webp"} alt={t("common.alt.logo")} className="logo" />
       </div>
       <div className="side-header right-header">
         <AppLanguageDropdown hideLabels />

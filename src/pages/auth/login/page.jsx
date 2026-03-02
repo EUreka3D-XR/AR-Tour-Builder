@@ -10,6 +10,7 @@ import Link from "@/components/link/Link";
 import PasswordInput from "@/components/password-input/PasswordInput";
 import useNavPaths from "@/hooks/useNavPaths";
 import AuthFormBox from "../_common/AuthFormBox";
+import EGILoginSection from "../_common/EGILoginSection";
 import HelperBottomText from "../_common/HelperBottomText";
 
 const defaultValues = {
@@ -83,12 +84,7 @@ function LoginPage() {
           {t("auth.login.links.forgotPassword")}
         </Link>
       </Stack>
-      <Button
-        variant="filled"
-        isFullwidth
-        type="submit"
-        isLoading={fetchState.isLoading}
-      >
+      <Button isFullwidth type="submit" isLoading={fetchState.isLoading}>
         {t("auth.login.buttons.login")}
       </Button>
       <HelperBottomText
@@ -96,6 +92,7 @@ function LoginPage() {
         linkText={t("auth.login.links.signup")}
         linkUrl="/auth/signup"
       />
+      <EGILoginSection />
     </AuthFormBox>
   );
 }

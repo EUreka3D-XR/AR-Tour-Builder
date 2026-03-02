@@ -10,6 +10,7 @@ import LabeledInput from "@/components/labeled-input/LabeledInput";
 import PasswordInput from "@/components/password-input/PasswordInput";
 import useNavPaths from "@/hooks/useNavPaths";
 import AuthFormBox from "../_common/AuthFormBox";
+import EGILoginSection from "../_common/EGILoginSection";
 import HelperBottomText from "../_common/HelperBottomText";
 
 const defaultValues = {
@@ -135,12 +136,7 @@ function SignupPage() {
           {errorMessage}
         </Alert>
       )}
-      <Button
-        variant="filled"
-        isFullwidth
-        type="submit"
-        isLoading={fetchState.isLoading}
-      >
+      <Button isFullwidth type="submit" isLoading={fetchState.isLoading}>
         {t("auth.signup.buttons.createAccount")}
       </Button>
       <HelperBottomText
@@ -148,6 +144,7 @@ function SignupPage() {
         linkText={t("auth.signup.links.login")}
         linkUrl="/auth/login"
       />
+      <EGILoginSection />
     </AuthFormBox>
   );
 }

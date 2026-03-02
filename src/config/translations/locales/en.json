@@ -259,6 +259,8 @@
   },
   "auth": {
     "logoAlt": "Logo",
+    "egiLogin": "Sign-in with EGI Check-in",
+    "or": "or",
     "signup": {
       "title": "Sign Up",
       "labels": {

@@ -22,13 +22,15 @@ function EGILoginSection() {
       </Stack>
       <Button
         variant="filled"
+        corners="round"
         startIcon={
           <img
             src={egiLogoWhite}
             alt={t("auth.logoAlt")}
-            style={{ height: 24 }}
+            style={{ height: 28 }}
           />
         }
+        sx={{ paddingTop: 1.5, paddingBottom: 1.5 }}
       >
         {t("auth.egiLogin")}
       </Button>

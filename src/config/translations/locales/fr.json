@@ -595,8 +595,8 @@
       "description": "Description",
       "estimatedTime": "Temps Estimé (minutes)",
       "estimatedTimeUnit": "min",
-      "estimatedDistance": "Distance Estimée (kilomètres)",
-      "estimatedDistanceUnit": "km",
+      "estimatedDistance": "Distance Estimée (mètres)",
+      "estimatedDistanceUnit": "m",
       "createButton": "Créer la visite et commencer l'édition"
     },
     "pois": {
@@ -679,7 +679,8 @@
     "card": {
       "guided": "Guidée",
       "freeRoam": "Libre",
-      "published": "Publié"
+      "published": "Publié",
+      "distanceUnit": "km"
     }
   },
   "fileTypes": {

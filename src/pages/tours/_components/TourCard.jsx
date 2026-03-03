@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import {
   Card,
@@ -8,7 +9,6 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import Image from "@/components/image/Image";
@@ -183,7 +183,9 @@ function TourCard({ tour, isFullWidth, isHighlighted, onTourClick }) {
         {/* Tour Stats */}
         <div className="stats-row">
           <Chip
-            label={tour.isGuided ? t("tours.card.guided") : t("tours.card.freeRoam")}
+            label={
+              tour.guided ? t("tours.card.guided") : t("tours.card.freeRoam")
+            }
             size="small"
             className={clsx("tour-type")}
           />
@@ -200,14 +202,18 @@ function TourCard({ tour, isFullWidth, isHighlighted, onTourClick }) {
 
           <div className="stat-item">
             <EurekaIcon name="route" className="stat-icon" />
-            <Typography variant="body2">{tour.distance / 1000}km</Typography>
+            <Typography variant="body2">
+              {`${tour.distance / 1000} ${t("tours.card.distanceUnit")}`}
+            </Typography>
           </div>
 
           {tour.status === "published" && (
             <div className="stat-item success">
               <EurekaIcon name="checkCircle" className="stat-icon" />
               {isFullWidth && (
-                <Typography variant="body2">{t("tours.card.published")}</Typography>
+                <Typography variant="body2">
+                  {t("tours.card.published")}
+                </Typography>
               )}
             </div>
           )}

@@ -151,3 +151,69 @@ To add a new runtime-configurable variable:
 1. Add it to `public/config.template.js` with a `$PLACEHOLDER`
 2. Add it to `src/config/base-url/config.js` with the same fallback pattern
 3. Add a build-time default to `.env.example`
+
+---
+
+## Backend Proxy via Nginx (`BACKEND_URL`)
+
+### Why this is needed
+
+The React app is compiled into static files served by nginx. All API calls (e.g. `/api/auth/login`) are made from the **user's browser**, not from a server. In our Kubernetes deployment, the Django backend runs in a private pod that is not exposed to the public internet — only the frontend nginx pod is publicly accessible.
+
+This means browser requests to the backend fail: the browser simply cannot reach a private cluster pod.
+
+```
+User's Browser → Internet → Firewall ✗→ Backend (private K8s pod)
+User's Browser → Internet → Frontend nginx (public) ✓
+```
+
+### The solution: nginx reverse proxy
+
+Nginx is configured to proxy all `/api/` requests to the backend internally, within the cluster. The browser only ever talks to the frontend domain; nginx forwards the request to the backend on its behalf.
+
+```
+User's Browser → nginx (public) → Backend (private, internal DNS)
+                  /api/* → proxy_pass $BACKEND_URL
+```
+
+This also means the mobile app works the same way — it calls the same public frontend domain for API requests, which nginx proxies through.
+
+### How it works
+
+The same `envsubst` pattern used for `config.js` is applied to the nginx config:
+
+| File | Purpose | Committed to git |
+|------|---------|-----------------|
+| `nginx.conf` | Nginx config template with `${BACKEND_URL}` placeholder | Yes |
+| `/etc/nginx/conf.d/default.conf` | Actual nginx config (generated at container startup) | No (generated at runtime) |
+
+At container startup, `docker-entrypoint.sh` runs:
+
+```sh
+envsubst '${BACKEND_URL}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
+```
+
+This replaces `${BACKEND_URL}` with the actual value from the environment, then nginx starts and reads the generated config. The `'${BACKEND_URL}'` argument to `envsubst` ensures **only** that variable is substituted — nginx variables like `$host` and `$remote_addr` are left untouched.
+
+### Why `VITE_API_BASE_URL` should be empty
+
+With the proxy in place, all API calls use relative paths (e.g. `/api/projects`). The browser sends them to the same domain the page was loaded from, nginx intercepts and proxies them to the backend. Setting `VITE_API_BASE_URL` to an absolute URL would bypass nginx and send requests directly to the backend, which would fail.
+
+Set it to empty string (or leave it unset) in production:
+
+```bash
+docker run -e VITE_API_BASE_URL="" -e BACKEND_URL=http://eureka-backend:8000 eureka-frontend
+```
+
+### Docker
+
+Pass `BACKEND_URL` when running the container. The value should be the internal Kubernetes Service name and port for the Django backend:
+
+```bash
+docker run \
+  -e VITE_API_BASE_URL="" \
+  -e BACKEND_URL=http://eureka-backend-service:8000 \
+  eureka-frontend
+```
+
+The service name (`eureka-backend-service`) is defined in your Kubernetes configuration and may differ per deployment environment.

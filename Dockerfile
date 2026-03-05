@@ -20,8 +20,8 @@ FROM nginx:alpine
 # Copy built assets from build stage
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy nginx config for SPA routing
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy nginx config template (BACKEND_URL will be substituted at container startup)
+COPY nginx.conf /etc/nginx/conf.d/default.conf.template
 
 # Copy the entrypoint script that injects runtime config
 COPY docker-entrypoint.sh /docker-entrypoint.sh

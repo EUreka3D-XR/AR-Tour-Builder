@@ -5,6 +5,7 @@ import { Stack, styled, Typography } from "@mui/material";
 import Button from "@/components/button/Button";
 import egiLogoWhite from "@/assets/images/egi_logo_white.svg";
 import egiLogo from "@/assets/images/egi_logo.svg";
+import { startEGILogin } from "@/utils/egiAuth";
 
 const EGI_BLUE = "#005faa";
 
@@ -55,6 +56,7 @@ function EGILoginSection() {
       <EGIButton
         variant="filled"
         corners="round"
+        onClick={startEGILogin}
         startIcon={
           <span>
             <img

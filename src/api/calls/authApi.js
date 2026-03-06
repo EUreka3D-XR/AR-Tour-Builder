@@ -11,6 +11,11 @@ const signup = async (data) => {
   return fetcher.post(url, { data });
 };
 
+const egiLogin = async (code) => {
+  const url = baseUrls.egiLogin;
+  return fetcher.post(url, { data: { code } });
+};
+
 const logout = async () => {
   const url = baseUrls.logout;
   return fetcher.post(url);
@@ -18,6 +23,7 @@ const logout = async () => {
 
 export const authApi = {
   login,
+  egiLogin,
   logout,
   signup,
 };

@@ -11,9 +11,9 @@ const signup = async (data) => {
   return fetcher.post(url, { data });
 };
 
-const egiLogin = async (code) => {
+const egiLogin = async (data) => {
   const url = baseUrls.egiLogin;
-  return fetcher.post(url, { data: { code } });
+  return fetcher.post(url, { data });
 };
 
 const logout = async () => {

@@ -5,7 +5,7 @@ import GuestRoute from "@/components/guards/GuestRoute";
 import AuthRoutes from "./AuthRoutes";
 import DefaultRoutes from "./DefaultRoutes";
 
-const EGICallbackPage = lazy(() => import("@/pages/auth/callback/page"));
+const EGICallbackPage = lazy(() => import("@/pages/auth/egi-login/page"));
 
 function EurekaRoutes() {
   return (
@@ -20,7 +20,14 @@ function EurekaRoutes() {
         }
       />
       {/* EGI Check-in callback — must be outside GuestRoute */}
-      <Route path="/callback" element={<EGICallbackPage />} />
+      <Route
+        path="/egi-login"
+        element={
+          <GuestRoute>
+            <EGICallbackPage />
+          </GuestRoute>
+        }
+      />
       {/* Default Home */}
       <Route path="/" element={<Navigate to="/projects" replace />} />
       {/* 📁 Projects */}

@@ -8,7 +8,7 @@ import { useDataMutator } from "./helpers/serviceHooks";
 //  */
 export const useEGILogin = () => {
   return useDataMutator({
-    mutator: (code) => api.auth.egiLogin(code),
+    mutator: (payload) => api.auth.egiLogin(payload),
     mutationKey: ["egi-login"],
     onSuccess: (data) => {
       localeStorageAPI.auth.setToken(data.token);

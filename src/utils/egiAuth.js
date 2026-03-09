@@ -1,12 +1,16 @@
 // EGI Check-in OpenID Connect helpers (Authorization Code flow, browser-native)
 
+import { config } from "@/config/base-url/config";
+
+const redirectUri = `${window.location.origin}/egi-login`;
+
 const EGI_CONFIG = {
-  authEndpoint: import.meta.env.VITE_EGI_AUTH_ENDPOINT,
-  code: import.meta.env.VITE_EGI_RESPONSE_TYPE,
-  clientId: import.meta.env.VITE_EGI_CLIENT_ID,
-  redirectUri: import.meta.env.VITE_EGI_REDIRECT_URI,
-  scope: import.meta.env.VITE_EGI_SCOPE,
-  codeChallengeMethod: import.meta.env.VITE_CODE_CHALLENGE_METHOD,
+  authEndpoint: config.egiLoginUrl,
+  code: "code",
+  clientId: config.egiClientId,
+  redirectUri: redirectUri,
+  scope: "openid profile email",
+  codeChallengeMethod: "S256",
 };
 
 function generateState() {
@@ -70,7 +74,7 @@ export async function startEGILogin() {
 /**
  * Called from the /callback page. Validates state and extracts the authorization code.
  * The code is then sent to our backend which handles the token exchange with EGI.
- * @returns {{ code: string }}
+ * @returns {{ code: string, state: string }}
  */
 export function extractEGICallback() {
   const params = new URLSearchParams(window.location.search);
@@ -87,5 +91,5 @@ export function extractEGICallback() {
     throw new Error("OAuth state mismatch. Possible CSRF attack.");
   }
 
-  return { code };
+  return { code, state: returnedState };
 }

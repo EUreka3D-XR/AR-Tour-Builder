@@ -4,14 +4,10 @@ const apiBaseUrl =
   "";
 
 const egiLoginUrl =
-  window.RUNTIME_CONFIG?.VITE_EGI_AUTH_ENDPOINT ??
-  import.meta.env.VITE_EGI_AUTH_ENDPOINT ??
-  "";
+  window.RUNTIME_CONFIG?.EGI_LOGIN_URL ?? import.meta.env.EGI_LOGIN_URL ?? "";
 
 const egiClientId =
-  window.RUNTIME_CONFIG?.VITE_EGI_CLIENT_ID ??
-  import.meta.env.VITE_EGI_CLIENT_ID ??
-  "";
+  window.RUNTIME_CONFIG?.EGI_CLIENT_ID ?? import.meta.env.EGI_CLIENT_ID ?? "";
 
 try {
   console.log("[config] All env variables (import.meta.env):", import.meta.env);

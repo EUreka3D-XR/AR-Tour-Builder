@@ -47,13 +47,13 @@ User         Browser (React)         EGI Check-in         Eureka Backend
 
 **Authorization request parameters:**
 
-| Parameter       | Value                          | Source              |
-|-----------------|-------------------------------|---------------------|
-| `response_type` | `code`                        | hardcoded           |
-| `client_id`     | EGI-registered client ID      | `VITE_EGI_CLIENT_ID` |
+| Parameter       | Value                                 | Source                  |
+| --------------- | ------------------------------------- | ----------------------- |
+| `response_type` | `code`                                | hardcoded               |
+| `client_id`     | EGI-registered client ID              | `EGI_CLIENT_ID`         |
 | `redirect_uri`  | e.g. `http://localhost:3000/callback` | `VITE_EGI_REDIRECT_URI` |
-| `scope`         | `openid profile email`        | `VITE_EGI_SCOPE`    |
-| `state`         | random string                 | generated at runtime |
+| `scope`         | `openid profile email`                | `VITE_EGI_SCOPE`        |
+| `state`         | random string                         | generated at runtime    |
 
 ---
 
@@ -86,6 +86,7 @@ If EGI returns an `error` parameter instead of a code, or the state doesn't matc
 **Payload:** `{ code: "AUTH_CODE" }`
 
 The Eureka Django backend:
+
 1. Receives the authorization code
 2. Exchanges it with EGI's token endpoint to verify it is valid
 3. Retrieves the user's identity from EGI
@@ -104,32 +105,32 @@ The Django token is stored in `localStorage` (same mechanism as email/password l
 
 ## Environment variables
 
-| Variable                  | Description                                      | Example (dev)                                                                 |
-|---------------------------|--------------------------------------------------|-------------------------------------------------------------------------------|
-| `VITE_EGI_AUTH_ENDPOINT`  | EGI authorization endpoint                       | `https://aai-dev.egi.eu/auth/realms/egi/protocol/openid-connect/auth`         |
-| `VITE_EGI_CLIENT_ID`      | Client ID registered in EGI Federation Registry  | `e00edd5a-e305-454e-9b2f-af410157a005`                                        |
-| `VITE_EGI_REDIRECT_URI`   | Must match the URI registered with EGI           | `http://localhost:3000/callback`                                               |
-| `VITE_EGI_SCOPE`          | Requested OIDC scopes                            | `openid profile email`                                                        |
+| Variable                | Description                                     | Example (dev)                                                         |
+| ----------------------- | ----------------------------------------------- | --------------------------------------------------------------------- |
+| `EGI_LOGIN_URL`         | EGI authorization endpoint                      | `https://aai-dev.egi.eu/auth/realms/egi/protocol/openid-connect/auth` |
+| `EGI_CLIENT_ID`         | Client ID registered in EGI Federation Registry | `e00edd5a-e305-454e-9b2f-af410157a005`                                |
+| `VITE_EGI_REDIRECT_URI` | Must match the URI registered with EGI          | `http://localhost:3000/callback`                                      |
+| `VITE_EGI_SCOPE`        | Requested OIDC scopes                           | `openid profile email`                                                |
 
 ### Switching environments
 
-Change the `VITE_EGI_AUTH_ENDPOINT` and `VITE_EGI_REDIRECT_URI` variables in the appropriate `.env` file — no code changes needed.
+Change the `EGI_LOGIN_URL` and `VITE_EGI_REDIRECT_URI` variables in the appropriate `.env` file — no code changes needed.
 
-| Environment | Auth endpoint                                                              |
-|-------------|----------------------------------------------------------------------------|
-| Development | `https://aai-dev.egi.eu/auth/realms/egi/protocol/openid-connect/auth`     |
-| Production  | `https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/auth`         |
+| Environment | Auth endpoint                                                         |
+| ----------- | --------------------------------------------------------------------- |
+| Development | `https://aai-dev.egi.eu/auth/realms/egi/protocol/openid-connect/auth` |
+| Production  | `https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/auth`     |
 
 ---
 
 ## Relevant files
 
-| File | Role |
-|------|------|
-| `src/utils/egiAuth.js` | `startEGILogin()` — builds redirect URL; `extractEGICallback()` — extracts and validates the code |
-| `src/pages/auth/_common/EGILoginSection.jsx` | EGI login button, calls `startEGILogin` on click |
-| `src/pages/auth/callback/page.jsx` | Callback route handler, sends code to backend |
-| `src/services/authService.js` | `useEGILogin()` hook — posts code to backend, stores returned token |
-| `src/api/calls/authApi.js` | `egiLogin(code)` — the raw API call |
-| `src/api/endpoints-base-urls/baseUrls.js` | Backend endpoint: `/api/auth/egi` |
-| `src/routes/EurekaRoutes.jsx` | `/callback` route, placed outside the `GuestRoute` guard |
+| File                                         | Role                                                                                              |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `src/utils/egiAuth.js`                       | `startEGILogin()` — builds redirect URL; `extractEGICallback()` — extracts and validates the code |
+| `src/pages/auth/_common/EGILoginSection.jsx` | EGI login button, calls `startEGILogin` on click                                                  |
+| `src/pages/auth/callback/page.jsx`           | Callback route handler, sends code to backend                                                     |
+| `src/services/authService.js`                | `useEGILogin()` hook — posts code to backend, stores returned token                               |
+| `src/api/calls/authApi.js`                   | `egiLogin(code)` — the raw API call                                                               |
+| `src/api/endpoints-base-urls/baseUrls.js`    | Backend endpoint: `/api/auth/egi`                                                                 |
+| `src/routes/EurekaRoutes.jsx`                | `/callback` route, placed outside the `GuestRoute` guard                                          |

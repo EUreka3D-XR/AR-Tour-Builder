@@ -72,7 +72,7 @@ export async function startEGILogin() {
 }
 
 /**
- * Called from the /callback page. Validates state and extracts the authorization code.
+ * Called from the /egi-login page. Validates state and extracts the authorization code.
  * The code is then sent to our backend which handles the token exchange with EGI.
  * @returns {{ code: string, state: string }}
  */

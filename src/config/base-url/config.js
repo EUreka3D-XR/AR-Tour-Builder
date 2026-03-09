@@ -3,6 +3,12 @@ const apiBaseUrl =
   import.meta.env.VITE_API_BASE_URL ??
   "";
 
+const egiLoginUrl =
+  window.RUNTIME_CONFIG?.EGI_LOGIN_URL ?? import.meta.env.EGI_LOGIN_URL ?? "";
+
+const egiClientId =
+  window.RUNTIME_CONFIG?.EGI_CLIENT_ID ?? import.meta.env.EGI_CLIENT_ID ?? "";
+
 try {
   console.log("[config] All env variables (import.meta.env):", import.meta.env);
 } catch (e) {
@@ -28,4 +34,6 @@ if (apiBaseUrl) {
 
 export const config = {
   apiBaseUrl,
+  egiLoginUrl,
+  egiClientId,
 };

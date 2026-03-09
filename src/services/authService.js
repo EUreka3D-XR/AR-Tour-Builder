@@ -6,6 +6,16 @@ import { useDataMutator } from "./helpers/serviceHooks";
 // /**
 //  * @returns {AssetMutateResult}
 //  */
+export const useEGILogin = () => {
+  return useDataMutator({
+    mutator: (payload) => api.auth.egiLogin(payload),
+    mutationKey: ["egi-login"],
+    onSuccess: (data) => {
+      localeStorageAPI.auth.setToken(data.token);
+    },
+  });
+};
+
 export const useLogin = () => {
   return useDataMutator({
     mutator: (payload) => api.auth.login(payload),

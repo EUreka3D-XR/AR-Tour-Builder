@@ -240,12 +240,18 @@
 // =============================================================================
 
 /**
+ * User authentication system provider
+ * @typedef {'egi'|'internal'} AuthProvider
+ */
+
+/**
  * User schema
  * @typedef {Object} User
  * @property {string} id - Unique user identifier
  * @property {string} email - User email address
  * @property {string} username - Unique username
  * @property {string} name - User's name
+ * @property {AuthProvider} provider - Authentication provider
  * @property {string} [avatar] - Avatar image URL
  * @property {UserRole} [role] - User role (admin, editor, viewer)
  */

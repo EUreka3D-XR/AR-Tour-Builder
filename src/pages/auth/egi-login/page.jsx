@@ -17,9 +17,9 @@ function EGICallbackPage() {
     hasCalled.current = true;
 
     try {
-      const { code, state } = extractEGICallback();
+      const { code, state, codeVerifier } = extractEGICallback();
       egiLogin(
-        { code, state },
+        { code, state, codeVerifier },
         {
           onSuccess: () => navigate(routes.home, { replace: true }),
           onError: () => navigate("/auth/login?egi_error=1", { replace: true }),

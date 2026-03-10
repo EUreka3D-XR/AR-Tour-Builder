@@ -53,7 +53,7 @@ export async function startEGILogin() {
     response_type: EGI_CONFIG.code,
     client_id: EGI_CONFIG.clientId,
     redirect_uri: EGI_CONFIG.redirectUri,
-    scope: EGI_CONFIG.scope,
+    scope: "openid profile email entitlements",
     code_challenge_method: EGI_CONFIG.codeChallengeMethod,
     code_challenge: codeChallenge,
     state,
@@ -74,7 +74,7 @@ export async function startEGILogin() {
 /**
  * Called from the /egi-login page. Validates state and extracts the authorization code.
  * The code is then sent to our backend which handles the token exchange with EGI.
- * @returns {{ code: string, state: string }}
+ * @returns {{ code: string, state: string, codeVerifier: string }}
  */
 export function extractEGICallback() {
   const params = new URLSearchParams(window.location.search);
@@ -86,10 +86,18 @@ export function extractEGICallback() {
   if (!code) throw new Error("No authorization code in callback URL.");
 
   const savedState = sessionStorage.getItem("egi_state");
+  const codeVerifier = sessionStorage.getItem("egi_code_verifier");
+
   sessionStorage.removeItem("egi_state");
+  sessionStorage.removeItem("egi_code_verifier");
+
   if (savedState && returnedState !== savedState) {
     throw new Error("OAuth state mismatch. Possible CSRF attack.");
   }
 
-  return { code, state: returnedState };
+  if (!codeVerifier) {
+    throw new Error("PKCE code verifier not found in session storage.");
+  }
+
+  return { code, state: returnedState, codeVerifier };
 }

@@ -61,7 +61,8 @@ const useNavPaths = () => {
       projectBranding: internalSettingsRoute("/branding"),
       auth: authBase,
       login: internalAuthRoute("/login"),
-      signup: internalAuthRoute("/signup"),
+      hiddenLogin: internalAuthRoute("/hidden/login"),
+      hiddenSignup: internalAuthRoute("/hidden/signup"),
       forgotPassword: internalAuthRoute("/forgot-password"),
       resetPassword: internalAuthRoute("/reset-password"),
     };

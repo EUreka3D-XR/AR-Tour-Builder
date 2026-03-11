@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
-import { Stack, styled, Typography } from "@mui/material";
+import { styled } from "@mui/material";
 
 import Button from "@/components/button/Button";
+import { startEGILogin } from "@/utils/egiAuth";
 import egiLogoWhite from "@/assets/images/egi_logo_white.svg";
 import egiLogo from "@/assets/images/egi_logo.svg";
-import { startEGILogin } from "@/utils/egiAuth";
 
 const EGI_BLUE = "#005faa";
 
@@ -40,41 +40,27 @@ const EGIButton = styled(Button)(({ theme }) => ({
 function EGILoginSection() {
   const { t } = useTranslation();
   return (
-    <Stack alignItems="stretch" spacing={2}>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-        spacing={1}
-      >
-        <span style={{ flex: 1, height: 1, backgroundColor: "#ccc" }} />
-        <Typography variant="body2" color="textSecondary" mr={1}>
-          {t("auth.or")}
-        </Typography>
-        <span style={{ flex: 1, height: 1, backgroundColor: "#ccc" }} />
-      </Stack>
-      <EGIButton
-        variant="filled"
-        corners="round"
-        onClick={startEGILogin}
-        startIcon={
-          <span>
-            <img
-              className={clsx("egi-logo", "egi-logo-white")}
-              src={egiLogoWhite}
-              alt={t("auth.logoAlt")}
-            />
-            <img
-              className={clsx("egi-logo", "egi-logo-color")}
-              src={egiLogo}
-              alt={t("auth.logoAlt")}
-            />
-          </span>
-        }
-      >
-        {t("auth.egiLogin")}
-      </EGIButton>
-    </Stack>
+    <EGIButton
+      variant="filled"
+      corners="round"
+      onClick={startEGILogin}
+      startIcon={
+        <span>
+          <img
+            className={clsx("egi-logo", "egi-logo-white")}
+            src={egiLogoWhite}
+            alt={t("auth.logoAlt")}
+          />
+          <img
+            className={clsx("egi-logo", "egi-logo-color")}
+            src={egiLogo}
+            alt={t("auth.logoAlt")}
+          />
+        </span>
+      }
+    >
+      {t("auth.egiLogin")}
+    </EGIButton>
   );
 }
 

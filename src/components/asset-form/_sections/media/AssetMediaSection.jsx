@@ -54,7 +54,7 @@ function AssetFormMediaSection() {
   const contentUrl = useWatch({ name: "contentUrl" });
 
   const helperTextForUrl = useMemo(() => {
-    return getExtensionsHelperForType(assetType);
+    return getExtensionsHelperForType(assetType, true);
   }, [assetType]);
 
   const url = localeValue(contentUrl, locale);
@@ -225,6 +225,7 @@ function AssetFormMediaSection() {
               onClick={() =>
                 openAssetModalWithUrl({
                   url: localeValue(contentUrl, locale),
+                  type: assetType,
                 })
               }
             >

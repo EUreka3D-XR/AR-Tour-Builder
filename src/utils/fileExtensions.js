@@ -18,33 +18,34 @@ export const allowedFileExtensions = {
     { value: ".jpg", label: "JPEG" },
     { value: ".jpeg", label: "JPEG" },
     { value: ".png", label: "PNG" },
-    { value: ".bmp", label: "BMP (Bitmap)" },
-    { value: ".tiff", label: "TIFF (Tagged Image File Format)" },
+    { value: ".bmp", label: "BMP - Bitmap" },
+    { value: ".tiff", label: "TIFF - Tagged Image File Format" },
     { value: ".webp", label: "WebP" },
   ],
   video: [
-    { value: ".mp4", label: "MP4 (MPEG-4 Part 14)" },
+    { value: ".mp4", label: "MP4 - MPEG-4 Part 14" },
     { value: ".m4v", label: "M4V" },
-    { value: ".mov", label: "QuickTime (MOV)" },
-    { value: ".3gp", label: "3GPP (3GP)" },
-    { value: ".3g2", label: "3GPP2 (3G2)" },
-    { value: ".mkv", label: "Matroska (MKV)" },
+    { value: ".mov", label: "QuickTime - MOV" },
+    { value: ".3gp", label: "3GPP - 3GP" },
+    { value: ".3g2", label: "3GPP2 - 3G2" },
+    { value: ".mkv", label: "Matroska - MKV" },
     { value: ".webm", label: "WebM" },
-    { value: ".ts", label: "MPEG-TS (TS)" },
-    { value: ".m2ts", label: "M2TS (BDAV / MPEG-TS)" },
-    { value: ".mpg", label: "MPEG (MPG)" },
+    { value: ".ts", label: "MPEG-TS - TS" },
+    { value: ".m2ts", label: "M2TS - BDAV / MPEG-TS" },
+    { value: ".mpg", label: "MPEG - MPG" },
     { value: ".mpeg", label: "MPEG" },
   ],
   audio: [
-    { value: ".mp3", label: "MP3 (MPEG-1 Audio Layer III)" },
-    { value: ".wav", label: "WAV (Waveform Audio File Format)" },
-    { value: ".ogg", label: "OGG (Ogg container)" },
-    { value: ".aac", label: "AAC (Advanced Audio Codec)" },
-    { value: ".flac", label: "FLAC (Free Lossless Audio Codec)" },
+    { value: ".mp3", label: "MP3 - MPEG-1 Audio Layer III" },
+    { value: ".wav", label: "WAV - Waveform Audio File Format" },
+    { value: ".ogg", label: "OGG - Ogg container" },
+    { value: ".aac", label: "AAC - Advanced Audio Codec" },
+    { value: ".flac", label: "FLAC - Free Lossless Audio Codec" },
   ],
   model3d: [
-    // { value: ".gltf", label: "glTF (GL Transmission Format)" },
-    { value: ".glb", label: "glTF Binary (GLB)" },
+    // { value: ".gltf", label: "glTF - GL Transmission Format" },
+    { value: ".glb", label: "glTF Binary - GLB" },
+    { value: ".zip", label: "ZIP archive containing 3D model files" },
     // { value: ".obj", label: "OBJ" },
     // { value: ".fbx", label: "FBX" },
   ],
@@ -67,7 +68,7 @@ export const allowedFileExtensions = {
  * @param {string} url - The URL or filename to inspect (may include query/hash).
  * @returns {import("@/types/jsdoc-types").AssetType|null} The matching asset type if found; otherwise null.
  */
-export const findTypeFromFileExtension = (url) => {
+export const _findTypeFromFileExtension = (url) => {
   const extension = url.split(".").pop().split(/#|\?/)[0].toLowerCase();
   for (const [type, extensions] of Object.entries(allowedFileExtensions)) {
     if (extensions.some((ext) => ext.value.slice(1) === extension)) {
@@ -76,15 +77,6 @@ export const findTypeFromFileExtension = (url) => {
   }
   return null;
 };
-
-/**
- * Flattened list of all allowed file extension values (each including the leading dot).
- *
- * @type {string[]}
- */
-export const allAllowedFileExtensions = Object.values(allowedFileExtensions)
-  .flat()
-  .map((ext) => ext.value);
 
 /**
  * List of all supported asset types.
@@ -113,28 +105,15 @@ export const fileTypes = [
   },
 ];
 
-export const getExtensionsHelperForType = (type) => {
+export const getExtensionsHelperForType = (type, showLabel) => {
   const allowed = allowedFileExtensions[type] || [];
-  return allowed.map((ext) => String(ext.value).toUpperCase()).join(", ");
-};
-
-export const checkAssetUrlValidity = (url) => {
-  if (!url || typeof url !== "string") return false;
-
-  try {
-    new URL(url);
-  } catch {
-    return false;
-  }
-  const type = findTypeFromFileExtension(url);
-
-  const allowedExtensions = allowedFileExtensions[type];
-  if (!allowedExtensions || allowedExtensions.length === 0) return false;
-
-  const urlLower = url.toLowerCase();
-  return allowedExtensions.some((ext) =>
-    urlLower.endsWith(ext.value.toLowerCase()),
-  );
+  return allowed
+    .map((ext) =>
+      showLabel
+        ? `${ext.value.toUpperCase()} (${ext.label})`
+        : ext.value.toUpperCase(),
+    )
+    .join(", ");
 };
 
 /**
@@ -207,7 +186,8 @@ const zipContains3DModel = async (url) => {
  * @returns {Promise<{ valid: boolean, detectedType: import("@/types/jsdoc-types").AssetType|null }>}
  */
 export const validateUrlContentType = async (url, expectedType) => {
-  if (!url || typeof url !== "string") return { valid: false, detectedType: null };
+  if (!url || typeof url !== "string")
+    return { valid: false, detectedType: null };
 
   try {
     new URL(url);
@@ -226,7 +206,8 @@ export const validateUrlContentType = async (url, expectedType) => {
     isZip =
       mime === "application/zip" ||
       mime === "application/x-zip-compressed" ||
-      mime === "application/octet-stream" && url.toLowerCase().endsWith(".zip");
+      (mime === "application/octet-stream" &&
+        url.toLowerCase().endsWith(".zip"));
 
     if (!isZip) {
       detectedType = findTypeFromMimeType(contentType);
@@ -240,7 +221,7 @@ export const validateUrlContentType = async (url, expectedType) => {
     const extLower = url.toLowerCase();
     isZip = extLower.endsWith(".zip");
     if (!isZip) {
-      detectedType = findTypeFromFileExtension(url);
+      detectedType = _findTypeFromFileExtension(url);
     }
   }
 

@@ -98,7 +98,6 @@ function AssetFormMediaSection() {
     assetType === "audio" || assetType === "video";
 
   const handleTypeChange = (e, onChange) => {
-    console.log(e);
     onChange(e);
 
     const newType = e.target.value;

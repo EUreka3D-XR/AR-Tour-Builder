@@ -136,3 +136,125 @@ export const checkAssetUrlValidity = (url) => {
     urlLower.endsWith(ext.value.toLowerCase()),
   );
 };
+
+/**
+ * Maps MIME type prefixes and specific MIME types to asset types.
+ * Prefix keys end with "/" and are matched via startsWith.
+ * @type {Record<string, import("@/types/jsdoc-types").AssetType>}
+ */
+export const mimeTypeToAssetType = {
+  "image/": "image",
+  "video/": "video",
+  "audio/": "audio",
+  "model/gltf-binary": "model3d",
+  "model/gltf+json": "model3d",
+  "application/pdf": "text",
+};
+
+/**
+ * Derive the asset type from a MIME type string.
+ *
+ * @param {string} mimeType
+ * @returns {import("@/types/jsdoc-types").AssetType|null}
+ */
+export const findTypeFromMimeType = (mimeType) => {
+  if (!mimeType) return null;
+  const mime = mimeType.toLowerCase().split(";")[0].trim();
+  for (const [key, type] of Object.entries(mimeTypeToAssetType)) {
+    if (key.endsWith("/") ? mime.startsWith(key) : mime === key) {
+      return type;
+    }
+  }
+  return null;
+};
+
+/** 3D model file extensions that are valid inside a zip archive. */
+const VALID_3D_EXTENSIONS_IN_ZIP = [".glb", ".gltf", ".obj"];
+
+/**
+ * Inspect a zip archive at the given URL using HTTP Range requests (via unzipit)
+ * so that only the zip central directory is fetched — not the full file.
+ * Returns true if the zip contains at least one supported 3D model file.
+ *
+ * @param {string} url
+ * @returns {Promise<boolean>}
+ */
+const zipContains3DModel = async (url) => {
+  try {
+    const { unzip } = await import("unzipit");
+    const { entries } = await unzip(url);
+    return Object.keys(entries).some((name) =>
+      VALID_3D_EXTENSIONS_IN_ZIP.some((ext) =>
+        name.toLowerCase().endsWith(ext),
+      ),
+    );
+  } catch {
+    return false;
+  }
+};
+
+/**
+ * Validate a URL by fetching its Content-Type via a HEAD request.
+ * Falls back to extension-based detection if the server does not return a
+ * usable Content-Type or if the request fails (e.g. CORS).
+ *
+ * Special handling for model3d: a zip URL is inspected (using HTTP Range
+ * requests) to confirm it contains a supported 3D file (.glb, .gltf, .obj)
+ * without downloading the full archive.
+ *
+ * @param {string} url
+ * @param {import("@/types/jsdoc-types").AssetType} expectedType
+ * @returns {Promise<{ valid: boolean, detectedType: import("@/types/jsdoc-types").AssetType|null }>}
+ */
+export const validateUrlContentType = async (url, expectedType) => {
+  if (!url || typeof url !== "string") return { valid: false, detectedType: null };
+
+  try {
+    new URL(url);
+  } catch {
+    return { valid: false, detectedType: null };
+  }
+
+  let detectedType = null;
+  let isZip = false;
+
+  try {
+    const response = await fetch(url, { method: "HEAD" });
+    const contentType = response.headers.get("content-type");
+    const mime = contentType?.toLowerCase().split(";")[0].trim() ?? "";
+
+    isZip =
+      mime === "application/zip" ||
+      mime === "application/x-zip-compressed" ||
+      mime === "application/octet-stream" && url.toLowerCase().endsWith(".zip");
+
+    if (!isZip) {
+      detectedType = findTypeFromMimeType(contentType);
+    }
+  } catch {
+    // CORS or network error — fall back below
+  }
+
+  // If HEAD gave no type, try extension
+  if (!detectedType && !isZip) {
+    const extLower = url.toLowerCase();
+    isZip = extLower.endsWith(".zip");
+    if (!isZip) {
+      detectedType = findTypeFromFileExtension(url);
+    }
+  }
+
+  // Zip path: inspect the archive entries
+  if (isZip) {
+    if (expectedType !== "model3d") {
+      return { valid: false, detectedType: null };
+    }
+    const has3D = await zipContains3DModel(url);
+    return { valid: has3D, detectedType: has3D ? "model3d" : null };
+  }
+
+  return {
+    valid: !!detectedType && detectedType === expectedType,
+    detectedType,
+  };
+};

@@ -212,6 +212,16 @@
   "model_viewer": {
     "alt": {
       "viewer_title": "Visionneuse 3D"
+    },
+    "mode": {
+      "freelook": "Freelook",
+      "grid": "Grille"
+    },
+    "controls": {
+      "position": "Position",
+      "rotation": "Rotation",
+      "scale": "Échelle",
+      "dimensions": "Dimensions (m)"
     }
   },
   "table": {

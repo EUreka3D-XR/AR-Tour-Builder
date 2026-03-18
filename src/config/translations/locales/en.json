@@ -212,6 +212,16 @@
   "model_viewer": {
     "alt": {
       "viewer_title": "3D Viewer"
+    },
+    "mode": {
+      "freelook": "Freelook",
+      "grid": "Grid"
+    },
+    "controls": {
+      "position": "Position",
+      "rotation": "Rotation",
+      "scale": "Scale",
+      "dimensions": "Dimensions (m)"
     }
   },
   "table": {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box, Collapse, Stack, Typography } from "@mui/material";
@@ -119,6 +120,7 @@ function Vec3Fields({ value = {}, variant = "input", onChange }) {
 }
 
 export const Controls = ({ onCameraChange, onError, postToViewer }) => {
+  const { t } = useTranslation();
   const { isOpen, open, close } = useToggle();
   const { updateTransform, updatePosition, updateRotation, updateScale } =
     useWriteModel3DTransform();
@@ -176,16 +178,16 @@ export const Controls = ({ onCameraChange, onError, postToViewer }) => {
 
   return (
     <Box sx={panelSx}>
-      <Section title="Position">
+      <Section title={t("model_viewer.controls.position")}>
         <Vec3Fields value={position} onChange={handlePositionChange} />
       </Section>
-      <Section title="Rotation">
+      <Section title={t("model_viewer.controls.rotation")}>
         <Vec3Fields value={rotation} onChange={handleRotationChange} />
       </Section>
-      <Section title="Scale">
+      <Section title={t("model_viewer.controls.scale")}>
         <VecField label="F" value={scale?.x} onChange={handleScaleChange} />
       </Section>
-      <Section title="Dimensions (m)">
+      <Section title={t("model_viewer.controls.dimensions")}>
         <Vec3Fields value={dimensions} variant="display" />
       </Section>
     </Box>

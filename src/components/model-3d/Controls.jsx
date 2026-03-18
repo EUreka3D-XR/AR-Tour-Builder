@@ -18,9 +18,6 @@ const keysToLabels = {
 };
 
 const panelSx = {
-  position: "absolute",
-  top: 16,
-  right: 16,
   width: 140,
   backgroundColor: "rgba(255,255,255,0.6)",
   borderRadius: 1,

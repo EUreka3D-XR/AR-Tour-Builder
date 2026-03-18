@@ -1,8 +1,10 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { styled } from "@mui/material";
+import { Stack, styled } from "@mui/material";
 
 import { Controls } from "./Controls";
+import ControlsPanel from "./ControlsPanel";
+import ToggleViewerButtons from "./ToggleViewerButtons";
 
 const DEFAULT_URL = import.meta.env.VITE_MODEL_INSPECTOR_URL;
 
@@ -35,7 +37,8 @@ const ContainerStyled = styled("div")(() => ({
  */
 function Model3DViewer({
   src,
-  mode = "freelook",
+  mode: propsMode = "freelook",
+  disableToggleModes = false,
   isEditable = false,
   viewerUrl = DEFAULT_URL,
   onCameraChange,
@@ -43,6 +46,8 @@ function Model3DViewer({
 }) {
   const { t } = useTranslation();
   const iframeRef = useRef(null);
+
+  const [mode, setMode] = useState(propsMode);
 
   // Construct viewer iframe URL
   const freelook = !isEditable && Boolean(mode === "freelook");
@@ -68,13 +73,21 @@ function Model3DViewer({
         }}
         allow="fullscreen"
       />
-      {!freelook && (
-        <Controls
-          onCameraChange={onCameraChange}
-          onError={onError}
-          postToViewer={postToViewer}
-        />
-      )}
+      <ControlsPanel>
+        <Stack spacing={1} alignItems="flex-end">
+          {!disableToggleModes && (
+            <ToggleViewerButtons mode={mode} setMode={setMode} />
+          )}
+
+          {!freelook && (
+            <Controls
+              onCameraChange={onCameraChange}
+              onError={onError}
+              postToViewer={postToViewer}
+            />
+          )}
+        </Stack>
+      </ControlsPanel>
       {/* <div className="mt-2 flex gap-2">
         <button
           onClick={resetCamera}

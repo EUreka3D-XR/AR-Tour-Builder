@@ -3,6 +3,7 @@ export const icons = {
   add: "add",
   arrowUp: "keyboard_arrow_up",
   arrowDown: "keyboard_arrow_down",
+  arrowRange: "arrow_range",
   archive: "archive",
   audio: "audio_file",
   back: "arrow_back",

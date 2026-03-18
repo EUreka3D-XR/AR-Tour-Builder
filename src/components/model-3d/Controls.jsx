@@ -90,6 +90,7 @@ function VecField({ label, value, isDisabled, onChange }) {
         min={-Infinity}
         max={Infinity}
         step={0.01}
+        draggable={!isDisabled}
         disabled={isDisabled}
         sx={inputSx}
         onChange={handleChange}
@@ -124,7 +125,6 @@ export const Controls = ({ onCameraChange, onError }) => {
   // Listen for messages from the iframe
   useEffect(() => {
     const handleMessage = (event) => {
-      console.log("Received message from viewer iframe:", event.data);
       // In production: validate origin (e.g., event.origin === viewerUrlOrigin)
       if (!event.data?.type) return;
 

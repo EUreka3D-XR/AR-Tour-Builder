@@ -15,6 +15,7 @@ const defaultTransform = {
   rotation: { x: 0, y: 0, z: 0 },
   scale: { x: 1, y: 1, z: 1 },
   dimensions: { width: 1, height: 1, depth: 1 },
+  initialDimensions: { width: 1, height: 1, depth: 1 },
 };
 
 const useModel3DStore = create((set) => ({
@@ -31,9 +32,18 @@ const useModel3DStore = create((set) => ({
         rotation: { ...state.rotation, ...rotation },
       }),
       ...(scale !== undefined && { scale: { ...state.scale, ...scale } }),
-      ...(dimensions !== undefined && {
-        dimensions: { ...state.dimensions, ...dimensions },
-      }),
+      ...(dimensions !== undefined
+        ? {
+            initialDimensions: { ...state.initialDimensions, ...dimensions },
+            dimensions: { ...state.dimensions, ...dimensions },
+          }
+        : scale !== undefined && {
+            dimensions: {
+              width: state.initialDimensions.width * (scale.x ?? state.scale.x),
+              height: state.initialDimensions.height * (scale.y ?? state.scale.y),
+              depth: state.initialDimensions.depth * (scale.z ?? state.scale.z),
+            },
+          }),
     })),
   reset: () => set({ ...defaultTransform }),
 }));

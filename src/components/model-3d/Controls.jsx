@@ -140,11 +140,6 @@ export const Controls = ({
   const { updateTransform } = useWriteModel3DTransform();
   const { position, rotation, scale, dimensions } = useReadModel3DTransform();
 
-  // Initialize transform when model is loaded
-  useEffect(() => {
-    if (initialTransform) updateTransform(initialTransform);
-  }, [initialTransform, updateTransform]);
-
   // Listen for messages from the iframe
   useEffect(() => {
     const handleMessage = (event) => {
@@ -154,16 +149,13 @@ export const Controls = ({
       switch (event.data.type) {
         case "modelLoaded": {
           open();
+          updateTransform({ dimensions: event.data.dimensions });
           const transform = {
             position: initialTransform?.position ?? 0,
             rotation: initialTransform?.rotation ?? 0,
             scale: initialTransform?.scale ?? 1,
           };
-          updateTransform({
-            ...transform,
-            dimensions: event.data.dimensions,
-          });
-          postToViewer?.({ type: "setTransform", transform });
+          postToViewer?.({ type: "initTransform", transform });
           break;
         }
         case "cameraChange":
@@ -174,8 +166,8 @@ export const Controls = ({
           onError?.(event.data.error);
           break;
         case "transformChange": {
-          const { position, rotation, scale, dimensions } = event.data;
-          updateTransform({ position, rotation, scale, dimensions });
+          const { position, rotation, scale } = event.data;
+          updateTransform({ position, rotation, scale });
           break;
         }
         default:

@@ -3,6 +3,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box, Collapse, Stack, Typography } from "@mui/material";
 
+import { useToggle } from "@/hooks/useToggle";
 import NumberInput from "../number-input/NumberInput";
 import { useReadModel3DTransform, useWriteModel3DTransform } from "./utils";
 
@@ -117,7 +118,8 @@ function Vec3Fields({ value = {}, variant = "input", onChange }) {
   ));
 }
 
-export const Controls = ({ onCameraChange, onError }) => {
+export const Controls = ({ onCameraChange, onError, postToViewer }) => {
+  const { isOpen, open, close } = useToggle();
   const { updateTransform, updatePosition, updateRotation, updateScale } =
     useWriteModel3DTransform();
   const { position, rotation, scale, dimensions } = useReadModel3DTransform();
@@ -129,10 +131,15 @@ export const Controls = ({ onCameraChange, onError }) => {
       if (!event.data?.type) return;
 
       switch (event.data.type) {
+        case "modelLoaded":
+          open();
+          updateTransform(event.data.transform);
+          break;
         case "cameraChange":
           onCameraChange?.(event.data);
           break;
         case "viewerError":
+          close();
           onError?.(event.data.error);
           break;
         case "transformChange": {
@@ -141,25 +148,42 @@ export const Controls = ({ onCameraChange, onError }) => {
           break;
         }
         default:
-          // You can add more message types if needed
           break;
       }
     };
 
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
-  }, [onCameraChange, onError, updateTransform]);
+  }, [onCameraChange, onError, updateTransform, open, close]);
+
+  const handlePositionChange = (vec) => {
+    updatePosition(vec);
+    postToViewer?.({ type: "setPosition", ...vec });
+  };
+
+  const handleRotationChange = (vec) => {
+    updateRotation(vec);
+    postToViewer?.({ type: "setRotation", ...vec });
+  };
+
+  const handleScaleChange = (vec) => {
+    const newScale = { x: vec, y: vec, z: vec };
+    updateScale(newScale);
+    postToViewer?.({ type: "setScale", ...newScale });
+  };
+
+  if (!isOpen) return null;
 
   return (
     <Box sx={panelSx}>
       <Section title="Position">
-        <Vec3Fields value={position} onChange={updatePosition} />
+        <Vec3Fields value={position} onChange={handlePositionChange} />
       </Section>
       <Section title="Rotation">
-        <Vec3Fields value={rotation} onChange={updateRotation} />
+        <Vec3Fields value={rotation} onChange={handleRotationChange} />
       </Section>
       <Section title="Scale">
-        <Vec3Fields value={scale} onChange={updateScale} />
+        <VecField label="F" value={scale?.x} onChange={handleScaleChange} />
       </Section>
       <Section title="Dimensions (m)">
         <Vec3Fields value={dimensions} variant="display" />

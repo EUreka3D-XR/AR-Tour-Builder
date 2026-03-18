@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { styled } from "@mui/material";
 
@@ -20,8 +20,9 @@ const ContainerStyled = styled("div")(() => ({
 /**
  * @typedef {Object} Model3DViewerProps
  * @property {string} src - URL of the 3D model file (.glb or .gltf)
- * @property {boolean} [showControls] - Whether to show viewer controls (default: true)
+ * @property {'grid' | 'freelook'} [mode] - Choose between 'grid' or 'freelook' mode (default: 'freelook')
  * @property {string} viewerUrl - URL of the hosted viewer page (e.g., https://your-username.github.io/threejs-viewer/index.html)
+ * @property {boolean} [isEditable] - Whether the model is editable (default: false). If false, the viewer will be in "showcase" mode with limited controls.
  * @property {(data: any) => void} [onCameraChange] - Callback when the camera moves or zooms
  * @property {(error: any) => void} [onError] - Callback when the viewer reports an error
  */
@@ -34,7 +35,8 @@ const ContainerStyled = styled("div")(() => ({
  */
 function Model3DViewer({
   src,
-  showControls,
+  mode = "freelook",
+  isEditable = false,
   viewerUrl = DEFAULT_URL,
   onCameraChange,
   onError,
@@ -43,20 +45,14 @@ function Model3DViewer({
   const iframeRef = useRef(null);
 
   // Construct viewer iframe URL
-  const iframeSrc = `${viewerUrl}?file=${encodeURIComponent(src)}&showControls=${Boolean(showControls)}`;
+  const freelook = !isEditable && Boolean(mode === "freelook");
+  const controls = isEditable ? "translate,rotate" : "hide";
+  const iframeSrc = `${viewerUrl}?file=${encodeURIComponent(src)}&freelook=${freelook}&controls=${controls}`;
 
-  // Send message to iframe (e.g., reset camera)
-  // const postMessage = useCallback((message) => {
-  //   if (!iframeRef.current) return;
-  //   iframeRef.current.contentWindow?.postMessage(message, "*");
-  // }, []);
+  const postToViewer = useCallback((message) => {
+    iframeRef.current?.contentWindow?.postMessage(message, "*");
+  }, []);
 
-  // Public helper to reset the camera (optional)
-  // const resetCamera = useCallback(() => {
-  //   postMessage({ type: "resetCamera" });
-  // }, [postMessage]);
-
-  // Optional UI buttons for testing interaction
   return (
     <ContainerStyled>
       <iframe
@@ -72,7 +68,13 @@ function Model3DViewer({
         }}
         allow="fullscreen"
       />
-      <Controls onCameraChange={onCameraChange} onError={onError} />
+      {!freelook && (
+        <Controls
+          onCameraChange={onCameraChange}
+          onError={onError}
+          postToViewer={postToViewer}
+        />
+      )}
       {/* <div className="mt-2 flex gap-2">
         <button
           onClick={resetCamera}

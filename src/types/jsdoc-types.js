@@ -220,8 +220,24 @@
  * @property {boolean} isGroundPlaced - Indicates if the 3D model is ground placed in AR
  * @property {number} spawnRadius - Radius within which the model can spawn in AR (in meters)
  * @property {Asset} linkedAsset - Linked asset information
+ * @property {ModelTransform} modelTransform - Default transform for the 3D model in AR
  * @property {Georeference} georeference - Geographical reference information for the asset
  * @property {boolean} isGeoreferenced - Indicates if the asset is georeferenced
+ */
+
+/**
+ * 3d Model Transform
+ * @typedef {Object} ModelTransform
+ * @property {Vector3d} position - The position vector for the 3D model in AR
+ * @property {Vector3d} rotation - The rotation vector for the 3D model in AR
+ * @property {Vector3d} scale - The scale vector for the 3D model in AR
+ */
+
+/**
+ * @typedef {Object} Vector3d
+ * @property {number} x
+ * @property {number} y
+ * @property {number} z
  */
 
 /**

@@ -35,15 +35,7 @@ const useModel3DStore = create((set) => ({
         dimensions: { ...state.dimensions, ...dimensions },
       }),
     })),
-  /** @param {Partial<Vector3>} position */
-  updatePosition: (position) =>
-    set((state) => ({ position: { ...state.position, ...position } })),
-  /** @param {Partial<Vector3>} rotation */
-  updateRotation: (rotation) =>
-    set((state) => ({ rotation: { ...state.rotation, ...rotation } })),
-  /** @param {Partial<Vector3>} scale */
-  updateScale: (scale) =>
-    set((state) => ({ scale: { ...state.scale, ...scale } })),
+  reset: () => set({ ...defaultTransform }),
 }));
 
 export const useReadModel3DTransform = () => {
@@ -62,14 +54,6 @@ export const useReadModel3DTransform = () => {
 
 export const useWriteModel3DTransform = () => {
   const update = useModel3DStore((s) => s.update);
-  const updatePosition = useModel3DStore((s) => s.updatePosition);
-  const updateRotation = useModel3DStore((s) => s.updateRotation);
-  const updateScale = useModel3DStore((s) => s.updateScale);
 
-  return {
-    updateTransform: update,
-    updatePosition,
-    updateRotation,
-    updateScale,
-  };
+  return { updateTransform: update };
 };

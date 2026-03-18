@@ -116,12 +116,34 @@ function Vec3Fields({ value = {}, variant = "input", onChange }) {
   ));
 }
 
-export const Controls = ({ onCameraChange, onError, postToViewer }) => {
+/**
+ * @typedef {Object} ControlsProps
+ * @property {(data: any) => void} [onCameraChange] - Callback when the camera moves or zooms in the viewer
+ * @property {(error: any) => void} [onError] - Callback when the viewer reports an error
+ * @property {(message: any) => void} postToViewer - Function to send messages to the viewer iframe
+ * @property {import("@/types/jsdoc-types").ModelTransform} [initialTransform] - Initial transform for the model (position, rotation, scale)
+ */
+
+/**
+ *
+ * @param {ControlsProps} props
+ * @returns {React.ReactNode}
+ */
+export const Controls = ({
+  onCameraChange,
+  onError,
+  postToViewer,
+  initialTransform,
+}) => {
   const { t } = useTranslation();
   const { isOpen, open, close } = useToggle();
-  const { updateTransform, updatePosition, updateRotation, updateScale } =
-    useWriteModel3DTransform();
+  const { updateTransform } = useWriteModel3DTransform();
   const { position, rotation, scale, dimensions } = useReadModel3DTransform();
+
+  // Initialize transform when model is loaded
+  useEffect(() => {
+    if (initialTransform) updateTransform(initialTransform);
+  }, [initialTransform, updateTransform]);
 
   // Listen for messages from the iframe
   useEffect(() => {
@@ -130,10 +152,20 @@ export const Controls = ({ onCameraChange, onError, postToViewer }) => {
       if (!event.data?.type) return;
 
       switch (event.data.type) {
-        case "modelLoaded":
+        case "modelLoaded": {
           open();
-          updateTransform(event.data.transform);
+          const transform = {
+            position: initialTransform?.position ?? 0,
+            rotation: initialTransform?.rotation ?? 0,
+            scale: initialTransform?.scale ?? 1,
+          };
+          updateTransform({
+            ...transform,
+            dimensions: event.data.dimensions,
+          });
+          postToViewer?.({ type: "setTransform", transform });
           break;
+        }
         case "cameraChange":
           onCameraChange?.(event.data);
           break;
@@ -153,21 +185,29 @@ export const Controls = ({ onCameraChange, onError, postToViewer }) => {
 
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
-  }, [onCameraChange, onError, updateTransform, open, close]);
+  }, [
+    onCameraChange,
+    onError,
+    updateTransform,
+    open,
+    close,
+    initialTransform,
+    postToViewer,
+  ]);
 
   const handlePositionChange = (vec) => {
-    updatePosition(vec);
+    updateTransform({ position: vec });
     postToViewer?.({ type: "setPosition", ...vec });
   };
 
   const handleRotationChange = (vec) => {
-    updateRotation(vec);
+    updateTransform({ rotation: vec });
     postToViewer?.({ type: "setRotation", ...vec });
   };
 
   const handleScaleChange = (vec) => {
     const newScale = { x: vec, y: vec, z: vec };
-    updateScale(newScale);
+    updateTransform({ scale: newScale });
     postToViewer?.({ type: "setScale", ...newScale });
   };
 

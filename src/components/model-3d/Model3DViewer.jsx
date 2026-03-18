@@ -24,7 +24,9 @@ const ContainerStyled = styled("div")(() => ({
  * @property {string} src - URL of the 3D model file (.glb or .gltf)
  * @property {'grid' | 'freelook'} [mode] - Choose between 'grid' or 'freelook' mode (default: 'freelook')
  * @property {string} viewerUrl - URL of the hosted viewer page (e.g., https://your-username.github.io/threejs-viewer/index.html)
+ * @property {import("@/types/jsdoc-types").ModelTransform} [initialTransform] - Initial transform for the model (position, rotation, scale)
  * @property {boolean} [isEditable] - Whether the model is editable (default: false). If false, the viewer will be in "showcase" mode with limited controls.
+ * @property {boolean} [disableToggleModes] - Whether to disable the toggle mode buttons (default: false)
  * @property {(data: any) => void} [onCameraChange] - Callback when the camera moves or zooms
  * @property {(error: any) => void} [onError] - Callback when the viewer reports an error
  */
@@ -37,6 +39,7 @@ const ContainerStyled = styled("div")(() => ({
  */
 function Model3DViewer({
   src,
+  initialTransform,
   mode: propsMode = "freelook",
   disableToggleModes = false,
   isEditable = false,
@@ -81,9 +84,10 @@ function Model3DViewer({
 
           {!freelook && (
             <Controls
+              initialTransform={initialTransform}
+              postToViewer={postToViewer}
               onCameraChange={onCameraChange}
               onError={onError}
-              postToViewer={postToViewer}
             />
           )}
         </Stack>

@@ -1,8 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { styled } from "@mui/material";
 
-const DEFAULT_URL = "https://leomav.github.io/model-inspector/";
+import { Controls } from "./Controls";
+
+const DEFAULT_URL = import.meta.env.VITE_MODEL_INSPECTOR_URL;
 
 const ContainerStyled = styled("div")(() => ({
   label: "model-iframe-container",
@@ -12,6 +14,7 @@ const ContainerStyled = styled("div")(() => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+  position: "relative",
 }));
 
 /**
@@ -42,29 +45,6 @@ function Model3DViewer({
   // Construct viewer iframe URL
   const iframeSrc = `${viewerUrl}?file=${encodeURIComponent(src)}&showControls=${Boolean(showControls)}`;
 
-  // Listen for messages from the iframe
-  useEffect(() => {
-    const handleMessage = (event) => {
-      // In production: validate origin (e.g., event.origin === viewerUrlOrigin)
-      if (!event.data?.type) return;
-
-      switch (event.data.type) {
-        case "cameraChange":
-          onCameraChange?.(event.data);
-          break;
-        case "viewerError":
-          onError?.(event.data.error);
-          break;
-        default:
-          // You can add more message types if needed
-          break;
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [onCameraChange, onError]);
-
   // Send message to iframe (e.g., reset camera)
   // const postMessage = useCallback((message) => {
   //   if (!iframeRef.current) return;
@@ -92,6 +72,7 @@ function Model3DViewer({
         }}
         allow="fullscreen"
       />
+      <Controls onCameraChange={onCameraChange} onError={onError} />
       {/* <div className="mt-2 flex gap-2">
         <button
           onClick={resetCamera}

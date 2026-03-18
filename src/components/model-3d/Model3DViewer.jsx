@@ -82,7 +82,7 @@ function Model3DViewer({
             <ToggleViewerButtons mode={mode} setMode={setMode} />
           )}
 
-          {!freelook && (
+          {!freelook && isEditable && (
             <Controls
               initialTransform={initialTransform}
               postToViewer={postToViewer}

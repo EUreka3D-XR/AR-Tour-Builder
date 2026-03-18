@@ -29,10 +29,12 @@ function ToggleViewerButtons({ mode, setMode }) {
         },
       }}
     >
-      <ToggleButton value="freelook">
+      <ToggleButton value="freelook" sx={{ px: "4px", py: "2px" }}>
         {t("model_viewer.mode.freelook")}
       </ToggleButton>
-      <ToggleButton value="grid">{t("model_viewer.mode.grid")}</ToggleButton>
+      <ToggleButton value="grid" sx={{ px: "4px", py: "2px" }}>
+        {t("model_viewer.mode.grid")}
+      </ToggleButton>
     </ToggleButtonGroup>
   );
 }

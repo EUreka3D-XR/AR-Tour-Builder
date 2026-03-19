@@ -1,3 +1,4 @@
+import { useFormContext, useWatch } from "react-hook-form";
 import { Stack, styled } from "@mui/material";
 
 import MediaPreview from "@/components/media-preview/MediaPreview";
@@ -11,16 +12,19 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   flexShrink: 0,
 }));
 
-const mockTransform = {
-  position: { x: 0, y: 0, z: 0 },
-  rotation: { x: 0, y: 0, z: 0 },
-  scale: { x: 1, y: 1, z: 1 },
-};
-
 function AssetFormPreview({ type, url }) {
+  const transform = useWatch({ name: "modelTransform" });
+  const isGeoreferenced = useWatch({ name: "isGeoreferenced" });
+  const { setValue } = useFormContext();
+
   if (type === "text") return null;
 
-  const showModelTransformButton = type === "model3d";
+  const showModelTransformButton = isGeoreferenced && type === "model3d";
+
+  const handleTransformSave = (updatedTransform) => {
+    // Update the form state with the new transform values
+    setValue("modelTransform", updatedTransform);
+  };
 
   return (
     <Stack
@@ -33,7 +37,11 @@ function AssetFormPreview({ type, url }) {
         <MediaPreview url={url} type={type} />
       </ContainerStyled>
       {showModelTransformButton && (
-        <EditModelTransformButton url={url} initialTransform={mockTransform} />
+        <EditModelTransformButton
+          url={url}
+          initialTransform={transform}
+          onSave={handleTransformSave}
+        />
       )}
     </Stack>
   );

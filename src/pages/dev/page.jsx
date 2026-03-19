@@ -32,6 +32,7 @@ function DevPage() {
           <Model3DViewer
             src={url}
             showControls
+            isEditable
             initialTransform={{
               position: { x: 1, y: 1, z: 1 },
               rotation: { x: 0, y: 0, z: 0 },

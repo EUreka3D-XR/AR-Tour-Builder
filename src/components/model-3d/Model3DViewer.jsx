@@ -8,6 +8,7 @@ import SaveActionButtons from "./SaveActionButtons";
 import ToggleViewerButtons from "./ToggleViewerButtons";
 
 const DEFAULT_URL = "https://leomav.github.io/model-inspector";
+// const DEFAULT_URL = import.meta.env.VITE_MODEL_INSPECTOR_URL;
 
 const ContainerStyled = styled("div")(() => ({
   label: "model-iframe-container",
@@ -60,7 +61,8 @@ function Model3DViewer({
   // Construct viewer iframe URL
   const freelook = Boolean(mode === "freelook");
   const controls = isEditable ? "translate,rotate" : "hide";
-  const iframeSrc = `${viewerUrl}?file=${encodeURIComponent(src)}&freelook=${freelook}&controls=${controls}`;
+  const compass = isEditable ? "strip" : undefined;
+  const iframeSrc = `${viewerUrl}?file=${encodeURIComponent(src)}&freelook=${freelook}&controls=${controls}&compass=${compass}`;
 
   const postToViewer = useCallback((message) => {
     iframeRef.current?.contentWindow?.postMessage(message, "*");

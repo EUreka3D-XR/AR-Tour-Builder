@@ -14,7 +14,9 @@ import AssetFormLinkedAudio from "../linked-audio/AssetFormLinkedAudio";
 
 function AssetFormModelAttributes({ isPoiAsset }) {
   const { t } = useTranslation();
-  const { formState: { errors } } = useFormContext();
+  const {
+    formState: { errors },
+  } = useFormContext();
   const assetType = useWatch({ name: "type" });
   const contentUrl = useWatch({ name: "contentUrl" });
   const isGeoreferenced = useWatch({ name: "isGeoreferenced" });
@@ -102,6 +104,7 @@ function AssetFormModelAttributes({ isPoiAsset }) {
                             render={({ field }) => (
                               <NumberInput
                                 {...field}
+                                mode="natural"
                                 min={3}
                                 max={30}
                                 iconName="radius"

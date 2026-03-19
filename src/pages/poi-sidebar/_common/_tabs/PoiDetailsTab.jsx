@@ -67,6 +67,7 @@ function PoiDetailsTab() {
           <LabeledInput label={t("poiSidebar.detailsTab.poiRadius")}>
             <NumberInput
               {...field}
+              mode="natural"
               min={5}
               max={100}
               error={!!fieldState.error}

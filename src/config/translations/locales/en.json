@@ -227,7 +227,8 @@
       "save": "Save transform",
       "cancel": "Cancel"
     },
-    "edit_properties": "Edit 3D properties"
+    "edit_properties": "Edit 3D properties",
+    "properties_title": "3D Model Properties"
   },
   "table": {
     "aria": {

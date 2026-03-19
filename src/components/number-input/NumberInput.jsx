@@ -66,7 +66,7 @@ function NumberInput({
   min,
   max,
   step = 1,
-  decimals = 7,
+  decimals,
   value: externalValue,
   draggable = false,
   scrubSensitivity = 2,

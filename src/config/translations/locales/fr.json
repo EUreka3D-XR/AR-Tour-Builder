@@ -227,7 +227,8 @@
       "save": "Enregistrer la transformation",
       "cancel": "Annuler"
     },
-    "edit_properties": "Modifier les propriétés 3D"
+    "edit_properties": "Modifier les propriétés 3D",
+    "properties_title": "Propriétés du modèle 3D"
   },
   "table": {
     "aria": {

@@ -62,6 +62,7 @@ function CoordinatesInput({
             <LabeledInput label={t("coordinates_input.latitude.label")}>
               <NumberInput
                 {...field}
+                decimals={7}
                 error={!!fieldState.error}
                 helperText={fieldState?.error?.message}
                 placeholder={t("coordinates_input.latitude.placeholder")}
@@ -75,6 +76,7 @@ function CoordinatesInput({
             <LabeledInput label={t("coordinates_input.longitude.label")}>
               <NumberInput
                 {...field}
+                decimals={7}
                 error={!!fieldState.error}
                 helperText={fieldState?.error?.message}
                 placeholder={t("coordinates_input.longitude.placeholder")}

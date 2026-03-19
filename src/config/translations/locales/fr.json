@@ -222,7 +222,12 @@
       "rotation": "Rotation",
       "scale": "Échelle",
       "dimensions": "Dimensions (m)"
-    }
+    },
+    "actions": {
+      "save": "Enregistrer la transformation",
+      "cancel": "Annuler"
+    },
+    "edit_properties": "Modifier les propriétés 3D"
   },
   "table": {
     "aria": {

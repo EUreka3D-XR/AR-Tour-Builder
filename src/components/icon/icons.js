@@ -18,6 +18,7 @@ export const icons = {
   delete: "delete",
   document: "article",
   edit: "edit",
+  edit3D: "3d_rotation",
   error: "error",
   filter: "filter_list",
   gridView: "grid_view",

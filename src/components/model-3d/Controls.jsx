@@ -18,7 +18,7 @@ const keysToLabels = {
 };
 
 const panelSx = {
-  width: 140,
+  width: 200,
   backgroundColor: "rgba(255,255,255,0.6)",
   borderRadius: 1,
   overflow: "hidden",

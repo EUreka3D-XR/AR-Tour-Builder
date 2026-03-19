@@ -7,7 +7,7 @@ import ControlsPanel from "./ControlsPanel";
 import SaveActionButtons from "./SaveActionButtons";
 import ToggleViewerButtons from "./ToggleViewerButtons";
 
-const DEFAULT_URL = import.meta.env.VITE_MODEL_INSPECTOR_URL;
+const DEFAULT_URL = "https://leomav.github.io/model-inspector";
 
 const ContainerStyled = styled("div")(() => ({
   label: "model-iframe-container",

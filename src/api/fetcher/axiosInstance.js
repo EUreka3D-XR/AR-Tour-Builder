@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import { config } from "@/config/base-url/config";
 import { localeStorageAPI } from "@/utils/local-storage-utils";
+import { config } from "@/config/base-url/config";
 import { transformKeysToCamel, transformKeysToSnake } from "./transformKeys";
 
 // fix for axios and mirage passthrough issue (see adapter):

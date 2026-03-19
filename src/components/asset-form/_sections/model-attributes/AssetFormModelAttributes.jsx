@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useWatch } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { Checkbox, Divider, Typography } from "@mui/material";
 
 import CoordinatesInput from "@/components/coordinates-input/CoordinatesInput";
@@ -14,11 +14,17 @@ import AssetFormLinkedAudio from "../linked-audio/AssetFormLinkedAudio";
 
 function AssetFormModelAttributes({ isPoiAsset }) {
   const { t } = useTranslation();
+  const {
+    formState: { errors },
+  } = useFormContext();
   const assetType = useWatch({ name: "type" });
+  const contentUrl = useWatch({ name: "contentUrl" });
   const isGeoreferenced = useWatch({ name: "isGeoreferenced" });
   const isARShown = useWatch({ name: "viewInAr" });
 
-  if (assetType !== "model3d") {
+  const hasUrl = Object.values(contentUrl?.locales ?? {}).some(Boolean);
+
+  if (assetType !== "model3d" || !hasUrl || errors.contentUrl) {
     return null;
   }
 
@@ -98,6 +104,7 @@ function AssetFormModelAttributes({ isPoiAsset }) {
                             render={({ field }) => (
                               <NumberInput
                                 {...field}
+                                mode="natural"
                                 min={3}
                                 max={30}
                                 iconName="radius"

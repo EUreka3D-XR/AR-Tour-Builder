@@ -82,6 +82,10 @@
         "spawn_radius_description": "Specify the radius within which the object can spawn in Augmented Reality (AR) mode.",
         "primary_description": "Set this asset as the primary one to be displayed more prominently."
       },
+      "url_validation": {
+        "checking": "Checking URL…",
+        "invalid_type": "The URL does not appear to serve a file of the selected type. Please check the URL or select the correct media type."
+      },
       "action": {
         "preview_fullscreen": "Preview fullscreen",
         "create_media_asset": "Create Media Asset",
@@ -208,7 +212,23 @@
   "model_viewer": {
     "alt": {
       "viewer_title": "3D Viewer"
-    }
+    },
+    "mode": {
+      "freelook": "Freelook",
+      "grid": "Grid"
+    },
+    "controls": {
+      "position": "Position",
+      "rotation": "Rotation",
+      "scale": "Scale",
+      "dimensions": "Dimensions (m)"
+    },
+    "actions": {
+      "save": "Save transform",
+      "cancel": "Cancel"
+    },
+    "edit_properties": "Edit 3D properties",
+    "properties_title": "3D Model Properties"
   },
   "table": {
     "aria": {

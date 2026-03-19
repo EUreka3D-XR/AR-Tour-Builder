@@ -4,10 +4,10 @@ import LibraryMediaModal from "./library-media/LibraryMediaModal";
 import PoiMediaModal from "./poi-media/PoiMediaModal";
 
 function MediaModal() {
-  const { assetId, sourceType, url, isOpen, closeModal } = useAssetModalState();
+  const { assetId, sourceType, url, type, isOpen, closeModal } = useAssetModalState();
 
   if (url) {
-    return <AssetMediaModal url={url} onClose={closeModal} />;
+    return <AssetMediaModal url={url} type={type} onClose={closeModal} />;
   }
 
   if (!assetId || !isOpen) {

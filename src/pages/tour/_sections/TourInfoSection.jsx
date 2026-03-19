@@ -94,6 +94,7 @@ function TourInfoSection() {
               <LabeledInput label={t("tour.info.estimatedTime")}>
                 <NumberInput
                   {...field}
+                  mode="natural"
                   fullWidth
                   min={0}
                   iconName="time"
@@ -109,6 +110,7 @@ function TourInfoSection() {
               <LabeledInput label={t("tour.info.estimatedDistance")}>
                 <NumberInput
                   {...field}
+                  mode="natural"
                   fullWidth
                   min={0}
                   iconName="route"

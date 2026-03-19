@@ -82,6 +82,10 @@
         "spawn_radius_description": "Spécifiez le rayon dans lequel l'objet peut apparaître en mode Réalité Augmentée (AR).",
         "primary_description": "Définissez cet actif comme principal pour qu'il soit affiché de manière plus proéminente."
       },
+      "url_validation": {
+        "checking": "Vérification de l'URL…",
+        "invalid_type": "L'URL ne semble pas pointer vers un fichier du type sélectionné. Veuillez vérifier l'URL ou sélectionner le bon type de média."
+      },
       "action": {
         "preview_fullscreen": "Aperçu plein écran",
         "create_media_asset": "Créer un Actif Média",
@@ -208,7 +212,23 @@
   "model_viewer": {
     "alt": {
       "viewer_title": "Visionneuse 3D"
-    }
+    },
+    "mode": {
+      "freelook": "Freelook",
+      "grid": "Grille"
+    },
+    "controls": {
+      "position": "Position",
+      "rotation": "Rotation",
+      "scale": "Échelle",
+      "dimensions": "Dimensions (m)"
+    },
+    "actions": {
+      "save": "Enregistrer la transformation",
+      "cancel": "Annuler"
+    },
+    "edit_properties": "Modifier les propriétés 3D",
+    "properties_title": "Propriétés du modèle 3D"
   },
   "table": {
     "aria": {

@@ -1,10 +1,7 @@
 import MediaDisplay from "@/components/media-display/MediaDisplay";
-import { findTypeFromFileExtension } from "@/utils/fileExtensions";
 import MediaModal from "../layout";
 
-function AssetMediaModal({ url, onClose }) {
-  const type = findTypeFromFileExtension(url);
-
+function AssetMediaModal({ url, type, onClose }) {
   return (
     <MediaModal isOpen onClose={onClose}>
       <MediaDisplay asset={{ contentUrl: url, type }} onClose={onClose} />

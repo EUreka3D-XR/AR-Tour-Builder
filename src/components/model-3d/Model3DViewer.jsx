@@ -1,8 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { styled } from "@mui/material";
+import { Box, Stack, styled } from "@mui/material";
 
-const DEFAULT_URL = "https://leomav.github.io/model-inspector/";
+import { Controls } from "./Controls";
+import ControlsPanel from "./ControlsPanel";
+import SaveActionButtons from "./SaveActionButtons";
+import ToggleViewerButtons from "./ToggleViewerButtons";
+
+const DEFAULT_URL = "https://leomav.github.io/model-inspector";
 
 const ContainerStyled = styled("div")(() => ({
   label: "model-iframe-container",
@@ -12,15 +17,21 @@ const ContainerStyled = styled("div")(() => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+  position: "relative",
 }));
 
 /**
  * @typedef {Object} Model3DViewerProps
  * @property {string} src - URL of the 3D model file (.glb or .gltf)
- * @property {boolean} [showControls] - Whether to show viewer controls (default: true)
+ * @property {'grid' | 'freelook'} [mode] - Choose between 'grid' or 'freelook' mode (default: 'freelook')
  * @property {string} viewerUrl - URL of the hosted viewer page (e.g., https://your-username.github.io/threejs-viewer/index.html)
+ * @property {import("@/types/jsdoc-types").ModelTransform} [initialTransform] - Initial transform for the model (position, rotation, scale)
+ * @property {boolean} [isEditable] - Whether the model is editable (default: false). If false, the viewer will be in "showcase" mode with limited controls.
+ * @property {boolean} [disableToggleModes] - Whether to disable the toggle mode buttons (default: false)
  * @property {(data: any) => void} [onCameraChange] - Callback when the camera moves or zooms
  * @property {(error: any) => void} [onError] - Callback when the viewer reports an error
+ * @property {() => void} [onCancel] - Callback when the user cancels editing (only shown if isEditable is true)
+ * @property {(transform: import("@/types/jsdoc-types").ModelTransform) => void} [onSave] - Callback when the user saves changes, receives the new model transform (only shown if isEditable is true)
  */
 
 /**
@@ -31,52 +42,30 @@ const ContainerStyled = styled("div")(() => ({
  */
 function Model3DViewer({
   src,
-  showControls,
+  initialTransform,
+  mode: propsMode = "freelook",
+  disableToggleModes = false,
+  isEditable = false,
   viewerUrl = DEFAULT_URL,
   onCameraChange,
   onError,
+  onCancel,
+  onSave,
 }) {
   const { t } = useTranslation();
   const iframeRef = useRef(null);
 
+  const [mode, setMode] = useState(isEditable ? "grid" : propsMode);
+
   // Construct viewer iframe URL
-  const iframeSrc = `${viewerUrl}?file=${encodeURIComponent(src)}&showControls=${Boolean(showControls)}`;
+  const freelook = Boolean(mode === "freelook");
+  const controls = isEditable ? "translate,rotate" : "hide";
+  const iframeSrc = `${viewerUrl}?file=${encodeURIComponent(src)}&freelook=${freelook}&controls=${controls}`;
 
-  // Listen for messages from the iframe
-  useEffect(() => {
-    const handleMessage = (event) => {
-      // In production: validate origin (e.g., event.origin === viewerUrlOrigin)
-      if (!event.data?.type) return;
+  const postToViewer = useCallback((message) => {
+    iframeRef.current?.contentWindow?.postMessage(message, "*");
+  }, []);
 
-      switch (event.data.type) {
-        case "cameraChange":
-          onCameraChange?.(event.data);
-          break;
-        case "viewerError":
-          onError?.(event.data.error);
-          break;
-        default:
-          // You can add more message types if needed
-          break;
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [onCameraChange, onError]);
-
-  // Send message to iframe (e.g., reset camera)
-  // const postMessage = useCallback((message) => {
-  //   if (!iframeRef.current) return;
-  //   iframeRef.current.contentWindow?.postMessage(message, "*");
-  // }, []);
-
-  // Public helper to reset the camera (optional)
-  // const resetCamera = useCallback(() => {
-  //   postMessage({ type: "resetCamera" });
-  // }, [postMessage]);
-
-  // Optional UI buttons for testing interaction
   return (
     <ContainerStyled>
       <iframe
@@ -92,6 +81,27 @@ function Model3DViewer({
         }}
         allow="fullscreen"
       />
+      <ControlsPanel>
+        <Stack spacing={1} alignItems="flex-end">
+          {!disableToggleModes && (
+            <ToggleViewerButtons mode={mode} setMode={setMode} />
+          )}
+
+          {!freelook && isEditable && (
+            <Controls
+              initialTransform={initialTransform}
+              postToViewer={postToViewer}
+              onCameraChange={onCameraChange}
+              onError={onError}
+            />
+          )}
+        </Stack>
+      </ControlsPanel>
+      {isEditable && (
+        <Box sx={{ position: "absolute", bottom: "16px", right: "16px" }}>
+          <SaveActionButtons onSave={onSave} onCancel={onCancel} />
+        </Box>
+      )}
       {/* <div className="mt-2 flex gap-2">
         <button
           onClick={resetCamera}

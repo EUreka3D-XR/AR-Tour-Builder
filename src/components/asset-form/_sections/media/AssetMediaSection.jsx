@@ -1,9 +1,11 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useWatch } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import {
+  Alert,
   Box,
   Checkbox,
+  CircularProgress,
   Divider,
   MenuItem,
   Select,
@@ -18,12 +20,13 @@ import FormInputCommonMultilingual from "@/components/form/FormInputCommonMultil
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import Link from "@/components/link/Link";
+import { useDebouncedValue } from "@/hooks/useDebounce";
 import { useLocale } from "@/hooks/useLocale";
 import { useToggle } from "@/hooks/useToggle";
 import {
-  checkAssetUrlValidity,
   fileTypes,
   getExtensionsHelperForType,
+  validateUrlContentType,
 } from "@/utils/fileExtensions";
 import { localeValue } from "@/utils/inputLocale";
 import { FormControlLabelStyled } from "../../_common/CommonFormComponents";
@@ -33,9 +36,14 @@ function AssetFormMediaSection() {
   const { t } = useTranslation();
   const locale = useLocale();
 
+  const { setError, clearErrors } = useFormContext();
   const { openAssetModalWithUrl } = useAssetModal();
 
-  const { isOpen: isMultilingual, toggle: toggleMultilingual } = useToggle();
+  const {
+    isOpen: isMultilingual,
+    toggle: toggleMultilingual,
+    close: disableMultilingual,
+  } = useToggle();
   // const {
   //   isOpen: isEurekaImportModalOpen,
   //   open: openEurekaImportModal,
@@ -46,13 +54,57 @@ function AssetFormMediaSection() {
   const contentUrl = useWatch({ name: "contentUrl" });
 
   const helperTextForUrl = useMemo(() => {
-    return getExtensionsHelperForType(assetType);
+    return getExtensionsHelperForType(assetType, true);
   }, [assetType]);
 
-  const isValidUrl = useMemo(() => {
-    const url = localeValue(contentUrl, locale);
-    return checkAssetUrlValidity(url);
-  }, [contentUrl, locale]);
+  const url = localeValue(contentUrl, locale);
+  const debouncedUrl = useDebouncedValue(url, 600);
+
+  // "idle" | "checking" | "valid" | "invalid"
+  const [urlStatus, setUrlStatus] = useState("idle");
+
+  useEffect(() => {
+    if (!debouncedUrl || !assetType) {
+      setUrlStatus("idle");
+      clearErrors("contentUrl");
+      return;
+    }
+
+    let cancelled = false;
+    setUrlStatus("checking");
+
+    validateUrlContentType(debouncedUrl, assetType).then(({ valid }) => {
+      if (cancelled) return;
+      if (valid) {
+        setUrlStatus("valid");
+        clearErrors("contentUrl");
+      } else {
+        setUrlStatus("invalid");
+        setError("contentUrl", {
+          type: "manual",
+          message: t("asset.form.url_validation.invalid_type"),
+        });
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [debouncedUrl, assetType, setError, clearErrors, t]);
+
+  const isValidUrl = urlStatus === "valid";
+
+  const shouldEnableMultilingual =
+    assetType === "audio" || assetType === "video";
+
+  const handleTypeChange = (e, onChange) => {
+    onChange(e);
+
+    const newType = e.target.value;
+    if (newType !== "audio" && newType !== "video") {
+      disableMultilingual();
+    }
+  };
 
   return (
     <>
@@ -62,7 +114,12 @@ function AssetFormMediaSection() {
         name="type"
         render={({ field }) => (
           <LabeledInput label={t("asset.form.field.media_type")}>
-            <Select {...field} fullWidth displayEmpty>
+            <Select
+              {...field}
+              onChange={(e) => handleTypeChange(e, field.onChange)}
+              fullWidth
+              displayEmpty
+            >
               <MenuItem value="" disabled>
                 <em>{t("asset.form.placeholder.select_media_type")}</em>
               </MenuItem>
@@ -75,21 +132,23 @@ function AssetFormMediaSection() {
           </LabeledInput>
         )}
       />
-      <FormControlLabelStyled
-        control={
-          <Checkbox checked={isMultilingual} onChange={toggleMultilingual} />
-        }
-        label={
-          <div className="checkbox-label">
-            <Typography variant="body2">
-              {t("asset.form.field.multilingual_media")}
-            </Typography>
-            <Typography variant="caption">
-              {t("asset.form.help.multilingual_media_description")}
-            </Typography>
-          </div>
-        }
-      />
+      {shouldEnableMultilingual && (
+        <FormControlLabelStyled
+          control={
+            <Checkbox checked={isMultilingual} onChange={toggleMultilingual} />
+          }
+          label={
+            <div className="checkbox-label">
+              <Typography variant="body2">
+                {t("asset.form.field.multilingual_media")}
+              </Typography>
+              <Typography variant="caption">
+                {t("asset.form.help.multilingual_media_description")}
+              </Typography>
+            </div>
+          }
+        />
+      )}
       <div>
         {/* <Box mb={2}>
           <span>
@@ -125,18 +184,38 @@ function AssetFormMediaSection() {
         ) : (
           <FormInputCommonMultilingual
             name="contentUrl"
-            render={({ field }) => (
-              <LabeledInput label={t("asset.form.field.media_url")}>
-                <TextField
-                  {...field}
-                  placeholder={t("asset.form.placeholder.media_url_example")}
-                  fullWidth
-                  helperText={helperTextForUrl}
-                  type="url"
-                />
-              </LabeledInput>
-            )}
+            render={({ field, parentFieldState }) => {
+              return (
+                <LabeledInput label={t("asset.form.field.media_url")}>
+                  <TextField
+                    {...field}
+                    error={!!parentFieldState.error}
+                    placeholder={t("asset.form.placeholder.media_url_example")}
+                    fullWidth
+                    helperText={
+                      parentFieldState.error?.message ?? helperTextForUrl
+                    }
+                    type="url"
+                  />
+                </LabeledInput>
+              );
+            }}
           />
+        )}
+        {urlStatus === "checking" && (
+          <Box
+            sx={{ mt: 1, ml: 1, display: "flex", alignItems: "center", gap: 1 }}
+          >
+            <CircularProgress size={16} />
+            <Typography variant="caption">
+              {t("asset.form.url_validation.checking")}
+            </Typography>
+          </Box>
+        )}
+        {urlStatus === "invalid" && (
+          <Alert severity="warning" sx={{ mt: 1 }}>
+            {t("asset.form.url_validation.invalid_type")}
+          </Alert>
         )}
         {isValidUrl && (
           <Box sx={{ mt: 1, ml: 1 }}>
@@ -146,6 +225,7 @@ function AssetFormMediaSection() {
               onClick={() =>
                 openAssetModalWithUrl({
                   url: localeValue(contentUrl, locale),
+                  type: assetType,
                 })
               }
             >

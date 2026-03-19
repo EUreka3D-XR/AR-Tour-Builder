@@ -1,9 +1,9 @@
-import { useTranslation } from "react-i18next";
 import { useFormContext, useWatch } from "react-hook-form";
-import { Stack, styled, Typography } from "@mui/material";
+import { Stack, styled } from "@mui/material";
 
 import MediaPreview from "@/components/media-preview/MediaPreview";
 import EditModelTransformButton from "./EditModelTransformButton";
+import PropertiesShowcase from "./PropertiesShowcase";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   label: "asset-form-preview-container",
@@ -13,16 +13,7 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   flexShrink: 0,
 }));
 
-const TransformGridStyled = styled("div")({
-  label: "transform-grid",
-  display: "grid",
-  gridTemplateColumns: "auto 1fr 1fr 1fr",
-  gap: "2px 12px",
-  alignItems: "center",
-});
-
 function AssetFormPreview({ type, url }) {
-  const { t } = useTranslation();
   const transform = useWatch({ name: "modelTransform" });
   const { setValue } = useFormContext();
 
@@ -34,14 +25,6 @@ function AssetFormPreview({ type, url }) {
     // Update the form state with the new transform values
     setValue("modelTransform", updatedTransform);
   };
-
-  const rows = transform
-    ? [
-        { label: t("model_viewer.controls.position"), vec: transform.position },
-        { label: t("model_viewer.controls.rotation"), vec: transform.rotation },
-        { label: t("model_viewer.controls.scale"), vec: transform.scale },
-      ]
-    : [];
 
   return (
     <Stack
@@ -55,49 +38,7 @@ function AssetFormPreview({ type, url }) {
       </ContainerStyled>
       {showModelTransform && (
         <Stack spacing={1.5} alignItems="flex-start">
-          <Typography variant="h5">
-            {t("model_viewer.properties_title")}
-          </Typography>
-          {transform && (
-            <TransformGridStyled>
-              {/* header row */}
-              <span />
-              {["X", "Y", "Z"].map((axis) => (
-                <Typography
-                  key={axis}
-                  // variant="caption"
-                  color="text.secondary"
-                  fontWeight="bold"
-                  textAlign="center"
-                >
-                  {axis}
-                </Typography>
-              ))}
-              {/* data rows */}
-              {rows.map(({ label, vec }) => (
-                <>
-                  <Typography
-                    key={`${label}-label`}
-                    // variant="caption"
-                    color="text.secondary"
-                    fontWeight="bold"
-                  >
-                    {label}
-                  </Typography>
-                  {["x", "y", "z"].map((axis) => (
-                    <Typography
-                      key={`${label}-${axis}`}
-                      // variant="caption"
-                      color="text.secondary"
-                      textAlign="center"
-                    >
-                      {vec ? Number(vec[axis]).toFixed(4) : "—"}
-                    </Typography>
-                  ))}
-                </>
-              ))}
-            </TransformGridStyled>
-          )}
+          <PropertiesShowcase transform={transform} />
           <EditModelTransformButton
             url={url}
             initialTransform={transform}

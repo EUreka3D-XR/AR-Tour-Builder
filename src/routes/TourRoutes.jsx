@@ -1,7 +1,7 @@
 import { Navigate, Outlet, Route, Routes } from "react-router";
 import TourInfoSection from "@/pages/tour/_sections/TourInfoSection";
-import NewTourPageContainer from "@/pages/tour/[id]/container";
 import TourPageContainer from "@/pages/tour/container";
+import NewTourPageContainer from "@/pages/tour/new/container";
 import ToursPage from "@/pages/tours/page";
 
 import PoiRoutes from "./PoiRoutes";

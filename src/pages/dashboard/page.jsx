@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import OverviewStats from "@/pages/dashboard/_sections/OverviewStats";
 import { Stack, styled } from "@mui/material";
 
 import FlagsGroup from "@/components/flags/FlagsGroup";
@@ -7,7 +6,6 @@ import EmptyProjectSection from "./_sections/EmptyProjectSection";
 import Members from "./_sections/Members";
 import ProjectBanner from "./_sections/ProjectBanner";
 import RecentTours from "./_sections/RecentTours";
-import ToursStats from "./_sections/ToursStats";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   paddingBottom: theme.spacing(8),

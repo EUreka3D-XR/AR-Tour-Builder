@@ -12,6 +12,7 @@ function TourPoisMapSection({ containerRef }) {
 
   const tourBoundBox = useWatch({ name: "boundBox" });
   const pois = useWatch({ name: "pois" }) || [];
+  const hasPois = pois.length > 0;
 
   const bounds = useMemo(
     () => convertToLeafletBounds(tourBoundBox),
@@ -21,6 +22,10 @@ function TourPoisMapSection({ containerRef }) {
   const handlePoiClick = (id) => {
     navigate(routes.pois.one(id));
   };
+
+  if (!hasPois) {
+    return null;
+  }
 
   return (
     <Map bounds={bounds}>

@@ -56,6 +56,14 @@ export const useAddProjectMember = (projectId) => {
   });
 };
 
+export const useUpdateMe = () => {
+  return useDataMutator({
+    mutator: (data) => api.users.updateMe(data),
+    mutationKey: ["me", "update"],
+    invalidateKey: ["profile"],
+  });
+};
+
 /**
  * @param {string} projectId
  */

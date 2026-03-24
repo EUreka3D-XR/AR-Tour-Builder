@@ -43,6 +43,11 @@ function SettingsNavigationTabs() {
         label: t("projectSettings.tabs.branding"),
         icon: "palette",
       },
+      {
+        value: routes.projectUserSettings,
+        label: t("projectSettings.tabs.userSettings"),
+        icon: "account",
+      },
     ],
     [routes, t],
   );

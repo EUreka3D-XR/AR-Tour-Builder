@@ -26,10 +26,16 @@ const removeGroupMember = async (groupId, userIdentifier) => {
   return fetcher.post(url, { data: { user_identifier: userIdentifier } });
 };
 
+const updateCurrentUser = async (data) => {
+  const url = baseUrls.me;
+  return fetcher.patch(url, { data });
+};
+
 export const usersApi = {
   fetchOne: getUser,
   fetchProjectUsers: getProjectUsers,
   fetchAll: getAllUsers,
   addGroupMember,
   removeGroupMember,
+  updateMe: updateCurrentUser,
 };

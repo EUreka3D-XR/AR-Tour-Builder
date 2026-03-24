@@ -1,5 +1,6 @@
 /** @const */
 export const icons = {
+  account: "account_circle",
   add: "add",
   arrowUp: "keyboard_arrow_up",
   arrowDown: "keyboard_arrow_down",

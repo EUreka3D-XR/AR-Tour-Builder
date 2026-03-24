@@ -166,6 +166,7 @@
   },
   "header": {
     "action": {
+      "account": "Profile",
       "projects": "My Projects",
       "logout": "Logout"
     }
@@ -514,7 +515,8 @@
       "general": "General",
       "supportedLanguages": "Supported Languages",
       "branding": "Branding",
-      "members": "Members"
+      "members": "Members",
+      "userSettings": "User Settings"
     },
     "saveButton": "Save Changes",
     "general": {
@@ -547,6 +549,23 @@
       "supportedLanguages": {
         "label": "Supported Languages",
         "description": "Specify the languages your project supports. You can populate content in multiple languages later in the project's settings."
+      }
+    },
+    "userSettings": {
+      "name": {
+        "label": "Name",
+        "description": "Your display name visible to other project members",
+        "placeholder": "Enter your name"
+      },
+      "username": {
+        "label": "Username",
+        "description": "Your unique username used to identify your account",
+        "placeholder": "Enter your username",
+        "alreadyTaken": "This username is already taken"
+      },
+      "email": {
+        "label": "Email",
+        "description": "Your email address is read-only and cannot be changed"
       }
     }
   },

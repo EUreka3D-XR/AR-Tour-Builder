@@ -4,6 +4,7 @@ import ProjectSettingsContainer from "@/pages/project-settings/container";
 import ProjectGeneralPage from "@/pages/project-settings/general/page";
 import ProjectLanguagesPage from "@/pages/project-settings/languages/page";
 import ProjectMembersPage from "@/pages/project-settings/members/page";
+import UserSettingsPage from "@/pages/project-settings/user-settings/page";
 
 function ProjectSettingsRoutes() {
   return (
@@ -14,6 +15,7 @@ function ProjectSettingsRoutes() {
         <Route path="languages" element={<ProjectLanguagesPage />} />
         <Route path="members" element={<ProjectMembersPage />} />
         <Route path="branding" element={<ProjectBrandingPage />} />
+        <Route path="user-settings" element={<UserSettingsPage />} />
       </Route>
     </Routes>
   );

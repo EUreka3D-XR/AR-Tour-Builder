@@ -59,6 +59,7 @@ const useNavPaths = () => {
       projectLocales: internalSettingsRoute("/languages"),
       projectMembers: internalSettingsRoute("/members"),
       projectBranding: internalSettingsRoute("/branding"),
+      projectUserSettings: internalSettingsRoute("/user-settings"),
       auth: authBase,
       login: internalAuthRoute("/login"),
       hiddenLogin: internalAuthRoute("/hidden/login"),

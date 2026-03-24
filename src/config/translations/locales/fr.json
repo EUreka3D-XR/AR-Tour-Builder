@@ -166,6 +166,7 @@
   },
   "header": {
     "action": {
+      "account": "Profil",
       "projects": "Mes Projets",
       "logout": "Déconnexion"
     }
@@ -514,7 +515,8 @@
       "general": "Général",
       "supportedLanguages": "Langues Prises en Charge",
       "branding": "Image de Marque",
-      "members": "Membres"
+      "members": "Membres",
+      "userSettings": "Paramètres Utilisateur"
     },
     "saveButton": "Enregistrer les Modifications",
     "general": {
@@ -547,6 +549,23 @@
       "supportedLanguages": {
         "label": "Langues Prises en Charge",
         "description": "Spécifiez les langues que votre projet prend en charge. Vous pourrez renseigner du contenu dans plusieurs langues ultérieurement dans les paramètres du projet."
+      }
+    },
+    "userSettings": {
+      "name": {
+        "label": "Nom",
+        "description": "Votre nom d'affichage visible par les autres membres du projet",
+        "placeholder": "Entrez votre nom"
+      },
+      "username": {
+        "label": "Nom d'utilisateur",
+        "description": "Votre nom d'utilisateur unique utilisé pour identifier votre compte",
+        "placeholder": "Entrez votre nom d'utilisateur",
+        "alreadyTaken": "Ce nom d'utilisateur est déjà pris"
+      },
+      "email": {
+        "label": "Email",
+        "description": "Votre adresse email est en lecture seule et ne peut pas être modifiée"
       }
     }
   },

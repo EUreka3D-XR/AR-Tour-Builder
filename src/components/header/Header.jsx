@@ -67,6 +67,10 @@ function Header() {
               // { label: "Profile", to: "/profile" },
               // { label: "Settings", to: "/settings" },
               {
+                label: t("header.action.account"),
+                href: routes.projectUserSettings,
+              },
+              {
                 label: t("header.action.projects"),
                 href: routes.projects.index,
               },

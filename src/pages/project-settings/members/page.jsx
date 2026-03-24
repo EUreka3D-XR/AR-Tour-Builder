@@ -20,13 +20,10 @@ function ProjectMembersPage() {
   const { t } = useTranslation();
   const { project } = useOutletContext();
   const { data: members, fetchState } = useProjectMembers(project?.id);
-  // const [isAdding, setIsAdding] = useState(false);
 
   if (!project) {
     return null;
   }
-
-  console.log(project);
 
   return (
     <Box sx={{ maxWidth: 600 }}>
@@ -46,14 +43,17 @@ function ProjectMembersPage() {
         <MembersList
           members={members}
           group={project.group}
-          projectId={project.id}
+          project={project}
         />
       )}
     </Box>
   );
 }
 
-function MembersList({ members, group, projectId }) {
+function MembersList({ members, group, project }) {
+  const checkIfOwner = (user) => {
+    return project?.createdBy?.id === user.id;
+  };
   return (
     <List dense disablePadding>
       {members?.map((member, index) => {
@@ -64,11 +64,14 @@ function MembersList({ members, group, projectId }) {
             <ListItem
               sx={{ bgcolor: index % 2 === 0 ? "background.paper" : "grey.50" }}
               secondaryAction={
-                <DeleteMemberButton
-                  group={group}
-                  user={member}
-                  projectId={projectId}
-                />
+                members?.length > 1 &&
+                !checkIfOwner(member) && (
+                  <DeleteMemberButton
+                    group={group}
+                    user={member}
+                    projectId={project.id}
+                  />
+                )
               }
             >
               <ListItemAvatar>

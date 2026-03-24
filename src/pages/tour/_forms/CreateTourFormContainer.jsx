@@ -21,6 +21,7 @@ function CreateTourForm() {
       distance: 0,
       guided: false,
       thumbnail: "",
+      status: "draft",
     },
   });
 

@@ -120,7 +120,7 @@ const PublishButton = () => {
   const { t } = useTranslation();
   const { tourId } = useParams();
 
-  const tourStatus = useWatch({ name: "status", defaultValue: "draft" });
+  const tourStatus = useWatch({ name: "status" });
 
   const { setValue } = useFormContext();
 

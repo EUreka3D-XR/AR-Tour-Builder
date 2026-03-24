@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { styled, Tab, Tabs } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { styled, Tab, Tabs } from "@mui/material";
 
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import useNavPaths from "@/hooks/useNavPaths";
@@ -23,14 +23,26 @@ function SettingsNavigationTabs() {
 
   const tabs = useMemo(
     () => [
-      { value: routes.projectGeneral, label: t("projectSettings.tabs.general"), icon: "settings" },
+      {
+        value: routes.projectGeneral,
+        label: t("projectSettings.tabs.general"),
+        icon: "settings",
+      },
       {
         value: routes.projectLocales,
         label: t("projectSettings.tabs.supportedLanguages"),
         icon: "language",
       },
-      { value: routes.projectBranding, label: t("projectSettings.tabs.branding"), icon: "palette" },
-      { value: routes.projectMembers, label: t("projectSettings.tabs.members"), icon: "users" },
+      {
+        value: routes.projectMembers,
+        label: t("projectSettings.tabs.members"),
+        icon: "users",
+      },
+      {
+        value: routes.projectBranding,
+        label: t("projectSettings.tabs.branding"),
+        icon: "palette",
+      },
     ],
     [routes, t],
   );

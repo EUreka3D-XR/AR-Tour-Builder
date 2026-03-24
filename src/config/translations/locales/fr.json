@@ -379,7 +379,8 @@
       "supportedLanguages": "Langues Prises en Charge"
     },
     "members": {
-      "title": "Membres"
+      "title": "Membres",
+      "manage": "Gérer les membres"
     },
     "projectBanner": {
       "tours": "Visites",
@@ -389,6 +390,7 @@
     },
     "recentTours": {
       "title": "Visites Récentes",
+      "seeAll": "Voir tout",
       "pois": "POIs",
       "status": {
         "published": "Publié",
@@ -525,6 +527,18 @@
         "label": "Description",
         "description": "Un bref aperçu de votre projet qui aide les utilisateurs à comprendre son objectif",
         "placeholder": "Entrez la description du projet"
+      }
+    },
+    "members": {
+      "title": "Gérer les Membres",
+      "add": "Ajouter un Membre",
+      "adding": "Ajout :",
+      "confirmAdding": "Confirmer l'ajout de {{name}}",
+      "thisUser": "cet utilisateur",
+      "remove": {
+        "title": "Confirmer la suppression du membre",
+        "message": "Êtes-vous sûr de vouloir retirer {{name}} du projet ?",
+        "confirmText": "Retirer"
       }
     },
     "languages": {

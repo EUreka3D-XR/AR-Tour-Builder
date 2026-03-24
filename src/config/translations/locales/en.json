@@ -379,7 +379,8 @@
       "supportedLanguages": "Supported Languages"
     },
     "members": {
-      "title": "Members"
+      "title": "Members",
+      "manage": "Manage"
     },
     "projectBanner": {
       "tours": "Tours",
@@ -389,6 +390,7 @@
     },
     "recentTours": {
       "title": "Recent Tours",
+      "seeAll": "See all",
       "pois": "POIs",
       "status": {
         "published": "Published",
@@ -525,6 +527,18 @@
         "label": "Description",
         "description": "A brief overview of your project that helps users understand its purpose",
         "placeholder": "Enter project description"
+      }
+    },
+    "members": {
+      "title": "Manage Members",
+      "add": "Add Member",
+      "adding": "Adding:",
+      "confirmAdding": "Confirm adding {{name}}",
+      "thisUser": "this user",
+      "remove": {
+        "title": "Confirm member removal",
+        "message": "Are you sure you want to remove {{name}} from the project?",
+        "confirmText": "Remove"
       }
     },
     "languages": {

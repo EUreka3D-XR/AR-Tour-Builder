@@ -9,6 +9,8 @@ import {
   styled,
 } from "@mui/material";
 
+import Button from "@/components/button/Button";
+
 const CardHeaderStyled = styled(CardHeader)({
   fontWeight: 600,
 });
@@ -19,12 +21,30 @@ const CardContentStyled = styled(CardContent)({
   },
 });
 
-function DashboardCard({ children, title, pagination, noPadding, className }) {
+function DashboardCard({
+  children,
+  title,
+  pagination,
+  noPadding,
+  className,
+  goToRoute,
+  goToLabel,
+}) {
   return (
     <Card className={className}>
       {title && (
         <>
-          <CardHeaderStyled title={title} className="dash-card-header" />
+          <CardHeaderStyled
+            title={title}
+            className="dash-card-header"
+            action={
+              goToRoute && (
+                <Button href={goToRoute} variant="text">
+                  {goToLabel ?? "Go"}
+                </Button>
+              )
+            }
+          />
           <Divider />
         </>
       )}

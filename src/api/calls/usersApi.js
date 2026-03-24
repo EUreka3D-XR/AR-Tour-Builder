@@ -11,7 +11,25 @@ const getProjectUsers = async (projectId) => {
   return fetcher.get(url);
 };
 
+const getAllUsers = async () => {
+  const url = baseUrls.users;
+  return fetcher.get(url);
+};
+
+const addGroupMember = async (groupId, userIdentifier) => {
+  const url = baseUrls.groupMembersAdd(groupId);
+  return fetcher.post(url, { data: { user_identifier: userIdentifier } });
+};
+
+const removeGroupMember = async (groupId, userIdentifier) => {
+  const url = baseUrls.groupMembersRemove(groupId);
+  return fetcher.post(url, { data: { user_identifier: userIdentifier } });
+};
+
 export const usersApi = {
   fetchOne: getUser,
   fetchProjectUsers: getProjectUsers,
+  fetchAll: getAllUsers,
+  addGroupMember,
+  removeGroupMember,
 };

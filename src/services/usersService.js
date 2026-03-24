@@ -1,6 +1,6 @@
 import { api } from "@/api";
 
-import { useDataFetcher } from "./helpers/serviceHooks";
+import { useDataFetcher, useDataMutator } from "./helpers/serviceHooks";
 
 /**
  * @typedef {import('@/types/jsdoc-types').User} User
@@ -16,6 +16,8 @@ export const useProjectMembers = (projectId) => {
   return useDataFetcher({
     fetcher: () => api.users.fetchProjectUsers(projectId),
     queryKey: ["members", projectId],
+    enabled: !!projectId,
+    storeValue: true,
   });
 };
 
@@ -26,6 +28,42 @@ export const useProjectMembers = (projectId) => {
 export const useUser = (userId) => {
   return useDataFetcher({
     fetcher: () => api.users.fetchOne(userId),
+    enabled: !!userId,
     queryKey: ["users", userId],
+  });
+};
+
+/**
+ * @returns {UsersResult}
+ */
+export const useAllUsers = () => {
+  return useDataFetcher({
+    fetcher: () => api.users.fetchAll(),
+    queryKey: ["users"],
+    storeValue: true,
+  });
+};
+
+/**
+ * @param {string} projectId
+ */
+export const useAddProjectMember = (projectId) => {
+  return useDataMutator({
+    mutator: ({ groupId, userIdentifier }) =>
+      api.users.addGroupMember(groupId, userIdentifier),
+    mutationKey: ["members", "add", projectId],
+    invalidateKey: ["members", projectId],
+  });
+};
+
+/**
+ * @param {string} projectId
+ */
+export const useRemoveProjectMember = (projectId) => {
+  return useDataMutator({
+    mutator: ({ groupId, userIdentifier }) =>
+      api.users.removeGroupMember(groupId, userIdentifier),
+    mutationKey: ["members", "remove", projectId],
+    invalidateKey: ["members", projectId],
   });
 };

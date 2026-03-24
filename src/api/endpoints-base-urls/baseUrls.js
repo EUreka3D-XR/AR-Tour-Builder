@@ -13,6 +13,8 @@ export const baseUrls = {
   library: "/api/assets",
   libraryAsset: (assetId) => `/api/assets/${assetId}`,
   members: (projectId) => `/api/projects/${projectId}/members`,
+  groupMembersAdd: (groupId) => `/api/groups/${groupId}/members/add`,
+  groupMembersRemove: (groupId) => `/api/groups/${groupId}/members/remove`,
   users: "/api/users",
   tours: "/api/tours",
   tour: (tourId) => `/api/tours/${tourId}`,

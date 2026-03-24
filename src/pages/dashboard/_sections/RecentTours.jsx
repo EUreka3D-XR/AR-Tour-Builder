@@ -17,6 +17,8 @@ import DashboardCard from "../_common/DashboardCard";
 
 function RecentTours({ projectId }) {
   const { t } = useTranslation();
+  const { routes } = useNavPaths();
+
   const { data, fetchState } = useProjectTours(projectId);
   const { data: tours, meta } = usePaginatedItems({
     items: data,
@@ -27,6 +29,8 @@ function RecentTours({ projectId }) {
     <DashboardCard
       title={t("dashboard.recentTours.title")}
       pagination={meta}
+      goToRoute={routes.tours.index}
+      goToLabel={t("dashboard.recentTours.seeAll")}
       noPadding
     >
       <>

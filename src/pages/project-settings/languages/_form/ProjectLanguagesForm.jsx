@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { FormProvider, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
 import { useUpdateProject } from "@/services/projectsService";
 import FormInput from "@/components/form/FormInput";
@@ -21,7 +21,7 @@ function ProjectLanguagesForm({ defaultValues }) {
   const { handleSubmit, setValue, reset } = methods;
 
   const handleChange = (val) => {
-    setValue("locales", val);
+    setValue("locales", val, { shouldDirty: true });
   };
 
   const onSubmit = async (data) => {
@@ -35,12 +35,16 @@ function ProjectLanguagesForm({ defaultValues }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <SettingsFormLayout>
           <Typography mb={2}>
-            <span style={{ fontWeight: "bold" }}>{t("projectSettings.languages.note")}</span>
+            <span style={{ fontWeight: "bold" }}>
+              {t("projectSettings.languages.note")}
+            </span>
             {t("projectSettings.languages.noteDescription")}
           </Typography>
           <HorizontalFieldWrapper
             label={t("projectSettings.languages.supportedLanguages.label")}
-            description={t("projectSettings.languages.supportedLanguages.description")}
+            description={t(
+              "projectSettings.languages.supportedLanguages.description",
+            )}
           >
             <FormInput
               name="locales"

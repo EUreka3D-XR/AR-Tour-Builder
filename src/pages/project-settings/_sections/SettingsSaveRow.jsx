@@ -1,6 +1,6 @@
+import { useTranslation } from "react-i18next";
 import { useFormContext } from "react-hook-form";
 import { Stack } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";

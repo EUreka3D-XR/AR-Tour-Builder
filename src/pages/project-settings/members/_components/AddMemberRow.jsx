@@ -58,7 +58,7 @@ const AddingMemberRow = ({ projectId, group, members, onDone }) => {
   const handleConfirm = async () => {
     if (!selectedUser) return;
     const userIdentifier = selectedUser.username || selectedUser.email;
-    await add({ groupId: group, userIdentifier });
+    await add({ userIdentifier });
     onDone();
   };
 

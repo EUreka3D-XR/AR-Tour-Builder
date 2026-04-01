@@ -16,13 +16,13 @@ const getAllUsers = async () => {
   return fetcher.get(url);
 };
 
-const addGroupMember = async (groupId, userIdentifier) => {
-  const url = baseUrls.groupMembersAdd(groupId);
+const addProjectMember = async (projectId, userIdentifier) => {
+  const url = baseUrls.projectMembersAdd(projectId);
   return fetcher.post(url, { data: { user_identifier: userIdentifier } });
 };
 
-const removeGroupMember = async (groupId, userIdentifier) => {
-  const url = baseUrls.groupMembersRemove(groupId);
+const removeProjectMember = async (projectId, userIdentifier) => {
+  const url = baseUrls.projectMembersRemove(projectId);
   return fetcher.post(url, { data: { user_identifier: userIdentifier } });
 };
 
@@ -35,7 +35,7 @@ export const usersApi = {
   fetchOne: getUser,
   fetchProjectUsers: getProjectUsers,
   fetchAll: getAllUsers,
-  addGroupMember,
-  removeGroupMember,
+  addProjectMember,
+  removeProjectMember,
   updateMe: updateCurrentUser,
 };

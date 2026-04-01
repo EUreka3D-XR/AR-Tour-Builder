@@ -49,8 +49,8 @@ export const useAllUsers = () => {
  */
 export const useAddProjectMember = (projectId) => {
   return useDataMutator({
-    mutator: ({ groupId, userIdentifier }) =>
-      api.users.addGroupMember(groupId, userIdentifier),
+    mutator: ({ userIdentifier }) =>
+      api.users.addProjectMember(projectId, userIdentifier),
     mutationKey: ["members", "add", projectId],
     invalidateKey: ["members", projectId],
   });
@@ -69,8 +69,8 @@ export const useUpdateMe = () => {
  */
 export const useRemoveProjectMember = (projectId) => {
   return useDataMutator({
-    mutator: ({ groupId, userIdentifier }) =>
-      api.users.removeGroupMember(groupId, userIdentifier),
+    mutator: ({ userIdentifier }) =>
+      api.users.removeProjectMember(projectId, userIdentifier),
     mutationKey: ["members", "remove", projectId],
     invalidateKey: ["members", projectId],
   });

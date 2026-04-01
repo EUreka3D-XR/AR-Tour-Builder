@@ -25,10 +25,7 @@ function DeleteMemberButton({ projectId, group, user }) {
       confirmText: t("projectSettings.members.remove.confirmText"),
       action: () => {
         const userIdentifier = user.email || user.username;
-        remove({
-          groupId: group,
-          userIdentifier,
-        });
+        remove({ userIdentifier });
       },
     });
   };

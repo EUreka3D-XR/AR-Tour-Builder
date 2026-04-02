@@ -529,6 +529,22 @@
         "label": "Description",
         "description": "A brief overview of your project that helps users understand its purpose",
         "placeholder": "Enter project description"
+      },
+      "dangerZone": {
+        "title": "Danger Zone",
+        "deleteProject": {
+          "label": "Delete this project",
+          "description": "Permanently delete this project, all its tours, media, and data. This action cannot be undone.",
+          "button": "Delete Project"
+        },
+        "modal": {
+          "title": "Delete Project",
+          "message": "This will permanently delete all tours, media, members, and settings associated with this project.",
+          "instruction": "Type {{projectName}} to confirm:",
+          "confirmPhrase": "delete project",
+          "cancelButton": "Cancel",
+          "confirmButton": "Delete Project"
+        }
       }
     },
     "members": {

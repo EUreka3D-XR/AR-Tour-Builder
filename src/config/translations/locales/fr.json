@@ -529,6 +529,22 @@
         "label": "Description",
         "description": "Un bref aperçu de votre projet qui aide les utilisateurs à comprendre son objectif",
         "placeholder": "Entrez la description du projet"
+      },
+      "dangerZone": {
+        "title": "Zone Dangereuse",
+        "deleteProject": {
+          "label": "Supprimer ce projet",
+          "description": "Supprimez définitivement ce projet, toutes ses visites, médias et données. Cette action est irréversible.",
+          "button": "Supprimer le Projet"
+        },
+        "modal": {
+          "title": "Supprimer le Projet",
+          "message": "Cela supprimera définitivement toutes les visites, médias, membres et paramètres associés à ce projet.",
+          "instruction": "Tapez {{projectName}} pour confirmer :",
+          "confirmPhrase": "supprimer le projet",
+          "cancelButton": "Annuler",
+          "confirmButton": "Supprimer le Projet"
+        }
       }
     },
     "members": {

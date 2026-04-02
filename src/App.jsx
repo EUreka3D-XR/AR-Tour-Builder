@@ -6,6 +6,7 @@ import MyThemeProvider from "@/providers/theme/MyThemeProvider";
 import "@/config/translations/i18next-config.js";
 
 import { ConfirmationModal } from "./components/confirmation-modal/ConfirmationModal";
+import { DeleteProjectModal } from "./components/delete-project-modal/DeleteProjectModal";
 import { DialogOptionsModal } from "./components/dialog-options-modal/DialogOptionsModal";
 import ErrorBoundary from "./components/error/ErrorBoundary";
 import { GeneralProvider } from "./providers/general/GeneralProvider";
@@ -29,6 +30,7 @@ export default function App() {
             <GeneralProvider>
               <EurekaRoutes />
               <ConfirmationModal />
+              <DeleteProjectModal />
               <DialogOptionsModal />
             </GeneralProvider>
           </QueryClientProvider>

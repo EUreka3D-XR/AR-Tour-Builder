@@ -4,8 +4,9 @@ import { IconButton } from "@mui/material";
 import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useRemoveProjectMember } from "@/services/usersService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import { getUserDisplayName, getUserIdentifier } from "@/utils/user";
 
-function DeleteMemberButton({ projectId, group, user }) {
+function DeleteMemberButton({ projectId, user }) {
   const { t } = useTranslation();
 
   const confirm = useConfirm();
@@ -13,10 +14,7 @@ function DeleteMemberButton({ projectId, group, user }) {
 
   const handleDelete = async () => {
     const nameDisplayed =
-      user.name ||
-      user.username ||
-      user.email ||
-      t("projectSettings.members.thisUser");
+      getUserDisplayName(user) ?? t("projectSettings.members.thisUser");
     await confirm({
       title: t("projectSettings.members.remove.title"),
       message: t("projectSettings.members.remove.message", {
@@ -24,7 +22,7 @@ function DeleteMemberButton({ projectId, group, user }) {
       }),
       confirmText: t("projectSettings.members.remove.confirmText"),
       action: () => {
-        const userIdentifier = user.email || user.username;
+        const userIdentifier = getUserIdentifier(user);
         remove({ userIdentifier });
       },
     });

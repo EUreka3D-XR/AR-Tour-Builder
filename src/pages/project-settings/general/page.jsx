@@ -26,7 +26,7 @@ function ProjectGeneralPage() {
   return (
     <>
       <ProjectGeneralForm defaultValues={defaultValues} />
-      <DangerZone projectName={projectName} />
+      <DangerZone projectName={projectName} project={project} />
     </>
   );
 }

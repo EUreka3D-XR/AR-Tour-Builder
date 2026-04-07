@@ -537,6 +537,16 @@
           "description": "Supprimez définitivement ce projet, toutes ses visites, médias et données. Cette action est irréversible.",
           "button": "Supprimer le Projet"
         },
+        "leaveProject": {
+          "label": "Quitter ce projet",
+          "description": "Retirez-vous de ce projet. Vous perdrez l'accès à tout son contenu.",
+          "button": "Quitter le Projet",
+          "modal": {
+            "title": "Quitter le Projet",
+            "message": "Êtes-vous sûr de vouloir quitter {{projectName}} ? Vous perdrez l'accès à tout son contenu.",
+            "confirmButton": "Quitter le Projet"
+          }
+        },
         "modal": {
           "title": "Supprimer le Projet",
           "message": "Cela supprimera définitivement toutes les visites, médias, membres et paramètres associés à ce projet.",

@@ -12,9 +12,10 @@ import {
 import { useAddProjectMember } from "@/services/usersService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import { useToggle } from "@/hooks/useToggle";
+import { getUserDisplayName, getUserIdentifier } from "@/utils/user";
 import MemberUserAutocomplete from "./MemberUserAutocomplete";
 
-function AddMemberRow({ projectId, group, members }) {
+function AddMemberRow({ projectId, members }) {
   const { t } = useTranslation();
   const { isOpen: isAdding, toggle } = useToggle();
 
@@ -39,7 +40,6 @@ function AddMemberRow({ projectId, group, members }) {
       ) : (
         <AddingMemberRow
           projectId={projectId}
-          group={group}
           members={members}
           onDone={toggle}
         />
@@ -50,14 +50,14 @@ function AddMemberRow({ projectId, group, members }) {
 
 export default AddMemberRow;
 
-const AddingMemberRow = ({ projectId, group, members, onDone }) => {
+const AddingMemberRow = ({ projectId, members, onDone }) => {
   const { t } = useTranslation();
   const [selectedUser, setSelectedUser] = useState(null);
   const { mutate: add, fetchState } = useAddProjectMember(projectId);
 
   const handleConfirm = async () => {
     if (!selectedUser) return;
-    const userIdentifier = selectedUser.username || selectedUser.email;
+    const userIdentifier = getUserIdentifier(selectedUser);
     await add({ userIdentifier });
     onDone();
   };
@@ -66,20 +66,19 @@ const AddingMemberRow = ({ projectId, group, members, onDone }) => {
     onDone();
   };
 
+  const userDisplayName = getUserDisplayName(selectedUser);
+
   return selectedUser ? (
     <>
       <Typography sx={{ flexGrow: 1 }}>
         <span style={{ fontStyle: "italic" }}>
           {t("projectSettings.members.adding")}{" "}
         </span>
-        <strong>
-          {selectedUser.name || selectedUser.username || selectedUser.email}
-        </strong>
+        <strong>{userDisplayName}</strong>
       </Typography>
       <Tooltip
         title={t("projectSettings.members.confirmAdding", {
-          name:
-            selectedUser.name || selectedUser.username || selectedUser.email,
+          name: userDisplayName,
         })}
       >
         <IconButton

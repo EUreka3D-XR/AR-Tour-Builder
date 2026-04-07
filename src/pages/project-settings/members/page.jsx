@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 
 import { useProjectMembers } from "@/services/usersService";
+import { getUserDisplayName } from "@/utils/user";
 import AddMemberRow from "./_components/AddMemberRow";
 import DeleteMemberButton from "./_components/DeleteMemberButton";
 
@@ -32,11 +33,7 @@ function ProjectMembersPage() {
           {t("projectSettings.members.title")}
         </Typography>
       </Box>
-      <AddMemberRow
-        projectId={project.id}
-        group={project.group}
-        members={members}
-      />
+      <AddMemberRow projectId={project.id} members={members} />
       <br />
       {fetchState.isLoading && <MembersSkeleton />}
       {fetchState.isSuccess && (
@@ -57,8 +54,7 @@ function MembersList({ members, group, project }) {
   return (
     <List dense disablePadding>
       {members?.map((member, index) => {
-        const nameResolved =
-          member.name || member.username || member.email || "Unknown User";
+        const nameResolved = getUserDisplayName(member);
         return (
           <Box key={member.id}>
             <ListItem

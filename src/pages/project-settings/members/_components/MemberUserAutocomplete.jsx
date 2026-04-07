@@ -1,7 +1,8 @@
-import { Autocomplete, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { Autocomplete, TextField } from "@mui/material";
 
 import { useAllUsers } from "@/services/usersService";
+import { getUserDisplayName } from "@/utils/user";
 
 function MemberUserAutocomplete({ members, onChange }) {
   const { t } = useTranslation();
@@ -10,9 +11,6 @@ function MemberUserAutocomplete({ members, onChange }) {
   const memberIds = new Set(members?.map((m) => m.id) ?? []);
   const options = (allUsers ?? []).filter((u) => !memberIds.has(u.id));
 
-  const getLabel = (user) =>
-    user.name || user.username || user.email || user.id;
-
   return (
     <Autocomplete
       fullWidth
@@ -20,7 +18,7 @@ function MemberUserAutocomplete({ members, onChange }) {
       autoHighlight
       loading={fetchState.isLoading}
       options={options}
-      getOptionLabel={getLabel}
+      getOptionLabel={getUserDisplayName}
       renderInput={(params) => (
         <TextField
           {...params}

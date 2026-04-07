@@ -537,6 +537,16 @@
           "description": "Permanently delete this project, all its tours, media, and data. This action cannot be undone.",
           "button": "Delete Project"
         },
+        "leaveProject": {
+          "label": "Leave this project",
+          "description": "Remove yourself from this project. You will lose access to all its content.",
+          "button": "Leave Project",
+          "modal": {
+            "title": "Leave Project",
+            "message": "Are you sure you want to leave {{projectName}}? You will lose access to all its content.",
+            "confirmButton": "Leave Project"
+          }
+        },
         "modal": {
           "title": "Delete Project",
           "message": "This will permanently delete all tours, media, members, and settings associated with this project.",

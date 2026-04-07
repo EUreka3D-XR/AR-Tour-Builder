@@ -11,6 +11,7 @@ import {
 import { useProjectMembers } from "@/services/usersService";
 import useNavPaths from "@/hooks/useNavPaths";
 import usePaginatedItems from "@/hooks/usePaginatedItems";
+import { getUserDisplayName } from "@/utils/user";
 import DashboardCard from "../_common/DashboardCard";
 
 function Members({ projectId }) {
@@ -50,8 +51,7 @@ function MembersList({ members }) {
   return (
     <List dense>
       {members?.map((member) => {
-        const nameResolved =
-          member.name || member.username || member.email || "Unknown User";
+        const nameResolved = getUserDisplayName(member);
         return (
           <ListItem
             key={member.id}

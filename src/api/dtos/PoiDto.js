@@ -6,6 +6,8 @@ export class PoiDto {
     const {
       assets,
       externalLinks: dataExternalLinks,
+      thumbnail,
+      thumbnail_url,
       ...restData
     } = data || {};
 
@@ -17,6 +19,8 @@ export class PoiDto {
       assets: PoiAssetListDto.fromApi(assets),
       externalLinks,
       quizLinks,
+      thumbnail,
+      thumbnailUrl: thumbnail_url,
     };
   }
 
@@ -25,6 +29,8 @@ export class PoiDto {
       assets,
       externalLinks: dataExternalLinks,
       quizLinks: dataQuizLinks,
+      thumbnail,
+      thumbnailUrl,
       ...restData
     } = data || {};
 
@@ -37,6 +43,7 @@ export class PoiDto {
       ...restData,
       assets: PoiAssetListDto.toApi(assets),
       ...(externalLinks && { externalLinks }),
+      ...(thumbnail !== undefined && { thumbnail }),
     };
   }
 }

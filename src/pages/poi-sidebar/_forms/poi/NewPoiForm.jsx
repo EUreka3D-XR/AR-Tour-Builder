@@ -20,7 +20,8 @@ const DEFAULT_POI_VALUES = {
   },
   coordinates: null,
   radius: 20,
-  thumbnai: "",
+  thumbnail: null,
+  thumbnailUrl: null,
   assets: [],
 };
 function NewPoiForm({ onClose }) {

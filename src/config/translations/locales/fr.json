@@ -676,6 +676,7 @@
       "estimatedTimeUnit": "min",
       "estimatedDistance": "Distance Estimée (mètres)",
       "estimatedDistanceUnit": "m",
+      "coverPhoto": "Photo de couverture",
       "createButton": "Créer la visite et commencer l'édition"
     },
     "pois": {

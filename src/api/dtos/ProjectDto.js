@@ -3,6 +3,12 @@ import { TourListDto } from "./TourDto";
 export class ProjectDto {
   static fromApi(data) {
     const { groupMembers, tours, ...restData } = data || {};
+
+    console.log({
+      ...restData,
+      tours: tours ? TourListDto.fromApi(tours) : undefined,
+      members: groupMembers,
+    });
     return {
       ...restData,
       tours: tours ? TourListDto.fromApi(tours) : undefined,
@@ -11,11 +17,21 @@ export class ProjectDto {
   }
 
   static toApi(data) {
-    const { members, tours, ...restData } = data || {};
+    const {
+      members,
+      tours,
+      logo,
+      logoUrl,
+      coverPhoto,
+      coverPhotoUrl,
+      ...restData
+    } = data || {};
     return {
       ...restData,
       groupMembers: members,
       tours: tours ? TourListDto.toApi(tours) : undefined,
+      ...(logo !== undefined && { logo }),
+      ...(coverPhoto !== undefined && { coverPhoto }),
     };
   }
 }

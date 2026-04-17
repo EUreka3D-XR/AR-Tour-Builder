@@ -32,8 +32,10 @@ function CreateProjectForm() {
       },
     },
     locales: ["en"],
-    logo: "",
-    coverPhoto: "",
+    logo: null,
+    logoUrl: null,
+    coverPhoto: null,
+    coverPhotoUrl: null,
   };
 
   const onSubmit = async (data) => {

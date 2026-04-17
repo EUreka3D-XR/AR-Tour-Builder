@@ -1,3 +1,4 @@
+import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { styled, TextField } from "@mui/material";
 
@@ -18,6 +19,8 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 function PoiDetailsTab() {
   const { t } = useTranslation();
+  const { watch, setValue } = useFormContext();
+  const thumbnailUrl = watch("thumbnailUrl");
 
   return (
     <ContainerStyled>
@@ -80,17 +83,17 @@ function PoiDetailsTab() {
           </LabeledInput>
         )}
       />
-      {/* <FormInput
-        name="thumbnail"
-        render={({ field }) => ( */}
       <LabeledInput label={t("poiSidebar.detailsTab.coverPhoto")}>
         <ImageInput
           placeholderText={t("poiSidebar.detailsTab.coverPhotoPlaceholder")}
           maxFileSize={5}
+          value={thumbnailUrl}
+          onUpload={(url, id) => {
+            setValue("thumbnail", id, { shouldDirty: true });
+            setValue("thumbnailUrl", url);
+          }}
         />
       </LabeledInput>
-      {/* )}
-      /> */}
     </ContainerStyled>
   );
 }

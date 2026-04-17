@@ -676,6 +676,7 @@
       "estimatedTimeUnit": "min",
       "estimatedDistance": "Estimated Distance (meters)",
       "estimatedDistanceUnit": "m",
+      "coverPhoto": "Cover Photo",
       "createButton": "Create tour and start editing"
     },
     "pois": {

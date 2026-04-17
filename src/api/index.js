@@ -1,4 +1,5 @@
 import { authApi } from "./calls/authApi";
+import { imagesApi } from "./calls/imagesApi";
 import europeanaApi from "./calls/europeanaApi";
 import { libraryApi } from "./calls/libraryApi";
 import { localesApi } from "./calls/localesApi";
@@ -11,6 +12,7 @@ import { usersApi } from "./calls/usersApi";
 
 export const api = {
   auth: authApi,
+  images: imagesApi,
   europeana: europeanaApi,
   poiAssets: poiAssetsApi,
   library: libraryApi,

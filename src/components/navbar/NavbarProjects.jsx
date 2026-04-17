@@ -94,8 +94,8 @@ function NavbarProjects() {
             ? selectedProject?.title
             : project.title;
           const projectThumbnail = isSelected
-            ? selectedProject?.thumbnail
-            : project.thumbnail;
+            ? selectedProject?.logoUrl
+            : project.logoUrl;
           return (
             <ProjectItem
               key={project.id}

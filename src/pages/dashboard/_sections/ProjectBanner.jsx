@@ -155,7 +155,7 @@ export default ProjectBanner;
 
 function ProjectLogoAvatar({ project }) {
   const {
-    thumbnail,
+    logoUrl: thumbnail,
     title,
     status,
     // totalAssets,

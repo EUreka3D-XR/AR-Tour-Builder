@@ -20,7 +20,8 @@ function CreateTourForm() {
       duration: 0,
       distance: 0,
       guided: false,
-      thumbnail: "",
+      coverPhoto: null,
+      coverPhotoUrl: null,
       status: "draft",
     },
   });

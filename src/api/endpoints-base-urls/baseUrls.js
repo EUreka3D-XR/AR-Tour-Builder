@@ -14,7 +14,8 @@ export const baseUrls = {
   libraryAsset: (assetId) => `/api/assets/${assetId}`,
   members: (projectId) => `/api/projects/${projectId}/members`,
   projectMembersAdd: (projectId) => `/api/projects/${projectId}/members/add`,
-  projectMembersRemove: (projectId) => `/api/projects/${projectId}/members/remove`,
+  projectMembersRemove: (projectId) =>
+    `/api/projects/${projectId}/members/remove`,
   users: "/api/users",
   tours: "/api/tours",
   tour: (tourId) => `/api/tours/${tourId}`,
@@ -22,5 +23,6 @@ export const baseUrls = {
   poi: (poiId) => `/api/pois/${poiId}`,
   poiAssets: "/api/poi-assets",
   poiAsset: (assetId) => `/api/poi-assets/${assetId}`,
+  images: "/api/images/upload",
   localesCDN: (locale) => `https://flagcdn.com/${locale}/codes.json`,
 };

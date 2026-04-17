@@ -6,6 +6,7 @@ import { styled, TextField } from "@mui/material";
 import Button from "@/components/button/Button";
 import FormInput from "@/components/form/FormInput";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
+import ImageInput from "@/components/image-input/ImageInput";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 import LanguageRow from "@/components/language-dropdown/LanguageRow";
@@ -56,7 +57,11 @@ function TourInfoSection() {
 
   const {
     formState: { isSubmitting },
+    watch,
+    setValue,
   } = useFormContext();
+
+  const coverPhotoUrl = watch("coverPhotoUrl");
 
   return (
     <ContainerStyled>
@@ -86,6 +91,16 @@ function TourInfoSection() {
             </LabeledInput>
           )}
         />
+
+        <LabeledInput label={t("tour.info.coverPhoto")}>
+          <ImageInput
+            value={coverPhotoUrl}
+            onUpload={(url, id) => {
+              setValue("coverPhoto", id, { shouldDirty: true });
+              setValue("coverPhotoUrl", url);
+            }}
+          />
+        </LabeledInput>
 
         <div className="small-inputs">
           <FormInput

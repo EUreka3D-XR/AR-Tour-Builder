@@ -8,8 +8,7 @@ export class TourDto {
       isPublic,
       pois,
       boundingBox,
-      cover_photo,
-      cover_photo_url,
+
       ...restData
     } = data || {};
     return {
@@ -19,14 +18,20 @@ export class TourDto {
       boundBox: boundingBox,
       distance: distanceMeters,
       duration: durationMinutes,
-      coverPhoto: cover_photo,
-      coverPhotoUrl: cover_photo_url,
     };
   }
 
   static toApi(data) {
-    const { distance, duration, status, pois, boundBox, coverPhoto, coverPhotoUrl, ...restData } =
-      data || {};
+    const {
+      distance,
+      duration,
+      status,
+      pois,
+      boundBox,
+      coverPhoto,
+      coverPhotoUrl,
+      ...restData
+    } = data || {};
     return {
       ...restData,
       pois: pois?.map((poi) => poi.id) ?? [],
@@ -34,7 +39,7 @@ export class TourDto {
       distanceMeters: distance,
       durationMinutes: duration,
       boundingBox: boundBox,
-      ...(coverPhoto !== undefined && { cover_photo: coverPhoto }),
+      ...(coverPhoto !== undefined && { coverPhoto }),
     };
   }
 }

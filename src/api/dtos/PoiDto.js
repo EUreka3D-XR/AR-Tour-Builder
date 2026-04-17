@@ -6,8 +6,7 @@ export class PoiDto {
     const {
       assets,
       externalLinks: dataExternalLinks,
-      thumbnail,
-      thumbnail_url,
+
       ...restData
     } = data || {};
 
@@ -19,8 +18,6 @@ export class PoiDto {
       assets: PoiAssetListDto.fromApi(assets),
       externalLinks,
       quizLinks,
-      thumbnail,
-      thumbnailUrl: thumbnail_url,
     };
   }
 

@@ -89,7 +89,7 @@
  * @property {string} id - The unique identifier for the project
  * @property {LocalesField} title - The multilingual title of the project
  * @property {LocalesField} description - The multilingual description of the project
- * @property {string} thumbnail - The URL of the project's thumbnail image
+ * @property {string} logo - The URL of the project's logo image
  * @property {string} coverPhoto - The URL of the project's cover photo
  * @property {Tour[]} tours - Array of tours associated with this project
  * @property {User[]} members - Members of the project
@@ -113,7 +113,7 @@
  * @property {string} id - Unique identifier for the tour
  * @property {LocalesField} title - Tour title
  * @property {LocalesField} description - Tour description
- * @property {string} thumbnail - Tour thumbnail image URL
+ * @property {string} coverPhoto - Tour cover photo URL
  * @property {Poi[]} pois - Array of Points of Interest in this tour
  * @property {Status} status - Tour status (draft, published, archived)
  * @property {number} totalPois - Total number of POIs in the tour

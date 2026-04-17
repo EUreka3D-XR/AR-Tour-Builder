@@ -35,7 +35,7 @@ function TourPoisMapSection({ containerRef }) {
           id={poi.id}
           title={<InjectedLocaleValue value={poi.title} />}
           coordinates={poi.coordinates}
-          thumbnail={poi.thumbnail}
+          thumbnail={poi.thumbnailUrl}
           containerRef={containerRef}
           onClick={handlePoiClick}
         />

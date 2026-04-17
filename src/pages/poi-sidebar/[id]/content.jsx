@@ -13,8 +13,8 @@ import ViewPoiMedia from "./_sections/ViewPoiMedia";
 function ViewPoiSidebarContent({ poi }) {
   return (
     <div className="poi-sidebar-content">
-      {poi.thumbnail ? (
-        <ViewPoiBanner photoUrl={poi.thumbnail} />
+      {poi.thumbnailUrl ? (
+        <ViewPoiBanner photoUrl={poi.thumbnailUrl} />
       ) : (
         <Spacer size={10} />
       )}

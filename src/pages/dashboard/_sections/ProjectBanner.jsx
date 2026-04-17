@@ -91,7 +91,7 @@ function ProjectBanner({ project = {} }) {
   const { t } = useTranslation();
   const { routes } = useNavPaths();
   const {
-    coverPhoto,
+    coverPhotoUrl,
     title,
     description,
     tours,
@@ -102,7 +102,7 @@ function ProjectBanner({ project = {} }) {
 
   return (
     <DashboardCard noPadding>
-      <Banner src={coverPhoto}>
+      <Banner src={coverPhotoUrl}>
         <ContainerStyled>
           <div className="info-wrapper">
             <ProjectLogoAvatar project={project} />

@@ -43,7 +43,7 @@ function ToursMapSection({ tour, onOpenTour }) {
           key={poi.id}
           title={poi.title}
           coordinates={poi.coordinates}
-          thumbnail={poi.thumbnail}
+          thumbnail={poi.thumbnailUrl}
         />
       ))}
       <MapUIAreaStyled>

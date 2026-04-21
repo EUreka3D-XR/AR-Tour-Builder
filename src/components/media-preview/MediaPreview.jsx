@@ -9,7 +9,7 @@ function MediaPreview({ url, type }) {
   }
 
   if (type === "model3d") {
-    return <Model3DViewer src={url} mode="freelook" />;
+    return <Model3DViewer src={url} mode="grid" />;
   }
 
   if (type === "video") {

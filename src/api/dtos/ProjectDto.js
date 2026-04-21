@@ -4,11 +4,6 @@ export class ProjectDto {
   static fromApi(data) {
     const { groupMembers, tours, ...restData } = data || {};
 
-    console.log({
-      ...restData,
-      tours: tours ? TourListDto.fromApi(tours) : undefined,
-      members: groupMembers,
-    });
     return {
       ...restData,
       tours: tours ? TourListDto.fromApi(tours) : undefined,

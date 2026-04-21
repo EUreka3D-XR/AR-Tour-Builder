@@ -45,6 +45,7 @@ export const allowedFileExtensions = {
   model3d: [
     // { value: ".gltf", label: "glTF - GL Transmission Format" },
     { value: ".glb", label: "glTF Binary - GLB" },
+    { value: ".ply", label: "PLY - Polygon File Format" },
     { value: ".zip", label: "ZIP archive containing 3D model files" },
     // { value: ".obj", label: "OBJ" },
     // { value: ".fbx", label: "FBX" },
@@ -148,7 +149,7 @@ export const findTypeFromMimeType = (mimeType) => {
 };
 
 /** 3D model file extensions that are valid inside a zip archive. */
-const VALID_3D_EXTENSIONS_IN_ZIP = [".glb", ".gltf", ".obj"];
+const VALID_3D_EXTENSIONS_IN_ZIP = [".glb", ".gltf", ".obj", ".ply"];
 
 /**
  * Inspect a zip archive at the given URL using HTTP Range requests (via unzipit)

@@ -46,7 +46,11 @@ export const allowedFileExtensions = {
     // { value: ".gltf", label: "glTF - GL Transmission Format" },
     { value: ".glb", label: "glTF Binary - GLB" },
     { value: ".ply", label: "PLY - Polygon File Format" },
-    { value: ".zip", label: "ZIP archive containing 3D model files" },
+    {
+      value: ".zip",
+      label:
+        "ZIP archive containing 3D model files of either GLB, PLY or OBJ and its relative mtl file, textures...",
+    },
     // { value: ".obj", label: "OBJ" },
     // { value: ".fbx", label: "FBX" },
   ],

@@ -54,8 +54,11 @@ function AssetFormMediaSection() {
   const contentUrl = useWatch({ name: "contentUrl" });
 
   const helperTextForUrl = useMemo(() => {
-    return getExtensionsHelperForType(assetType, true);
-  }, [assetType]);
+    if (!assetType) return "";
+    const typeLabel = t(`fileTypes.${assetType}`);
+    const prefix = t("fileTypes.supportedTypes", { type: typeLabel });
+    return `${prefix}: ${getExtensionsHelperForType(assetType, true)}`;
+  }, [assetType, t]);
 
   const url = localeValue(contentUrl, locale);
   const debouncedUrl = useDebouncedValue(url, 600);

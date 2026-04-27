@@ -768,7 +768,8 @@
     "video": "Vidéo",
     "audio": "Audio",
     "model3d": "Modèle 3D",
-    "document": "Document"
+    "document": "Document",
+    "supportedTypes": "Types {{type}} supportés"
   },
   "app_language_dropdown": {
     "en": "Anglais",

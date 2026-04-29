@@ -9,6 +9,10 @@ const DevPage = lazy(() => import("@/pages/dev/page"));
 
 const EGICallbackPage = lazy(() => import("@/pages/auth/egi-login/page"));
 
+const MobilePrivacyPolicyIndexPage = lazy(() => import("@/pages/mobile-privacy-policy/page"));
+const PrivacyPolicyEnPage = lazy(() => import("@/pages/mobile-privacy-policy/en/page"));
+const PrivacyPolicyFrPage = lazy(() => import("@/pages/mobile-privacy-policy/fr/page"));
+
 function EurekaRoutes() {
   return (
     <Routes>
@@ -36,6 +40,10 @@ function EurekaRoutes() {
       <Route path="/projects/*" element={<DefaultRoutes />} />
       {/* 🛠 Dev */}
       <Route path="/dev" element={<DevPage />} />
+      {/* 📄 Privacy Policy (public) */}
+      <Route path="/mobile-privacy-policy" element={<MobilePrivacyPolicyIndexPage />} />
+      <Route path="/mobile-privacy-policy/en" element={<PrivacyPolicyEnPage />} />
+      <Route path="/mobile-privacy-policy/fr" element={<PrivacyPolicyFrPage />} />
       {/* 404 - Not Found */}
       {/* <Route path="*" element={<Navigate to="/projects" replace />} /> */}
     </Routes>

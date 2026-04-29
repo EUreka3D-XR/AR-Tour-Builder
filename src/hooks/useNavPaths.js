@@ -47,6 +47,11 @@ const useNavPaths = () => {
 
     return {
       home: "/",
+      mobilePrivacyPolicy: {
+        index: "/mobile-privacy-policy",
+        en: "/mobile-privacy-policy/en",
+        fr: "/mobile-privacy-policy/fr",
+      },
       projects: projectsBase,
       dashboard: constructPaths(internalProjectRoute("/dashboard")),
       tours: constructPaths(internalProjectRoute("/tours")),

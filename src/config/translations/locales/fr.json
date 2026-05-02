@@ -659,6 +659,7 @@
   "tour": {
     "header": {
       "editingTour": "Modification de la Visite :",
+      "creatingTour": "Création d'une Nouvelle Visite :",
       "saveChanges": "Enregistrer les Modifications",
       "saving": "Enregistrement...",
       "deleteTour": "Supprimer la Visite",

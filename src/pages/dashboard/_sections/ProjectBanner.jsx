@@ -61,6 +61,12 @@ const ContainerStyled = styled("div")(({ theme }) => ({
       flex: 1,
       color: "white",
       textShadow: "2px 2px 4px rgba(0,0,0,0.7)",
+      "& .description": {
+        display: "-webkit-box",
+        WebkitLineClamp: 3,
+        WebkitBoxOrient: "vertical",
+        overflow: "hidden",
+      },
     },
     "& .stats-info": {
       marginTop: theme.spacing(2),
@@ -113,7 +119,7 @@ function ProjectBanner({ project = {} }) {
             <ProjectLogoAvatar project={project} />
             <div className="project-info">
               <Typography variant="h2">{projectTitle}</Typography>
-              <Typography>{description}</Typography>
+              <Typography className="description">{description}</Typography>
               <div className="stats-info">
                 <div className="stat">
                   <EurekaIcon name="tour" />

@@ -659,6 +659,7 @@
   "tour": {
     "header": {
       "editingTour": "Editing Tour:",
+      "creatingTour": "Creating New Tour:",
       "saveChanges": "Save Changes",
       "saving": "Saving...",
       "deleteTour": "Delete Tour",

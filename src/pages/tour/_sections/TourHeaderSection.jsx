@@ -69,6 +69,10 @@ function TourHeaderSection() {
     navigate(routes.tours.index);
   };
 
+  const headerPrefix = isExisting
+    ? t("tour.header.editingTour")
+    : t("tour.header.creatingTour");
+
   return (
     <ContainerStyled>
       <div className="left-section">
@@ -76,8 +80,7 @@ function TourHeaderSection() {
           <EurekaIcon name="back" fontSize="small" />
         </IconButton>
         <Typography variant="h4" component="h2" noWrap>
-          {t("tour.header.editingTour")}{" "}
-          <InjectedLocaleValue value={tourTitle} />
+          {headerPrefix} <InjectedLocaleValue value={tourTitle} />
         </Typography>
       </div>
       {isExisting && (

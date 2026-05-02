@@ -16,7 +16,6 @@ import { useDataFetcher, useDataMutator } from "./helpers/serviceHooks";
  */
 export const useProjects = () => {
   const locale = useLocale();
-  console.log(locale);
   return useDataFetcher({
     fetcher: () => api.projects.fetchAll(locale),
     queryKey: ["projects", locale],
@@ -103,7 +102,7 @@ export const useUpdateProject = (projectId) => {
   return useDataMutator({
     mutator: ({ data }) => api.projects.update(projectId, data),
     mutationKey: ["update-project", projectId],
-    invalidateKey: ["project", projectId, "localized"],
+    invalidateKey: [["project", projectId, "localized"], ["projects"]],
     onSuccess: (_, variables) => {
       const updateQuery = (queryKey) => {
         qc.setQueryData(queryKey, (oldData) => {

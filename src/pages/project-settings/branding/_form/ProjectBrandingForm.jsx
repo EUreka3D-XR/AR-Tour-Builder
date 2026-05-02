@@ -3,8 +3,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { useUpdateProject } from "@/services/projectsService";
+import FormImageInput from "@/components/form/FormImageInput";
 import HorizontalFieldWrapper from "@/components/horizontal-field-wrapper/HorizontalFieldWrapper";
-import ImageInput from "@/components/image-input/ImageInput";
 import { SettingsFormLayout } from "../../_sections/SettingsFormLayout";
 import SettingsSaveRow from "../../_sections/SettingsSaveRow";
 
@@ -14,10 +14,7 @@ function ProjectBrandingForm({ defaultValues }) {
   const { mutate: updateProject } = useUpdateProject(projectId);
 
   const methods = useForm({ defaultValues });
-  const { handleSubmit, watch, setValue, reset } = methods;
-
-  const logoUrl = watch("logoUrl");
-  const coverPhotoUrl = watch("coverPhotoUrl");
+  const { handleSubmit, reset } = methods;
 
   const onSubmit = async (data) => {
     const newData = await updateProject({ data });
@@ -37,27 +34,21 @@ function ProjectBrandingForm({ defaultValues }) {
             label={t("projects.form.branding.logo.label")}
             description={t("projects.form.branding.logo.description")}
           >
-            <ImageInput
+            <FormImageInput
+              idName="logo"
+              urlName="logoUrl"
               placeholderText={t("projects.form.branding.logo.placeholder")}
               maxFileSize={2}
-              value={logoUrl}
-              onUpload={(url, id) => {
-                setValue("logo", id, { shouldDirty: true });
-                setValue("logoUrl", url);
-              }}
             />
           </HorizontalFieldWrapper>
           <HorizontalFieldWrapper
             label={t("projects.form.branding.coverPhoto.label")}
             description={t("projects.form.branding.coverPhoto.description")}
           >
-            <ImageInput
+            <FormImageInput
+              idName="coverPhoto"
+              urlName="coverPhotoUrl"
               placeholderText={t("projects.form.branding.coverPhoto.placeholder")}
-              value={coverPhotoUrl}
-              onUpload={(url, id) => {
-                setValue("coverPhoto", id, { shouldDirty: true });
-                setValue("coverPhotoUrl", url);
-              }}
             />
           </HorizontalFieldWrapper>
           <SettingsSaveRow />

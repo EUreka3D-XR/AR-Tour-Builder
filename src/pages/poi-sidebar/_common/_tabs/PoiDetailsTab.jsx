@@ -1,10 +1,9 @@
-import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { styled, TextField } from "@mui/material";
 
+import FormImageInput from "@/components/form/FormImageInput";
 import FormInput from "@/components/form/FormInput";
 import FormInputMultilingual from "@/components/form/FormInputMultilingual";
-import ImageInput from "@/components/image-input/ImageInput";
 import LabeledInput from "@/components/labeled-input/LabeledInput";
 import LanguageDropdown from "@/components/language-dropdown/LanguageDropdown";
 import NumberInput from "@/components/number-input/NumberInput";
@@ -19,8 +18,6 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 }));
 function PoiDetailsTab() {
   const { t } = useTranslation();
-  const { watch, setValue } = useFormContext();
-  const thumbnailUrl = watch("thumbnailUrl");
 
   return (
     <ContainerStyled>
@@ -84,14 +81,11 @@ function PoiDetailsTab() {
         )}
       />
       <LabeledInput label={t("poiSidebar.detailsTab.coverPhoto")}>
-        <ImageInput
+        <FormImageInput
+          idName="thumbnail"
+          urlName="thumbnailUrl"
           placeholderText={t("poiSidebar.detailsTab.coverPhotoPlaceholder")}
           maxFileSize={5}
-          value={thumbnailUrl}
-          onUpload={(url, id) => {
-            setValue("thumbnail", id, { shouldDirty: true });
-            setValue("thumbnailUrl", url);
-          }}
         />
       </LabeledInput>
     </ContainerStyled>

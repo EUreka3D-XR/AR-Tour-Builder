@@ -30,6 +30,19 @@ export const isLocalesValue = (value) => {
   );
 };
 
+/**
+ * Returns the field value, or a translated "No <language> <field>" fallback when empty.
+ *
+ * @param {string} value - The field value (e.g. a localized title or description string)
+ * @param {"en"|"fr"} locale - The language this field belongs to
+ * @param {"title"|"description"} fieldType - The type of field being displayed
+ * @param {Function} t - The i18next t function
+ */
+export const getFieldOrFallback = (value, locale, fieldType, t) => {
+  if (value) return value;
+  return t(`common.empty_field.no_${fieldType}_${locale}`);
+};
+
 export const localizeData = (data, locale) => {
   const transform = (value) => {
     // If it's a multilingual value, extract the locale and stop recursing

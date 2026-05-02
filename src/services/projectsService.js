@@ -16,6 +16,7 @@ import { useDataFetcher, useDataMutator } from "./helpers/serviceHooks";
  */
 export const useProjects = () => {
   const locale = useLocale();
+  console.log(locale);
   return useDataFetcher({
     fetcher: () => api.projects.fetchAll(locale),
     queryKey: ["projects", locale],
@@ -41,7 +42,7 @@ export const useProject = (projectId) => {
   const locale = useLocale();
   return useDataFetcher({
     fetcher: () => api.projects.fetchOne(projectId, locale),
-    queryKey: ["project", projectId, "localized"],
+    queryKey: ["project", projectId, "localized", locale],
     storeValue: true,
   });
 };

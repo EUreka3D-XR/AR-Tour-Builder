@@ -7,6 +7,8 @@ import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import { useProjectProvider } from "@/providers/project/ProjectContext";
 import useNavPaths from "@/hooks/useNavPaths";
 import { useToggle } from "@/hooks/useToggle";
+import { useLocale } from "@/hooks/useLocale";
+import { getFieldOrFallback } from "@/utils/inputLocale";
 import Button from "../button/Button";
 import EurekaIcon from "../icon/EurekaIcon";
 import Image from "../image/Image";
@@ -63,6 +65,7 @@ const ProjectItem = styled(Link)({
 
 function NavbarProjects() {
   const { t } = useTranslation();
+  const locale = useLocale();
   const { project: selectedProject } = useProjectProvider();
   const { data: projects } = useProjects();
 
@@ -90,9 +93,12 @@ function NavbarProjects() {
                 to: routes.projects.one(project.id),
                 onClick: isProjectMenuOpen ? closeProjectMenu : openProjectMenu,
               };
-          const projectTitle = isSelected
-            ? selectedProject?.title
-            : project.title;
+          const projectTitle = getFieldOrFallback(
+            isSelected ? selectedProject?.title : project.title,
+            locale,
+            "title",
+            t,
+          );
           const projectThumbnail = isSelected
             ? selectedProject?.logoUrl
             : project.logoUrl;

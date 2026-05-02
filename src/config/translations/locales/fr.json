@@ -40,6 +40,12 @@
     },
     "errors": {
       "invalidCoordinates": "Coordonnées invalides"
+    },
+    "empty_field": {
+      "no_title_en": "Pas de titre en anglais",
+      "no_title_fr": "Pas de titre en français",
+      "no_description_en": "Pas de description en anglais",
+      "no_description_fr": "Pas de description en français"
     }
   },
   "asset": {

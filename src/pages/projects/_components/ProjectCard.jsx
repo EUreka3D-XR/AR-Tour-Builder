@@ -65,7 +65,7 @@ function ProjectCard({ project }) {
     <ProjectCardStyled onClick={handleCardClick}>
       <CardMedia>
         <Image
-          src={project.thumbnail}
+          src={project.coverPhotoUrl}
           alt={project.title}
           width="100%"
           height="200px"

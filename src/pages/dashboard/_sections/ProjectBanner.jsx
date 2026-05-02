@@ -5,7 +5,9 @@ import { Avatar, Badge, styled, Typography } from "@mui/material";
 import Banner from "@/components/banner/Banner";
 import Button from "@/components/button/Button";
 import EurekaIcon from "@/components/icon/EurekaIcon";
+import { useLocale } from "@/hooks/useLocale";
 import useNavPaths from "@/hooks/useNavPaths";
+import { getFieldOrFallback } from "@/utils/inputLocale";
 import DashboardCard from "../_common/DashboardCard";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -100,6 +102,9 @@ function ProjectBanner({ project = {} }) {
     // totalAssets,
   } = project;
 
+  const locale = useLocale();
+  const projectTitle = getFieldOrFallback(title, locale, "title", t);
+
   return (
     <DashboardCard noPadding>
       <Banner src={coverPhotoUrl}>
@@ -107,7 +112,7 @@ function ProjectBanner({ project = {} }) {
           <div className="info-wrapper">
             <ProjectLogoAvatar project={project} />
             <div className="project-info">
-              <Typography variant="h2">{title}</Typography>
+              <Typography variant="h2">{projectTitle}</Typography>
               <Typography>{description}</Typography>
               <div className="stats-info">
                 <div className="stat">

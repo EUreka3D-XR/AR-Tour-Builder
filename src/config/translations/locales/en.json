@@ -512,6 +512,13 @@
       "browseLibrary": "Browse Library"
     }
   },
+  "accountSettings": {
+    "backToProjects": "Back to Projects",
+    "header": {
+      "title": "Account Settings",
+      "subtitle": "Manage your personal profile and account information"
+    }
+  },
   "projectSettings": {
     "header": {
       "title": "Settings",

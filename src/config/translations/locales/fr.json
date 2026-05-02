@@ -512,6 +512,13 @@
       "browseLibrary": "Parcourir la Bibliothèque"
     }
   },
+  "accountSettings": {
+    "backToProjects": "Retour aux projets",
+    "header": {
+      "title": "Paramètres du compte",
+      "subtitle": "Gérez votre profil personnel et les informations de votre compte"
+    }
+  },
   "projectSettings": {
     "header": {
       "title": "Paramètres",

@@ -5,9 +5,9 @@ import { Divider, styled } from "@mui/material";
 import { useProjects } from "@/services/projectsService";
 import { useGeneralProvider } from "@/providers/general/GeneralContext";
 import { useProjectProvider } from "@/providers/project/ProjectContext";
+import { useLocale } from "@/hooks/useLocale";
 import useNavPaths from "@/hooks/useNavPaths";
 import { useToggle } from "@/hooks/useToggle";
-import { useLocale } from "@/hooks/useLocale";
 import { getFieldOrFallback } from "@/utils/inputLocale";
 import Button from "../button/Button";
 import EurekaIcon from "../icon/EurekaIcon";
@@ -60,6 +60,9 @@ const ProjectItem = styled(Link)({
         backgroundColor: "#ccc",
       },
     },
+  },
+  "& .hidden": {
+    display: "none",
   },
 });
 

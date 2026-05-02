@@ -47,6 +47,7 @@ const useNavPaths = () => {
 
     return {
       home: "/",
+      account: "/account",
       mobilePrivacyPolicy: {
         index: "/mobile-privacy-policy",
         en: "/mobile-privacy-policy/en",

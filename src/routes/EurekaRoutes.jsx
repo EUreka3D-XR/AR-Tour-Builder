@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import GuestRoute from "@/components/guards/GuestRoute";
+import OuterLayout from "@/layouts/OuterLayout";
 import AuthRoutes from "./AuthRoutes";
 import DefaultRoutes from "./DefaultRoutes";
 
@@ -12,6 +13,8 @@ const EGICallbackPage = lazy(() => import("@/pages/auth/egi-login/page"));
 const MobilePrivacyPolicyIndexPage = lazy(() => import("@/pages/mobile-privacy-policy/page"));
 const PrivacyPolicyEnPage = lazy(() => import("@/pages/mobile-privacy-policy/en/page"));
 const PrivacyPolicyFrPage = lazy(() => import("@/pages/mobile-privacy-policy/fr/page"));
+
+const AccountSettingsPage = lazy(() => import("@/pages/account-settings/page"));
 
 function EurekaRoutes() {
   return (
@@ -36,6 +39,10 @@ function EurekaRoutes() {
       />
       {/* Default Home */}
       <Route path="/" element={<Navigate to="/projects" replace />} />
+      {/* 👤 Account Settings */}
+      <Route path="/account" element={<OuterLayout />}>
+        <Route index element={<AccountSettingsPage />} />
+      </Route>
       {/* 📁 Projects */}
       <Route path="/projects/*" element={<DefaultRoutes />} />
       {/* 🛠 Dev */}

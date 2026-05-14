@@ -123,9 +123,11 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      // Token expired or invalid - clear token and redirect to login
-      localeStorageAPI.auth.removeToken();
-      window.location.href = "/auth/login";
+      const url = error.config?.url ?? "";
+      if (!url.includes("/api/auth/oidc/login")) {
+        localeStorageAPI.auth.removeToken();
+        window.location.href = "/auth/login";
+      }
     }
     return Promise.reject(error);
   },

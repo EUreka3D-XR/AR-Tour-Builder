@@ -87,6 +87,7 @@ function ButtonNewUnstyled({
   onClick,
   className,
 }) {
+  const isExternalHref = href && /^(https?:|mailto:|tel:|\/\/)/i.test(href);
   return (
     <ButtonStyled
       variant={VARIANTS_DICT[variant]}
@@ -104,7 +105,9 @@ function ButtonNewUnstyled({
         "btn-unstyled": variant === "unstyled",
         "disable-gutters": disableGutters,
       })}
-      {...(href ? { component: Link, to: href } : {})}
+      {...(href
+        ? { component: Link, to: href, openInNewTab: isExternalHref }
+        : {})}
       onClick={onClick}
     >
       {children}

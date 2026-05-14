@@ -342,6 +342,11 @@
       },
       "errors": {
         "loginFailed": "Une erreur s'est produite, assurez-vous de fournir les bons identifiants"
+      },
+      "egiAccess": {
+        "noAccess": "Une erreur s'est produite, vous n'avez pas accès à l'espace AR Tour Builder",
+        "requestAccess": "Pour accéder à l'AR Tour Builder, vous devez d'abord rejoindre la communauté EUreka3D. À cet effet, veuillez envoyer une demande d'approbation en visitant le lien ci-dessous.\n\nVotre demande devrait être traitée dans un délai de ?XXX?, veuillez donc réessayer après cette période.",
+        "requestAccessLink": "Rejoindre la communauté EUreka3D"
       }
     },
     "forgotPassword": {

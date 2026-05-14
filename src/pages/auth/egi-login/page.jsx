@@ -1,16 +1,18 @@
-import { useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
+import { useEffect, useRef, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { Alert, Box, CircularProgress, Typography } from "@mui/material";
 
 import { useEGILogin } from "@/services/authService";
+import Button from "@/components/button/Button";
 import useNavPaths from "@/hooks/useNavPaths";
 import { extractEGICallback } from "@/utils/egiAuth";
 
 function EGICallbackPage() {
   const { t } = useTranslation();
   const { navigate, routes } = useNavPaths();
-  const { mutate: egiLogin, fetchState } = useEGILogin();
+  const { mutate: egiLogin } = useEGILogin();
   const hasCalled = useRef(false);
+  const [accessDenied, setAccessDenied] = useState(false);
 
   useEffect(() => {
     if (hasCalled.current) return;
@@ -18,11 +20,18 @@ function EGICallbackPage() {
 
     try {
       const { code, state, codeVerifier } = extractEGICallback();
+      setAccessDenied(true);
       egiLogin(
         { code, state, codeVerifier },
         {
           onSuccess: () => navigate(routes.home, { replace: true }),
-          onError: () => navigate("/auth/login?egi_error=1", { replace: true }),
+          onError: (error) => {
+            if (error?.response?.status === 401) {
+              setAccessDenied(true);
+            } else {
+              navigate("/auth/login?egi_error=1", { replace: true });
+            }
+          },
         },
       );
     } catch {
@@ -37,17 +46,44 @@ function EGICallbackPage() {
       alignItems="center"
       justifyContent="center"
       height="100vh"
+      width="100vw"
       gap={3}
     >
-      {fetchState.isError ? (
-        <Alert severity="error">
-          {t("auth.login.errors.loginFailed", "EGI Login Failed")}
-        </Alert>
+      {accessDenied ? (
+        <Box
+          maxWidth={480}
+          width="100%"
+          display="flex"
+          flexDirection="column"
+          gap={2}
+        >
+          <Alert severity="error">
+            {t(
+              "auth.login.egiAccess.noAccess",
+              "An error has occurred, you don't have access to the AR Tour Builder Space",
+            )}
+          </Alert>
+          <Alert severity="info">
+            <Typography variant="body2" sx={{ whiteSpace: "pre-line" }}>
+              <Trans i18nKey="auth.login.egiAccess.requestAccess" />
+            </Typography>
+          </Alert>
+          <Button
+            href="https://go.egi.eu/join_eureka3d"
+            target="_blank"
+            rel="noopener"
+          >
+            {t("auth.login.egiAccess.requestAccessLink", "Request access")}
+          </Button>
+        </Box>
       ) : (
         <>
           <CircularProgress />
           <Typography variant="h6">
-            Completing EGI login, please wait...
+            {t(
+              "auth.login.egiAccess.completing",
+              "Completing EGI login, please wait...",
+            )}
           </Typography>
         </>
       )}

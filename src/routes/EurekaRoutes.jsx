@@ -1,8 +1,9 @@
 import { lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import GuestRoute from "@/components/guards/GuestRoute";
 import OuterLayout from "@/layouts/OuterLayout";
+import GuestRoute from "@/components/guards/GuestRoute";
+import LegalPageTemplate from "@/components/legal-page-template/LegalPageTemplate";
 import AuthRoutes from "./AuthRoutes";
 import DefaultRoutes from "./DefaultRoutes";
 
@@ -10,9 +11,15 @@ const DevPage = lazy(() => import("@/pages/dev/page"));
 
 const EGICallbackPage = lazy(() => import("@/pages/auth/egi-login/page"));
 
-const MobilePrivacyPolicyIndexPage = lazy(() => import("@/pages/mobile-privacy-policy/page"));
-const PrivacyPolicyEnPage = lazy(() => import("@/pages/mobile-privacy-policy/en/page"));
-const PrivacyPolicyFrPage = lazy(() => import("@/pages/mobile-privacy-policy/fr/page"));
+const MobilePrivacyPolicyIndexPage = lazy(
+  () => import("@/pages/mobile-privacy-policy/page"),
+);
+const PrivacyPolicyEnPage = lazy(
+  () => import("@/pages/mobile-privacy-policy/en/page"),
+);
+const PrivacyPolicyFrPage = lazy(
+  () => import("@/pages/mobile-privacy-policy/fr/page"),
+);
 
 const AccountSettingsPage = lazy(() => import("@/pages/account-settings/page"));
 
@@ -47,10 +54,27 @@ function EurekaRoutes() {
       <Route path="/projects/*" element={<DefaultRoutes />} />
       {/* 🛠 Dev */}
       <Route path="/dev" element={<DevPage />} />
+      <Route
+        path="/data-policy"
+        element={<LegalPageTemplate file="/legal/data-policy.md" />}
+      />
+      <Route
+        path="/use-policy-and-conditions"
+        element={<LegalPageTemplate file="/legal/aup.md" />}
+      />
       {/* 📄 Privacy Policy (public) */}
-      <Route path="/mobile-privacy-policy" element={<MobilePrivacyPolicyIndexPage />} />
-      <Route path="/mobile-privacy-policy/en" element={<PrivacyPolicyEnPage />} />
-      <Route path="/mobile-privacy-policy/fr" element={<PrivacyPolicyFrPage />} />
+      <Route
+        path="/mobile-privacy-policy"
+        element={<MobilePrivacyPolicyIndexPage />}
+      />
+      <Route
+        path="/mobile-privacy-policy/en"
+        element={<PrivacyPolicyEnPage />}
+      />
+      <Route
+        path="/mobile-privacy-policy/fr"
+        element={<PrivacyPolicyFrPage />}
+      />
       {/* 404 - Not Found */}
       {/* <Route path="*" element={<Navigate to="/projects" replace />} /> */}
     </Routes>

@@ -793,5 +793,8 @@
   "app_language_dropdown": {
     "en": "English",
     "fr": "French"
+  },
+  "legal": {
+    "backToApp": "Back to App"
   }
 }

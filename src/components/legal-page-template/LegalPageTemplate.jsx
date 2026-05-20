@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { styled } from "@mui/material";
@@ -37,7 +38,16 @@ const ContainerStyled = styled("div")(({ theme }) => ({
 
 export default function LegalPageTemplate({ file }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [content, setContent] = useState("");
+
+  const handleBack = () => {
+    if (window.history.state?.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
 
   useEffect(() => {
     fetch(file)
@@ -50,7 +60,7 @@ export default function LegalPageTemplate({ file }) {
       <div className="inner">
         <Button
           variant="text"
-          href="/"
+          onClick={handleBack}
           startIcon={<EurekaIcon name="back" />}
           className="back-button"
         >

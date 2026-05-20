@@ -53,6 +53,8 @@ const useNavPaths = () => {
         en: "/mobile-privacy-policy/en",
         fr: "/mobile-privacy-policy/fr",
       },
+      dataPolicy: "/data-policy",
+      termsOfUse: "/terms-of-use",
       projects: projectsBase,
       dashboard: constructPaths(internalProjectRoute("/dashboard")),
       tours: constructPaths(internalProjectRoute("/tours")),
@@ -86,6 +88,8 @@ const useNavPaths = () => {
       tours: { label: t("nav_menu.tours"), to: routes.tours.index },
       library: { label: t("nav_menu.library"), to: routes.library.index },
       settings: { label: t("nav_menu.settings"), to: routes.projectSettings },
+      dataPolicy: { label: t("nav_menu.data_policy"), to: routes.dataPolicy },
+      termsOfUse: { label: t("nav_menu.terms_of_use"), to: routes.termsOfUse },
     }),
     [routes, t],
   );

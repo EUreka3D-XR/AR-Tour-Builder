@@ -59,7 +59,7 @@ function EurekaRoutes() {
         element={<LegalPageTemplate file="/legal/data-policy.md" />}
       />
       <Route
-        path="/use-policy-and-conditions"
+        path="/terms-of-use"
         element={<LegalPageTemplate file="/legal/aup.md" />}
       />
       {/* 📄 Privacy Policy (public) */}

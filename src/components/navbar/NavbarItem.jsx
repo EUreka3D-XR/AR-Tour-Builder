@@ -56,7 +56,12 @@ function NavbarItem({ to, name, className, icon }) {
           "nav-item-shrink": !isNavMenuOpen,
         })}
       >
-        <EurekaIcon name={icon} variant={isSelected ? "filled" : "outlined"} />
+        {icon && (
+          <EurekaIcon
+            name={icon}
+            variant={isSelected ? "filled" : "outlined"}
+          />
+        )}
         <span className="nav-item-name">{name}</span>
       </Link>
     </MenuItemStyled>

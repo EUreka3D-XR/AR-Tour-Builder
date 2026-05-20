@@ -4,7 +4,9 @@
     "tours": "Éditeur de Visites",
     "library": "Bibliothèque",
     "dashboard": "Tableau de bord",
-    "settings": "Paramètres du Projet"
+    "settings": "Paramètres du Projet",
+    "data_policy": "Politique de Données",
+    "terms_of_use": "Conditions d'Utilisation"
   },
   "dates": {
     "today": "Aujourd'hui",

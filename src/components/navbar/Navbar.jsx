@@ -9,6 +9,9 @@ import NavbarProjects from "./NavbarProjects";
 const MenuListStyled = styled(MenuList)(({ theme }) => ({
   boxShadow: "2px 0 8px rgba(0,0,0,0.08)", // right shadow
   transition: theme.transitions.create("width"),
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
   "&.nav-open": {
     padding: "0 1rem",
     width: "300px",
@@ -33,27 +36,39 @@ function Navbar() {
         "nav-close": !isNavMenuOpen,
       })}
     >
-      <NavbarProjects />
-      <NavbarItem
-        to={navLinks.dashboard.to}
-        name={navLinks.dashboard.label}
-        icon="home"
-      />
-      <NavbarItem
-        to={navLinks.tours.to}
-        name={navLinks.tours.label}
-        icon="tour"
-      />
-      <NavbarItem
-        to={navLinks.library.to}
-        name={navLinks.library.label}
-        icon="media"
-      />
-      <NavbarItem
-        to={navLinks.settings.to}
-        name={navLinks.settings.label}
-        icon="settings"
-      />
+      <div>
+        <NavbarProjects />
+        <NavbarItem
+          to={navLinks.dashboard.to}
+          name={navLinks.dashboard.label}
+          icon="home"
+        />
+        <NavbarItem
+          to={navLinks.tours.to}
+          name={navLinks.tours.label}
+          icon="tour"
+        />
+        <NavbarItem
+          to={navLinks.library.to}
+          name={navLinks.library.label}
+          icon="media"
+        />
+        <NavbarItem
+          to={navLinks.settings.to}
+          name={navLinks.settings.label}
+          icon="settings"
+        />
+      </div>
+      <div>
+        <NavbarItem
+          to={navLinks.dataPolicy.to}
+          name={navLinks.dataPolicy.label}
+        />
+        <NavbarItem
+          to={navLinks.termsOfUse.to}
+          name={navLinks.termsOfUse.label}
+        />
+      </div>
     </MenuListStyled>
   );
 }

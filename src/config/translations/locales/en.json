@@ -4,7 +4,9 @@
     "tours": "Tours Editor",
     "library": "Library",
     "dashboard": "Dashboard",
-    "settings": "Project Settings"
+    "settings": "Project Settings",
+    "data_policy": "Data Policy",
+    "terms_of_use": "Terms of Use"
   },
   "dates": {
     "today": "Today",

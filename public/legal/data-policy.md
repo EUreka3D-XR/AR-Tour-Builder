@@ -1,6 +1,8 @@
-# Personal Data Protection Policy Data
+# Privacy Policy
 
-**Controller details**: EUreka3D-XR Consortium (EUreka3D-XR is a project funded by the European Union, under the Digital Europe Programme) 
+**Controller details**: EUreka3D-XR Consortium (EUreka3D-XR is a project funded by the
+
+European Union, under the Digital Europe Programme) 
 
 **Data Controller contact details**: Eirini Kaldeli (acting as the responsible party for the AR Tour Builder tool). Email: ekaldeli\@image.ece.ntua.gr
 
@@ -18,7 +20,7 @@ The processing of personal data by the AR Tour Builder tool is conducted in a ma
 
 When the user visits the AR Tour Builder platform and as long as they interact with it, some information may be collected, such as: 
 
-a) Information that enables the registration and identification of the user. Authentication is managed through EGI Check-in, which ensures that registration information (username and password) is processed lawfully, securely, and only for authorized scientific and operational purposes, granting users full rights to access, correct, or delete their data. 
+a) Information that enables the registration and identification of the user. Authentication is managed through EGI Check-in, which ensures that registration information (username and password) is processed lawfully, securely, and only for authorized scientific and operational purposes, granting users full rights to access, correct, or delete their data. The Privacy Policy of the EGI Check-in can be found [here](https://aai.egi.eu/proxy/module.php/themeegi/views.php?id=privacy).
 
 b) Information that enables the provision of the platform’s services, including: 
 

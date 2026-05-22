@@ -4,36 +4,43 @@ const sections = [
     content: `The Eureka3D-XR AR Tour Experience mobile application (thereafter referenced as the App) is bound by the European Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data (General Data Protection Regulation – GDPR). The app is compliant with any Law and/or Regulation implemented or enacted in accordance with the GDPR and the legislation on the protection of electronic privacy, or any law which modifies, replaces, adopts or codifies any of the above laws, as well as any other applicable national laws on the processing of personal data and privacy, as they may exist under applicable law.`,
   },
   {
-    title: "2. No Collection of Personal Data",
-    content: `The App does not collect, store, process, or transmit any personal data as defined under the General Data Protection Regulation (EU) 2016/679 ("GDPR").`,
+    title: "2. Personal Data Processed",
+    content: `The App processes the following category of personal data as defined under the General Data Protection Regulation (EU) 2016/679 ("GDPR"):`,
     bullets: [
-      "We do not require user registration.",
-      "We do not collect names, email addresses, or contact details.",
-      "We do not collect device identifiers that can be linked to individuals.",
-      "We do not track user behavior or usage for profiling purposes.",
+      "Device location (GPS coordinates) — collected in real time while the App is in active use.",
     ],
+    footer: `The App does not collect, store, process, or transmit any other personal data. We do not require user registration, collect names, email addresses, contact details, or device identifiers that can be linked to individuals, and we do not track user behavior or usage for profiling purposes.`,
   },
   {
-    title: "3. No Data Sharing",
-    content: `Since no personal data is collected, no personal data is shared with third parties, including:`,
+    title: "3. Location Data — Purpose, Legal Basis, and Retention",
+    content: `The App requests access to the device's precise location (foreground only) for the following purposes:`,
+    bullets: [
+      "Tour navigation: to display the user's real-time position on the tour map and provide directional guidance between points of interest.",
+      "Augmented Reality (AR) positioning: to anchor and correctly place 3D models in physical space during AR experiences.",
+    ],
+    footer: `Legal basis: Article 6(1)(a) GDPR — consent. Location access is granted by the user via the operating system permission prompt and can be revoked at any time through the device settings. Location data is processed exclusively on-device and is never transmitted to, stored on, or shared with any server or third party. No location data is retained after the session ends.`,
+  },
+  {
+    title: "4. No Data Sharing",
+    content: `Location data and any other data processed by the App are not shared with third parties, including:`,
     bullets: ["Service providers", "Analytics platforms", "Advertisers"],
-    footer: `The app makes FETCH API calls to read data from the Eureka3D-XR AR Tour Builder (http://artourbuilder.eureka3dxr.fedcloud.eu) service, but these interactions do not, in any way, transfer/transmit or disclose any personal data. No personal data is collected or transferred outside the European Economic Area (EEA).`,
+    footer: `The App makes FETCH API calls to read data from the Eureka3D-XR AR Tour Builder (http://artourbuilder.eureka3dxr.fedcloud.eu) service, but these interactions do not transfer, transmit, or disclose any personal data. No personal data is collected or transferred outside the European Economic Area (EEA).`,
   },
   {
-    title: "4. Third-Party Services",
+    title: "5. Third-Party Services",
     content: `The App does not integrate third-party services that process personal data (such as analytics, advertising SDKs, or tracking tools). If this changes in the future, this policy will be updated accordingly.`,
   },
   {
-    title: "5. Cookies and Tracking Technologies",
+    title: "6. Cookies and Tracking Technologies",
     content: `The App does not use cookies or similar tracking technologies.`,
   },
   {
-    title: "6. Data Security",
+    title: "7. Data Security",
     content: `Although the App does not process personal data, we apply appropriate technical and organizational measures to ensure the App operates securely and reliably.`,
   },
   {
-    title: "7. User Rights under GDPR",
-    content: `Under the GDPR, users have rights such as access, rectification, erasure, and restriction of processing. However, since the App does not process personal data, these rights are not applicable in practice.`,
+    title: "8. User Rights under GDPR",
+    content: `Under the GDPR, users have the right to access, rectify, erase, or restrict the processing of their personal data, as well as the right to withdraw consent and to lodge a complaint with a supervisory authority. Because location data is processed solely on-device and in real time, and is never stored or transmitted, there is no retained data to access, rectify, or erase. You can exercise your right to withdraw consent at any time by revoking the location permission in your device settings. For any privacy-related enquiries please contact the Data Controller at the address above.`,
   },
 ];
 

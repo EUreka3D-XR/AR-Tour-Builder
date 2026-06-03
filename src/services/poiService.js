@@ -59,7 +59,10 @@ export const useCreateTourPoi = (tourId) => {
   return useDataMutator({
     mutator: ({ data }) => api.pois.create(tourId, data),
     mutationKey: ["create-tour-poi", tourId],
-    invalidateKey: ["tour-pois", tourId],
+    invalidateKey: [
+      ["tour-pois", tourId],
+      ["project-tour", tourId, "multilingual"],
+    ],
   });
 };
 
@@ -88,7 +91,10 @@ export const useDeleteTourPoi = (tourId, poiId) => {
   return useDataMutator({
     mutator: () => api.pois.delete(poiId),
     mutationKey: ["delete-tour-poi", poiId],
-    invalidateKey: ["tour-pois", tourId],
+    invalidateKey: [
+      ["tour-pois", tourId],
+      ["project-tour", tourId, "multilingual"],
+    ],
   });
 };
 

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams } from "react-router";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -21,6 +22,10 @@ function EditTourForm({ initialTour }) {
   });
 
   const { handleSubmit, reset } = methods;
+
+  useEffect(() => {
+    reset(parseTourDefaultValues(initialTour));
+  }, [initialTour, reset]);
 
   const onSubmit = async (data) => {
     const updatedTour = await updateTour({ data });

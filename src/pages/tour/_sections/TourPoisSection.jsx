@@ -80,7 +80,7 @@ function TourPoisSection() {
   const location = useLocation();
   const { routes, navigate } = useNavPaths();
 
-  const { data: pois, fetchState } = useTourPois(tourId);
+  const { fetchState } = useTourPois(tourId);
 
   const isGuided = useWatch({ name: "guided" });
   const {
@@ -123,7 +123,7 @@ function TourPoisSection() {
     );
   }
 
-  if (!pois?.length) {
+  if (!poisFields?.length) {
     return (
       <>
         <CenteredArea className="empty-pois-section">

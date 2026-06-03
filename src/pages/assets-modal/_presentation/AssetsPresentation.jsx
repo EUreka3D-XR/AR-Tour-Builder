@@ -1,10 +1,12 @@
-import { useParams } from "react-router";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { lighten, styled, Typography } from "@mui/material";
 
-import { useLibraryAssets } from "@/services/libraryService";
+import Button from "@/components/button/Button";
+import EurekaIcon from "@/components/icon/EurekaIcon";
 import MediaIcon from "@/components/icon/MediaIcon";
+import AssetMediaModal from "@/components/media-modal/asset-media/AssetMediaModal";
 import MediaThumbnail from "@/components/media-thumbnail/MediaThumbnail";
 
 const PresentationStyled = styled("div")(({ theme }) => ({
@@ -58,6 +60,7 @@ const GridAssetItem = styled("div")(({ theme }) => ({
 const ListAssetItem = styled("div")(({ theme }) => ({
   padding: theme.spacing(0.5, 1.5),
   borderRadius: theme.shape.borderRadius,
+  borderBottom: `1px solid ${theme.palette.divider}`,
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(2),
@@ -71,6 +74,21 @@ const ListAssetItem = styled("div")(({ theme }) => ({
   },
   "&.selected": {
     backgroundColor: lighten(theme.palette.primary.light, 0.8),
+  },
+
+  "& .item-content": {
+    display: "flex",
+    alignItems: "center",
+    gap: theme.spacing(4),
+    overflow: "hidden",
+  },
+  "& .preview-btn": {
+    flexShrink: 0,
+    opacity: 0,
+    transition: "opacity 0.1s ease",
+  },
+  "&:hover .preview-btn": {
+    opacity: 1,
   },
 }));
 
@@ -90,12 +108,12 @@ function AssetsPresentation({
   isListView,
   setSelected,
   selected = [],
-  filters,
+  assets = [],
+  fetchState,
   allowMultiple,
 }) {
   const { t } = useTranslation();
-  const { projectId } = useParams();
-  const { data: assets, fetchState } = useLibraryAssets(projectId);
+  const [previewAsset, setPreviewAsset] = useState(null);
 
   if (fetchState.isLoading) {
     return <div>{t("assetsModal.presentation.loading")}</div>;
@@ -109,22 +127,7 @@ function AssetsPresentation({
     return <div>{t("assetsModal.presentation.noAssets")}</div>;
   }
 
-  const filteredAssets = assets
-    .filter((asset) => {
-      const matchesSearchTerm = asset.title
-        .toLowerCase()
-        .includes(filters.searchTerm.toLowerCase());
-      const matchesType = filters.type ? asset.type === filters.type : true;
-      return matchesSearchTerm && matchesType;
-    })
-    .sort((a, b) => {
-      if (filters.sortBy === "title-asc") {
-        return a.title.localeCompare(b.title);
-      } else if (filters.sortBy === "title-desc") {
-        return b.title.localeCompare(a.title);
-      }
-      return 0;
-    });
+  const filteredAssets = assets;
 
   const handleSelectAsset = (asset) => {
     if (allowMultiple) {
@@ -141,52 +144,78 @@ function AssetsPresentation({
   };
 
   return (
-    <PresentationStyled
-      className={clsx("presentation-section", {
-        "list-view": isListView,
-        "grid-view": !isListView,
-      })}
-    >
-      {isListView &&
-        filteredAssets.map((asset) => {
-          const isSelected = selected.some((a) => a.id === asset.id);
-          return (
-            <ListAssetItem
-              key={asset.id}
-              className={clsx("list-item", {
-                selected: isSelected,
-              })}
-              onClick={() => handleSelectAsset(asset)}
-            >
-              <MediaIcon type={asset.type} />
-              <Typography nowrap>{asset.title}</Typography>
-            </ListAssetItem>
-          );
+    <>
+      {previewAsset && (
+        <AssetMediaModal
+          url={previewAsset.contentUrl}
+          type={previewAsset.type}
+          onClose={() => setPreviewAsset(null)}
+        />
+      )}
+      <PresentationStyled
+        className={clsx("presentation-section", {
+          "list-view": isListView,
+          "grid-view": !isListView,
         })}
-      {!isListView &&
-        filteredAssets.map((asset) => {
-          const isSelected = selected.some((a) => a.id === asset.id);
-          return (
-            <GridAssetItem
-              key={asset.id}
-              className={clsx("grid-item", { selected: isSelected })}
-              onClick={() => handleSelectAsset(asset)}
-            >
-              <div className="preview">
-                <MediaThumbnail
-                  type={asset.type}
-                  url={asset.url}
-                  title={asset.title}
-                  className="media-preview-transparent"
-                />
-              </div>
-              <div className="title-area">
-                <Typography noWrap>{asset.title}</Typography>
-              </div>
-            </GridAssetItem>
-          );
-        })}
-    </PresentationStyled>
+      >
+        {isListView &&
+          filteredAssets.map((asset) => {
+            const isSelected = selected.some((a) => a.id === asset.id);
+            return (
+              <ListAssetItem
+                key={asset.id}
+                className={clsx("list-item", {
+                  selected: isSelected,
+                })}
+                onClick={() => handleSelectAsset(asset)}
+              >
+                <MediaIcon type={asset.type} />
+                <div className="item-content">
+                  <Typography noWrap>{asset.title}</Typography>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    disableGutters
+                    startIcon={
+                      <EurekaIcon name="visibility" fontSize="small" />
+                    }
+                    className="preview-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setPreviewAsset(asset);
+                    }}
+                  >
+                    Preview
+                  </Button>
+                </div>
+              </ListAssetItem>
+            );
+          })}
+        {!isListView &&
+          filteredAssets.map((asset) => {
+            const isSelected = selected.some((a) => a.id === asset.id);
+            return (
+              <GridAssetItem
+                key={asset.id}
+                className={clsx("grid-item", { selected: isSelected })}
+                onClick={() => handleSelectAsset(asset)}
+              >
+                <div className="preview">
+                  <MediaThumbnail
+                    type={asset.type}
+                    url={asset.url}
+                    title={asset.title}
+                    className="media-preview-transparent"
+                  />
+                </div>
+                <div className="title-area">
+                  <Typography noWrap>{asset.title}</Typography>
+                </div>
+              </GridAssetItem>
+            );
+          })}
+      </PresentationStyled>
+    </>
   );
 }
 

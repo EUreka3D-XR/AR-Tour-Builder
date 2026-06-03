@@ -1,10 +1,12 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router";
 import {
   Box,
   FormControl,
   IconButton,
   MenuItem,
+  Pagination,
   Select,
   styled,
 } from "@mui/material";
@@ -12,6 +14,7 @@ import {
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import SearchInput from "@/components/search-input/SearchInput";
 import { useToggle } from "@/hooks/useToggle";
+import { useLibraryAssets } from "@/services/libraryService";
 import AssetsPresentation from "../_presentation/AssetsPresentation";
 
 const BrowsingContent = styled("div")(({ theme }) => ({
@@ -22,7 +25,7 @@ const BrowsingContent = styled("div")(({ theme }) => ({
   overflow: "hidden",
   "& .presentation-wrapper": {
     overflow: "auto",
-    paddingBottom: theme.spacing(10),
+    flex: 1,
   },
 }));
 
@@ -48,6 +51,7 @@ const SortByFormControlStyled = styled(FormControl)(({ theme }) => ({
 
 function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
   const { t } = useTranslation();
+  const { projectId } = useParams();
   const { isOpen: isListView, toggle: toggleListView } = useToggle(true);
 
   const sortOptions = useMemo(() => [
@@ -64,24 +68,38 @@ function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
     searchTerm: "",
     type: "",
     sortBy: sortOptions[0].value,
+    page: 0,
+    pageSize: 25,
   });
+
+  const apiParams = useMemo(() => ({
+    searchTerm: filters.searchTerm,
+    type: filters.type || undefined,
+    ordering: filters.sortBy === "title-asc" ? "title" : "-title",
+    page: filters.page,
+    pageSize: filters.pageSize,
+  }), [filters]);
+
+  const { data, fetchState } = useLibraryAssets(projectId, apiParams);
+
+  const totalPages = data?.total ? Math.ceil(data.total / filters.pageSize) : 0;
+
+  const handleFilterChange = (key) => (value) => {
+    setFilters((prev) => ({ ...prev, [key]: value, page: 0 }));
+  };
 
   return (
     <BrowsingContent className="browsing-form">
       <FilterRow>
         <SearchInput
           value={filters.searchTerm}
-          onChange={(term) =>
-            setFilters((prev) => ({ ...prev, searchTerm: term }))
-          }
+          onChange={handleFilterChange("searchTerm")}
           placeholder={t("assetsModal.browser.searchPlaceholder")}
         />
         <Select
           value={filters.type}
           displayEmpty
-          onChange={(e) =>
-            setFilters((prev) => ({ ...prev, type: e.target.value }))
-          }
+          onChange={(e) => handleFilterChange("type")(e.target.value)}
         >
           <MenuItem value="">{t("assetsModal.browser.fileTypes.all")}</MenuItem>
           <MenuItem value="image">{t("assetsModal.browser.fileTypes.images")}</MenuItem>
@@ -93,18 +111,12 @@ function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
           <Select
             renderValue={(se) => (
               <div className="sortby-item">
-                <EurekaIcon
-                  name="sort"
-                  fontSize="small"
-                  className="sortby-icon"
-                />
+                <EurekaIcon name="sort" fontSize="small" className="sortby-icon" />
                 {sortOptionsMap[se]}
               </div>
             )}
             value={filters.sortBy}
-            onChange={(e) =>
-              setFilters((prev) => ({ ...prev, sortBy: e.target.value }))
-            }
+            onChange={(e) => handleFilterChange("sortBy")(e.target.value)}
           >
             {sortOptions.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -126,11 +138,22 @@ function AssetsModalBrowser({ allowMultiple, selected, setSelected }) {
         <AssetsPresentation
           isListView={isListView}
           allowMultiple={allowMultiple}
-          filters={filters}
+          assets={data?.items}
+          fetchState={fetchState}
           selected={selected}
           setSelected={setSelected}
         />
       </div>
+      {totalPages > 1 && (
+        <Pagination
+          count={totalPages}
+          page={filters.page + 1}
+          onChange={(_, newPage) =>
+            setFilters((prev) => ({ ...prev, page: newPage - 1 }))
+          }
+          sx={{ display: "flex", justifyContent: "center", flexShrink: 0, py: 1 }}
+        />
+      )}
     </BrowsingContent>
   );
 }

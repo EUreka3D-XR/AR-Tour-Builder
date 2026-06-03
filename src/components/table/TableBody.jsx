@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { TableBody as MuiTableBody, TableCell, TableRow } from "@mui/material";
 
 import getColumnStyle from "./_utils/columnWidth";
@@ -17,12 +16,7 @@ import getColumnStyle from "./_utils/columnWidth";
  * @param {TableBodyProps} props - TableBody props
  * @returns {React.ReactElement} Rendered table body component
  */
-function TableBody({ columns, rows, pageSize, className }) {
-  const emptyRows = useMemo(
-    () => pageSize - Math.min(pageSize, rows.length),
-    [pageSize, rows.length],
-  );
-
+function TableBody({ columns, rows, className }) {
   return (
     <MuiTableBody className={className}>
       {rows.map((row) => {
@@ -44,15 +38,6 @@ function TableBody({ columns, rows, pageSize, className }) {
           </TableRow>
         );
       })}
-      {emptyRows > 0 && (
-        <TableRow
-          sx={{
-            height: 53 * emptyRows,
-          }}
-        >
-          <TableCell colSpan={columns.length} />
-        </TableRow>
-      )}
     </MuiTableBody>
   );
 }

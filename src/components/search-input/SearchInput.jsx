@@ -24,15 +24,20 @@ const SearchInputUnstyled = ({
         return;
       }
       if (typeof onChange === "function") {
-        onChange(finalValue);
+        onChange(finalValue.trim());
       }
     },
     [finalValue],
     300,
   );
 
+  const finalValueRef = useRef(finalValue);
+  finalValueRef.current = finalValue;
+
   useEffect(() => {
-    setFinalValue(value);
+    if (value !== finalValueRef.current.trim()) {
+      setFinalValue(value);
+    }
   }, [value]);
 
   const handleChange = (event) => {

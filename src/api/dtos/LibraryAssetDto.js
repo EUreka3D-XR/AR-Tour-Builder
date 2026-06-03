@@ -13,8 +13,11 @@ export class LibraryAssetDto {
 }
 
 export class LibraryAssetListDto {
-  static fromApi(dataList) {
-    return dataList.map(LibraryAssetDto.fromApi);
+  static fromApi({ count, results }) {
+    return {
+      total: count,
+      items: results.map(LibraryAssetDto.fromApi),
+    };
   }
 
   static toApi(dataList) {

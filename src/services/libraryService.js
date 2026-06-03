@@ -12,13 +12,23 @@ import { useDataFetcher, useDataMutator } from "./helpers/serviceHooks";
 
 /**
  * @param {string} projectId
+ * @param {Object} [filterParams]
  * @returns {AssetsResult}
  */
-export const useLibraryAssets = (projectId, params) => {
+export const useLibraryAssets = (projectId, filterParams) => {
   const locale = useLocale();
+
+  const params = {
+    ...(filterParams?.type && { type: filterParams.type }),
+    ...(filterParams?.searchTerm && { search: filterParams.searchTerm }),
+    ...(filterParams?.ordering && { ordering: filterParams.ordering }),
+    page: (filterParams?.page ?? 0) + 1, // DRF pagination is 1-based
+    pageSize: filterParams?.pageSize ?? 10,
+  };
+
   return useDataFetcher({
     fetcher: () => api.library.fetchAll(projectId, { params, locale }),
-    queryKey: ["library-assets", projectId],
+    queryKey: ["library-assets", projectId, locale, params],
   });
 };
 

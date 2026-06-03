@@ -53,7 +53,7 @@ import TableHeader from "./TableHeader";
  * @returns {React.ReactElement} Rendered table component
  */
 
-const ContainerStyled = styled("div")(() => ({
+const ContainerStyled = styled("div")(({ theme }) => ({
   label: "table-wrapper",
   height: "100%",
   display: "flex",
@@ -61,6 +61,8 @@ const ContainerStyled = styled("div")(() => ({
   overflow: "hidden",
   "& .expanded-table": {
     flex: 1,
+    overflow: "auto",
+    paddingBottom: theme.spacing(2),
   },
   "& .pagination-footer": {
     flexShrink: 0,
@@ -82,8 +84,8 @@ export default function Table({
 }) {
   const rowsPaged = useMemo(() => {
     if (!Array.isArray(rows)) return [];
-    return rows.slice(page * pageSize, (page + 1) * pageSize);
-  }, [rows, page, pageSize]);
+    return rows;
+  }, [rows]);
 
   const handleChangePage = useCallback(
     (_, newPage) => {
@@ -109,7 +111,7 @@ export default function Table({
             orderBy={orderBy}
             onRequestSort={onRequestSort}
           />
-          <TableBody columns={columns} rows={rowsPaged} pageSize={pageSize} />
+          <TableBody columns={columns} rows={rowsPaged} />
         </MuiTable>
       </MuiTableContainer>
       <MuiTablePagination

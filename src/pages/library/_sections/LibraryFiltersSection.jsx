@@ -39,7 +39,6 @@ function LibraryFiltersSection() {
   const { t } = useTranslation();
   const { routes } = useNavPaths();
   const { filterParams, updateParams } = useDashboardParams();
-
   const typeOptions = useMemo(() => [
     { value: "all", label: t("library.filters.typeOptions.all") },
     { value: "image", label: t("library.filters.typeOptions.image") },
@@ -67,7 +66,7 @@ function LibraryFiltersSection() {
         <SearchInput
           label={t("library.filters.searchLabel")}
           value={filterParams.searchTerm || ""}
-          onChange={handleParamsChange("searchTerm")}
+          onChange={(val) => updateParams({ searchTerm: val, page: 0 })}
         />
         <FormControl size="small" className="type-input item-no-shrink">
           <Select

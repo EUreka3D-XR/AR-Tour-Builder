@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Box } from "@mui/material";
 
 import Table from "@/components/table/Table";
 import useDashboardParams from "@/hooks/useDashboardParams";
@@ -52,20 +51,17 @@ function LibraryTableSection({ assets = [], total, fetchState }) {
     ],
     [t],
   );
-
   return (
-    <Box sx={{ flex: 1 }}>
-      <Table
-        rows={assets}
-        columns={columns}
-        page={filterParams.page || 0}
-        total={total ?? 0}
-        pageSize={filterParams.pageSize || 10}
-        fetchState={fetchState}
-        onChangePage={(page) => updateParams({ page })}
-        onChangePageSize={(pageSize) => updateParams({ pageSize, page: 0 })}
-      />
-    </Box>
+    <Table
+      rows={assets}
+      columns={columns}
+      page={filterParams.page || 0}
+      total={total ?? 0}
+      pageSize={filterParams.pageSize || 10}
+      fetchState={fetchState}
+      onChangePage={(page) => updateParams({ page })}
+      onChangePageSize={(pageSize) => updateParams({ pageSize, page: 0 })}
+    />
   );
 }
 

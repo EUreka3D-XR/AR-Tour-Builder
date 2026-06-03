@@ -692,6 +692,7 @@
     },
     "info": {
       "tourTitle": "Titre de la Visite",
+      "subtitle": "Sous-titre",
       "description": "Description",
       "estimatedTime": "Temps Estimé (minutes)",
       "estimatedTimeUnit": "min",

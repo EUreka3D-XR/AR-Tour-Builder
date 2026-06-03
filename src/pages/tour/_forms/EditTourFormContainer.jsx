@@ -24,12 +24,12 @@ function EditTourForm({ initialTour }) {
   const { handleSubmit, reset } = methods;
 
   useEffect(() => {
-    reset(parseTourDefaultValues(initialTour));
+    reset(parseTourDefaultValues(initialTour), { keepDirtyValues: false });
   }, [initialTour, reset]);
 
   const onSubmit = async (data) => {
     const updatedTour = await updateTour({ data });
-    reset(parseTourDefaultValues(updatedTour));
+    reset(parseTourDefaultValues(updatedTour), { keepDirtyValues: false });
   };
 
   return (
@@ -44,6 +44,7 @@ export default EditTourForm;
 const parseTourDefaultValues = (tour) => {
   return {
     title: tour.title,
+    subtitle: tour.subtitle,
     description: tour.description,
     pois: tour.pois,
     duration: tour.duration ?? 0,

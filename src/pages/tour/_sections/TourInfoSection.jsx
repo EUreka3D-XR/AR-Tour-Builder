@@ -74,6 +74,19 @@ function TourInfoSection() {
           )}
         />
         <FormInputMultilingual
+          name="subtitle"
+          render={({ field }) => (
+            <LabeledInput label={t("tour.info.subtitle")} isMultilingual>
+              <TextField
+                fullWidth
+                {...field}
+                slotProps={{ htmlInput: { maxLength: 100 } }}
+                helperText={`${(field.value ?? "").length}/100`}
+              />
+            </LabeledInput>
+          )}
+        />
+        <FormInputMultilingual
           name="description"
           render={({ field }) => (
             <LabeledInput label={t("tour.info.description")} isMultilingual>

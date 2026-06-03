@@ -15,6 +15,7 @@ function CreateTourForm() {
     shouldUnregister: false,
     defaultValues: {
       title: { locales: { en: "", fr: "" } },
+      subtitle: { locales: { en: "", fr: "" } },
       description: { locales: { en: "", fr: "" } },
       pois: [],
       duration: 0,

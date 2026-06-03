@@ -12,6 +12,8 @@ import { useConfirm } from "@/stores/confirmation-modal-stores";
 import { useDeleteTourPoi } from "@/services/poiService";
 import EurekaIcon from "@/components/icon/EurekaIcon";
 import MediaCounter from "@/components/media-counter/MediaCounter";
+import { useLocale } from "@/hooks/useLocale";
+import { isLocalesValue, localeValue } from "@/utils/inputLocale";
 
 const CardStyled = styled(Card)(({ theme }) => ({
   cursor: "pointer",
@@ -117,6 +119,7 @@ function PoiItem({
 }) {
   const { t } = useTranslation();
   const { tourId } = useParams();
+  const locale = useLocale();
   const confirm = useConfirm();
   const { mutate: deletePoi } = useDeleteTourPoi(tourId, poi.id);
 
@@ -130,6 +133,19 @@ function PoiItem({
     if (confirmed) onRemove(poi.id);
   };
 
+  let title, description;
+  if (isLocalesValue(poi.title)) {
+    title = localeValue(poi.title, locale);
+  } else {
+    title = poi.title ?? t("tour.pois.item.untitled");
+  }
+
+  if (isLocalesValue(poi.description)) {
+    description = localeValue(poi.description, locale);
+  } else {
+    description = poi.description ?? t("tour.pois.item.noDescription");
+  }
+
   return (
     <CardStyled className="poi-card" onClick={() => onClick(poi.id)}>
       <CardContent className="card-content">
@@ -140,11 +156,9 @@ function PoiItem({
           {/* Second flex item: Title, Description, and Media Icons */}
           <ContentSection>
             <PoiTitle variant="h6" component="h3">
-              {poi?.title || t("tour.pois.item.untitled")}
+              {title}
             </PoiTitle>
-            <PoiDescription variant="body2">
-              {poi?.description || t("tour.pois.item.noDescription")}
-            </PoiDescription>
+            <PoiDescription variant="body2">{description}</PoiDescription>
 
             <AssetsRow className="assets-row">
               <MediaCounter

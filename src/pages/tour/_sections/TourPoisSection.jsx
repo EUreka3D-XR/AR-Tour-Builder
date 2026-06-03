@@ -83,9 +83,15 @@ function TourPoisSection() {
   const { data: pois, fetchState } = useTourPois(tourId);
 
   const isGuided = useWatch({ name: "guided" });
-  const { move, remove } = useFieldArrayWithId({
+  const {
+    fields: poisFields,
+    move,
+    remove,
+  } = useFieldArrayWithId({
     name: "pois",
   });
+
+  console.log(poisFields);
 
   const handleEdit = (poiId) => {
     navigate(routes.pois.edit(poiId), {
@@ -162,7 +168,7 @@ function TourPoisSection() {
         <Divider />
         <div className="pois-list">
           <div className="pois-list-scrollable">
-            {pois.map((poi, index) => (
+            {poisFields.map((poi, index) => (
               <div
                 key={poi.id}
                 className="poi-item-flex-item"
@@ -192,7 +198,7 @@ function TourPoisSection() {
                   dataId={poi.id}
                   isOrderable={isGuided}
                   isMoveUpDisabled={index === 0}
-                  isMoveDownDisabled={index === pois.length - 1}
+                  isMoveDownDisabled={index === poisFields.length - 1}
                   onMoveUp={() => move(index, index - 1)}
                   onMoveDown={() => move(index, index + 1)}
                   onEdit={handleEdit}

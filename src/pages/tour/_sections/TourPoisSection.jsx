@@ -91,8 +91,6 @@ function TourPoisSection() {
     name: "pois",
   });
 
-  console.log(poisFields);
-
   const handleEdit = (poiId) => {
     navigate(routes.pois.edit(poiId), {
       state: { backgroundLocation: location },

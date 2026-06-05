@@ -62,7 +62,12 @@ export const usePoiAssetMultilingual = (assetId) => {
 export const useCreatePoiAsset = (tourId, poiId, locale) => {
   const qc = useQueryClient();
   return useDataMutator({
-    mutator: ({ data }) => api.poiAssets.create(poiId, data),
+    mutator: ({ data }) => {
+      const existingAssets = qc.getQueryData(["poi-assets", poiId]) ?? [];
+      const sameType = existingAssets.filter((a) => a.type === data.type);
+      const typeOrder = sameType.length; // next index
+      return api.poiAssets.create(poiId, { ...data, typeOrder });
+    },
     mutationKey: ["create-poi-asset", poiId],
     invalidateKey: [
       ["poi-assets", poiId],
@@ -154,6 +159,34 @@ export const useDeletePoiAsset = (tourId, poiId, assetId) => {
  * @param {string} locale
  * @returns {PoiAssetMutateResult}
  */
+/**
+ * @param {string} poiId
+ * @returns {import('@/types/jsdoc-types').MutationResultType<void>}
+ */
+export const useReorderPoiAssets = (poiId) => {
+  const qc = useQueryClient();
+  return useDataMutator({
+    mutator: ({ data }) => api.poiAssets.reorderByType(poiId, data),
+    mutationKey: ["reorder-poi-assets", poiId],
+    onSuccess: (_, { data: reorderMap }) => {
+      qc.setQueryData(["poi-assets", poiId], (oldData) => {
+        if (!oldData) return oldData;
+        const orderMap = {};
+        Object.entries(reorderMap).forEach(([, ids]) => {
+          ids.forEach((id, index) => {
+            orderMap[String(id)] = index;
+          });
+        });
+        return oldData.map((asset) =>
+          String(asset.id) in orderMap
+            ? { ...asset, typeOrder: orderMap[String(asset.id)] }
+            : asset,
+        );
+      });
+    },
+  });
+};
+
 export const useChangePoiAssetPriority = (poiId, assetId, locale) => {
   const qc = useQueryClient();
 

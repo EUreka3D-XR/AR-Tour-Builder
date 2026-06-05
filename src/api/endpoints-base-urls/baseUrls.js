@@ -23,6 +23,7 @@ export const baseUrls = {
   poi: (poiId) => `/api/pois/${poiId}`,
   poiAssets: "/api/poi-assets",
   poiAsset: (assetId) => `/api/poi-assets/${assetId}`,
+  poiAssetsReorder: (poiId) => `/api/pois/${poiId}/assets/reorder`,
   images: "/api/images/upload",
   localesCDN: (locale) => `https://flagcdn.com/${locale}/codes.json`,
 };

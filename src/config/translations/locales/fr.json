@@ -511,7 +511,16 @@
       "externalUrlPlaceholder": "URL : ex. https://un-blog.com/page"
     },
     "mediaTab": {
-      "tabTitle": "Médias et Fichiers Associés"
+      "tabTitle": "Médias et Fichiers Associés",
+      "sectionTitle": "Médias associés",
+      "empty": "Aucun média disponible pour ce Point d'Intérêt.",
+      "types": {
+        "image": "Images",
+        "video": "Vidéos",
+        "model3d": "Modèles 3D",
+        "document": "Documents",
+        "audio": "Audio"
+      }
     },
     "addMediaButton": {
       "add": "Ajouter",

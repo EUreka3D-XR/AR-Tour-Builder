@@ -9,7 +9,6 @@ const ViewPoiSidebarLayout = styled("div")(({ theme }) => ({
   },
   "& .poi-info-section, .poi-links-section, .poi-media-section": {
     marginTop: theme.spacing(4),
-    padding: theme.spacing(0, 4),
   },
 }));
 

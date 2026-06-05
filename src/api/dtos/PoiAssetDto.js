@@ -4,13 +4,14 @@ import { LinkedAssetDto } from "./LinkedAssetDto";
 export class PoiAssetDto {
   static fromApi(data) {
     const newData = AssetBaseDto.fromApi(data);
-    const { arPlacement, priority, linkedAsset, ...restData } = newData || {};
+    const { arPlacement, priority, typeOrder, linkedAsset, ...restData } = newData || {};
 
     return {
       ...restData,
       isGroundPlaced: arPlacement === "ground",
       priority,
       isPrimary: priority === "high",
+      typeOrder: typeOrder ?? null,
       linkedAsset: linkedAsset ? LinkedAssetDto.fromApi(linkedAsset) : null,
     };
   }

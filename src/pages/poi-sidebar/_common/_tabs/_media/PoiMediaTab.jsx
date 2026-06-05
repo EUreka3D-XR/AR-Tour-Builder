@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { Skeleton, Stack, styled, Typography } from "@mui/material";
+import { Box, Skeleton, Stack, styled, Typography } from "@mui/material";
 
 import AddMediaButton from "./AddMediaButton";
 import MediaCardItem from "./MediaCardItem";
+import { groupAssetsByType } from "./groupAssetsByType";
 
 const ContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -20,8 +21,9 @@ const ContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-function PoiMediaTab({ mediaAssets = [], onEdit }) {
+function PoiMediaTab({ mediaAssets = [], onEdit, onMove }) {
   const { t } = useTranslation();
+  const grouped = groupAssetsByType(mediaAssets);
 
   return (
     <ContainerStyled>
@@ -31,15 +33,29 @@ function PoiMediaTab({ mediaAssets = [], onEdit }) {
         </Typography>
         <AddMediaButton />
       </div>
-      <div className="media-list">
-        {/* Render media card items here */}
-        {mediaAssets &&
-          mediaAssets
-            .filter((asset) => asset.type !== "audio")
-            .map((asset) => (
-              <MediaCardItem key={asset.id} asset={asset} onEdit={onEdit} />
-            ))}
-      </div>
+      <Box display="flex" flexDirection="column" gap={3}>
+        {grouped.map(({ type, assets }) => (
+          <Box key={type} display="flex" flexDirection="column" gap={1}>
+            <Typography variant="subtitle2" color="text.secondary">
+              {t(`poiSidebar.mediaTab.types.${type}`)}
+            </Typography>
+            <div className="media-list">
+              {assets.map((asset, index) => (
+                <MediaCardItem
+                  key={asset.id}
+                  asset={asset}
+                  onEdit={onEdit}
+                  isOrderable
+                  isMoveUpDisabled={index === 0}
+                  isMoveDownDisabled={index === assets.length - 1}
+                  onMoveUp={() => onMove(type, assets, index, index - 1)}
+                  onMoveDown={() => onMove(type, assets, index, index + 1)}
+                />
+              ))}
+            </div>
+          </Box>
+        ))}
+      </Box>
     </ContainerStyled>
   );
 }

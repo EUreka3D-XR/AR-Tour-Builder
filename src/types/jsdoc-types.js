@@ -196,6 +196,7 @@
  * @property {string} sourceAssetId - ID of the source asset
  * @property {AssetPriority} priority - Asset priority (normal, high)
  * @property {boolean} isPrimary - Indicates if this asset is the primary asset for the POI
+ * @property {number|null} typeOrder - Display order within the asset's type group on this POI
  */
 
 /**

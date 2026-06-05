@@ -511,7 +511,16 @@
       "externalUrlPlaceholder": "URL: ex. https://some-blog.com/page"
     },
     "mediaTab": {
-      "tabTitle": "Media and Files Associated"
+      "tabTitle": "Media and Files Associated",
+      "sectionTitle": "Asset Media",
+      "empty": "No media assets available for this Point of Interest.",
+      "types": {
+        "image": "Images",
+        "video": "Videos",
+        "model3d": "3D Models",
+        "document": "Documents",
+        "audio": "Audio"
+      }
     },
     "addMediaButton": {
       "add": "Add",

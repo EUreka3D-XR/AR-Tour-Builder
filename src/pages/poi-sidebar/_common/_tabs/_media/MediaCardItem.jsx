@@ -30,19 +30,25 @@ const CardStyled = styled(Card)(({ theme }) => ({
   },
 }));
 
-const CardContentStyled = styled(CardContent)(({ theme }) => ({
+const CardContentStyled = styled(CardContent, {
+  shouldForwardProp: (prop) => prop !== "vertical",
+})(({ theme, vertical }) => ({
   padding: theme.spacing(1),
   "&:last-child": {
     paddingBottom: theme.spacing(1),
   },
   display: "flex",
+  flexDirection: vertical ? "column" : "row",
   gap: theme.spacing(2),
 }));
 
-const MediaThumbnailStyled = styled(MediaThumbnail)({
-  width: 80,
-  height: 80,
-});
+const MediaThumbnailStyled = styled(MediaThumbnail, {
+  shouldForwardProp: (prop) => prop !== "vertical",
+})(({ vertical }) => ({
+  width: vertical ? "100%" : 80,
+  height: vertical ? 140 : 80,
+  flexShrink: 0,
+}));
 
 const PillStyled = styled(Chip)(({ theme }) => ({
   fontSize: "0.75rem",
@@ -84,6 +90,14 @@ const ActionButtons = styled(Box)(() => ({
   flexShrink: 0,
 }));
 
+const CardFooter = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: theme.spacing(0.5, 1),
+  borderTop: `1px solid ${theme.palette.divider}`,
+}));
+
 const PillsRow = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(1),
@@ -112,7 +126,16 @@ const MediaDescription = styled(Typography)(() => ({
  * @param {Function} [props.onDelete] - Delete button click handler
  * @returns {React.ReactElement} Rendered media card item
  */
-function MediaCardItem({ asset, onEdit }) {
+function MediaCardItem({
+  asset,
+  onEdit,
+  vertical = false,
+  isOrderable = false,
+  isMoveUpDisabled = false,
+  isMoveDownDisabled = false,
+  onMoveUp,
+  onMoveDown,
+}) {
   const { t } = useTranslation();
   const { openPoiMediaModal } = useAssetModal();
   const locale = useLocale();
@@ -149,11 +172,23 @@ function MediaCardItem({ asset, onEdit }) {
     });
   };
 
+  const handleMoveUp = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onMoveUp?.();
+  };
+
+  const handleMoveDown = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onMoveDown?.();
+  };
+
   return (
     <CardStyled onClick={handleClick}>
-      <CardContentStyled>
-        {/* Media Thumbnail */}
+      <CardContentStyled vertical={vertical}>
         <MediaThumbnailStyled
+          vertical={vertical}
           type={asset?.type}
           url={localeValue(asset?.contentUrl, locale)}
           title={<InjectedLocaleValue value={asset?.title} />}
@@ -214,6 +249,26 @@ function MediaCardItem({ asset, onEdit }) {
           </PillsRow>
         </ContentSection>
       </CardContentStyled>
+      {isOrderable && (
+        <CardFooter>
+          <ActionButtons>
+            <IconButton
+              size="small"
+              disabled={isMoveUpDisabled}
+              onClick={handleMoveUp}
+            >
+              <EurekaIcon name="arrowUp" fontSize="small" />
+            </IconButton>
+            <IconButton
+              size="small"
+              disabled={isMoveDownDisabled}
+              onClick={handleMoveDown}
+            >
+              <EurekaIcon name="arrowDown" fontSize="small" />
+            </IconButton>
+          </ActionButtons>
+        </CardFooter>
+      )}
     </CardStyled>
   );
 }

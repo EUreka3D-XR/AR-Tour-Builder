@@ -46,6 +46,11 @@ const changePriority = async (assetId, priority, locale) => {
   return fetcher.post(url, { locale });
 };
 
+const reorderByType = async (poiId, data) => {
+  const url = baseUrls.poiAssetsReorder(poiId);
+  return fetcher.patch(url, { data });
+};
+
 export const poiAssetsApi = {
   fetchAll: getPoiAssets,
   fetchOne: getPoiAsset,
@@ -53,4 +58,5 @@ export const poiAssetsApi = {
   update: updatePoiAsset,
   delete: deletePoiAsset,
   changePriority,
+  reorderByType,
 };

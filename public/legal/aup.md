@@ -26,6 +26,8 @@ This Acceptable Use Policy and Conditions of Use ("AUP") defines the rules and c
 
 - that goes against the declared objectives of the AR tours.9. You may not misuse the website (including, without limitation, by hacking).
 
+9. You may not misuse the website (including, without limitation, by hacking).
+
 10. We have the right to block any user’s account and/or remove any material or posting you make on the website if, in our opinion, such material does not comply with the provisions set out above or for any other reason whatsoever. In addition, we shall fully co-operate with any law enforcement authorities or court order requesting or directing us to disclose the identity or locate anyone posting any material in breach of the provisions set out above. The tool providers accept no liability for the consequences of such removal.
 
 11. If you are the owner of the copyright in any of the content on this website and you do not agree to your content appearing on the website, please contact us with the information requested below:- Your contact details

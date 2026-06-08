@@ -230,6 +230,14 @@ export const validateUrlContentType = async (url, expectedType) => {
     }
   }
 
+  // If both HEAD and extension detection failed, we have no info — trust the caller
+  if (!detectedType && !isZip) {
+    return {
+      valid: expectedType != null,
+      detectedType: expectedType ?? null,
+    };
+  }
+
   // Zip path: inspect the archive entries
   if (isZip) {
     if (expectedType !== "model3d") {
